@@ -2,7 +2,6 @@ library(r2r)
 library(ggplot2)
 library(reshape2)
 
-# 100.000
 m <- readRDS("cluster_hash.rds.xz")
 
 K <- 8                     # número de clusters
@@ -13,9 +12,10 @@ freqs <- sapply(keys_list, function(k) query(m, k))
 keys_mat <- do.call(rbind, keys_list)
 n_arch <- nrow(keys_mat)
 
+# Distancia de Hamming
 hamming_dist <- function(x, y) sum(x != y)
 
-# para encontrar arquetipos similares
+# Encontrar arquetipos similares
 find_similar <- function(center, keys_mat, freqs, used, D) {
   free_idx <- which(!used)
   if(length(free_idx) == 0) return(list(indices = integer(0), score = 0))
@@ -50,10 +50,8 @@ for(D in D_values) {
   cat("Probando D =", D, "\n")
   res <- greedy_clusters(keys_mat, freqs, K, D)
   
-  
   dir_D <- file.path("resultsD_plot", paste0("D_", D))
   dir.create(dir_D, showWarnings = FALSE)
-  
   
   centers_df <- do.call(rbind, lapply(seq_along(res$clusters), function(i) {
     cl <- res$clusters[[i]]
@@ -62,46 +60,46 @@ for(D in D_values) {
   }))
   write.csv(centers_df, file.path(dir_D, "greedy_cluster_centers.csv"), row.names = FALSE)
   
-  
   assignments_df <- do.call(rbind, lapply(seq_along(res$clusters), function(i) {
     cl <- res$clusters[[i]]
     if(length(cl$members) == 0) return(NULL)
     data.frame(archetype_id = cl$members,
-               cluster = i,
-               frequency = freqs[cl$members])
+               cluster = i)
   }))
   write.csv(assignments_df, file.path(dir_D, "greedy_cluster_assignments.csv"), row.names = FALSE)
   
-
-  total_freq <- sum(freqs)
-  remaining_freq <- total_freq
+  total_arch <- n_arch
+  cumulative_pct <- 0   # <- para el pct_rest_arch estilo “resta general”
   summary_list <- list()
+  
   for(i in seq_along(res$clusters)) {
     cl <- res$clusters[[i]]
-    if(length(cl$members)==0) next
-    total_freq_cluster <- sum(freqs[cl$members])
-    freq_pct_total <- total_freq_cluster / total_freq * 100
-    freq_pct_rest  <- total_freq_cluster / remaining_freq * 100
-    remaining_freq <- remaining_freq - total_freq_cluster
+    if(length(cl$members) == 0) next
+    
+    n_cluster <- length(cl$members)
+    
+    pct_total <- n_cluster / total_arch * 100              # % del total de arquetipos
+    pct_rest  <- 100 - cumulative_pct                       # % restante general
+    cumulative_pct <- cumulative_pct + pct_total           # actualizar acumulado
+    
     summary_list[[i]] <- data.frame(
       cluster = i,
-      n_archetypes = length(cl$members),
-      total_frequency = total_freq_cluster,
-      freq_pct_total = freq_pct_total,
-      freq_pct_rest  = freq_pct_rest
+      n_archetypes = n_cluster,
+      pct_total_arch = pct_total,
+      pct_rest_arch  = pct_rest
     )
   }
+  
   summary_df <- do.call(rbind, summary_list)
-  write.csv(summary_df, file.path(dir_D, "greedy_cluster_summary.csv"), row.names = FALSE)
+  write.csv(summary_df, file.path(dir_D, "greedy_cluster_summary_by_archetypes.csv"), row.names = FALSE)
   
-  
+  # Arquetipos no asignados
   unassigned_df <- data.frame(
-    archetype_id = which(!res$used),
-    frequency = freqs[!res$used]
+    archetype_id = which(!res$used)
   )
   write.csv(unassigned_df, file.path(dir_D, "greedy_unassigned_archetypes.csv"), row.names = FALSE)
   
-
+  # Porcentaje asignados vs no asignados
   assigned <- sum(res$used)
   unassigned <- n_arch - assigned
   results <- rbind(results, data.frame(
@@ -111,13 +109,11 @@ for(D in D_values) {
   ))
 }
 
-## plot 
+# Plot 
 results_long <- melt(results, id.vars = "D", variable.name = "Type", value.name = "Percent")
 results_long$Type <- factor(results_long$Type, levels = c("assigned_pct", "unassigned_pct"),
                             labels = c("Asignados", "No asignados"))
-                          
 results_long$D <- factor(results_long$D)
-
 
 p <- ggplot(results_long, aes(x = D, y = Percent, color = Type, group = Type)) +
   geom_line(size = 1.2) +
@@ -125,9 +121,9 @@ p <- ggplot(results_long, aes(x = D, y = Percent, color = Type, group = Type)) +
   scale_y_continuous(
     breaks = seq(0, 100, by = 5),
     labels = function(x) paste0(round(x,1), "%"),
-    limits = c(0, 105)       
+    limits = c(0, 105)
   ) +
-  geom_hline(yintercept = seq(0,100,by=5), color = "grey90", linetype = "dashed") + 
+  geom_hline(yintercept = seq(0,100,by=5), color = "grey90", linetype = "dashed") +
   labs(
     title = "Asignación de arquetipos vs distancia máxima D",
     x = "Distancia máxima D",
@@ -141,6 +137,4 @@ p <- ggplot(results_long, aes(x = D, y = Percent, color = Type, group = Type)) +
   )
 
 print(p)
-
 ggsave("resultsD_plot/assigned_vs_D_pct_lines.png", plot = p, width = 8, height = 5)
-
