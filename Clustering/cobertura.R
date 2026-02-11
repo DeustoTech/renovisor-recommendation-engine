@@ -13,6 +13,7 @@ norm <- function(x) {
 clusters_df <- read.csv("resultsD_plot/D_6/greedy_cluster_centers.csv", stringsAsFactors = FALSE)
 
 cluster_dets <- norm(colnames(clusters_df)[-1])
+
 cluster_mat <- as.matrix(clusters_df[, -1])
 
 expert_csv_to_binary <- function(expert_csv, determinantes) {
