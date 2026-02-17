@@ -1,6 +1,5 @@
 library(dplyr)
-
-########################## preprocess 
+library(ggplot2)
 
 norm <- function(x) {
   x <- tolower(x)
@@ -9,16 +8,9 @@ norm <- function(x) {
   x
 }
 
-#poner apra todos
-clusters_df <- read.csv("resultsD_plot/D_6/greedy_cluster_centers.csv", stringsAsFactors = FALSE)
-
-cluster_dets <- norm(colnames(clusters_df)[-1])
-
-cluster_mat <- as.matrix(clusters_df[, -1])
-
 expert_csv_to_binary <- function(expert_csv, determinantes) {
   expert_df <- read.csv(expert_csv, stringsAsFactors = FALSE, check.names = FALSE)
-  expert_df <- expert_df[, colSums(!is.na(expert_df) & expert_df != "") > 0]  # quitar columnas vacías
+  expert_df <- expert_df[, colSums(!is.na(expert_df) & expert_df != "") > 0]
   expert_mat <- t(as.matrix(expert_df))
   
   expert_bin <- t(apply(expert_mat, 1, function(row) {
@@ -43,14 +35,14 @@ compute_coverage_binary <- function(cluster_mat, expert_bin, cluster_names = NUL
   for (i in 1:n_clusters) {
     cluster_row <- cluster_mat[i, ] > 0
     vol_cluster <- sum(cluster_row)
-    active_dets <- cluster_dets[cluster_row]       # determinantes activos del cluster
-    cluster_all <- paste(active_dets, collapse = ", ")  # todos los determinantes del cluster
+    active_dets <- cluster_dets[cluster_row]
+    cluster_all <- paste(active_dets, collapse = ", ")
     
     for (j in 1:n_experts) {
       expert_row <- expert_bin[j, ] > 0
       vol_expert <- sum(expert_row)
-      expert_dets <- cluster_dets[expert_row]       # determinantes activos del experto
-      expert_all <- paste(expert_dets, collapse = ", ") # todos los determinantes del experto
+      expert_dets <- cluster_dets[expert_row]
+      expert_all <- paste(expert_dets, collapse = ", ")
       
       common_dets <- intersect(active_dets, expert_dets)
       vol_common <- length(common_dets)
@@ -74,23 +66,46 @@ compute_coverage_binary <- function(cluster_mat, expert_bin, cluster_names = NUL
   do.call(rbind, coverage_list)
 }
 
-expert_bin <- expert_csv_to_binary("data/archetypeExperts.csv", cluster_dets)
-coverage_experts <- compute_coverage_binary(cluster_mat, expert_bin)
 
-kmeans_bin <- expert_csv_to_binary("data/archetypeKmeans.csv", cluster_dets)
-coverage_kmeans <- compute_coverage_binary(cluster_mat, kmeans_bin)
+for (D in seq(2, 20, by = 2)) {
+  
+  cat("Procesando D =", D, "\n")
+  
+  cluster_path <- paste0("resultsD_plot/D_", D, "/greedy_cluster_centers.csv")
+  
+  if (!file.exists(cluster_path)) {
+    cat("No existe:", cluster_path, "\n")
+    next
+  }
+  
+  clusters_df <- read.csv(cluster_path, stringsAsFactors = FALSE)
+  
+  cluster_dets <- norm(colnames(clusters_df)[-1])
+  cluster_mat <- as.matrix(clusters_df[, -1])
+  
+  expert_bin <- expert_csv_to_binary("data/archetypeExperts.csv", cluster_dets)
+  coverage_experts <- compute_coverage_binary(cluster_mat, expert_bin, cluster_dets = cluster_dets)
+  
+  kmeans_bin <- expert_csv_to_binary("data/archetypeKmeans.csv", cluster_dets)
+  coverage_kmeans <- compute_coverage_binary(cluster_mat, kmeans_bin, cluster_dets = cluster_dets)
+  
 
-sins_bin <- expert_csv_to_binary("data/archetypeSINS.csv", cluster_dets)
-coverage_sins <- compute_coverage_binary(cluster_mat, sins_bin)
+  sins_bin <- expert_csv_to_binary("data/archetypeSINS.csv", cluster_dets)
+  coverage_sins <- compute_coverage_binary(cluster_mat, sins_bin, cluster_dets = cluster_dets)
+  
 
-write.csv(coverage_experts, "resultsD_plot/coverage_experts_D6.csv", row.names = FALSE)
-write.csv(coverage_kmeans, "resultsD_plot/coverage_kmeans_D6.csv", row.names = FALSE)
-write.csv(coverage_sins, "resultsD_plot/coverage_sins_D6.csv", row.names = FALSE)
+  write.csv(coverage_experts, paste0("resultsD_plot/D_", D, "/coverage_experts_D", D, ".csv"), row.names = FALSE)
+  write.csv(coverage_kmeans, paste0("resultsD_plot/D_", D, "/coverage_kmeans_D", D, ".csv"), row.names = FALSE)
+  write.csv(coverage_sins, paste0("resultsD_plot/D_", D, "/coverage_sins_D", D, ".csv"), row.names = FALSE)
+  
 
-
-################################################ plot
-library(ggplot2)
-ggplot(coverage_experts, aes(x=cluster, y=pct_cluster_covered, fill=expert_row)) +
-  geom_bar(stat="identity", position="dodge") +
-  labs(title="Cobertura de clusters vs expertos", y="% de cluster cubierto") +
-  theme_minimal()
+  p <- ggplot(coverage_experts, aes(x=cluster, y=pct_cluster_covered, fill=expert_row)) +
+    geom_bar(stat="identity", position="dodge") +
+    labs(title=paste("Cobertura clusters vs expertos - D =", D),
+         y="% de cluster cubierto") +
+    theme_minimal()
+  
+  ggsave(paste0("resultsD_plot/D_", D, "/plot_experts_D", D, ".png"),
+         plot = p, width = 10, height = 6)
+  
+}
