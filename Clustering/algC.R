@@ -2,7 +2,7 @@ library(r2r)
 library(ggplot2)
 library(reshape2)
 
-m <- readRDS("cluster_hash.rds.xz")
+m <- readRDS("data/cluster_hash.rds.xz")
 
 K <- 8                     # número de clusters
 D_values <- seq(2, 20, 2)  # SOLO D PARES
