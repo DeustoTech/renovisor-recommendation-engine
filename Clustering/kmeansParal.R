@@ -23,7 +23,7 @@ colnames(z) <- det_names
 K    <- 8
 NN   <- 1
 MAX  <- 50
-NF   <- 15
+NF   <- 15  # si no esta entre los 15 valores mas altos, se pone 0
 BOOT <- 100000
 
 m <- hashmap(default = 0, on_missing_key = "default")
