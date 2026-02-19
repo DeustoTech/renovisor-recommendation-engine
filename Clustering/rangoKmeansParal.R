@@ -6,6 +6,7 @@ doFuture::registerDoFuture()
 future::plan("multicore")
 
 d <- read.csv("data/Content_Export_Investment_Arquetypes_2022_full-latin-final.csv", skip = 2)
+dm <- read.csv2("data/determinants.csv",row.names = 1)
 
 z <- as.matrix(d[,50:81])
 z[is.na(z)] <- 50  # Rellenar NA con valor neutro
@@ -17,29 +18,14 @@ det_names <- c("PROFITS", "CREDIT SCORE", "RISK PROFILE", "ADDED VALUE",
                "ADHERENCE", "AUTARKY", "WELLBEING", "COZINESS", "RIGHTS AND DUTIES",
                "PEER-PRESSURE", "SUPPORT", "SOCIALISING", "AGREEMENT", "NOVELTY",
                "FUN", "RECOGNITION", "TRENDS", "AUTHORITY", "OWN SIGNIFICANCE", "APPROVAL")
+
 colnames(z) <- det_names
 
-# asignar rangos
-value_to_range <- function(x) {
-  cut(x,
-      breaks = seq(0, 100, by = 10),  # 0-10, 11-20, ..., 91-100
-      include.lowest = TRUE,
-      labels = paste(seq(1, 91, by = 10), seq(10, 100, by = 10), sep = "-"))
-}
+# comprobar esto!
+zz <- round(z,-1)/10
 
-# aplicar rangos a cada celda
-z_ranges <- apply(z, c(1,2), value_to_range)
-
-# nuevo --> convertir a matriz binaria por determinante y rango
-# cada determinante tendrá 10 columnas: "PROFITS_1-10", "PROFITS_11-20", ...
-z_bin <- do.call(cbind, lapply(1:ncol(z_ranges), function(j) {
-  det <- colnames(z_ranges)[j]
-  sapply(levels(z_ranges[,j]), function(rng) as.integer(z_ranges[,j] == rng))
-}))
-
-colnames(z_bin) <- unlist(lapply(1:ncol(z_ranges), function(j) {
-  paste(colnames(z_ranges)[j], levels(z_ranges[,j]), sep = "_")
-}))
+z9  <- z  %*% as.matrix(dm)
+zz9 <- zz %*% as.matrix(dm)
 
 K    <- 8
 NN   <- 1
@@ -51,8 +37,8 @@ m <- hashmap(default = 0, on_missing_key = "default")
 
 # bootstrap y kmeans sobre la matriz binaria
 par_out <- foreach (b = 1:BOOT, .options.future = list(seed = TRUE)) %dorng% {
-  idx  <- sample(1:nrow(z_bin), replace = TRUE)
-  km_b <- kmeans(z_bin[idx,], centers = K, nstart = NN)
+  idx  <- sample(1:nrow(zz), replace = TRUE)
+  km_b <- kmeans(zz[idx,], centers = K, nstart = NN)
   
   aux <- km_b$centers
   for (j in 1:K) {

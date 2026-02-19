@@ -8,6 +8,9 @@ K <- 8                     # número de clusters
 D_values <- seq(2, 20, 2)  # SOLO D PARES
 
 keys_list <- keys(m)
+
+#### multiplicar cada elemento por su valor. sabemos Cuantas veces aaprece x total y x cluster
+
 freqs <- sapply(keys_list, function(k) query(m, k))
 keys_mat <- do.call(rbind, keys_list)
 n_arch <- nrow(keys_mat)
