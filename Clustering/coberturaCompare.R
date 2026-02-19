@@ -22,7 +22,6 @@ expert_csv_to_binary <- function(expert_csv, determinantes) {
   expert_bin
 }
 
-
 # compara cada cluster con cada experto
 compute_coverage_binary <- function(cluster_mat, expert_bin, cluster_names = NULL, expert_names = NULL, cluster_dets = NULL) {
   
@@ -149,12 +148,15 @@ for (D in seq(2, 20, by = 2)) {
   rownames(cluster_mat) <- clusters_df$cluster
   
   expert_bin <- expert_csv_to_binary("data/archetypeExperts.csv", cluster_dets)
+  write.csv(expert_bin, paste0("data/dataPreproc/binarchetypeExperts.csv"), row.names = FALSE)
   coverage_experts <- compute_coverage_binary(cluster_mat, expert_bin, cluster_dets = cluster_dets)
   
   kmeans_bin <- expert_csv_to_binary("data/archetypeKmeans.csv", cluster_dets)
+  write.csv(kmeans_bin, paste0("data/dataPreproc/binarchetypeKmeans.csv"), row.names = FALSE)
   coverage_kmeans <- compute_coverage_binary(cluster_mat, kmeans_bin, cluster_dets = cluster_dets)
   
   sins_bin <- expert_csv_to_binary("data/archetypeSINS.csv", cluster_dets)
+  write.csv(sins_bin, paste0("data/dataPreproc/binarchetypeSINS.csv"), row.names = FALSE)
   coverage_sins <- compute_coverage_binary(cluster_mat, sins_bin, cluster_dets = cluster_dets)
   
   write.csv(coverage_experts, paste0("resultsD_plot/D_", D, "/coverage_experts_D", D, ".csv"), row.names = FALSE)

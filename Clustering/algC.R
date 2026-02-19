@@ -91,6 +91,23 @@ for(D in D_values) {
   }
   
   summary_df <- do.call(rbind, summary_list)
+
+  # calcular arquetipos no asignados
+  n_rest <- n_arch - sum(summary_df$n_archetypes)
+  if(n_rest > 0){
+    pct_total_rest <- n_rest / n_arch * 100
+    pct_rest_rest  <- 0  # no hay más restante después de esto
+        summary_df <- rbind(
+      summary_df,
+      data.frame(
+        cluster = "Restantes",
+        n_archetypes = n_rest,
+        pct_total_arch = pct_total_rest,
+        pct_rest_arch  = pct_rest_rest
+      )
+    )
+  }
+  
   write.csv(summary_df, file.path(dir_D, "greedy_cluster_summary_by_archetypes.csv"), row.names = FALSE)
   
   # Arquetipos no asignados
