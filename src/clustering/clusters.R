@@ -1,7 +1,6 @@
 # library("stringi")
 # library("PMCMRplus")
 # library("effectsize")
-
 library("clValid")
 library("factoextra")
 library("kohonen")
@@ -96,15 +95,16 @@ summary(sinsm)
 #             col.ind = "cos2", # Color by the quality of representation
 #             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
 #             repel = TRUE     # Avoid text overlapping)
-# fviz_pca_var(pca,haotmail
+# fviz_pca_var(pca,hotmail
 #           col.var = "contrib", # Color by contributions to the PC
 #           gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
 #           repel = TRUE     # Avoid text overlapping)
+summary(pca)
 
 
 # archetypesKq <- apply(zzz$centers,1,function(x) { AUX <- abs(x-50)/50; names(AUX[which(AUX >= quantile(AUX,QUANTILE))])})
 
-TARGET   <- read.csv("data/archetypeKmeans.csv")[,-1]
+TARGET   <- read.csv("archetypeKmeans.csv")[,-1]
 NFACTORS <- 15
 NCLUSTER <- 8
 SAVE     <- 0
@@ -186,8 +186,6 @@ RESULT <- foreach(NCLUSTER=4:9,.combine='rbind') %:%
 
   # PCA y hierarchical son entrenamientos deterministas
   pca          <- prcomp(z[complete.cases(z),],scale=T)
-  summary(pca)
-
   archetypesP  <- apply(pca$rotation,2,function(x) {names(head(x[order(-x)],NFACTORS))})[,1:NCLUSTER]
 
   hie_model    <- cutree(tree=hclust(dist(z[complete.cases(z),])),k=NCLUSTER)
