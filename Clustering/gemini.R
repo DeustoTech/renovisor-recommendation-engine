@@ -22,31 +22,26 @@ BINARIZAR <- function(M, n_top) {
 GET_FREQ <- function(z, DIR){
   if (!dir.exists(DIR)) dir.create(DIR, recursive = TRUE)
   
-  cat("Empezamos ",DIR,"\n")
-  
   cl <-  foreach (b = 1:BOOT, .options.future = list(seed = TRUE)) %dofuture% {
     idx  <- sample.int(nrow(z), replace = TRUE)
     km_b <- kmeans(z[idx,], centers = K, iter.max = 20)
     return(km_b$centers)
   }
-  cl <- as.matrix(data.table::rbindlist(lapply(cl, as.data.frame)))
+  cl <- as.matrix(data.table::rbindlist(cl))
   fwrite(cl, file = paste0(DIR, "/cluster_cen.csv"))
-
-  cat("Termino C ",DIR, "\n")
-  
+ 
   pos <- ext <- cl
   ext <- abs(ext-50)
   pos[pos < MAX] <- NA
   ext[ext < Q3]  <- NA
   
-   pdf(file=paste0(DIR,"/","boxplots.pdf"))
+  pdf(file=paste0(DIR,"/","boxplots.pdf"))
+    on.exit(if (!is.null(dev.list())) dev.off(), add = TRUE)
     boxplot(z,  main="RAW answers")
     boxplot(cl, main="Centers")
     boxplot(pos,main="Centers upper half truncated")
     boxplot(ext,main="Centers extreme truncated")
-  dev.off()
 
-  cat("Empezamos POS ", DIR, "\n")
   pos <- as.data.table(BINARIZAR(pos, NF))
   setnames(pos, colnames(z))
   freq_pos <- pos[, .N, by = names(pos)]
@@ -54,20 +49,19 @@ GET_FREQ <- function(z, DIR){
   fwrite(pos,      file = paste0(DIR, "/cluster_det_pos.csv"))
   fwrite(freq_pos, file = paste0(DIR, "/freq_cluster_det_pos.csv"))
   
-  cat("Empezamos EXT ", DIR, "\n")
   ext <- as.data.table(BINARIZAR(ext, NF))
   setnames(ext, colnames(z))
   freq_ext <- ext[, .N, by = names(ext)]
   
-  fwrite(ext,      file = paste0(DIR, "/cluster_det_pos.csv"))
-  fwrite(freq_ext, file = paste0(DIR, "/freq_cluster_det_pos.csv"))
+  fwrite(ext,      file = paste0(DIR, "/cluster_det_ext.csv"))
+  fwrite(freq_ext, file = paste0(DIR, "/freq_cluster_det_ext.csv"))
 }
 
 K    <- 8     # Number of clusters
 MAX  <- 50    # punto de corte para considerar el determinante solo positivo
 Q3   <- 25    # punto de corte para considerar el determinante extremos alto
 NF   <- 15    # si no esta entre los 15 valores mas altos, se pone 0
-BOOT <- 1e5   # numero de repeticiones de bootstraping
+BOOT <- 1e6   # numero de repeticiones de bootstraping
 
 d  <- read.csv("data/Content_Export_Investment_Arquetypes_2022_full-latin-final.csv", skip = 2)
 dm <- read.csv2("data/determinants.csv",row.names = 1)
