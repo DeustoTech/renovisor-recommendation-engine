@@ -27,6 +27,13 @@ zz <- round(z,-1)/10
 z9  <- z  %*% as.matrix(dm)
 zz9 <- zz %*% as.matrix(dm)
 
+pdf()
+  boxplot(z)
+  boxplot(zz)
+  boxplot(z9)
+  boxplot(zz9)
+dev.off()
+
 K    <- 8
 NN   <- 1
 MAX  <- 50

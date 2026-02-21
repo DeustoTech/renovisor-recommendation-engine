@@ -2,6 +2,7 @@ library(data.table)
 library(foreach)
 library(doFuture)
 library(iterators)
+library(future.apply)
 
 doFuture::registerDoFuture()
 plan(list(
@@ -9,57 +10,64 @@ plan(list(
   tweak(multicore, workers = 4)
 ))
 
-GET_FREQ <- function(z,DIR){
-  if (!file.exists(DIR)) dir.create(DIR, recursive = TRUE)
+BINARIZAR <- function(M, n_top) {    
+  ranks <- apply(M, 1, function(x) rank(-x, ties.method = "first"))
+  ranks <- t(ranks) 
   
-  C <- foreach (b = 1:BOOT,.options.future = list(seed = TRUE)) %dofuture% {
-    idx  <- sample(1:nrow(z), replace = TRUE)
-    km_b <- kmeans(z[idx,], centers = K)
+  res <- matrix(0, nrow = nrow(M), ncol = ncol(M))
+  res[ranks <= n_top & !is.na(M)] <- 1
+  return(res)
+}
+
+GET_FREQ <- function(z, DIR){
+  if (!dir.exists(DIR)) dir.create(DIR, recursive = TRUE)
+  
+  cat("Empezamos ",DIR,"\n")
+  
+  cl <-  foreach (b = 1:BOOT, .options.future = list(seed = TRUE)) %dofuture% {
+    idx  <- sample.int(nrow(z), replace = TRUE)
+    km_b <- kmeans(z[idx,], centers = K, iter.max = 20)
     return(km_b$centers)
   }
-  C <- data.table::rbindlist(C)
-  fwrite(C,file=paste0(DIR,"/","cluster_cen.csv"))
+  cl <- as.matrix(data.table::rbindlist(lapply(cl, as.data.frame)))
+  fwrite(cl, file = paste0(DIR, "/cluster_cen.csv"))
 
-  pos <- ext <- C
+  cat("Termino C ",DIR, "\n")
+  
+  pos <- ext <- cl
   ext <- abs(ext-50)
   pos[pos < MAX] <- NA
   ext[ext < Q3]  <- NA
   
    pdf(file=paste0(DIR,"/","boxplots.pdf"))
-    boxplot(z,main="RAW answers")
-    boxplot(C,main="Centers")
+    boxplot(z,  main="RAW answers")
+    boxplot(cl, main="Centers")
     boxplot(pos,main="Centers upper half truncated")
     boxplot(ext,main="Centers extreme truncated")
   dev.off()
 
-  pos <- foreach(fila=iter(pos,by="row"),.combine=rbind) %dofuture% { ## binarizo solo positivio
-    fila[order(fila,decreasing=T,na.last=NA)[1:NF]] <- 1
-    fila[fila>1]      <- NA
-    fila[is.na(fila)] <- 0
-    return(fila)
-  }
-  pos <- as.data.table(pos)
+  cat("Empezamos POS ", DIR, "\n")
+  pos <- as.data.table(BINARIZAR(pos, NF))
+  setnames(pos, colnames(z))
   freq_pos <- pos[, .N, by = names(pos)]
-  fwrite(pos,     file=paste0(DIR,"/","cluster_det_pos.csv"))
-  fwrite(freq_pos,file=paste0(DIR,"/","freq_cluster_det_pos.csv"))
-
-  ext <- foreach(fila=iter(ext,by="row"),.combine=rbind) %dofuture% { ## binarizo extremos
-    fila[order(fila,decreasing=T,na.last=NA)[1:NF]] <- 1
-    fila[fila>1]      <- NA
-    fila[is.na(fila)] <- 0
-    return(fila)
-  }
-  ext <- as.data.table(ext)
+  
+  fwrite(pos,      file = paste0(DIR, "/cluster_det_pos.csv"))
+  fwrite(freq_pos, file = paste0(DIR, "/freq_cluster_det_pos.csv"))
+  
+  cat("Empezamos EXT ", DIR, "\n")
+  ext <- as.data.table(BINARIZAR(ext, NF))
+  setnames(ext, colnames(z))
   freq_ext <- ext[, .N, by = names(ext)]
-  fwrite(pos,     file=paste0(DIR,"/","cluster_det_ext.csv"))
-  fwrite(freq_pos,file=paste0(DIR,"/","freq_cluster_det_ext.csv"))
+  
+  fwrite(ext,      file = paste0(DIR, "/cluster_det_pos.csv"))
+  fwrite(freq_ext, file = paste0(DIR, "/freq_cluster_det_pos.csv"))
 }
 
 K    <- 8     # Number of clusters
 MAX  <- 50    # punto de corte para considerar el determinante solo positivo
 Q3   <- 25    # punto de corte para considerar el determinante extremos alto
 NF   <- 15    # si no esta entre los 15 valores mas altos, se pone 0
-BOOT <- 1e6   # numero de repeticiones de bootstraping
+BOOT <- 1e5   # numero de repeticiones de bootstraping
 
 d  <- read.csv("data/Content_Export_Investment_Arquetypes_2022_full-latin-final.csv", skip = 2)
 dm <- read.csv2("data/determinants.csv",row.names = 1)
@@ -77,13 +85,9 @@ det_names <- c("PROFITS", "CREDIT SCORE", "RISK PROFILE", "ADDED VALUE",
 colnames(z) <- det_names
 rm(d)
 
-resultados <- future_mapply(
+resultados <-  future.apply::future_mapply(
   FUN = GET_FREQ, 
-  datos = list(z, round(z,-1), z  %*% as.matrix(dm),round(z,-1) %*% as.matrix(dm)), 
-  names = list("100-32","10-32","100-9","10-9")
+  z = list(z, round(z,-1), z  %*% as.matrix(dm),round(z,-1) %*% as.matrix(dm)), 
+  DIR = list("100-32","10-32","100-9","10-9"),
+  future.seed = TRUE
 )
-
-# GET_FREQ(z,  "100-32")
-# GET_FREQ(round(z,-1), "10-32")
-# GET_FREQ(z  %*% as.matrix(dm), "100-9")
-# GET_FREQ(round(z,-1) %*% as.matrix(dm),"10-9")
