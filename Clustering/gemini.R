@@ -19,15 +19,15 @@ BINARIZAR <- function(M, n_top) {
   return(res)
 }
 
-GET_FREQ <- function(z, DIR){
+GET_FREQ <- function(DAT, DIR){
   if (!dir.exists(DIR)) dir.create(DIR, recursive = TRUE)
   
   cl <-  foreach (b = 1:BOOT, .options.future = list(seed = TRUE)) %dofuture% {
-    idx  <- sample.int(nrow(z), replace = TRUE)
-    km_b <- kmeans(z[idx,], centers = K, iter.max = 20)
+    idx  <- sample.int(nrow(DAT), replace = TRUE)
+    km_b <- kmeans(DAT[idx,], centers = K, iter.max = 20)
     return(km_b$centers)
   }
-  cl <- as.matrix(data.table::rbindlist(cl))
+  cl <- do.call(rbind, cl)
   fwrite(cl, file = paste0(DIR, "/cluster_cen.csv"))
  
   pos <- ext <- cl
@@ -37,20 +37,20 @@ GET_FREQ <- function(z, DIR){
   
   pdf(file=paste0(DIR,"/","boxplots.pdf"))
     on.exit(if (!is.null(dev.list())) dev.off(), add = TRUE)
-    boxplot(z,  main="RAW answers")
+    boxplot(DAT,main="RAW answers")
     boxplot(cl, main="Centers")
     boxplot(pos,main="Centers upper half truncated")
     boxplot(ext,main="Centers extreme truncated")
 
   pos <- as.data.table(BINARIZAR(pos, NF))
-  setnames(pos, colnames(z))
+  setnames(pos, colnames(DAT))
   freq_pos <- pos[, .N, by = names(pos)]
   
   fwrite(pos,      file = paste0(DIR, "/cluster_det_pos.csv"))
   fwrite(freq_pos, file = paste0(DIR, "/freq_cluster_det_pos.csv"))
   
   ext <- as.data.table(BINARIZAR(ext, NF))
-  setnames(ext, colnames(z))
+  setnames(ext, colnames(DAT))
   freq_ext <- ext[, .N, by = names(ext)]
   
   fwrite(ext,      file = paste0(DIR, "/cluster_det_ext.csv"))
@@ -81,7 +81,8 @@ rm(d)
 
 resultados <-  future.apply::future_mapply(
   FUN = GET_FREQ, 
-  z = list(z, round(z,-1), z  %*% as.matrix(dm),round(z,-1) %*% as.matrix(dm)), 
+  DAT = list(z, round(z,-1), z  %*% as.matrix(dm),round(z,-1) %*% as.matrix(dm)), 
   DIR = list("100-32","10-32","100-9","10-9"),
+  SIMPLIFY= T,
   future.seed = TRUE
 )
