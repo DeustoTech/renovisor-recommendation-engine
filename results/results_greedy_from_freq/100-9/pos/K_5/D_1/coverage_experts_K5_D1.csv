@@ -1,0 +1,41 @@
+"cluster","expert","vol_cluster","vol_expert","vol_common","pct_cluster_covered","pct_expert_covered","jaccard"
+"cluster_1","Early Adopter",5,0,0,0,0,0
+"cluster_1","Uninterested",5,0,0,0,0,0
+"cluster_1","Homo Economicus",5,0,0,0,0,0
+"cluster_1","Fearful",5,0,0,0,0,0
+"cluster_1","Stubborn",5,0,0,0,0,0
+"cluster_1","Influencer",5,0,0,0,0,0
+"cluster_1","Careful",5,0,0,0,0,0
+"cluster_1","Activist",5,0,0,0,0,0
+"cluster_2","Early Adopter",9,0,0,0,0,0
+"cluster_2","Uninterested",9,0,0,0,0,0
+"cluster_2","Homo Economicus",9,0,0,0,0,0
+"cluster_2","Fearful",9,0,0,0,0,0
+"cluster_2","Stubborn",9,0,0,0,0,0
+"cluster_2","Influencer",9,0,0,0,0,0
+"cluster_2","Careful",9,0,0,0,0,0
+"cluster_2","Activist",9,0,0,0,0,0
+"cluster_3","Early Adopter",3,0,0,0,0,0
+"cluster_3","Uninterested",3,0,0,0,0,0
+"cluster_3","Homo Economicus",3,0,0,0,0,0
+"cluster_3","Fearful",3,0,0,0,0,0
+"cluster_3","Stubborn",3,0,0,0,0,0
+"cluster_3","Influencer",3,0,0,0,0,0
+"cluster_3","Careful",3,0,0,0,0,0
+"cluster_3","Activist",3,0,0,0,0,0
+"cluster_4","Early Adopter",7,0,0,0,0,0
+"cluster_4","Uninterested",7,0,0,0,0,0
+"cluster_4","Homo Economicus",7,0,0,0,0,0
+"cluster_4","Fearful",7,0,0,0,0,0
+"cluster_4","Stubborn",7,0,0,0,0,0
+"cluster_4","Influencer",7,0,0,0,0,0
+"cluster_4","Careful",7,0,0,0,0,0
+"cluster_4","Activist",7,0,0,0,0,0
+"cluster_5","Early Adopter",7,0,0,0,0,0
+"cluster_5","Uninterested",7,0,0,0,0,0
+"cluster_5","Homo Economicus",7,0,0,0,0,0
+"cluster_5","Fearful",7,0,0,0,0,0
+"cluster_5","Stubborn",7,0,0,0,0,0
+"cluster_5","Influencer",7,0,0,0,0,0
+"cluster_5","Careful",7,0,0,0,0,0
+"cluster_5","Activist",7,0,0,0,0,0

@@ -1,0 +1,9 @@
+"step","pattern","expert","freq","jaccard","score","active_determinants","n_active_dets"
+1,"pattern_1","Early Adopter",245367,0,0,"",0
+2,"pattern_2","Uninterested",24274,0,0,"COMPETENCE",1
+3,"pattern_3","Homo Economicus",19060,0,0,"STIMULATION; POPULARITY; MEANING",3
+4,"pattern_4","Fearful",430,0,0,"FINANCIAL; SECURITY; COMPETENCE; AUTONOMY; PHYSICALNESS; RELATEDNESS; STIMULATION; MEANING",8
+5,"pattern_5","Stubborn",60409,0,0,"COMPETENCE; AUTONOMY; PHYSICALNESS",3
+6,"pattern_6","Influencer",19664,0,0,"COMPETENCE; STIMULATION; POPULARITY",3
+7,"pattern_7","Careful",44154,0,0,"COMPETENCE; AUTONOMY; PHYSICALNESS; POPULARITY",4
+8,"pattern_8","Activist",8943,0,0,"PHYSICALNESS",1
