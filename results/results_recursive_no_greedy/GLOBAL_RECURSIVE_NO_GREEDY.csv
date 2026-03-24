@@ -1,9 +1,0 @@
-"scenario","type","reference","criterion","n_experts_total","n_matches","mean_jaccard","weighted_mean_jaccard","sum_score"
-"10-32","ext","experts","freq_jaccard",8,8,33.0151966089466,29.2820737397274,3150604.72402597
-"10-32","pos","experts","freq_jaccard",8,8,32.515318627451,41.9547671523419,13078769.3382353
-"10-9","ext","experts","freq_jaccard",8,8,0,0,0
-"10-9","pos","experts","freq_jaccard",8,8,0,0,0
-"100-32","ext","experts","freq_jaccard",8,8,33.0151966089466,30.2549002913176,3153861.57106782
-"100-32","pos","experts","freq_jaccard",8,8,32.515318627451,41.658121344294,13399334.7303922
-"100-9","ext","experts","freq_jaccard",8,8,0,0,0
-"100-9","pos","experts","freq_jaccard",8,8,0,0,0

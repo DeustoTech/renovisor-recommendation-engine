@@ -1,2 +1,0 @@
-"scenario","type","reference","criterion","n_experts_total","n_matches","mean_jaccard","weighted_mean_jaccard","sum_score"
-"10-32","ext","experts","freq_jaccard",8,8,33.0151966089466,29.2820737397274,3150604.72402597
