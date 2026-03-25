@@ -201,7 +201,7 @@ make_greedy_pdf_by_scenario <- function(df, type_value, scenario_value, outfile)
     labs(
       title = paste("greedy -", type_value, "-", scenario_value),
       x = "D",
-      y = "% asignado",
+      y = "% frecuencia asignada",
       color = "K"
     ) +
     theme_minimal(base_size = 12) +
@@ -333,13 +333,15 @@ for (sc in scenarios) {
         unassigned_df <- data.frame(pattern_id = which(!res$used))
         write.csv(unassigned_df, file.path(dir_D, "greedy_unassigned_patterns.csv"), row.names = FALSE)
         
-        assigned <- sum(res$used)
-        unassigned <- n_arch - assigned
+        total_freq <- sum(freqs, na.rm = TRUE)
+        
+        assigned_freq <- sum(freqs[res$used], na.rm = TRUE)
+        unassigned_freq <- sum(freqs[!res$used], na.rm = TRUE)
         
         results_D <- rbind(results_D, data.frame(
           D = D,
-          assigned_pct = assigned / n_arch * 100,
-          unassigned_pct = unassigned / n_arch * 100
+          assigned_pct = 100 * assigned_freq / total_freq,
+          unassigned_pct = 100 * unassigned_freq / total_freq
         ))
         
         pdf_results[[paste(sc, tp, K, D, sep = "_")]] <- data.frame(
@@ -347,8 +349,8 @@ for (sc in scenarios) {
           type = tp,
           K = K,
           D = D,
-          assigned_pct = assigned / n_arch * 100,
-          unassigned_pct = unassigned / n_arch * 100,
+          assigned_pct = 100 * assigned_freq / total_freq,
+          unassigned_pct = 100 * unassigned_freq / total_freq,
           stringsAsFactors = FALSE
         )
         
@@ -430,9 +432,9 @@ for (sc in scenarios) {
         ) +
         geom_hline(yintercept = seq(0, 100, by = 5), color = "grey90", linetype = "dashed") +
         labs(
-          title = paste("Asignación de patrones vs D -", sc, tp, "K =", K),
+          title = paste("Asignación de frecuencia vs D -", sc, tp, "K =", K),
           x = "Distancia máxima D",
-          y = "Porcentaje de patrones",
+          y = "Porcentaje de frecuencia",
           color = "Tipo"
         ) +
         theme_minimal(base_size = 14) +
@@ -476,9 +478,9 @@ if (length(pdf_results) > 0) {
         labels = function(x) paste0(x, "%")
       ) +
       labs(
-        title = paste("Greedy: % asignado vs D para distintos K -", toupper(type_value)),
+        title = paste("Greedy: % frecuencia asignada vs D para distintos K -", toupper(type_value)),
         x = "Distancia máxima D",
-        y = "% asignado",
+        y = "% frecuencia asignada",
         color = "K"
       ) +
       theme_minimal(base_size = 12) +

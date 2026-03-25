@@ -98,7 +98,7 @@ make_pdf <- function(df, type_value, ref_value, outfile, D_values, D_order) {
     filter(type == type_value, reference == ref_value) %>%
     mutate(
       scenario = factor(scenario, levels = c("100-32", "10-32")),
-      legend_lab = paste0("K=", K, ": ", archetypes_used)
+      legend_lab = paste0("K=", K)
     )
   
   p <- ggplot(df_sub, aes(x = D, y = pct_covered, color = legend_lab, group = legend_lab)) +
@@ -145,7 +145,7 @@ make_cumulative_pdf_by_scenario <- function(df, type_value, scenario_value, ref_
   df_sub <- df %>%
     filter(type == type_value, scenario == scenario_value, reference == ref_value) %>%
     mutate(
-      legend_lab = paste0("K=", K, ": ", archetypes_used)
+      legend_lab = paste0("K=", K)
     )
   
   p <- ggplot(df_sub, aes(x = D, y = pct_covered, color = legend_lab, group = legend_lab)) +
@@ -288,6 +288,18 @@ for (sc in scenarios) {
       dist_mat_ord <- dist_mat[, ordered_idx, drop = FALSE]
       sim_mat_ord  <- sim_mat[, ordered_idx, drop = FALSE]
       ordered_names <- colnames(dist_mat_ord)
+      
+      k_map_df <- data.frame(
+        K = seq_len(n_exp),
+        archetypes_used = sapply(seq_len(n_exp), function(k) paste(ordered_names[1:k], collapse = " | ")),
+        stringsAsFactors = FALSE
+      )
+      
+      write.csv(
+        k_map_df,
+        file.path(ref_dir, paste0("K_meaning_order_D", D_order, ".csv")),
+        row.names = FALSE
+      )
       
       # ACUMULATIVO CON ESE ORDEN
       for (K in seq_len(n_exp)) {
