@@ -1,24 +1,11 @@
-
-
-### un pdf para pos y otro para ext.
-# donde salgan las 4 imágenes:
-
-# - 100-32
-# - 10-32
-# - 100-9
-# - 10-9
-
-# greedy y con varios k=1,2,3,4,5,6,7,8.
-# q en cada una de los 4 gráficas salga la raya de los asignados para cada k.
 library(data.table)
 library(dplyr)
 library(clue)
 library(ggplot2)
 library(reshape2)
 
-####### greedy + comparación con expertos + PDF final con varios K
+### greedy + comparación con expertos + PDF final con varios K
 
-# 1. func
 norm_txt <- function(x) {
   x <- tolower(x)
   x <- gsub("[[:punct:]]", "", x)
@@ -26,7 +13,6 @@ norm_txt <- function(x) {
   x
 }
 
-# Lee freq_cluster_det_pos/ext.csv
 read_freq_clusters <- function(file_path) {
   df <- fread(file_path)
   
@@ -41,10 +27,8 @@ read_freq_clusters <- function(file_path) {
   list(mat = mat, freq = freq, df = df)
 }
 
-# distancia de Hamming entre patrones binarios
 hamming_dist <- function(x, y) sum(x != y)
 
-# encuentra patrones similares a un centro con distancia <= D
 find_similar <- function(center, keys_mat, freqs, used, D) {
   free_idx <- which(!used)
   if (length(free_idx) == 0) {
@@ -57,7 +41,6 @@ find_similar <- function(center, keys_mat, freqs, used, D) {
   list(indices = sel, score = sum(freqs[sel]))
 }
 
-# Greedy clustering
 greedy_clusters <- function(keys_mat, freqs, K, D) {
   n <- nrow(keys_mat)
   used <- rep(FALSE, n)
@@ -85,7 +68,6 @@ greedy_clusters <- function(keys_mat, freqs, K, D) {
   list(clusters = clusters, scores = scores, used = used)
 }
 
-# convierte CSV de expertos a matriz binaria comparable
 expert_csv_to_binary <- function(expert_csv, cluster_dets) {
   expert_df <- read.csv(expert_csv, stringsAsFactors = FALSE, check.names = FALSE)
   expert_df <- expert_df[, colSums(!is.na(expert_df) & expert_df != "") > 0, drop = FALSE]
@@ -112,7 +94,6 @@ jaccard_similarity <- function(a, b) {
   100 * inter / uni
 }
 
-# cobertura cluster vs experto
 compute_coverage_binary <- function(cluster_mat, expert_bin, cluster_names = NULL, expert_names = NULL, cluster_dets = NULL) {
   n_clusters <- nrow(cluster_mat)
   n_experts  <- nrow(expert_bin)
@@ -153,7 +134,6 @@ compute_coverage_binary <- function(cluster_mat, expert_bin, cluster_names = NUL
   do.call(rbind, coverage_list)
 }
 
-# matriz cluster x experto de similitud Jaccard
 build_similarity_matrix <- function(cluster_mat, expert_bin) {
   n_clusters <- nrow(cluster_mat)
   n_experts  <- nrow(expert_bin)
@@ -171,7 +151,6 @@ build_similarity_matrix <- function(cluster_mat, expert_bin) {
   sim_mat
 }
 
-# matching exclusivo 1-1 maximizando suma total
 assign_clusters_exclusive <- function(sim_mat, cluster_names, min_pct = 0) {
   n_clusters <- nrow(sim_mat)
   n_experts  <- ncol(sim_mat)
@@ -205,9 +184,34 @@ assign_clusters_exclusive <- function(sim_mat, cluster_names, min_pct = 0) {
   results
 }
 
-# 2. PARÁMETROS
-base_dir <- "~/Desktop/master/PFM_extra/100000"
-out_root <- "results_greedy_from_freq"
+make_greedy_pdf_by_scenario <- function(df, type_value, scenario_value, outfile) {
+  df_sub <- df %>%
+    filter(type == type_value, scenario == scenario_value) %>%
+    mutate(K = factor(K))
+  
+  p <- ggplot(df_sub, aes(x = D, y = assigned_pct, color = K, group = K)) +
+    geom_line(linewidth = 1) +
+    geom_point(size = 1.6) +
+    scale_x_continuous(breaks = sort(unique(df_sub$D))) +
+    scale_y_continuous(
+      breaks = seq(0, 100, by = 10),
+      limits = c(0, 100),
+      labels = function(x) paste0(x, "%")
+    ) +
+    labs(
+      title = paste("greedy -", type_value, "-", scenario_value),
+      x = "D",
+      y = "% asignado",
+      color = "K"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(panel.grid.minor = element_blank())
+  
+  ggsave(outfile, plot = p, width = 8, height = 6)
+}
+
+base_dir <- "~/Desktop/master/PFM_extra/1000000"
+out_root <- "results/results_greedy_from_freq"
 
 if (!dir.exists(out_root)) dir.create(out_root, recursive = TRUE)
 
@@ -215,15 +219,12 @@ scenarios <- c("100-32", "10-32", "100-9", "10-9")
 types <- c("pos", "ext")
 
 K_values <- 1:8
-D_values <- seq(0, 20, by = 1)
+D_values <- seq(0, 10, by = 2)
 
 expert_files <- list(
   experts = "data/archetypeExperts.csv"
-  # kmeans = "data/archetypeKmeans.csv",
-  # sins   = "data/archetypeSINS.csv"
 )
 
-# 3. bucle principal
 global_results <- list()
 pdf_results <- list()
 
@@ -241,7 +242,6 @@ for (sc in scenarios) {
       next
     }
     
-    # leer patrones binarios + frecuencia
     cl_obj <- read_freq_clusters(freq_file)
     keys_mat <- cl_obj$mat
     freqs <- cl_obj$freq
@@ -268,7 +268,6 @@ for (sc in scenarios) {
         dir_D <- file.path(k_dir, paste0("D_", D))
         if (!dir.exists(dir_D)) dir.create(dir_D, recursive = TRUE)
         
-        # guardar centros greedy
         centers_df <- do.call(rbind, lapply(seq_along(res$clusters), function(i) {
           cl <- res$clusters[[i]]
           if (is.null(cl$center) || length(cl$center) == 0) return(NULL)
@@ -279,7 +278,6 @@ for (sc in scenarios) {
           write.csv(centers_df, file.path(dir_D, "greedy_cluster_centers.csv"), row.names = FALSE)
         }
         
-        # guardar asignaciones
         assignments_df <- do.call(rbind, lapply(seq_along(res$clusters), function(i) {
           cl <- res$clusters[[i]]
           if (is.null(cl) || length(cl$members) == 0) return(NULL)
@@ -293,7 +291,6 @@ for (sc in scenarios) {
           write.csv(assignments_df, file.path(dir_D, "greedy_cluster_assignments.csv"), row.names = FALSE)
         }
         
-        # resumen de cobertura de patrones
         total_arch <- n_arch
         cumulative_pct <- 0
         summary_list <- list()
@@ -333,11 +330,9 @@ for (sc in scenarios) {
           write.csv(summary_df, file.path(dir_D, "greedy_cluster_summary_by_patterns.csv"), row.names = FALSE)
         }
         
-        # no asignados
         unassigned_df <- data.frame(pattern_id = which(!res$used))
         write.csv(unassigned_df, file.path(dir_D, "greedy_unassigned_patterns.csv"), row.names = FALSE)
         
-        # porcentaje asignados/no asignados
         assigned <- sum(res$used)
         unassigned <- n_arch - assigned
         
@@ -347,7 +342,6 @@ for (sc in scenarios) {
           unassigned_pct = unassigned / n_arch * 100
         ))
         
-        # guardar para pdf final
         pdf_results[[paste(sc, tp, K, D, sep = "_")]] <- data.frame(
           scenario = sc,
           type = tp,
@@ -358,7 +352,6 @@ for (sc in scenarios) {
           stringsAsFactors = FALSE
         )
         
-        # PASO 2: COMPARAR REPRESENTANTES CON EXPERTOS
         if (!is.null(centers_df)) {
           cluster_mat <- as.matrix(centers_df[, -1, drop = FALSE])
           rownames(cluster_mat) <- paste0("cluster_", centers_df$cluster)
@@ -417,7 +410,6 @@ for (sc in scenarios) {
         }
       }
       
-      # guardar curva assigned/unassigned vs D por K
       write.csv(results_D, file.path(k_dir, "assigned_vs_D.csv"), row.names = FALSE)
       
       results_long <- melt(results_D, id.vars = "D", variable.name = "Type", value.name = "Percent")
@@ -454,7 +446,6 @@ for (sc in scenarios) {
   }
 }
 
-# 4. tabla final comparación expertos
 if (length(global_results) > 0) {
   global_table <- bind_rows(global_results) %>%
     arrange(reference, scenario, type, K, D)
@@ -462,7 +453,6 @@ if (length(global_results) > 0) {
   write.csv(global_table, file.path(out_root, "GLOBAL_GREEDY_COMPARISON.csv"), row.names = FALSE)
 }
 
-# 5. PDF FINAL con 4 paneles por tipo y líneas para cada K
 if (length(pdf_results) > 0) {
   pdf_df <- bind_rows(pdf_results)
   write.csv(pdf_df, file.path(out_root, "ALL_ASSIGNED_RESULTS.csv"), row.names = FALSE)
@@ -511,6 +501,18 @@ if (length(pdf_results) > 0) {
     "ext",
     file.path(out_root, "assigned_vs_D_byK_ext.pdf")
   )
+  
+  # NUEVO: greedy por escenario solo para 100-32 y 10-32
+  out_dir_greedy <- file.path(out_root, "by_scenario")
+  dir.create(out_dir_greedy, recursive = TRUE, showWarnings = FALSE)
+  
+  for (tp in c("pos", "ext")) {
+    for (sc in c("100-32", "10-32")) {
+      outfile <- file.path(out_dir_greedy, paste0("greedy_", tp, "_", sc, ".pdf"))
+      make_greedy_pdf_by_scenario(pdf_df, tp, sc, outfile)
+      cat("OK greedy escenario:", outfile, "\n")
+    }
+  }
 }
 
 cat("fin\n")
