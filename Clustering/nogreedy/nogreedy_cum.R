@@ -102,8 +102,8 @@ make_pdf <- function(df, type_value, ref_value, outfile, D_values, D_order) {
     )
   
   p <- ggplot(df_sub, aes(x = D, y = pct_covered, color = legend_lab, group = legend_lab)) +
-    geom_line(linewidth = 1) +
-    geom_point(size = 1.3) +
+    geom_line(linewidth = 0.9) +
+    geom_point(size = 1.1) +
     facet_wrap(~ scenario, ncol = 2, scales = "fixed") +
     scale_x_continuous(breaks = D_values) +
     scale_y_continuous(
@@ -118,10 +118,24 @@ make_pdf <- function(df, type_value, ref_value, outfile, D_values, D_order) {
       y = "% frecuencia cubierta",
       color = "Arquetipos usados"
     ) +
-    theme_minimal(base_size = 12) +
+    guides(color = guide_legend(
+      ncol = 1,
+      byrow = TRUE,
+      keyheight = unit(0.35, "cm"),
+      keywidth  = unit(0.45, "cm")
+    )) +
+    theme_minimal(base_size = 11) +
     theme(
       panel.grid.minor = element_blank(),
-      strip.text = element_text(face = "bold")
+      strip.text = element_text(face = "bold"),
+      legend.position = "right",
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6, lineheight = 0.85),
+      legend.key.height = unit(0.35, "cm"),
+      legend.key.width = unit(0.45, "cm"),
+      legend.spacing.y = unit(0.03, "cm"),
+      legend.margin = margin(0, 0, 0, 0),
+      legend.box.margin = margin(0, 0, 0, 0)
     )
   
   ggsave(outfile, plot = p, width = 12, height = 8.5)
@@ -135,8 +149,8 @@ make_cumulative_pdf_by_scenario <- function(df, type_value, scenario_value, ref_
     )
   
   p <- ggplot(df_sub, aes(x = D, y = pct_covered, color = legend_lab, group = legend_lab)) +
-    geom_line(linewidth = 1) +
-    geom_point(size = 1.3) +
+    geom_line(linewidth = 0.9) +
+    geom_point(size = 1.1) +
     scale_x_continuous(breaks = D_values) +
     scale_y_continuous(
       breaks = seq(0, 100, by = 10),
@@ -149,10 +163,26 @@ make_cumulative_pdf_by_scenario <- function(df, type_value, scenario_value, ref_
       y = "% cubierto",
       color = "Arquetipos usados"
     ) +
-    theme_minimal(base_size = 11) +
-    theme(panel.grid.minor = element_blank())
+    guides(color = guide_legend(
+      ncol = 1,
+      byrow = TRUE,
+      keyheight = unit(0.35, "cm"),
+      keywidth  = unit(0.45, "cm")
+    )) +
+    theme_minimal(base_size = 10) +
+    theme(
+      panel.grid.minor = element_blank(),
+      legend.position = "right",
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 5.5, lineheight = 0.8),
+      legend.key.height = unit(0.35, "cm"),
+      legend.key.width = unit(0.45, "cm"),
+      legend.spacing.y = unit(0.02, "cm"),
+      legend.margin = margin(0, 0, 0, 0),
+      legend.box.margin = margin(0, 0, 0, 0)
+    )
   
-  ggsave(outfile, p, width = 8, height = 6)
+  ggsave(outfile, p, width = 8.5, height = 6)
 }
 
 base_dir <- "~/Desktop/master/PFM_extra/1000000"
