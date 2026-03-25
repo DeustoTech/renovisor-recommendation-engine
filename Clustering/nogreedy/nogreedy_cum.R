@@ -116,7 +116,7 @@ make_pdf <- function(df, type_value, ref_value, outfile, D_values, D_order) {
                      " - ", toupper(type_value), " - ", ref_value),
       x = "D (margen de distancia de Hamming)",
       y = "% frecuencia cubierta",
-      color = "Arquetipos usados"
+      color = "K"
     ) +
     guides(color = guide_legend(
       ncol = 1,
@@ -161,7 +161,7 @@ make_cumulative_pdf_by_scenario <- function(df, type_value, scenario_value, ref_
       title = paste0(ref_value, " - ", type_value, " - ", scenario_value, " (orden D=", D_order, ")"),
       x = "D",
       y = "% cubierto",
-      color = "Arquetipos usados"
+      color = "K" # arquetipo usado
     ) +
     guides(color = guide_legend(
       ncol = 1,
