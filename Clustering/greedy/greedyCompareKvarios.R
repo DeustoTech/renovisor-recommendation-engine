@@ -4,12 +4,21 @@ library(clue)
 library(ggplot2)
 library(reshape2)
 
-### greedy + comparación con expertos + PDF final con varios K
+### greedy + comparación con expertos binarizados + PDF final con varios K
 
 norm_txt <- function(x) {
-  x <- tolower(x)
-  x <- gsub("[[:punct:]]", "", x)
-  x <- gsub("[[:space:]]+", "", x)
+  x <- toupper(as.character(x))
+  x <- trimws(x)
+  x <- gsub("[[:punct:]]", " ", x)
+  x <- gsub("[[:space:]]+", " ", x)
+  x
+}
+
+recode_dets <- function(x) {
+  x <- norm_txt(x)
+  x[x == "BRAG"]     <- "RECOGNITION"
+  x[x == "POSEUR"]   <- "APPROVAL"
+  x[x == "COZYNESS"] <- "COZINESS"
   x
 }
 
@@ -22,9 +31,38 @@ read_freq_clusters <- function(file_path) {
   
   freq <- df$N
   mat <- as.matrix(df[, !"N"])
+  mode(mat) <- "numeric"
+  colnames(mat) <- recode_dets(colnames(mat))
   rownames(mat) <- paste0("pattern_", seq_len(nrow(mat)))
   
   list(mat = mat, freq = freq, df = df)
+}
+
+read_binary_archetypes <- function(file_path, target_cols = NULL) {
+  df <- fread(file_path)
+  df <- as.data.frame(df, check.names = FALSE)
+  
+  if (!"Archetype" %in% names(df)) {
+    stop(paste("No existe columna Archetype en", file_path))
+  }
+  
+  rownames(df) <- df$Archetype
+  df$Archetype <- NULL
+  colnames(df) <- recode_dets(colnames(df))
+  
+  mat <- as.matrix(df)
+  mode(mat) <- "numeric"
+  
+  if (!is.null(target_cols)) {
+    target_cols <- recode_dets(target_cols)
+    miss <- setdiff(target_cols, colnames(mat))
+    if (length(miss) > 0) {
+      stop(paste("Faltan columnas en", file_path, ":", paste(miss, collapse = ", ")))
+    }
+    mat <- mat[, target_cols, drop = FALSE]
+  }
+  
+  mat
 }
 
 hamming_dist <- function(x, y) sum(x != y)
@@ -66,23 +104,6 @@ greedy_clusters <- function(keys_mat, freqs, K, D) {
   }
   
   list(clusters = clusters, scores = scores, used = used)
-}
-
-expert_csv_to_binary <- function(expert_csv, cluster_dets) {
-  expert_df <- read.csv(expert_csv, stringsAsFactors = FALSE, check.names = FALSE)
-  expert_df <- expert_df[, colSums(!is.na(expert_df) & expert_df != "") > 0, drop = FALSE]
-  
-  expert_mat <- t(as.matrix(expert_df))
-  dets_norm <- norm_txt(cluster_dets)
-  
-  expert_bin <- t(apply(expert_mat, 1, function(row) {
-    row_norm <- norm_txt(row)
-    sapply(dets_norm, function(det) as.integer(det %in% row_norm))
-  }))
-  
-  colnames(expert_bin) <- cluster_dets
-  rownames(expert_bin) <- rownames(expert_mat)
-  expert_bin
 }
 
 jaccard_similarity <- function(a, b) {
@@ -215,14 +236,14 @@ out_root <- "results/results_greedy_from_freq"
 
 if (!dir.exists(out_root)) dir.create(out_root, recursive = TRUE)
 
-scenarios <- c("100-32", "10-32", "100-9", "10-9")
+scenarios <- c("100-32", "10-32") # 100-9, 10-9
 types <- c("pos", "ext")
 
 K_values <- 1:8
 D_values <- seq(0, 10, by = 2)
 
 expert_files <- list(
-  experts = "data/archetypeExperts.csv"
+  experts = "data/dataPreproc/archetypeExperts_bin_32.csv"
 )
 
 global_results <- list()
@@ -356,6 +377,7 @@ for (sc in scenarios) {
         
         if (!is.null(centers_df)) {
           cluster_mat <- as.matrix(centers_df[, -1, drop = FALSE])
+          mode(cluster_mat) <- "numeric"
           rownames(cluster_mat) <- paste0("cluster_", centers_df$cluster)
           colnames(cluster_mat) <- det_names
           
@@ -376,7 +398,7 @@ for (sc in scenarios) {
             expert_file <- expert_files[[ref_name]]
             if (!file.exists(expert_file)) next
             
-            expert_bin <- expert_csv_to_binary(expert_file, colnames(cluster_mat))
+            expert_bin <- read_binary_archetypes(expert_file, target_cols = colnames(cluster_mat))
             write.csv(expert_bin, file.path(dir_D, paste0("experts_binary_", ref_name, ".csv")), row.names = TRUE)
             
             coverage_df <- compute_coverage_binary(cluster_mat, expert_bin, cluster_dets = colnames(cluster_mat))
@@ -463,7 +485,7 @@ if (length(pdf_results) > 0) {
     df_type <- df %>%
       filter(type == type_value) %>%
       mutate(
-        scenario = factor(scenario, levels = c("100-32", "10-32", "100-9", "10-9")),
+        scenario = factor(scenario, levels = c("100-32", "10-32")),
         K = factor(K)
       )
     
@@ -504,7 +526,6 @@ if (length(pdf_results) > 0) {
     file.path(out_root, "assigned_vs_D_byK_ext.pdf")
   )
   
-  # NUEVO: greedy por escenario solo para 100-32 y 10-32
   out_dir_greedy <- file.path(out_root, "by_scenario")
   dir.create(out_dir_greedy, recursive = TRUE, showWarnings = FALSE)
   

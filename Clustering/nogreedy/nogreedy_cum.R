@@ -190,7 +190,7 @@ out_root <- "results/results_no_greedy_from_freq"
 
 if (!dir.exists(out_root)) dir.create(out_root, recursive = TRUE)
 
-scenarios <- c("100-32", "10-32")
+scenarios <- c("100-32", "10-32") # 9 
 types <- c("pos", "ext")
 D_values <- seq(0, 10, by = 2)
 D_order <- 4
@@ -377,7 +377,6 @@ for (tp in types) {
   }
 }
 
-# NUEVO: PDFs por escenario
 out_dir_by_scenario <- file.path(out_root, "by_scenario")
 dir.create(out_dir_by_scenario, recursive = TRUE, showWarnings = FALSE)
 
