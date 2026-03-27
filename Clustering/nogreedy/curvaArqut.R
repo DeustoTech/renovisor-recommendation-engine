@@ -6,24 +6,19 @@ library(patchwork)
 ##### individual --> medir la capacidad explicativa individual de cada arquetipo
 
 norm_txt <- function(x) {
-  x <- tolower(as.character(x))
+  x <- toupper(as.character(x))
   x <- trimws(x)
-  x <- gsub("[[:punct:]]", "", x)
-  x <- gsub("[[:space:]]+", "", x)
+  x <- gsub("[[:punct:]]", " ", x)
+  x <- gsub("[[:space:]]+", " ", x)
   x
 }
 
-alias_map <- c(
-  "cozyness" = "coziness",
-  "brag"     = "recognition",
-  "poseur"   = "approval"
-)
-
-apply_alias <- function(x_norm) {
-  x_out <- x_norm
-  hit <- x_norm %in% names(alias_map)
-  x_out[hit] <- alias_map[x_norm[hit]]
-  x_out
+recode_dets <- function(x) {
+  x <- norm_txt(x)
+  x[x == "BRAG"]     <- "RECOGNITION"
+  x[x == "POSEUR"]   <- "APPROVAL"
+  x[x == "COZYNESS"] <- "COZINESS"
+  x
 }
 
 hamming_dist <- function(x, y) sum(x != y)
@@ -45,55 +40,37 @@ read_freq_clusters <- function(file_path) {
   freq <- df$N
   mat <- as.matrix(df[, !"N"])
   storage.mode(mat) <- "integer"
+  colnames(mat) <- recode_dets(colnames(mat))
   rownames(mat) <- paste0("pattern_", seq_len(nrow(mat)))
   
   list(mat = mat, freq = freq, df = df)
 }
 
-expert_csv_to_binary <- function(expert_csv, det_names) {
-  expert_df <- read.csv(expert_csv, stringsAsFactors = FALSE, check.names = FALSE)
+read_binary_archetypes <- function(file_path, target_cols = NULL) {
+  df <- fread(file_path)
+  df <- as.data.frame(df, check.names = FALSE)
   
-  drop_cols <- grepl("^Unnamed", names(expert_df), ignore.case = TRUE) |
-    names(expert_df) %in% c("", "X", "...1")
-  
-  if (any(drop_cols)) {
-    expert_df <- expert_df[, !drop_cols, drop = FALSE]
+  if (!"Archetype" %in% names(df)) {
+    stop(paste("No existe columna Archetype en", file_path))
   }
   
-  if (ncol(expert_df) > 0) {
-    first_col <- expert_df[[1]]
-    suppressWarnings(num_col <- as.numeric(first_col))
-    if (all(!is.na(num_col)) && all(num_col == seq_along(num_col))) {
-      expert_df <- expert_df[, -1, drop = FALSE]
+  rownames(df) <- df$Archetype
+  df$Archetype <- NULL
+  colnames(df) <- recode_dets(colnames(df))
+  
+  mat <- as.matrix(df)
+  mode(mat) <- "numeric"
+  
+  if (!is.null(target_cols)) {
+    target_cols <- recode_dets(target_cols)
+    miss <- setdiff(target_cols, colnames(mat))
+    if (length(miss) > 0) {
+      stop(paste("Faltan columnas en", file_path, ":", paste(miss, collapse = ", ")))
     }
+    mat <- mat[, target_cols, drop = FALSE]
   }
   
-  names(expert_df)[names(expert_df) == "8"] <- "Cluster8"
-  
-  expert_df <- expert_df[, colSums(!is.na(expert_df) & expert_df != "") > 0, drop = FALSE]
-  
-  det_norm <- norm_txt(det_names)
-  
-  expert_bin <- sapply(seq_len(ncol(expert_df)), function(j) {
-    vals <- expert_df[[j]]
-    vals <- vals[!is.na(vals) & vals != ""]
-    vals_norm <- apply_alias(norm_txt(vals))
-    as.integer(det_norm %in% vals_norm)
-  })
-  
-  expert_bin <- as.matrix(expert_bin)
-  
-  if (nrow(expert_bin) == length(det_names) && ncol(expert_bin) == ncol(expert_df)) {
-    expert_bin <- t(expert_bin)
-  }
-  
-  colnames(expert_bin) <- det_names
-  
-  expert_names <- names(expert_df)
-  expert_names[is.na(expert_names) | expert_names == ""] <- paste0("expert_", seq_len(ncol(expert_df)))
-  rownames(expert_bin) <- expert_names
-  
-  expert_bin
+  mat
 }
 
 make_combined_individual_pdf <- function(df, type_value, scenario_value, outfile) {
@@ -135,7 +112,8 @@ make_pdf <- function(df, type_value, ref_value, outfile, D_values) {
   df_sub <- df %>%
     filter(type == type_value, reference == ref_value) %>%
     mutate(
-      scenario = factor(scenario, levels = c("100-32", "10-32"))
+      #scenario = factor(scenario, levels = c("100-32", "10-32"))
+      scenario = factor(scenario, levels = c("100-9", "10-9"))
     )
   
   p <- ggplot(df_sub, aes(x = D, y = pct_covered, color = archetype, group = archetype)) +
@@ -189,18 +167,23 @@ make_individual_pdf_by_scenario <- function(df, type_value, scenario_value, ref_
 }
 
 base_dir <- "~/Desktop/master/PFM_extra/1000000"
-out_root <- "results/results_each_archetype_separate"
+out_root <- "results/results_each_archetype_separate_9"
 
 if (!dir.exists(out_root)) dir.create(out_root, recursive = TRUE)
 
-scenarios <- c("100-32", "10-32") # añadir cuando eso lo de 9
+#scenarios <- c("100-32", "10-32")
+scenarios <- c("100-9", "10-9")
+
 types <- c("pos", "ext")
 D_values <- seq(0, 10, by = 2)
 
 expert_files <- list(
-  experts = "data/archetypeExperts.csv",
-  kmeans  = "data/archetypeKmeans.csv",
-  sins    = "data/archetypeSINS.csv"
+  #experts = "data/archetypeExperts.csv",
+  #kmeans  = "data/archetypeKmeans.csv",
+  #sins    = "data/archetypeSINS.csv"
+  experts = "data/archetypeExperts_9.csv",
+  kmeans  = "data/archetypeKmeans_9.csv",
+  sins    = "data/archetypeSINS_9.csv"
 )
 
 all_results <- list()
@@ -229,7 +212,7 @@ for (sc in scenarios) {
       expert_file <- expert_files[[ref_name]]
       if (!file.exists(expert_file)) next
       
-      expert_bin <- expert_csv_to_binary(expert_file, colnames(pattern_mat))
+      expert_bin <- read_binary_archetypes(expert_file, target_cols = colnames(pattern_mat))
       n_exp <- nrow(expert_bin)
       if (n_exp == 0) next
       
@@ -315,7 +298,6 @@ write.csv(
   row.names = FALSE
 )
 
-# PDFs como hasta ahora
 for (tp in types) {
   for (ref_name in names(expert_files)) {
     if (any(results_df$type == tp & results_df$reference == ref_name)) {
@@ -330,7 +312,7 @@ for (tp in types) {
   }
 }
 
-out_dir_combined <- "results/combined_individuals"
+out_dir_combined <- "results/combined_individuals_9"
 dir.create(out_dir_combined, recursive = TRUE, showWarnings = FALSE)
 
 out_dir_by_scenario <- file.path(out_root, "by_scenario")
@@ -339,12 +321,10 @@ dir.create(out_dir_by_scenario, recursive = TRUE, showWarnings = FALSE)
 for (tp in types) {
   for (sc in scenarios) {
     
-    # combinado 2x2 con experts/kmeans/sins
     outfile_comb <- file.path(out_dir_combined, paste0("individual_", tp, "_", sc, ".pdf"))
     make_combined_individual_pdf(results_df, tp, sc, outfile_comb)
     cat("OK combinado:", outfile_comb, "\n")
     
-    # individuales por escenario
     for (ref_name in names(expert_files)) {
       outfile_single <- file.path(out_dir_by_scenario, paste0("individual_", tp, "_", sc, "_", ref_name, ".pdf"))
       make_individual_pdf_by_scenario(results_df, tp, sc, ref_name, outfile_single)

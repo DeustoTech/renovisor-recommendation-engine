@@ -1,6 +1,4 @@
-
-
-# fichero para juntar por cada 100-32 acumuladtivos, etc, x pos/ext para cada csv + greedy.
+# fichero para juntar por cada escenario los acumulativos + greedy en un 2x2
 library(magick)
 
 combine_2x2_pdfs <- function(file_experts, file_kmeans, file_sins, file_greedy, output_file) {
@@ -16,14 +14,25 @@ combine_2x2_pdfs <- function(file_experts, file_kmeans, file_sins, file_greedy, 
   image_write(final_img, path = output_file, format = "pdf")
 }
 
-base_cum <- "results/results_no_greedy_from_freq/by_scenario"
-base_greedy <- "results/results_greedy_from_freq/by_scenario"
-out_dir <- "results/final_compare_pdfs_cumulative"
+# 32
+# base_cum <- "results/results_no_greedy_from_freq/by_scenario"
+# base_greedy <- "results/results_greedy_from_freq/by_scenario"
+# out_dir <- "results/final_compare_pdfs_cumulative"
+
+# 9
+base_cum <- "results/results_no_greedy_from_freq_9/by_scenario"
+base_greedy <- "results/results_greedy_from_freq_9/by_scenario"
+out_dir <- "results/final_compare_pdfs_cumulative_9"
 
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
 types <- c("pos", "ext")
-scenarios <- c("100-32", "10-32")
+
+# 32
+# scenarios <- c("100-32", "10-32")
+
+# 9
+scenarios <- c("100-9", "10-9")
 
 for (tp in types) {
   for (sc in scenarios) {

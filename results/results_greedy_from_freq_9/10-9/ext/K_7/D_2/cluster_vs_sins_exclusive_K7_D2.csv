@@ -1,0 +1,8 @@
+"cluster","best_match","pct_match","active_determinants","n_active_dets"
+"cluster_1","Homo.Economicus",0,"",0
+"cluster_2","Uninterested",60,"COMPETENCE; AUTONOMY; PHYSICALNESS",3
+"cluster_3","Fearful",77.7777777777778,"FINANCIAL; SECURITY; COMPETENCE; AUTONOMY; PHYSICALNESS; RELATEDNESS; STIMULATION; POPULARITY; MEANING",9
+"cluster_4","Early.Adopter",50,"STIMULATION; POPULARITY; MEANING",3
+"cluster_5","Careful",62.5,"FINANCIAL; SECURITY; COMPETENCE; AUTONOMY; PHYSICALNESS; STIMULATION",6
+"cluster_6","Stubborn",50,"SECURITY; COMPETENCE; AUTONOMY; POPULARITY",4
+"cluster_7","Influencer",12.5,"AUTONOMY; PHYSICALNESS; STIMULATION; POPULARITY",4

@@ -3,24 +3,19 @@ library(dplyr)
 library(ggplot2)
 
 norm_txt <- function(x) {
-  x <- tolower(as.character(x))
+  x <- toupper(as.character(x))
   x <- trimws(x)
-  x <- gsub("[[:punct:]]", "", x)
-  x <- gsub("[[:space:]]+", "", x)
+  x <- gsub("[[:punct:]]", " ", x)
+  x <- gsub("[[:space:]]+", " ", x)
   x
 }
 
-alias_map <- c(
-  "cozyness" = "coziness",
-  "brag"     = "recognition",
-  "poseur"   = "approval"
-)
-
-apply_alias <- function(x_norm) {
-  x_out <- x_norm
-  hit <- x_norm %in% names(alias_map)
-  x_out[hit] <- alias_map[x_norm[hit]]
-  x_out
+recode_dets <- function(x) {
+  x <- norm_txt(x)
+  x[x == "BRAG"]     <- "RECOGNITION"
+  x[x == "POSEUR"]   <- "APPROVAL"
+  x[x == "COZYNESS"] <- "COZINESS"
+  x
 }
 
 hamming_dist <- function(x, y) sum(x != y)
@@ -42,62 +37,45 @@ read_freq_clusters <- function(file_path) {
   freq <- df$N
   mat <- as.matrix(df[, !"N"])
   storage.mode(mat) <- "integer"
+  colnames(mat) <- recode_dets(colnames(mat))
   rownames(mat) <- paste0("pattern_", seq_len(nrow(mat)))
   
   list(mat = mat, freq = freq, df = df)
 }
 
-expert_csv_to_binary <- function(expert_csv, det_names) {
-  expert_df <- read.csv(expert_csv, stringsAsFactors = FALSE, check.names = FALSE)
+read_binary_archetypes <- function(file_path, target_cols = NULL) {
+  df <- fread(file_path)
+  df <- as.data.frame(df, check.names = FALSE)
   
-  drop_cols <- grepl("^Unnamed", names(expert_df), ignore.case = TRUE) |
-    names(expert_df) %in% c("", "X", "...1")
-  
-  if (any(drop_cols)) {
-    expert_df <- expert_df[, !drop_cols, drop = FALSE]
+  if (!"Archetype" %in% names(df)) {
+    stop(paste("No existe columna Archetype en", file_path))
   }
   
-  if (ncol(expert_df) > 0) {
-    first_col <- expert_df[[1]]
-    suppressWarnings(num_col <- as.numeric(first_col))
-    if (all(!is.na(num_col)) && all(num_col == seq_along(num_col))) {
-      expert_df <- expert_df[, -1, drop = FALSE]
+  rownames(df) <- df$Archetype
+  df$Archetype <- NULL
+  colnames(df) <- recode_dets(colnames(df))
+  
+  mat <- as.matrix(df)
+  mode(mat) <- "numeric"
+  
+  if (!is.null(target_cols)) {
+    target_cols <- recode_dets(target_cols)
+    miss <- setdiff(target_cols, colnames(mat))
+    if (length(miss) > 0) {
+      stop(paste("Faltan columnas en", file_path, ":", paste(miss, collapse = ", ")))
     }
+    mat <- mat[, target_cols, drop = FALSE]
   }
   
-  names(expert_df)[names(expert_df) == "8"] <- "Cluster8"
-  
-  expert_df <- expert_df[, colSums(!is.na(expert_df) & expert_df != "") > 0, drop = FALSE]
-  
-  det_norm <- norm_txt(det_names)
-  
-  expert_bin <- sapply(seq_len(ncol(expert_df)), function(j) {
-    vals <- expert_df[[j]]
-    vals <- vals[!is.na(vals) & vals != ""]
-    vals_norm <- apply_alias(norm_txt(vals))
-    as.integer(det_norm %in% vals_norm)
-  })
-  
-  expert_bin <- as.matrix(expert_bin)
-  
-  if (nrow(expert_bin) == length(det_names) && ncol(expert_bin) == ncol(expert_df)) {
-    expert_bin <- t(expert_bin)
-  }
-  
-  colnames(expert_bin) <- det_names
-  
-  expert_names <- names(expert_df)
-  expert_names[is.na(expert_names) | expert_names == ""] <- paste0("expert_", seq_len(ncol(expert_df)))
-  rownames(expert_bin) <- expert_names
-  
-  expert_bin
+  mat
 }
 
 make_pdf <- function(df, type_value, ref_value, outfile, D_values, D_order) {
   df_sub <- df %>%
     filter(type == type_value, reference == ref_value) %>%
     mutate(
-      scenario = factor(scenario, levels = c("100-32", "10-32")),
+      #scenario = factor(scenario, levels = c("100-32", "10-32")),
+      scenario = factor(scenario, levels = c("100-9", "10-9")),
       legend_lab = paste0("K=", K)
     )
   
@@ -161,7 +139,7 @@ make_cumulative_pdf_by_scenario <- function(df, type_value, scenario_value, ref_
       title = paste0(ref_value, " - ", type_value, " - ", scenario_value, " (orden D=", D_order, ")"),
       x = "D",
       y = "% cubierto",
-      color = "K" # arquetipo usado
+      color = "K"
     ) +
     guides(color = guide_legend(
       ncol = 1,
@@ -186,19 +164,24 @@ make_cumulative_pdf_by_scenario <- function(df, type_value, scenario_value, ref_
 }
 
 base_dir <- "~/Desktop/master/PFM_extra/1000000"
-out_root <- "results/results_no_greedy_from_freq"
+out_root <- "results/results_no_greedy_from_freq_9"
 
 if (!dir.exists(out_root)) dir.create(out_root, recursive = TRUE)
 
-scenarios <- c("100-32", "10-32") # 9 
+#scenarios <- c("100-32", "10-32")
+scenarios <- c("100-9", "10-9")
+
 types <- c("pos", "ext")
 D_values <- seq(0, 10, by = 2)
 D_order <- 4
 
 expert_files <- list(
-  experts = "data/archetypeExperts.csv",
-  kmeans  = "data/archetypeKmeans.csv",
-  sins    = "data/archetypeSINS.csv"
+  #experts = "data/archetypeExperts.csv",
+  #kmeans  = "data/archetypeKmeans.csv",
+  #sins    = "data/archetypeSINS.csv"
+  experts = "data/archetypeExperts_9.csv",
+  kmeans  = "data/archetypeKmeans_9.csv",
+  sins    = "data/archetypeSINS_9.csv"
 )
 
 all_results <- list()
@@ -227,7 +210,7 @@ for (sc in scenarios) {
       expert_file <- expert_files[[ref_name]]
       if (!file.exists(expert_file)) next
       
-      expert_bin <- expert_csv_to_binary(expert_file, colnames(pattern_mat))
+      expert_bin <- read_binary_archetypes(expert_file, target_cols = colnames(pattern_mat))
       n_exp <- nrow(expert_bin)
       if (n_exp == 0) next
       
@@ -262,7 +245,6 @@ for (sc in scenarios) {
         row.names = TRUE
       )
       
-      # ORDEN INDIVIDUAL EN D = 4
       individual_cov <- sapply(seq_len(n_exp), function(j) {
         covered_j <- dist_mat[, j] <= D_order
         sum(freqs[covered_j], na.rm = TRUE)
@@ -301,7 +283,6 @@ for (sc in scenarios) {
         row.names = FALSE
       )
       
-      # ACUMULATIVO CON ESE ORDEN
       for (K in seq_len(n_exp)) {
         
         dist_sub <- dist_mat_ord[, 1:K, drop = FALSE]
@@ -361,7 +342,6 @@ write.csv(
   row.names = FALSE
 )
 
-# PDFs como hasta ahora (con dos escenarios juntos)
 for (tp in types) {
   for (ref_name in names(expert_files)) {
     if (any(results_df$type == tp & results_df$reference == ref_name)) {

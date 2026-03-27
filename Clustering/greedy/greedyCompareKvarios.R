@@ -232,18 +232,22 @@ make_greedy_pdf_by_scenario <- function(df, type_value, scenario_value, outfile)
 }
 
 base_dir <- "~/Desktop/master/PFM_extra/1000000"
-out_root <- "results/results_greedy_from_freq"
+out_root <- "results/results_greedy_from_freq_9"
 
 if (!dir.exists(out_root)) dir.create(out_root, recursive = TRUE)
 
-scenarios <- c("100-32", "10-32") # 100-9, 10-9
+#scenarios <- c("100-32", "10-32") # 100-9, 10-9
+scenarios <- c("100-9", "10-9")
 types <- c("pos", "ext")
 
 K_values <- 1:8
 D_values <- seq(0, 10, by = 2)
 
 expert_files <- list(
-  experts = "data/dataPreproc/archetypeExperts_bin_32.csv"
+  #experts = "data/dataPreproc/archetypeExperts_bin_32.csv"
+  experts = "data/archetypeExperts_9.csv",
+  kmeans  = "data/archetypeKmeans_9.csv",
+  sins    = "data/archetypeSINS_9.csv"
 )
 
 global_results <- list()
@@ -485,7 +489,8 @@ if (length(pdf_results) > 0) {
     df_type <- df %>%
       filter(type == type_value) %>%
       mutate(
-        scenario = factor(scenario, levels = c("100-32", "10-32")),
+        #scenario = factor(scenario, levels = c("100-32", "10-32")),
+        scenario = factor(scenario, levels = c("100-9", "10-9")),
         K = factor(K)
       )
     
@@ -530,7 +535,8 @@ if (length(pdf_results) > 0) {
   dir.create(out_dir_greedy, recursive = TRUE, showWarnings = FALSE)
   
   for (tp in c("pos", "ext")) {
-    for (sc in c("100-32", "10-32")) {
+    #for (sc in c("100-32", "10-32")) {
+    for (sc in c("100-9", "10-9")) {
       outfile <- file.path(out_dir_greedy, paste0("greedy_", tp, "_", sc, ".pdf"))
       make_greedy_pdf_by_scenario(pdf_df, tp, sc, outfile)
       cat("OK greedy escenario:", outfile, "\n")
