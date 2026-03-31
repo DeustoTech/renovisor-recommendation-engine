@@ -619,3 +619,29 @@ cat("fin\n")
 #       + })
 
 # > colSums(freq[, -"N"] * freq$N)
+
+
+##### resultados 
+
+# [[1]]
+# [1] "COMPETENCE"   "AUTONOMY"     "PHYSICALNESS"
+# 
+# [[2]]
+# [1] "SECURITY"   "COMPETENCE" "AUTONOMY"  
+# 
+# [[3]]
+# [1] "FINANCIAL"  "COMPETENCE" "AUTONOMY"  
+
+
+# podemos ver que hay clusters muy claros.
+
+## el 1 es physicalness
+# el 2 security
+# el 3 financial
+
+### aqui se ve mejor cómo dos dimensiones estan presente siempre:
+# colSums(freq[, -"N"] * freq$N)/8e6 * 100
+# FINANCIAL     SECURITY   COMPETENCE     AUTONOMY PHYSICALNESS  RELATEDNESS  STIMULATION   POPULARITY 
+# 10.8735125   32.8836750   97.3309000   99.7018125   57.5577250    0.0024125    0.5678625    0.0684500 
+# MEANING 
+# 0.0415250 

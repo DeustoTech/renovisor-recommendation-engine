@@ -3,8 +3,8 @@ library(dplyr)
 
 # CONFIG
 
-mode <- "9_top3data"
-# mode <- "32"
+#mode <- "9_top3data"
+mode <- "32"
 # mode <- "9"
 
 if (mode == "32") {
