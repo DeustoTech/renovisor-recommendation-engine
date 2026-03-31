@@ -599,3 +599,23 @@ if (length(pdf_results) > 0) {
 }
 
 cat("fin\n")
+
+
+
+
+################ para mirar qué 3 dimensiones tienen los clust
+
+#> freq <- fread("data/9_top3/100-9-top3/freq_cluster_det_pos.csv")
+# > setorder(freq, -N)
+# > head(freq, 5)
+# > get_dims <- function(row) {
+# +     names(row)[which(row == 1)]
+# + }
+# > 
+#   > top_patterns <- freq[1:3]  # los 3 que cubren todo
+#   > 
+#     > lapply(1:3, function(i) {
+#       +     get_dims(top_patterns[i, -"N"])
+#       + })
+
+# > colSums(freq[, -"N"] * freq$N)
