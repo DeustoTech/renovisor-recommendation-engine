@@ -1,0 +1,9 @@
+"cluster","best_match","pct_match","active_determinants","n_active_dets"
+"cluster_1","Uninterested",33.3333333333333,"COMPETENCE; AUTONOMY; PHYSICALNESS",3
+"cluster_2","Activist",100,"SECURITY; COMPETENCE; AUTONOMY",3
+"cluster_3","Homo.Economicus",75,"FINANCIAL; COMPETENCE; AUTONOMY",3
+"cluster_4","Fearful",40,"SECURITY; AUTONOMY; PHYSICALNESS",3
+"cluster_5","Stubborn",100,"COMPETENCE; AUTONOMY",2
+"cluster_6","Careful",60,"FINANCIAL; AUTONOMY; PHYSICALNESS",3
+"cluster_7","Influencer",16.6666666666667,"AUTONOMY; PHYSICALNESS; STIMULATION",3
+"cluster_8","Early.Adopter",75,"COMPETENCE; AUTONOMY; STIMULATION",3

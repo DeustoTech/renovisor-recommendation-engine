@@ -1,0 +1,43 @@
+"scenario","type","reference","K","D","D_order","archetypes_used","n_patterns_covered","freq_covered","pct_covered"
+"10-9-top3","pos","sins",1,0,4,"Uninterested",0,0,0
+"10-9-top3","pos","sins",1,2,4,"Uninterested",0,0,0
+"10-9-top3","pos","sins",1,4,4,"Uninterested",6,4524414,56.555175
+"10-9-top3","pos","sins",1,6,4,"Uninterested",61,7995208,99.9401
+"10-9-top3","pos","sins",1,8,4,"Uninterested",89,8000000,100
+"10-9-top3","pos","sins",1,10,4,"Uninterested",89,8000000,100
+"10-9-top3","pos","sins",2,0,4,"Uninterested | Homo.Economicus",0,0,0
+"10-9-top3","pos","sins",2,2,4,"Uninterested | Homo.Economicus",3,5567,0.0695875
+"10-9-top3","pos","sins",2,4,4,"Uninterested | Homo.Economicus",46,7959452,99.49315
+"10-9-top3","pos","sins",2,6,4,"Uninterested | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","sins",2,8,4,"Uninterested | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","sins",2,10,4,"Uninterested | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","sins",3,0,4,"Uninterested | Homo.Economicus | Influencer",0,0,0
+"10-9-top3","pos","sins",3,2,4,"Uninterested | Homo.Economicus | Influencer",3,5567,0.0695875
+"10-9-top3","pos","sins",3,4,4,"Uninterested | Homo.Economicus | Influencer",53,7959490,99.493625
+"10-9-top3","pos","sins",3,6,4,"Uninterested | Homo.Economicus | Influencer",89,8000000,100
+"10-9-top3","pos","sins",3,8,4,"Uninterested | Homo.Economicus | Influencer",89,8000000,100
+"10-9-top3","pos","sins",3,10,4,"Uninterested | Homo.Economicus | Influencer",89,8000000,100
+"10-9-top3","pos","sins",4,0,4,"Uninterested | Homo.Economicus | Influencer | Careful",0,0,0
+"10-9-top3","pos","sins",4,2,4,"Uninterested | Homo.Economicus | Influencer | Careful",3,5567,0.0695875
+"10-9-top3","pos","sins",4,4,4,"Uninterested | Homo.Economicus | Influencer | Careful",53,7959490,99.493625
+"10-9-top3","pos","sins",4,6,4,"Uninterested | Homo.Economicus | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","sins",4,8,4,"Uninterested | Homo.Economicus | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","sins",4,10,4,"Uninterested | Homo.Economicus | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","sins",5,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",0,0,0
+"10-9-top3","pos","sins",5,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",3,5567,0.0695875
+"10-9-top3","pos","sins",5,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",53,7959490,99.493625
+"10-9-top3","pos","sins",5,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",89,8000000,100
+"10-9-top3","pos","sins",5,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",89,8000000,100
+"10-9-top3","pos","sins",5,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",89,8000000,100
+"10-9-top3","pos","sins",6,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",0,0,0
+"10-9-top3","pos","sins",6,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",3,5567,0.0695875
+"10-9-top3","pos","sins",6,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",53,7959490,99.493625
+"10-9-top3","pos","sins",6,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","sins",6,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","sins",6,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","sins",7,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",0,0,0
+"10-9-top3","pos","sins",7,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",3,5567,0.0695875
+"10-9-top3","pos","sins",7,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",53,7959490,99.493625
+"10-9-top3","pos","sins",7,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",89,8000000,100
+"10-9-top3","pos","sins",7,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",89,8000000,100
+"10-9-top3","pos","sins",7,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",89,8000000,100
