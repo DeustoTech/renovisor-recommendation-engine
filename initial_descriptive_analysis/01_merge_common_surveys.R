@@ -50,10 +50,10 @@ library(ggplot2)
 # RUTAS DE ARCHIVOS
 files <- list(
   #decision = "initial_descriptive_analysis/data/Content_Export_RV-Decision_Decision.xlsx",
-  decision = "initial_descriptive_analysis/data/Content_Export_RV-Decision__235.xlsx",
-  concerns2 = "initial_descriptive_analysis/data/Content_Export_RV-Concerns_2__143.xlsx",
-  poverty = "initial_descriptive_analysis/data/Content_Export_RV-Poverty__80.xlsx",
-  energy_crisis = "initial_descriptive_analysis/data/Content_Export_RV-Energy_Crisis__148.xlsx"
+  decision = "initial_descriptive_analysis/data/Content_Export_RV-Decision__423.xlsx",
+  concerns2 = "initial_descriptive_analysis/data/Content_Export_RV-Concerns_2__161.xlsx",
+  poverty = "initial_descriptive_analysis/data/Content_Export_RV-Poverty__96.xlsx",
+  energy_crisis = "initial_descriptive_analysis/data/Content_Export_RV-Energy_Crisis__156.xlsx"
 )
 
 # LIMPIAR TEXTO DE PREGUNTA PARA CREAR NOMBRE DE VARIABLE

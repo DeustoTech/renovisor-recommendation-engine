@@ -1,7 +1,9 @@
 # SCRIPT 05 - EXPERIENCE Y ETAPAS TTM
 
 
-# Librerías
+# ==============================================================================
+# LIBRERÍAS
+# ==============================================================================
 
 library(readr)
 library(dplyr)
@@ -10,6 +12,11 @@ library(stringr)
 library(ggplot2)
 library(tibble)
 library(ggpattern)
+
+
+# ==============================================================================
+# RUTAS
+# ==============================================================================
 
 base_input_dir <- "initial_descriptive_analysis/output/clean_datasets"
 
@@ -27,7 +34,11 @@ dir.create(pdf_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(logs_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(plots_technology_dir, recursive = TRUE, showWarnings = FALSE)
 
-# Cargar datos
+
+# ==============================================================================
+# CARGAR DATOS
+# ==============================================================================
+
 df <- read_csv(
   file.path(base_input_dir, "df_clean_general.csv"),
   show_col_types = FALSE
@@ -37,7 +48,9 @@ cat("Filas:", nrow(df), "\n")
 cat("Columnas:", ncol(df), "\n")
 
 
-# Inspección inicial de columnas
+# ==============================================================================
+# INSPECCIÓN INICIAL DE COLUMNAS
+# ==============================================================================
 
 cols_df <- tibble(
   index = seq_along(names(df)),
@@ -52,7 +65,9 @@ write_csv(
 print(cols_df, n = Inf)
 
 
-# Definir columnas relevantes
+# ==============================================================================
+# DEFINIR COLUMNAS RELEVANTES
+# ==============================================================================
 
 df <- df %>%
   mutate(
@@ -63,9 +78,6 @@ df <- df %>%
       as.character(row_number())
     )
   )
-
-#experience_tech_cols <- names(df)[122:137]
-#renovation_age_cols <- names(df)[148:163]
 
 experience_tech_cols <- names(df)[
   str_detect(
@@ -93,12 +105,13 @@ type_house_col <- "what_type_of_household_do_you_live_in_please_select_the_optio
 tenure_col <- "what_is_the_current_tenure_status_of_your_home_final"
 political_col <- "on_a_scale_from_0_to_100_where_0_means_most_left_and_100_means_most_right_where_would_you_place_yourself_politically_final"
 
-#cat("Determinantes:", length(determinant_cols), "\n")
 cat("Tecnologías Experience:", length(experience_tech_cols), "\n")
 cat("Edad renovación:", length(renovation_age_cols), "\n")
 
 
-# Comprobar opciones originales de Experience
+# ==============================================================================
+# COMPROBAR OPCIONES ORIGINALES DE EXPERIENCE
+# ==============================================================================
 
 experience_options_raw <- df %>%
   select(all_of(experience_tech_cols)) %>%
@@ -114,8 +127,6 @@ experience_options_raw <- df %>%
   filter(!is.na(experience_raw)) %>%
   count(experience_raw, sort = TRUE)
 
-# View(experience_options_raw)
-
 write_csv(
   experience_options_raw,
   file.path(csv_dir, "experience_options_raw.csv")
@@ -123,7 +134,10 @@ write_csv(
 
 print(experience_options_raw, n = Inf)
 
-# Recodificar opciones de Experience
+
+# ==============================================================================
+# RECODIFICAR OPCIONES DE EXPERIENCE
+# ==============================================================================
 
 experience_levels <- c(
   "Already present when I moved in",
@@ -167,7 +181,10 @@ recode_experience <- function(x) {
 }
 
 
-# Comprobar opciones limpias
+# ==============================================================================
+# COMPROBAR OPCIONES LIMPIAS
+# ==============================================================================
+
 experience_options_clean <- df %>%
   select(all_of(experience_tech_cols)) %>%
   pivot_longer(
@@ -183,8 +200,6 @@ experience_options_clean <- df %>%
   filter(!is.na(experience_clean)) %>%
   count(experience_clean, sort = TRUE)
 
-#View(experience_options_clean)
-
 write_csv(
   experience_options_clean,
   file.path(csv_dir, "experience_options_clean.csv")
@@ -193,7 +208,10 @@ write_csv(
 print(experience_options_clean, n = Inf)
 
 
-# Revisar si queda alguna respuesta sin clasificar
+# ==============================================================================
+# REVISAR RESPUESTAS SIN CLASIFICAR
+# ==============================================================================
+
 experience_unclassified <- df %>%
   select(all_of(experience_tech_cols)) %>%
   pivot_longer(
@@ -212,8 +230,6 @@ experience_unclassified <- df %>%
   ) %>%
   count(experience_raw, sort = TRUE)
 
-#View(experience_unclassified)
-
 write_csv(
   experience_unclassified,
   file.path(csv_dir, "experience_unclassified.csv")
@@ -222,7 +238,10 @@ write_csv(
 print(experience_unclassified, n = Inf)
 
 
-# Limpiar año de nacimiento
+# ==============================================================================
+# LIMPIAR AÑO DE NACIMIENTO
+# ==============================================================================
+
 project_year <- 2026
 
 df <- df %>%
@@ -230,15 +249,16 @@ df <- df %>%
     year_of_birth_raw = suppressWarnings(as.numeric(.data[[year_of_birth_col]])),
     
     year_of_birth_clean = case_when(
-      year_of_birth_raw >= 1900 & year_of_birth_raw <= 2007 ~
-        year_of_birth_raw,
-      
-      year_of_birth_raw >= 18 & year_of_birth_raw <= 100 ~
-        project_year - year_of_birth_raw,
-      
+      year_of_birth_raw >= 1900 & year_of_birth_raw <= 2007 ~ year_of_birth_raw,
+      year_of_birth_raw >= 18 & year_of_birth_raw <= 100 ~ project_year - year_of_birth_raw,
       TRUE ~ NA_real_
     )
   )
+
+
+# ==============================================================================
+# FUNCIONES AUXILIARES
+# ==============================================================================
 
 clean_text_basic <- function(x) {
   x <- str_squish(as.character(x))
@@ -255,7 +275,25 @@ get_optional_col <- function(data, col_name) {
     rep(NA_character_, nrow(data))
   }
 }
-# Funciones de limpieza socioeconómica
+
+clean_filename <- function(x) {
+  x %>%
+    str_to_lower() %>%
+    str_replace_all("[áàäâ]", "a") %>%
+    str_replace_all("[éèëê]", "e") %>%
+    str_replace_all("[íìïî]", "i") %>%
+    str_replace_all("[óòöô]", "o") %>%
+    str_replace_all("[úùüû]", "u") %>%
+    str_replace_all("ñ", "n") %>%
+    str_replace_all("[^a-z0-9]+", "_") %>%
+    str_replace_all("^_|_$", "")
+}
+
+
+# ==============================================================================
+# FUNCIONES DE LIMPIEZA SOCIOECONÓMICA
+# ==============================================================================
+
 clean_gender <- function(x) {
   x <- str_squish(as.character(x))
   
@@ -409,7 +447,11 @@ clean_political_orientation <- function(x) {
   )
 }
 
-# Limpiar tecnología
+
+# ==============================================================================
+# LIMPIAR TECNOLOGÍA
+# ==============================================================================
+
 clean_technology <- function(x) {
   case_when(
     str_detect(x, "balcony_solar_kits") ~ "Kits solares de balcón",
@@ -433,7 +475,10 @@ clean_technology <- function(x) {
 }
 
 
-# Crear tabla larga de Experience
+# ==============================================================================
+# CREAR TABLA LARGA DE EXPERIENCE
+# ==============================================================================
+
 experience_long <- df %>%
   mutate(
     country_clean_final = coalesce(
@@ -494,8 +539,6 @@ experience_long <- df %>%
   ) %>%
   filter(!is.na(experience_clean))
 
-#View(experience_long)
-
 write_csv(
   experience_long,
   file.path(csv_dir, "experience_long.csv")
@@ -504,7 +547,10 @@ write_csv(
 glimpse(experience_long)
 
 
-# Preparar etiquetas cortas de Experience
+# ==============================================================================
+# PREPARAR ETIQUETAS CORTAS DE EXPERIENCE
+# ==============================================================================
+
 experience_short_levels <- c(
   "Ya estaba presente",
   "Implementada",
@@ -542,7 +588,9 @@ write_csv(
 )
 
 
-# 13. Distribución general de Experience ----------------------------------
+# ==============================================================================
+# DISTRIBUCIÓN GENERAL DE EXPERIENCE
+# ==============================================================================
 
 experience_distribution <- experience_long %>%
   count(experience_short, sort = FALSE) %>%
@@ -551,7 +599,10 @@ experience_distribution <- experience_long %>%
   ) %>%
   arrange(desc(n)) %>%
   mutate(
-    experience_short = factor(experience_short, levels = rev(experience_short))
+    experience_short = factor(
+      experience_short,
+      levels = rev(as.character(experience_short))
+    )
   )
 
 write_csv(
@@ -562,7 +613,9 @@ write_csv(
 print(experience_distribution, n = Inf)
 
 
-# 14. Distribución de Experience por tecnología ---------------------------
+# ==============================================================================
+# DISTRIBUCIÓN DE EXPERIENCE POR TECNOLOGÍA
+# ==============================================================================
 
 experience_distribution_by_technology <- experience_long %>%
   count(technology, experience_short, sort = FALSE) %>%
@@ -600,7 +653,10 @@ write_csv(
 print(experience_distribution_by_technology, n = Inf)
 
 
-# Comprobaciones
+# ==============================================================================
+# COMPROBACIONES
+# ==============================================================================
+
 n_participants_total <- n_distinct(df$participant_id)
 n_participants_valid <- n_distinct(experience_long$participant_id)
 n_technologies <- length(experience_tech_cols)
@@ -632,7 +688,10 @@ write_csv(
 print(responses_per_participant, n = Inf)
 
 
-# Comprobar variables limpias
+# ==============================================================================
+# COMPROBAR VARIABLES LIMPIAS
+# ==============================================================================
+
 variables_check <- experience_long %>%
   distinct(
     participant_id,
@@ -656,9 +715,11 @@ write_csv(
   file.path(csv_dir, "socioeconomic_variables_check.csv")
 )
 
-#View(variables_check)
 
-# Crear carpeta de gráficos
+# ==============================================================================
+# FUNCIONES PARA GUARDAR GRÁFICOS
+# ==============================================================================
+
 save_plot_png <- function(plot, filename, width = 9, height = 5) {
   ggsave(
     filename = file.path(plots_dir, paste0(filename, ".png")),
@@ -669,8 +730,21 @@ save_plot_png <- function(plot, filename, width = 9, height = 5) {
   )
 }
 
+save_plot_png_technology <- function(plot, filename, width = 9, height = 5) {
+  ggsave(
+    filename = file.path(plots_technology_dir, paste0(filename, ".png")),
+    plot = plot,
+    width = width,
+    height = height,
+    dpi = 300
+  )
+}
 
-# Estilo de gráficos
+
+# ==============================================================================
+# ESTILO DE GRÁFICOS
+# ==============================================================================
+
 experience_colors <- c(
   "Ya estaba presente" = "#0072B2",
   "Implementada" = "#009E73",
@@ -698,24 +772,65 @@ experience_pattern_angles <- c(
   "Nunca la usaría" = 90
 )
 
-theme_experience <- theme_minimal(base_size = 12) +
+plot_base_size <- 15
+plot_title_size <- 18
+plot_subtitle_size <- 13
+plot_axis_title_size <- 15
+plot_axis_text_size <- 15
+plot_legend_text_size <- 13
+plot_legend_title_size <- 14
+
+plot_label_size <- 4.2
+plot_stack_label_size <- 3.4
+plot_heatmap_label_size <- 3.5
+
+theme_experience <- theme_minimal(base_size = plot_base_size) +
   theme(
-    plot.title = element_text(face = "bold", size = 14),
-    plot.subtitle = element_text(size = 10),
-    axis.text = element_text(size = 10),
+    plot.title = element_text(face = "bold", size = plot_title_size),
+    plot.subtitle = element_text(size = plot_subtitle_size),
+    axis.title.x = element_text(size = plot_axis_title_size, margin = margin(t = 8)),
+    axis.title.y = element_text(size = plot_axis_title_size, margin = margin(r = 8)),
+    axis.text.x = element_text(size = plot_axis_text_size),
+    axis.text.y = element_text(size = plot_axis_text_size),
     legend.position = "bottom",
-    legend.title = element_text(face = "bold"),
-    plot.margin = margin(10, 25, 10, 10)
+    legend.title = element_text(face = "bold", size = plot_legend_title_size),
+    legend.text = element_text(size = plot_legend_text_size),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(12, 45, 12, 12)
   )
 
-# Función para elegir color del texto dentro de las barras
+theme_experience_heatmap <- theme_minimal(base_size = plot_base_size) +
+  theme(
+    plot.title = element_text(face = "bold", size = plot_title_size),
+    plot.subtitle = element_text(size = plot_subtitle_size),
+    axis.title.x = element_text(size = plot_axis_title_size, margin = margin(t = 8)),
+    axis.title.y = element_text(size = plot_axis_title_size, margin = margin(r = 8)),
+    axis.text.x = element_text(size = plot_axis_text_size, angle = 35, hjust = 1),
+    axis.text.y = element_text(size = plot_axis_text_size),
+    legend.position = "right",
+    legend.title = element_text(face = "bold", size = plot_legend_title_size),
+    legend.text = element_text(size = plot_legend_text_size),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(12, 12, 12, 12)
+  )
+
+
+# ==============================================================================
+# FUNCIÓN PARA ELEGIR COLOR DEL TEXTO DENTRO DE LAS BARRAS
+# ==============================================================================
+
 label_color_experience <- function(x) {
   case_when(
     x %in% c("Ya estaba presente", "Implementada", "No la conoce") ~ "white",
     TRUE ~ "black"
   )
 }
-# Gráfico total de Experience
+
+
+# ==============================================================================
+# GRÁFICO TOTAL DE EXPERIENCE
+# ==============================================================================
+
 experience_distribution_plot <- experience_distribution %>%
   mutate(
     label = paste0(round(percentage, 1), "%\n(n=", n, ")")
@@ -743,7 +858,7 @@ plot_experience_total <- ggplot(
   geom_text(
     aes(label = label),
     hjust = -0.10,
-    size = 3.4,
+    size = plot_label_size,
     lineheight = 0.9
   ) +
   coord_flip(clip = "off") +
@@ -751,7 +866,7 @@ plot_experience_total <- ggplot(
   scale_pattern_manual(values = experience_patterns, drop = FALSE, guide = "none") +
   scale_pattern_angle_manual(values = experience_pattern_angles, drop = FALSE, guide = "none") +
   scale_y_continuous(
-    limits = c(0, max(experience_distribution_plot$percentage) + 8),
+    limits = c(0, max(experience_distribution_plot$percentage) + 10),
     labels = function(x) paste0(x, "%")
   ) +
   labs(
@@ -767,12 +882,15 @@ print(plot_experience_total)
 save_plot_png(
   plot = plot_experience_total,
   filename = "experience_distribution_total",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 
-# Barras apiladas por tecnología en números absolutos
+# ==============================================================================
+# BARRAS APILADAS POR TECNOLOGÍA EN NÚMEROS ABSOLUTOS
+# ==============================================================================
+
 experience_distribution_by_technology_plot <- experience_distribution_by_technology %>%
   mutate(
     technology_label = str_wrap(as.character(technology), width = 32),
@@ -817,7 +935,7 @@ plot_experience_by_technology <- ggplot(
       color = label_color
     ),
     position = position_stack(vjust = 0.5),
-    size = 2.8,
+    size = plot_stack_label_size,
     show.legend = FALSE
   ) +
   coord_flip() +
@@ -842,10 +960,15 @@ print(plot_experience_by_technology)
 save_plot_png(
   plot = plot_experience_by_technology,
   filename = "experience_distribution_by_technology_absolute",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
-# Barras apiladas por tecnología al 100
+
+
+# ==============================================================================
+# BARRAS APILADAS POR TECNOLOGÍA AL 100%
+# ==============================================================================
+
 plot_experience_by_technology_percentage <- ggplot(
   experience_distribution_by_technology_plot,
   aes(
@@ -870,10 +993,10 @@ plot_experience_by_technology_percentage <- ggplot(
       color = label_color
     ),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = plot_stack_label_size,
     lineheight = 0.9,
     show.legend = FALSE
-  )+
+  ) +
   coord_flip() +
   scale_fill_manual(values = experience_colors, drop = FALSE) +
   scale_pattern_manual(values = experience_patterns, drop = FALSE, guide = "none") +
@@ -900,12 +1023,15 @@ print(plot_experience_by_technology_percentage)
 save_plot_png(
   plot = plot_experience_by_technology_percentage,
   filename = "experience_distribution_by_technology_percentage",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
 
 
-# Heatmap por tecnología
+# ==============================================================================
+# HEATMAP POR TECNOLOGÍA
+# ==============================================================================
+
 experience_distribution_by_technology_heatmap <- experience_distribution_by_technology %>%
   mutate(
     technology_label = str_wrap(as.character(technology), width = 32),
@@ -927,7 +1053,7 @@ plot_experience_heatmap <- ggplot(
   geom_tile(color = "black", linewidth = 0.25) +
   geom_text(
     aes(label = label),
-    size = 3,
+    size = plot_heatmap_label_size,
     lineheight = 0.9
   ) +
   scale_fill_gradient(
@@ -944,60 +1070,22 @@ plot_experience_heatmap <- ggplot(
     y = NULL,
     fill = "Porcentaje"
   ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14),
-    plot.subtitle = element_text(size = 10),
-    axis.text.x = element_text(angle = 35, hjust = 1),
-    axis.text.y = element_text(size = 9),
-    legend.position = "right",
-    plot.margin = margin(10, 10, 10, 10)
-  )
+  theme_experience_heatmap
 
 print(plot_experience_heatmap)
 
 save_plot_png(
   plot = plot_experience_heatmap,
   filename = "experience_distribution_heatmap_by_technology",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
 
-# Gráficos individuales por tecnología
-# Función para limpiar nombres de archivo
-clean_filename <- function(x) {
-  x %>%
-    str_to_lower() %>%
-    str_replace_all("[áàäâ]", "a") %>%
-    str_replace_all("[éèëê]", "e") %>%
-    str_replace_all("[íìïî]", "i") %>%
-    str_replace_all("[óòöô]", "o") %>%
-    str_replace_all("[úùüû]", "u") %>%
-    str_replace_all("ñ", "n") %>%
-    str_replace_all("[^a-z0-9]+", "_") %>%
-    str_replace_all("^_|_$", "")
-}
 
-# Crear carpeta específica para gráficos por tecnología
-plots_technology_dir <- file.path(plots_dir, "by_technology")
+# ==============================================================================
+# GRÁFICOS INDIVIDUALES POR TECNOLOGÍA
+# ==============================================================================
 
-dir.create(
-  plots_technology_dir,
-  showWarnings = FALSE,
-  recursive = TRUE
-)
-
-save_plot_png_technology <- function(plot, filename, width = 9, height = 5) {
-  ggsave(
-    filename = file.path(plots_technology_dir, paste0(filename, ".png")),
-    plot = plot,
-    width = width,
-    height = height,
-    dpi = 300
-  )
-}
-
-# Función para generar un gráfico individual por tecnología
 plot_single_technology_absolute <- function(technology_name) {
   
   plot_data <- experience_distribution_by_technology %>%
@@ -1049,7 +1137,7 @@ plot_single_technology_absolute <- function(technology_name) {
         color = label_color,
         hjust = label_hjust
       ),
-      size = 3.4,
+      size = plot_label_size,
       show.legend = FALSE
     ) +
     coord_flip(clip = "off") +
@@ -1077,12 +1165,13 @@ plot_single_technology_absolute <- function(technology_name) {
   save_plot_png_technology(
     plot = p,
     filename = paste0("experience_absolute_", clean_filename(technology_name)),
-    width = 9,
-    height = 5
+    width = 10,
+    height = 6
   )
   
   return(p)
 }
+
 plot_single_technology_percentage <- function(technology_name) {
   
   plot_data <- experience_distribution_by_technology %>%
@@ -1138,7 +1227,7 @@ plot_single_technology_percentage <- function(technology_name) {
         color = label_color,
         hjust = label_hjust
       ),
-      size = 3.0,
+      size = plot_label_size,
       lineheight = 0.9,
       show.legend = FALSE
     ) +
@@ -1168,15 +1257,18 @@ plot_single_technology_percentage <- function(technology_name) {
   save_plot_png_technology(
     plot = p,
     filename = paste0("experience_percentage_", clean_filename(technology_name)),
-    width = 9,
-    height = 5
+    width = 10,
+    height = 6
   )
   
   return(p)
 }
 
 
-# Generar un gráfico por cada tecnología
+# ==============================================================================
+# GENERAR UN GRÁFICO POR CADA TECNOLOGÍA
+# ==============================================================================
+
 technology_names <- as.character(technology_order)
 
 plot_experience_individual_absolute_by_technology <- lapply(
@@ -1194,7 +1286,10 @@ plot_experience_individual_percentage_by_technology <- lapply(
 names(plot_experience_individual_percentage_by_technology) <- technology_names
 
 
-# Funciones para variables sociodemográficas
+# ==============================================================================
+# FUNCIONES PARA VARIABLES SOCIODEMOGRÁFICAS
+# ==============================================================================
+
 calculate_experience_by_group <- function(data, group_col) {
   data %>%
     filter(
@@ -1229,6 +1324,46 @@ order_groups_by_awareness <- function(distribution_data) {
     arrange(score_awareness) %>%
     pull(group)
 }
+
+get_natural_group_order <- function(distribution_data, variable_name = NULL) {
+  
+  natural_orders <- list(
+    age_group = c(
+      "Generación Z",
+      "Millennials",
+      "Generación X",
+      "Boomers + generación silenciosa"
+    ),
+    city_size = c(
+      "Municipio pequeño",
+      "Ciudad pequeña",
+      "Ciudad mediana",
+      "Ciudad grande",
+      "Metrópolis"
+    ),
+    political_orientation = c(
+      "Extrema izquierda",
+      "Izquierda",
+      "Centro",
+      "Derecha",
+      "Extrema derecha"
+    )
+  )
+  
+  if (!is.null(variable_name) && variable_name %in% names(natural_orders)) {
+    return(natural_orders[[variable_name]])
+  }
+  
+  distribution_data %>%
+    distinct(group) %>%
+    pull(group) %>%
+    as.character()
+}
+
+
+# ==============================================================================
+# FUNCIONES DE GRÁFICOS POR GRUPO
+# ==============================================================================
 
 plot_experience_by_group <- function(distribution_data, title, subtitle, filename,
                                      width = 11, height = 6) {
@@ -1270,7 +1405,7 @@ plot_experience_by_group <- function(distribution_data, title, subtitle, filenam
         color = label_color
       ),
       position = position_stack(vjust = 0.5),
-      size = 3,
+      size = plot_stack_label_size,
       show.legend = FALSE
     ) +
     coord_flip() +
@@ -1343,7 +1478,7 @@ plot_experience_percentage_by_group <- function(distribution_data, title, subtit
         color = label_color
       ),
       position = position_stack(vjust = 0.5),
-      size = 2.8,
+      size = plot_stack_label_size,
       lineheight = 0.9,
       show.legend = FALSE
     ) +
@@ -1405,7 +1540,7 @@ plot_experience_heatmap_by_group <- function(distribution_data, title, subtitle,
     geom_tile(color = "black", linewidth = 0.25) +
     geom_text(
       aes(label = label),
-      size = 3,
+      size = plot_heatmap_label_size,
       lineheight = 0.9
     ) +
     scale_fill_gradient(
@@ -1419,15 +1554,7 @@ plot_experience_heatmap_by_group <- function(distribution_data, title, subtitle,
       y = NULL,
       fill = "Porcentaje"
     ) +
-    theme_minimal(base_size = 12) +
-    theme(
-      plot.title = element_text(face = "bold", size = 14),
-      plot.subtitle = element_text(size = 10),
-      axis.text.x = element_text(angle = 35, hjust = 1),
-      axis.text.y = element_text(size = 9),
-      legend.position = "right",
-      plot.margin = margin(10, 10, 10, 10)
-    )
+    theme_experience_heatmap
   
   print(p)
   
@@ -1441,40 +1568,10 @@ plot_experience_heatmap_by_group <- function(distribution_data, title, subtitle,
   return(p)
 }
 
-get_natural_group_order <- function(distribution_data, variable_name = NULL) {
-  
-  natural_orders <- list(
-    age_group = c(
-      "Generación Z",
-      "Millennials",
-      "Generación X",
-      "Boomers + generación silenciosa"
-    ),
-    city_size = c(
-      "Municipio pequeño",
-      "Ciudad pequeña",
-      "Ciudad mediana",
-      "Ciudad grande",
-      "Metrópolis"
-    ),
-    political_orientation = c(
-      "Extrema izquierda",
-      "Izquierda",
-      "Centro",
-      "Derecha",
-      "Extrema derecha"
-    )
-  )
-  
-  if (!is.null(variable_name) && variable_name %in% names(natural_orders)) {
-    return(natural_orders[[variable_name]])
-  }
-  
-  distribution_data %>%
-    distinct(group) %>%
-    pull(group) %>%
-    as.character()
-}
+
+# ==============================================================================
+# FUNCIONES DE GRÁFICOS POR GRUPO SIN ORDENAR POR AWARENESS
+# ==============================================================================
 
 plot_experience_by_group_no_order <- function(distribution_data, title, subtitle, filename,
                                               variable_name = NULL,
@@ -1514,7 +1611,7 @@ plot_experience_by_group_no_order <- function(distribution_data, title, subtitle
     geom_text(
       aes(label = label_n, color = label_color),
       position = position_stack(vjust = 0.5),
-      size = 3,
+      size = plot_stack_label_size,
       show.legend = FALSE
     ) +
     coord_flip() +
@@ -1535,7 +1632,6 @@ plot_experience_by_group_no_order <- function(distribution_data, title, subtitle
   save_plot_png(p, filename, width, height)
   return(p)
 }
-
 
 plot_experience_percentage_by_group_no_order <- function(distribution_data, title, subtitle, filename,
                                                          variable_name = NULL,
@@ -1579,7 +1675,7 @@ plot_experience_percentage_by_group_no_order <- function(distribution_data, titl
     geom_text(
       aes(label = label, color = label_color),
       position = position_stack(vjust = 0.5),
-      size = 2.8,
+      size = plot_stack_label_size,
       lineheight = 0.9,
       show.legend = FALSE
     ) +
@@ -1608,7 +1704,6 @@ plot_experience_percentage_by_group_no_order <- function(distribution_data, titl
   return(p)
 }
 
-
 plot_experience_heatmap_by_group_no_order <- function(distribution_data, title, subtitle, filename,
                                                       variable_name = NULL,
                                                       width = 11, height = 6) {
@@ -1634,8 +1729,15 @@ plot_experience_heatmap_by_group_no_order <- function(distribution_data, title, 
     )
   ) +
     geom_tile(color = "black", linewidth = 0.25) +
-    geom_text(aes(label = label), size = 3, lineheight = 0.9) +
-    scale_fill_gradient(low = "white", high = "#0072B2") +
+    geom_text(
+      aes(label = label),
+      size = plot_heatmap_label_size,
+      lineheight = 0.9
+    ) +
+    scale_fill_gradient(
+      low = "white",
+      high = "#0072B2"
+    ) +
     labs(
       title = title,
       subtitle = subtitle,
@@ -1643,20 +1745,18 @@ plot_experience_heatmap_by_group_no_order <- function(distribution_data, title, 
       y = NULL,
       fill = "Porcentaje"
     ) +
-    theme_minimal(base_size = 12) +
-    theme(
-      plot.title = element_text(face = "bold", size = 14),
-      plot.subtitle = element_text(size = 10),
-      axis.text.x = element_text(angle = 35, hjust = 1),
-      axis.text.y = element_text(size = 9),
-      legend.position = "right"
-    )
+    theme_experience_heatmap
   
   print(p)
   save_plot_png(p, filename, width, height)
   return(p)
 }
-# Experience por generación
+
+
+# ==============================================================================
+# EXPERIENCE POR GENERACIÓN
+# ==============================================================================
+
 experience_by_age_group <- calculate_experience_by_group(
   experience_long,
   "age_group"
@@ -1675,8 +1775,8 @@ plot_experience_by_age_group <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_age_group_absolute",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_experience_percentage_by_age_group <- plot_experience_percentage_by_group(
@@ -1687,8 +1787,8 @@ plot_experience_percentage_by_age_group <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada generación"
   ),
   filename = "experience_distribution_by_age_group_percentage",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_heatmap_age_group <- plot_experience_heatmap_by_group(
@@ -1699,12 +1799,15 @@ plot_heatmap_age_group <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada generación"
   ),
   filename = "heatmap_experience_by_age_group",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 
-# Experience por género
+# ==============================================================================
+# EXPERIENCE POR GÉNERO
+# ==============================================================================
+
 experience_by_gender <- calculate_experience_by_group(
   experience_long,
   "gender"
@@ -1723,8 +1826,8 @@ plot_experience_by_gender <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_gender_absolute",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 plot_experience_percentage_by_gender <- plot_experience_percentage_by_group(
@@ -1735,8 +1838,8 @@ plot_experience_percentage_by_gender <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada grupo de género"
   ),
   filename = "experience_distribution_by_gender_percentage",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 plot_heatmap_gender <- plot_experience_heatmap_by_group(
@@ -1747,12 +1850,15 @@ plot_heatmap_gender <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada grupo de género"
   ),
   filename = "heatmap_experience_by_gender",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 
-# Experience por país
+# ==============================================================================
+# EXPERIENCE POR PAÍS
+# ==============================================================================
+
 experience_by_country <- calculate_experience_by_group(
   experience_long,
   "country"
@@ -1771,8 +1877,8 @@ plot_experience_by_country <- plot_experience_by_group(
     ". Países ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_country_absolute",
-  width = 12,
-  height = 8
+  width = 14,
+  height = 9
 )
 
 plot_experience_percentage_by_country <- plot_experience_percentage_by_group(
@@ -1783,8 +1889,8 @@ plot_experience_percentage_by_country <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada país"
   ),
   filename = "experience_distribution_by_country_percentage",
-  width = 12,
-  height = 8
+  width = 14,
+  height = 9
 )
 
 plot_heatmap_country <- plot_experience_heatmap_by_group(
@@ -1795,12 +1901,15 @@ plot_heatmap_country <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada país"
   ),
   filename = "heatmap_experience_by_country",
-  width = 12,
-  height = 8
+  width = 14,
+  height = 9
 )
 
 
-# Experience por región europea
+# ==============================================================================
+# EXPERIENCE POR REGIÓN EUROPEA
+# ==============================================================================
+
 experience_by_residence_region <- calculate_experience_by_group(
   experience_long,
   "residence_region"
@@ -1819,8 +1928,8 @@ plot_experience_by_residence_region <- plot_experience_by_group(
     ". Regiones ordenadas por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_residence_region_absolute",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 plot_experience_percentage_by_residence_region <- plot_experience_percentage_by_group(
@@ -1831,8 +1940,8 @@ plot_experience_percentage_by_residence_region <- plot_experience_percentage_by_
     ". Porcentajes calculados dentro de cada región europea"
   ),
   filename = "experience_distribution_by_residence_region_percentage",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 plot_heatmap_residence_region <- plot_experience_heatmap_by_group(
@@ -1843,12 +1952,15 @@ plot_heatmap_residence_region <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada región europea"
   ),
   filename = "heatmap_experience_by_residence_region",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 
-# Experience por tamaño de ciudad
+# ==============================================================================
+# EXPERIENCE POR TAMAÑO DE CIUDAD
+# ==============================================================================
+
 experience_by_city_size <- calculate_experience_by_group(
   experience_long,
   "city_size"
@@ -1867,8 +1979,8 @@ plot_experience_by_city_size <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_city_size_absolute",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_experience_percentage_by_city_size <- plot_experience_percentage_by_group(
@@ -1879,8 +1991,8 @@ plot_experience_percentage_by_city_size <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada tamaño de ciudad"
   ),
   filename = "experience_distribution_by_city_size_percentage",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_heatmap_city_size <- plot_experience_heatmap_by_group(
@@ -1891,12 +2003,15 @@ plot_heatmap_city_size <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada tamaño de ciudad"
   ),
   filename = "heatmap_experience_by_city_size",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 
-# Experience por zona climática
+# ==============================================================================
+# EXPERIENCE POR ZONA CLIMÁTICA
+# ==============================================================================
+
 experience_by_climate_zone <- calculate_experience_by_group(
   experience_long,
   "climate_zone"
@@ -1915,8 +2030,8 @@ plot_experience_by_climate_zone <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_climate_zone_absolute",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_experience_percentage_by_climate_zone <- plot_experience_percentage_by_group(
@@ -1927,8 +2042,8 @@ plot_experience_percentage_by_climate_zone <- plot_experience_percentage_by_grou
     ". Porcentajes calculados dentro de cada zona climática"
   ),
   filename = "experience_distribution_by_climate_zone_percentage",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_heatmap_climate_zone <- plot_experience_heatmap_by_group(
@@ -1939,12 +2054,15 @@ plot_heatmap_climate_zone <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada zona climática"
   ),
   filename = "heatmap_experience_by_climate_zone",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 
-# Experience por situación laboral
+# ==============================================================================
+# EXPERIENCE POR SITUACIÓN LABORAL
+# ==============================================================================
+
 experience_by_employment <- calculate_experience_by_group(
   experience_long,
   "employment"
@@ -1963,8 +2081,8 @@ plot_experience_by_employment <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_employment_absolute",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_experience_percentage_by_employment <- plot_experience_percentage_by_group(
@@ -1975,8 +2093,8 @@ plot_experience_percentage_by_employment <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada situación laboral"
   ),
   filename = "experience_distribution_by_employment_percentage",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_heatmap_employment <- plot_experience_heatmap_by_group(
@@ -1987,12 +2105,15 @@ plot_heatmap_employment <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada situación laboral"
   ),
   filename = "heatmap_experience_by_employment",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 
-# Experience por nivel educativo
+# ==============================================================================
+# EXPERIENCE POR NIVEL EDUCATIVO
+# ==============================================================================
+
 experience_by_education <- calculate_experience_by_group(
   experience_long,
   "education_group"
@@ -2011,8 +2132,8 @@ plot_experience_by_education <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_education_absolute",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 plot_experience_percentage_by_education <- plot_experience_percentage_by_group(
@@ -2023,8 +2144,8 @@ plot_experience_percentage_by_education <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada nivel educativo"
   ),
   filename = "experience_distribution_by_education_percentage",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 plot_heatmap_education <- plot_experience_heatmap_by_group(
@@ -2035,12 +2156,15 @@ plot_heatmap_education <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada nivel educativo"
   ),
   filename = "heatmap_experience_by_education",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 
-# Experience por trabajo/estudio desde casa
+# ==============================================================================
+# EXPERIENCE POR TRABAJO/ESTUDIO DESDE CASA
+# ==============================================================================
+
 experience_by_work_home <- calculate_experience_by_group(
   experience_long,
   "work_home"
@@ -2059,8 +2183,8 @@ plot_experience_by_work_home <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_work_home_absolute",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 plot_experience_percentage_by_work_home <- plot_experience_percentage_by_group(
@@ -2071,8 +2195,8 @@ plot_experience_percentage_by_work_home <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada grupo"
   ),
   filename = "experience_distribution_by_work_home_percentage",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 plot_heatmap_work_home <- plot_experience_heatmap_by_group(
@@ -2083,12 +2207,15 @@ plot_heatmap_work_home <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada grupo"
   ),
   filename = "heatmap_experience_by_work_home",
-  width = 10,
-  height = 5
+  width = 11,
+  height = 6
 )
 
 
-# Experience por tipo de hogar
+# ==============================================================================
+# EXPERIENCE POR TIPO DE HOGAR
+# ==============================================================================
+
 experience_by_type_house <- calculate_experience_by_group(
   experience_long,
   "type_house"
@@ -2107,8 +2234,8 @@ plot_experience_by_type_house <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_type_house_absolute",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_experience_percentage_by_type_house <- plot_experience_percentage_by_group(
@@ -2119,8 +2246,8 @@ plot_experience_percentage_by_type_house <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada tipo de hogar"
   ),
   filename = "experience_distribution_by_type_house_percentage",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_heatmap_type_house <- plot_experience_heatmap_by_group(
@@ -2131,12 +2258,15 @@ plot_heatmap_type_house <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada tipo de hogar"
   ),
   filename = "heatmap_experience_by_type_house",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 
-# Experience por régimen de tenencia
+# ==============================================================================
+# EXPERIENCE POR RÉGIMEN DE TENENCIA
+# ==============================================================================
+
 experience_by_tenure <- calculate_experience_by_group(
   experience_long,
   "tenure"
@@ -2155,8 +2285,8 @@ plot_experience_by_tenure <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_tenure_absolute",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_experience_percentage_by_tenure <- plot_experience_percentage_by_group(
@@ -2167,8 +2297,8 @@ plot_experience_percentage_by_tenure <- plot_experience_percentage_by_group(
     ". Porcentajes calculados dentro de cada régimen de tenencia"
   ),
   filename = "experience_distribution_by_tenure_percentage",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_heatmap_tenure <- plot_experience_heatmap_by_group(
@@ -2179,12 +2309,15 @@ plot_heatmap_tenure <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada régimen de tenencia"
   ),
   filename = "heatmap_experience_by_tenure",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 
-# Experience por orientación política
+# ==============================================================================
+# EXPERIENCE POR ORIENTACIÓN POLÍTICA
+# ==============================================================================
+
 experience_by_political_orientation <- calculate_experience_by_group(
   experience_long,
   "political_orientation"
@@ -2203,8 +2336,8 @@ plot_experience_by_political_orientation <- plot_experience_by_group(
     ". Grupos ordenados por la suma de 'No la conoce' y 'La conoce / la consideraría'"
   ),
   filename = "experience_distribution_by_political_orientation_absolute",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_experience_percentage_by_political_orientation <- plot_experience_percentage_by_group(
@@ -2215,8 +2348,8 @@ plot_experience_percentage_by_political_orientation <- plot_experience_percentag
     ". Porcentajes calculados dentro de cada grupo de orientación política"
   ),
   filename = "experience_distribution_by_political_orientation_percentage",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 plot_heatmap_political_orientation <- plot_experience_heatmap_by_group(
@@ -2227,25 +2360,28 @@ plot_heatmap_political_orientation <- plot_experience_heatmap_by_group(
     ". Porcentajes calculados dentro de cada grupo de orientación política"
   ),
   filename = "heatmap_experience_by_political_orientation",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
 
+# ==============================================================================
 # MISMOS GRÁFICOS SIN ORDENAR POR AWARENESS
+# ==============================================================================
+
 variables_no_order <- list(
-  age_group = list(data = experience_by_age_group, label = "generación", width = 11, height = 6),
-  gender = list(data = experience_by_gender, label = "género", width = 10, height = 5),
-  country = list(data = experience_by_country, label = "país", width = 12, height = 8),
-  residence_region = list(data = experience_by_residence_region, label = "región europea", width = 10, height = 5),
-  city_size = list(data = experience_by_city_size, label = "tamaño de ciudad", width = 11, height = 6),
-  climate_zone = list(data = experience_by_climate_zone, label = "zona climática", width = 11, height = 6),
-  employment = list(data = experience_by_employment, label = "situación laboral", width = 11, height = 6),
-  education_group = list(data = experience_by_education, label = "nivel educativo", width = 10, height = 5),
-  work_home = list(data = experience_by_work_home, label = "trabajo/estudio desde casa", width = 10, height = 5),
-  type_house = list(data = experience_by_type_house, label = "tipo de hogar", width = 11, height = 6),
-  tenure = list(data = experience_by_tenure, label = "régimen de tenencia", width = 11, height = 6),
-  political_orientation = list(data = experience_by_political_orientation, label = "orientación política", width = 11, height = 6)
+  age_group = list(data = experience_by_age_group, label = "generación", width = 12, height = 7),
+  gender = list(data = experience_by_gender, label = "género", width = 11, height = 6),
+  country = list(data = experience_by_country, label = "país", width = 14, height = 9),
+  residence_region = list(data = experience_by_residence_region, label = "región europea", width = 11, height = 6),
+  city_size = list(data = experience_by_city_size, label = "tamaño de ciudad", width = 12, height = 7),
+  climate_zone = list(data = experience_by_climate_zone, label = "zona climática", width = 12, height = 7),
+  employment = list(data = experience_by_employment, label = "situación laboral", width = 12, height = 7),
+  education_group = list(data = experience_by_education, label = "nivel educativo", width = 11, height = 6),
+  work_home = list(data = experience_by_work_home, label = "trabajo/estudio desde casa", width = 11, height = 6),
+  type_house = list(data = experience_by_type_house, label = "tipo de hogar", width = 12, height = 7),
+  tenure = list(data = experience_by_tenure, label = "régimen de tenencia", width = 12, height = 7),
+  political_orientation = list(data = experience_by_political_orientation, label = "orientación política", width = 12, height = 7)
 )
 
 plots_no_order <- list()
@@ -2291,7 +2427,11 @@ for (var_name in names(variables_no_order)) {
     )
 }
 
-# Tabla resumen de porcentajes por variable
+
+# ==============================================================================
+# TABLA RESUMEN DE PORCENTAJES POR VARIABLE
+# ==============================================================================
+
 create_summary_table_by_group <- function(data, group_col, variable_label) {
   
   distribution_data <- calculate_experience_by_group(data, group_col)
@@ -2337,12 +2477,13 @@ write_csv(
   file.path(csv_dir, "summary_experience_by_variables.csv")
 )
 
-#View(summary_experience_by_variables)
-
 print(summary_experience_by_variables, n = Inf)
 
 
-# Edad de renovaciones ya existentes o implementadas
+# ==============================================================================
+# EDAD DE RENOVACIONES YA EXISTENTES O IMPLEMENTADAS
+# ==============================================================================
+
 implemented_experience_levels <- c(
   "Already present when I moved in",
   "I have installed / implemented / am currently doing this myself"
@@ -2367,15 +2508,13 @@ write_csv(
   file.path(csv_dir, "renovation_age_options_raw.csv")
 )
 
-#View(renovation_age_options_raw)
-
 print(renovation_age_options_raw, n = Inf)
 
 
 renovation_age_levels <- c(
   "Hace menos de 5 años",
-  "Hace 5–15 años",
-  "Hace 15–25 años",
+  "Hace 5-15 años",
+  "Hace 15-25 años",
   "Hace más de 25 años / nunca actualizada",
   "No lo sé"
 )
@@ -2386,28 +2525,20 @@ clean_renovation_age <- function(x) {
   
   case_when(
     is.na(x) | x == "" ~ NA_character_,
-    
-    x == "Yes, less than 5 years ago" ~
-      "Hace menos de 5 años",
-    
-    x == "Yes, between 15 and 5 years ago" ~
-      "Hace 5–15 años",
-    
-    x == "Yes, between 25 and 15 years ago" ~
-      "Hace 15–25 años",
-    
-    x == "Never or more than 25 years ago" ~
-      "Hace más de 25 años / nunca actualizada",
-    
-    x == "I do not know" ~
-      "No lo sé",
-    
+    x == "Yes, less than 5 years ago" ~ "Hace menos de 5 años",
+    x == "Yes, between 15 and 5 years ago" ~ "Hace 5-15 años",
+    x == "Yes, between 25 and 15 years ago" ~ "Hace 15-25 años",
+    x == "Never or more than 25 years ago" ~ "Hace más de 25 años / nunca actualizada",
+    x == "I do not know" ~ "No lo sé",
     TRUE ~ NA_character_
   )
 }
 
 
-# Tabla larga con la etapa de experiencia
+# ==============================================================================
+# TABLA LARGA CON LA ETAPA DE EXPERIENCE
+# ==============================================================================
+
 experience_stage_for_age <- df %>%
   select(
     participant_id,
@@ -2428,7 +2559,10 @@ experience_stage_for_age <- df %>%
   )
 
 
-# Tabla larga con edad de renovación
+# ==============================================================================
+# TABLA LARGA CON EDAD DE RENOVACIÓN
+# ==============================================================================
+
 renovation_age_long <- df %>%
   select(
     participant_id,
@@ -2472,8 +2606,6 @@ write_csv(
   file.path(csv_dir, "renovation_age_long.csv")
 )
 
-#View(renovation_age_long)
-
 glimpse(renovation_age_long)
 
 
@@ -2488,7 +2620,10 @@ subtitle_renovation_age <- paste0(
 )
 
 
-# Distribución de edad de renovación por tecnología
+# ==============================================================================
+# DISTRIBUCIÓN DE EDAD DE RENOVACIÓN POR TECNOLOGÍA
+# ==============================================================================
+
 renovation_age_distribution_by_technology <- renovation_age_long %>%
   count(technology, renovation_age_clean, sort = FALSE) %>%
   group_by(technology) %>%
@@ -2515,7 +2650,6 @@ write_csv(
 print(renovation_age_distribution_by_technology, n = Inf)
 
 
-# Ordenar tecnologías de edad usando el mismo orden general
 renovation_age_distribution_by_technology_plot <- renovation_age_distribution_by_technology %>%
   mutate(
     technology = factor(technology, levels = technology_order),
@@ -2527,7 +2661,10 @@ renovation_age_distribution_by_technology_plot <- renovation_age_distribution_by
   )
 
 
-# Barras apiladas de edad de renovación
+# ==============================================================================
+# BARRAS APILADAS DE EDAD DE RENOVACIÓN
+# ==============================================================================
+
 plot_renovation_age_by_technology <- ggplot(
   renovation_age_distribution_by_technology_plot,
   aes(
@@ -2552,10 +2689,15 @@ print(plot_renovation_age_by_technology)
 save_plot_png(
   plot = plot_renovation_age_by_technology,
   filename = "renovation_age_distribution_by_technology_absolute",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
-# Barras apiladas de edad de renovación en porcentaje
+
+
+# ==============================================================================
+# BARRAS APILADAS DE EDAD DE RENOVACIÓN EN PORCENTAJE
+# ==============================================================================
+
 plot_renovation_age_by_technology_percentage <- ggplot(
   renovation_age_distribution_by_technology_plot,
   aes(
@@ -2568,7 +2710,7 @@ plot_renovation_age_by_technology_percentage <- ggplot(
   geom_text(
     aes(label = label),
     position = position_stack(vjust = 0.5),
-    size = 2.6,
+    size = plot_stack_label_size,
     lineheight = 0.9
   ) +
   coord_flip(clip = "off") +
@@ -2595,11 +2737,15 @@ print(plot_renovation_age_by_technology_percentage)
 save_plot_png(
   plot = plot_renovation_age_by_technology_percentage,
   filename = "renovation_age_distribution_by_technology_percentage",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
 
-# Heatmap de edad de renovación
+
+# ==============================================================================
+# HEATMAP DE EDAD DE RENOVACIÓN
+# ==============================================================================
+
 plot_renovation_age_heatmap <- ggplot(
   renovation_age_distribution_by_technology_plot,
   aes(
@@ -2611,7 +2757,7 @@ plot_renovation_age_heatmap <- ggplot(
   geom_tile(color = "black", linewidth = 0.25) +
   geom_text(
     aes(label = label),
-    size = 3,
+    size = plot_heatmap_label_size,
     lineheight = 0.9
   ) +
   scale_fill_gradient(
@@ -2628,28 +2774,23 @@ plot_renovation_age_heatmap <- ggplot(
     y = NULL,
     fill = "Porcentaje"
   ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14),
-    plot.subtitle = element_text(size = 10),
-    axis.text.x = element_text(angle = 35, hjust = 1),
-    axis.text.y = element_text(size = 9),
-    legend.position = "right",
-    plot.margin = margin(10, 10, 10, 10)
-  )
+  theme_experience_heatmap
 
 print(plot_renovation_age_heatmap)
 
 save_plot_png(
   plot = plot_renovation_age_heatmap,
   filename = "renovation_age_heatmap_by_technology",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
 
 
-# Guardar todos los gráficos en un único PDF
-save_plots_pdf <- function(plot_list, filename, width = 13, height = 8) {
+# ==============================================================================
+# GUARDAR TODOS LOS GRÁFICOS EN UN ÚNICO PDF
+# ==============================================================================
+
+save_plots_pdf <- function(plot_list, filename, width = 14, height = 9) {
   pdf(
     file = file.path(pdf_dir, filename),
     width = width,
@@ -2677,7 +2818,6 @@ all_plots <- c(
   plot_experience_individual_percentage_by_technology,
   
   list(
-    # Generación
     plot_experience_by_age_group,
     plot_experience_percentage_by_age_group,
     plot_heatmap_age_group,
@@ -2685,7 +2825,6 @@ all_plots <- c(
     plots_no_order[["age_group_percentage_no_order"]],
     plots_no_order[["age_group_heatmap_no_order"]],
     
-    # Género
     plot_experience_by_gender,
     plot_experience_percentage_by_gender,
     plot_heatmap_gender,
@@ -2693,7 +2832,6 @@ all_plots <- c(
     plots_no_order[["gender_percentage_no_order"]],
     plots_no_order[["gender_heatmap_no_order"]],
     
-    # País
     plot_experience_by_country,
     plot_experience_percentage_by_country,
     plot_heatmap_country,
@@ -2701,7 +2839,6 @@ all_plots <- c(
     plots_no_order[["country_percentage_no_order"]],
     plots_no_order[["country_heatmap_no_order"]],
     
-    # Región europea
     plot_experience_by_residence_region,
     plot_experience_percentage_by_residence_region,
     plot_heatmap_residence_region,
@@ -2709,7 +2846,6 @@ all_plots <- c(
     plots_no_order[["residence_region_percentage_no_order"]],
     plots_no_order[["residence_region_heatmap_no_order"]],
     
-    # Tamaño de ciudad
     plot_experience_by_city_size,
     plot_experience_percentage_by_city_size,
     plot_heatmap_city_size,
@@ -2717,7 +2853,6 @@ all_plots <- c(
     plots_no_order[["city_size_percentage_no_order"]],
     plots_no_order[["city_size_heatmap_no_order"]],
     
-    # Zona climática
     plot_experience_by_climate_zone,
     plot_experience_percentage_by_climate_zone,
     plot_heatmap_climate_zone,
@@ -2725,7 +2860,6 @@ all_plots <- c(
     plots_no_order[["climate_zone_percentage_no_order"]],
     plots_no_order[["climate_zone_heatmap_no_order"]],
     
-    # Situación laboral
     plot_experience_by_employment,
     plot_experience_percentage_by_employment,
     plot_heatmap_employment,
@@ -2733,7 +2867,6 @@ all_plots <- c(
     plots_no_order[["employment_percentage_no_order"]],
     plots_no_order[["employment_heatmap_no_order"]],
     
-    # Nivel educativo
     plot_experience_by_education,
     plot_experience_percentage_by_education,
     plot_heatmap_education,
@@ -2741,7 +2874,6 @@ all_plots <- c(
     plots_no_order[["education_group_percentage_no_order"]],
     plots_no_order[["education_group_heatmap_no_order"]],
     
-    # Trabajo/estudio desde casa
     plot_experience_by_work_home,
     plot_experience_percentage_by_work_home,
     plot_heatmap_work_home,
@@ -2749,7 +2881,6 @@ all_plots <- c(
     plots_no_order[["work_home_percentage_no_order"]],
     plots_no_order[["work_home_heatmap_no_order"]],
     
-    # Tipo de hogar
     plot_experience_by_type_house,
     plot_experience_percentage_by_type_house,
     plot_heatmap_type_house,
@@ -2757,7 +2888,6 @@ all_plots <- c(
     plots_no_order[["type_house_percentage_no_order"]],
     plots_no_order[["type_house_heatmap_no_order"]],
     
-    # Régimen de tenencia
     plot_experience_by_tenure,
     plot_experience_percentage_by_tenure,
     plot_heatmap_tenure,
@@ -2765,7 +2895,6 @@ all_plots <- c(
     plots_no_order[["tenure_percentage_no_order"]],
     plots_no_order[["tenure_heatmap_no_order"]],
     
-    # Orientación política
     plot_experience_by_political_orientation,
     plot_experience_percentage_by_political_orientation,
     plot_heatmap_political_orientation,
@@ -2773,17 +2902,22 @@ all_plots <- c(
     plots_no_order[["political_orientation_percentage_no_order"]],
     plots_no_order[["political_orientation_heatmap_no_order"]],
     
-    # Antigüedad de renovaciones
     plot_renovation_age_by_technology,
     plot_renovation_age_by_technology_percentage,
     plot_renovation_age_heatmap
   )
 )
+
 all_plots <- all_plots[!sapply(all_plots, is.null)]
 
 save_plots_pdf(
   plot_list = all_plots,
   filename = "experience_all_plots.pdf",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
+
+cat("Gráficos guardados en:\n")
+cat(plots_dir, "\n")
+cat("PDF conjunto guardado en:\n")
+cat(file.path(pdf_dir, "experience_all_plots.pdf"), "\n")

@@ -50,7 +50,9 @@
 # que la acción tiene un significado más allá del beneficio económico.
 
 
-# 0. Librerías
+# ==============================================================================
+# 0. LIBRERÍAS
+# ==============================================================================
 
 library(readr)
 library(dplyr)
@@ -61,13 +63,15 @@ library(purrr)
 library(ggplot2)
 
 
-# Cargar datos
+# ==============================================================================
+# 1. CARGAR DATOS Y DEFINIR CARPETAS
+# ==============================================================================
+
 df <- read_csv(
   "initial_descriptive_analysis/output/clean_datasets/df_clean_general.csv",
   show_col_types = FALSE
 )
 
-# Carpetas de salida
 base_output_dir <- "initial_descriptive_analysis/output/ttm_stage_analysis"
 
 csv_dir <- file.path(base_output_dir, "csv")
@@ -91,7 +95,11 @@ df <- df %>%
     )
   )
 
-# Función para guardar gráficos
+
+# ==============================================================================
+# 2. FUNCIÓN PARA GUARDAR GRÁFICOS
+# ==============================================================================
+
 save_plot_png <- function(plot, filename, width = 10, height = 6) {
   ggsave(
     filename = file.path(plots_dir, paste0(filename, ".png")),
@@ -102,7 +110,60 @@ save_plot_png <- function(plot, filename, width = 10, height = 6) {
   )
 }
 
-# Diccionario de determinantes
+
+# ==============================================================================
+# 3. CONFIGURACIÓN VISUAL PARA GRÁFICOS DEL TFM
+# ==============================================================================
+
+plot_base_size <- 15
+plot_title_size <- 18
+plot_subtitle_size <- 13
+plot_axis_title_size <- 15
+plot_axis_text_size <- 15
+plot_strip_text_size <- 13
+plot_legend_title_size <- 14
+plot_legend_text_size <- 13
+
+plot_label_size <- 4
+plot_heatmap_label_size <- 3.8
+
+theme_ttm <- theme_minimal(base_size = plot_base_size) +
+  theme(
+    plot.title = element_text(face = "bold", size = plot_title_size),
+    plot.subtitle = element_text(size = plot_subtitle_size),
+    axis.title.x = element_text(size = plot_axis_title_size, margin = margin(t = 8)),
+    axis.title.y = element_text(size = plot_axis_title_size, margin = margin(r = 8)),
+    axis.text.x = element_text(size = plot_axis_text_size),
+    axis.text.y = element_text(size = plot_axis_text_size),
+    strip.text = element_text(face = "bold", size = plot_strip_text_size),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold", size = plot_legend_title_size),
+    legend.text = element_text(size = plot_legend_text_size),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(12, 45, 12, 12)
+  )
+
+theme_ttm_heatmap <- theme_minimal(base_size = plot_base_size) +
+  theme(
+    plot.title = element_text(face = "bold", size = plot_title_size),
+    plot.subtitle = element_text(size = plot_subtitle_size),
+    axis.title.x = element_text(size = plot_axis_title_size, margin = margin(t = 8)),
+    axis.title.y = element_text(size = plot_axis_title_size, margin = margin(r = 8)),
+    axis.text.x = element_text(size = plot_axis_text_size, angle = 35, hjust = 1),
+    axis.text.y = element_text(size = plot_axis_text_size),
+    strip.text = element_text(face = "bold", size = plot_strip_text_size),
+    legend.position = "right",
+    legend.title = element_text(face = "bold", size = plot_legend_title_size),
+    legend.text = element_text(size = plot_legend_text_size),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(12, 20, 12, 12)
+  )
+
+
+# ==============================================================================
+# 4. DICCIONARIO DE DETERMINANTES
+# ==============================================================================
+
 determinant_ids <- c(
   "profits",
   "credit_score_access_to_funding",
@@ -155,14 +216,14 @@ determinant_labels <- c(
   "Preocupación ambiental",
   "Satisfacción personal",
   "Compromiso",
-  "Persistencia",
+  "Adherencia",
   "Autosuficiencia",
   "Bienestar",
   "Confort",
   "Derechos y deberes",
   "Presión social",
   "Apoyo social",
-  "Sociabilidad",
+  "Socialización",
   "Acuerdo",
   "Novedad",
   "Diversión",
@@ -173,7 +234,6 @@ determinant_labels <- c(
   "Significado personal"
 )
 
-# Buscar automáticamente la columna real de cada determinante en df
 determinant_cols <- map_chr(determinant_ids, function(id) {
   
   matches <- names(df)[str_detect(names(df), paste0("^", id, "_"))]
@@ -208,7 +268,10 @@ write_csv(
 print(determinant_dictionary, n = Inf)
 
 
-# 3. Correspondencia dimensión -> determinantes
+# ==============================================================================
+# 5. CORRESPONDENCIA DIMENSIÓN -> DETERMINANTES
+# ==============================================================================
+
 dimension_determinant_mapping <- tibble(
   dimension = c(
     "FINANCIAL",
@@ -222,53 +285,44 @@ dimension_determinant_mapping <- tibble(
     "MEANING"
   ),
   
-  # FINANCIAL
   profits = c(1, 0, 0, 0, 0, 0, 0, 0, 0),
   credit_score_access_to_funding = c(1, 0, 0, 0, 0, 0, 0, 0, 0),
   risk_profile = c(1, 0, 0, 0, 0, 0, 0, 0, 0),
   added_value = c(1, 0, 0, 0, 0, 0, 0, 0, 0),
   frugality = c(1, 0, 0, 0, 0, 0, 0, 0, 0),
   
-  # SECURITY
   legal = c(0, 1, 0, 0, 0, 0, 0, 0, 0),
   trust = c(0, 1, 0, 0, 0, 0, 0, 0, 0),
   safety = c(0, 1, 0, 0, 0, 0, 0, 0, 0),
   climate_protection = c(0, 1, 0, 0, 0, 0, 0, 0, 0),
   
-  # COMPETENCE
   cost_efficiency = c(0, 0, 1, 0, 0, 0, 0, 0, 0),
   knowledge = c(0, 0, 1, 0, 0, 0, 0, 0, 0),
   own_competence = c(0, 0, 1, 0, 0, 0, 0, 0, 0),
   technical_fit = c(0, 0, 1, 0, 0, 0, 0, 0, 0),
   environmental_concerns = c(0, 0, 1, 0, 0, 0, 0, 0, 0),
   
-  # AUTONOMY
   self_satisfaction = c(0, 0, 0, 1, 0, 0, 0, 0, 0),
   commitment = c(0, 0, 0, 1, 0, 0, 0, 0, 0),
   adherence = c(0, 0, 0, 1, 0, 0, 0, 0, 0),
   autonomy = c(0, 0, 0, 1, 0, 0, 0, 0, 0),
   
-  # PHYSIOLOGICAL
   wellbeing = c(0, 0, 0, 0, 1, 0, 0, 0, 0),
   coziness = c(0, 0, 0, 0, 1, 0, 0, 0, 0),
   
-  # RELATEDNESS
   rights_and_duties = c(0, 0, 0, 0, 0, 1, 0, 0, 0),
   peer_pressure = c(0, 0, 0, 0, 0, 1, 0, 0, 0),
   support = c(0, 0, 0, 0, 0, 1, 0, 0, 0),
   socialising = c(0, 0, 0, 0, 0, 1, 0, 0, 0),
   agreement = c(0, 0, 0, 0, 0, 1, 0, 0, 0),
   
-  # STIMULATION
   novelty = c(0, 0, 0, 0, 0, 0, 1, 0, 0),
   fun = c(0, 0, 0, 0, 0, 0, 1, 0, 0),
   recognition = c(0, 0, 0, 0, 0, 0, 1, 0, 0),
   
-  # POPULARITY
   trends = c(0, 0, 0, 0, 0, 0, 0, 1, 0),
   authority = c(0, 0, 0, 0, 0, 0, 0, 1, 0),
   
-  # MEANING
   own_significance = c(0, 0, 0, 0, 0, 0, 0, 0, 1),
   approval = c(0, 0, 0, 0, 0, 0, 0, 0, 1)
 )
@@ -278,7 +332,11 @@ write_csv(
   file.path(csv_dir, "dimension_determinant_mapping.csv")
 )
 
-# Funciones auxiliares
+
+# ==============================================================================
+# 6. FUNCIONES AUXILIARES
+# ==============================================================================
+
 clean_determinant_score <- function(x) {
   x <- suppressWarnings(as.numeric(x))
   
@@ -296,57 +354,23 @@ clean_selected_technology <- function(x) {
   
   case_when(
     is.na(x) | x == "" ~ NA_character_,
-    
     str_detect(x, regex("^none\\.?$|none option|prefer not to answer", ignore_case = TRUE)) ~ NA_character_,
-    
-    str_detect(x, regex("balcony|kit", ignore_case = TRUE)) ~
-      "Kits solares de balcón",
-    
-    str_detect(x, regex("tariff|electricity tariff|time-of-use", ignore_case = TRUE)) ~
-      "Cambio de tarifa eléctrica",
-    
-    str_detect(x, regex("cooling", ignore_case = TRUE)) ~
-      "Sistema de refrigeración",
-    
-    str_detect(x, regex("hot water|domestic hot water|boiler|water heater", ignore_case = TRUE)) ~
-      "Agua caliente sanitaria",
-    
-    str_detect(x, regex("electric vehicle", ignore_case = TRUE)) ~
-      "Vehículo eléctrico",
-    
-    str_detect(x, regex("elevator|lift", ignore_case = TRUE)) ~
-      "Ascensor",
-    
-    str_detect(x, regex("appliance", ignore_case = TRUE)) ~
-      "Electrodomésticos eficientes",
-    
-    str_detect(x, regex("storage", ignore_case = TRUE)) ~
-      "Almacenamiento energético",
-    
-    str_detect(x, regex("envelope|insulation|windows|roof|wall", ignore_case = TRUE)) ~
-      "Renovación de envolvente",
-    
-    str_detect(x, regex("fossil|biomass", ignore_case = TRUE)) ~
-      "Calefacción fósil o biomasa",
-    
-    str_detect(x, regex("heat pump", ignore_case = TRUE)) ~
-      "Bomba de calor",
-    
-    str_detect(x, regex("ventilation|heat recovery", ignore_case = TRUE)) ~
-      "Ventilación con recuperador",
-    
-    str_detect(x, regex("energy community", ignore_case = TRUE)) ~
-      "Comunidad energética",
-    
-    str_detect(x, regex("micro", ignore_case = TRUE)) ~
-      "Medidas de microeficiencia",
-    
-    str_detect(x, regex("photovoltaic|pv|solar pv|rooftop", ignore_case = TRUE)) ~
-      "Fotovoltaica en cubierta",
-    
-    str_detect(x, regex("smart home", ignore_case = TRUE)) ~
-      "Sistemas inteligentes del hogar",
-    
+    str_detect(x, regex("balcony|kit", ignore_case = TRUE)) ~ "Kits solares de balcón",
+    str_detect(x, regex("tariff|electricity tariff|time-of-use", ignore_case = TRUE)) ~ "Cambio de tarifa eléctrica",
+    str_detect(x, regex("cooling", ignore_case = TRUE)) ~ "Sistema de refrigeración",
+    str_detect(x, regex("hot water|domestic hot water|boiler|water heater", ignore_case = TRUE)) ~ "Agua caliente sanitaria",
+    str_detect(x, regex("electric vehicle", ignore_case = TRUE)) ~ "Vehículo eléctrico",
+    str_detect(x, regex("elevator|lift", ignore_case = TRUE)) ~ "Ascensor",
+    str_detect(x, regex("appliance", ignore_case = TRUE)) ~ "Electrodomésticos eficientes",
+    str_detect(x, regex("storage", ignore_case = TRUE)) ~ "Almacenamiento energético",
+    str_detect(x, regex("envelope|insulation|windows|roof|wall", ignore_case = TRUE)) ~ "Renovación de envolvente",
+    str_detect(x, regex("fossil|biomass", ignore_case = TRUE)) ~ "Calefacción fósil o biomasa",
+    str_detect(x, regex("heat pump", ignore_case = TRUE)) ~ "Bomba de calor",
+    str_detect(x, regex("ventilation|heat recovery", ignore_case = TRUE)) ~ "Ventilación con recuperador",
+    str_detect(x, regex("energy community", ignore_case = TRUE)) ~ "Comunidad energética",
+    str_detect(x, regex("micro", ignore_case = TRUE)) ~ "Medidas de microeficiencia",
+    str_detect(x, regex("photovoltaic|pv|solar pv|rooftop", ignore_case = TRUE)) ~ "Fotovoltaica en cubierta",
+    str_detect(x, regex("smart home", ignore_case = TRUE)) ~ "Sistemas inteligentes del hogar",
     TRUE ~ x
   )
 }
@@ -366,15 +390,15 @@ dimension_levels <- c(
 dimension_dictionary <- tibble(
   dimension_key = dimension_levels,
   dimension_label = c(
-    "Financiero",
+    "Seguridad financiera",
     "Seguridad",
     "Competencia",
     "Autonomía",
-    "Fisiología",
-    "Relación",
+    "Materialidad",
+    "Vinculación",
     "Estímulo",
     "Popularidad",
-    "Sentido"
+    "Significado"
   )
 )
 
@@ -396,7 +420,11 @@ extract_dimensions <- function(x) {
   detected
 }
 
-# Matriz de determinantes por participante
+
+# ==============================================================================
+# 7. MATRIZ DE DETERMINANTES POR PARTICIPANTE
+# ==============================================================================
+
 determinants_wide <- df %>%
   select(participant_id, all_of(determinant_cols)) %>%
   pivot_longer(
@@ -427,7 +455,10 @@ write_csv(
 )
 
 
-# Localizar columnas de etapa/dimensión
+# ==============================================================================
+# 8. LOCALIZAR COLUMNAS DE ETAPA/DIMENSIÓN
+# ==============================================================================
+
 find_unique_col <- function(pattern, label, exclude_pattern = NULL) {
   
   matches <- names(df)[
@@ -512,7 +543,10 @@ cat("Dimensiones curiosidad:", curious_dimensions_col, "\n")
 cat("Tecnología nunca:", never_technology_col, "\n")
 
 
-# Crear tabla etapa - tecnología - dimensión
+# ==============================================================================
+# 9. CREAR TABLA ETAPA - TECNOLOGÍA - DIMENSIÓN
+# ==============================================================================
+
 implemented_stage <- df %>%
   transmute(
     participant_id,
@@ -566,7 +600,10 @@ write_csv(
 )
 
 
-# Expandir dimensiones seleccionadas
+# ==============================================================================
+# 10. EXPANDIR DIMENSIONES SELECCIONADAS
+# ==============================================================================
+
 ttm_stage_dimension_long <- ttm_stage_raw %>%
   unnest_longer(
     dimensions_list,
@@ -601,7 +638,10 @@ write_csv(
 print(ttm_stage_dimension_long, n = 100)
 
 
-# Resumen de tecnologías por etapa
+# ==============================================================================
+# 11. RESUMEN DE TECNOLOGÍAS POR ETAPA
+# ==============================================================================
+
 summary_technology_by_stage <- ttm_stage_dimension_long %>%
   distinct(participant_id, stage, technology) %>%
   count(
@@ -624,7 +664,10 @@ write_csv(
 print(summary_technology_by_stage, n = Inf)
 
 
-# Resumen de dimensiones por etapa
+# ==============================================================================
+# 12. RESUMEN DE DIMENSIONES POR ETAPA
+# ==============================================================================
+
 summary_dimension_by_stage <- ttm_stage_dimension_long %>%
   filter(!is.na(dimension)) %>%
   count(
@@ -647,7 +690,10 @@ write_csv(
 print(summary_dimension_by_stage, n = Inf)
 
 
-# Preparar mapping dimensión -> determinantes
+# ==============================================================================
+# 13. PREPARAR MAPPING DIMENSIÓN -> DETERMINANTES
+# ==============================================================================
+
 dimension_determinant_mapping_fixed <- dimension_determinant_mapping %>%
   rename(dimension_key = dimension) %>%
   mutate(
@@ -674,8 +720,6 @@ write_csv(
   file.path(csv_dir, "dimension_determinant_mapping_long.csv")
 )
 
-# Comprobación rápida del mapping
-
 print(
   mapping_long %>%
     filter(is_linked == 1) %>%
@@ -684,7 +728,10 @@ print(
 )
 
 
-# Construir vector de 32 determinantes por etapa/dimensión
+# ==============================================================================
+# 14. CONSTRUIR VECTOR DE 32 DETERMINANTES POR ETAPA/DIMENSIÓN
+# ==============================================================================
+
 determinants_long_scores <- determinants_wide %>%
   pivot_longer(
     cols = all_of(determinant_ids),
@@ -800,7 +847,10 @@ write_csv(
 )
 
 
-# Resumen de determinantes por etapa
+# ==============================================================================
+# 15. RESUMEN DE DETERMINANTES POR ETAPA
+# ==============================================================================
+
 summary_determinants_by_stage <- ttm_stage_determinant_vector_long %>%
   filter(
     is_linked == 1,
@@ -831,9 +881,15 @@ write_csv(
 print(summary_determinants_by_stage, n = Inf)
 
 
-# Gráfico de la tabla final etapa/intervención/dimensión/vector
+# ==============================================================================
+# 16. GRÁFICO FINAL ETAPA / INTERVENCIÓN / DIMENSIÓN / VECTOR
+# ==============================================================================
 
-# Seleccionar tecnologías más frecuentes por etapa para que el gráfico no sea ilegible
+stage_levels <- c(
+  "Implementada",
+  "La conoce / la consideraría",
+  "No la conoce, pero le genera curiosidad"
+)
 
 top_technologies_by_stage <- ttm_stage_dimension_long %>%
   filter(
@@ -847,6 +903,9 @@ top_technologies_by_stage <- ttm_stage_dimension_long %>%
   ungroup()
 
 vector_final_plot_data <- ttm_stage_determinant_vector_long %>%
+  mutate(
+    stage = factor(stage, levels = stage_levels)
+  ) %>%
   filter(
     is_linked == 1,
     !is.na(determinant_score_stage)
@@ -884,7 +943,7 @@ plot_final_stage_technology_dimension_vector <- ggplot(
   geom_tile(color = "black", linewidth = 0.2) +
   geom_text(
     aes(label = round(mean_score, 0)),
-    size = 2.5
+    size = plot_heatmap_label_size
   ) +
   facet_grid(
     rows = vars(stage),
@@ -904,39 +963,22 @@ plot_final_stage_technology_dimension_vector <- ggplot(
     y = "Determinante",
     fill = "Media"
   ) +
-  theme_minimal(base_size = 11) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14),
-    plot.subtitle = element_text(size = 10),
-    axis.text.x = element_text(angle = 35, hjust = 1),
-    axis.text.y = element_text(size = 7),
-    strip.text = element_text(face = "bold", size = 8),
-    legend.position = "right"
-  )
+  theme_ttm_heatmap
 
 print(plot_final_stage_technology_dimension_vector)
 
 save_plot_png(
   plot_final_stage_technology_dimension_vector,
   "final_stage_technology_dimension_vector_heatmap",
-  width = 16,
-  height = 12
+  width = 18,
+  height = 14
 )
 
 
-# Gráficos de resultados TTM
-theme_ttm <- theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14),
-    plot.subtitle = element_text(size = 10),
-    axis.text = element_text(size = 10),
-    legend.position = "bottom",
-    legend.title = element_text(face = "bold"),
-    plot.margin = margin(10, 20, 10, 10)
-  )
+# ==============================================================================
+# 17. TECNOLOGÍAS POR ETAPA
+# ==============================================================================
 
-
-# Tecnologías por etapa
 plot_technology_by_stage <- summary_technology_by_stage %>%
   group_by(stage) %>%
   slice_max(n_participants, n = 10, with_ties = FALSE) %>%
@@ -956,7 +998,7 @@ plot_technology_by_stage <- summary_technology_by_stage %>%
   geom_text(
     aes(label = n_participants),
     hjust = -0.1,
-    size = 3
+    size = plot_label_size
   ) +
   coord_flip(clip = "off") +
   facet_wrap(~ stage, scales = "free_y") +
@@ -976,12 +1018,20 @@ print(plot_technology_by_stage)
 save_plot_png(
   plot_technology_by_stage,
   "ttm_top_technologies_by_stage",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
 
-# Dimensiones por etapa
+
+# ==============================================================================
+# 18. DIMENSIONES POR ETAPA
+# ==============================================================================
+
 plot_dimensions_by_stage_percentage <- summary_dimension_by_stage %>%
+  mutate(
+    stage = factor(stage, levels = stage_levels),
+    dimension = factor(dimension, levels = dimension_dictionary$dimension_label)
+  ) %>%
   ggplot(
     aes(
       x = stage,
@@ -999,8 +1049,9 @@ plot_dimensions_by_stage_percentage <- summary_dimension_by_stage %>%
       )
     ),
     position = position_stack(vjust = 0.5),
-    size = 3
+    size = plot_label_size
   ) +
+  scale_x_discrete(limits = rev(stage_levels)) +
   scale_y_continuous(
     limits = c(0, 100),
     labels = function(x) paste0(x, "%")
@@ -1020,12 +1071,20 @@ print(plot_dimensions_by_stage_percentage)
 save_plot_png(
   plot_dimensions_by_stage_percentage,
   "ttm_dimensions_by_stage_percentage",
-  width = 11,
-  height = 6
+  width = 12,
+  height = 7
 )
 
-# Heatmap etapa x dimensión
+
+# ==============================================================================
+# 19. HEATMAP ETAPA X DIMENSIÓN
+# ==============================================================================
+
 plot_heatmap_dimensions_by_stage <- summary_dimension_by_stage %>%
+  mutate(
+    stage = factor(stage, levels = stage_levels),
+    dimension = factor(dimension, levels = dimension_dictionary$dimension_label)
+  ) %>%
   ggplot(
     aes(
       x = dimension,
@@ -1043,9 +1102,10 @@ plot_heatmap_dimensions_by_stage <- summary_dimension_by_stage %>%
         ")"
       )
     ),
-    size = 3,
+    size = plot_heatmap_label_size,
     lineheight = 0.9
   ) +
+  scale_y_discrete(limits = rev(stage_levels)) +
   scale_fill_gradient(
     low = "white",
     high = "#0072B2"
@@ -1057,24 +1117,22 @@ plot_heatmap_dimensions_by_stage <- summary_dimension_by_stage %>%
     y = NULL,
     fill = "Porcentaje"
   ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14),
-    axis.text.x = element_text(angle = 35, hjust = 1),
-    legend.position = "right"
-  )
+  theme_ttm_heatmap
 
 print(plot_heatmap_dimensions_by_stage)
 
 save_plot_png(
   plot_heatmap_dimensions_by_stage,
   "ttm_heatmap_dimensions_by_stage",
-  width = 12,
-  height = 6
+  width = 13,
+  height = 7
 )
 
 
-# Top determinantes por etapa
+# ==============================================================================
+# 20. TOP DETERMINANTES POR ETAPA
+# ==============================================================================
+
 plot_top_determinants_by_stage <- summary_determinants_by_stage %>%
   group_by(stage) %>%
   slice_max(n_mentions, n = 8, with_ties = FALSE) %>%
@@ -1094,7 +1152,7 @@ plot_top_determinants_by_stage <- summary_determinants_by_stage %>%
   geom_text(
     aes(label = n_mentions),
     hjust = -0.1,
-    size = 3
+    size = plot_label_size
   ) +
   coord_flip(clip = "off") +
   facet_wrap(~ stage, scales = "free_y") +
@@ -1114,11 +1172,15 @@ print(plot_top_determinants_by_stage)
 save_plot_png(
   plot_top_determinants_by_stage,
   "ttm_top_determinants_by_stage",
-  width = 13,
-  height = 8
+  width = 14,
+  height = 9
 )
 
-# Heatmap de score medio de determinantes por etapa
+
+# ==============================================================================
+# 21. HEATMAP DE SCORE MEDIO DE DETERMINANTES POR ETAPA
+# ==============================================================================
+
 plot_heatmap_determinants_mean_score <- summary_determinants_by_stage %>%
   group_by(determinant_label) %>%
   mutate(
@@ -1142,7 +1204,7 @@ plot_heatmap_determinants_mean_score <- summary_determinants_by_stage %>%
   geom_tile(color = "black", linewidth = 0.2) +
   geom_text(
     aes(label = round(mean_score, 1)),
-    size = 2.8
+    size = plot_heatmap_label_size
   ) +
   scale_fill_gradient(
     low = "white",
@@ -1156,26 +1218,23 @@ plot_heatmap_determinants_mean_score <- summary_determinants_by_stage %>%
     y = NULL,
     fill = "Media"
   ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14),
-    axis.text.x = element_text(angle = 35, hjust = 1),
-    axis.text.y = element_text(size = 8),
-    legend.position = "right"
-  )
+  theme_ttm_heatmap
 
 print(plot_heatmap_determinants_mean_score)
 
 save_plot_png(
   plot_heatmap_determinants_mean_score,
   "ttm_heatmap_determinants_mean_score_by_stage",
-  width = 11,
-  height = 10
+  width = 13,
+  height = 11
 )
 
 
-# Guardar todos los gráficos en un único PDF
-save_plots_pdf <- function(plot_list, filename, width = 12, height = 8) {
+# ==============================================================================
+# 22. GUARDAR TODOS LOS GRÁFICOS EN UN ÚNICO PDF
+# ==============================================================================
+
+save_plots_pdf <- function(plot_list, filename, width = 14, height = 9) {
   
   pdf(
     file = file.path(pdf_dir, filename),
@@ -1203,9 +1262,8 @@ all_ttm_plots <- list(
 save_plots_pdf(
   plot_list = all_ttm_plots,
   filename = "ttm_stage_dimension_determinants_all_plots.pdf",
-  width = 12,
-  height = 8
+  width = 14,
+  height = 9
 )
 
-cat("Script 07 finalizado correctamente.\n")
 cat("Resultados guardados en:", base_output_dir, "\n")

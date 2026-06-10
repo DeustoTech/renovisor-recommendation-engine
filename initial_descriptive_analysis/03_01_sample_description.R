@@ -1,4 +1,3 @@
-
 # SCRIPT 03.1 - DESCRIPCIÓN DE LA MUESTRA
 
 # Este script realiza la descripción exploratoria de la muestra.
@@ -13,7 +12,10 @@
 # 5. Generar un PDF conjunto con todos los gráficos.
 
 
+# ==============================================================================
 # LIBRERÍAS
+# ==============================================================================
+
 library(readr)
 library(dplyr)
 library(stringr)
@@ -22,7 +24,10 @@ library(tidyr)
 library(tibble)
 
 
+# ==============================================================================
 # RUTAS
+# ==============================================================================
+
 base_input_dir <- "initial_descriptive_analysis/output/clean_datasets"
 base_output_dir <- "initial_descriptive_analysis/output/sample_description"
 
@@ -37,8 +42,10 @@ dir.create(pdf_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(logs_dir, recursive = TRUE, showWarnings = FALSE)
 
 
-
+# ==============================================================================
 # CARGAR DATOS
+# ==============================================================================
+
 df <- read_csv(
   file.path(base_input_dir, "df_clean_sociodemographic.csv"),
   show_col_types = FALSE
@@ -49,7 +56,10 @@ cat("Filas:", nrow(df), "\n")
 cat("Columnas:", ncol(df), "\n")
 
 
+# ==============================================================================
 # FUNCIONES AUXILIARES GENERALES
+# ==============================================================================
+
 clean_text_basic <- function(x) {
   x <- str_squish(as.character(x))
   x <- na_if(x, "")
@@ -91,8 +101,10 @@ clean_filename <- function(x) {
 }
 
 
-
+# ==============================================================================
 # CREAR PARTICIPANT_ID
+# ==============================================================================
+
 df <- df %>%
   mutate(
     participant_id = coalesce(
@@ -105,7 +117,10 @@ df <- df %>%
   )
 
 
+# ==============================================================================
 # DEFINIR COLUMNAS
+# ==============================================================================
+
 year_of_birth_candidates <- c(
   "year_of_birth_clean",
   "please_enter_your_year_of_birth_final",
@@ -141,7 +156,10 @@ political_col <- "on_a_scale_from_0_to_100_where_0_means_most_left_and_100_means
 vote_col <- "which_of_the_following_best_describes_your_general_approach_to_voting_in_elections_final"
 
 
+# ==============================================================================
 # FUNCIONES DE LIMPIEZA SOCIODEMOGRÁFICA
+# ==============================================================================
+
 clean_gender <- function(x) {
   x <- clean_text_basic(x)
   
@@ -318,7 +336,10 @@ clean_vote <- function(x) {
 }
 
 
+# ==============================================================================
 # LIMPIAR EDAD Y GENERACIÓN
+# ==============================================================================
+
 project_year <- 2026
 
 year_of_birth_raw <- suppressWarnings(
@@ -357,7 +378,10 @@ df <- df %>%
   )
 
 
+# ==============================================================================
 # CREAR TABLA DE DESCRIPCIÓN DE MUESTRA
+# ==============================================================================
+
 country_raw <- get_optional_col(df, country_col)
 country_clean_from_dataset <- get_optional_col(df, country_clean_col)
 region_from_dataset <- get_optional_col(df, residence_region_col)
@@ -406,8 +430,10 @@ write_csv(
 cat("Participantes únicos en sample_description:", nrow(sample_description), "\n")
 
 
-
+# ==============================================================================
 # ÓRDENES NATURALES
+# ==============================================================================
+
 natural_orders <- list(
   age_group = c(
     "Generación Z",
@@ -499,7 +525,11 @@ natural_orders <- list(
   )
 )
 
+
+# ==============================================================================
 # PALETAS
+# ==============================================================================
+
 sample_colors <- list(
   age_group = c(
     "Generación Z" = "#56B4E9",
@@ -550,8 +580,52 @@ get_sample_colors <- function(variable_name, categories) {
 }
 
 
+# ==============================================================================
+# CONFIGURACIÓN VISUAL PARA GRÁFICOS DEL TFM
+# ==============================================================================
 
+plot_base_size <- 16
+plot_title_size <- 19
+plot_subtitle_size <- 13
+plot_axis_title_size <- 15
+plot_axis_text_x_size <- 15
+plot_axis_text_y_size <- 15
+plot_label_size <- 4.5
+
+theme_sample_tfm <- function() {
+  theme_minimal(base_size = plot_base_size) +
+    theme(
+      plot.title = element_text(
+        face = "bold",
+        size = plot_title_size
+      ),
+      plot.subtitle = element_text(
+        size = plot_subtitle_size
+      ),
+      axis.title.x = element_text(
+        size = plot_axis_title_size,
+        margin = margin(t = 8)
+      ),
+      axis.title.y = element_text(
+        size = plot_axis_title_size,
+        margin = margin(r = 8)
+      ),
+      axis.text.x = element_text(
+        size = plot_axis_text_x_size
+      ),
+      axis.text.y = element_text(
+        size = plot_axis_text_y_size
+      ),
+      panel.grid.minor = element_blank(),
+      plot.margin = margin(12, 80, 12, 12)
+    )
+}
+
+
+# ==============================================================================
 # FUNCIONES DE TABLAS Y GRÁFICOS
+# ==============================================================================
+
 get_variable_order <- function(variable_name, data_summary) {
   if (variable_name %in% names(natural_orders)) {
     return(natural_orders[[variable_name]])
@@ -599,11 +673,20 @@ plot_sample_variable <- function(data, variable_name, variable_label, width = 9,
   
   p <- ggplot(plot_data, aes(x = category, y = n, fill = category)) +
     geom_col(color = "#2C3E50") +
-    geom_text(aes(label = label), hjust = -0.1, size = 3.5) +
+    geom_text(
+      aes(label = label),
+      hjust = -0.1,
+      size = plot_label_size
+    ) +
     coord_flip(clip = "off") +
+    scale_x_discrete(
+      labels = function(x) str_wrap(x, width = 32)
+    ) +
     scale_fill_manual(values = colors, drop = FALSE) +
     guides(fill = "none") +
-    scale_y_continuous(limits = c(0, max(plot_data$n) * 1.25)) +
+    scale_y_continuous(
+      limits = c(0, max(plot_data$n) * 1.30)
+    ) +
     labs(
       title = paste("Distribución de la muestra por", str_to_lower(variable_label)),
       subtitle = paste0(
@@ -614,22 +697,31 @@ plot_sample_variable <- function(data, variable_name, variable_label, width = 9,
       x = NULL,
       y = "Número de participantes"
     ) +
-    theme_minimal(base_size = 12) +
-    theme(
-      plot.title = element_text(face = "bold", size = 14),
-      plot.subtitle = element_text(size = 10),
-      axis.text.y = element_text(size = 9),
-      panel.grid.minor = element_blank(),
-      plot.margin = margin(10, 35, 10, 10)
-    )
+    theme_sample_tfm()
   
   print(p)
   
   filename <- paste0("sample_description_", clean_filename(variable_name))
   
-  ggsave(file.path(plots_dir, paste0(filename, ".png")), p, width = width, height = height, dpi = 300)
-  ggsave(file.path(pdf_dir, paste0(filename, ".pdf")), p, width = width, height = height)
-  write_csv(summary_data, file.path(csv_dir, paste0(filename, ".csv")))
+  ggsave(
+    file.path(plots_dir, paste0(filename, ".png")),
+    p,
+    width = width,
+    height = height,
+    dpi = 300
+  )
+  
+  ggsave(
+    file.path(pdf_dir, paste0(filename, ".pdf")),
+    p,
+    width = width,
+    height = height
+  )
+  
+  write_csv(
+    summary_data,
+    file.path(csv_dir, paste0(filename, ".csv"))
+  )
   
   return(p)
 }
@@ -659,12 +751,19 @@ plot_sample_variable_percentage <- function(data, variable_name, variable_label,
   
   p <- ggplot(plot_data, aes(x = category, y = percentage, fill = category)) +
     geom_col(color = "#2C3E50") +
-    geom_text(aes(label = label), hjust = -0.1, size = 3.5) +
+    geom_text(
+      aes(label = label),
+      hjust = -0.1,
+      size = plot_label_size
+    ) +
     coord_flip(clip = "off") +
+    scale_x_discrete(
+      labels = function(x) str_wrap(x, width = 32)
+    ) +
     scale_fill_manual(values = colors, drop = FALSE) +
     guides(fill = "none") +
     scale_y_continuous(
-      limits = c(0, max(plot_data$percentage) * 1.25),
+      limits = c(0, max(plot_data$percentage) * 1.30),
       labels = function(x) paste0(x, "%")
     ) +
     labs(
@@ -677,21 +776,26 @@ plot_sample_variable_percentage <- function(data, variable_name, variable_label,
       x = NULL,
       y = "Porcentaje de participantes"
     ) +
-    theme_minimal(base_size = 12) +
-    theme(
-      plot.title = element_text(face = "bold", size = 14),
-      plot.subtitle = element_text(size = 10),
-      axis.text.y = element_text(size = 9),
-      panel.grid.minor = element_blank(),
-      plot.margin = margin(10, 35, 10, 10)
-    )
+    theme_sample_tfm()
   
   print(p)
   
   filename <- paste0("sample_description_", clean_filename(variable_name), "_percentage")
   
-  ggsave(file.path(plots_dir, paste0(filename, ".png")), p, width = width, height = height, dpi = 300)
-  ggsave(file.path(pdf_dir, paste0(filename, ".pdf")), p, width = width, height = height)
+  ggsave(
+    file.path(plots_dir, paste0(filename, ".png")),
+    p,
+    width = width,
+    height = height,
+    dpi = 300
+  )
+  
+  ggsave(
+    file.path(pdf_dir, paste0(filename, ".pdf")),
+    p,
+    width = width,
+    height = height
+  )
   
   return(p)
 }
@@ -719,11 +823,20 @@ plot_sample_variable_ordered <- function(data, variable_name, variable_label, wi
   
   p <- ggplot(plot_data, aes(x = category, y = n, fill = category)) +
     geom_col(color = "#2C3E50") +
-    geom_text(aes(label = label), hjust = -0.1, size = 3.5) +
+    geom_text(
+      aes(label = label),
+      hjust = -0.1,
+      size = plot_label_size
+    ) +
     coord_flip(clip = "off") +
+    scale_x_discrete(
+      labels = function(x) str_wrap(x, width = 32)
+    ) +
     scale_fill_manual(values = colors, drop = FALSE) +
     guides(fill = "none") +
-    scale_y_continuous(limits = c(0, max(plot_data$n) * 1.25)) +
+    scale_y_continuous(
+      limits = c(0, max(plot_data$n) * 1.30)
+    ) +
     labs(
       title = paste("Distribución de la muestra por", str_to_lower(variable_label), "- ordenada"),
       subtitle = paste0(
@@ -734,26 +847,35 @@ plot_sample_variable_ordered <- function(data, variable_name, variable_label, wi
       x = NULL,
       y = "Número de participantes"
     ) +
-    theme_minimal(base_size = 12) +
-    theme(
-      plot.title = element_text(face = "bold", size = 14),
-      plot.subtitle = element_text(size = 10),
-      axis.text.y = element_text(size = 9),
-      panel.grid.minor = element_blank(),
-      plot.margin = margin(10, 35, 10, 10)
-    )
+    theme_sample_tfm()
   
   print(p)
   
   filename <- paste0("sample_description_", clean_filename(variable_name), "_ordered")
   
-  ggsave(file.path(plots_dir, paste0(filename, ".png")), p, width = width, height = height, dpi = 300)
-  ggsave(file.path(pdf_dir, paste0(filename, ".pdf")), p, width = width, height = height)
+  ggsave(
+    file.path(plots_dir, paste0(filename, ".png")),
+    p,
+    width = width,
+    height = height,
+    dpi = 300
+  )
+  
+  ggsave(
+    file.path(pdf_dir, paste0(filename, ".pdf")),
+    p,
+    width = width,
+    height = height
+  )
   
   return(p)
 }
 
+
+# ==============================================================================
 # VARIABLES A DESCRIBIR
+# ==============================================================================
+
 sample_variables <- tibble(
   variable_name = c(
     "age_group",
@@ -789,8 +911,16 @@ sample_variables <- tibble(
     "encuesta de origen",
     "tipo de identificador"
   ),
-  width = c(9, 8, 10, 9, 9, 8, 9, 8, 8, 9, 9, 9, 10, 8, 8),
-  height = c(5, 5, 7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5)
+  width = c(
+    9, 8, 11, 9, 9,
+    9, 9, 8, 8, 9,
+    9, 9, 11, 8, 8
+  ),
+  height = c(
+    5.5, 5.5, 7.5, 5.5, 5.5,
+    5.5, 5.5, 5.5, 5.5, 5.5,
+    5.5, 5.5, 6, 5.5, 5.5
+  )
 )
 
 write_csv(
@@ -799,7 +929,10 @@ write_csv(
 )
 
 
+# ==============================================================================
 # TABLAS RESUMEN
+# ==============================================================================
+
 summary_sample_all <- sample_variables %>%
   rowwise() %>%
   do(
@@ -819,7 +952,10 @@ write_csv(
 print(summary_sample_all, n = Inf)
 
 
+# ==============================================================================
 # GRÁFICOS CATEGÓRICOS
+# ==============================================================================
+
 sample_plots <- list()
 
 for (i in seq_len(nrow(sample_variables))) {
@@ -857,7 +993,10 @@ for (i in seq_len(nrow(sample_variables))) {
 sample_plots <- sample_plots[!sapply(sample_plots, is.null)]
 
 
+# ==============================================================================
 # EDAD NUMÉRICA
+# ==============================================================================
+
 age_summary <- sample_description %>%
   summarise(
     n_valid = sum(!is.na(age)),
@@ -894,29 +1033,33 @@ if (sum(!is.na(sample_description$age)) > 0) {
       x = "Edad",
       y = "Número de participantes"
     ) +
-    theme_minimal(base_size = 12)
+    theme_sample_tfm()
   
   print(plot_age_numeric)
   
   ggsave(
     file.path(plots_dir, "sample_description_age_numeric.png"),
     plot_age_numeric,
-    width = 8,
-    height = 5,
+    width = 9,
+    height = 5.5,
     dpi = 300
   )
   
   ggsave(
     file.path(pdf_dir, "sample_description_age_numeric.pdf"),
     plot_age_numeric,
-    width = 8,
-    height = 5
+    width = 9,
+    height = 5.5
   )
   
   sample_plots[["age_numeric"]] <- plot_age_numeric
 }
 
+
+# ==============================================================================
 # MISSING POR VARIABLE
+# ==============================================================================
+
 missing_sample_description <- sample_description %>%
   summarise(across(-participant_id, ~ sum(is.na(.x)))) %>%
   pivot_longer(
@@ -938,11 +1081,15 @@ write_csv(
 
 print(missing_sample_description, n = Inf)
 
-# PDF FINAL
+
+# ==============================================================================
+# PDF FINAL CON TODOS LOS GRÁFICOS
+# ==============================================================================
+
 pdf(
   file = file.path(pdf_dir, "sample_description_all_plots.pdf"),
-  width = 10,
-  height = 6,
+  width = 12,
+  height = 7,
   onefile = TRUE
 )
 
@@ -952,7 +1099,11 @@ for (p in sample_plots) {
 
 dev.off()
 
+
+# ==============================================================================
 # COMPROBACIONES FINALES
+# ==============================================================================
+
 cat("\nDescripción de muestra generada en:\n")
 cat(base_output_dir, "\n")
 

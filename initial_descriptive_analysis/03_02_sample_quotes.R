@@ -1,24 +1,8 @@
-
+# ==============================================================================
 # SCRIPT 03.2 - CUOTAS DE MUESTRA POR PAÍS Y REGIÓN
+# ESCENARIO REAL: MUESTRA ACTUAL + 181 NUEVAS RESPUESTAS
+# ==============================================================================
 
-# Este script calcula la distribución actual de la muestra limpia frente a la
-# distribución teórica objetivo.
-#
-# Parte del dataset limpio sociodemográfico generado en el Script 03:
-#   initial_descriptive_analysis/output/clean_datasets/df_clean_sociodemographic.csv
-#
-# Genera:
-# 1. Distribución actual por país.
-# 2. Distribución actual por región europea.
-# 3. Distribución objetivo escalada para distintos tamaños de muestra:
-#    181, 300, 500 y 1000.
-# 4. Comparación actual vs objetivo por país.
-# 5. Comparación actual vs objetivo por región.
-# 6. CSVs en formato largo y ancho.
-# 7. Gráficos de participantes a reclutar y sobrerrepresentación.
-
-
-# LIBRERÍAS
 library(readr)
 library(dplyr)
 library(stringr)
@@ -26,13 +10,19 @@ library(tidyr)
 library(ggplot2)
 library(tibble)
 
+# ==============================================================================
 # RUTAS
+# ==============================================================================
+
 base_input_dir <- "initial_descriptive_analysis/output/clean_datasets"
 quota_output_dir <- "initial_descriptive_analysis/output/sample_quotas"
 
 dir.create(quota_output_dir, recursive = TRUE, showWarnings = FALSE)
 
+# ==============================================================================
 # CARGAR DATASET LIMPIO
+# ==============================================================================
+
 df_quota <- read_csv(
   file.path(base_input_dir, "df_clean_sociodemographic.csv"),
   show_col_types = FALSE
@@ -42,7 +32,10 @@ cat("Dataset cargado: df_clean_sociodemographic.csv\n")
 cat("Filas:", nrow(df_quota), "\n")
 cat("Columnas:", ncol(df_quota), "\n")
 
+# ==============================================================================
 # FUNCIONES AUXILIARES
+# ==============================================================================
+
 clean_text_basic <- function(x) {
   x <- str_squish(as.character(x))
   x <- na_if(x, "")
@@ -61,14 +54,9 @@ get_optional_col <- function(data, col_name) {
 
 clean_country_quota <- function(x) {
   x <- clean_text_basic(x)
-  
-  # Quitar sufijo tipo "(ID860)"
   x <- str_remove(x, "\\s*\\(ID[0-9]+\\)$")
-  
-  # Quitar prefijo tipo "ES – ", "GB - ", "DE – "
   x <- str_remove(x, "^[A-Z]{2}\\s*[–-]\\s*")
   
-  # Normalizaciones
   x <- case_when(
     is.na(x) | x == "" ~ NA_character_,
     x == "United Kingdom *" ~ "United Kingdom",
@@ -112,23 +100,12 @@ clean_residence_region <- function(country) {
   )
 }
 
-clean_filename <- function(x) {
-  x %>%
-    str_to_lower() %>%
-    str_replace_all("[áàäâ]", "a") %>%
-    str_replace_all("[éèëê]", "e") %>%
-    str_replace_all("[íìïî]", "i") %>%
-    str_replace_all("[óòöô]", "o") %>%
-    str_replace_all("[úùüû]", "u") %>%
-    str_replace_all("ñ", "n") %>%
-    str_replace_all("[^a-z0-9]+", "_") %>%
-    str_replace_all("^_|_$", "")
-}
-
+# ==============================================================================
 # PREPARAR PAÍS Y REGIÓN
+# ==============================================================================
+
 country_col <- "in_which_country_do_you_currently_live_final"
 
-# Mantener una copia antes de filtrar país
 df_quota_input <- df_quota
 
 df_quota <- df_quota %>%
@@ -140,21 +117,13 @@ df_quota <- df_quota %>%
       as.character(get_optional_col(., "identification_code")),
       as.character(row_number())
     ),
-    
-    # Si country_clean ya viene del Script 03, se usa.
-    # Si no, se reconstruye desde la columna original de país.
     country_raw = get_optional_col(., country_col),
     country_clean_existing = get_optional_col(., "country_clean"),
-    
     country_clean = coalesce(
       clean_country_quota(country_clean_existing),
       clean_country_quota(country_raw)
     ),
-    
-    # Si residence_region ya viene del Script 03, se usa.
-    # Si no, se reconstruye desde country_clean.
     residence_region_existing = get_optional_col(., "residence_region"),
-    
     residence_region = coalesce(
       clean_text_basic(residence_region_existing),
       clean_residence_region(country_clean)
@@ -162,7 +131,6 @@ df_quota <- df_quota %>%
   ) %>%
   distinct(participant_id, .keep_all = TRUE)
 
-# Filas con y sin país dentro del dataset sociodemográfico
 quota_country_filter_summary <- tibble(
   dataset = c(
     "df_clean_sociodemographic_before_country_filter",
@@ -178,34 +146,32 @@ quota_country_filter_summary <- tibble(
 
 print(quota_country_filter_summary)
 
-# Para cuotas por país/región solo pueden entrar personas con país
 df_quota <- df_quota %>%
   filter(!is.na(country_clean))
 
 cat("Filas usables para cuotas:", nrow(df_quota), "\n")
 
-# DISTRIBUCIÓN ACTUAL POR PAÍS
+# ==============================================================================
+# DISTRIBUCIÓN ACTUAL
+# ==============================================================================
+
 country_distribution_clean <- df_quota %>%
   count(country_clean, name = "current_n") %>%
-  mutate(
-    current_pct = round(current_n / sum(current_n) * 100, 2)
-  ) %>%
+  mutate(current_pct = round(current_n / sum(current_n) * 100, 2)) %>%
+  arrange(desc(current_n))
+
+region_distribution_clean <- df_quota %>%
+  count(residence_region, name = "current_n") %>%
+  mutate(current_pct = round(current_n / sum(current_n) * 100, 2)) %>%
   arrange(desc(current_n))
 
 print(country_distribution_clean, n = Inf)
-
-# DISTRIBUCIÓN ACTUAL POR REGIÓN
-region_distribution_clean <- df_quota %>%
-  count(residence_region, name = "current_n") %>%
-  mutate(
-    current_pct = round(current_n / sum(current_n) * 100, 2)
-  ) %>%
-  arrange(desc(current_n))
-
 print(region_distribution_clean, n = Inf)
 
-
+# ==============================================================================
 # DISTRIBUCIÓN TEÓRICA OBJETIVO POR PAÍS
+# ==============================================================================
+
 target_country <- tribble(
   ~country, ~target_n,
   "Germany", 20,
@@ -242,12 +208,30 @@ target_total_original <- sum(target_country$target_n)
 
 cat("Total teórico original:", target_total_original, "\n")
 
-# ESCALAR CUOTAS A DISTINTOS TAMAÑOS DE MUESTRA
-# Cambia este valor para elegir el escenario principal
-selected_total_n <- 500
+# ==============================================================================
+# ESCENARIO REAL: MUESTRA ACTUAL + 181 NUEVAS RESPUESTAS
+# ==============================================================================
 
-# Escenarios que se calculan en paralelo
-desired_sample_sizes <- c(181, 300, 500, 1000)
+additional_n_available <- 181
+current_total_n <- nrow(df_quota)
+selected_total_n <- current_total_n + additional_n_available
+
+cat("\nMuestra actual usable:", current_total_n, "\n")
+cat("Nuevas respuestas disponibles:", additional_n_available, "\n")
+cat("Tamaño final objetivo:", selected_total_n, "\n")
+
+desired_sample_sizes <- c(
+  selected_total_n,
+  300,
+  500,
+  1000
+) %>%
+  unique() %>%
+  sort()
+
+# ==============================================================================
+# FUNCIÓN PARA ESCALAR CUOTAS
+# ==============================================================================
 
 scale_quotas <- function(target_country, desired_n) {
   
@@ -278,7 +262,7 @@ scale_quotas <- function(target_country, desired_n) {
       target_n_scaled
     )
   
-  return(base)
+  base
 }
 
 quota_targets_scaled <- bind_rows(
@@ -289,8 +273,10 @@ quota_targets_scaled <- bind_rows(
 
 print(quota_targets_scaled, n = Inf)
 
-
+# ==============================================================================
 # COMPARACIÓN ACTUAL VS OBJETIVO POR PAÍS
+# ==============================================================================
+
 quota_check_scenarios <- quota_targets_scaled %>%
   left_join(
     country_distribution_clean %>%
@@ -339,40 +325,29 @@ quota_check_scenarios_wide <- quota_check_scenarios %>%
     names_glue = "{.value}_{desired_total_n}"
   )
 
-print(quota_check_scenarios, n = Inf)
-print(quota_check_scenarios_wide, n = Inf)
-
-# PAÍSES PRESENTES EN DATOS PERO FUERA DE LA DISTRIBUCIÓN OBJETIVO
 countries_outside_target <- country_distribution_clean %>%
-  anti_join(
-    target_country,
-    by = c("country_clean" = "country")
-  ) %>%
+  anti_join(target_country, by = c("country_clean" = "country")) %>%
   arrange(desc(current_n))
 
-print(countries_outside_target, n = Inf)
-
-
+# ==============================================================================
 # DISTRIBUCIÓN OBJETIVO POR REGIÓN
+# ==============================================================================
+
 region_targets_scaled <- quota_targets_scaled %>%
-  mutate(
-    residence_region = clean_residence_region(country)
-  ) %>%
+  mutate(residence_region = clean_residence_region(country)) %>%
   group_by(desired_total_n, residence_region) %>%
   summarise(
     target_n_original = sum(target_n_original),
     target_n_scaled = sum(target_n_scaled),
     .groups = "drop"
   ) %>%
-  mutate(
-    target_pct = round(target_n_scaled / desired_total_n * 100, 2)
-  ) %>%
+  mutate(target_pct = round(target_n_scaled / desired_total_n * 100, 2)) %>%
   arrange(desired_total_n, residence_region)
 
-print(region_targets_scaled, n = Inf)
-
-
+# ==============================================================================
 # COMPARACIÓN ACTUAL VS OBJETIVO POR REGIÓN
+# ==============================================================================
+
 region_quota_check_scenarios <- region_targets_scaled %>%
   left_join(
     region_distribution_clean %>%
@@ -421,174 +396,168 @@ region_quota_check_scenarios_wide <- region_quota_check_scenarios %>%
     names_glue = "{.value}_{desired_total_n}"
   )
 
-print(region_quota_check_scenarios, n = Inf)
-print(region_quota_check_scenarios_wide, n = Inf)
+# ==============================================================================
+# REPARTO REALISTA DE LAS 181 NUEVAS RESPUESTAS POR REGIÓN
+# ==============================================================================
 
+region_recruitment_plan_181 <- region_quota_check %>%
+  filter(recruit_next_n > 0) %>%
+  mutate(
+    deficit_weight = recruit_next_n / sum(recruit_next_n),
+    recruit_raw_181 = deficit_weight * additional_n_available,
+    recruit_floor_181 = floor(recruit_raw_181),
+    remainder = recruit_raw_181 - recruit_floor_181
+  ) %>%
+  arrange(desc(remainder)) %>%
+  mutate(
+    extra_unit = if_else(
+      row_number() <= additional_n_available - sum(recruit_floor_181),
+      1L,
+      0L
+    ),
+    recruit_planned_181 = recruit_floor_181 + extra_unit
+  ) %>%
+  arrange(desc(recruit_planned_181)) %>%
+  select(
+    residence_region,
+    current_n,
+    target_n_scaled,
+    recruit_next_n,
+    recruit_planned_181
+  )
+
+print(region_recruitment_plan_181)
+
+# ==============================================================================
+# REPARTO REALISTA DE LAS 181 NUEVAS RESPUESTAS POR PAÍS
+# ==============================================================================
+
+country_recruitment_plan_181 <- quota_check %>%
+  filter(recruit_next_n > 0) %>%
+  mutate(
+    deficit_weight = recruit_next_n / sum(recruit_next_n),
+    recruit_raw_181 = deficit_weight * additional_n_available,
+    recruit_floor_181 = floor(recruit_raw_181),
+    remainder = recruit_raw_181 - recruit_floor_181
+  ) %>%
+  arrange(desc(remainder)) %>%
+  mutate(
+    extra_unit = if_else(
+      row_number() <= additional_n_available - sum(recruit_floor_181),
+      1L,
+      0L
+    ),
+    recruit_planned_181 = recruit_floor_181 + extra_unit
+  ) %>%
+  arrange(desc(recruit_planned_181)) %>%
+  select(
+    country,
+    current_n,
+    target_n_scaled,
+    recruit_next_n,
+    recruit_planned_181
+  )
+
+print(country_recruitment_plan_181)
+
+# ==============================================================================
 # RESUMEN EJECUTIVO
+# ==============================================================================
+
 quota_summary <- tibble(
   selected_total_n = selected_total_n,
+  current_total_usable = current_total_n,
+  additional_n_available = additional_n_available,
   rows_in_clean_sociodemographic = nrow(df_quota_input),
   usable_rows_for_country_quota = nrow(df_quota),
   excluded_rows_without_country = nrow(df_quota_input) - nrow(df_quota),
   current_total_in_target_countries = sum(quota_check$current_n),
   current_total_outside_target_countries = sum(countries_outside_target$current_n),
   total_to_recruit_by_country_to_cover_deficits = sum(quota_check$recruit_next_n),
+  total_planned_recruitment_by_country = sum(country_recruitment_plan_181$recruit_planned_181),
   total_overrepresented_by_country_if_balanced = sum(quota_check$overrepresented_n),
   total_to_recruit_by_region_to_cover_deficits = sum(region_quota_check$recruit_next_n),
+  total_planned_recruitment_by_region = sum(region_recruitment_plan_181$recruit_planned_181),
   total_overrepresented_by_region_if_balanced = sum(region_quota_check$overrepresented_n)
 )
 
 print(quota_summary)
 
+# ==============================================================================
 # GUARDAR CSVs
-# Dataset base usado para cuotas
-write_csv(
-  df_quota,
-  file.path(quota_output_dir, "df_quota_base_usable.csv")
-)
+# ==============================================================================
 
-# Distribución actual
-write_csv(
-  country_distribution_clean,
-  file.path(quota_output_dir, "country_distribution_current_clean.csv")
-)
+write_csv(df_quota, file.path(quota_output_dir, "df_quota_base_usable.csv"))
 
-write_csv(
-  region_distribution_clean,
-  file.path(quota_output_dir, "region_distribution_current_clean.csv")
-)
+write_csv(country_distribution_clean, file.path(quota_output_dir, "country_distribution_current_clean.csv"))
+write_csv(region_distribution_clean, file.path(quota_output_dir, "region_distribution_current_clean.csv"))
 
-# Distribución objetivo escalada
-write_csv(
-  quota_targets_scaled,
-  file.path(quota_output_dir, "target_distribution_scaled_by_country_181_300_500_1000.csv")
-)
+write_csv(quota_targets_scaled, file.path(quota_output_dir, "target_distribution_scaled_by_country_scenarios.csv"))
+write_csv(region_targets_scaled, file.path(quota_output_dir, "target_distribution_scaled_by_region_scenarios.csv"))
 
-write_csv(
-  region_targets_scaled,
-  file.path(quota_output_dir, "target_distribution_scaled_by_region_181_300_500_1000.csv")
-)
+write_csv(quota_check, file.path(quota_output_dir, "country_quota_check_selected_total.csv"))
+write_csv(quota_check_scenarios, file.path(quota_output_dir, "country_quota_check_scenarios.csv"))
+write_csv(quota_check_scenarios_wide, file.path(quota_output_dir, "country_quota_check_scenarios_wide.csv"))
 
-# Comparación país
-write_csv(
-  quota_check,
-  file.path(quota_output_dir, "country_quota_check.csv")
-)
+write_csv(region_quota_check, file.path(quota_output_dir, "region_quota_check_selected_total.csv"))
+write_csv(region_quota_check_scenarios, file.path(quota_output_dir, "region_quota_check_scenarios.csv"))
+write_csv(region_quota_check_scenarios_wide, file.path(quota_output_dir, "region_quota_check_scenarios_wide.csv"))
 
-write_csv(
-  quota_check_scenarios,
-  file.path(quota_output_dir, "country_quota_check_scenarios_181_300_500_1000.csv")
-)
+write_csv(region_recruitment_plan_181, file.path(quota_output_dir, "region_recruitment_plan_181_new_responses.csv"))
+write_csv(country_recruitment_plan_181, file.path(quota_output_dir, "country_recruitment_plan_181_new_responses.csv"))
 
-write_csv(
-  quota_check_scenarios_wide,
-  file.path(quota_output_dir, "country_quota_check_scenarios_wide.csv")
-)
+write_csv(countries_outside_target, file.path(quota_output_dir, "countries_outside_target.csv"))
+write_csv(quota_summary, file.path(quota_output_dir, "quota_summary.csv"))
+write_csv(quota_country_filter_summary, file.path(quota_output_dir, "quota_country_filter_summary.csv"))
 
-write_csv(
-  countries_outside_target,
-  file.path(quota_output_dir, "countries_outside_target.csv")
-)
+# ==============================================================================
+# GRÁFICOS
+# ==============================================================================
 
-# Comparación región
-write_csv(
-  region_quota_check,
-  file.path(quota_output_dir, "region_quota_check.csv")
-)
-
-write_csv(
-  region_quota_check_scenarios,
-  file.path(quota_output_dir, "region_quota_check_scenarios_181_300_500_1000.csv")
-)
-
-write_csv(
-  region_quota_check_scenarios_wide,
-  file.path(quota_output_dir, "region_quota_check_scenarios_wide.csv")
-)
-
-# Resumen
-write_csv(
-  quota_summary,
-  file.path(quota_output_dir, "quota_summary.csv")
-)
-
-write_csv(
-  quota_country_filter_summary,
-  file.path(quota_output_dir, "quota_country_filter_summary.csv")
-)
-
-# GRÁFICOS POR PAÍS
-plot_country_recruitment_needed <- quota_check %>%
-  filter(recruit_next_n > 0) %>%
-  mutate(country = reorder(country, recruit_next_n)) %>%
-  ggplot(aes(x = country, y = recruit_next_n)) +
+plot_region_recruitment_plan_181 <- region_recruitment_plan_181 %>%
+  mutate(residence_region = reorder(residence_region, recruit_planned_181)) %>%
+  ggplot(aes(x = residence_region, y = recruit_planned_181)) +
   geom_col(fill = "#56B4E9", color = "#2C3E50") +
   coord_flip() +
   labs(
-    title = paste0("Participantes adicionales necesarios por país para N = ", selected_total_n),
-    subtitle = "Comparación entre muestra actual usable y distribución teórica objetivo",
+    title = "Reparto recomendado de las 181 nuevas respuestas por región",
+    subtitle = paste0("Escenario final objetivo: N = ", selected_total_n),
     x = NULL,
     y = "Participantes a reclutar"
   ) +
   theme_minimal(base_size = 12)
 
-print(plot_country_recruitment_needed)
+print(plot_region_recruitment_plan_181)
 
 ggsave(
-  file.path(quota_output_dir, "country_recruitment_needed.png"),
-  plot_country_recruitment_needed,
-  width = 9,
-  height = 7,
-  dpi = 300
-)
-
-plot_country_overrepresented <- quota_check %>%
-  filter(overrepresented_n > 0) %>%
-  mutate(country = reorder(country, overrepresented_n)) %>%
-  ggplot(aes(x = country, y = overrepresented_n)) +
-  geom_col(fill = "#E69F00", color = "#2C3E50") +
-  coord_flip() +
-  labs(
-    title = paste0("Países sobrerrepresentados respecto a la cuota para N = ", selected_total_n),
-    subtitle = "Participantes que exceden la distribución objetivo",
-    x = NULL,
-    y = "Participantes por encima de la cuota"
-  ) +
-  theme_minimal(base_size = 12)
-
-print(plot_country_overrepresented)
-
-ggsave(
-  file.path(quota_output_dir, "country_overrepresented.png"),
-  plot_country_overrepresented,
-  width = 9,
-  height = 5,
-  dpi = 300
-)
-
-
-# GRÁFICOS POR REGIÓN
-plot_region_recruitment_needed <- region_quota_check %>%
-  filter(recruit_next_n > 0) %>%
-  mutate(residence_region = reorder(residence_region, recruit_next_n)) %>%
-  ggplot(aes(x = residence_region, y = recruit_next_n)) +
-  geom_col(fill = "#56B4E9", color = "#2C3E50") +
-  coord_flip() +
-  labs(
-    title = paste0("Participantes adicionales necesarios por región para N = ", selected_total_n),
-    subtitle = "Comparación entre muestra actual usable y distribución teórica objetivo",
-    x = NULL,
-    y = "Participantes a reclutar"
-  ) +
-  theme_minimal(base_size = 12)
-
-print(plot_region_recruitment_needed)
-
-ggsave(
-  file.path(quota_output_dir, "region_recruitment_needed.png"),
-  plot_region_recruitment_needed,
+  file.path(quota_output_dir, "region_recruitment_plan_181_new_responses.png"),
+  plot_region_recruitment_plan_181,
   width = 8,
   height = 5,
+  dpi = 300
+)
+
+plot_country_recruitment_plan_181 <- country_recruitment_plan_181 %>%
+  filter(recruit_planned_181 > 0) %>%
+  mutate(country = reorder(country, recruit_planned_181)) %>%
+  ggplot(aes(x = country, y = recruit_planned_181)) +
+  geom_col(fill = "#56B4E9", color = "#2C3E50") +
+  coord_flip() +
+  labs(
+    title = "Reparto recomendado de las 181 nuevas respuestas por país",
+    subtitle = paste0("Escenario final objetivo: N = ", selected_total_n),
+    x = NULL,
+    y = "Participantes a reclutar"
+  ) +
+  theme_minimal(base_size = 12)
+
+print(plot_country_recruitment_plan_181)
+
+ggsave(
+  file.path(quota_output_dir, "country_recruitment_plan_181_new_responses.png"),
+  plot_country_recruitment_plan_181,
+  width = 9,
+  height = 7,
   dpi = 300
 )
 
@@ -609,33 +578,38 @@ plot_region_overrepresented <- region_quota_check %>%
 print(plot_region_overrepresented)
 
 ggsave(
-  file.path(quota_output_dir, "region_overrepresented.png"),
+  file.path(quota_output_dir, "region_overrepresented_selected_total.png"),
   plot_region_overrepresented,
   width = 8,
   height = 5,
   dpi = 300
 )
 
-
+# ==============================================================================
 # COMPROBACIONES FINALES
-cat("\nEscenario seleccionado:", selected_total_n, "\n")
+# ==============================================================================
 
-cat("\nFilas usables para cuotas:\n")
-print(nrow(df_quota))
+cat("\n============================================================\n")
+cat("RESUMEN FINAL\n")
+cat("============================================================\n")
 
-cat("\nDistribución actual por país:\n")
-print(country_distribution_clean, n = Inf)
+cat("\nMuestra actual usable:", current_total_n, "\n")
+cat("Nuevas respuestas disponibles:", additional_n_available, "\n")
+cat("Tamaño final objetivo:", selected_total_n, "\n")
 
 cat("\nDistribución actual por región:\n")
 print(region_distribution_clean, n = Inf)
 
-cat("\nResumen de cuotas:\n")
-print(quota_summary)
+cat("\nPlan recomendado por región para las 181 nuevas respuestas:\n")
+print(region_recruitment_plan_181, n = Inf)
+
+cat("\nPlan recomendado por país para las 181 nuevas respuestas:\n")
+print(country_recruitment_plan_181, n = Inf)
 
 cat("\nArchivos principales generados en:\n")
 cat(quota_output_dir, "\n")
 
-cat("\nPara revisar:\n")
-cat("- country_quota_check_scenarios_wide.csv\n")
-cat("- region_quota_check_scenarios_wide.csv\n")
+cat("\nArchivos clave para enviar/revisar:\n")
+cat("- region_recruitment_plan_181_new_responses.csv\n")
+cat("- country_recruitment_plan_181_new_responses.csv\n")
 cat("- quota_summary.csv\n")
