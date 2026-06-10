@@ -1,0 +1,9 @@
+line_check_status,check_42_status,check_4_status,strongly_disagree_status,n
+falla,pasa,no_responde,no_responde,22
+pasa,falla,no_responde,no_responde,18
+falla,pasa,pasa,pasa,7
+falla,falla,no_responde,no_responde,6
+falla,pasa,falla,pasa,1
+falla,pasa,pasa,falla,1
+no_responde,falla,no_responde,no_responde,1
+pasa,pasa,pasa,falla,1

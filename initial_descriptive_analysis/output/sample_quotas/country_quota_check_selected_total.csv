@@ -1,0 +1,29 @@
+desired_total_n,country,target_pct,target_n_original,target_n_scaled,current_n,current_pct_for_desired_n,difference_n,recruit_next_n,overrepresented_n,keep_for_balanced_sample_n,status
+405,France,0.11049723756906077,20,45,3,0.74,42,42,0,3,Faltan participantes
+405,Italy,0.11049723756906077,20,45,3,0.74,42,42,0,3,Faltan participantes
+405,Germany,0.11049723756906077,20,45,4,0.99,41,41,0,4,Faltan participantes
+405,United Kingdom,0.11049723756906077,20,45,5,1.23,40,40,0,5,Faltan participantes
+405,Poland,0.08287292817679558,15,33,3,0.74,30,30,0,3,Faltan participantes
+405,Czech Republic,0.027624309392265192,5,11,0,0,11,11,0,0,Faltan participantes
+405,Portugal,0.027624309392265192,5,11,0,0,11,11,0,0,Faltan participantes
+405,Sweden,0.027624309392265192,5,11,0,0,11,11,0,0,Faltan participantes
+405,Belgium,0.027624309392265192,5,11,1,0.25,10,10,0,1,Faltan participantes
+405,Greece,0.027624309392265192,5,11,1,0.25,10,10,0,1,Faltan participantes
+405,Romania,0.027624309392265192,5,11,3,0.74,8,8,0,3,Faltan participantes
+405,Bulgaria,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Croatia,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Denmark,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Estonia,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Finland,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Hungary,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Latvia,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Lithuania,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Slovakia,0.016574585635359115,3,6,0,0,6,6,0,0,Faltan participantes
+405,Slovenia,0.016574585635359115,3,6,0,0,6,6,0,0,Faltan participantes
+405,Austria,0.016574585635359115,3,7,2,0.49,5,5,0,2,Faltan participantes
+405,Ireland,0.016574585635359115,3,7,3,0.74,4,4,0,3,Faltan participantes
+405,Netherlands,0.027624309392265192,5,11,10,2.47,1,1,0,10,Faltan participantes
+405,Cyprus,0,0,0,0,0,0,0,0,0,Cuota cubierta
+405,Luxembourg,0,0,0,0,0,0,0,0,0,Cuota cubierta
+405,Malta,0,0,0,0,0,0,0,0,0,Cuota cubierta
+405,Spain,0.08287292817679558,15,33,185,45.68,-152,0,152,33,Sobrerrepresentado

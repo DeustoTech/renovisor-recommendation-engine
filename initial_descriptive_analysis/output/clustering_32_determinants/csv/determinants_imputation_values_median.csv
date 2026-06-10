@@ -1,0 +1,33 @@
+determinant_id,determinant_label,median_imputation_value
+profits,Beneficio económico,45
+credit_score_access_to_funding,Acceso a financiación,65
+risk_profile,Perfil de riesgo,61
+added_value,Valor añadido,66
+frugality,Frugalidad,52.5
+climate_protection,Protección climática,78.5
+legal,Cumplimiento legal,74
+trust,Confianza,79
+safety,Seguridad,70
+cost_efficiency,Eficiencia de costes,70
+knowledge,Conocimiento,80
+own_competence,Competencia propia,65
+technical_fit,Adecuación técnica,80
+environmental_concerns,Preocupación ambiental,77
+self_satisfaction,Satisfacción personal,74.5
+commitment,Compromiso,75
+adherence,Persistencia,73
+autarky,Autosuficiencia,65
+wellbeing,Bienestar,75
+coziness,Confort,68
+rights_and_duties,Derechos y deberes,71.5
+peer_pressure,Presión social,36
+support,Apoyo social,60.5
+socialising,Sociabilidad,22
+agreement,Acuerdo,74
+novelty,Novedad,41.5
+fun,Diversión,20
+recognition,Reconocimiento,15
+trends,Tendencias,25
+authority,Autoridad,23
+approval,Aprobación,19
+own_significance,Significado personal,67

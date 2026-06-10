@@ -1,0 +1,33 @@
+determinant_id,determinant_label,n_missing,n_valid,percentage_missing
+own_competence,Competencia propia,57,127,30.978260869565215
+fun,Diversión,56,128,30.434782608695656
+credit_score_access_to_funding,Acceso a financiación,55,129,29.891304347826086
+authority,Autoridad,54,130,29.347826086956523
+risk_profile,Perfil de riesgo,54,130,29.347826086956523
+support,Apoyo social,54,130,29.347826086956523
+safety,Seguridad,53,131,28.804347826086957
+adherence,Persistencia,51,133,27.717391304347828
+legal,Cumplimiento legal,51,133,27.717391304347828
+added_value,Valor añadido,50,134,27.173913043478258
+socialising,Sociabilidad,50,134,27.173913043478258
+frugality,Frugalidad,48,136,26.08695652173913
+agreement,Acuerdo,46,138,25
+rights_and_duties,Derechos y deberes,46,138,25
+profits,Beneficio económico,45,139,24.456521739130434
+coziness,Confort,44,140,23.91304347826087
+novelty,Novedad,44,140,23.91304347826087
+own_significance,Significado personal,44,140,23.91304347826087
+trends,Tendencias,43,141,23.369565217391305
+trust,Confianza,43,141,23.369565217391305
+wellbeing,Bienestar,41,143,22.282608695652172
+autarky,Autosuficiencia,40,144,21.73913043478261
+approval,Aprobación,39,145,21.195652173913043
+peer_pressure,Presión social,39,145,21.195652173913043
+recognition,Reconocimiento,39,145,21.195652173913043
+self_satisfaction,Satisfacción personal,38,146,20.652173913043477
+commitment,Compromiso,37,147,20.108695652173914
+cost_efficiency,Eficiencia de costes,37,147,20.108695652173914
+technical_fit,Adecuación técnica,37,147,20.108695652173914
+knowledge,Conocimiento,36,148,19.565217391304348
+environmental_concerns,Preocupación ambiental,33,151,17.934782608695652
+climate_protection,Protección climática,30,154,16.304347826086957

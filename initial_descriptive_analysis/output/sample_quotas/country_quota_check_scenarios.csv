@@ -1,0 +1,113 @@
+desired_total_n,country,target_pct,target_n_original,target_n_scaled,current_n,current_pct_for_desired_n,difference_n,recruit_next_n,overrepresented_n,keep_for_balanced_sample_n,status
+300,France,0.11049723756906077,20,33,3,1,30,30,0,3,Faltan participantes
+300,Italy,0.11049723756906077,20,33,3,1,30,30,0,3,Faltan participantes
+300,Germany,0.11049723756906077,20,33,4,1.33,29,29,0,4,Faltan participantes
+300,United Kingdom,0.11049723756906077,20,33,5,1.67,28,28,0,5,Faltan participantes
+300,Poland,0.08287292817679558,15,25,3,1,22,22,0,3,Faltan participantes
+300,Czech Republic,0.027624309392265192,5,9,0,0,9,9,0,0,Faltan participantes
+300,Belgium,0.027624309392265192,5,9,1,0.33,8,8,0,1,Faltan participantes
+300,Portugal,0.027624309392265192,5,8,0,0,8,8,0,0,Faltan participantes
+300,Sweden,0.027624309392265192,5,8,0,0,8,8,0,0,Faltan participantes
+300,Greece,0.027624309392265192,5,8,1,0.33,7,7,0,1,Faltan participantes
+300,Bulgaria,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Croatia,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Denmark,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Estonia,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Finland,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Hungary,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Latvia,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Lithuania,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Romania,0.027624309392265192,5,8,3,1,5,5,0,3,Faltan participantes
+300,Slovakia,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Slovenia,0.016574585635359115,3,5,0,0,5,5,0,0,Faltan participantes
+300,Austria,0.016574585635359115,3,5,2,0.67,3,3,0,2,Faltan participantes
+300,Ireland,0.016574585635359115,3,5,3,1,2,2,0,3,Faltan participantes
+300,Cyprus,0,0,0,0,0,0,0,0,0,Cuota cubierta
+300,Luxembourg,0,0,0,0,0,0,0,0,0,Cuota cubierta
+300,Malta,0,0,0,0,0,0,0,0,0,Cuota cubierta
+300,Netherlands,0.027624309392265192,5,8,10,3.33,-2,0,2,8,Sobrerrepresentado
+300,Spain,0.08287292817679558,15,25,185,61.67,-160,0,160,25,Sobrerrepresentado
+405,France,0.11049723756906077,20,45,3,0.74,42,42,0,3,Faltan participantes
+405,Italy,0.11049723756906077,20,45,3,0.74,42,42,0,3,Faltan participantes
+405,Germany,0.11049723756906077,20,45,4,0.99,41,41,0,4,Faltan participantes
+405,United Kingdom,0.11049723756906077,20,45,5,1.23,40,40,0,5,Faltan participantes
+405,Poland,0.08287292817679558,15,33,3,0.74,30,30,0,3,Faltan participantes
+405,Czech Republic,0.027624309392265192,5,11,0,0,11,11,0,0,Faltan participantes
+405,Portugal,0.027624309392265192,5,11,0,0,11,11,0,0,Faltan participantes
+405,Sweden,0.027624309392265192,5,11,0,0,11,11,0,0,Faltan participantes
+405,Belgium,0.027624309392265192,5,11,1,0.25,10,10,0,1,Faltan participantes
+405,Greece,0.027624309392265192,5,11,1,0.25,10,10,0,1,Faltan participantes
+405,Romania,0.027624309392265192,5,11,3,0.74,8,8,0,3,Faltan participantes
+405,Bulgaria,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Croatia,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Denmark,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Estonia,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Finland,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Hungary,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Latvia,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Lithuania,0.016574585635359115,3,7,0,0,7,7,0,0,Faltan participantes
+405,Slovakia,0.016574585635359115,3,6,0,0,6,6,0,0,Faltan participantes
+405,Slovenia,0.016574585635359115,3,6,0,0,6,6,0,0,Faltan participantes
+405,Austria,0.016574585635359115,3,7,2,0.49,5,5,0,2,Faltan participantes
+405,Ireland,0.016574585635359115,3,7,3,0.74,4,4,0,3,Faltan participantes
+405,Netherlands,0.027624309392265192,5,11,10,2.47,1,1,0,10,Faltan participantes
+405,Cyprus,0,0,0,0,0,0,0,0,0,Cuota cubierta
+405,Luxembourg,0,0,0,0,0,0,0,0,0,Cuota cubierta
+405,Malta,0,0,0,0,0,0,0,0,0,Cuota cubierta
+405,Spain,0.08287292817679558,15,33,185,45.68,-152,0,152,33,Sobrerrepresentado
+500,France,0.11049723756906077,20,55,3,0.6,52,52,0,3,Faltan participantes
+500,Italy,0.11049723756906077,20,55,3,0.6,52,52,0,3,Faltan participantes
+500,Germany,0.11049723756906077,20,55,4,0.8,51,51,0,4,Faltan participantes
+500,United Kingdom,0.11049723756906077,20,55,5,1,50,50,0,5,Faltan participantes
+500,Poland,0.08287292817679558,15,42,3,0.6,39,39,0,3,Faltan participantes
+500,Czech Republic,0.027624309392265192,5,14,0,0,14,14,0,0,Faltan participantes
+500,Portugal,0.027624309392265192,5,14,0,0,14,14,0,0,Faltan participantes
+500,Sweden,0.027624309392265192,5,14,0,0,14,14,0,0,Faltan participantes
+500,Belgium,0.027624309392265192,5,14,1,0.2,13,13,0,1,Faltan participantes
+500,Greece,0.027624309392265192,5,14,1,0.2,13,13,0,1,Faltan participantes
+500,Romania,0.027624309392265192,5,14,3,0.6,11,11,0,3,Faltan participantes
+500,Bulgaria,0.016574585635359115,3,9,0,0,9,9,0,0,Faltan participantes
+500,Croatia,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Denmark,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Estonia,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Finland,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Hungary,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Latvia,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Lithuania,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Slovakia,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Slovenia,0.016574585635359115,3,8,0,0,8,8,0,0,Faltan participantes
+500,Austria,0.016574585635359115,3,9,2,0.4,7,7,0,2,Faltan participantes
+500,Ireland,0.016574585635359115,3,8,3,0.6,5,5,0,3,Faltan participantes
+500,Netherlands,0.027624309392265192,5,14,10,2,4,4,0,10,Faltan participantes
+500,Cyprus,0,0,0,0,0,0,0,0,0,Cuota cubierta
+500,Luxembourg,0,0,0,0,0,0,0,0,0,Cuota cubierta
+500,Malta,0,0,0,0,0,0,0,0,0,Cuota cubierta
+500,Spain,0.08287292817679558,15,42,185,37,-143,0,143,42,Sobrerrepresentado
+1000,France,0.11049723756906077,20,110,3,0.3,107,107,0,3,Faltan participantes
+1000,Italy,0.11049723756906077,20,110,3,0.3,107,107,0,3,Faltan participantes
+1000,Germany,0.11049723756906077,20,110,4,0.4,106,106,0,4,Faltan participantes
+1000,United Kingdom,0.11049723756906077,20,110,5,0.5,105,105,0,5,Faltan participantes
+1000,Poland,0.08287292817679558,15,83,3,0.3,80,80,0,3,Faltan participantes
+1000,Czech Republic,0.027624309392265192,5,28,0,0,28,28,0,0,Faltan participantes
+1000,Portugal,0.027624309392265192,5,28,0,0,28,28,0,0,Faltan participantes
+1000,Sweden,0.027624309392265192,5,28,0,0,28,28,0,0,Faltan participantes
+1000,Belgium,0.027624309392265192,5,28,1,0.1,27,27,0,1,Faltan participantes
+1000,Greece,0.027624309392265192,5,28,1,0.1,27,27,0,1,Faltan participantes
+1000,Romania,0.027624309392265192,5,28,3,0.3,25,25,0,3,Faltan participantes
+1000,Netherlands,0.027624309392265192,5,28,10,1,18,18,0,10,Faltan participantes
+1000,Bulgaria,0.016574585635359115,3,17,0,0,17,17,0,0,Faltan participantes
+1000,Croatia,0.016574585635359115,3,17,0,0,17,17,0,0,Faltan participantes
+1000,Denmark,0.016574585635359115,3,17,0,0,17,17,0,0,Faltan participantes
+1000,Estonia,0.016574585635359115,3,17,0,0,17,17,0,0,Faltan participantes
+1000,Finland,0.016574585635359115,3,17,0,0,17,17,0,0,Faltan participantes
+1000,Hungary,0.016574585635359115,3,16,0,0,16,16,0,0,Faltan participantes
+1000,Latvia,0.016574585635359115,3,16,0,0,16,16,0,0,Faltan participantes
+1000,Lithuania,0.016574585635359115,3,16,0,0,16,16,0,0,Faltan participantes
+1000,Slovakia,0.016574585635359115,3,16,0,0,16,16,0,0,Faltan participantes
+1000,Slovenia,0.016574585635359115,3,16,0,0,16,16,0,0,Faltan participantes
+1000,Austria,0.016574585635359115,3,17,2,0.2,15,15,0,2,Faltan participantes
+1000,Ireland,0.016574585635359115,3,16,3,0.3,13,13,0,3,Faltan participantes
+1000,Cyprus,0,0,0,0,0,0,0,0,0,Cuota cubierta
+1000,Luxembourg,0,0,0,0,0,0,0,0,0,Cuota cubierta
+1000,Malta,0,0,0,0,0,0,0,0,0,Cuota cubierta
+1000,Spain,0.08287292817679558,15,83,185,18.5,-102,0,102,83,Sobrerrepresentado

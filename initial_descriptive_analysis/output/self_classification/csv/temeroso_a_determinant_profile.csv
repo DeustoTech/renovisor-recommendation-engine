@@ -1,0 +1,33 @@
+self_profile,determinant_id,determinant_label,n,mean,median,sd
+Temeroso/a,knowledge,Conocimiento,64,83.1875,82.5,14.202475751090635
+Temeroso/a,trust,Confianza,59,79.27118644067797,81,18.589791885903196
+Temeroso/a,legal,Cumplimiento legal,56,79.03571428571429,82,17.16652586837565
+Temeroso/a,adherence,Adherencia,61,78.21311475409836,79,15.424131260353432
+Temeroso/a,technical_fit,Adecuación técnica,64,78.09375,80,16.836957412805763
+Temeroso/a,environmental_concerns,Preocupación ambiental,66,76.33333333333333,79,16.94364717193968
+Temeroso/a,safety,Seguridad,56,74.25,74.5,21.014497160510192
+Temeroso/a,self_satisfaction,Satisfacción personal,60,73.9,78,18.780353961394184
+Temeroso/a,climate_protection,Protección climática,65,73.52307692307693,77,20.850740163951382
+Temeroso/a,commitment,Compromiso,63,72.39682539682539,71,15.227881561665718
+Temeroso/a,rights_and_duties,Derechos y deberes,60,72.35,76,21.204272834517997
+Temeroso/a,wellbeing,Bienestar,58,72.15517241379311,74,23.82303302691181
+Temeroso/a,risk_profile,Perfil de riesgo,53,70.35849056603773,75,20.993675182725724
+Temeroso/a,credit_score_access_to_funding,Acceso a financiación,58,69.82758620689656,75,22.8712168234151
+Temeroso/a,cost_efficiency,Eficiencia de costes,61,69,75,25.40144352853462
+Temeroso/a,agreement,Acuerdo,64,67.453125,71,24.635069651738995
+Temeroso/a,own_significance,Significado personal,57,64.66666666666667,66,20.495063284791758
+Temeroso/a,added_value,Valor añadido,60,63.85,70,24.05701208605247
+Temeroso/a,autarky,Autosuficiencia,58,63.36206896551724,67,22.900776264987613
+Temeroso/a,own_competence,Competencia propia,54,62.148148148148145,70.5,27.45590454927951
+Temeroso/a,support,Apoyo social,56,62.05357142857142,66,23.681538373599377
+Temeroso/a,coziness,Confort,56,61.75,67.5,23.850481222513196
+Temeroso/a,frugality,Frugalidad,57,52.666666666666664,54,26.565507532817637
+Temeroso/a,profits,Beneficio económico,59,52.20338983050847,58,26.331297531459395
+Temeroso/a,novelty,Novedad,62,47.61290322580645,48.5,27.06177198389851
+Temeroso/a,socialising,Socialización,59,34.79661016949153,30,28.71007252120758
+Temeroso/a,fun,Diversión,59,33.7457627118644,27,27.297589397385277
+Temeroso/a,peer_pressure,Presión social,62,33.516129032258064,25.5,26.458592416052962
+Temeroso/a,trends,Tendencias,61,31.672131147540984,30,25.07304084169251
+Temeroso/a,authority,Autoridad,59,27.169491525423734,23,23.628702988302376
+Temeroso/a,approval,Aprobación,60,23.983333333333334,18.5,25.29319039239591
+Temeroso/a,recognition,Reconocimiento,64,22.890625,20,21.95964349574732

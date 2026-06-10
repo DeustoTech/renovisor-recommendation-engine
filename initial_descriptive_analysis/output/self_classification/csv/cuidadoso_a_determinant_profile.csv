@@ -1,0 +1,33 @@
+self_profile,determinant_id,determinant_label,n,mean,median,sd
+Cuidadoso/a,cost_efficiency,Eficiencia de costes,74,80.83783783783784,81.5,16.944734525442616
+Cuidadoso/a,knowledge,Conocimiento,73,79.08219178082192,85,20.679937556762546
+Cuidadoso/a,trust,Confianza,72,78.15277777777777,82.5,18.919890213645555
+Cuidadoso/a,wellbeing,Bienestar,75,76.13333333333334,79,19.690396433584358
+Cuidadoso/a,adherence,Adherencia,72,75.66666666666667,75.5,17.039308324254655
+Cuidadoso/a,legal,Cumplimiento legal,73,75.3013698630137,78,21.884599437546417
+Cuidadoso/a,technical_fit,Adecuación técnica,73,75.24657534246575,79,20.303106509649236
+Cuidadoso/a,self_satisfaction,Satisfacción personal,72,75.04166666666667,75.5,19.05399111642463
+Cuidadoso/a,credit_score_access_to_funding,Acceso a financiación,72,74.43055555555556,76,22.425982409048537
+Cuidadoso/a,coziness,Confort,73,74.08219178082192,77,20.87046918538883
+Cuidadoso/a,safety,Seguridad,74,73.66216216216216,75,20.034406724314582
+Cuidadoso/a,risk_profile,Perfil de riesgo,72,72.27777777777777,73,20.711446261905056
+Cuidadoso/a,commitment,Compromiso,73,72.04109589041096,73,19.961378234094106
+Cuidadoso/a,profits,Beneficio económico,72,68.18055555555556,70.5,23.191381588182736
+Cuidadoso/a,rights_and_duties,Derechos y deberes,73,66.47945205479452,68,24.43989770223243
+Cuidadoso/a,autarky,Autosuficiencia,74,65.63513513513513,69,22.627159292600595
+Cuidadoso/a,environmental_concerns,Preocupación ambiental,73,64.6986301369863,66,21.541100851051933
+Cuidadoso/a,frugality,Frugalidad,71,64.53521126760563,70,23.92299012958962
+Cuidadoso/a,own_competence,Competencia propia,72,64.33333333333333,70,23.092587677300326
+Cuidadoso/a,climate_protection,Protección climática,72,61.875,65,23.27056866939833
+Cuidadoso/a,agreement,Acuerdo,75,60.160000000000004,67,27.61317742614144
+Cuidadoso/a,added_value,Valor añadido,72,57.27777777777778,59,22.18438876442915
+Cuidadoso/a,own_significance,Significado personal,74,55.17567567567568,57.5,27.776188732367743
+Cuidadoso/a,novelty,Novedad,74,50.229729729729726,56,26.45624316991511
+Cuidadoso/a,support,Apoyo social,73,44.863013698630134,49,26.58806910193469
+Cuidadoso/a,fun,Diversión,70,41.48571428571428,38.5,28.141332156977903
+Cuidadoso/a,authority,Autoridad,70,33.871428571428574,26.5,26.535140184221245
+Cuidadoso/a,peer_pressure,Presión social,74,32.60810810810811,30,26.10559041979772
+Cuidadoso/a,socialising,Socialización,70,28.2,23,26.03264394418357
+Cuidadoso/a,trends,Tendencias,73,27.931506849315067,22,24.905002156596794
+Cuidadoso/a,approval,Aprobación,71,23.802816901408452,20,24.422249643839038
+Cuidadoso/a,recognition,Reconocimiento,70,21.171428571428567,17,23.16166962804262

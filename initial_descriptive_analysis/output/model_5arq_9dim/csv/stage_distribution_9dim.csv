@@ -1,0 +1,16 @@
+macro_archetype_5,adoption_stage,n_rows,percentage_within_macro
+G1_Activist_Stubborn_Sentient,Knowledge,742,23.399558498896248
+G1_Activist_Stubborn_Sentient,Considering,1302,41.05960264900662
+G1_Activist_Stubborn_Sentient,Done,1127,35.54083885209713
+G2_EarlyAdopter_Influencer,Knowledge,805,15.066442073741342
+G2_EarlyAdopter_Influencer,Considering,1833,34.306569343065696
+G2_EarlyAdopter_Influencer,Done,2705,50.62698858319297
+G3_Fearful_Careful,Knowledge,1664,45.09485094850948
+G3_Fearful_Careful,Considering,1481,40.135501355013545
+G3_Fearful_Careful,Done,545,14.769647696476964
+G4_HomoEconomicus,Knowledge,456,30.522088353413658
+G4_HomoEconomicus,Considering,689,46.11780455153949
+G4_HomoEconomicus,Done,349,23.360107095046853
+G5_Uninterested,Knowledge,855,65.66820276497695
+G5_Uninterested,Considering,323,24.807987711213517
+G5_Uninterested,Done,124,9.523809523809524

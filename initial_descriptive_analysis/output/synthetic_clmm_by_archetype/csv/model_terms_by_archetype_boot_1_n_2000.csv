@@ -1,0 +1,9 @@
+term,estimate,std.error,statistic,p.value,coef.type,arquetipo,determinant,is_significant,boot_id,n_participants,model_status,Estado_Mental_expert,expert_defined,recovered
+z_profits,0.07901273528807481,NA,NA,NA,location,Stubborn,profits,FALSE,1,2000,ok,NA,FALSE,FALSE
+z_profits,-1.0628397471874023,0.08458825208679324,-12.564862388891274,3.294477421082915e-36,location,Homo_Economicus,profits,TRUE,1,2000,ok,Early,TRUE,TRUE
+z_profits,-0.11653310282283084,0.07747272710822842,-1.5041822738476158,0.1325344406488324,location,Early_Adopter,profits,FALSE,1,2000,ok,NA,FALSE,FALSE
+z_profits,-0.958405498245058,NA,NA,NA,location,Uninterested,profits,FALSE,1,2000,ok,Early,TRUE,FALSE
+z_profits,-0.9431947119980021,0.07830755013015031,-12.044748053417255,2.067070011335013e-33,location,Influencer,profits,TRUE,1,2000,ok,Early,TRUE,TRUE
+z_profits,-0.09686145575685864,NA,NA,NA,location,Activist,profits,FALSE,1,2000,ok,NA,FALSE,FALSE
+z_profits,0.14349929786711776,0.0749770761672057,1.9139089599479884,0.055631789349429396,location,Careful,profits,FALSE,1,2000,ok,NA,FALSE,FALSE
+z_profits,-0.058167931501005285,0.07167320808252071,-0.8115714791785771,0.4170375622278386,location,Fearful,profits,FALSE,1,2000,ok,NA,FALSE,FALSE

@@ -1,0 +1,31 @@
+group,experience_short,n,total_group,percentage
+Ciudad grande,Ya estaba presente,95,707,13.437057991513438
+Ciudad grande,Implementada,120,707,16.973125884016973
+Ciudad grande,Buscó información,97,707,13.719943422913719
+Ciudad grande,La conoce / la consideraría,162,707,22.913719943422915
+Ciudad grande,No la conoce,122,707,17.256011315417254
+Ciudad grande,Nunca la usaría,111,707,15.700141442715701
+Ciudad mediana,Ya estaba presente,143,840,17.023809523809526
+Ciudad mediana,Implementada,121,840,14.404761904761903
+Ciudad mediana,Buscó información,91,840,10.833333333333334
+Ciudad mediana,La conoce / la consideraría,274,840,32.61904761904762
+Ciudad mediana,No la conoce,110,840,13.095238095238097
+Ciudad mediana,Nunca la usaría,101,840,12.023809523809524
+Ciudad pequeña,Ya estaba presente,119,1195,9.9581589958159
+Ciudad pequeña,Implementada,214,1195,17.90794979079498
+Ciudad pequeña,Buscó información,184,1195,15.397489539748953
+Ciudad pequeña,La conoce / la consideraría,387,1195,32.38493723849372
+Ciudad pequeña,No la conoce,193,1195,16.150627615062763
+Ciudad pequeña,Nunca la usaría,98,1195,8.200836820083682
+Metrópolis,Ya estaba presente,69,593,11.63575042158516
+Metrópolis,Implementada,79,593,13.322091062394604
+Metrópolis,Buscó información,126,593,21.247892074198987
+Metrópolis,La conoce / la consideraría,168,593,28.330522765598655
+Metrópolis,No la conoce,100,593,16.863406408094438
+Metrópolis,Nunca la usaría,51,593,8.600337268128163
+Municipio pequeño,Ya estaba presente,127,1349,9.414381022979985
+Municipio pequeño,Implementada,294,1349,21.7939214232765
+Municipio pequeño,Buscó información,210,1349,15.567086730911786
+Municipio pequeño,La conoce / la consideraría,413,1349,30.61527057079318
+Municipio pequeño,No la conoce,178,1349,13.194959229058561
+Municipio pequeño,Nunca la usaría,127,1349,9.414381022979985

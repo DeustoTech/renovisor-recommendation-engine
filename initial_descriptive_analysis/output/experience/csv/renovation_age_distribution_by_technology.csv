@@ -1,0 +1,159 @@
+technology,renovation_age_clean,n,total_technology,percentage,label
+Agua caliente sanitaria,Hace menos de 5 años,62,257,24.124513618677042,"24%
+(n=62)"
+Agua caliente sanitaria,Hace 5-15 años,77,257,29.961089494163424,"30%
+(n=77)"
+Agua caliente sanitaria,Hace 15-25 años,59,257,22.957198443579767,"23%
+(n=59)"
+Agua caliente sanitaria,Hace más de 25 años / nunca actualizada,38,257,14.785992217898833,"15%
+(n=38)"
+Agua caliente sanitaria,No lo sé,21,257,8.171206225680933,"8%
+(n=21)"
+Almacenamiento energético,Hace menos de 5 años,22,38,57.89473684210527,"58%
+(n=22)"
+Almacenamiento energético,Hace 5-15 años,4,38,10.526315789473683,"11%
+(n=4)"
+Almacenamiento energético,Hace 15-25 años,2,38,5.263157894736842,"5%
+(n=2)"
+Almacenamiento energético,Hace más de 25 años / nunca actualizada,3,38,7.894736842105263,"8%
+(n=3)"
+Almacenamiento energético,No lo sé,7,38,18.421052631578945,"18%
+(n=7)"
+Ascensor,Hace menos de 5 años,15,160,9.375,"9%
+(n=15)"
+Ascensor,Hace 5-15 años,30,160,18.75,"19%
+(n=30)"
+Ascensor,Hace 15-25 años,41,160,25.624999999999996,"26%
+(n=41)"
+Ascensor,Hace más de 25 años / nunca actualizada,57,160,35.625,"36%
+(n=57)"
+Ascensor,No lo sé,17,160,10.625,"11%
+(n=17)"
+Bomba de calor,Hace menos de 5 años,36,68,52.94117647058824,"53%
+(n=36)"
+Bomba de calor,Hace 5-15 años,10,68,14.705882352941178,"15%
+(n=10)"
+Bomba de calor,Hace 15-25 años,10,68,14.705882352941178,"15%
+(n=10)"
+Bomba de calor,Hace más de 25 años / nunca actualizada,6,68,8.823529411764707,"9%
+(n=6)"
+Bomba de calor,No lo sé,6,68,8.823529411764707,"9%
+(n=6)"
+Calefacción fósil o biomasa,Hace menos de 5 años,18,98,18.367346938775512,"18%
+(n=18)"
+Calefacción fósil o biomasa,Hace 5-15 años,22,98,22.448979591836736,"22%
+(n=22)"
+Calefacción fósil o biomasa,Hace 15-25 años,26,98,26.53061224489796,"27%
+(n=26)"
+Calefacción fósil o biomasa,Hace más de 25 años / nunca actualizada,20,98,20.408163265306122,"20%
+(n=20)"
+Calefacción fósil o biomasa,No lo sé,12,98,12.244897959183673,"12%
+(n=12)"
+Cambio de tarifa eléctrica,Hace menos de 5 años,84,146,57.534246575342465,"58%
+(n=84)"
+Cambio de tarifa eléctrica,Hace 5-15 años,43,146,29.45205479452055,"29%
+(n=43)"
+Cambio de tarifa eléctrica,Hace 15-25 años,6,146,4.10958904109589,"4%
+(n=6)"
+Cambio de tarifa eléctrica,Hace más de 25 años / nunca actualizada,3,146,2.054794520547945,"2%
+(n=3)"
+Cambio de tarifa eléctrica,No lo sé,10,146,6.8493150684931505,"7%
+(n=10)"
+Comunidad energética,Hace menos de 5 años,38,69,55.072463768115945,"55%
+(n=38)"
+Comunidad energética,Hace 5-15 años,22,69,31.88405797101449,"32%
+(n=22)"
+Comunidad energética,Hace 15-25 años,2,69,2.898550724637681,"3%
+(n=2)"
+Comunidad energética,Hace más de 25 años / nunca actualizada,4,69,5.797101449275362,"6%
+(n=4)"
+Comunidad energética,No lo sé,3,69,4.3478260869565215,"4%
+(n=3)"
+Electrodomésticos eficientes,Hace menos de 5 años,85,191,44.50261780104712,"45%
+(n=85)"
+Electrodomésticos eficientes,Hace 5-15 años,71,191,37.17277486910995,"37%
+(n=71)"
+Electrodomésticos eficientes,Hace 15-25 años,15,191,7.853403141361256,"8%
+(n=15)"
+Electrodomésticos eficientes,Hace más de 25 años / nunca actualizada,4,191,2.094240837696335,"2%
+(n=4)"
+Electrodomésticos eficientes,No lo sé,16,191,8.37696335078534,"8%
+(n=16)"
+Fotovoltaica en cubierta,Hace menos de 5 años,40,76,52.63157894736842,"53%
+(n=40)"
+Fotovoltaica en cubierta,Hace 5-15 años,24,76,31.57894736842105,"32%
+(n=24)"
+Fotovoltaica en cubierta,Hace 15-25 años,4,76,5.263157894736842,"5%
+(n=4)"
+Fotovoltaica en cubierta,Hace más de 25 años / nunca actualizada,5,76,6.578947368421052,"7%
+(n=5)"
+Fotovoltaica en cubierta,No lo sé,3,76,3.9473684210526314,"4%
+(n=3)"
+Kits solares de balcón,Hace menos de 5 años,9,24,37.5,"38%
+(n=9)"
+Kits solares de balcón,Hace 5-15 años,6,24,25,"25%
+(n=6)"
+Kits solares de balcón,Hace 15-25 años,1,24,4.166666666666666,"4%
+(n=1)"
+Kits solares de balcón,Hace más de 25 años / nunca actualizada,5,24,20.833333333333336,"21%
+(n=5)"
+Kits solares de balcón,No lo sé,3,24,12.5,"12%
+(n=3)"
+Medidas de microeficiencia,Hace menos de 5 años,65,227,28.634361233480178,"29%
+(n=65)"
+Medidas de microeficiencia,Hace 5-15 años,84,227,37.00440528634361,"37%
+(n=84)"
+Medidas de microeficiencia,Hace 15-25 años,33,227,14.537444933920703,"15%
+(n=33)"
+Medidas de microeficiencia,Hace más de 25 años / nunca actualizada,19,227,8.370044052863436,"8%
+(n=19)"
+Medidas de microeficiencia,No lo sé,26,227,11.45374449339207,"11%
+(n=26)"
+Renovación de envolvente,Hace menos de 5 años,62,191,32.460732984293195,"32%
+(n=62)"
+Renovación de envolvente,Hace 5-15 años,72,191,37.696335078534034,"38%
+(n=72)"
+Renovación de envolvente,Hace 15-25 años,25,191,13.089005235602095,"13%
+(n=25)"
+Renovación de envolvente,Hace más de 25 años / nunca actualizada,11,191,5.7591623036649215,"6%
+(n=11)"
+Renovación de envolvente,No lo sé,21,191,10.99476439790576,"11%
+(n=21)"
+Sistema de refrigeración,Hace menos de 5 años,44,86,51.162790697674424,"51%
+(n=44)"
+Sistema de refrigeración,Hace 5-15 años,20,86,23.25581395348837,"23%
+(n=20)"
+Sistema de refrigeración,Hace 15-25 años,6,86,6.976744186046512,"7%
+(n=6)"
+Sistema de refrigeración,Hace más de 25 años / nunca actualizada,8,86,9.30232558139535,"9%
+(n=8)"
+Sistema de refrigeración,No lo sé,8,86,9.30232558139535,"9%
+(n=8)"
+Sistemas inteligentes del hogar,Hace menos de 5 años,51,67,76.11940298507463,"76%
+(n=51)"
+Sistemas inteligentes del hogar,Hace 5-15 años,11,67,16.417910447761194,"16%
+(n=11)"
+Sistemas inteligentes del hogar,Hace 15-25 años,0,67,0,
+Sistemas inteligentes del hogar,Hace más de 25 años / nunca actualizada,1,67,1.4925373134328357,"1%
+(n=1)"
+Sistemas inteligentes del hogar,No lo sé,4,67,5.970149253731343,"6%
+(n=4)"
+Vehículo eléctrico,Hace menos de 5 años,38,56,67.85714285714286,"68%
+(n=38)"
+Vehículo eléctrico,Hace 5-15 años,11,56,19.642857142857142,"20%
+(n=11)"
+Vehículo eléctrico,Hace 15-25 años,0,56,0,
+Vehículo eléctrico,Hace más de 25 años / nunca actualizada,4,56,7.142857142857142,"7%
+(n=4)"
+Vehículo eléctrico,No lo sé,3,56,5.357142857142857,"5%
+(n=3)"
+Ventilación con recuperador,Hace menos de 5 años,12,33,36.36363636363637,"36%
+(n=12)"
+Ventilación con recuperador,Hace 5-15 años,12,33,36.36363636363637,"36%
+(n=12)"
+Ventilación con recuperador,Hace 15-25 años,1,33,3.0303030303030303,"3%
+(n=1)"
+Ventilación con recuperador,Hace más de 25 años / nunca actualizada,3,33,9.090909090909092,"9%
+(n=3)"
+Ventilación con recuperador,No lo sé,5,33,15.151515151515152,"15%
+(n=5)"

@@ -1,0 +1,29 @@
+country,target_n_scaled_300,target_n_scaled_405,target_n_scaled_500,target_n_scaled_1000,current_n_300,current_n_405,current_n_500,current_n_1000,recruit_next_n_300,recruit_next_n_405,recruit_next_n_500,recruit_next_n_1000,overrepresented_n_300,overrepresented_n_405,overrepresented_n_500,overrepresented_n_1000,keep_for_balanced_sample_n_300,keep_for_balanced_sample_n_405,keep_for_balanced_sample_n_500,keep_for_balanced_sample_n_1000,status_300,status_405,status_500,status_1000
+France,33,45,55,110,3,3,3,3,30,42,52,107,0,0,0,0,3,3,3,3,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Italy,33,45,55,110,3,3,3,3,30,42,52,107,0,0,0,0,3,3,3,3,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Germany,33,45,55,110,4,4,4,4,29,41,51,106,0,0,0,0,4,4,4,4,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+United Kingdom,33,45,55,110,5,5,5,5,28,40,50,105,0,0,0,0,5,5,5,5,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Poland,25,33,42,83,3,3,3,3,22,30,39,80,0,0,0,0,3,3,3,3,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Czech Republic,9,11,14,28,0,0,0,0,9,11,14,28,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Belgium,9,11,14,28,1,1,1,1,8,10,13,27,0,0,0,0,1,1,1,1,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Portugal,8,11,14,28,0,0,0,0,8,11,14,28,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Sweden,8,11,14,28,0,0,0,0,8,11,14,28,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Greece,8,11,14,28,1,1,1,1,7,10,13,27,0,0,0,0,1,1,1,1,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Bulgaria,5,7,9,17,0,0,0,0,5,7,9,17,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Croatia,5,7,8,17,0,0,0,0,5,7,8,17,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Denmark,5,7,8,17,0,0,0,0,5,7,8,17,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Estonia,5,7,8,17,0,0,0,0,5,7,8,17,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Finland,5,7,8,17,0,0,0,0,5,7,8,17,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Hungary,5,7,8,16,0,0,0,0,5,7,8,16,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Latvia,5,7,8,16,0,0,0,0,5,7,8,16,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Lithuania,5,7,8,16,0,0,0,0,5,7,8,16,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Romania,8,11,14,28,3,3,3,3,5,8,11,25,0,0,0,0,3,3,3,3,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Slovakia,5,6,8,16,0,0,0,0,5,6,8,16,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Slovenia,5,6,8,16,0,0,0,0,5,6,8,16,0,0,0,0,0,0,0,0,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Austria,5,7,9,17,2,2,2,2,3,5,7,15,0,0,0,0,2,2,2,2,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Ireland,5,7,8,16,3,3,3,3,2,4,5,13,0,0,0,0,3,3,3,3,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
+Cyprus,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Cuota cubierta,Cuota cubierta,Cuota cubierta,Cuota cubierta
+Luxembourg,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Cuota cubierta,Cuota cubierta,Cuota cubierta,Cuota cubierta
+Malta,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Cuota cubierta,Cuota cubierta,Cuota cubierta,Cuota cubierta
+Netherlands,8,11,14,28,10,10,10,10,0,1,4,18,2,0,0,0,8,10,10,10,Sobrerrepresentado,Faltan participantes,Faltan participantes,Faltan participantes
+Spain,25,33,42,83,185,185,185,185,0,0,0,0,160,152,143,102,25,33,42,83,Sobrerrepresentado,Sobrerrepresentado,Sobrerrepresentado,Sobrerrepresentado

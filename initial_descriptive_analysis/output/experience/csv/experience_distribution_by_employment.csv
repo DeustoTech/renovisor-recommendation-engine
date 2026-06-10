@@ -1,0 +1,31 @@
+group,experience_short,n,total_group,percentage
+Desempleado/a,Ya estaba presente,34,301,11.295681063122924
+Desempleado/a,Implementada,32,301,10.631229235880399
+Desempleado/a,Buscó información,39,301,12.956810631229235
+Desempleado/a,La conoce / la consideraría,87,301,28.903654485049834
+Desempleado/a,No la conoce,66,301,21.92691029900332
+Desempleado/a,Nunca la usaría,43,301,14.285714285714285
+Empleado/a,Ya estaba presente,501,4393,11.40450717049852
+Empleado/a,Implementada,873,4393,19.872524470748917
+Empleado/a,Buscó información,657,4393,14.955611199635785
+Empleado/a,La conoce / la consideraría,1336,4393,30.412019121329386
+Empleado/a,No la conoce,584,4393,13.293876621898477
+Empleado/a,Nunca la usaría,442,4393,10.061461415888914
+Estudiante,Ya estaba presente,49,476,10.294117647058822
+Estudiante,Implementada,77,476,16.176470588235293
+Estudiante,Buscó información,75,476,15.756302521008402
+Estudiante,La conoce / la consideraría,131,476,27.521008403361346
+Estudiante,No la conoce,106,476,22.268907563025213
+Estudiante,Nunca la usaría,38,476,7.9831932773109235
+Otra situación,Ya estaba presente,68,640,10.625
+Otra situación,Implementada,168,640,26.25
+Otra situación,Buscó información,88,640,13.750000000000002
+Otra situación,La conoce / la consideraría,194,640,30.312499999999996
+Otra situación,No la conoce,65,640,10.15625
+Otra situación,Nunca la usaría,57,640,8.90625
+Otra situación inactiva,Ya estaba presente,12,80,15
+Otra situación inactiva,Implementada,10,80,12.5
+Otra situación inactiva,Buscó información,9,80,11.25
+Otra situación inactiva,La conoce / la consideraría,22,80,27.500000000000004
+Otra situación inactiva,No la conoce,18,80,22.5
+Otra situación inactiva,Nunca la usaría,9,80,11.25

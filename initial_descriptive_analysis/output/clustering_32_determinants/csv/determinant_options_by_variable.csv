@@ -1,0 +1,1661 @@
+determinant_id,determinant_label,response_raw,n
+added_value,Valor añadido,0,5
+added_value,Valor añadido,100,8
+added_value,Valor añadido,12,1
+added_value,Valor añadido,14,1
+added_value,Valor añadido,15,1
+added_value,Valor añadido,20,1
+added_value,Valor añadido,23,1
+added_value,Valor añadido,25,3
+added_value,Valor añadido,26,1
+added_value,Valor añadido,32,2
+added_value,Valor añadido,35,1
+added_value,Valor añadido,37,1
+added_value,Valor añadido,38,2
+added_value,Valor añadido,40,3
+added_value,Valor añadido,45,1
+added_value,Valor añadido,46,1
+added_value,Valor añadido,47,1
+added_value,Valor añadido,5,1
+added_value,Valor añadido,50,5
+added_value,Valor añadido,55,2
+added_value,Valor añadido,56,2
+added_value,Valor añadido,58,3
+added_value,Valor añadido,59,2
+added_value,Valor añadido,6,1
+added_value,Valor añadido,60,13
+added_value,Valor añadido,61,3
+added_value,Valor añadido,62,3
+added_value,Valor añadido,65,5
+added_value,Valor añadido,66,4
+added_value,Valor añadido,68,2
+added_value,Valor añadido,69,1
+added_value,Valor añadido,70,8
+added_value,Valor añadido,71,2
+added_value,Valor añadido,72,2
+added_value,Valor añadido,73,2
+added_value,Valor añadido,74,1
+added_value,Valor añadido,75,6
+added_value,Valor añadido,76,4
+added_value,Valor añadido,77,2
+added_value,Valor añadido,78,4
+added_value,Valor añadido,80,6
+added_value,Valor añadido,81,3
+added_value,Valor añadido,82,2
+added_value,Valor añadido,83,1
+added_value,Valor añadido,84,2
+added_value,Valor añadido,85,2
+added_value,Valor añadido,86,1
+added_value,Valor añadido,88,2
+added_value,Valor añadido,90,1
+added_value,Valor añadido,91,2
+adherence,Persistencia,100,11
+adherence,Persistencia,20,1
+adherence,Persistencia,30,1
+adherence,Persistencia,32,1
+adherence,Persistencia,35,1
+adherence,Persistencia,36,1
+adherence,Persistencia,37,1
+adherence,Persistencia,40,1
+adherence,Persistencia,45,1
+adherence,Persistencia,50,5
+adherence,Persistencia,51,1
+adherence,Persistencia,53,1
+adherence,Persistencia,55,2
+adherence,Persistencia,56,2
+adherence,Persistencia,57,2
+adherence,Persistencia,58,2
+adherence,Persistencia,60,5
+adherence,Persistencia,61,2
+adherence,Persistencia,62,1
+adherence,Persistencia,63,5
+adherence,Persistencia,64,2
+adherence,Persistencia,65,3
+adherence,Persistencia,66,2
+adherence,Persistencia,67,4
+adherence,Persistencia,69,6
+adherence,Persistencia,70,7
+adherence,Persistencia,71,2
+adherence,Persistencia,72,3
+adherence,Persistencia,73,5
+adherence,Persistencia,74,4
+adherence,Persistencia,75,4
+adherence,Persistencia,77,6
+adherence,Persistencia,78,1
+adherence,Persistencia,79,3
+adherence,Persistencia,80,11
+adherence,Persistencia,82,1
+adherence,Persistencia,83,1
+adherence,Persistencia,84,2
+adherence,Persistencia,85,3
+adherence,Persistencia,87,4
+adherence,Persistencia,88,1
+adherence,Persistencia,89,1
+adherence,Persistencia,90,4
+adherence,Persistencia,92,1
+adherence,Persistencia,93,1
+adherence,Persistencia,97,1
+adherence,Persistencia,99,3
+agreement,Acuerdo,0,4
+agreement,Acuerdo,10,1
+agreement,Acuerdo,100,14
+agreement,Acuerdo,11,2
+agreement,Acuerdo,13,1
+agreement,Acuerdo,18,1
+agreement,Acuerdo,20,2
+agreement,Acuerdo,21,1
+agreement,Acuerdo,22,1
+agreement,Acuerdo,23,1
+agreement,Acuerdo,24,1
+agreement,Acuerdo,25,2
+agreement,Acuerdo,29,2
+agreement,Acuerdo,30,2
+agreement,Acuerdo,34,1
+agreement,Acuerdo,35,1
+agreement,Acuerdo,39,1
+agreement,Acuerdo,40,1
+agreement,Acuerdo,50,3
+agreement,Acuerdo,51,2
+agreement,Acuerdo,53,1
+agreement,Acuerdo,55,1
+agreement,Acuerdo,56,1
+agreement,Acuerdo,58,4
+agreement,Acuerdo,60,6
+agreement,Acuerdo,61,1
+agreement,Acuerdo,62,2
+agreement,Acuerdo,65,3
+agreement,Acuerdo,66,2
+agreement,Acuerdo,67,2
+agreement,Acuerdo,68,1
+agreement,Acuerdo,69,1
+agreement,Acuerdo,70,9
+agreement,Acuerdo,71,1
+agreement,Acuerdo,72,2
+agreement,Acuerdo,73,1
+agreement,Acuerdo,74,2
+agreement,Acuerdo,75,9
+agreement,Acuerdo,76,2
+agreement,Acuerdo,77,1
+agreement,Acuerdo,78,4
+agreement,Acuerdo,79,1
+agreement,Acuerdo,80,9
+agreement,Acuerdo,81,1
+agreement,Acuerdo,82,2
+agreement,Acuerdo,83,2
+agreement,Acuerdo,84,3
+agreement,Acuerdo,85,4
+agreement,Acuerdo,86,3
+agreement,Acuerdo,87,1
+agreement,Acuerdo,88,4
+agreement,Acuerdo,90,5
+agreement,Acuerdo,91,1
+agreement,Acuerdo,95,1
+agreement,Acuerdo,99,1
+approval,Aprobación,0,38
+approval,Aprobación,1,1
+approval,Aprobación,10,7
+approval,Aprobación,11,2
+approval,Aprobación,12,1
+approval,Aprobación,13,4
+approval,Aprobación,14,1
+approval,Aprobación,15,1
+approval,Aprobación,16,3
+approval,Aprobación,17,4
+approval,Aprobación,18,1
+approval,Aprobación,19,3
+approval,Aprobación,20,12
+approval,Aprobación,21,3
+approval,Aprobación,22,1
+approval,Aprobación,23,4
+approval,Aprobación,24,1
+approval,Aprobación,25,4
+approval,Aprobación,26,3
+approval,Aprobación,27,1
+approval,Aprobación,28,2
+approval,Aprobación,29,1
+approval,Aprobación,30,4
+approval,Aprobación,31,2
+approval,Aprobación,32,1
+approval,Aprobación,33,1
+approval,Aprobación,34,1
+approval,Aprobación,35,2
+approval,Aprobación,36,1
+approval,Aprobación,37,1
+approval,Aprobación,38,3
+approval,Aprobación,4,1
+approval,Aprobación,40,3
+approval,Aprobación,41,2
+approval,Aprobación,45,1
+approval,Aprobación,48,1
+approval,Aprobación,49,1
+approval,Aprobación,5,2
+approval,Aprobación,54,1
+approval,Aprobación,55,1
+approval,Aprobación,56,1
+approval,Aprobación,6,1
+approval,Aprobación,60,1
+approval,Aprobación,63,1
+approval,Aprobación,64,1
+approval,Aprobación,65,1
+approval,Aprobación,7,1
+approval,Aprobación,70,1
+approval,Aprobación,72,2
+approval,Aprobación,73,1
+approval,Aprobación,75,1
+approval,Aprobación,77,1
+approval,Aprobación,8,1
+approval,Aprobación,80,1
+approval,Aprobación,86,1
+approval,Aprobación,9,2
+autarky,Autosuficiencia,0,5
+autarky,Autosuficiencia,100,11
+autarky,Autosuficiencia,11,1
+autarky,Autosuficiencia,13,1
+autarky,Autosuficiencia,15,2
+autarky,Autosuficiencia,19,1
+autarky,Autosuficiencia,20,2
+autarky,Autosuficiencia,25,3
+autarky,Autosuficiencia,27,1
+autarky,Autosuficiencia,28,2
+autarky,Autosuficiencia,29,2
+autarky,Autosuficiencia,3,1
+autarky,Autosuficiencia,30,2
+autarky,Autosuficiencia,31,1
+autarky,Autosuficiencia,32,1
+autarky,Autosuficiencia,33,3
+autarky,Autosuficiencia,35,2
+autarky,Autosuficiencia,36,3
+autarky,Autosuficiencia,38,1
+autarky,Autosuficiencia,40,4
+autarky,Autosuficiencia,41,1
+autarky,Autosuficiencia,42,1
+autarky,Autosuficiencia,43,1
+autarky,Autosuficiencia,44,1
+autarky,Autosuficiencia,5,1
+autarky,Autosuficiencia,50,5
+autarky,Autosuficiencia,51,1
+autarky,Autosuficiencia,53,1
+autarky,Autosuficiencia,55,5
+autarky,Autosuficiencia,59,2
+autarky,Autosuficiencia,60,10
+autarky,Autosuficiencia,61,1
+autarky,Autosuficiencia,62,1
+autarky,Autosuficiencia,64,2
+autarky,Autosuficiencia,65,4
+autarky,Autosuficiencia,66,2
+autarky,Autosuficiencia,68,2
+autarky,Autosuficiencia,69,3
+autarky,Autosuficiencia,70,7
+autarky,Autosuficiencia,71,1
+autarky,Autosuficiencia,72,2
+autarky,Autosuficiencia,73,2
+autarky,Autosuficiencia,74,2
+autarky,Autosuficiencia,75,8
+autarky,Autosuficiencia,76,1
+autarky,Autosuficiencia,77,4
+autarky,Autosuficiencia,78,1
+autarky,Autosuficiencia,80,10
+autarky,Autosuficiencia,81,1
+autarky,Autosuficiencia,83,3
+autarky,Autosuficiencia,84,1
+autarky,Autosuficiencia,85,2
+autarky,Autosuficiencia,86,1
+autarky,Autosuficiencia,90,3
+autarky,Autosuficiencia,96,1
+autarky,Autosuficiencia,98,1
+authority,Autoridad,0,31
+authority,Autoridad,1,1
+authority,Autoridad,10,2
+authority,Autoridad,100,1
+authority,Autoridad,13,2
+authority,Autoridad,15,3
+authority,Autoridad,16,1
+authority,Autoridad,17,3
+authority,Autoridad,18,2
+authority,Autoridad,19,1
+authority,Autoridad,20,5
+authority,Autoridad,21,6
+authority,Autoridad,22,1
+authority,Autoridad,23,4
+authority,Autoridad,25,5
+authority,Autoridad,26,3
+authority,Autoridad,27,1
+authority,Autoridad,28,3
+authority,Autoridad,29,1
+authority,Autoridad,3,1
+authority,Autoridad,30,4
+authority,Autoridad,31,1
+authority,Autoridad,33,2
+authority,Autoridad,35,3
+authority,Autoridad,37,1
+authority,Autoridad,38,1
+authority,Autoridad,40,5
+authority,Autoridad,42,2
+authority,Autoridad,46,2
+authority,Autoridad,47,1
+authority,Autoridad,5,1
+authority,Autoridad,50,6
+authority,Autoridad,52,2
+authority,Autoridad,54,1
+authority,Autoridad,55,1
+authority,Autoridad,57,2
+authority,Autoridad,60,4
+authority,Autoridad,64,1
+authority,Autoridad,7,2
+authority,Autoridad,70,4
+authority,Autoridad,71,1
+authority,Autoridad,75,1
+authority,Autoridad,84,1
+authority,Autoridad,87,1
+authority,Autoridad,88,1
+authority,Autoridad,9,2
+climate_protection,Protección climática,0,1
+climate_protection,Protección climática,10,1
+climate_protection,Protección climática,100,15
+climate_protection,Protección climática,15,2
+climate_protection,Protección climática,17,1
+climate_protection,Protección climática,20,1
+climate_protection,Protección climática,26,1
+climate_protection,Protección climática,30,1
+climate_protection,Protección climática,35,3
+climate_protection,Protección climática,40,1
+climate_protection,Protección climática,45,1
+climate_protection,Protección climática,48,1
+climate_protection,Protección climática,50,4
+climate_protection,Protección climática,55,1
+climate_protection,Protección climática,57,1
+climate_protection,Protección climática,58,1
+climate_protection,Protección climática,60,8
+climate_protection,Protección climática,62,1
+climate_protection,Protección climática,63,1
+climate_protection,Protección climática,65,6
+climate_protection,Protección climática,67,1
+climate_protection,Protección climática,68,1
+climate_protection,Protección climática,69,1
+climate_protection,Protección climática,70,12
+climate_protection,Protección climática,71,3
+climate_protection,Protección climática,72,1
+climate_protection,Protección climática,74,2
+climate_protection,Protección climática,75,13
+climate_protection,Protección climática,77,1
+climate_protection,Protección climática,78,5
+climate_protection,Protección climática,79,2
+climate_protection,Protección climática,80,11
+climate_protection,Protección climática,81,3
+climate_protection,Protección climática,82,2
+climate_protection,Protección climática,83,3
+climate_protection,Protección climática,84,4
+climate_protection,Protección climática,85,8
+climate_protection,Protección climática,86,2
+climate_protection,Protección climática,87,5
+climate_protection,Protección climática,88,3
+climate_protection,Protección climática,89,2
+climate_protection,Protección climática,90,8
+climate_protection,Protección climática,91,1
+climate_protection,Protección climática,92,2
+climate_protection,Protección climática,93,1
+climate_protection,Protección climática,94,1
+climate_protection,Protección climática,95,1
+climate_protection,Protección climática,96,1
+climate_protection,Protección climática,99,2
+commitment,Compromiso,100,18
+commitment,Compromiso,30,1
+commitment,Compromiso,38,1
+commitment,Compromiso,39,1
+commitment,Compromiso,44,1
+commitment,Compromiso,50,3
+commitment,Compromiso,54,1
+commitment,Compromiso,55,2
+commitment,Compromiso,56,1
+commitment,Compromiso,57,1
+commitment,Compromiso,58,1
+commitment,Compromiso,60,11
+commitment,Compromiso,61,2
+commitment,Compromiso,62,1
+commitment,Compromiso,63,1
+commitment,Compromiso,65,3
+commitment,Compromiso,66,1
+commitment,Compromiso,67,2
+commitment,Compromiso,68,3
+commitment,Compromiso,69,4
+commitment,Compromiso,70,16
+commitment,Compromiso,71,3
+commitment,Compromiso,72,3
+commitment,Compromiso,73,3
+commitment,Compromiso,74,6
+commitment,Compromiso,75,7
+commitment,Compromiso,76,2
+commitment,Compromiso,77,1
+commitment,Compromiso,78,4
+commitment,Compromiso,79,2
+commitment,Compromiso,80,11
+commitment,Compromiso,81,3
+commitment,Compromiso,82,1
+commitment,Compromiso,84,1
+commitment,Compromiso,85,6
+commitment,Compromiso,86,1
+commitment,Compromiso,87,2
+commitment,Compromiso,90,9
+commitment,Compromiso,91,1
+commitment,Compromiso,92,3
+commitment,Compromiso,95,1
+commitment,Compromiso,98,2
+cost_efficiency,Eficiencia de costes,0,2
+cost_efficiency,Eficiencia de costes,100,18
+cost_efficiency,Eficiencia de costes,12,1
+cost_efficiency,Eficiencia de costes,15,1
+cost_efficiency,Eficiencia de costes,17,1
+cost_efficiency,Eficiencia de costes,18,1
+cost_efficiency,Eficiencia de costes,20,1
+cost_efficiency,Eficiencia de costes,25,1
+cost_efficiency,Eficiencia de costes,27,1
+cost_efficiency,Eficiencia de costes,30,4
+cost_efficiency,Eficiencia de costes,31,3
+cost_efficiency,Eficiencia de costes,33,1
+cost_efficiency,Eficiencia de costes,39,1
+cost_efficiency,Eficiencia de costes,40,3
+cost_efficiency,Eficiencia de costes,42,2
+cost_efficiency,Eficiencia de costes,43,1
+cost_efficiency,Eficiencia de costes,44,2
+cost_efficiency,Eficiencia de costes,46,1
+cost_efficiency,Eficiencia de costes,50,6
+cost_efficiency,Eficiencia de costes,51,2
+cost_efficiency,Eficiencia de costes,55,1
+cost_efficiency,Eficiencia de costes,56,1
+cost_efficiency,Eficiencia de costes,58,2
+cost_efficiency,Eficiencia de costes,59,1
+cost_efficiency,Eficiencia de costes,60,9
+cost_efficiency,Eficiencia de costes,61,4
+cost_efficiency,Eficiencia de costes,62,5
+cost_efficiency,Eficiencia de costes,63,3
+cost_efficiency,Eficiencia de costes,64,3
+cost_efficiency,Eficiencia de costes,65,2
+cost_efficiency,Eficiencia de costes,66,1
+cost_efficiency,Eficiencia de costes,67,1
+cost_efficiency,Eficiencia de costes,68,1
+cost_efficiency,Eficiencia de costes,69,3
+cost_efficiency,Eficiencia de costes,7,1
+cost_efficiency,Eficiencia de costes,70,10
+cost_efficiency,Eficiencia de costes,74,4
+cost_efficiency,Eficiencia de costes,75,4
+cost_efficiency,Eficiencia de costes,76,3
+cost_efficiency,Eficiencia de costes,77,2
+cost_efficiency,Eficiencia de costes,78,2
+cost_efficiency,Eficiencia de costes,79,1
+cost_efficiency,Eficiencia de costes,80,10
+cost_efficiency,Eficiencia de costes,81,2
+cost_efficiency,Eficiencia de costes,82,1
+cost_efficiency,Eficiencia de costes,83,2
+cost_efficiency,Eficiencia de costes,84,1
+cost_efficiency,Eficiencia de costes,85,1
+cost_efficiency,Eficiencia de costes,86,1
+cost_efficiency,Eficiencia de costes,90,7
+cost_efficiency,Eficiencia de costes,92,1
+cost_efficiency,Eficiencia de costes,94,2
+cost_efficiency,Eficiencia de costes,95,1
+cost_efficiency,Eficiencia de costes,98,1
+coziness,Confort,0,1
+coziness,Confort,10,1
+coziness,Confort,100,8
+coziness,Confort,15,2
+coziness,Confort,20,3
+coziness,Confort,26,1
+coziness,Confort,30,3
+coziness,Confort,35,2
+coziness,Confort,37,2
+coziness,Confort,38,2
+coziness,Confort,40,6
+coziness,Confort,41,1
+coziness,Confort,42,1
+coziness,Confort,50,3
+coziness,Confort,52,1
+coziness,Confort,53,1
+coziness,Confort,54,1
+coziness,Confort,55,2
+coziness,Confort,57,1
+coziness,Confort,58,1
+coziness,Confort,59,1
+coziness,Confort,60,15
+coziness,Confort,61,1
+coziness,Confort,62,3
+coziness,Confort,63,1
+coziness,Confort,65,7
+coziness,Confort,66,1
+coziness,Confort,67,4
+coziness,Confort,68,5
+coziness,Confort,69,2
+coziness,Confort,70,9
+coziness,Confort,71,1
+coziness,Confort,72,2
+coziness,Confort,73,3
+coziness,Confort,74,4
+coziness,Confort,75,9
+coziness,Confort,76,4
+coziness,Confort,77,2
+coziness,Confort,80,9
+coziness,Confort,82,1
+coziness,Confort,84,1
+coziness,Confort,85,2
+coziness,Confort,86,2
+coziness,Confort,88,1
+coziness,Confort,90,3
+coziness,Confort,94,3
+coziness,Confort,95,1
+credit_score_access_to_funding,Acceso a financiación,0,2
+credit_score_access_to_funding,Acceso a financiación,100,15
+credit_score_access_to_funding,Acceso a financiación,12,1
+credit_score_access_to_funding,Acceso a financiación,13,1
+credit_score_access_to_funding,Acceso a financiación,15,1
+credit_score_access_to_funding,Acceso a financiación,16,2
+credit_score_access_to_funding,Acceso a financiación,17,1
+credit_score_access_to_funding,Acceso a financiación,20,3
+credit_score_access_to_funding,Acceso a financiación,22,1
+credit_score_access_to_funding,Acceso a financiación,23,2
+credit_score_access_to_funding,Acceso a financiación,25,3
+credit_score_access_to_funding,Acceso a financiación,27,1
+credit_score_access_to_funding,Acceso a financiación,28,1
+credit_score_access_to_funding,Acceso a financiación,30,5
+credit_score_access_to_funding,Acceso a financiación,32,1
+credit_score_access_to_funding,Acceso a financiación,33,1
+credit_score_access_to_funding,Acceso a financiación,34,1
+credit_score_access_to_funding,Acceso a financiación,35,3
+credit_score_access_to_funding,Acceso a financiación,36,1
+credit_score_access_to_funding,Acceso a financiación,39,1
+credit_score_access_to_funding,Acceso a financiación,40,2
+credit_score_access_to_funding,Acceso a financiación,41,1
+credit_score_access_to_funding,Acceso a financiación,42,1
+credit_score_access_to_funding,Acceso a financiación,45,1
+credit_score_access_to_funding,Acceso a financiación,50,5
+credit_score_access_to_funding,Acceso a financiación,52,1
+credit_score_access_to_funding,Acceso a financiación,57,1
+credit_score_access_to_funding,Acceso a financiación,58,2
+credit_score_access_to_funding,Acceso a financiación,59,2
+credit_score_access_to_funding,Acceso a financiación,60,5
+credit_score_access_to_funding,Acceso a financiación,61,1
+credit_score_access_to_funding,Acceso a financiación,62,1
+credit_score_access_to_funding,Acceso a financiación,63,3
+credit_score_access_to_funding,Acceso a financiación,64,3
+credit_score_access_to_funding,Acceso a financiación,65,4
+credit_score_access_to_funding,Acceso a financiación,66,4
+credit_score_access_to_funding,Acceso a financiación,69,1
+credit_score_access_to_funding,Acceso a financiación,70,8
+credit_score_access_to_funding,Acceso a financiación,71,2
+credit_score_access_to_funding,Acceso a financiación,72,1
+credit_score_access_to_funding,Acceso a financiación,74,2
+credit_score_access_to_funding,Acceso a financiación,75,7
+credit_score_access_to_funding,Acceso a financiación,76,2
+credit_score_access_to_funding,Acceso a financiación,80,7
+credit_score_access_to_funding,Acceso a financiación,82,1
+credit_score_access_to_funding,Acceso a financiación,83,2
+credit_score_access_to_funding,Acceso a financiación,84,2
+credit_score_access_to_funding,Acceso a financiación,85,4
+credit_score_access_to_funding,Acceso a financiación,9,1
+credit_score_access_to_funding,Acceso a financiación,90,3
+credit_score_access_to_funding,Acceso a financiación,91,1
+credit_score_access_to_funding,Acceso a financiación,95,1
+environmental_concerns,Preocupación ambiental,0,1
+environmental_concerns,Preocupación ambiental,100,16
+environmental_concerns,Preocupación ambiental,15,1
+environmental_concerns,Preocupación ambiental,30,2
+environmental_concerns,Preocupación ambiental,35,1
+environmental_concerns,Preocupación ambiental,36,1
+environmental_concerns,Preocupación ambiental,40,1
+environmental_concerns,Preocupación ambiental,5,1
+environmental_concerns,Preocupación ambiental,50,1
+environmental_concerns,Preocupación ambiental,51,1
+environmental_concerns,Preocupación ambiental,55,1
+environmental_concerns,Preocupación ambiental,57,1
+environmental_concerns,Preocupación ambiental,58,1
+environmental_concerns,Preocupación ambiental,60,4
+environmental_concerns,Preocupación ambiental,61,3
+environmental_concerns,Preocupación ambiental,62,2
+environmental_concerns,Preocupación ambiental,64,2
+environmental_concerns,Preocupación ambiental,65,5
+environmental_concerns,Preocupación ambiental,66,3
+environmental_concerns,Preocupación ambiental,67,3
+environmental_concerns,Preocupación ambiental,69,2
+environmental_concerns,Preocupación ambiental,70,16
+environmental_concerns,Preocupación ambiental,71,6
+environmental_concerns,Preocupación ambiental,72,4
+environmental_concerns,Preocupación ambiental,73,2
+environmental_concerns,Preocupación ambiental,74,1
+environmental_concerns,Preocupación ambiental,75,5
+environmental_concerns,Preocupación ambiental,76,4
+environmental_concerns,Preocupación ambiental,77,5
+environmental_concerns,Preocupación ambiental,78,2
+environmental_concerns,Preocupación ambiental,79,1
+environmental_concerns,Preocupación ambiental,80,10
+environmental_concerns,Preocupación ambiental,81,3
+environmental_concerns,Preocupación ambiental,82,2
+environmental_concerns,Preocupación ambiental,83,1
+environmental_concerns,Preocupación ambiental,84,1
+environmental_concerns,Preocupación ambiental,85,10
+environmental_concerns,Preocupación ambiental,86,2
+environmental_concerns,Preocupación ambiental,87,6
+environmental_concerns,Preocupación ambiental,89,2
+environmental_concerns,Preocupación ambiental,90,9
+environmental_concerns,Preocupación ambiental,91,1
+environmental_concerns,Preocupación ambiental,92,1
+environmental_concerns,Preocupación ambiental,95,2
+environmental_concerns,Preocupación ambiental,96,1
+environmental_concerns,Preocupación ambiental,98,1
+frugality,Frugalidad,0,6
+frugality,Frugalidad,10,1
+frugality,Frugalidad,100,4
+frugality,Frugalidad,16,1
+frugality,Frugalidad,17,1
+frugality,Frugalidad,18,1
+frugality,Frugalidad,19,1
+frugality,Frugalidad,20,6
+frugality,Frugalidad,22,1
+frugality,Frugalidad,23,1
+frugality,Frugalidad,24,1
+frugality,Frugalidad,25,3
+frugality,Frugalidad,26,1
+frugality,Frugalidad,27,1
+frugality,Frugalidad,28,3
+frugality,Frugalidad,29,3
+frugality,Frugalidad,30,4
+frugality,Frugalidad,31,2
+frugality,Frugalidad,32,2
+frugality,Frugalidad,33,1
+frugality,Frugalidad,34,2
+frugality,Frugalidad,35,1
+frugality,Frugalidad,38,1
+frugality,Frugalidad,39,3
+frugality,Frugalidad,4,1
+frugality,Frugalidad,40,7
+frugality,Frugalidad,41,2
+frugality,Frugalidad,44,1
+frugality,Frugalidad,45,2
+frugality,Frugalidad,50,5
+frugality,Frugalidad,51,2
+frugality,Frugalidad,54,1
+frugality,Frugalidad,55,3
+frugality,Frugalidad,57,1
+frugality,Frugalidad,58,1
+frugality,Frugalidad,59,2
+frugality,Frugalidad,60,6
+frugality,Frugalidad,61,2
+frugality,Frugalidad,62,1
+frugality,Frugalidad,63,2
+frugality,Frugalidad,65,1
+frugality,Frugalidad,66,3
+frugality,Frugalidad,67,2
+frugality,Frugalidad,68,2
+frugality,Frugalidad,69,2
+frugality,Frugalidad,70,3
+frugality,Frugalidad,71,1
+frugality,Frugalidad,74,1
+frugality,Frugalidad,75,10
+frugality,Frugalidad,77,2
+frugality,Frugalidad,8,1
+frugality,Frugalidad,80,5
+frugality,Frugalidad,81,2
+frugality,Frugalidad,84,1
+frugality,Frugalidad,85,3
+frugality,Frugalidad,89,1
+frugality,Frugalidad,90,3
+frugality,Frugalidad,91,1
+frugality,Frugalidad,95,1
+frugality,Frugalidad,96,1
+fun,Diversión,0,31
+fun,Diversión,1,1
+fun,Diversión,10,8
+fun,Diversión,100,1
+fun,Diversión,11,1
+fun,Diversión,12,3
+fun,Diversión,13,3
+fun,Diversión,14,1
+fun,Diversión,15,7
+fun,Diversión,16,2
+fun,Diversión,17,1
+fun,Diversión,18,1
+fun,Diversión,19,1
+fun,Diversión,20,9
+fun,Diversión,21,2
+fun,Diversión,22,2
+fun,Diversión,23,1
+fun,Diversión,25,1
+fun,Diversión,26,1
+fun,Diversión,27,1
+fun,Diversión,29,3
+fun,Diversión,30,3
+fun,Diversión,33,1
+fun,Diversión,35,2
+fun,Diversión,36,3
+fun,Diversión,38,1
+fun,Diversión,40,2
+fun,Diversión,41,1
+fun,Diversión,42,1
+fun,Diversión,45,1
+fun,Diversión,48,1
+fun,Diversión,50,2
+fun,Diversión,51,1
+fun,Diversión,53,1
+fun,Diversión,55,3
+fun,Diversión,57,1
+fun,Diversión,59,1
+fun,Diversión,60,2
+fun,Diversión,61,1
+fun,Diversión,66,2
+fun,Diversión,67,1
+fun,Diversión,68,3
+fun,Diversión,7,1
+fun,Diversión,70,3
+fun,Diversión,71,1
+fun,Diversión,75,2
+fun,Diversión,80,1
+fun,Diversión,84,1
+fun,Diversión,89,1
+fun,Diversión,9,2
+fun,Diversión,98,1
+knowledge,Conocimiento,100,27
+knowledge,Conocimiento,16,1
+knowledge,Conocimiento,20,1
+knowledge,Conocimiento,22,1
+knowledge,Conocimiento,33,1
+knowledge,Conocimiento,34,1
+knowledge,Conocimiento,40,1
+knowledge,Conocimiento,50,2
+knowledge,Conocimiento,53,1
+knowledge,Conocimiento,56,1
+knowledge,Conocimiento,58,1
+knowledge,Conocimiento,59,1
+knowledge,Conocimiento,60,3
+knowledge,Conocimiento,61,1
+knowledge,Conocimiento,63,2
+knowledge,Conocimiento,65,5
+knowledge,Conocimiento,66,2
+knowledge,Conocimiento,67,1
+knowledge,Conocimiento,68,2
+knowledge,Conocimiento,69,1
+knowledge,Conocimiento,70,9
+knowledge,Conocimiento,71,3
+knowledge,Conocimiento,72,2
+knowledge,Conocimiento,73,1
+knowledge,Conocimiento,74,1
+knowledge,Conocimiento,75,10
+knowledge,Conocimiento,76,4
+knowledge,Conocimiento,77,3
+knowledge,Conocimiento,78,5
+knowledge,Conocimiento,79,1
+knowledge,Conocimiento,80,12
+knowledge,Conocimiento,81,1
+knowledge,Conocimiento,82,4
+knowledge,Conocimiento,83,5
+knowledge,Conocimiento,84,3
+knowledge,Conocimiento,85,3
+knowledge,Conocimiento,86,2
+knowledge,Conocimiento,87,1
+knowledge,Conocimiento,89,1
+knowledge,Conocimiento,90,14
+knowledge,Conocimiento,91,1
+knowledge,Conocimiento,95,3
+knowledge,Conocimiento,97,1
+knowledge,Conocimiento,98,1
+knowledge,Conocimiento,99,1
+legal,Cumplimiento legal,0,2
+legal,Cumplimiento legal,10,2
+legal,Cumplimiento legal,100,19
+legal,Cumplimiento legal,11,1
+legal,Cumplimiento legal,13,2
+legal,Cumplimiento legal,16,1
+legal,Cumplimiento legal,20,1
+legal,Cumplimiento legal,25,1
+legal,Cumplimiento legal,26,1
+legal,Cumplimiento legal,30,3
+legal,Cumplimiento legal,31,1
+legal,Cumplimiento legal,35,1
+legal,Cumplimiento legal,36,1
+legal,Cumplimiento legal,37,1
+legal,Cumplimiento legal,40,3
+legal,Cumplimiento legal,43,1
+legal,Cumplimiento legal,44,1
+legal,Cumplimiento legal,50,3
+legal,Cumplimiento legal,54,2
+legal,Cumplimiento legal,55,1
+legal,Cumplimiento legal,56,1
+legal,Cumplimiento legal,58,2
+legal,Cumplimiento legal,59,1
+legal,Cumplimiento legal,60,4
+legal,Cumplimiento legal,61,4
+legal,Cumplimiento legal,64,1
+legal,Cumplimiento legal,65,2
+legal,Cumplimiento legal,66,1
+legal,Cumplimiento legal,67,1
+legal,Cumplimiento legal,68,2
+legal,Cumplimiento legal,69,3
+legal,Cumplimiento legal,70,5
+legal,Cumplimiento legal,71,4
+legal,Cumplimiento legal,72,4
+legal,Cumplimiento legal,73,1
+legal,Cumplimiento legal,74,3
+legal,Cumplimiento legal,75,2
+legal,Cumplimiento legal,76,2
+legal,Cumplimiento legal,78,1
+legal,Cumplimiento legal,79,1
+legal,Cumplimiento legal,80,10
+legal,Cumplimiento legal,81,3
+legal,Cumplimiento legal,83,1
+legal,Cumplimiento legal,84,1
+legal,Cumplimiento legal,85,4
+legal,Cumplimiento legal,88,2
+legal,Cumplimiento legal,89,3
+legal,Cumplimiento legal,90,9
+legal,Cumplimiento legal,91,1
+legal,Cumplimiento legal,92,1
+legal,Cumplimiento legal,93,1
+legal,Cumplimiento legal,94,1
+legal,Cumplimiento legal,95,2
+legal,Cumplimiento legal,97,1
+novelty,Novedad,0,14
+novelty,Novedad,10,4
+novelty,Novedad,100,4
+novelty,Novedad,11,1
+novelty,Novedad,12,2
+novelty,Novedad,14,1
+novelty,Novedad,15,2
+novelty,Novedad,16,1
+novelty,Novedad,19,1
+novelty,Novedad,20,5
+novelty,Novedad,21,2
+novelty,Novedad,22,3
+novelty,Novedad,23,3
+novelty,Novedad,24,2
+novelty,Novedad,25,3
+novelty,Novedad,26,1
+novelty,Novedad,28,1
+novelty,Novedad,30,6
+novelty,Novedad,34,3
+novelty,Novedad,36,2
+novelty,Novedad,38,1
+novelty,Novedad,39,1
+novelty,Novedad,40,5
+novelty,Novedad,41,1
+novelty,Novedad,42,1
+novelty,Novedad,43,3
+novelty,Novedad,44,1
+novelty,Novedad,45,2
+novelty,Novedad,47,1
+novelty,Novedad,48,1
+novelty,Novedad,5,4
+novelty,Novedad,50,3
+novelty,Novedad,51,1
+novelty,Novedad,52,1
+novelty,Novedad,54,1
+novelty,Novedad,55,1
+novelty,Novedad,56,1
+novelty,Novedad,57,2
+novelty,Novedad,58,1
+novelty,Novedad,59,1
+novelty,Novedad,60,9
+novelty,Novedad,62,1
+novelty,Novedad,63,3
+novelty,Novedad,64,4
+novelty,Novedad,65,1
+novelty,Novedad,66,1
+novelty,Novedad,67,1
+novelty,Novedad,68,1
+novelty,Novedad,69,2
+novelty,Novedad,7,1
+novelty,Novedad,70,6
+novelty,Novedad,72,1
+novelty,Novedad,74,1
+novelty,Novedad,75,1
+novelty,Novedad,76,2
+novelty,Novedad,78,2
+novelty,Novedad,79,1
+novelty,Novedad,80,4
+novelty,Novedad,83,1
+novelty,Novedad,84,1
+novelty,Novedad,90,1
+novelty,Novedad,95,1
+own_competence,Competencia propia,0,11
+own_competence,Competencia propia,10,1
+own_competence,Competencia propia,100,7
+own_competence,Competencia propia,11,1
+own_competence,Competencia propia,14,1
+own_competence,Competencia propia,15,2
+own_competence,Competencia propia,17,1
+own_competence,Competencia propia,2,1
+own_competence,Competencia propia,20,1
+own_competence,Competencia propia,26,1
+own_competence,Competencia propia,27,1
+own_competence,Competencia propia,28,1
+own_competence,Competencia propia,29,1
+own_competence,Competencia propia,30,1
+own_competence,Competencia propia,31,1
+own_competence,Competencia propia,32,1
+own_competence,Competencia propia,35,1
+own_competence,Competencia propia,37,1
+own_competence,Competencia propia,38,2
+own_competence,Competencia propia,39,1
+own_competence,Competencia propia,40,1
+own_competence,Competencia propia,42,1
+own_competence,Competencia propia,43,1
+own_competence,Competencia propia,50,5
+own_competence,Competencia propia,51,1
+own_competence,Competencia propia,53,2
+own_competence,Competencia propia,55,1
+own_competence,Competencia propia,60,6
+own_competence,Competencia propia,61,3
+own_competence,Competencia propia,62,3
+own_competence,Competencia propia,63,3
+own_competence,Competencia propia,64,2
+own_competence,Competencia propia,65,6
+own_competence,Competencia propia,66,1
+own_competence,Competencia propia,67,1
+own_competence,Competencia propia,69,1
+own_competence,Competencia propia,70,4
+own_competence,Competencia propia,71,5
+own_competence,Competencia propia,72,4
+own_competence,Competencia propia,73,4
+own_competence,Competencia propia,74,1
+own_competence,Competencia propia,75,6
+own_competence,Competencia propia,76,1
+own_competence,Competencia propia,77,3
+own_competence,Competencia propia,78,1
+own_competence,Competencia propia,79,1
+own_competence,Competencia propia,80,7
+own_competence,Competencia propia,85,1
+own_competence,Competencia propia,86,3
+own_competence,Competencia propia,87,1
+own_competence,Competencia propia,89,2
+own_competence,Competencia propia,90,4
+own_competence,Competencia propia,92,1
+own_competence,Competencia propia,94,1
+own_competence,Competencia propia,99,1
+own_significance,Significado personal,0,2
+own_significance,Significado personal,10,1
+own_significance,Significado personal,100,9
+own_significance,Significado personal,15,1
+own_significance,Significado personal,20,2
+own_significance,Significado personal,23,2
+own_significance,Significado personal,24,1
+own_significance,Significado personal,25,2
+own_significance,Significado personal,27,1
+own_significance,Significado personal,29,1
+own_significance,Significado personal,30,2
+own_significance,Significado personal,31,1
+own_significance,Significado personal,33,2
+own_significance,Significado personal,35,1
+own_significance,Significado personal,36,1
+own_significance,Significado personal,39,1
+own_significance,Significado personal,40,4
+own_significance,Significado personal,41,1
+own_significance,Significado personal,45,1
+own_significance,Significado personal,49,1
+own_significance,Significado personal,50,4
+own_significance,Significado personal,51,1
+own_significance,Significado personal,53,2
+own_significance,Significado personal,57,2
+own_significance,Significado personal,58,2
+own_significance,Significado personal,59,1
+own_significance,Significado personal,60,10
+own_significance,Significado personal,61,2
+own_significance,Significado personal,62,1
+own_significance,Significado personal,63,2
+own_significance,Significado personal,64,4
+own_significance,Significado personal,65,6
+own_significance,Significado personal,66,2
+own_significance,Significado personal,67,2
+own_significance,Significado personal,7,1
+own_significance,Significado personal,70,5
+own_significance,Significado personal,71,5
+own_significance,Significado personal,72,3
+own_significance,Significado personal,73,1
+own_significance,Significado personal,74,2
+own_significance,Significado personal,75,13
+own_significance,Significado personal,76,3
+own_significance,Significado personal,77,2
+own_significance,Significado personal,79,3
+own_significance,Significado personal,8,1
+own_significance,Significado personal,80,3
+own_significance,Significado personal,81,1
+own_significance,Significado personal,82,1
+own_significance,Significado personal,83,3
+own_significance,Significado personal,85,4
+own_significance,Significado personal,86,2
+own_significance,Significado personal,90,7
+own_significance,Significado personal,92,1
+own_significance,Significado personal,93,1
+peer_pressure,Presión social,0,16
+peer_pressure,Presión social,10,5
+peer_pressure,Presión social,100,1
+peer_pressure,Presión social,11,1
+peer_pressure,Presión social,12,2
+peer_pressure,Presión social,13,1
+peer_pressure,Presión social,16,2
+peer_pressure,Presión social,17,1
+peer_pressure,Presión social,19,4
+peer_pressure,Presión social,20,10
+peer_pressure,Presión social,21,1
+peer_pressure,Presión social,22,1
+peer_pressure,Presión social,25,6
+peer_pressure,Presión social,26,1
+peer_pressure,Presión social,27,1
+peer_pressure,Presión social,28,1
+peer_pressure,Presión social,3,1
+peer_pressure,Presión social,30,6
+peer_pressure,Presión social,31,1
+peer_pressure,Presión social,33,1
+peer_pressure,Presión social,34,1
+peer_pressure,Presión social,35,2
+peer_pressure,Presión social,36,4
+peer_pressure,Presión social,37,1
+peer_pressure,Presión social,38,1
+peer_pressure,Presión social,39,1
+peer_pressure,Presión social,40,5
+peer_pressure,Presión social,41,1
+peer_pressure,Presión social,42,1
+peer_pressure,Presión social,45,3
+peer_pressure,Presión social,5,3
+peer_pressure,Presión social,50,7
+peer_pressure,Presión social,51,1
+peer_pressure,Presión social,52,1
+peer_pressure,Presión social,54,1
+peer_pressure,Presión social,55,2
+peer_pressure,Presión social,57,2
+peer_pressure,Presión social,59,4
+peer_pressure,Presión social,60,4
+peer_pressure,Presión social,61,2
+peer_pressure,Presión social,62,2
+peer_pressure,Presión social,63,1
+peer_pressure,Presión social,65,1
+peer_pressure,Presión social,66,1
+peer_pressure,Presión social,68,1
+peer_pressure,Presión social,69,1
+peer_pressure,Presión social,70,7
+peer_pressure,Presión social,72,1
+peer_pressure,Presión social,73,1
+peer_pressure,Presión social,75,2
+peer_pressure,Presión social,79,1
+peer_pressure,Presión social,80,3
+peer_pressure,Presión social,81,1
+peer_pressure,Presión social,86,1
+peer_pressure,Presión social,87,1
+peer_pressure,Presión social,88,1
+peer_pressure,Presión social,9,4
+peer_pressure,Presión social,90,2
+peer_pressure,Presión social,91,1
+peer_pressure,Presión social,95,1
+peer_pressure,Presión social,97,1
+profits,Beneficio económico,0,11
+profits,Beneficio económico,10,3
+profits,Beneficio económico,100,8
+profits,Beneficio económico,14,1
+profits,Beneficio económico,15,1
+profits,Beneficio económico,17,1
+profits,Beneficio económico,20,5
+profits,Beneficio económico,21,4
+profits,Beneficio económico,23,1
+profits,Beneficio económico,24,2
+profits,Beneficio económico,25,3
+profits,Beneficio económico,26,2
+profits,Beneficio económico,27,2
+profits,Beneficio económico,28,1
+profits,Beneficio económico,30,7
+profits,Beneficio económico,31,1
+profits,Beneficio económico,32,1
+profits,Beneficio económico,33,2
+profits,Beneficio económico,34,1
+profits,Beneficio económico,35,4
+profits,Beneficio económico,36,2
+profits,Beneficio económico,38,2
+profits,Beneficio económico,39,1
+profits,Beneficio económico,40,5
+profits,Beneficio económico,43,3
+profits,Beneficio económico,44,1
+profits,Beneficio económico,45,2
+profits,Beneficio económico,46,1
+profits,Beneficio económico,5,1
+profits,Beneficio económico,50,4
+profits,Beneficio económico,51,1
+profits,Beneficio económico,55,4
+profits,Beneficio económico,58,1
+profits,Beneficio económico,60,5
+profits,Beneficio económico,62,1
+profits,Beneficio económico,63,1
+profits,Beneficio económico,64,1
+profits,Beneficio económico,65,3
+profits,Beneficio económico,66,1
+profits,Beneficio económico,68,2
+profits,Beneficio económico,69,2
+profits,Beneficio económico,70,5
+profits,Beneficio económico,71,2
+profits,Beneficio económico,74,1
+profits,Beneficio económico,75,5
+profits,Beneficio económico,76,1
+profits,Beneficio económico,77,2
+profits,Beneficio económico,78,2
+profits,Beneficio económico,79,1
+profits,Beneficio económico,8,1
+profits,Beneficio económico,80,5
+profits,Beneficio económico,81,2
+profits,Beneficio económico,83,1
+profits,Beneficio económico,85,3
+profits,Beneficio económico,88,1
+profits,Beneficio económico,94,1
+profits,Beneficio económico,95,1
+recognition,Reconocimiento,0,42
+recognition,Reconocimiento,1,3
+recognition,Reconocimiento,10,8
+recognition,Reconocimiento,100,1
+recognition,Reconocimiento,12,2
+recognition,Reconocimiento,13,1
+recognition,Reconocimiento,14,1
+recognition,Reconocimiento,15,5
+recognition,Reconocimiento,16,2
+recognition,Reconocimiento,17,1
+recognition,Reconocimiento,18,3
+recognition,Reconocimiento,19,1
+recognition,Reconocimiento,2,1
+recognition,Reconocimiento,20,8
+recognition,Reconocimiento,21,1
+recognition,Reconocimiento,22,1
+recognition,Reconocimiento,23,6
+recognition,Reconocimiento,24,3
+recognition,Reconocimiento,25,3
+recognition,Reconocimiento,26,3
+recognition,Reconocimiento,27,2
+recognition,Reconocimiento,29,1
+recognition,Reconocimiento,30,4
+recognition,Reconocimiento,31,1
+recognition,Reconocimiento,32,1
+recognition,Reconocimiento,33,1
+recognition,Reconocimiento,35,2
+recognition,Reconocimiento,36,2
+recognition,Reconocimiento,37,1
+recognition,Reconocimiento,38,2
+recognition,Reconocimiento,39,1
+recognition,Reconocimiento,4,1
+recognition,Reconocimiento,44,2
+recognition,Reconocimiento,46,1
+recognition,Reconocimiento,5,2
+recognition,Reconocimiento,50,1
+recognition,Reconocimiento,56,1
+recognition,Reconocimiento,57,1
+recognition,Reconocimiento,58,1
+recognition,Reconocimiento,60,2
+recognition,Reconocimiento,62,1
+recognition,Reconocimiento,63,1
+recognition,Reconocimiento,65,1
+recognition,Reconocimiento,7,2
+recognition,Reconocimiento,70,2
+recognition,Reconocimiento,74,1
+recognition,Reconocimiento,75,1
+recognition,Reconocimiento,8,6
+recognition,Reconocimiento,85,1
+recognition,Reconocimiento,9,2
+recognition,Reconocimiento,90,1
+rights_and_duties,Derechos y deberes,0,3
+rights_and_duties,Derechos y deberes,100,16
+rights_and_duties,Derechos y deberes,15,4
+rights_and_duties,Derechos y deberes,20,1
+rights_and_duties,Derechos y deberes,25,3
+rights_and_duties,Derechos y deberes,30,4
+rights_and_duties,Derechos y deberes,32,1
+rights_and_duties,Derechos y deberes,33,1
+rights_and_duties,Derechos y deberes,35,1
+rights_and_duties,Derechos y deberes,36,1
+rights_and_duties,Derechos y deberes,37,1
+rights_and_duties,Derechos y deberes,40,5
+rights_and_duties,Derechos y deberes,42,1
+rights_and_duties,Derechos y deberes,44,1
+rights_and_duties,Derechos y deberes,49,1
+rights_and_duties,Derechos y deberes,50,2
+rights_and_duties,Derechos y deberes,54,1
+rights_and_duties,Derechos y deberes,55,3
+rights_and_duties,Derechos y deberes,56,1
+rights_and_duties,Derechos y deberes,58,1
+rights_and_duties,Derechos y deberes,59,2
+rights_and_duties,Derechos y deberes,60,4
+rights_and_duties,Derechos y deberes,61,2
+rights_and_duties,Derechos y deberes,62,1
+rights_and_duties,Derechos y deberes,64,2
+rights_and_duties,Derechos y deberes,65,4
+rights_and_duties,Derechos y deberes,66,3
+rights_and_duties,Derechos y deberes,67,6
+rights_and_duties,Derechos y deberes,69,1
+rights_and_duties,Derechos y deberes,70,5
+rights_and_duties,Derechos y deberes,71,2
+rights_and_duties,Derechos y deberes,72,2
+rights_and_duties,Derechos y deberes,74,2
+rights_and_duties,Derechos y deberes,75,6
+rights_and_duties,Derechos y deberes,76,4
+rights_and_duties,Derechos y deberes,77,1
+rights_and_duties,Derechos y deberes,79,3
+rights_and_duties,Derechos y deberes,8,1
+rights_and_duties,Derechos y deberes,80,9
+rights_and_duties,Derechos y deberes,81,4
+rights_and_duties,Derechos y deberes,82,1
+rights_and_duties,Derechos y deberes,83,3
+rights_and_duties,Derechos y deberes,84,1
+rights_and_duties,Derechos y deberes,85,3
+rights_and_duties,Derechos y deberes,86,1
+rights_and_duties,Derechos y deberes,87,3
+rights_and_duties,Derechos y deberes,88,1
+rights_and_duties,Derechos y deberes,89,1
+rights_and_duties,Derechos y deberes,90,4
+rights_and_duties,Derechos y deberes,93,2
+rights_and_duties,Derechos y deberes,95,1
+rights_and_duties,Derechos y deberes,98,1
+risk_profile,Perfil de riesgo,10,2
+risk_profile,Perfil de riesgo,100,7
+risk_profile,Perfil de riesgo,15,1
+risk_profile,Perfil de riesgo,17,1
+risk_profile,Perfil de riesgo,19,1
+risk_profile,Perfil de riesgo,20,2
+risk_profile,Perfil de riesgo,21,3
+risk_profile,Perfil de riesgo,25,1
+risk_profile,Perfil de riesgo,26,1
+risk_profile,Perfil de riesgo,30,4
+risk_profile,Perfil de riesgo,31,1
+risk_profile,Perfil de riesgo,32,2
+risk_profile,Perfil de riesgo,33,2
+risk_profile,Perfil de riesgo,35,2
+risk_profile,Perfil de riesgo,36,3
+risk_profile,Perfil de riesgo,39,2
+risk_profile,Perfil de riesgo,40,6
+risk_profile,Perfil de riesgo,41,2
+risk_profile,Perfil de riesgo,48,1
+risk_profile,Perfil de riesgo,5,1
+risk_profile,Perfil de riesgo,50,3
+risk_profile,Perfil de riesgo,51,1
+risk_profile,Perfil de riesgo,52,3
+risk_profile,Perfil de riesgo,53,1
+risk_profile,Perfil de riesgo,54,3
+risk_profile,Perfil de riesgo,55,1
+risk_profile,Perfil de riesgo,56,1
+risk_profile,Perfil de riesgo,57,1
+risk_profile,Perfil de riesgo,58,1
+risk_profile,Perfil de riesgo,60,10
+risk_profile,Perfil de riesgo,61,3
+risk_profile,Perfil de riesgo,62,1
+risk_profile,Perfil de riesgo,65,3
+risk_profile,Perfil de riesgo,66,1
+risk_profile,Perfil de riesgo,67,1
+risk_profile,Perfil de riesgo,68,1
+risk_profile,Perfil de riesgo,69,3
+risk_profile,Perfil de riesgo,70,6
+risk_profile,Perfil de riesgo,72,1
+risk_profile,Perfil de riesgo,73,2
+risk_profile,Perfil de riesgo,74,2
+risk_profile,Perfil de riesgo,75,5
+risk_profile,Perfil de riesgo,76,1
+risk_profile,Perfil de riesgo,77,2
+risk_profile,Perfil de riesgo,8,1
+risk_profile,Perfil de riesgo,80,11
+risk_profile,Perfil de riesgo,81,1
+risk_profile,Perfil de riesgo,82,1
+risk_profile,Perfil de riesgo,84,1
+risk_profile,Perfil de riesgo,85,1
+risk_profile,Perfil de riesgo,86,2
+risk_profile,Perfil de riesgo,87,1
+risk_profile,Perfil de riesgo,89,1
+risk_profile,Perfil de riesgo,90,4
+risk_profile,Perfil de riesgo,91,1
+risk_profile,Perfil de riesgo,93,1
+risk_profile,Perfil de riesgo,96,1
+risk_profile,Perfil de riesgo,98,1
+safety,Seguridad,100,10
+safety,Seguridad,16,1
+safety,Seguridad,20,2
+safety,Seguridad,25,2
+safety,Seguridad,31,1
+safety,Seguridad,32,1
+safety,Seguridad,33,1
+safety,Seguridad,34,1
+safety,Seguridad,35,1
+safety,Seguridad,38,1
+safety,Seguridad,5,1
+safety,Seguridad,50,5
+safety,Seguridad,51,2
+safety,Seguridad,53,2
+safety,Seguridad,55,1
+safety,Seguridad,56,3
+safety,Seguridad,58,2
+safety,Seguridad,59,1
+safety,Seguridad,60,8
+safety,Seguridad,61,3
+safety,Seguridad,64,2
+safety,Seguridad,65,5
+safety,Seguridad,66,2
+safety,Seguridad,67,5
+safety,Seguridad,68,1
+safety,Seguridad,69,1
+safety,Seguridad,70,10
+safety,Seguridad,73,3
+safety,Seguridad,74,4
+safety,Seguridad,75,14
+safety,Seguridad,77,3
+safety,Seguridad,78,2
+safety,Seguridad,80,6
+safety,Seguridad,81,1
+safety,Seguridad,82,2
+safety,Seguridad,83,2
+safety,Seguridad,84,1
+safety,Seguridad,85,2
+safety,Seguridad,86,2
+safety,Seguridad,88,2
+safety,Seguridad,89,2
+safety,Seguridad,9,1
+safety,Seguridad,90,5
+safety,Seguridad,91,2
+safety,Seguridad,92,1
+safety,Seguridad,96,1
+self_satisfaction,Satisfacción personal,0,2
+self_satisfaction,Satisfacción personal,10,1
+self_satisfaction,Satisfacción personal,100,15
+self_satisfaction,Satisfacción personal,20,1
+self_satisfaction,Satisfacción personal,22,1
+self_satisfaction,Satisfacción personal,23,1
+self_satisfaction,Satisfacción personal,25,2
+self_satisfaction,Satisfacción personal,27,1
+self_satisfaction,Satisfacción personal,29,1
+self_satisfaction,Satisfacción personal,30,1
+self_satisfaction,Satisfacción personal,33,1
+self_satisfaction,Satisfacción personal,40,1
+self_satisfaction,Satisfacción personal,42,2
+self_satisfaction,Satisfacción personal,50,3
+self_satisfaction,Satisfacción personal,53,1
+self_satisfaction,Satisfacción personal,54,1
+self_satisfaction,Satisfacción personal,56,1
+self_satisfaction,Satisfacción personal,57,1
+self_satisfaction,Satisfacción personal,58,1
+self_satisfaction,Satisfacción personal,59,2
+self_satisfaction,Satisfacción personal,60,5
+self_satisfaction,Satisfacción personal,61,3
+self_satisfaction,Satisfacción personal,62,2
+self_satisfaction,Satisfacción personal,63,1
+self_satisfaction,Satisfacción personal,64,4
+self_satisfaction,Satisfacción personal,65,10
+self_satisfaction,Satisfacción personal,66,2
+self_satisfaction,Satisfacción personal,67,2
+self_satisfaction,Satisfacción personal,68,1
+self_satisfaction,Satisfacción personal,69,2
+self_satisfaction,Satisfacción personal,70,6
+self_satisfaction,Satisfacción personal,71,5
+self_satisfaction,Satisfacción personal,72,4
+self_satisfaction,Satisfacción personal,74,1
+self_satisfaction,Satisfacción personal,75,5
+self_satisfaction,Satisfacción personal,76,3
+self_satisfaction,Satisfacción personal,78,2
+self_satisfaction,Satisfacción personal,79,2
+self_satisfaction,Satisfacción personal,80,16
+self_satisfaction,Satisfacción personal,81,2
+self_satisfaction,Satisfacción personal,82,1
+self_satisfaction,Satisfacción personal,83,2
+self_satisfaction,Satisfacción personal,84,1
+self_satisfaction,Satisfacción personal,85,4
+self_satisfaction,Satisfacción personal,87,1
+self_satisfaction,Satisfacción personal,89,3
+self_satisfaction,Satisfacción personal,90,5
+self_satisfaction,Satisfacción personal,91,1
+self_satisfaction,Satisfacción personal,92,1
+self_satisfaction,Satisfacción personal,93,1
+self_satisfaction,Satisfacción personal,94,1
+self_satisfaction,Satisfacción personal,95,4
+self_satisfaction,Satisfacción personal,96,1
+self_satisfaction,Satisfacción personal,98,2
+socialising,Sociabilidad,0,28
+socialising,Sociabilidad,1,3
+socialising,Sociabilidad,10,2
+socialising,Sociabilidad,100,2
+socialising,Sociabilidad,11,3
+socialising,Sociabilidad,12,2
+socialising,Sociabilidad,14,2
+socialising,Sociabilidad,15,5
+socialising,Sociabilidad,16,2
+socialising,Sociabilidad,17,2
+socialising,Sociabilidad,19,2
+socialising,Sociabilidad,2,1
+socialising,Sociabilidad,20,8
+socialising,Sociabilidad,21,1
+socialising,Sociabilidad,22,3
+socialising,Sociabilidad,24,1
+socialising,Sociabilidad,25,2
+socialising,Sociabilidad,27,1
+socialising,Sociabilidad,30,6
+socialising,Sociabilidad,31,3
+socialising,Sociabilidad,33,2
+socialising,Sociabilidad,34,3
+socialising,Sociabilidad,35,2
+socialising,Sociabilidad,37,1
+socialising,Sociabilidad,39,2
+socialising,Sociabilidad,40,4
+socialising,Sociabilidad,5,1
+socialising,Sociabilidad,50,5
+socialising,Sociabilidad,51,1
+socialising,Sociabilidad,53,1
+socialising,Sociabilidad,56,1
+socialising,Sociabilidad,58,2
+socialising,Sociabilidad,60,2
+socialising,Sociabilidad,61,1
+socialising,Sociabilidad,62,1
+socialising,Sociabilidad,64,1
+socialising,Sociabilidad,66,1
+socialising,Sociabilidad,7,2
+socialising,Sociabilidad,70,2
+socialising,Sociabilidad,71,2
+socialising,Sociabilidad,72,1
+socialising,Sociabilidad,74,1
+socialising,Sociabilidad,75,1
+socialising,Sociabilidad,76,1
+socialising,Sociabilidad,78,1
+socialising,Sociabilidad,79,2
+socialising,Sociabilidad,8,1
+socialising,Sociabilidad,80,2
+socialising,Sociabilidad,82,1
+socialising,Sociabilidad,85,1
+socialising,Sociabilidad,88,1
+socialising,Sociabilidad,89,2
+socialising,Sociabilidad,92,1
+socialising,Sociabilidad,95,2
+support,Apoyo social,0,2
+support,Apoyo social,10,2
+support,Apoyo social,100,4
+support,Apoyo social,15,2
+support,Apoyo social,19,1
+support,Apoyo social,25,2
+support,Apoyo social,27,1
+support,Apoyo social,29,1
+support,Apoyo social,30,2
+support,Apoyo social,31,2
+support,Apoyo social,32,1
+support,Apoyo social,34,3
+support,Apoyo social,35,1
+support,Apoyo social,39,1
+support,Apoyo social,40,4
+support,Apoyo social,41,1
+support,Apoyo social,42,2
+support,Apoyo social,44,1
+support,Apoyo social,5,1
+support,Apoyo social,50,5
+support,Apoyo social,51,1
+support,Apoyo social,52,2
+support,Apoyo social,54,1
+support,Apoyo social,55,2
+support,Apoyo social,56,3
+support,Apoyo social,58,3
+support,Apoyo social,59,6
+support,Apoyo social,60,12
+support,Apoyo social,61,2
+support,Apoyo social,62,1
+support,Apoyo social,63,4
+support,Apoyo social,64,3
+support,Apoyo social,65,5
+support,Apoyo social,66,3
+support,Apoyo social,68,1
+support,Apoyo social,69,1
+support,Apoyo social,70,5
+support,Apoyo social,71,3
+support,Apoyo social,72,3
+support,Apoyo social,73,3
+support,Apoyo social,75,9
+support,Apoyo social,76,1
+support,Apoyo social,77,1
+support,Apoyo social,78,3
+support,Apoyo social,80,2
+support,Apoyo social,81,2
+support,Apoyo social,82,1
+support,Apoyo social,85,2
+support,Apoyo social,86,1
+support,Apoyo social,87,1
+support,Apoyo social,89,1
+support,Apoyo social,90,1
+support,Apoyo social,92,1
+support,Apoyo social,96,1
+technical_fit,Adecuación técnica,100,21
+technical_fit,Adecuación técnica,39,1
+technical_fit,Adecuación técnica,40,1
+technical_fit,Adecuación técnica,41,2
+technical_fit,Adecuación técnica,49,1
+technical_fit,Adecuación técnica,50,2
+technical_fit,Adecuación técnica,55,2
+technical_fit,Adecuación técnica,57,1
+technical_fit,Adecuación técnica,58,1
+technical_fit,Adecuación técnica,60,6
+technical_fit,Adecuación técnica,61,3
+technical_fit,Adecuación técnica,62,1
+technical_fit,Adecuación técnica,63,2
+technical_fit,Adecuación técnica,64,3
+technical_fit,Adecuación técnica,65,5
+technical_fit,Adecuación técnica,66,3
+technical_fit,Adecuación técnica,67,2
+technical_fit,Adecuación técnica,68,1
+technical_fit,Adecuación técnica,69,2
+technical_fit,Adecuación técnica,70,13
+technical_fit,Adecuación técnica,71,3
+technical_fit,Adecuación técnica,72,1
+technical_fit,Adecuación técnica,73,1
+technical_fit,Adecuación técnica,74,2
+technical_fit,Adecuación técnica,75,7
+technical_fit,Adecuación técnica,76,2
+technical_fit,Adecuación técnica,78,2
+technical_fit,Adecuación técnica,79,3
+technical_fit,Adecuación técnica,80,15
+technical_fit,Adecuación técnica,81,2
+technical_fit,Adecuación técnica,82,2
+technical_fit,Adecuación técnica,83,1
+technical_fit,Adecuación técnica,84,1
+technical_fit,Adecuación técnica,85,4
+technical_fit,Adecuación técnica,86,3
+technical_fit,Adecuación técnica,87,3
+technical_fit,Adecuación técnica,88,2
+technical_fit,Adecuación técnica,89,2
+technical_fit,Adecuación técnica,90,13
+technical_fit,Adecuación técnica,92,1
+technical_fit,Adecuación técnica,95,1
+technical_fit,Adecuación técnica,98,1
+technical_fit,Adecuación técnica,99,2
+trends,Tendencias,0,22
+trends,Tendencias,1,1
+trends,Tendencias,10,9
+trends,Tendencias,100,1
+trends,Tendencias,11,2
+trends,Tendencias,12,2
+trends,Tendencias,13,2
+trends,Tendencias,14,4
+trends,Tendencias,15,3
+trends,Tendencias,17,1
+trends,Tendencias,18,1
+trends,Tendencias,19,1
+trends,Tendencias,20,9
+trends,Tendencias,21,2
+trends,Tendencias,23,2
+trends,Tendencias,24,4
+trends,Tendencias,25,6
+trends,Tendencias,26,1
+trends,Tendencias,27,1
+trends,Tendencias,30,4
+trends,Tendencias,31,1
+trends,Tendencias,32,1
+trends,Tendencias,33,1
+trends,Tendencias,35,3
+trends,Tendencias,39,1
+trends,Tendencias,4,1
+trends,Tendencias,40,5
+trends,Tendencias,41,4
+trends,Tendencias,42,1
+trends,Tendencias,43,1
+trends,Tendencias,44,1
+trends,Tendencias,45,2
+trends,Tendencias,49,1
+trends,Tendencias,5,2
+trends,Tendencias,50,2
+trends,Tendencias,51,1
+trends,Tendencias,52,1
+trends,Tendencias,53,1
+trends,Tendencias,56,2
+trends,Tendencias,57,2
+trends,Tendencias,58,1
+trends,Tendencias,6,1
+trends,Tendencias,60,1
+trends,Tendencias,61,1
+trends,Tendencias,63,4
+trends,Tendencias,64,1
+trends,Tendencias,65,1
+trends,Tendencias,68,2
+trends,Tendencias,70,2
+trends,Tendencias,73,1
+trends,Tendencias,74,2
+trends,Tendencias,75,2
+trends,Tendencias,77,1
+trends,Tendencias,78,1
+trends,Tendencias,79,1
+trends,Tendencias,80,2
+trends,Tendencias,81,1
+trends,Tendencias,90,3
+trends,Tendencias,94,1
+trust,Confianza,0,1
+trust,Confianza,100,14
+trust,Confianza,19,1
+trust,Confianza,25,1
+trust,Confianza,30,2
+trust,Confianza,32,1
+trust,Confianza,35,1
+trust,Confianza,41,1
+trust,Confianza,44,1
+trust,Confianza,45,2
+trust,Confianza,50,2
+trust,Confianza,53,1
+trust,Confianza,55,1
+trust,Confianza,58,1
+trust,Confianza,59,2
+trust,Confianza,60,4
+trust,Confianza,61,2
+trust,Confianza,62,2
+trust,Confianza,63,2
+trust,Confianza,64,2
+trust,Confianza,65,1
+trust,Confianza,66,1
+trust,Confianza,67,1
+trust,Confianza,68,1
+trust,Confianza,69,2
+trust,Confianza,70,11
+trust,Confianza,71,1
+trust,Confianza,73,4
+trust,Confianza,74,2
+trust,Confianza,75,10
+trust,Confianza,76,1
+trust,Confianza,77,1
+trust,Confianza,78,4
+trust,Confianza,79,5
+trust,Confianza,80,11
+trust,Confianza,81,5
+trust,Confianza,82,3
+trust,Confianza,83,3
+trust,Confianza,84,3
+trust,Confianza,85,3
+trust,Confianza,87,4
+trust,Confianza,89,2
+trust,Confianza,90,8
+trust,Confianza,91,2
+trust,Confianza,93,1
+trust,Confianza,94,1
+trust,Confianza,95,6
+wellbeing,Bienestar,0,1
+wellbeing,Bienestar,10,1
+wellbeing,Bienestar,100,21
+wellbeing,Bienestar,14,1
+wellbeing,Bienestar,15,1
+wellbeing,Bienestar,25,1
+wellbeing,Bienestar,30,1
+wellbeing,Bienestar,31,1
+wellbeing,Bienestar,33,2
+wellbeing,Bienestar,50,5
+wellbeing,Bienestar,52,1
+wellbeing,Bienestar,55,1
+wellbeing,Bienestar,57,2
+wellbeing,Bienestar,58,1
+wellbeing,Bienestar,59,1
+wellbeing,Bienestar,60,6
+wellbeing,Bienestar,61,3
+wellbeing,Bienestar,63,2
+wellbeing,Bienestar,65,4
+wellbeing,Bienestar,66,1
+wellbeing,Bienestar,67,4
+wellbeing,Bienestar,68,8
+wellbeing,Bienestar,70,9
+wellbeing,Bienestar,71,1
+wellbeing,Bienestar,72,4
+wellbeing,Bienestar,73,1
+wellbeing,Bienestar,74,1
+wellbeing,Bienestar,75,10
+wellbeing,Bienestar,76,6
+wellbeing,Bienestar,77,4
+wellbeing,Bienestar,78,1
+wellbeing,Bienestar,79,2
+wellbeing,Bienestar,80,14
+wellbeing,Bienestar,82,3
+wellbeing,Bienestar,83,1
+wellbeing,Bienestar,85,4
+wellbeing,Bienestar,86,3
+wellbeing,Bienestar,87,2
+wellbeing,Bienestar,89,1
+wellbeing,Bienestar,90,3
+wellbeing,Bienestar,91,1
+wellbeing,Bienestar,96,2
+wellbeing,Bienestar,98,1

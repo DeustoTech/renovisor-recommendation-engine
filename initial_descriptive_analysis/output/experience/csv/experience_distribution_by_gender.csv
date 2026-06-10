@@ -1,0 +1,19 @@
+group,experience_short,n,total_group,percentage
+Hombre,Ya estaba presente,337,2863,11.770869717079986
+Hombre,Implementada,647,2863,22.59867272092211
+Hombre,Buscó información,483,2863,16.87041564792176
+Hombre,La conoce / la consideraría,852,2863,29.758994062172544
+Hombre,No la conoce,301,2863,10.513447432762836
+Hombre,Nunca la usaría,243,2863,8.487600419140762
+Mujer,Ya estaba presente,325,2950,11.016949152542372
+Mujer,Implementada,497,2950,16.847457627118644
+Mujer,Buscó información,366,2950,12.40677966101695
+Mujer,La conoce / la consideraría,893,2950,30.271186440677965
+Mujer,No la conoce,526,2950,17.83050847457627
+Mujer,Nunca la usaría,343,2950,11.627118644067796
+Otro / Prefiere no decirlo,Ya estaba presente,6,62,9.67741935483871
+Otro / Prefiere no decirlo,Implementada,17,62,27.419354838709676
+Otro / Prefiere no decirlo,Buscó información,11,62,17.741935483870968
+Otro / Prefiere no decirlo,La conoce / la consideraría,16,62,25.806451612903224
+Otro / Prefiere no decirlo,No la conoce,6,62,9.67741935483871
+Otro / Prefiere no decirlo,Nunca la usaría,6,62,9.67741935483871

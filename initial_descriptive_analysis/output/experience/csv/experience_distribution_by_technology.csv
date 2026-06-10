@@ -1,0 +1,97 @@
+technology,experience_short,n,total_technology,percentage
+Agua caliente sanitaria,Ya estaba presente,165,375,44
+Agua caliente sanitaria,Implementada,97,375,25.866666666666667
+Agua caliente sanitaria,Buscó información,32,375,8.533333333333333
+Agua caliente sanitaria,La conoce / la consideraría,51,375,13.600000000000001
+Agua caliente sanitaria,No la conoce,21,375,5.6000000000000005
+Agua caliente sanitaria,Nunca la usaría,9,375,2.4
+Almacenamiento energético,Ya estaba presente,11,385,2.857142857142857
+Almacenamiento energético,Implementada,29,385,7.532467532467532
+Almacenamiento energético,Buscó información,77,385,20
+Almacenamiento energético,La conoce / la consideraría,179,385,46.493506493506494
+Almacenamiento energético,No la conoce,68,385,17.662337662337663
+Almacenamiento energético,Nunca la usaría,21,385,5.454545454545454
+Ascensor,Ya estaba presente,146,376,38.82978723404255
+Ascensor,Implementada,21,376,5.585106382978723
+Ascensor,Buscó información,17,376,4.521276595744681
+Ascensor,La conoce / la consideraría,66,376,17.5531914893617
+Ascensor,No la conoce,9,376,2.393617021276596
+Ascensor,Nunca la usaría,117,376,31.117021276595747
+Bomba de calor,Ya estaba presente,24,366,6.557377049180328
+Bomba de calor,Implementada,45,366,12.295081967213115
+Bomba de calor,Buscó información,53,366,14.48087431693989
+Bomba de calor,La conoce / la consideraría,127,366,34.69945355191257
+Bomba de calor,No la conoce,89,366,24.316939890710383
+Bomba de calor,Nunca la usaría,28,366,7.650273224043716
+Calefacción fósil o biomasa,Ya estaba presente,74,374,19.786096256684495
+Calefacción fósil o biomasa,Implementada,37,374,9.893048128342247
+Calefacción fósil o biomasa,Buscó información,38,374,10.16042780748663
+Calefacción fósil o biomasa,La conoce / la consideraría,61,374,16.31016042780749
+Calefacción fósil o biomasa,No la conoce,63,374,16.844919786096256
+Calefacción fósil o biomasa,Nunca la usaría,101,374,27.00534759358289
+Cambio de tarifa eléctrica,Ya estaba presente,19,385,4.935064935064935
+Cambio de tarifa eléctrica,Implementada,137,385,35.58441558441559
+Cambio de tarifa eléctrica,Buscó información,82,385,21.298701298701296
+Cambio de tarifa eléctrica,La conoce / la consideraría,84,385,21.818181818181817
+Cambio de tarifa eléctrica,No la conoce,54,385,14.025974025974024
+Cambio de tarifa eléctrica,Nunca la usaría,9,385,2.3376623376623376
+Comunidad energética,Ya estaba presente,18,368,4.891304347826087
+Comunidad energética,Implementada,53,368,14.402173913043478
+Comunidad energética,Buscó información,49,368,13.31521739130435
+Comunidad energética,La conoce / la consideraría,136,368,36.95652173913043
+Comunidad energética,No la conoce,79,368,21.467391304347828
+Comunidad energética,Nunca la usaría,33,368,8.967391304347826
+Electrodomésticos eficientes,Ya estaba presente,34,384,8.854166666666668
+Electrodomésticos eficientes,Implementada,170,384,44.27083333333333
+Electrodomésticos eficientes,Buscó información,74,384,19.270833333333336
+Electrodomésticos eficientes,La conoce / la consideraría,76,384,19.791666666666664
+Electrodomésticos eficientes,No la conoce,24,384,6.25
+Electrodomésticos eficientes,Nunca la usaría,6,384,1.5625
+Fotovoltaica en cubierta,Ya estaba presente,15,387,3.875968992248062
+Fotovoltaica en cubierta,Implementada,65,387,16.795865633074936
+Fotovoltaica en cubierta,Buscó información,84,387,21.705426356589147
+Fotovoltaica en cubierta,La conoce / la consideraría,165,387,42.63565891472868
+Fotovoltaica en cubierta,No la conoce,38,387,9.819121447028424
+Fotovoltaica en cubierta,Nunca la usaría,20,387,5.167958656330749
+Kits solares de balcón,Ya estaba presente,7,367,1.9073569482288828
+Kits solares de balcón,Implementada,18,367,4.904632152588556
+Kits solares de balcón,Buscó información,54,367,14.713896457765669
+Kits solares de balcón,La conoce / la consideraría,156,367,42.50681198910082
+Kits solares de balcón,No la conoce,89,367,24.250681198910083
+Kits solares de balcón,Nunca la usaría,43,367,11.716621253405995
+Medidas de microeficiencia,Ya estaba presente,26,386,6.7357512953367875
+Medidas de microeficiencia,Implementada,212,386,54.92227979274611
+Medidas de microeficiencia,Buscó información,57,386,14.766839378238341
+Medidas de microeficiencia,La conoce / la consideraría,53,386,13.730569948186528
+Medidas de microeficiencia,No la conoce,29,386,7.512953367875648
+Medidas de microeficiencia,Nunca la usaría,9,386,2.33160621761658
+Renovación de envolvente,Ya estaba presente,93,387,24.031007751937985
+Renovación de envolvente,Implementada,110,387,28.42377260981912
+Renovación de envolvente,Buscó información,52,387,13.436692506459949
+Renovación de envolvente,La conoce / la consideraría,100,387,25.839793281653744
+Renovación de envolvente,No la conoce,17,387,4.3927648578811365
+Renovación de envolvente,Nunca la usaría,15,387,3.875968992248062
+Sistema de refrigeración,Ya estaba presente,22,375,5.866666666666666
+Sistema de refrigeración,Implementada,66,375,17.599999999999998
+Sistema de refrigeración,Buscó información,49,375,13.066666666666665
+Sistema de refrigeración,La conoce / la consideraría,121,375,32.266666666666666
+Sistema de refrigeración,No la conoce,58,375,15.466666666666667
+Sistema de refrigeración,Nunca la usaría,59,375,15.733333333333333
+Sistemas inteligentes del hogar,Ya estaba presente,11,383,2.8720626631853787
+Sistemas inteligentes del hogar,Implementada,57,383,14.882506527415144
+Sistemas inteligentes del hogar,Buscó información,73,383,19.06005221932115
+Sistemas inteligentes del hogar,La conoce / la consideraría,147,383,38.38120104438642
+Sistemas inteligentes del hogar,No la conoce,38,383,9.921671018276761
+Sistemas inteligentes del hogar,Nunca la usaría,57,383,14.882506527415144
+Vehículo eléctrico,Ya estaba presente,7,384,1.8229166666666667
+Vehículo eléctrico,Implementada,51,384,13.28125
+Vehículo eléctrico,Buscó información,99,384,25.78125
+Vehículo eléctrico,La conoce / la consideraría,176,384,45.83333333333333
+Vehículo eléctrico,No la conoce,7,384,1.8229166666666667
+Vehículo eléctrico,Nunca la usaría,44,384,11.458333333333332
+Ventilación con recuperador,Ya estaba presente,13,379,3.430079155672823
+Ventilación con recuperador,Implementada,24,379,6.33245382585752
+Ventilación con recuperador,Buscó información,38,379,10.026385224274406
+Ventilación con recuperador,La conoce / la consideraría,92,379,24.274406332453825
+Ventilación con recuperador,No la conoce,173,379,45.64643799472295
+Ventilación con recuperador,Nunca la usaría,39,379,10.29023746701847

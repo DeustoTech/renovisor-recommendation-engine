@@ -1,0 +1,257 @@
+cluster,determinant_id,centroid,determinant_label
+Cluster 1,profits,34.86486486486486,Beneficio económico
+Cluster 1,credit_score_access_to_funding,66.35135135135135,Acceso a financiación
+Cluster 1,risk_profile,64.56756756756756,Perfil de riesgo
+Cluster 1,added_value,72.4054054054054,Valor añadido
+Cluster 1,frugality,50.013513513513516,Frugalidad
+Cluster 1,climate_protection,82.91891891891892,Protección climática
+Cluster 1,legal,74.62162162162163,Cumplimiento legal
+Cluster 1,trust,76.02702702702703,Confianza
+Cluster 1,safety,70.70270270270271,Seguridad
+Cluster 1,cost_efficiency,63.189189189189186,Eficiencia de costes
+Cluster 1,knowledge,83.24324324324324,Conocimiento
+Cluster 1,own_competence,69.72972972972973,Competencia propia
+Cluster 1,technical_fit,82.4054054054054,Adecuación técnica
+Cluster 1,environmental_concerns,82.24324324324324,Preocupación ambiental
+Cluster 1,self_satisfaction,83.16216216216216,Satisfacción personal
+Cluster 1,commitment,80.1891891891892,Compromiso
+Cluster 1,adherence,77.4054054054054,Persistencia
+Cluster 1,autarky,69.83783783783784,Autosuficiencia
+Cluster 1,wellbeing,78.02702702702703,Bienestar
+Cluster 1,coziness,72,Confort
+Cluster 1,rights_and_duties,71.22972972972973,Derechos y deberes
+Cluster 1,peer_pressure,43.054054054054056,Presión social
+Cluster 1,support,71.01351351351352,Apoyo social
+Cluster 1,socialising,35.45945945945946,Sociabilidad
+Cluster 1,agreement,79.24324324324324,Acuerdo
+Cluster 1,novelty,51.25675675675676,Novedad
+Cluster 1,fun,19.783783783783782,Diversión
+Cluster 1,recognition,14.675675675675675,Reconocimiento
+Cluster 1,trends,35.83783783783784,Tendencias
+Cluster 1,authority,22.7027027027027,Autoridad
+Cluster 1,approval,22.45945945945946,Aprobación
+Cluster 1,own_significance,73.24324324324324,Significado personal
+Cluster 2,profits,20.166666666666668,Beneficio económico
+Cluster 2,credit_score_access_to_funding,38.916666666666664,Acceso a financiación
+Cluster 2,risk_profile,42,Perfil de riesgo
+Cluster 2,added_value,80,Valor añadido
+Cluster 2,frugality,35.25,Frugalidad
+Cluster 2,climate_protection,84.875,Protección climática
+Cluster 2,legal,64.91666666666667,Cumplimiento legal
+Cluster 2,trust,83.33333333333333,Confianza
+Cluster 2,safety,66.66666666666667,Seguridad
+Cluster 2,cost_efficiency,25.666666666666668,Eficiencia de costes
+Cluster 2,knowledge,83.41666666666667,Conocimiento
+Cluster 2,own_competence,56.166666666666664,Competencia propia
+Cluster 2,technical_fit,77.66666666666667,Adecuación técnica
+Cluster 2,environmental_concerns,87.16666666666667,Preocupación ambiental
+Cluster 2,self_satisfaction,60.791666666666664,Satisfacción personal
+Cluster 2,commitment,85.16666666666667,Compromiso
+Cluster 2,adherence,80.41666666666667,Persistencia
+Cluster 2,autarky,22.583333333333332,Autosuficiencia
+Cluster 2,wellbeing,59.083333333333336,Bienestar
+Cluster 2,coziness,47.25,Confort
+Cluster 2,rights_and_duties,59.125,Derechos y deberes
+Cluster 2,peer_pressure,27,Presión social
+Cluster 2,support,65.79166666666667,Apoyo social
+Cluster 2,socialising,44.666666666666664,Sociabilidad
+Cluster 2,agreement,68.08333333333333,Acuerdo
+Cluster 2,novelty,29.125,Novedad
+Cluster 2,fun,10.833333333333334,Diversión
+Cluster 2,recognition,6.916666666666667,Reconocimiento
+Cluster 2,trends,9.083333333333334,Tendencias
+Cluster 2,authority,14.75,Autoridad
+Cluster 2,approval,12.333333333333334,Aprobación
+Cluster 2,own_significance,67,Significado personal
+Cluster 3,profits,44.08,Beneficio económico
+Cluster 3,credit_score_access_to_funding,59.52,Acceso a financiación
+Cluster 3,risk_profile,51,Perfil de riesgo
+Cluster 3,added_value,60.2,Valor añadido
+Cluster 3,frugality,55.04,Frugalidad
+Cluster 3,climate_protection,83.14,Protección climática
+Cluster 3,legal,76.04,Cumplimiento legal
+Cluster 3,trust,71.56,Confianza
+Cluster 3,safety,64.36,Seguridad
+Cluster 3,cost_efficiency,74.04,Eficiencia de costes
+Cluster 3,knowledge,80.2,Conocimiento
+Cluster 3,own_competence,66,Competencia propia
+Cluster 3,technical_fit,75.48,Adecuación técnica
+Cluster 3,environmental_concerns,80,Preocupación ambiental
+Cluster 3,self_satisfaction,59.28,Satisfacción personal
+Cluster 3,commitment,70.76,Compromiso
+Cluster 3,adherence,68.32,Persistencia
+Cluster 3,autarky,56.04,Autosuficiencia
+Cluster 3,wellbeing,68.96,Bienestar
+Cluster 3,coziness,59.44,Confort
+Cluster 3,rights_and_duties,68.3,Derechos y deberes
+Cluster 3,peer_pressure,22.28,Presión social
+Cluster 3,support,56.76,Apoyo social
+Cluster 3,socialising,10.52,Sociabilidad
+Cluster 3,agreement,44.32,Acuerdo
+Cluster 3,novelty,32.22,Novedad
+Cluster 3,fun,16.6,Diversión
+Cluster 3,recognition,7.44,Reconocimiento
+Cluster 3,trends,24.92,Tendencias
+Cluster 3,authority,23.36,Autoridad
+Cluster 3,approval,13.16,Aprobación
+Cluster 3,own_significance,68.08,Significado personal
+Cluster 4,profits,77.3,Beneficio económico
+Cluster 4,credit_score_access_to_funding,70.6,Acceso a financiación
+Cluster 4,risk_profile,77,Perfil de riesgo
+Cluster 4,added_value,68.4,Valor añadido
+Cluster 4,frugality,71.95,Frugalidad
+Cluster 4,climate_protection,70.3,Protección climática
+Cluster 4,legal,82.1,Cumplimiento legal
+Cluster 4,trust,83.9,Confianza
+Cluster 4,safety,78.6,Seguridad
+Cluster 4,cost_efficiency,86.4,Eficiencia de costes
+Cluster 4,knowledge,80.2,Conocimiento
+Cluster 4,own_competence,81.3,Competencia propia
+Cluster 4,technical_fit,84,Adecuación técnica
+Cluster 4,environmental_concerns,71,Preocupación ambiental
+Cluster 4,self_satisfaction,89.3,Satisfacción personal
+Cluster 4,commitment,79.5,Compromiso
+Cluster 4,adherence,71.3,Persistencia
+Cluster 4,autarky,74.1,Autosuficiencia
+Cluster 4,wellbeing,80.7,Bienestar
+Cluster 4,coziness,78.6,Confort
+Cluster 4,rights_and_duties,77.5,Derechos y deberes
+Cluster 4,peer_pressure,64.9,Presión social
+Cluster 4,support,69,Apoyo social
+Cluster 4,socialising,77.5,Sociabilidad
+Cluster 4,agreement,74.9,Acuerdo
+Cluster 4,novelty,73.4,Novedad
+Cluster 4,fun,68.1,Diversión
+Cluster 4,recognition,52.9,Reconocimiento
+Cluster 4,trends,76.1,Tendencias
+Cluster 4,authority,62,Autoridad
+Cluster 4,approval,57.3,Aprobación
+Cluster 4,own_significance,78.7,Significado personal
+Cluster 5,profits,77.42857142857143,Beneficio económico
+Cluster 5,credit_score_access_to_funding,70.64285714285714,Acceso a financiación
+Cluster 5,risk_profile,80.28571428571429,Perfil de riesgo
+Cluster 5,added_value,54.285714285714285,Valor añadido
+Cluster 5,frugality,61.642857142857146,Frugalidad
+Cluster 5,climate_protection,80.78571428571429,Protección climática
+Cluster 5,legal,93.71428571428571,Cumplimiento legal
+Cluster 5,trust,81.28571428571429,Confianza
+Cluster 5,safety,78.71428571428571,Seguridad
+Cluster 5,cost_efficiency,88.57142857142857,Eficiencia de costes
+Cluster 5,knowledge,93.42857142857143,Conocimiento
+Cluster 5,own_competence,75.21428571428571,Competencia propia
+Cluster 5,technical_fit,86.92857142857143,Adecuación técnica
+Cluster 5,environmental_concerns,87.21428571428571,Preocupación ambiental
+Cluster 5,self_satisfaction,75.82142857142857,Satisfacción personal
+Cluster 5,commitment,86.57142857142857,Compromiso
+Cluster 5,adherence,82.85714285714286,Persistencia
+Cluster 5,autarky,74.92857142857143,Autosuficiencia
+Cluster 5,wellbeing,79.71428571428571,Bienestar
+Cluster 5,coziness,71.71428571428571,Confort
+Cluster 5,rights_and_duties,88.03571428571429,Derechos y deberes
+Cluster 5,peer_pressure,29,Presión social
+Cluster 5,support,48.964285714285715,Apoyo social
+Cluster 5,socialising,23.071428571428573,Sociabilidad
+Cluster 5,agreement,71.64285714285714,Acuerdo
+Cluster 5,novelty,64.60714285714286,Novedad
+Cluster 5,fun,29,Diversión
+Cluster 5,recognition,27.714285714285715,Reconocimiento
+Cluster 5,trends,14.785714285714286,Tendencias
+Cluster 5,authority,34.142857142857146,Autoridad
+Cluster 5,approval,16.857142857142858,Aprobación
+Cluster 5,own_significance,51.285714285714285,Significado personal
+Cluster 6,profits,47.94871794871795,Beneficio económico
+Cluster 6,credit_score_access_to_funding,56.97435897435897,Acceso a financiación
+Cluster 6,risk_profile,56.69230769230769,Perfil de riesgo
+Cluster 6,added_value,57.48717948717949,Valor añadido
+Cluster 6,frugality,45.05128205128205,Frugalidad
+Cluster 6,climate_protection,67.21794871794872,Protección climática
+Cluster 6,legal,60.717948717948715,Cumplimiento legal
+Cluster 6,trust,68.84615384615384,Confianza
+Cluster 6,safety,65.8974358974359,Seguridad
+Cluster 6,cost_efficiency,62.56410256410256,Eficiencia de costes
+Cluster 6,knowledge,66.48717948717949,Conocimiento
+Cluster 6,own_competence,58.743589743589745,Competencia propia
+Cluster 6,technical_fit,67.46153846153847,Adecuación técnica
+Cluster 6,environmental_concerns,70,Preocupación ambiental
+Cluster 6,self_satisfaction,63.23076923076923,Satisfacción personal
+Cluster 6,commitment,67.17948717948718,Compromiso
+Cluster 6,adherence,64.02564102564102,Persistencia
+Cluster 6,autarky,56,Autosuficiencia
+Cluster 6,wellbeing,73.51282051282051,Bienestar
+Cluster 6,coziness,59.07692307692308,Confort
+Cluster 6,rights_and_duties,59,Derechos y deberes
+Cluster 6,peer_pressure,51.17948717948718,Presión social
+Cluster 6,support,57.14102564102564,Apoyo social
+Cluster 6,socialising,36.84615384615385,Sociabilidad
+Cluster 6,agreement,67.76923076923077,Acuerdo
+Cluster 6,novelty,41.67948717948718,Novedad
+Cluster 6,fun,34.94871794871795,Diversión
+Cluster 6,recognition,32.43589743589744,Reconocimiento
+Cluster 6,trends,40.43589743589744,Tendencias
+Cluster 6,authority,30.82051282051282,Autoridad
+Cluster 6,approval,29.307692307692307,Aprobación
+Cluster 6,own_significance,60.53846153846154,Significado personal
+Cluster 7,profits,40.4,Beneficio económico
+Cluster 7,credit_score_access_to_funding,51,Acceso a financiación
+Cluster 7,risk_profile,34.7,Perfil de riesgo
+Cluster 7,added_value,55,Valor añadido
+Cluster 7,frugality,36.3,Frugalidad
+Cluster 7,climate_protection,76.3,Protección climática
+Cluster 7,legal,36.8,Cumplimiento legal
+Cluster 7,trust,83.6,Confianza
+Cluster 7,safety,52.9,Seguridad
+Cluster 7,cost_efficiency,49.5,Eficiencia de costes
+Cluster 7,knowledge,86.6,Conocimiento
+Cluster 7,own_competence,19.3,Competencia propia
+Cluster 7,technical_fit,84.4,Adecuación técnica
+Cluster 7,environmental_concerns,67.3,Preocupación ambiental
+Cluster 7,self_satisfaction,82.75,Satisfacción personal
+Cluster 7,commitment,84.3,Compromiso
+Cluster 7,adherence,71.8,Persistencia
+Cluster 7,autarky,75.6,Autosuficiencia
+Cluster 7,wellbeing,80.5,Bienestar
+Cluster 7,coziness,72.2,Confort
+Cluster 7,rights_and_duties,47.1,Derechos y deberes
+Cluster 7,peer_pressure,19.6,Presión social
+Cluster 7,support,55.9,Apoyo social
+Cluster 7,socialising,8.9,Sociabilidad
+Cluster 7,agreement,53.5,Acuerdo
+Cluster 7,novelty,27.6,Novedad
+Cluster 7,fun,21.7,Diversión
+Cluster 7,recognition,0.3,Reconocimiento
+Cluster 7,trends,19.5,Tendencias
+Cluster 7,authority,7.9,Autoridad
+Cluster 7,approval,3.6,Aprobación
+Cluster 7,own_significance,62.5,Significado personal
+Cluster 8,profits,65.92857142857143,Beneficio económico
+Cluster 8,credit_score_access_to_funding,78.35714285714286,Acceso a financiación
+Cluster 8,risk_profile,75.07142857142857,Perfil de riesgo
+Cluster 8,added_value,50.214285714285715,Valor añadido
+Cluster 8,frugality,65.67857142857143,Frugalidad
+Cluster 8,climate_protection,46.5,Protección climática
+Cluster 8,legal,76.85714285714286,Cumplimiento legal
+Cluster 8,trust,79.78571428571429,Confianza
+Cluster 8,safety,80.71428571428571,Seguridad
+Cluster 8,cost_efficiency,88.07142857142857,Eficiencia de costes
+Cluster 8,knowledge,80.64285714285714,Conocimiento
+Cluster 8,own_competence,27.928571428571427,Competencia propia
+Cluster 8,technical_fit,84.71428571428571,Adecuación técnica
+Cluster 8,environmental_concerns,55.142857142857146,Preocupación ambiental
+Cluster 8,self_satisfaction,75.5,Satisfacción personal
+Cluster 8,commitment,71.64285714285714,Compromiso
+Cluster 8,adherence,75.28571428571429,Persistencia
+Cluster 8,autarky,46.57142857142857,Autosuficiencia
+Cluster 8,wellbeing,69.14285714285714,Bienestar
+Cluster 8,coziness,70,Confort
+Cluster 8,rights_and_duties,76.03571428571429,Derechos y deberes
+Cluster 8,peer_pressure,30.214285714285715,Presión social
+Cluster 8,support,40.17857142857143,Apoyo social
+Cluster 8,socialising,7,Sociabilidad
+Cluster 8,agreement,80.78571428571429,Acuerdo
+Cluster 8,novelty,13.357142857142858,Novedad
+Cluster 8,fun,8.071428571428571,Diversión
+Cluster 8,recognition,4.142857142857143,Reconocimiento
+Cluster 8,trends,16.214285714285715,Tendencias
+Cluster 8,authority,14.714285714285714,Autoridad
+Cluster 8,approval,5.214285714285714,Aprobación
+Cluster 8,own_significance,42.92857142857143,Significado personal

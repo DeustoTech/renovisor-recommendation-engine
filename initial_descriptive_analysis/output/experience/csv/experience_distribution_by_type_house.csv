@@ -1,0 +1,31 @@
+group,experience_short,n,total_group,percentage
+Hogar con hijos,Ya estaba presente,261,2630,9.923954372623573
+Hogar con hijos,Implementada,561,2630,21.330798479087456
+Hogar con hijos,Buscó información,383,2630,14.562737642585551
+Hogar con hijos,La conoce / la consideraría,766,2630,29.125475285171103
+Hogar con hijos,No la conoce,376,2630,14.29657794676806
+Hogar con hijos,Nunca la usaría,283,2630,10.760456273764259
+Otro tipo de hogar,Ya estaba presente,2,48,4.166666666666666
+Otro tipo de hogar,Implementada,3,48,6.25
+Otro tipo de hogar,Buscó información,6,48,12.5
+Otro tipo de hogar,La conoce / la consideraría,25,48,52.083333333333336
+Otro tipo de hogar,No la conoce,10,48,20.833333333333336
+Otro tipo de hogar,Nunca la usaría,2,48,4.166666666666666
+Pareja sin hijos,Ya estaba presente,240,1945,12.339331619537274
+Pareja sin hijos,Implementada,361,1945,18.560411311053983
+Pareja sin hijos,Buscó información,321,1945,16.503856041131105
+Pareja sin hijos,La conoce / la consideraría,600,1945,30.848329048843187
+Pareja sin hijos,No la conoce,249,1945,12.802056555269923
+Pareja sin hijos,Nunca la usaría,174,1945,8.946015424164525
+Vive solo/a,Ya estaba presente,143,1087,13.155473781048757
+Vive solo/a,Implementada,219,1087,20.14719411223551
+Vive solo/a,Buscó información,117,1087,10.763569457221712
+Vive solo/a,La conoce / la consideraría,326,1087,29.990800367985283
+Vive solo/a,No la conoce,171,1087,15.731370745170192
+Vive solo/a,Nunca la usaría,111,1087,10.211591536338545
+Vivienda compartida,Ya estaba presente,21,141,14.893617021276595
+Vivienda compartida,Implementada,12,141,8.51063829787234
+Vivienda compartida,Buscó información,32,141,22.69503546099291
+Vivienda compartida,La conoce / la consideraría,30,141,21.27659574468085
+Vivienda compartida,No la conoce,29,141,20.56737588652482
+Vivienda compartida,Nunca la usaría,17,141,12.056737588652481

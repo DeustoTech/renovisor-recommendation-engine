@@ -1,0 +1,16 @@
+variable_name,variable_label,width,height
+age_group,generación,9,5.5
+gender,género,8,5.5
+country,país,11,7.5
+residence_region,región europea,9,5.5
+city_size,tamaño de ciudad,9,5.5
+climate_zone,zona climática,9,5.5
+employment,situación laboral,9,5.5
+education_group,nivel educativo,8,5.5
+work_home,trabajo/estudio desde casa,8,5.5
+type_house,tipo de hogar,9,5.5
+tenure,régimen de tenencia,9,5.5
+political_orientation,orientación política,9,5.5
+vote_type,tipo de voto,11,6
+source_survey,encuesta de origen,8,5.5
+identifier_type,tipo de identificador,8,5.5

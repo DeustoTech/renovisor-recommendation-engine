@@ -1,0 +1,17 @@
+desired_total_n,residence_region,target_n_original,target_n_scaled,target_pct,current_n,current_pct_for_desired_n,difference_n,recruit_next_n,overrepresented_n,keep_for_balanced_sample_n,status
+181,Europa del Norte,43,43,23.76,9,4.97,34,34,0,9,Faltan participantes
+181,Europa Occidental,53,53,29.28,20,11.05,33,33,0,20,Faltan participantes
+181,Europa del Este,34,34,18.78,6,3.31,28,28,0,6,Faltan participantes
+181,Europa del Sur,51,51,28.18,189,104.42,-138,0,138,51,Sobrerrepresentado
+300,Europa Occidental,53,88,29.33,20,6.67,68,68,0,20,Faltan participantes
+300,Europa del Norte,43,71,23.67,9,3,62,62,0,9,Faltan participantes
+300,Europa del Este,34,57,19,6,2,51,51,0,6,Faltan participantes
+300,Europa del Sur,51,84,28,189,63,-105,0,105,84,Sobrerrepresentado
+500,Europa Occidental,53,147,29.4,20,4,127,127,0,20,Faltan participantes
+500,Europa del Norte,43,117,23.4,9,1.8,108,108,0,9,Faltan participantes
+500,Europa del Este,34,95,19,6,1.2,89,89,0,6,Faltan participantes
+500,Europa del Sur,51,141,28.2,189,37.8,-48,0,48,141,Sobrerrepresentado
+1000,Europa Occidental,53,293,29.3,20,2,273,273,0,20,Faltan participantes
+1000,Europa del Norte,43,237,23.7,9,0.9,228,228,0,9,Faltan participantes
+1000,Europa del Este,34,188,18.8,6,0.6,182,182,0,6,Faltan participantes
+1000,Europa del Sur,51,282,28.2,189,18.9,93,93,0,189,Faltan participantes

@@ -1,0 +1,33 @@
+self_profile,determinant_id,determinant_label,n,mean,median,sd
+Influyente,technical_fit,Adecuación técnica,29,81.58620689655173,81,16.948487588191863
+Influyente,knowledge,Conocimiento,34,79.6470588235294,79.5,15.977033427640755
+Influyente,environmental_concerns,Preocupación ambiental,35,78.45714285714286,80,18.94472277465161
+Influyente,climate_protection,Protección climática,35,78.08571428571429,81,22.33221285704659
+Influyente,commitment,Compromiso,31,77.7741935483871,76,13.930086569291557
+Influyente,adherence,Adherencia,32,74.21875,75,16.68828906555384
+Influyente,self_satisfaction,Satisfacción personal,31,73.51612903225806,75,18.3482441807419
+Influyente,trust,Confianza,33,71.75757575757575,75,18.839835294911527
+Influyente,added_value,Valor añadido,32,71.1875,75.5,23.79948156117366
+Influyente,legal,Cumplimiento legal,31,70.96774193548387,75,25.46433305752413
+Influyente,own_significance,Significado personal,32,69.28125,73,17.919595284528338
+Influyente,safety,Seguridad,32,69.1875,75,23.507634312447138
+Influyente,wellbeing,Bienestar,31,68.2258064516129,70,22.282593621358885
+Influyente,support,Apoyo social,28,64.42857142857143,66.5,20.80140410401213
+Influyente,agreement,Acuerdo,30,63.6,74,28.250846798416255
+Influyente,rights_and_duties,Derechos y deberes,32,63.125,71,24.556386725906115
+Influyente,credit_score_access_to_funding,Acceso a financiación,28,63.035714285714285,64.5,23.817954856472745
+Influyente,own_competence,Competencia propia,29,62.93103448275862,68,23.42302138995913
+Influyente,autarky,Autosuficiencia,30,62.4,69.5,22.75143042111631
+Influyente,cost_efficiency,Eficiencia de costes,31,62.29032258064516,67,24.450212743978454
+Influyente,risk_profile,Perfil de riesgo,29,59.13793103448276,65,22.957607108275266
+Influyente,coziness,Confort,28,58.714285714285715,62.5,22.927998641249125
+Influyente,frugality,Frugalidad,31,58.03225806451613,67,27.1986321604203
+Influyente,profits,Beneficio económico,30,50.66666666666667,50,29.7499154833147
+Influyente,peer_pressure,Presión social,30,41.96666666666667,43,29.100874893037666
+Influyente,novelty,Novedad,32,41.6875,42,22.724773322976077
+Influyente,trends,Tendencias,31,30.967741935483872,19,29.577563423387605
+Influyente,socialising,Socialización,28,29.178571428571427,17,27.54263169790717
+Influyente,authority,Autoridad,29,27.862068965517242,20,26.836441293151896
+Influyente,fun,Diversión,26,27.769230769230766,19,27.336872816483886
+Influyente,recognition,Reconocimiento,32,23.9375,13.5,26.048264755530138
+Influyente,approval,Aprobación,33,22.09090909090909,20,21.56003773820276

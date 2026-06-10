@@ -1,0 +1,4 @@
+n_participants,n_boot,mean_archetypes_ok,mean_terms_with_p,mean_significant_terms,mean_recovery_rate
+1000,10,8,5.6,2.1,0.225
+2000,10,8,5.7,2.4,0.2875
+3000,10,8,5.6,2.1,0.2375

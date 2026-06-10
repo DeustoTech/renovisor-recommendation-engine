@@ -1,0 +1,7 @@
+pass_line_check,pass_42_check,pass_4_check,pass_strongly_disagree_check,n
+FALSE,TRUE,TRUE,TRUE,29
+TRUE,FALSE,TRUE,TRUE,19
+FALSE,FALSE,TRUE,TRUE,6
+FALSE,TRUE,FALSE,TRUE,1
+FALSE,TRUE,TRUE,FALSE,1
+TRUE,TRUE,TRUE,FALSE,1

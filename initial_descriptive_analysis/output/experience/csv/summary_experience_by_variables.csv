@@ -1,0 +1,409 @@
+variable,group,n_participants,experience_short,n_pairs,total_pairs,percentage
+Generación,Boomers + generación silenciosa,105,Ya estaba presente,153,1533,9.980430528375733
+Generación,Boomers + generación silenciosa,105,Implementada,409,1533,26.679712981082844
+Generación,Boomers + generación silenciosa,105,Buscó información,192,1533,12.524461839530332
+Generación,Boomers + generación silenciosa,105,La conoce / la consideraría,477,1533,31.115459882583167
+Generación,Boomers + generación silenciosa,105,No la conoce,176,1533,11.480756686236138
+Generación,Boomers + generación silenciosa,105,Nunca la usaría,126,1533,8.21917808219178
+Generación,Generación X,100,Ya estaba presente,173,1550,11.161290322580646
+Generación,Generación X,100,Implementada,336,1550,21.677419354838708
+Generación,Generación X,100,Buscó información,212,1550,13.67741935483871
+Generación,Generación X,100,La conoce / la consideraría,502,1550,32.387096774193544
+Generación,Generación X,100,No la conoce,152,1550,9.806451612903226
+Generación,Generación X,100,Nunca la usaría,175,1550,11.29032258064516
+Generación,Generación Z,36,Ya estaba presente,68,572,11.888111888111888
+Generación,Generación Z,36,Implementada,87,572,15.209790209790212
+Generación,Generación Z,36,Buscó información,77,572,13.461538461538462
+Generación,Generación Z,36,La conoce / la consideraría,145,572,25.34965034965035
+Generación,Generación Z,36,No la conoce,141,572,24.65034965034965
+Generación,Generación Z,36,Nunca la usaría,54,572,9.44055944055944
+Generación,Millennials,140,Ya estaba presente,266,2203,12.074443940081707
+Generación,Millennials,140,Implementada,332,2203,15.070358601906491
+Generación,Millennials,140,Buscó información,376,2203,17.067635043123015
+Generación,Millennials,140,La conoce / la consideraría,636,2203,28.869723104857016
+Generación,Millennials,140,No la conoce,359,2203,16.295960054471177
+Generación,Millennials,140,Nunca la usaría,234,2203,10.6218792555606
+Género,Hombre,190,Ya estaba presente,337,2863,11.770869717079986
+Género,Hombre,190,Implementada,647,2863,22.59867272092211
+Género,Hombre,190,Buscó información,483,2863,16.87041564792176
+Género,Hombre,190,La conoce / la consideraría,852,2863,29.758994062172544
+Género,Hombre,190,No la conoce,301,2863,10.513447432762836
+Género,Hombre,190,Nunca la usaría,243,2863,8.487600419140762
+Género,Mujer,188,Ya estaba presente,325,2950,11.016949152542372
+Género,Mujer,188,Implementada,497,2950,16.847457627118644
+Género,Mujer,188,Buscó información,366,2950,12.40677966101695
+Género,Mujer,188,La conoce / la consideraría,893,2950,30.271186440677965
+Género,Mujer,188,No la conoce,526,2950,17.83050847457627
+Género,Mujer,188,Nunca la usaría,343,2950,11.627118644067796
+Género,Otro / Prefiere no decirlo,4,Ya estaba presente,6,62,9.67741935483871
+Género,Otro / Prefiere no decirlo,4,Implementada,17,62,27.419354838709676
+Género,Otro / Prefiere no decirlo,4,Buscó información,11,62,17.741935483870968
+Género,Otro / Prefiere no decirlo,4,La conoce / la consideraría,16,62,25.806451612903224
+Género,Otro / Prefiere no decirlo,4,No la conoce,6,62,9.67741935483871
+Género,Otro / Prefiere no decirlo,4,Nunca la usaría,6,62,9.67741935483871
+País,Austria,2,Ya estaba presente,8,32,25
+País,Austria,2,Implementada,3,32,9.375
+País,Austria,2,Buscó información,5,32,15.625
+País,Austria,2,La conoce / la consideraría,5,32,15.625
+País,Austria,2,No la conoce,6,32,18.75
+País,Austria,2,Nunca la usaría,5,32,15.625
+País,Belgium,7,Ya estaba presente,14,107,13.084112149532709
+País,Belgium,7,Implementada,13,107,12.149532710280374
+País,Belgium,7,Buscó información,15,107,14.018691588785046
+País,Belgium,7,La conoce / la consideraría,21,107,19.626168224299064
+País,Belgium,7,No la conoce,38,107,35.51401869158878
+País,Belgium,7,Nunca la usaría,6,107,5.607476635514018
+País,Bulgaria,3,Ya estaba presente,3,46,6.521739130434782
+País,Bulgaria,3,Implementada,4,46,8.695652173913043
+País,Bulgaria,3,Buscó información,9,46,19.565217391304348
+País,Bulgaria,3,La conoce / la consideraría,18,46,39.130434782608695
+País,Bulgaria,3,No la conoce,10,46,21.73913043478261
+País,Bulgaria,3,Nunca la usaría,2,46,4.3478260869565215
+País,Czech Republic,5,Ya estaba presente,14,80,17.5
+País,Czech Republic,5,Implementada,5,80,6.25
+País,Czech Republic,5,Buscó información,11,80,13.750000000000002
+País,Czech Republic,5,La conoce / la consideraría,19,80,23.75
+País,Czech Republic,5,No la conoce,23,80,28.749999999999996
+País,Czech Republic,5,Nunca la usaría,8,80,10
+País,Denmark,4,Ya estaba presente,6,63,9.523809523809524
+País,Denmark,4,Implementada,11,63,17.46031746031746
+País,Denmark,4,Buscó información,8,63,12.698412698412698
+País,Denmark,4,La conoce / la consideraría,20,63,31.746031746031743
+País,Denmark,4,No la conoce,7,63,11.11111111111111
+País,Denmark,4,Nunca la usaría,11,63,17.46031746031746
+País,Estonia,4,Ya estaba presente,10,63,15.873015873015872
+País,Estonia,4,Implementada,8,63,12.698412698412698
+País,Estonia,4,Buscó información,7,63,11.11111111111111
+País,Estonia,4,La conoce / la consideraría,20,63,31.746031746031743
+País,Estonia,4,No la conoce,12,63,19.047619047619047
+País,Estonia,4,Nunca la usaría,6,63,9.523809523809524
+País,Finland,4,Ya estaba presente,8,64,12.5
+País,Finland,4,Implementada,6,64,9.375
+País,Finland,4,Buscó información,11,64,17.1875
+País,Finland,4,La conoce / la consideraría,24,64,37.5
+País,Finland,4,No la conoce,8,64,12.5
+País,Finland,4,Nunca la usaría,7,64,10.9375
+País,France,25,Ya estaba presente,44,395,11.139240506329113
+País,France,25,Implementada,54,395,13.670886075949367
+País,France,25,Buscó información,63,395,15.949367088607595
+País,France,25,La conoce / la consideraría,116,395,29.367088607594937
+País,France,25,No la conoce,64,395,16.20253164556962
+País,France,25,Nunca la usaría,54,395,13.670886075949367
+País,Germany,23,Ya estaba presente,36,361,9.97229916897507
+País,Germany,23,Implementada,51,361,14.127423822714682
+País,Germany,23,Buscó información,88,361,24.37673130193906
+País,Germany,23,La conoce / la consideraría,101,361,27.977839335180054
+País,Germany,23,No la conoce,58,361,16.06648199445983
+País,Germany,23,Nunca la usaría,27,361,7.479224376731302
+País,Greece,5,Ya estaba presente,11,78,14.102564102564102
+País,Greece,5,Implementada,18,78,23.076923076923077
+País,Greece,5,Buscó información,8,78,10.256410256410255
+País,Greece,5,La conoce / la consideraría,19,78,24.358974358974358
+País,Greece,5,No la conoce,10,78,12.82051282051282
+País,Greece,5,Nunca la usaría,12,78,15.384615384615385
+País,Hungary,4,Ya estaba presente,3,63,4.761904761904762
+País,Hungary,4,Implementada,9,63,14.285714285714285
+País,Hungary,4,Buscó información,11,63,17.46031746031746
+País,Hungary,4,La conoce / la consideraría,32,63,50.79365079365079
+País,Hungary,4,No la conoce,5,63,7.936507936507936
+País,Hungary,4,Nunca la usaría,3,63,4.761904761904762
+País,Ireland,2,Ya estaba presente,1,22,4.545454545454546
+País,Ireland,2,Implementada,8,22,36.36363636363637
+País,Ireland,2,Buscó información,8,22,36.36363636363637
+País,Ireland,2,La conoce / la consideraría,0,22,0
+País,Ireland,2,No la conoce,1,22,4.545454545454546
+País,Ireland,2,Nunca la usaría,4,22,18.181818181818183
+País,Italy,27,Ya estaba presente,51,425,12
+País,Italy,27,Implementada,81,425,19.058823529411764
+País,Italy,27,Buscó información,81,425,19.058823529411764
+País,Italy,27,La conoce / la consideraría,122,425,28.705882352941174
+País,Italy,27,No la conoce,56,425,13.176470588235295
+País,Italy,27,Nunca la usaría,34,425,8
+País,Latvia,4,Ya estaba presente,8,64,12.5
+País,Latvia,4,Implementada,11,64,17.1875
+País,Latvia,4,Buscó información,9,64,14.0625
+País,Latvia,4,La conoce / la consideraría,14,64,21.875
+País,Latvia,4,No la conoce,17,64,26.5625
+País,Latvia,4,Nunca la usaría,5,64,7.8125
+País,Lithuania,1,Ya estaba presente,3,16,18.75
+País,Lithuania,1,Implementada,8,16,50
+País,Lithuania,1,Buscó información,0,16,0
+País,Lithuania,1,La conoce / la consideraría,2,16,12.5
+País,Lithuania,1,No la conoce,0,16,0
+País,Lithuania,1,Nunca la usaría,3,16,18.75
+País,Luxembourg,1,Ya estaba presente,0,14,0
+País,Luxembourg,1,Implementada,2,14,14.285714285714285
+País,Luxembourg,1,Buscó información,4,14,28.57142857142857
+País,Luxembourg,1,La conoce / la consideraría,8,14,57.14285714285714
+País,Luxembourg,1,No la conoce,0,14,0
+País,Luxembourg,1,Nunca la usaría,0,14,0
+País,Netherlands,11,Ya estaba presente,15,166,9.036144578313253
+País,Netherlands,11,Implementada,44,166,26.506024096385545
+País,Netherlands,11,Buscó información,35,166,21.084337349397593
+País,Netherlands,11,La conoce / la consideraría,31,166,18.67469879518072
+País,Netherlands,11,No la conoce,11,166,6.626506024096386
+País,Netherlands,11,Nunca la usaría,30,166,18.072289156626507
+País,Norway,2,Ya estaba presente,1,32,3.125
+País,Norway,2,Implementada,8,32,25
+País,Norway,2,Buscó información,2,32,6.25
+País,Norway,2,La conoce / la consideraría,7,32,21.875
+País,Norway,2,No la conoce,12,32,37.5
+País,Norway,2,Nunca la usaría,2,32,6.25
+País,Poland,26,Ya estaba presente,42,412,10.194174757281553
+País,Poland,26,Implementada,57,412,13.834951456310678
+País,Poland,26,Buscó información,59,412,14.320388349514563
+País,Poland,26,La conoce / la consideraría,135,412,32.76699029126214
+País,Poland,26,No la conoce,62,412,15.048543689320388
+País,Poland,26,Nunca la usaría,57,412,13.834951456310678
+País,Portugal,4,Ya estaba presente,5,64,7.8125
+País,Portugal,4,Implementada,7,64,10.9375
+País,Portugal,4,Buscó información,16,64,25
+País,Portugal,4,La conoce / la consideraría,16,64,25
+País,Portugal,4,No la conoce,16,64,25
+País,Portugal,4,Nunca la usaría,4,64,6.25
+País,Romania,8,Ya estaba presente,18,126,14.285714285714285
+País,Romania,8,Implementada,18,126,14.285714285714285
+País,Romania,8,Buscó información,36,126,28.57142857142857
+País,Romania,8,La conoce / la consideraría,25,126,19.841269841269842
+País,Romania,8,No la conoce,19,126,15.079365079365079
+País,Romania,8,Nunca la usaría,10,126,7.936507936507936
+País,Slovakia,4,Ya estaba presente,1,62,1.6129032258064515
+País,Slovakia,4,Implementada,12,62,19.35483870967742
+País,Slovakia,4,Buscó información,5,62,8.064516129032258
+País,Slovakia,4,La conoce / la consideraría,17,62,27.419354838709676
+País,Slovakia,4,No la conoce,16,62,25.806451612903224
+País,Slovakia,4,Nunca la usaría,11,62,17.741935483870968
+País,Slovenia,4,Ya estaba presente,8,63,12.698412698412698
+País,Slovenia,4,Implementada,16,63,25.396825396825395
+País,Slovenia,4,Buscó información,8,63,12.698412698412698
+País,Slovenia,4,La conoce / la consideraría,18,63,28.57142857142857
+País,Slovenia,4,No la conoce,8,63,12.698412698412698
+País,Slovenia,4,Nunca la usaría,5,63,7.936507936507936
+País,Spain,182,Ya estaba presente,302,2706,11.160384331116038
+País,Spain,182,Implementada,661,2706,24.42719881744272
+País,Spain,182,Buscó información,373,2706,13.78418329637842
+País,Spain,182,La conoce / la consideraría,857,2706,31.670362158167038
+País,Spain,182,No la conoce,302,2706,11.160384331116038
+País,Spain,182,Nunca la usaría,211,2706,7.797487065779748
+País,Sweden,3,Ya estaba presente,4,48,8.333333333333332
+País,Sweden,3,Implementada,8,48,16.666666666666664
+País,Sweden,3,Buscó información,10,48,20.833333333333336
+País,Sweden,3,La conoce / la consideraría,7,48,14.583333333333334
+País,Sweden,3,No la conoce,16,48,33.33333333333333
+País,Sweden,3,Nunca la usaría,3,48,6.25
+País,United Kingdom,25,Ya estaba presente,59,394,14.974619289340103
+País,United Kingdom,25,Implementada,49,394,12.436548223350254
+País,United Kingdom,25,Buscó información,39,394,9.898477157360407
+País,United Kingdom,25,La conoce / la consideraría,106,394,26.903553299492383
+País,United Kingdom,25,No la conoce,71,394,18.02030456852792
+País,United Kingdom,25,Nunca la usaría,70,394,17.766497461928935
+Región europea,Europa Occidental,69,Ya estaba presente,117,1075,10.883720930232558
+Región europea,Europa Occidental,69,Implementada,167,1075,15.534883720930232
+Región europea,Europa Occidental,69,Buscó información,210,1075,19.53488372093023
+Región europea,Europa Occidental,69,La conoce / la consideraría,282,1075,26.232558139534884
+Región europea,Europa Occidental,69,No la conoce,177,1075,16.465116279069765
+Región europea,Europa Occidental,69,Nunca la usaría,122,1075,11.348837209302326
+Región europea,Europa del Este,50,Ya estaba presente,81,789,10.26615969581749
+Región europea,Europa del Este,50,Implementada,105,789,13.307984790874524
+Región europea,Europa del Este,50,Buscó información,131,789,16.603295310519645
+Región europea,Europa del Este,50,La conoce / la consideraría,246,789,31.1787072243346
+Región europea,Europa del Este,50,No la conoce,135,789,17.110266159695815
+Región europea,Europa del Este,50,Nunca la usaría,91,789,11.533586818757922
+Región europea,Europa del Norte,49,Ya estaba presente,100,766,13.054830287206268
+Región europea,Europa del Norte,49,Implementada,117,766,15.274151436031334
+Región europea,Europa del Norte,49,Buscó información,94,766,12.27154046997389
+Región europea,Europa del Norte,49,La conoce / la consideraría,200,766,26.109660574412537
+Región europea,Europa del Norte,49,No la conoce,144,766,18.79895561357702
+Región europea,Europa del Norte,49,Nunca la usaría,111,766,14.490861618798956
+Región europea,Europa del Sur,222,Ya estaba presente,377,3336,11.30095923261391
+Región europea,Europa del Sur,222,Implementada,783,3336,23.471223021582734
+Región europea,Europa del Sur,222,Buscó información,486,3336,14.568345323741008
+Región europea,Europa del Sur,222,La conoce / la consideraría,1032,3336,30.935251798561154
+Región europea,Europa del Sur,222,No la conoce,392,3336,11.750599520383693
+Región europea,Europa del Sur,222,Nunca la usaría,266,3336,7.973621103117506
+Tamaño de ciudad,Ciudad grande,45,Ya estaba presente,95,707,13.437057991513438
+Tamaño de ciudad,Ciudad grande,45,Implementada,120,707,16.973125884016973
+Tamaño de ciudad,Ciudad grande,45,Buscó información,97,707,13.719943422913719
+Tamaño de ciudad,Ciudad grande,45,La conoce / la consideraría,162,707,22.913719943422915
+Tamaño de ciudad,Ciudad grande,45,No la conoce,122,707,17.256011315417254
+Tamaño de ciudad,Ciudad grande,45,Nunca la usaría,111,707,15.700141442715701
+Tamaño de ciudad,Ciudad mediana,55,Ya estaba presente,143,840,17.023809523809526
+Tamaño de ciudad,Ciudad mediana,55,Implementada,121,840,14.404761904761903
+Tamaño de ciudad,Ciudad mediana,55,Buscó información,91,840,10.833333333333334
+Tamaño de ciudad,Ciudad mediana,55,La conoce / la consideraría,274,840,32.61904761904762
+Tamaño de ciudad,Ciudad mediana,55,No la conoce,110,840,13.095238095238097
+Tamaño de ciudad,Ciudad mediana,55,Nunca la usaría,101,840,12.023809523809524
+Tamaño de ciudad,Ciudad pequeña,77,Ya estaba presente,119,1195,9.9581589958159
+Tamaño de ciudad,Ciudad pequeña,77,Implementada,214,1195,17.90794979079498
+Tamaño de ciudad,Ciudad pequeña,77,Buscó información,184,1195,15.397489539748953
+Tamaño de ciudad,Ciudad pequeña,77,La conoce / la consideraría,387,1195,32.38493723849372
+Tamaño de ciudad,Ciudad pequeña,77,No la conoce,193,1195,16.150627615062763
+Tamaño de ciudad,Ciudad pequeña,77,Nunca la usaría,98,1195,8.200836820083682
+Tamaño de ciudad,Metrópolis,38,Ya estaba presente,69,593,11.63575042158516
+Tamaño de ciudad,Metrópolis,38,Implementada,79,593,13.322091062394604
+Tamaño de ciudad,Metrópolis,38,Buscó información,126,593,21.247892074198987
+Tamaño de ciudad,Metrópolis,38,La conoce / la consideraría,168,593,28.330522765598655
+Tamaño de ciudad,Metrópolis,38,No la conoce,100,593,16.863406408094438
+Tamaño de ciudad,Metrópolis,38,Nunca la usaría,51,593,8.600337268128163
+Tamaño de ciudad,Municipio pequeño,89,Ya estaba presente,127,1349,9.414381022979985
+Tamaño de ciudad,Municipio pequeño,89,Implementada,294,1349,21.7939214232765
+Tamaño de ciudad,Municipio pequeño,89,Buscó información,210,1349,15.567086730911786
+Tamaño de ciudad,Municipio pequeño,89,La conoce / la consideraría,413,1349,30.61527057079318
+Tamaño de ciudad,Municipio pequeño,89,No la conoce,178,1349,13.194959229058561
+Tamaño de ciudad,Municipio pequeño,89,Nunca la usaría,127,1349,9.414381022979985
+Zona climática,Clima frío,16,Ya estaba presente,35,254,13.779527559055119
+Zona climática,Clima frío,16,Implementada,37,254,14.566929133858267
+Zona climática,Clima frío,16,Buscó información,51,254,20.078740157480315
+Zona climática,Clima frío,16,La conoce / la consideraría,75,254,29.527559055118108
+Zona climática,Clima frío,16,No la conoce,41,254,16.141732283464567
+Zona climática,Clima frío,16,Nunca la usaría,15,254,5.905511811023622
+Zona climática,Clima subtropical,157,Ya estaba presente,299,2365,12.642706131078224
+Zona climática,Clima subtropical,157,Implementada,580,2365,24.52431289640592
+Zona climática,Clima subtropical,157,Buscó información,349,2365,14.756871035940803
+Zona climática,Clima subtropical,157,La conoce / la consideraría,664,2365,28.076109936575055
+Zona climática,Clima subtropical,157,No la conoce,293,2365,12.389006342494714
+Zona climática,Clima subtropical,157,Nunca la usaría,180,2365,7.6109936575052854
+Zona climática,Clima templado,224,Ya estaba presente,351,3442,10.19755955839628
+Zona climática,Clima templado,224,Implementada,575,3442,16.705403834979663
+Zona climática,Clima templado,224,Buscó información,528,3442,15.339918651946544
+Zona climática,Clima templado,224,La conoce / la consideraría,1051,3442,30.53457292271935
+Zona climática,Clima templado,224,No la conoce,522,3442,15.165601394538058
+Zona climática,Clima templado,224,Nunca la usaría,415,3442,12.056943637420105
+Situación laboral,Desempleado/a,19,Ya estaba presente,34,301,11.295681063122924
+Situación laboral,Desempleado/a,19,Implementada,32,301,10.631229235880399
+Situación laboral,Desempleado/a,19,Buscó información,39,301,12.956810631229235
+Situación laboral,Desempleado/a,19,La conoce / la consideraría,87,301,28.903654485049834
+Situación laboral,Desempleado/a,19,No la conoce,66,301,21.92691029900332
+Situación laboral,Desempleado/a,19,Nunca la usaría,43,301,14.285714285714285
+Situación laboral,Empleado/a,284,Ya estaba presente,501,4393,11.40450717049852
+Situación laboral,Empleado/a,284,Implementada,873,4393,19.872524470748917
+Situación laboral,Empleado/a,284,Buscó información,657,4393,14.955611199635785
+Situación laboral,Empleado/a,284,La conoce / la consideraría,1336,4393,30.412019121329386
+Situación laboral,Empleado/a,284,No la conoce,584,4393,13.293876621898477
+Situación laboral,Empleado/a,284,Nunca la usaría,442,4393,10.061461415888914
+Situación laboral,Estudiante,30,Ya estaba presente,49,476,10.294117647058822
+Situación laboral,Estudiante,30,Implementada,77,476,16.176470588235293
+Situación laboral,Estudiante,30,Buscó información,75,476,15.756302521008402
+Situación laboral,Estudiante,30,La conoce / la consideraría,131,476,27.521008403361346
+Situación laboral,Estudiante,30,No la conoce,106,476,22.268907563025213
+Situación laboral,Estudiante,30,Nunca la usaría,38,476,7.9831932773109235
+Situación laboral,Otra situación,45,Ya estaba presente,68,640,10.625
+Situación laboral,Otra situación,45,Implementada,168,640,26.25
+Situación laboral,Otra situación,45,Buscó información,88,640,13.750000000000002
+Situación laboral,Otra situación,45,La conoce / la consideraría,194,640,30.312499999999996
+Situación laboral,Otra situación,45,No la conoce,65,640,10.15625
+Situación laboral,Otra situación,45,Nunca la usaría,57,640,8.90625
+Situación laboral,Otra situación inactiva,5,Ya estaba presente,12,80,15
+Situación laboral,Otra situación inactiva,5,Implementada,10,80,12.5
+Situación laboral,Otra situación inactiva,5,Buscó información,9,80,11.25
+Situación laboral,Otra situación inactiva,5,La conoce / la consideraría,22,80,27.500000000000004
+Situación laboral,Otra situación inactiva,5,No la conoce,18,80,22.5
+Situación laboral,Otra situación inactiva,5,Nunca la usaría,9,80,11.25
+Nivel educativo,No universitaria,93,Ya estaba presente,145,1411,10.276399716513112
+Nivel educativo,No universitaria,93,Implementada,288,1411,20.41105598866052
+Nivel educativo,No universitaria,93,Buscó información,213,1411,15.095676824946846
+Nivel educativo,No universitaria,93,La conoce / la consideraría,397,1411,28.13607370659107
+Nivel educativo,No universitaria,93,No la conoce,216,1411,15.308291991495393
+Nivel educativo,No universitaria,93,Nunca la usaría,152,1411,10.772501771793054
+Nivel educativo,Universitaria,290,Ya estaba presente,522,4479,11.654387139986603
+Nivel educativo,Universitaria,290,Implementada,867,4479,19.356999330207636
+Nivel educativo,Universitaria,290,Buscó información,651,4479,14.534494306764904
+Nivel educativo,Universitaria,290,La conoce / la consideraría,1377,4479,30.74346952444742
+Nivel educativo,Universitaria,290,No la conoce,619,4479,13.82004911810672
+Nivel educativo,Universitaria,290,Nunca la usaría,443,4479,9.890600580486716
+Trabajo/estudio desde casa,No,156,Ya estaba presente,289,2361,12.240576027107158
+Trabajo/estudio desde casa,No,156,Implementada,501,2361,21.21982210927573
+Trabajo/estudio desde casa,No,156,Buscó información,321,2361,13.595933926302415
+Trabajo/estudio desde casa,No,156,La conoce / la consideraría,714,2361,30.241423125794153
+Trabajo/estudio desde casa,No,156,No la conoce,312,2361,13.214739517153747
+Trabajo/estudio desde casa,No,156,Nunca la usaría,224,2361,9.487505294366795
+Trabajo/estudio desde casa,Sí,221,Ya estaba presente,371,3454,10.741169658367111
+Trabajo/estudio desde casa,Sí,221,Implementada,626,3454,18.12391430225825
+Trabajo/estudio desde casa,Sí,221,Buscó información,543,3454,15.720903300521135
+Trabajo/estudio desde casa,Sí,221,La conoce / la consideraría,1042,3454,30.1679212507238
+Trabajo/estudio desde casa,Sí,221,No la conoce,515,3454,14.910248986682106
+Trabajo/estudio desde casa,Sí,221,Nunca la usaría,357,3454,10.335842501447596
+Tipo de hogar,Hogar con hijos,171,Ya estaba presente,261,2630,9.923954372623573
+Tipo de hogar,Hogar con hijos,171,Implementada,561,2630,21.330798479087456
+Tipo de hogar,Hogar con hijos,171,Buscó información,383,2630,14.562737642585551
+Tipo de hogar,Hogar con hijos,171,La conoce / la consideraría,766,2630,29.125475285171103
+Tipo de hogar,Hogar con hijos,171,No la conoce,376,2630,14.29657794676806
+Tipo de hogar,Hogar con hijos,171,Nunca la usaría,283,2630,10.760456273764259
+Tipo de hogar,Otro tipo de hogar,4,Ya estaba presente,2,48,4.166666666666666
+Tipo de hogar,Otro tipo de hogar,4,Implementada,3,48,6.25
+Tipo de hogar,Otro tipo de hogar,4,Buscó información,6,48,12.5
+Tipo de hogar,Otro tipo de hogar,4,La conoce / la consideraría,25,48,52.083333333333336
+Tipo de hogar,Otro tipo de hogar,4,No la conoce,10,48,20.833333333333336
+Tipo de hogar,Otro tipo de hogar,4,Nunca la usaría,2,48,4.166666666666666
+Tipo de hogar,Pareja sin hijos,126,Ya estaba presente,240,1945,12.339331619537274
+Tipo de hogar,Pareja sin hijos,126,Implementada,361,1945,18.560411311053983
+Tipo de hogar,Pareja sin hijos,126,Buscó información,321,1945,16.503856041131105
+Tipo de hogar,Pareja sin hijos,126,La conoce / la consideraría,600,1945,30.848329048843187
+Tipo de hogar,Pareja sin hijos,126,No la conoce,249,1945,12.802056555269923
+Tipo de hogar,Pareja sin hijos,126,Nunca la usaría,174,1945,8.946015424164525
+Tipo de hogar,Vive solo/a,70,Ya estaba presente,143,1087,13.155473781048757
+Tipo de hogar,Vive solo/a,70,Implementada,219,1087,20.14719411223551
+Tipo de hogar,Vive solo/a,70,Buscó información,117,1087,10.763569457221712
+Tipo de hogar,Vive solo/a,70,La conoce / la consideraría,326,1087,29.990800367985283
+Tipo de hogar,Vive solo/a,70,No la conoce,171,1087,15.731370745170192
+Tipo de hogar,Vive solo/a,70,Nunca la usaría,111,1087,10.211591536338545
+Tipo de hogar,Vivienda compartida,9,Ya estaba presente,21,141,14.893617021276595
+Tipo de hogar,Vivienda compartida,9,Implementada,12,141,8.51063829787234
+Tipo de hogar,Vivienda compartida,9,Buscó información,32,141,22.69503546099291
+Tipo de hogar,Vivienda compartida,9,La conoce / la consideraría,30,141,21.27659574468085
+Tipo de hogar,Vivienda compartida,9,No la conoce,29,141,20.56737588652482
+Tipo de hogar,Vivienda compartida,9,Nunca la usaría,17,141,12.056737588652481
+Régimen de tenencia,Alquiler,87,Ya estaba presente,211,1369,15.412710007304604
+Régimen de tenencia,Alquiler,87,Implementada,171,1369,12.490869247626005
+Régimen de tenencia,Alquiler,87,Buscó información,205,1369,14.974433893352812
+Régimen de tenencia,Alquiler,87,La conoce / la consideraría,395,1369,28.85317750182615
+Régimen de tenencia,Alquiler,87,No la conoce,238,1369,17.384952520087655
+Régimen de tenencia,Alquiler,87,Nunca la usaría,149,1369,10.883856829802776
+Régimen de tenencia,Otro régimen,14,Ya estaba presente,23,200,11.5
+Régimen de tenencia,Otro régimen,14,Implementada,33,200,16.5
+Régimen de tenencia,Otro régimen,14,Buscó información,25,200,12.5
+Régimen de tenencia,Otro régimen,14,La conoce / la consideraría,60,200,30
+Régimen de tenencia,Otro régimen,14,No la conoce,40,200,20
+Régimen de tenencia,Otro régimen,14,Nunca la usaría,19,200,9.5
+Régimen de tenencia,Propiedad con hipoteca,106,Ya estaba presente,173,1625,10.646153846153846
+Régimen de tenencia,Propiedad con hipoteca,106,Implementada,359,1625,22.092307692307692
+Régimen de tenencia,Propiedad con hipoteca,106,Buscó información,219,1625,13.476923076923079
+Régimen de tenencia,Propiedad con hipoteca,106,La conoce / la consideraría,458,1625,28.184615384615384
+Régimen de tenencia,Propiedad con hipoteca,106,No la conoce,222,1625,13.661538461538461
+Régimen de tenencia,Propiedad con hipoteca,106,Nunca la usaría,194,1625,11.938461538461539
+Régimen de tenencia,Propiedad sin hipoteca,183,Ya estaba presente,266,2777,9.578682030968672
+Régimen de tenencia,Propiedad sin hipoteca,183,Implementada,608,2777,21.89413035649982
+Régimen de tenencia,Propiedad sin hipoteca,183,Buscó información,442,2777,15.916456607850199
+Régimen de tenencia,Propiedad sin hipoteca,183,La conoce / la consideraría,869,2777,31.29276197335254
+Régimen de tenencia,Propiedad sin hipoteca,183,No la conoce,354,2777,12.747569319409436
+Régimen de tenencia,Propiedad sin hipoteca,183,Nunca la usaría,238,2777,8.570399711919336
+Orientación política,Centro,73,Ya estaba presente,130,1133,11.47396293027361
+Orientación política,Centro,73,Implementada,207,1133,18.27007943512798
+Orientación política,Centro,73,Buscó información,182,1133,16.063548102383056
+Orientación política,Centro,73,La conoce / la consideraría,274,1133,24.18358340688438
+Orientación política,Centro,73,No la conoce,183,1133,16.15180935569285
+Orientación política,Centro,73,Nunca la usaría,157,1133,13.857016769638127
+Orientación política,Derecha,29,Ya estaba presente,44,444,9.90990990990991
+Orientación política,Derecha,29,Implementada,93,444,20.945945945945947
+Orientación política,Derecha,29,Buscó información,79,444,17.792792792792792
+Orientación política,Derecha,29,La conoce / la consideraría,133,444,29.954954954954953
+Orientación política,Derecha,29,No la conoce,52,444,11.711711711711711
+Orientación política,Derecha,29,Nunca la usaría,43,444,9.684684684684685
+Orientación política,Extrema derecha,6,Ya estaba presente,16,93,17.20430107526882
+Orientación política,Extrema derecha,6,Implementada,14,93,15.053763440860216
+Orientación política,Extrema derecha,6,Buscó información,20,93,21.50537634408602
+Orientación política,Extrema derecha,6,La conoce / la consideraría,22,93,23.655913978494624
+Orientación política,Extrema derecha,6,No la conoce,15,93,16.129032258064516
+Orientación política,Extrema derecha,6,Nunca la usaría,6,93,6.451612903225806
+Orientación política,Extrema izquierda,142,Ya estaba presente,252,2165,11.639722863741339
+Orientación política,Extrema izquierda,142,Implementada,433,2165,20
+Orientación política,Extrema izquierda,142,Buscó información,297,2165,13.718244803695152
+Orientación política,Extrema izquierda,142,La conoce / la consideraría,686,2165,31.685912240184756
+Orientación política,Extrema izquierda,142,No la conoce,300,2165,13.856812933025402
+Orientación política,Extrema izquierda,142,Nunca la usaría,197,2165,9.099307159353348
+Orientación política,Izquierda,129,Ya estaba presente,207,1954,10.59365404298874
+Orientación política,Izquierda,129,Implementada,385,1954,19.703172978505627
+Orientación política,Izquierda,129,Buscó información,312,1954,15.967246673490276
+Orientación política,Izquierda,129,La conoce / la consideraría,592,1954,30.296827021494373
+Orientación política,Izquierda,129,No la conoce,271,1954,13.868986693961105
+Orientación política,Izquierda,129,Nunca la usaría,187,1954,9.570112589559878

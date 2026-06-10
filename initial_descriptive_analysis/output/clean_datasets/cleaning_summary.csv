@@ -1,0 +1,6 @@
+dataset,n_rows
+df_analysis_ready_original,439
+df_analysis_enriched,439
+df_clean_general,429
+df_clean_sociodemographic,403
+df_excluded_final,10

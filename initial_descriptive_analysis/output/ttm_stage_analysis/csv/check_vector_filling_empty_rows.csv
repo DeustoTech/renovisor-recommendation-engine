@@ -1,0 +1,27 @@
+stage_dimension_id,participant_id,stage,technology,dimension_key,dimension,n_determinants_linked,n_determinants_filled,n_determinants_missing
+34,PROLIFIC_69932173fe3deef35c4f7e70,Implementada,Electrodomésticos eficientes,MEANING,Significado,2,0,2
+432,212,Implementada,Cambio de tarifa eléctrica,MEANING,Significado,2,0,2
+468,228,Implementada,Renovación de envolvente,FINANCIAL,Seguridad financiera,5,0,5
+487,238,Implementada,Renovación de envolvente,PHYSIOLOGICAL,Materialidad,2,0,2
+489,238,Implementada,Renovación de envolvente,MEANING,Significado,2,0,2
+599,300,Implementada,Renovación de envolvente,MEANING,Significado,2,0,2
+688,349,Implementada,Renovación de envolvente,MEANING,Significado,2,0,2
+702,358,Implementada,Renovación de envolvente,PHYSIOLOGICAL,Materialidad,2,0,2
+1209,185,La conoce / la consideraría,Bomba de calor,PHYSIOLOGICAL,Materialidad,2,0,2
+1257,212,La conoce / la consideraría,Renovación de envolvente,MEANING,Significado,2,0,2
+1313,238,La conoce / la consideraría,Comunidad energética,COMPETENCE,Competencia,5,0,5
+1314,238,La conoce / la consideraría,Comunidad energética,RELATEDNESS,Vinculación,5,0,5
+1315,238,La conoce / la consideraría,Comunidad energética,MEANING,Significado,2,0,2
+1356,263,La conoce / la consideraría,Electrodomésticos eficientes,MEANING,Significado,2,0,2
+1361,265,La conoce / la consideraría,Renovación de envolvente,MEANING,Significado,2,0,2
+1389,278,La conoce / la consideraría,Electrodomésticos eficientes,FINANCIAL,Seguridad financiera,5,0,5
+1556,358,La conoce / la consideraría,Sistemas inteligentes del hogar,PHYSIOLOGICAL,Materialidad,2,0,2
+2002,216,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,AUTONOMY,Autonomía,4,0,4
+2027,238,"No la conoce, pero le genera curiosidad",Comunidad energética,COMPETENCE,Competencia,5,0,5
+2028,238,"No la conoce, pero le genera curiosidad",Comunidad energética,RELATEDNESS,Vinculación,5,0,5
+2029,238,"No la conoce, pero le genera curiosidad",Comunidad energética,MEANING,Significado,2,0,2
+2068,263,"No la conoce, pero le genera curiosidad",Agua caliente sanitaria,MEANING,Significado,2,0,2
+2111,300,"No la conoce, pero le genera curiosidad",Bomba de calor,MEANING,Significado,2,0,2
+2145,329,"No la conoce, pero le genera curiosidad",Comunidad energética,STIMULATION,Estímulo,3,0,3
+2178,347,"No la conoce, pero le genera curiosidad",Almacenamiento energético,FINANCIAL,Seguridad financiera,5,0,5
+2195,358,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,PHYSIOLOGICAL,Materialidad,2,0,2

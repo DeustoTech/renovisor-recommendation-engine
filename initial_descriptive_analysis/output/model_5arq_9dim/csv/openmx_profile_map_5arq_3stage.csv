@@ -1,0 +1,16 @@
+macro_archetype_5,adoption_stage,archetype_label,adoption_stage_label,profile_id,profile_cell,profile_label,openmx_model_name
+G1_Activist_Stubborn_Sentient,Knowledge,G1 - Activista / resistente / consciente,Conocimiento,P01,G1_Activist_Stubborn_Sentient__Knowledge,G1 - Activista / resistente / consciente | Conocimiento,mx_P01
+G1_Activist_Stubborn_Sentient,Considering,G1 - Activista / resistente / consciente,Consideración,P02,G1_Activist_Stubborn_Sentient__Considering,G1 - Activista / resistente / consciente | Consideración,mx_P02
+G1_Activist_Stubborn_Sentient,Done,G1 - Activista / resistente / consciente,Implementada,P03,G1_Activist_Stubborn_Sentient__Done,G1 - Activista / resistente / consciente | Implementada,mx_P03
+G2_EarlyAdopter_Influencer,Knowledge,G2 - Adoptante temprano / influencer,Conocimiento,P04,G2_EarlyAdopter_Influencer__Knowledge,G2 - Adoptante temprano / influencer | Conocimiento,mx_P04
+G2_EarlyAdopter_Influencer,Considering,G2 - Adoptante temprano / influencer,Consideración,P05,G2_EarlyAdopter_Influencer__Considering,G2 - Adoptante temprano / influencer | Consideración,mx_P05
+G2_EarlyAdopter_Influencer,Done,G2 - Adoptante temprano / influencer,Implementada,P06,G2_EarlyAdopter_Influencer__Done,G2 - Adoptante temprano / influencer | Implementada,mx_P06
+G3_Fearful_Careful,Knowledge,G3 - Temeroso / cuidadoso,Conocimiento,P07,G3_Fearful_Careful__Knowledge,G3 - Temeroso / cuidadoso | Conocimiento,mx_P07
+G3_Fearful_Careful,Considering,G3 - Temeroso / cuidadoso,Consideración,P08,G3_Fearful_Careful__Considering,G3 - Temeroso / cuidadoso | Consideración,mx_P08
+G3_Fearful_Careful,Done,G3 - Temeroso / cuidadoso,Implementada,P09,G3_Fearful_Careful__Done,G3 - Temeroso / cuidadoso | Implementada,mx_P09
+G4_HomoEconomicus,Knowledge,G4 - Homo economicus,Conocimiento,P10,G4_HomoEconomicus__Knowledge,G4 - Homo economicus | Conocimiento,mx_P10
+G4_HomoEconomicus,Considering,G4 - Homo economicus,Consideración,P11,G4_HomoEconomicus__Considering,G4 - Homo economicus | Consideración,mx_P11
+G4_HomoEconomicus,Done,G4 - Homo economicus,Implementada,P12,G4_HomoEconomicus__Done,G4 - Homo economicus | Implementada,mx_P12
+G5_Uninterested,Knowledge,G5 - Desinteresado,Conocimiento,P13,G5_Uninterested__Knowledge,G5 - Desinteresado | Conocimiento,mx_P13
+G5_Uninterested,Considering,G5 - Desinteresado,Consideración,P14,G5_Uninterested__Considering,G5 - Desinteresado | Consideración,mx_P14
+G5_Uninterested,Done,G5 - Desinteresado,Implementada,P15,G5_Uninterested__Done,G5 - Desinteresado | Implementada,mx_P15

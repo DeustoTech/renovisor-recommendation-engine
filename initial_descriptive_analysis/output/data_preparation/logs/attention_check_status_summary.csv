@@ -1,0 +1,13 @@
+attention_check,status,n,percentage_within_check
+check_42_status,pasa,374,85.2
+check_42_status,no_responde,39,8.9
+check_42_status,falla,26,5.9
+check_4_status,no_responde,400,91.1
+check_4_status,pasa,38,8.7
+check_4_status,falla,1,0.2
+line_check_status,pasa,288,65.6
+line_check_status,falla,102,23.2
+line_check_status,no_responde,49,11.2
+strongly_disagree_status,no_responde,400,91.1
+strongly_disagree_status,pasa,36,8.2
+strongly_disagree_status,falla,3,0.7

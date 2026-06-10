@@ -1,0 +1,33 @@
+self_profile,determinant_id,determinant_label,n,mean,median,sd
+Sensible,knowledge,Conocimiento,50,80.16,80,16.445779807275414
+Sensible,climate_protection,Protección climática,52,79.09615384615384,80,15.441552821672268
+Sensible,technical_fit,Adecuación técnica,48,78.85416666666667,81,16.353787489393
+Sensible,environmental_concerns,Preocupación ambiental,50,78.7,80,18.1313236681491
+Sensible,wellbeing,Bienestar,45,78.37777777777778,76,14.82670945055959
+Sensible,commitment,Compromiso,50,77.34,75,14.918294480404978
+Sensible,safety,Seguridad,40,76.45,78.5,15.96944197281411
+Sensible,trust,Confianza,47,71.93617021276596,75,19.762067590428355
+Sensible,adherence,Adherencia,41,70.60975609756098,74,22.024847387417342
+Sensible,self_satisfaction,Satisfacción personal,45,69.06666666666666,75,22.74003278161865
+Sensible,coziness,Confort,44,69,70,18.374653928081045
+Sensible,support,Apoyo social,45,66.4,65,19.28659449650786
+Sensible,legal,Cumplimiento legal,39,63.61538461538461,72,27.081373852088806
+Sensible,added_value,Valor añadido,42,62.333333333333336,70,19.646468889787766
+Sensible,autarky,Autosuficiencia,47,62.255319148936174,72,26.888229269803077
+Sensible,rights_and_duties,Derechos y deberes,45,60.71111111111111,65,27.636127723607654
+Sensible,agreement,Acuerdo,44,58.40909090909091,67.5,27.160434785897394
+Sensible,own_significance,Significado personal,44,58.18181818181818,62,25.60275487291265
+Sensible,cost_efficiency,Eficiencia de costes,48,57.9375,61,25.949546997234886
+Sensible,credit_score_access_to_funding,Acceso a financiación,38,57.78947368421053,64,27.227924750189676
+Sensible,own_competence,Competencia propia,40,55.7,61,30.37306499059779
+Sensible,risk_profile,Perfil de riesgo,40,52.75,50,24.923215415886183
+Sensible,frugality,Frugalidad,40,47.075,52,26.644273450261462
+Sensible,peer_pressure,Presión social,44,42.86363636363637,42,29.30242541679023
+Sensible,profits,Beneficio económico,48,38.375,31.5,29.176371232520886
+Sensible,novelty,Novedad,44,37.97727272727273,33,25.86772132103048
+Sensible,socialising,Socialización,44,34.65909090909091,25,29.946419735392205
+Sensible,fun,Diversión,48,28.395833333333336,20,26.732512345682302
+Sensible,trends,Tendencias,48,26.854166666666664,22,23.720885476756937
+Sensible,authority,Autoridad,46,26.608695652173914,21.5,22.47317241203096
+Sensible,approval,Aprobación,54,19.59259259259259,17,18.647189599081543
+Sensible,recognition,Reconocimiento,46,18.97826086956522,10,23.33189436556728

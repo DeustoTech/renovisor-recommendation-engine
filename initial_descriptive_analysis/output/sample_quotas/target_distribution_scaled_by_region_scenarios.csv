@@ -1,0 +1,17 @@
+desired_total_n,residence_region,target_n_original,target_n_scaled,target_pct
+300,Europa Occidental,53,88,29.33
+300,Europa del Este,34,57,19
+300,Europa del Norte,43,71,23.67
+300,Europa del Sur,51,84,28
+405,Europa Occidental,53,119,29.38
+405,Europa del Este,34,75,18.52
+405,Europa del Norte,43,98,24.2
+405,Europa del Sur,51,113,27.9
+500,Europa Occidental,53,147,29.4
+500,Europa del Este,34,95,19
+500,Europa del Norte,43,117,23.4
+500,Europa del Sur,51,141,28.2
+1000,Europa Occidental,53,293,29.3
+1000,Europa del Este,34,188,18.8
+1000,Europa del Norte,43,237,23.7
+1000,Europa del Sur,51,282,28.2

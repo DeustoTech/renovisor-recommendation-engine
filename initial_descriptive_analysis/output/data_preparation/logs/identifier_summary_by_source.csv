@@ -1,0 +1,6 @@
+source_survey,identifier_type,n_rows,percentage_within_source
+concerns1,sin_identificador,12,100
+decision,prolific,210,50.1
+decision,sin_identificador,198,47.3
+decision,codigo,11,2.6
+rvs,sin_identificador,8,100
