@@ -333,7 +333,7 @@ row_id,participant_id,source_survey,line_check_status,check_42_status,check_4_st
 89,PROLIFIC_6985f197cf1559ac62ea5dc3,decision,pasa,pasa,no_responde,no_responde,2,0,2,0,2,2,0,2,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,usable
 4,PROLIFIC_69864a7ee88ba6c6a6f798fc,decision,pasa,pasa,no_responde,no_responde,2,0,2,0,2,2,0,2,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,usable
 115,PROLIFIC_6989bce959483bc187776922,decision,no_responde,pasa,no_responde,no_responde,1,0,3,0,1,1,0,1,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,sin_sociodemografico
-12,PROLIFIC_698b10e112e204e2d1f0c126,decision,falla,pasa,pasa,pasa,3,1,0,0,4,1,1,2,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,attention_check_fallido
+12,PROLIFIC_698b10e112e204e2d1f0c126,decision,pasa,pasa,pasa,pasa,4,0,0,0,4,2,0,2,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,usable
 10,PROLIFIC_698db045fae28c25c8879634,decision,no_responde,pasa,no_responde,no_responde,1,0,3,0,1,1,0,1,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,sin_sociodemografico
 162,PROLIFIC_698df153dc723dada19b1dab,decision,falla,pasa,no_responde,no_responde,1,1,2,0,2,1,1,2,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,attention_check_fallido
 149,PROLIFIC_698df4a194fabefa716596ec,decision,pasa,pasa,no_responde,no_responde,2,0,2,0,2,2,0,2,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,usable
@@ -349,7 +349,7 @@ row_id,participant_id,source_survey,line_check_status,check_42_status,check_4_st
 18,PROLIFIC_69932173fe3deef35c4f7e70,decision,falla,pasa,no_responde,no_responde,1,1,2,0,2,1,1,2,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,attention_check_fallido
 158,PROLIFIC_69946a0579d779ee49dca2c5,decision,falla,pasa,no_responde,no_responde,1,1,2,0,2,1,1,2,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,attention_check_fallido
 27,PROLIFIC_699776549800aa3b0399d642,decision,falla,pasa,no_responde,no_responde,1,1,2,0,2,1,1,2,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,attention_check_fallido
-167,PROLIFIC_699b5130e75520d8cda5a642,decision,falla,pasa,pasa,pasa,3,1,0,0,4,1,1,2,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,attention_check_fallido
+167,PROLIFIC_699b5130e75520d8cda5a642,decision,pasa,pasa,pasa,pasa,4,0,0,0,4,2,0,2,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,usable
 399,PROLIFIC_699e007dc8f8cbd074222f56,decision,pasa,pasa,no_responde,no_responde,2,0,2,0,2,2,0,2,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,usable
 139,PROLIFIC_69a5621021a584cfa45f5f38,decision,pasa,pasa,no_responde,no_responde,2,0,2,0,2,2,0,2,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,usable
 17,PROLIFIC_69a6fd75a40ab271c0a54fd7,decision,pasa,pasa,no_responde,no_responde,2,0,2,0,2,2,0,2,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,usable

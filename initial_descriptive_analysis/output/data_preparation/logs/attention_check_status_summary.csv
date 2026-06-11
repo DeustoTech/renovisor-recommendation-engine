@@ -5,8 +5,8 @@ check_42_status,falla,26,5.9
 check_4_status,no_responde,400,91.1
 check_4_status,pasa,38,8.7
 check_4_status,falla,1,0.2
-line_check_status,pasa,288,65.6
-line_check_status,falla,102,23.2
+line_check_status,pasa,290,66.1
+line_check_status,falla,100,22.8
 line_check_status,no_responde,49,11.2
 strongly_disagree_status,no_responde,400,91.1
 strongly_disagree_status,pasa,36,8.2
