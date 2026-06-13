@@ -1,3 +1,4 @@
+
 # SCRIPT 03.1 - DESCRIPCIÓN DE LA MUESTRA
 
 # Este script realiza la descripción exploratoria de la muestra.
@@ -11,11 +12,6 @@
 # 4. Generar gráficos en PNG y PDF.
 # 5. Generar un PDF conjunto con todos los gráficos.
 
-
-# ==============================================================================
-# LIBRERÍAS
-# ==============================================================================
-
 library(readr)
 library(dplyr)
 library(stringr)
@@ -24,10 +20,7 @@ library(tidyr)
 library(tibble)
 
 
-# ==============================================================================
 # RUTAS
-# ==============================================================================
-
 base_input_dir <- "initial_descriptive_analysis/output/clean_datasets"
 base_output_dir <- "initial_descriptive_analysis/output/sample_description"
 
@@ -42,10 +35,7 @@ dir.create(pdf_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(logs_dir, recursive = TRUE, showWarnings = FALSE)
 
 
-# ==============================================================================
 # CARGAR DATOS
-# ==============================================================================
-
 df <- read_csv(
   file.path(base_input_dir, "df_clean_sociodemographic.csv"),
   show_col_types = FALSE
@@ -55,11 +45,7 @@ cat("Dataset cargado: df_clean_sociodemographic.csv\n")
 cat("Filas:", nrow(df), "\n")
 cat("Columnas:", ncol(df), "\n")
 
-
-# ==============================================================================
 # FUNCIONES AUXILIARES GENERALES
-# ==============================================================================
-
 clean_text_basic <- function(x) {
   x <- str_squish(as.character(x))
   x <- na_if(x, "")
@@ -100,11 +86,7 @@ clean_filename <- function(x) {
     str_replace_all("^_|_$", "")
 }
 
-
-# ==============================================================================
 # CREAR PARTICIPANT_ID
-# ==============================================================================
-
 df <- df %>%
   mutate(
     participant_id = coalesce(
@@ -116,11 +98,7 @@ df <- df %>%
     )
   )
 
-
-# ==============================================================================
 # DEFINIR COLUMNAS
-# ==============================================================================
-
 year_of_birth_candidates <- c(
   "year_of_birth_clean",
   "please_enter_your_year_of_birth_final",
@@ -136,30 +114,17 @@ gender_col <- "what_is_your_gender_final"
 country_col <- "in_which_country_do_you_currently_live_final"
 country_clean_col <- "country_clean"
 residence_region_col <- "residence_region"
-
 size_city_col <- "what_is_the_approximate_population_size_of_the_city_where_you_live_final"
-
 climate_zone_col <- "in_which_climate_zone_do_you_live_please_select_the_option_that_corresponds_to_your_location_if_you_re_not_sure_which_climate_zone_you_live_in_please_refer_to_the_map_below_or_select_the_option_that_best_matches_your_region_final"
-
 employment_col <- "what_is_your_current_employment_status_please_indicate_your_main_contractual_status_if_you_are_temporarily_on_leave_such_as_sick_leave_parental_leave_or_a_temporary_reduction_in_working_hours_please_report_your_usual_employment_status_final"
-
 education_level_col <- "what_is_the_highest_level_of_education_that_you_have_completed_if_you_are_currently_studying_and_have_not_yet_completed_a_level_please_select_the_last_level_you_have_finished_final"
-
 work_home_col <- "do_you_currently_work_or_study_from_home_final"
-
 type_house_col <- "what_type_of_household_do_you_live_in_please_select_the_option_that_best_describes_your_household_final"
-
 tenure_col <- "what_is_the_current_tenure_status_of_your_home_final"
-
 political_col <- "on_a_scale_from_0_to_100_where_0_means_most_left_and_100_means_most_right_where_would_you_place_yourself_politically_final"
-
 vote_col <- "which_of_the_following_best_describes_your_general_approach_to_voting_in_elections_final"
 
-
-# ==============================================================================
 # FUNCIONES DE LIMPIEZA SOCIODEMOGRÁFICA
-# ==============================================================================
-
 clean_gender <- function(x) {
   x <- clean_text_basic(x)
   
@@ -388,10 +353,8 @@ clean_vote <- function(x) {
   )
 }
 
-# ==============================================================================
-# LIMPIAR EDAD Y GENERACIÓN
-# ==============================================================================
 
+# LIMPIAR EDAD Y GENERACIÓN
 project_year <- 2026
 
 year_of_birth_raw <- suppressWarnings(
@@ -429,10 +392,8 @@ df <- df %>%
     )
   )
 
-# ==============================================================================
-# CREAR TABLA DE DESCRIPCIÓN DE MUESTRA
-# ==============================================================================
 
+# CREAR TABLA DE DESCRIPCIÓN DE MUESTRA
 country_raw <- get_optional_col(df, country_col)
 country_clean_from_dataset <- get_optional_col(df, country_clean_col)
 region_from_dataset <- get_optional_col(df, residence_region_col)
@@ -478,10 +439,7 @@ write_csv(
 cat("Participantes únicos en sample_description:", nrow(sample_description), "\n")
 
 
-# ==============================================================================
 # ÓRDENES NATURALES
-# ==============================================================================
-
 natural_orders <- list(
   age_group = c(
     "Generación Z",
@@ -575,11 +533,7 @@ natural_orders <- list(
   )
 )
 
-
-# ==============================================================================
 # PALETAS
-# ==============================================================================
-
 sample_colors <- list(
   age_group = c(
     "Generación Z" = "#56B4E9",
@@ -629,11 +583,7 @@ get_sample_colors <- function(variable_name, categories) {
   colors
 }
 
-
-# ==============================================================================
 # CONFIGURACIÓN VISUAL PARA GRÁFICOS DEL TFM
-# ==============================================================================
-
 plot_base_size <- 16
 plot_title_size <- 19
 plot_subtitle_size <- 13
@@ -671,11 +621,7 @@ theme_sample_tfm <- function() {
     )
 }
 
-
-# ==============================================================================
 # FUNCIONES DE TABLAS Y GRÁFICOS
-# ==============================================================================
-
 get_variable_order <- function(variable_name, data_summary) {
   if (variable_name %in% names(natural_orders)) {
     return(natural_orders[[variable_name]])
@@ -921,11 +867,7 @@ plot_sample_variable_ordered <- function(data, variable_name, variable_label, wi
   return(p)
 }
 
-
-# ==============================================================================
 # VARIABLES A DESCRIBIR
-# ==============================================================================
-
 sample_variables <- tibble(
   variable_name = c(
     "age_group",
@@ -978,11 +920,7 @@ write_csv(
   file.path(csv_dir, "sample_description_variables_used.csv")
 )
 
-
-# ==============================================================================
 # TABLAS RESUMEN
-# ==============================================================================
-
 summary_sample_all <- sample_variables %>%
   rowwise() %>%
   do(
@@ -1001,11 +939,7 @@ write_csv(
 
 print(summary_sample_all, n = Inf)
 
-
-# ==============================================================================
 # GRÁFICOS CATEGÓRICOS
-# ==============================================================================
-
 sample_plots <- list()
 
 for (i in seq_len(nrow(sample_variables))) {
@@ -1042,11 +976,7 @@ for (i in seq_len(nrow(sample_variables))) {
 
 sample_plots <- sample_plots[!sapply(sample_plots, is.null)]
 
-
-# ==============================================================================
 # EDAD NUMÉRICA
-# ==============================================================================
-
 age_summary <- sample_description %>%
   summarise(
     n_valid = sum(!is.na(age)),
@@ -1105,11 +1035,7 @@ if (sum(!is.na(sample_description$age)) > 0) {
   sample_plots[["age_numeric"]] <- plot_age_numeric
 }
 
-
-# ==============================================================================
 # MISSING POR VARIABLE
-# ==============================================================================
-
 missing_sample_description <- sample_description %>%
   summarise(across(-participant_id, ~ sum(is.na(.x)))) %>%
   pivot_longer(
@@ -1131,11 +1057,7 @@ write_csv(
 
 print(missing_sample_description, n = Inf)
 
-
-# ==============================================================================
 # PDF FINAL CON TODOS LOS GRÁFICOS
-# ==============================================================================
-
 pdf(
   file = file.path(pdf_dir, "sample_description_all_plots.pdf"),
   width = 12,
@@ -1149,11 +1071,7 @@ for (p in sample_plots) {
 
 dev.off()
 
-
-# ==============================================================================
 # COMPROBACIONES FINALES
-# ==============================================================================
-
 cat("\nDescripción de muestra generada en:\n")
 cat(base_output_dir, "\n")
 

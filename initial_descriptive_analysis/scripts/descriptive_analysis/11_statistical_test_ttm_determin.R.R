@@ -1,9 +1,9 @@
 #install.packages("PMCMRplus")
 #install.packages("rstatix")
 
-# ==============================================================================
+
 # SCRIPT 09 - CONTRASTES ESTADÍSTICOS POR ETAPA TTM
-# ==============================================================================
+
 
 library(readr)
 library(dplyr)
@@ -12,15 +12,13 @@ library(stringr)
 library(rstatix)
 library(PMCMRplus)
 
-# 1. Cargar datos ---------------------------------------------------------
-
+# 1. Cargar datos 
 df_long <- read_csv(
   "initial_descriptive_analysis/output/ttm_determinants_long_for_boxplots.csv",
   show_col_types = FALSE
 )
 
-# 2. Preparar datos -------------------------------------------------------
-
+# 2. Preparar datos 
 stage_order <- c(
   "No la conoce, pero le genera curiosidad",
   "La conoce / la consideraría",
@@ -40,8 +38,7 @@ df_tests <- df_long %>%
     dimension = as.character(dimension)
   )
 
-# 3. Carpeta de salida ----------------------------------------------------
-
+# 3. Carpeta de salida 
 output_dir <- "initial_descriptive_analysis/output/statistical_tests_ttm"
 
 dir.create(
@@ -50,8 +47,7 @@ dir.create(
   recursive = TRUE
 )
 
-# 4. Kruskal-Wallis por determinante -------------------------------------
-
+# 4. Kruskal-Wallis por determinante 
 kruskal_one_determinant <- function(data) {
   
   if (n_distinct(data$etapa) < 2) {
@@ -96,8 +92,7 @@ write_csv(
 
 print(kruskal_by_determinant, n = Inf)
 
-# 4B. Test de tendencia Jonckheere-Terpstra -----------------------------
-
+# 4B. Test de tendencia Jonckheere-Terpstra
 trend_by_determinant <- df_tests %>%
   group_by(determinant) %>%
   group_modify(~{
@@ -138,8 +133,7 @@ write_csv(
 print(trend_by_determinant, n = Inf)
 
 
-# 5. Posthoc Dunn por determinante ---------------------------------------
-
+# 5. Posthoc Dunn por determinante
 significant_determinants <- kruskal_by_determinant %>%
   filter(p < 0.05) %>%
   pull(determinant)
@@ -170,8 +164,7 @@ write_csv(
 print(dunn_by_determinant, n = Inf)
 
 
-# 8. Resumen compacto -----------------------------------------------------
-
+# 8. Resumen compacto 
 summary_significant_determinants <- kruskal_by_determinant %>%
   mutate(
     significant_raw = p < 0.05,

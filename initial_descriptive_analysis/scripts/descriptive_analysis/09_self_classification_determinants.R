@@ -1,6 +1,5 @@
-# ==============================================================================
+
 # SCRIPT 09 - AUTOCLASIFICACIÓN 4.3 Y PERFIL DE DETERMINANTES
-# ==============================================================================
 
 library(readr)
 library(dplyr)
@@ -13,10 +12,8 @@ library(gridExtra)
 library(grid)
 
 
-# ==============================================================================
-# 1. CARGAR DATOS YA LIMPIOS
-# ==============================================================================
 
+# 1. CARGAR DATOS YA LIMPIOS
 df <- read_csv(
   "initial_descriptive_analysis/output/clean_datasets/df_clean_general.csv",
   show_col_types = FALSE
@@ -25,10 +22,8 @@ df <- read_csv(
 glimpse(df)
 
 
-# ==============================================================================
-# 2. ASEGURAR PARTICIPANT_ID
-# ==============================================================================
 
+# 2. ASEGURAR PARTICIPANT_ID
 if (!"participant_id" %in% names(df)) {
   df <- df %>%
     mutate(
@@ -46,11 +41,7 @@ if (!"participant_id" %in% names(df)) {
 
 cat("Filas usadas en Script 09:", nrow(df), "\n")
 
-
-# ==============================================================================
 # 3. DICCIONARIO ROBUSTO DE DETERMINANTES EN CASTELLANO
-# ==============================================================================
-
 determinant_dictionary <- tribble(
   ~determinant_id, ~determinant_label, ~determinant_prefix,
   "profits", "Beneficio económico", "profits",
@@ -115,10 +106,8 @@ cat("Número de determinantes detectados:", length(determinant_cols), "\n")
 print(determinant_dictionary %>% select(determinant_id, determinant_label, determinant_col))
 
 
-# ==============================================================================
-# 4. DETECTAR COLUMNA DE AUTOCLASIFICACIÓN 4.3
-# ==============================================================================
 
+# 4. DETECTAR COLUMNA DE AUTOCLASIFICACIÓN 4.3
 self_col_candidates <- c(
   "which_statement_best_describes_you_when_making_an_investment_decision_related_to_your_household_final",
   "which_statement_best_describes_you_when_making_an_investment_decision_related_to_your_household"
@@ -133,10 +122,7 @@ if (is.na(self_col)) {
 cat("Columna usada para autoclasificación:", self_col, "\n")
 
 
-# ==============================================================================
 # 5. CARPETAS DE SALIDA
-# ==============================================================================
-
 base_output_dir <- "initial_descriptive_analysis/output/self_classification"
 
 csv_dir <- file.path(base_output_dir, "csv")
@@ -149,11 +135,7 @@ dir.create(pdf_dir, showWarnings = FALSE, recursive = TRUE)
 
 excluded_plot_profiles <- c("Faltante", "Sin clasificar", "Otro")
 
-
-# ==============================================================================
 # 6. CONFIGURACIÓN VISUAL PARA GRÁFICOS DEL TFM
-# ==============================================================================
-
 box_fill <- "#BDE3FF"
 box_color <- "#2C3E50"
 outlier_color <- "#4F4F4F"
@@ -204,10 +186,7 @@ theme_self_heatmap <- theme_minimal(base_size = plot_base_size) +
   )
 
 
-# ==============================================================================
 # 7. FUNCIONES AUXILIARES
-# ==============================================================================
-
 make_subtitle_self <- function(data) {
   paste0(
     "n participantes = ", n_distinct(data$participant_id),
@@ -255,11 +234,7 @@ clean_filename <- function(x) {
     str_replace_all("^_|_$", "")
 }
 
-
-# ==============================================================================
 # 8. RECODIFICAR AUTOCLASIFICACIÓN 4.3 EN CASTELLANO
-# ==============================================================================
-
 df_self <- df %>%
   mutate(
     self_response_raw = as.character(.data[[self_col]]),
@@ -282,10 +257,7 @@ df_self <- df %>%
   )
 
 
-# ==============================================================================
 # 9. TABLA LARGA DE DETERMINANTES + AUTOCLASIFICACIÓN
-# ==============================================================================
-
 determinants_self_long <- df_self %>%
   select(
     participant_id,
@@ -326,10 +298,8 @@ determinants_self_long_plot <- determinants_self_long %>%
   filter(!self_profile %in% excluded_plot_profiles)
 
 
-# ==============================================================================
-# 10. DISTRIBUCIÓN DE AUTOCLASIFICACIÓN
-# ==============================================================================
 
+# 10. DISTRIBUCIÓN DE AUTOCLASIFICACIÓN
 self_profile_counts <- df_self %>%
   count(self_profile, name = "n_participants") %>%
   arrange(desc(n_participants))
@@ -378,10 +348,7 @@ save_plot(
 )
 
 
-# ==============================================================================
 # 11. MEDIA DE DETERMINANTES POR PERFIL
-# ==============================================================================
-
 summary_self_determinants <- determinants_self_long %>%
   group_by(self_profile, determinant_id, determinant_label) %>%
   summarise(
@@ -400,11 +367,7 @@ write_csv(
 summary_self_determinants_plot <- summary_self_determinants %>%
   filter(!self_profile %in% excluded_plot_profiles)
 
-
-# ==============================================================================
 # 12. HEATMAP PERFIL X DETERMINANTES
-# ==============================================================================
-
 plot_heatmap_self <- summary_self_determinants_plot %>%
   mutate(
     self_profile = factor(
@@ -441,11 +404,7 @@ save_plot(
   height = 12
 )
 
-
-# ==============================================================================
 # 13. HEATMAP DE RANKING DENTRO DE CADA PERFIL
-# ==============================================================================
-
 rank_colors <- c(
   "1.º" = "#8B0000",
   "2.º" = "#D7191C",
@@ -527,11 +486,7 @@ save_plot(
   height = 12
 )
 
-
-# ==============================================================================
 # 14. BOXPLOTS DE TODOS LOS DETERMINANTES POR AUTOCLASIFICACIÓN
-# ==============================================================================
-
 plot_boxplots_self_all <- determinants_self_long_plot %>%
   mutate(
     determinant_label = factor(
@@ -564,11 +519,7 @@ save_plot(
   height = 16
 )
 
-
-# ==============================================================================
 # 15. BOXPLOTS DE DETERMINANTES CLAVE
-# ==============================================================================
-
 key_determinants <- c(
   "novelty",
   "trends",
@@ -621,11 +572,7 @@ save_plot(
   height = 12
 )
 
-
-# ==============================================================================
 # 16. BOXPLOTS INDIVIDUALES POR PERFIL AUTOCLASIFICADO
-# ==============================================================================
-
 profiles_boxplots <- determinants_self_long_plot %>%
   pull(self_profile) %>%
   unique()
@@ -688,11 +635,7 @@ for (prof in profiles_boxplots) {
   profile_boxplot_list[[prof]] <- plot_profile_box
 }
 
-
-# ==============================================================================
 # 17. PERFILES MEDIOS DE DETERMINANTES POR AUTOCLASIFICACIÓN
-# ==============================================================================
-
 profiles <- summary_self_determinants_plot %>%
   pull(self_profile) %>%
   unique()
@@ -746,11 +689,7 @@ for (prof in profiles) {
   profile_plots[[prof]] <- plot_profile
 }
 
-
-# ==============================================================================
 # 18. PDF MULTIPÁGINA CON PERFILES MEDIOS
-# ==============================================================================
-
 pdf(
   file = file.path(pdf_dir, "all_self_profiles_determinants.pdf"),
   width = 12,
@@ -763,11 +702,7 @@ for (p in profile_plots) {
 
 dev.off()
 
-
-# ==============================================================================
 # 19. PDF MULTIPÁGINA CON BOXPLOTS POR PERFIL
-# ==============================================================================
-
 pdf(
   file = file.path(pdf_dir, "all_self_profiles_boxplots.pdf"),
   width = 12,
@@ -781,10 +716,7 @@ for (p in profile_boxplot_list) {
 dev.off()
 
 
-# ==============================================================================
 # 20. COMPARACIONES 2x2
-# ==============================================================================
-
 if (length(profile_plots) > 0) {
   comparison_profiles <- marrangeGrob(
     grobs = profile_plots,
@@ -824,10 +756,7 @@ if (length(profile_boxplot_list) > 0) {
 }
 
 
-# ==============================================================================
 # 21. PDF FINAL CON TODOS LOS GRÁFICOS DEL SCRIPT 09
-# ==============================================================================
-
 pdf(
   file = file.path(pdf_dir, "self_classification_determinants_TODO.pdf"),
   width = 16,
@@ -849,11 +778,6 @@ for (p in profile_boxplot_list) {
 }
 
 dev.off()
-
-
-# ==============================================================================
-# 22. MENSAJES FINALES
-# ==============================================================================
 
 cat("Análisis de autoclasificación generado en:", plots_dir, "\n")
 cat("CSV completos guardados incluyendo Faltante, Sin clasificar y Otro.\n")

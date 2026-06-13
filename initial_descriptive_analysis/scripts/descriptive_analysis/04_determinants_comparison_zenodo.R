@@ -71,8 +71,6 @@ df_ours <- read_csv(
 
 
 # 1B. Carpetas de salida
-
-
 base_output_dir <- "initial_descriptive_analysis/output/determinants_comparison"
 
 csv_dir <- file.path(base_output_dir, "csv")

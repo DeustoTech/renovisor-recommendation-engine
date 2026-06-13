@@ -1,6 +1,5 @@
-# ==============================================================================
+
 # SCRIPT 08 - BOXPLOTS DETERMINANTES POR ETAPA TTM
-# ==============================================================================
 
 library(readr)
 library(dplyr)
@@ -13,10 +12,8 @@ library(gridExtra)
 library(grid)
 
 
-# ==============================================================================
-# 1. CARGAR TABLA
-# ==============================================================================
 
+# 1. CARGAR TABLA
 df <- read_csv(
   file.path(
     "initial_descriptive_analysis/output/ttm_stage_analysis/csv",
@@ -28,20 +25,16 @@ df <- read_csv(
 glimpse(df)
 
 
-# ==============================================================================
-# 2. DEFINIR COLUMNAS CLAVE
-# ==============================================================================
 
+# 2. DEFINIR COLUMNAS CLAVE
 id_col <- "participant_id"
 stage_col <- "stage"
 technology_col <- "technology"
 dimension_col <- "dimension"
 
 
-# ==============================================================================
-# 3. DICCIONARIOS EN CASTELLANO
-# ==============================================================================
 
+# 3. DICCIONARIOS EN CASTELLANO
 determinant_dictionary <- tibble(
   determinant_id = c(
     "profits",
@@ -174,11 +167,7 @@ clean_filename <- function(x) {
     str_replace_all("^_|_$", "")
 }
 
-
-# ==============================================================================
 # 4. DEFINIR COLUMNAS DE DETERMINANTES
-# ==============================================================================
-
 non_determinant_cols <- c(
   id_col,
   stage_col,
@@ -199,11 +188,7 @@ determinant_cols <- determinant_cols[
 cat("Número de determinantes detectados:", length(determinant_cols), "\n")
 print(determinant_cols)
 
-
-# ==============================================================================
 # 5. CREAR CARPETAS DE SALIDA
-# ==============================================================================
-
 base_output_dir <- "initial_descriptive_analysis/output/boxplots_ttm_determinants"
 
 csv_dir <- file.path(base_output_dir, "csv")
@@ -217,10 +202,7 @@ dir.create(pdf_dir, showWarnings = FALSE, recursive = TRUE)
 dir.create(profile_rank_dir, showWarnings = FALSE, recursive = TRUE)
 
 
-# ==============================================================================
 # 6. CONFIGURACIÓN VISUAL PARA GRÁFICOS DEL TFM
-# ==============================================================================
-
 plot_base_size <- 15
 plot_title_size <- 18
 plot_subtitle_size <- 13
@@ -269,11 +251,7 @@ theme_boxplot_facets <- theme_minimal(base_size = plot_base_size) +
     plot.margin = margin(12, 45, 12, 12)
   )
 
-
-# ==============================================================================
 # 7. FUNCIONES AUXILIARES
-# ==============================================================================
-
 save_plot <- function(plot, filename, width = 12, height = 7) {
   ggsave(
     filename = file.path(plots_dir, paste0(filename, ".png")),
@@ -291,11 +269,7 @@ make_subtitle <- function(data) {
   )
 }
 
-
-# ==============================================================================
 # 8. PASAR A FORMATO LARGO Y TRADUCIR DETERMINANTES/DIMENSIONES
-# ==============================================================================
-
 df_long <- df %>%
   pivot_longer(
     cols = all_of(determinant_cols),
@@ -326,11 +300,7 @@ write_csv(
 
 glimpse(df_long)
 
-
-# ==============================================================================
 # 9. CREAR DATASET GENERAL
-# ==============================================================================
-
 df_general_long <- df_long %>%
   mutate(etapa = "General")
 
@@ -353,10 +323,7 @@ df_all_long <- bind_rows(
   )
 
 
-# ==============================================================================
 # 10. BOXPLOTS DE 32 DETERMINANTES POR ETAPA
-# ==============================================================================
-
 create_32det_boxplot <- function(data, etapa_filtrada, titulo) {
   
   data_filtrada <- data %>%
@@ -431,10 +398,7 @@ for (p in plots_32) {
 dev.off()
 
 
-# ==============================================================================
 # 11. COMPARACIÓN 2x2
-# ==============================================================================
-
 plot_32_comparison_2x2 <- grid.arrange(
   plot_32_general,
   plot_32_implementada,
@@ -464,10 +428,8 @@ ggsave(
 )
 
 
-# ==============================================================================
-# 12. COMPARACIÓN POR DETERMINANTE
-# ==============================================================================
 
+# 12. COMPARACIÓN POR DETERMINANTE
 plot_determinants_by_stage <- df_all_long %>%
   ggplot(aes(x = etapa, y = value)) +
   geom_boxplot(
@@ -501,11 +463,7 @@ ggsave(
   height = 15
 )
 
-
-# ==============================================================================
 # 13. BOXPLOTS POR PERFIL: DETERMINANTES POR ETAPA CON COLOR DE RANKING
-# ==============================================================================
-
 df_profile <- read_csv(
   file.path(
     "initial_descriptive_analysis/output/data_preparation/csv",
@@ -707,10 +665,7 @@ for (p in plots_profile_stage_rank) {
 dev.off()
 
 
-# ==============================================================================
 # 14. BOXPLOT AGREGADO POR DIMENSIÓN
-# ==============================================================================
-
 plot_dimensions_by_stage <- df_all_long %>%
   ggplot(aes(x = etapa, y = value)) +
   geom_boxplot(
@@ -744,11 +699,7 @@ ggsave(
   height = 10
 )
 
-
-# ==============================================================================
 # 15. 32 DETERMINANTES RESALTANDO CADA DIMENSIÓN
-# ==============================================================================
-
 determinant_dimension_map <- read_csv(
   file.path(
     "initial_descriptive_analysis/output/ttm_stage_analysis/csv",
@@ -856,11 +807,7 @@ for (p in plots_32det_by_dimension) {
 
 dev.off()
 
-
-# ==============================================================================
 # 16. PDF FINAL CON TODO
-# ==============================================================================
-
 pdf(
   file = file.path(pdf_dir, "boxplots_ttm_determinants_TODO.pdf"),
   width = 16,
@@ -894,10 +841,7 @@ for (p in plots_32det_by_dimension) {
 dev.off()
 
 
-# ==============================================================================
 # 17. RESÚMENES NUMÉRICOS
-# ==============================================================================
-
 summary_by_stage_determinant <- df_all_long %>%
   group_by(etapa, determinant) %>%
   summarise(

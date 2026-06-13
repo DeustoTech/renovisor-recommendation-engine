@@ -1,6 +1,5 @@
-# ==============================================================================
+
 # SCRIPT 07 - ETAPAS TTM, DIMENSIONES Y VECTOR DE DETERMINANTES
-# ==============================================================================
 
 # Descripción de dimensiones:
 #
@@ -49,11 +48,6 @@
 # la decisión. Incluye la contribución social, el valor añadido y la percepción de
 # que la acción tiene un significado más allá del beneficio económico.
 
-
-# ==============================================================================
-# 0. LIBRERÍAS
-# ==============================================================================
-
 library(readr)
 library(dplyr)
 library(tidyr)
@@ -63,10 +57,8 @@ library(purrr)
 library(ggplot2)
 
 
-# ==============================================================================
-# 1. CARGAR DATOS Y DEFINIR CARPETAS
-# ==============================================================================
 
+# 1. CARGAR DATOS Y DEFINIR CARPETAS
 df <- read_csv(
   "initial_descriptive_analysis/output/clean_datasets/df_clean_general.csv",
   show_col_types = FALSE
@@ -95,11 +87,7 @@ df <- df %>%
     )
   )
 
-
-# ==============================================================================
 # 2. FUNCIÓN PARA GUARDAR GRÁFICOS
-# ==============================================================================
-
 save_plot_png <- function(plot, filename, width = 10, height = 6) {
   ggsave(
     filename = file.path(plots_dir, paste0(filename, ".png")),
@@ -110,11 +98,7 @@ save_plot_png <- function(plot, filename, width = 10, height = 6) {
   )
 }
 
-
-# ==============================================================================
 # 3. CONFIGURACIÓN VISUAL PARA GRÁFICOS DEL TFM
-# ==============================================================================
-
 plot_base_size <- 15
 plot_title_size <- 18
 plot_subtitle_size <- 13
@@ -160,10 +144,7 @@ theme_ttm_heatmap <- theme_minimal(base_size = plot_base_size) +
   )
 
 
-# ==============================================================================
 # 4. DICCIONARIO DE DETERMINANTES
-# ==============================================================================
-
 determinant_ids <- c(
   "profits",
   "credit_score_access_to_funding",
@@ -267,11 +248,7 @@ write_csv(
 
 print(determinant_dictionary, n = Inf)
 
-
-# ==============================================================================
 # 5. CORRESPONDENCIA DIMENSIÓN -> DETERMINANTES
-# ==============================================================================
-
 dimension_determinant_mapping <- tibble(
   dimension = c(
     "FINANCIAL",
@@ -332,11 +309,7 @@ write_csv(
   file.path(csv_dir, "dimension_determinant_mapping.csv")
 )
 
-
-# ==============================================================================
 # 6. FUNCIONES AUXILIARES
-# ==============================================================================
-
 clean_determinant_score <- function(x) {
   x <- suppressWarnings(as.numeric(x))
   
@@ -420,11 +393,7 @@ extract_dimensions <- function(x) {
   detected
 }
 
-
-# ==============================================================================
 # 7. MATRIZ DE DETERMINANTES POR PARTICIPANTE
-# ==============================================================================
-
 determinants_wide <- df %>%
   select(participant_id, all_of(determinant_cols)) %>%
   pivot_longer(
@@ -454,11 +423,7 @@ write_csv(
   file.path(csv_dir, "ttm_determinants_wide.csv")
 )
 
-
-# ==============================================================================
 # 8. LOCALIZAR COLUMNAS DE ETAPA/DIMENSIÓN
-# ==============================================================================
-
 find_unique_col <- function(pattern, label, exclude_pattern = NULL) {
   
   matches <- names(df)[
@@ -542,11 +507,7 @@ cat("Tecnología curiosidad:", curious_technology_col, "\n")
 cat("Dimensiones curiosidad:", curious_dimensions_col, "\n")
 cat("Tecnología nunca:", never_technology_col, "\n")
 
-
-# ==============================================================================
 # 9. CREAR TABLA ETAPA - TECNOLOGÍA - DIMENSIÓN
-# ==============================================================================
-
 implemented_stage <- df %>%
   transmute(
     participant_id,
@@ -599,11 +560,7 @@ write_csv(
   file.path(csv_dir, "ttm_stage_technology_raw.csv")
 )
 
-
-# ==============================================================================
 # 10. EXPANDIR DIMENSIONES SELECCIONADAS
-# ==============================================================================
-
 ttm_stage_dimension_long <- ttm_stage_raw %>%
   unnest_longer(
     dimensions_list,
@@ -638,10 +595,7 @@ write_csv(
 print(ttm_stage_dimension_long, n = 100)
 
 
-# ==============================================================================
 # 11. RESUMEN DE TECNOLOGÍAS POR ETAPA
-# ==============================================================================
-
 summary_technology_by_stage <- ttm_stage_dimension_long %>%
   distinct(participant_id, stage, technology) %>%
   count(
@@ -663,11 +617,7 @@ write_csv(
 
 print(summary_technology_by_stage, n = Inf)
 
-
-# ==============================================================================
 # 12. RESUMEN DE DIMENSIONES POR ETAPA
-# ==============================================================================
-
 summary_dimension_by_stage <- ttm_stage_dimension_long %>%
   filter(!is.na(dimension)) %>%
   count(
@@ -689,11 +639,7 @@ write_csv(
 
 print(summary_dimension_by_stage, n = Inf)
 
-
-# ==============================================================================
 # 13. PREPARAR MAPPING DIMENSIÓN -> DETERMINANTES
-# ==============================================================================
-
 dimension_determinant_mapping_fixed <- dimension_determinant_mapping %>%
   rename(dimension_key = dimension) %>%
   mutate(
@@ -728,10 +674,7 @@ print(
 )
 
 
-# ==============================================================================
 # 14. CONSTRUIR VECTOR DE 32 DETERMINANTES POR ETAPA/DIMENSIÓN
-# ==============================================================================
-
 determinants_long_scores <- determinants_wide %>%
   pivot_longer(
     cols = all_of(determinant_ids),
@@ -846,11 +789,7 @@ write_csv(
   file.path(csv_dir, "ttm_stage_determinant_vector_wide_valid.csv")
 )
 
-
-# ==============================================================================
 # 15. RESUMEN DE DETERMINANTES POR ETAPA
-# ==============================================================================
-
 summary_determinants_by_stage <- ttm_stage_determinant_vector_long %>%
   filter(
     is_linked == 1,
@@ -880,11 +819,7 @@ write_csv(
 
 print(summary_determinants_by_stage, n = Inf)
 
-
-# ==============================================================================
 # 16. GRÁFICO FINAL ETAPA / INTERVENCIÓN / DIMENSIÓN / VECTOR
-# ==============================================================================
-
 stage_levels <- c(
   "Implementada",
   "La conoce / la consideraría",
@@ -974,11 +909,7 @@ save_plot_png(
   height = 14
 )
 
-
-# ==============================================================================
 # 17. TECNOLOGÍAS POR ETAPA
-# ==============================================================================
-
 plot_technology_by_stage <- summary_technology_by_stage %>%
   group_by(stage) %>%
   slice_max(n_participants, n = 10, with_ties = FALSE) %>%
@@ -1022,11 +953,7 @@ save_plot_png(
   height = 9
 )
 
-
-# ==============================================================================
 # 18. DIMENSIONES POR ETAPA
-# ==============================================================================
-
 plot_dimensions_by_stage_percentage <- summary_dimension_by_stage %>%
   mutate(
     stage = factor(stage, levels = stage_levels),
@@ -1075,11 +1002,7 @@ save_plot_png(
   height = 7
 )
 
-
-# ==============================================================================
 # 19. HEATMAP ETAPA X DIMENSIÓN
-# ==============================================================================
-
 plot_heatmap_dimensions_by_stage <- summary_dimension_by_stage %>%
   mutate(
     stage = factor(stage, levels = stage_levels),
@@ -1128,11 +1051,7 @@ save_plot_png(
   height = 7
 )
 
-
-# ==============================================================================
 # 20. TOP DETERMINANTES POR ETAPA
-# ==============================================================================
-
 plot_top_determinants_by_stage <- summary_determinants_by_stage %>%
   group_by(stage) %>%
   slice_max(n_mentions, n = 8, with_ties = FALSE) %>%
@@ -1176,11 +1095,7 @@ save_plot_png(
   height = 9
 )
 
-
-# ==============================================================================
 # 21. HEATMAP DE SCORE MEDIO DE DETERMINANTES POR ETAPA
-# ==============================================================================
-
 plot_heatmap_determinants_mean_score <- summary_determinants_by_stage %>%
   group_by(determinant_label) %>%
   mutate(
