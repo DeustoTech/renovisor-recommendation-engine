@@ -1,8 +1,6 @@
-# ==============================================================================
-# SCRIPT 06 - CLUSTERING K-MEANS CON 32 DETERMINANTES
-# ==============================================================================
 
-# Librerías
+# SCRIPT 06 - CLUSTERING K-MEANS CON 32 DETERMINANTES
+
 library(readr)
 library(dplyr)
 library(tidyr)

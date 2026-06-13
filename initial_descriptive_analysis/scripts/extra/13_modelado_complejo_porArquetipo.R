@@ -121,10 +121,7 @@ write_csv(
   file.path(csv_dir, "expert_archetype_stage_determinants.csv")
 )
 
-# ==============================================================================
 # 6. Generar dataset sintético
-# ==============================================================================
-
 participants <- tibble(
   participant_id = paste0("synthetic_", seq_len(N_SYNTHETIC_PARTICIPANTS)),
   arquetipo = sample(

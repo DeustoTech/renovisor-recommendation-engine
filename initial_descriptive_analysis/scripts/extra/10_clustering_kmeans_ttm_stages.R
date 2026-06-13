@@ -1,6 +1,5 @@
-# ==============================================================================
+
 # SCRIPT 10 - CLUSTERING K-MEANS GENERAL Y POR ETAPA TTM
-# ==============================================================================
 
 # Este script realiza clustering mediante k-means sobre los 32 determinantes
 # de decisión relacionados con renovaciones energéticas residenciales.
@@ -27,13 +26,9 @@
 #    - se generan gráficos y PDFs,
 #    - se compara con la autoclasificación de la pregunta 4.3 si está disponible.
 #
-# ==============================================================================
 
 
 ### forzar con 8 !!!!!!!!!!!!!!!!!
-
-# Librerías
-
 library(readr)
 library(dplyr)
 library(tidyr)
@@ -45,10 +40,7 @@ library(purrr)
 library(gridExtra)
 
 
-# ==============================================================================
 # 1. Cargar datasets
-# ==============================================================================
-
 df_general <- read_csv(
   "initial_descriptive_analysis/output/df_analysis_ready.csv",
   show_col_types = FALSE
@@ -65,7 +57,7 @@ cat("Filas df_ttm:", nrow(df_ttm), "\n")
 cat("Columnas df_ttm:", ncol(df_ttm), "\n")
 
 
-# Crear participant_id en df_general -------------------------------------------
+# Crear participant_id en df_general
 
 df_general <- df_general %>%
   mutate(
@@ -78,10 +70,8 @@ df_general <- df_general %>%
   )
 
 
-# ==============================================================================
-# 2. Definir determinantes
-# ==============================================================================
 
+# 2. Definir determinantes
 # Columnas originales del bloque "Determinants" en df_analysis_ready.csv
 determinant_cols_general <- names(df_general)[8:39]
 
@@ -165,8 +155,7 @@ determinant_dictionary <- tibble(
 cat("Número de determinantes General:", length(determinant_cols_general), "\n")
 
 
-# Columnas de determinantes en la tabla TTM ------------------------------------
-
+# Columnas de determinantes en la tabla TTM 
 id_col <- "participant_id"
 stage_col <- "stage"
 technology_col <- "technology"
@@ -199,10 +188,8 @@ if (length(determinant_cols_ttm) != 32) {
 }
 
 
-# ==============================================================================
-# 3. Crear carpetas de salida
-# ==============================================================================
 
+# 3. Crear carpetas de salida
 output_dir <- "initial_descriptive_analysis/output/clustering_ttm_stages"
 plots_dir <- file.path(output_dir, "plots")
 
@@ -214,11 +201,7 @@ write_csv(
   file.path(output_dir, "determinant_dictionary_clustering.csv")
 )
 
-
-# ==============================================================================
 # 4. Funciones auxiliares
-# ==============================================================================
-
 clean_determinant_score <- function(x) {
   
   x <- suppressWarnings(as.numeric(x))
@@ -257,10 +240,7 @@ theme_clustering <- theme_minimal(base_size = 12) +
   )
 
 
-# ==============================================================================
 # 5. Preparar matriz General desde df_analysis_ready.csv
-# ==============================================================================
-
 prepare_general_matrix <- function(data) {
   
   data_long <- data %>%
@@ -356,10 +336,7 @@ prepare_general_matrix <- function(data) {
 }
 
 
-# ==============================================================================
 # 6. Preparar matriz por etapa desde ttm_stage_determinant_vector_wide.csv
-# ==============================================================================
-
 prepare_stage_matrix <- function(data, selected_stage) {
   
   matrix_data <- data %>%
@@ -409,16 +386,11 @@ prepare_stage_matrix <- function(data, selected_stage) {
 }
 
 
-# ==============================================================================
 # 7. Función principal de clustering
-# ==============================================================================
-
 run_kmeans_for_stage <- function(stage_name, data_matrix, k_max_input = 8) {
   
-  cat("\n==============================\n")
   cat("CLUSTERING:", stage_name, "\n")
-  cat("==============================\n")
-  
+
   stage_file <- safe_name(stage_name)
   
   if (nrow(data_matrix) < 4) {
@@ -505,8 +477,7 @@ run_kmeans_for_stage <- function(stage_name, data_matrix, k_max_input = 8) {
     iter.max = 100
   )
   
-  # Asignaciones ---------------------------------------------------------------
-  
+  # Asignaciones 
   cluster_assignments <- data_matrix %>%
     select(participant_id, etapa_cluster) %>%
     mutate(
@@ -521,8 +492,7 @@ run_kmeans_for_stage <- function(stage_name, data_matrix, k_max_input = 8) {
     file.path(output_dir, paste0("cluster_assignments_", stage_file, ".csv"))
   )
   
-  # Tamaños --------------------------------------------------------------------
-  
+  # Tamaños 
   cluster_sizes <- cluster_assignments %>%
     count(etapa_cluster, cluster, name = "n_participants")
   
@@ -531,8 +501,7 @@ run_kmeans_for_stage <- function(stage_name, data_matrix, k_max_input = 8) {
     file.path(output_dir, paste0("cluster_sizes_", stage_file, ".csv"))
   )
   
-  # Centroides en escala original ----------------------------------------------
-  
+  # Centroides en escala original
   matrix_with_cluster <- data_matrix %>%
     left_join(
       cluster_assignments,
@@ -572,8 +541,7 @@ run_kmeans_for_stage <- function(stage_name, data_matrix, k_max_input = 8) {
     file.path(output_dir, paste0("centroids_long_", stage_file, ".csv"))
   )
   
-  # Diferencias respecto a la media --------------------------------------------
-  
+  # Diferencias respecto a la media
   overall_means <- data_matrix %>%
     summarise(
       across(
@@ -630,8 +598,7 @@ run_kmeans_for_stage <- function(stage_name, data_matrix, k_max_input = 8) {
     file.path(output_dir, paste0("top_negative_determinants_", stage_file, ".csv"))
   )
   
-  # Persona representativa ------------------------------------------------------
-  
+  # Persona representativa
   centers_scaled <- km_final$centers
   
   distances_to_centroid <- map_dfr(1:nrow(x_scaled), function(i) {
@@ -662,8 +629,7 @@ run_kmeans_for_stage <- function(stage_name, data_matrix, k_max_input = 8) {
     file.path(output_dir, paste0("representative_persons_", stage_file, ".csv"))
   )
   
-  # PCA ------------------------------------------------------------------------
-  
+  # PCA 
   pca <- prcomp(
     x_scaled,
     center = FALSE,
@@ -687,10 +653,7 @@ run_kmeans_for_stage <- function(stage_name, data_matrix, k_max_input = 8) {
     file.path(output_dir, paste0("pca_scores_", stage_file, ".csv"))
   )
   
-  # ============================================================================
   # Gráficos
-  # ============================================================================
-  
   plot_elbow <- ggplot(
     k_diagnostics,
     aes(x = k, y = total_withinss)
@@ -866,11 +829,7 @@ matrices <- list(
   "No la conoce, pero le genera curiosidad" = prepare_stage_matrix(df_ttm, "No la conoce, pero le genera curiosidad")
 )
 
-
-# ==============================================================================
 # 9. Ejecutar clustering
-# ==============================================================================
-
 results <- imap(
   matrices,
   ~ run_kmeans_for_stage(
@@ -880,11 +839,7 @@ results <- imap(
   )
 )
 
-
-# ==============================================================================
 # 10. Unir resultados globales
-# ==============================================================================
-
 all_assignments <- results %>%
   compact() %>%
   map_dfr("assignments")
@@ -934,10 +889,7 @@ write_csv(
 )
 
 
-# ==============================================================================
 # 11. Comparar con autoclasificación 4.3 si existe
-# ==============================================================================
-
 self_classification_path <- "initial_descriptive_analysis/output/self_classification_4_3_clean.csv"
 
 if (file.exists(self_classification_path)) {
@@ -1017,11 +969,7 @@ if (file.exists(self_classification_path)) {
   )
 }
 
-
-# ==============================================================================
 # 12. PDF final con todos los gráficos
-# ==============================================================================
-
 pdf(
   file = file.path(
     plots_dir,
