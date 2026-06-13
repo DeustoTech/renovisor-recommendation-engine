@@ -1,6 +1,6 @@
-# ==============================================================================
+
 # SCRIPT 17 - CLMM DATOS SINTÉTICOS 5 MACROARQUETIPOS x 3 ETAPAS x 9 DIMENSIONES
-# ==============================================================================
+
 # Objetivo:
 #   Ajustar modelos CLMM sobre datos sintéticos.
 #
@@ -15,7 +15,6 @@
 #   M0: adoption_stage ~ macro_archetype_5 + (1 | participant_id)
 #   M1: adoption_stage ~ macro_archetype_5 + dimensiones + (1 | participant_id)
 #   M2: adoption_stage ~ macro_archetype_5 * dimensiones + (1 | participant_id)
-# ==============================================================================
 
 library(dplyr)
 library(tidyr)
@@ -28,10 +27,8 @@ library(broom.mixed)
 
 set.seed(123)
 
-# ==============================================================================
-# 1. CONFIGURACIÓN GENERAL
-# ==============================================================================
 
+# 1. CONFIGURACIÓN GENERAL
 RUN_BOOTSTRAPS <- TRUE
 
 # Primero prueba con 5 o 10.
@@ -55,10 +52,8 @@ mapping_candidates <- c(
   file.path(synthetic_csv_dir, "dimension_determinant_mapping_long.csv")
 )
 
-# ==============================================================================
-# 2. CARPETAS
-# ==============================================================================
 
+# 2. CARPETAS
 base_output_dir <- "initial_descriptive_analysis/output/model_5arq_9dim_clmm_standardized_determinants"
 
 csv_dir <- file.path(base_output_dir, "csv")
@@ -69,10 +64,7 @@ dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(bootstrap_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(models_dir, recursive = TRUE, showWarnings = FALSE)
 
-# ==============================================================================
 # 3. DICCIONARIOS
-# ==============================================================================
-
 dimension_dictionary <- tibble(
   dimension_key = c(
     "FINANCIAL",
@@ -141,10 +133,8 @@ write_csv(stage_dictionary, file.path(csv_dir, "stage_dictionary_castellano.csv"
 write_csv(macro_archetype_dictionary, file.path(csv_dir, "macro_archetype_dictionary_castellano.csv"))
 write_csv(model_dictionary, file.path(csv_dir, "model_dictionary_castellano.csv"))
 
-# ==============================================================================
-# 4. FUNCIONES AUXILIARES
-# ==============================================================================
 
+# 4. FUNCIONES AUXILIARES
 safe_z_zero <- function(x) {
   x <- suppressWarnings(as.numeric(x))
   
@@ -288,10 +278,7 @@ get_sample_label_es <- function(sample_label) {
   )
 }
 
-# ==============================================================================
 # 5. RECONSTRUIR DIMENSIONES DESDE DETERMINANTES ESTANDARIZADOS
-# ==============================================================================
-
 determinant_mapping <- read_determinant_mapping()
 
 rebuild_dimensions_from_standardized_determinants <- function(data_i, dataset_label = "dataset") {
@@ -418,10 +405,7 @@ rebuild_dimensions_from_standardized_determinants <- function(data_i, dataset_la
   data_out
 }
 
-# ==============================================================================
 # 6. CARGAR DATOS SINTÉTICOS
-# ==============================================================================
-
 if (!file.exists(synthetic_full_path)) {
   stop("No existe synthetic_5arq_9dim.csv en: ", synthetic_full_path)
 }
@@ -450,10 +434,8 @@ cat("\nDatos sintéticos cargados correctamente\n")
 cat("Filas dataset completo:", nrow(df_full), "\n")
 cat("Participantes dataset completo:", n_distinct(df_full$participant_id), "\n")
 
-# ==============================================================================
-# 7. VALIDACIONES
-# ==============================================================================
 
+# 7. VALIDACIONES
 required_cols <- c(
   "participant_id",
   "macro_archetype_5",
@@ -479,10 +461,8 @@ if (RUN_BOOTSTRAPS) {
   }
 }
 
-# ==============================================================================
-# 8. PREPARAR DATOS CLMM
-# ==============================================================================
 
+# 8. PREPARAR DATOS CLMM
 prepare_clmm_data <- function(data_i) {
   
   macro_levels <- c(
@@ -532,10 +512,8 @@ prepare_clmm_data <- function(data_i) {
     )
 }
 
-# ==============================================================================
-# 9. FÓRMULAS
-# ==============================================================================
 
+# 9. FÓRMULAS
 build_formula <- function(model_type) {
   
   z_dims <- paste0("z_", dimensions)
@@ -580,10 +558,8 @@ build_formula <- function(model_type) {
   as.formula(formula_txt)
 }
 
-# ==============================================================================
-# 10. AJUSTE SEGURO
-# ==============================================================================
 
+# 10. AJUSTE SEGURO
 fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot_id) {
   
   formula_i <- build_formula(model_type)
@@ -743,10 +719,8 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
   )
 }
 
-# ==============================================================================
-# 11. MODELOS SOBRE DATASET COMPLETO
-# ==============================================================================
 
+# 11. MODELOS SOBRE DATASET COMPLETO
 df_full_clmm <- prepare_clmm_data(df_full)
 
 write_csv(
@@ -792,10 +766,8 @@ write_csv(full_model_terms, file.path(csv_dir, "clmm_synthetic_full_model_terms.
 cat("\nResumen modelos sintéticos completos:\n")
 print(full_model_summary, n = Inf)
 
-# ==============================================================================
-# 12. MODELOS SOBRE BOOTSTRAPS SINTÉTICOS
-# ==============================================================================
 
+# 12. MODELOS SOBRE BOOTSTRAPS SINTÉTICOS
 if (RUN_BOOTSTRAPS) {
   
   bootstrap_keys <- df_bootstrap_raw %>%
@@ -874,10 +846,7 @@ if (RUN_BOOTSTRAPS) {
   bootstrap_model_terms <- tibble()
 }
 
-# ==============================================================================
 # 13. COMPARACIÓN DE MODELOS
-# ==============================================================================
-
 model_comparison_full <- full_model_summary %>%
   select(
     sample_label,
@@ -928,10 +897,7 @@ if (nrow(bootstrap_model_summary) > 0) {
   )
 }
 
-# ==============================================================================
 # 14. TÉRMINOS SIGNIFICATIVOS
-# ==============================================================================
-
 significant_terms_full <- full_model_terms %>%
   filter(!is.na(p.value)) %>%
   arrange(model_type, p.value)
@@ -989,11 +955,6 @@ if (nrow(bootstrap_model_terms) > 0) {
   )
 }
 
-# ==============================================================================
-# 15. SALIDA FINAL
-# ==============================================================================
-
-cat("\nScript sintético terminado correctamente.\n")
 cat("Archivos en:\n")
 cat(csv_dir, "\n")
 

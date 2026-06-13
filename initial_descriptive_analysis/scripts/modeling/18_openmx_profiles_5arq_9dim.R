@@ -1,7 +1,8 @@
-# ==============================================================================
+
+
 # SCRIPT 18 - OPENMX 5 ARQUETIPOS x 3 ETAPAS x 9 DIMENSIONES
 # Modelo de perfiles conocidos: macro_archetype_5 x adoption_stage
-# ==============================================================================
+
 
 library(dplyr)
 library(tidyr)
@@ -13,10 +14,7 @@ library(OpenMx)
 
 set.seed(123)
 
-# ==============================================================================
 # 1. CARPETAS
-# ==============================================================================
-
 base_output_dir <- "initial_descriptive_analysis/output/model_5arq_9dim"
 
 csv_dir <- file.path(base_output_dir, "csv")
@@ -27,10 +25,8 @@ dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(bootstrap_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(models_dir, recursive = TRUE, showWarnings = FALSE)
 
-# ==============================================================================
-# 2. DICCIONARIOS EN CASTELLANO
-# ==============================================================================
 
+# 2. DICCIONARIOS EN CASTELLANO
 dimension_dictionary <- tibble(
   dimension = c(
     "FINANCIAL",
@@ -101,10 +97,8 @@ write_csv(
   file.path(csv_dir, "archetype_dictionary_castellano.csv")
 )
 
-# ==============================================================================
-# 3. PARÁMETROS
-# ==============================================================================
 
+# 3. PARÁMETROS
 dimensions <- dimension_dictionary$dimension
 macro_archetypes <- archetype_dictionary$macro_archetype_5
 stage_levels <- stage_dictionary$adoption_stage
@@ -122,10 +116,8 @@ MX_EXTRA_TRIES <- 10
 # Optimizador OpenMx
 mxOption(NULL, "Default optimizer", "SLSQP")
 
-# ==============================================================================
-# 4. CARGAR DATOS
-# ==============================================================================
 
+# 4. CARGAR DATOS
 df_full <- read_csv(
   file.path(csv_dir, "synthetic_5arq_9dim.csv"),
   show_col_types = FALSE
@@ -141,10 +133,8 @@ cat("Filas dataset completo original:", nrow(df_full), "\n")
 cat("Participantes dataset completo:", n_distinct(df_full$participant_id), "\n")
 cat("Filas dataset bootstrap original:", nrow(df_bootstrap), "\n")
 
-# ==============================================================================
-# 5. VALIDACIONES
-# ==============================================================================
 
+# 5. VALIDACIONES
 required_full_cols <- c(
   "participant_id",
   "macro_archetype_5",
@@ -176,10 +166,7 @@ if (length(missing_boot) > 0) {
   )
 }
 
-# ==============================================================================
 # 6. LIMPIAR DATASETS: SOLO COLUMNAS NECESARIAS PARA OPENMX
-# ==============================================================================
-
 df_full <- df_full %>%
   select(
     participant_id,
@@ -210,10 +197,8 @@ print(names(df_full))
 cat("\nColumnas usadas en OpenMx bootstrap:\n")
 print(names(df_bootstrap))
 
-# ==============================================================================
-# 7. MAPA DE PERFILES
-# ==============================================================================
 
+# 7. MAPA DE PERFILES
 profile_map <- expand_grid(
   macro_archetype_5 = macro_archetypes,
   adoption_stage = stage_levels
@@ -241,10 +226,8 @@ write_csv(
 cat("\nMapa de perfiles OpenMx:\n")
 print(profile_map, n = Inf)
 
-# ==============================================================================
-# 8. PREPARAR DATOS PARA OPENMX
-# ==============================================================================
 
+# 8. PREPARAR DATOS PARA OPENMX
 prepare_openmx_data <- function(data_i) {
   
   data_i %>%
@@ -261,10 +244,7 @@ prepare_openmx_data <- function(data_i) {
     filter(!is.na(profile_id))
 }
 
-# ==============================================================================
 # 9. CREAR UN SUBMODELO OPENMX PARA UN PERFIL
-# ==============================================================================
-
 build_profile_submodel <- function(data_profile, profile_model_name) {
   
   # OpenMx solo debe recibir las 9 dimensiones observadas.
@@ -336,10 +316,7 @@ build_profile_submodel <- function(data_profile, profile_model_name) {
   )
 }
 
-# ==============================================================================
 # 10. AJUSTAR MODELO OPENMX PARA UN DATASET
-# ==============================================================================
-
 fit_openmx_profiles <- function(data_i, sample_label, n_participants, boot_id) {
   
   cat(
@@ -601,10 +578,7 @@ fit_openmx_profiles <- function(data_i, sample_label, n_participants, boot_id) {
   )
 }
 
-# ==============================================================================
 # 11. AJUSTE EN DATASET COMPLETO
-# ==============================================================================
-
 full_result <- fit_openmx_profiles(
   data_i = df_full,
   sample_label = "full",
@@ -633,10 +607,8 @@ print(full_result$summary)
 cat("\nEstimaciones de perfiles dataset completo:\n")
 print(full_result$profiles, n = 50)
 
-# ==============================================================================
-# 12. AJUSTE EN BOOTSTRAPS / SUBMUESTRAS
-# ==============================================================================
 
+# 12. AJUSTE EN BOOTSTRAPS / SUBMUESTRAS
 if (RUN_BOOTSTRAPS) {
   
   bootstrap_keys <- df_bootstrap %>%
@@ -728,10 +700,7 @@ if (RUN_BOOTSTRAPS) {
   print(profile_stability, n = 80)
 }
 
-# ==============================================================================
 # 13. TABLA TIPO HEATMAP PARA GRÁFICOS
-# ==============================================================================
-
 if (nrow(full_result$profiles) > 0) {
   
   openmx_heatmap_data <- full_result$profiles %>%
@@ -758,10 +727,7 @@ if (nrow(full_result$profiles) > 0) {
   )
 }
 
-# ==============================================================================
 # 14. VERSIONES MÁS LEGIBLES EN CASTELLANO
-# ==============================================================================
-
 openmx_full_model_summary_castellano <- full_result$summary %>%
   select(
     muestra = sample_label_es,
@@ -899,10 +865,8 @@ if (RUN_BOOTSTRAPS) {
   )
 }
 
-# ==============================================================================
-# 15. MENSAJE FINAL
-# ==============================================================================
 
+# 15. MENSAJE FINAL
 cat("Archivos principales creados:\n")
 cat("- openmx_profile_map_5arq_3stage.csv\n")
 cat("- openmx_full_model_summary.csv\n")

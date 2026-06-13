@@ -1,7 +1,7 @@
-# ==============================================================================
+
 # SCRIPT 20 - CLMM SOBRE BOOTSTRAPS POLÍTICOS
 # 4 MACROARQUETIPOS x 3 ETAPAS x 9 DIMENSIONES
-# ==============================================================================
+
 # Objetivo:
 #   Aplicar modelos CLMM sobre las muestras bootstrap políticas generadas
 #   previamente en el SCRIPT 19.
@@ -18,7 +18,7 @@
 #   - Lee:
 #       bootstrap_political_profile_4blocks_draws.csv
 #   - Reconstruye cada muestra bootstrap uniendo esos IDs con el dataset real CLMM.
-# ==============================================================================
+
 
 library(dplyr)
 library(tidyr)
@@ -31,10 +31,8 @@ library(broom.mixed)
 
 set.seed(123)
 
-# ==============================================================================
-# 1. CONFIGURACIÓN GENERAL
-# ==============================================================================
 
+# 1. CONFIGURACIÓN GENERAL
 EXCLUDE_UNINTERESTED_REAL <- TRUE
 
 RUN_FULL_MODEL <- TRUE
@@ -55,10 +53,8 @@ MODELS_TO_RUN <- c("M0", "M1", "M2")
 
 political_draws_path <- "initial_descriptive_analysis/output/bootstrap_political_profile_4blocks/draws/bootstrap_political_profile_4blocks_draws.csv"
 
-# ==============================================================================
-# 2. CARPETAS
-# ==============================================================================
 
+# 2. CARPETAS
 base_output_dir <- "initial_descriptive_analysis/output/model_4arq_9dim_real_clmm_political_bootstrap_standardized_determinants"
 
 csv_dir <- file.path(base_output_dir, "csv")
@@ -69,10 +65,7 @@ dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(bootstrap_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(models_dir, recursive = TRUE, showWarnings = FALSE)
 
-# ==============================================================================
 # 3. DICCIONARIOS
-# ==============================================================================
-
 dimension_dictionary <- tibble(
   dimension_key = c(
     "FINANCIAL",
@@ -141,10 +134,8 @@ write_csv(model_dictionary, file.path(csv_dir, "model_dictionary_castellano.csv"
 dimensions <- dimension_dictionary$dimension_key
 stage_levels <- stage_dictionary$adoption_stage
 
-# ==============================================================================
-# 4. FUNCIONES AUXILIARES
-# ==============================================================================
 
+# 4. FUNCIONES AUXILIARES
 clean_text_basic <- function(x) {
   x <- str_squish(as.character(x))
   x <- na_if(x, "")
@@ -289,10 +280,7 @@ get_sample_label_es <- function(sample_label) {
   )
 }
 
-# ==============================================================================
 # 5. CREAR DATASET REAL PARA CLMM
-# ==============================================================================
-
 build_real_clmm_dataset <- function() {
   
   ttm_path <- "initial_descriptive_analysis/output/ttm_stage_analysis/csv/ttm_stage_determinant_vector_wide.csv"
@@ -307,10 +295,7 @@ build_real_clmm_dataset <- function() {
   cat("Filas ttm_stage_determinant_vector_wide:", nrow(df_ttm), "\n")
   cat("Filas df_analysis_ready:", nrow(df_profile), "\n")
   
-  # ---------------------------------------------------------------------------
   # 5.1. Crear perfil autoclasificado y macroarquetipo
-  # ---------------------------------------------------------------------------
-  
   self_col <- "which_statement_best_describes_you_when_making_an_investment_decision_related_to_your_household_final"
   
   df_self_profile <- df_profile %>%
@@ -348,10 +333,8 @@ build_real_clmm_dataset <- function() {
     select(participant_id, self_profile, macro_archetype_5) %>%
     distinct(participant_id, .keep_all = TRUE)
   
-  # ---------------------------------------------------------------------------
+
   # 5.2. Preparar determinantes
-  # ---------------------------------------------------------------------------
-  
   determinant_mapping <- determinant_mapping %>%
     filter(is_linked == 1) %>%
     select(dimension_key, determinant_id) %>%
@@ -410,10 +393,7 @@ build_real_clmm_dataset <- function() {
       .groups = "drop"
     )
   
-  # ---------------------------------------------------------------------------
   # 5.3. Estandarizar determinantes y construir dimensiones
-  # ---------------------------------------------------------------------------
-  
   df_base_z <- df_base %>%
     mutate(
       across(
@@ -457,10 +437,7 @@ build_real_clmm_dataset <- function() {
     dimension_scores
   )
   
-  # ---------------------------------------------------------------------------
   # 5.4. Mapear etapas reales
-  # ---------------------------------------------------------------------------
-  
   df_real <- df_dimensions %>%
     mutate(
       adoption_stage = case_when(
@@ -500,10 +477,8 @@ build_real_clmm_dataset <- function() {
     file.path(csv_dir, "clmm_real_input_4arq_9dim_standardized_determinants.csv")
   )
   
-  # ---------------------------------------------------------------------------
+
   # 5.5. Diagnósticos
-  # ---------------------------------------------------------------------------
-  
   participant_counts <- df_real %>%
     distinct(participant_id, macro_archetype_5, self_profile) %>%
     count(macro_archetype_5, self_profile, name = "n_participantes") %>%
@@ -553,10 +528,8 @@ build_real_clmm_dataset <- function() {
   df_real
 }
 
-# ==============================================================================
-# 6. CARGAR DATOS REALES Y DRAWS DEL SCRIPT 19
-# ==============================================================================
 
+# 6. CARGAR DATOS REALES Y DRAWS DEL SCRIPT 19
 df_full <- build_real_clmm_dataset()
 
 if (!file.exists(political_draws_path)) {
@@ -581,10 +554,8 @@ cat("Participantes dataset real CLMM:", n_distinct(df_full$participant_id), "\n"
 cat("Filas draws políticos:", nrow(political_draws), "\n")
 cat("Bootstraps políticos disponibles:", n_distinct(political_draws$bootstrap_id), "\n")
 
-# ==============================================================================
-# 7. VALIDACIONES
-# ==============================================================================
 
+# 7. VALIDACIONES
 required_cols <- c(
   "participant_id",
   "macro_archetype_5",
@@ -612,10 +583,8 @@ if (length(missing_draw_cols) > 0) {
   stop("Faltan columnas en political_draws: ", paste(missing_draw_cols, collapse = ", "))
 }
 
-# ==============================================================================
-# 8. PREPARAR DATOS CLMM
-# ==============================================================================
 
+# 8. PREPARAR DATOS CLMM
 prepare_clmm_data <- function(data_i) {
   
   macro_levels <- if (EXCLUDE_UNINTERESTED_REAL) {
@@ -674,10 +643,8 @@ prepare_clmm_data <- function(data_i) {
     )
 }
 
-# ==============================================================================
-# 9. FÓRMULAS CLMM
-# ==============================================================================
 
+# 9. FÓRMULAS CLMM
 build_formula <- function(model_type) {
   
   z_dims <- paste0("z_", dimensions)
@@ -722,10 +689,8 @@ build_formula <- function(model_type) {
   as.formula(formula_txt)
 }
 
-# ==============================================================================
-# 10. AJUSTE SEGURO
-# ==============================================================================
 
+# 10. AJUSTE SEGURO
 fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot_id) {
   
   formula_i <- build_formula(model_type)
@@ -885,10 +850,8 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
   )
 }
 
-# ==============================================================================
-# 11. MODELOS SOBRE MUESTRA COMPLETA REAL
-# ==============================================================================
 
+# 11. MODELOS SOBRE MUESTRA COMPLETA REAL
 df_full_clmm <- prepare_clmm_data(df_full)
 
 write_csv(
@@ -942,10 +905,8 @@ if (RUN_FULL_MODEL) {
   full_model_terms <- tibble()
 }
 
-# ==============================================================================
-# 12. MODELOS SOBRE BOOTSTRAPS POLÍTICOS DEL SCRIPT 19
-# ==============================================================================
 
+# 12. MODELOS SOBRE BOOTSTRAPS POLÍTICOS DEL SCRIPT 19
 if (RUN_POLITICAL_BOOTSTRAPS) {
   
   model_participants <- df_full %>%
@@ -1168,10 +1129,7 @@ if (RUN_POLITICAL_BOOTSTRAPS) {
   bootstrap_model_terms <- tibble()
 }
 
-# ==============================================================================
 # 13. COMPARACIÓN DE MODELOS
-# ==============================================================================
-
 if (nrow(full_model_summary) > 0) {
   
   model_comparison_full <- full_model_summary %>%
@@ -1237,10 +1195,7 @@ if (nrow(bootstrap_model_summary) > 0) {
   model_comparison_bootstrap <- tibble()
 }
 
-# ==============================================================================
 # 14. RESUMEN DE TÉRMINOS SIGNIFICATIVOS
-# ==============================================================================
-
 if (nrow(full_model_terms) > 0) {
   
   significant_terms_full <- full_model_terms %>%
@@ -1305,10 +1260,7 @@ if (nrow(bootstrap_model_terms) > 0) {
   )
 }
 
-# ==============================================================================
 # 15. VERSIONES CASTELLANO
-# ==============================================================================
-
 if (nrow(full_model_summary) > 0) {
   
   full_model_summary_castellano <- full_model_summary %>%
@@ -1407,11 +1359,6 @@ if (nrow(bootstrap_model_summary) > 0) {
   )
 }
 
-# ==============================================================================
-# 16. MENSAJE FINAL
-# ==============================================================================
-
-cat("\nScript terminado correctamente.\n")
 cat("Archivos creados en:\n")
 cat(csv_dir, "\n")
 

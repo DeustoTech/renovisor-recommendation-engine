@@ -11,7 +11,6 @@ library(stringr)
 set.seed(123)
 
 # 1. CARPETAS
-
 base_output_dir <- "initial_descriptive_analysis/output/model_5arq_9dim"
 
 csv_dir <- file.path(base_output_dir, "csv")
