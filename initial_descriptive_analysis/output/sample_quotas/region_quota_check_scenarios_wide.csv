@@ -1,5 +1,0 @@
-residence_region,target_n_scaled_300,target_n_scaled_405,target_n_scaled_500,target_n_scaled_1000,current_n_300,current_n_405,current_n_500,current_n_1000,recruit_next_n_300,recruit_next_n_405,recruit_next_n_500,recruit_next_n_1000,overrepresented_n_300,overrepresented_n_405,overrepresented_n_500,overrepresented_n_1000,keep_for_balanced_sample_n_300,keep_for_balanced_sample_n_405,keep_for_balanced_sample_n_500,keep_for_balanced_sample_n_1000,status_300,status_405,status_500,status_1000
-Europa Occidental,88,119,147,293,20,20,20,20,68,99,127,273,0,0,0,0,20,20,20,20,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
-Europa del Norte,71,98,117,237,9,9,9,9,62,89,108,228,0,0,0,0,9,9,9,9,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
-Europa del Este,57,75,95,188,6,6,6,6,51,69,89,182,0,0,0,0,6,6,6,6,Faltan participantes,Faltan participantes,Faltan participantes,Faltan participantes
-Europa del Sur,84,113,141,282,189,189,189,189,0,0,0,93,105,76,48,0,84,113,141,189,Sobrerrepresentado,Sobrerrepresentado,Sobrerrepresentado,Faltan participantes

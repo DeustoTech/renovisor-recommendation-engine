@@ -1,5 +1,0 @@
-desired_total_n,residence_region,target_n_original,target_n_scaled,target_pct,current_n,current_pct_for_desired_n,difference_n,recruit_next_n,overrepresented_n,keep_for_balanced_sample_n,status
-405,Europa Occidental,53,119,29.38,20,4.94,99,99,0,20,Faltan participantes
-405,Europa del Norte,43,98,24.2,9,2.22,89,89,0,9,Faltan participantes
-405,Europa del Este,34,75,18.52,6,1.48,69,69,0,6,Faltan participantes
-405,Europa del Sur,51,113,27.9,189,46.67,-76,0,76,113,Sobrerrepresentado
