@@ -1,6 +1,8 @@
 variable,category,n,percentage
-tamaño de ciudad,Ciudad grande,45,14.5
-tamaño de ciudad,Ciudad mediana,57,18.4
-tamaño de ciudad,Ciudad pequeña,77,24.8
-tamaño de ciudad,Metrópolis,39,12.6
-tamaño de ciudad,Municipio pequeño,92,29.7
+tamaño de ciudad,Aldea o núcleo rural (<1.000 hab.),34,8.4
+tamaño de ciudad,Ciudad grande (500.000-1.000.000 hab.),45,11.2
+tamaño de ciudad,Ciudad mediana (250.000-500.000 hab.),57,14.1
+tamaño de ciudad,Ciudad pequeña (50.000-250.000 hab.),77,19.1
+tamaño de ciudad,Metrópolis (>1.000.000 hab.),39,9.7
+tamaño de ciudad,Municipio mediano (10.000-50.000 hab.),92,22.8
+tamaño de ciudad,Municipio pequeño (1.000-10.000 hab.),59,14.6

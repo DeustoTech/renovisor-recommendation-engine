@@ -6,51 +6,52 @@ generación,Millennials,143,37
 género,Hombre,192,49.5
 género,Mujer,192,49.5
 género,Otro / Prefiere no decirlo,4,1
+país,Alemania,24,6.1
 país,Austria,2,0.5
-país,Belgium,7,1.8
 país,Bulgaria,3,0.8
-país,Czech Republic,5,1.3
-país,Denmark,4,1
+país,Bélgica,7,1.8
+país,Dinamarca,4,1
+país,Eslovaquia,4,1
+país,Eslovenia,4,1
+país,España,186,47
 país,Estonia,4,1
-país,Finland,4,1
-país,France,25,6.3
-país,Germany,24,6.1
-país,Greece,5,1.3
-país,Hungary,4,1
-país,Ireland,3,0.8
-país,Italy,27,6.8
-país,Latvia,4,1
-país,Lithuania,1,0.3
-país,Luxembourg,1,0.3
-país,Netherlands,11,2.8
-país,Norway,2,0.5
-país,Poland,26,6.6
+país,Finlandia,4,1
+país,Francia,25,6.3
+país,Grecia,5,1.3
+país,Hungría,4,1
+país,Irlanda,3,0.8
+país,Italia,27,6.8
+país,Letonia,4,1
+país,Lituania,1,0.3
+país,Luxemburgo,1,0.3
+país,Noruega,2,0.5
+país,Países Bajos,11,2.8
+país,Polonia,26,6.6
 país,Portugal,4,1
-país,Romania,8,2
-país,Slovakia,4,1
-país,Slovenia,4,1
-país,Spain,186,47
-país,Sweden,3,0.8
-país,United Kingdom,25,6.3
+país,Reino Unido,25,6.3
+país,República Checa,5,1.3
+país,Rumanía,8,2
+país,Suecia,3,0.8
 región europea,Europa Occidental,70,17.7
 región europea,Europa del Este,50,12.6
 región europea,Europa del Norte,50,12.6
 región europea,Europa del Sur,226,57.1
-tamaño de ciudad,Ciudad grande,45,14.5
-tamaño de ciudad,Ciudad mediana,57,18.4
-tamaño de ciudad,Ciudad pequeña,77,24.8
-tamaño de ciudad,Metrópolis,39,12.6
-tamaño de ciudad,Municipio pequeño,92,29.7
-zona climática,Clima continental,42,10.4
-zona climática,Clima de transición,71,17.6
-zona climática,Clima frío,12,3
-zona climática,Clima mediterráneo,160,39.7
+tamaño de ciudad,Aldea o núcleo rural (<1.000 hab.),34,8.4
+tamaño de ciudad,Ciudad grande (500.000-1.000.000 hab.),45,11.2
+tamaño de ciudad,Ciudad mediana (250.000-500.000 hab.),57,14.1
+tamaño de ciudad,Ciudad pequeña (50.000-250.000 hab.),77,19.1
+tamaño de ciudad,Metrópolis (>1.000.000 hab.),39,9.7
+tamaño de ciudad,Municipio mediano (10.000-50.000 hab.),92,22.8
+tamaño de ciudad,Municipio pequeño (1.000-10.000 hab.),59,14.6
+zona climática,Clima continental templado,42,10.4
+zona climática,Clima de transición,66,16.4
+zona climática,Clima frío,17,4.2
+zona climática,Clima mediterráneo/subtropical,160,39.7
 zona climática,Clima oceánico,118,29.3
 situación laboral,Desempleado/a,19,4.9
 situación laboral,Empleado/a,290,74.6
 situación laboral,Estudiante,30,7.7
-situación laboral,Otra situación,45,11.6
-situación laboral,Otra situación inactiva,5,1.3
+situación laboral,Otra situación inactiva,50,12.9
 nivel educativo,No universitaria,93,23.9
 nivel educativo,Universitaria,296,76.1
 trabajo/estudio desde casa,No,156,41.3
@@ -69,8 +70,7 @@ orientación política,Derecha,29,7.6
 orientación política,Extrema derecha,6,1.6
 orientación política,Extrema izquierda,145,37.9
 orientación política,Izquierda,130,33.9
-tipo de voto,Abstención,2,0.5
-tipo de voto,No vota / blanco / nulo,37,9.4
+tipo de voto,No vota / blanco / nulo,39,9.9
 tipo de voto,Otras opciones,31,7.9
 tipo de voto,Partidos nacionales,70,17.8
 tipo de voto,Partidos regionalistas/independentistas,108,27.5

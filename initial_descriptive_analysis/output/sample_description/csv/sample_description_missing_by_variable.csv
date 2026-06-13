@@ -1,5 +1,4 @@
 variable,n_missing,n_total,n_valid,percentage_missing
-city_size,93,403,310,23.1
 work_home,25,403,378,6.2
 type_house,22,403,381,5.5
 political_orientation,20,403,383,5
@@ -13,6 +12,7 @@ vote_type,10,403,393,2.5
 country,7,403,396,1.7
 residence_region,7,403,396,1.7
 tenure,7,403,396,1.7
+city_size,0,403,403,0
 climate_zone,0,403,403,0
 source_survey,0,403,403,0
 identifier_type,0,403,403,0

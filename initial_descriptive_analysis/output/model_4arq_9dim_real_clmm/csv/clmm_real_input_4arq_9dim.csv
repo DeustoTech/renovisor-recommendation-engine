@@ -1,0 +1,805 @@
+participant_id,macro_archetype_5,self_profile,adoption_stage,stage,technology,FINANCIAL,SECURITY,COMPETENCE,AUTONOMY,PHYSIOLOGICAL,RELATEDNESS,STIMULATION,POPULARITY,MEANING
+183,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,68.5,NA,NA,NA,69,NA,NA,NA,38.5
+183,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,NA,NA,16,NA,38.5
+184,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Electrodomésticos eficientes,NA,NA,65.2,NA,77.5,NA,NA,NA,37
+184,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Bomba de calor,61.6,NA,NA,NA,77.5,NA,NA,NA,37
+184,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,NA,NA,60.333333333333336,NA,NA,37
+185,G4_HomoEconomicus,Homo economicus,Done,Implementada,Electrodomésticos eficientes,NA,NA,81,82.5,NA,NA,NA,NA,50
+185,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Bomba de calor,88.75,NA,NA,NA,NA,NA,NA,NA,50
+185,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,81,82.5,NA,NA,NA,NA,50
+186,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Comunidad energética,66,NA,NA,83.25,81.5,NA,NA,NA,NA
+186,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,66,NA,NA,83.25,81.5,NA,NA,NA,NA
+187,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,64,NA,NA,NA,NA,NA,NA,NA,NA
+188,G4_HomoEconomicus,Homo economicus,Done,Implementada,Ventilación con recuperador,59,NA,NA,NA,100,NA,NA,NA,NA
+188,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Sistema de refrigeración,NA,NA,NA,NA,100,NA,NA,NA,NA
+188,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,59,84.5,NA,NA,NA,NA,NA,NA,NA
+189,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,NA,NA,NA,NA,NA,NA,NA,NA,35
+189,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,58,NA,84.25,NA,NA,NA,NA,NA,NA
+189,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,NA,NA,84.25,NA,NA,NA,NA,NA,NA
+190,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,NA,NA,70,75.25,75.5,NA,NA,NA,NA
+190,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Comunidad energética,NA,73.75,70,NA,NA,NA,NA,NA,50
+190,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,NA,NA,NA,75.25,75.5,NA,NA,NA,50
+191,G2_EarlyAdopter_Influencer,Pionero,Done,Implementada,Renovación de envolvente,NA,86.25,NA,NA,NA,NA,NA,NA,80
+191,G2_EarlyAdopter_Influencer,Pionero,Considering,La conoce / la consideraría,Bomba de calor,61.5,NA,NA,NA,NA,NA,NA,NA,NA
+192,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,83,NA,NA,78
+192,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Vehículo eléctrico,82.6,84.5,NA,78,NA,NA,NA,NA,NA
+193,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Ventilación con recuperador,39.25,NA,NA,NA,NA,NA,NA,50.5,53.5
+194,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Comunidad energética,NA,NA,NA,54.5,NA,NA,NA,NA,NA
+194,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Ventilación con recuperador,40.75,NA,NA,NA,NA,NA,NA,NA,NA
+194,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,NA,NA,54.5,NA,NA,NA,NA,NA
+195,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,58.4,NA,NA,NA,100,83.2,NA,NA,NA
+195,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,100,83.2,NA,NA,NA
+195,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,58.4,NA,NA,NA,NA,83.2,NA,NA,49
+196,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,41,NA,NA,69.25,NA,NA,NA,NA,38
+196,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Renovación de envolvente,41,NA,NA,NA,66,NA,NA,NA,38
+196,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,NA,NA,NA,NA,NA,NA,NA,38
+197,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Comunidad energética,NA,NA,NA,NA,50.5,74,NA,NA,50
+197,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,NA,NA,NA,50.5,74,NA,NA,50
+197,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Cambio de tarifa eléctrica,NA,NA,NA,NA,50.5,74,NA,NA,50
+198,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,56.8,NA,NA,82,NA,NA,NA,NA,0
+198,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Ascensor,NA,73.5,NA,82,83,NA,NA,NA,NA
+201,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,NA,90,NA,NA,72.5,NA,NA,NA,5
+201,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,NA,90,NA,NA,72.5,NA,NA,NA,5
+203,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,NA,NA,NA,83.33333333333333,NA,NA,NA,NA,NA
+203,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,52,53.75,NA,NA,NA,NA,NA,NA,87.5
+204,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,75,85,46.5,NA,NA,NA,NA,NA,NA
+204,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Electrodomésticos eficientes,75,85,46.5,NA,NA,NA,NA,NA,NA
+205,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,NA,78.75,NA,81.25,90,NA,NA,NA,NA
+205,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Vehículo eléctrico,50,NA,NA,81.25,90,NA,NA,NA,NA
+205,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,50,NA,NA,NA,90,52,NA,NA,NA
+206,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,72,41.666666666666664,70,NA
+206,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,80,89,76.66666666666667,NA,NA,NA,NA,NA
+207,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,67.75,90,NA,NA,NA,NA,NA,NA,65
+208,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,NA,NA,NA,50,NA,NA,23.333333333333332,NA,40
+208,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,50,NA,NA,23.333333333333332,NA,40
+208,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,50,NA,NA,23.333333333333332,NA,40
+210,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Vehículo eléctrico,NA,50,NA,NA,NA,NA,NA,NA,NA
+210,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,NA,NA,50,50,NA,NA,NA,NA,50
+211,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,76,NA,NA,NA,NA,NA,NA,NA
+213,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,NA,54.75,NA,NA,19.666666666666668,NA,40.5
+213,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,NA,NA,NA,NA,NA,NA,NA,NA,40.5
+214,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Cambio de tarifa eléctrica,67.2,NA,NA,NA,NA,NA,NA,NA,NA
+214,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,67.2,NA,NA,NA,83.5,66.25,NA,NA,NA
+216,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Bomba de calor,80.33333333333333,NA,NA,NA,75,NA,NA,NA,47.5
+216,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Comunidad energética,NA,77.5,NA,NA,75,NA,NA,NA,47.5
+216,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,NA,NA,81.66666666666667,NA,NA,NA,NA,NA,47.5
+217,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,66.75,85.5,NA,69.25,NA,NA,NA,NA,NA
+217,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Bomba de calor,66.75,85.5,NA,69.25,NA,NA,NA,NA,NA
+217,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Sistema de refrigeración,66.75,85.5,NA,69.25,NA,NA,NA,NA,NA
+218,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Vehículo eléctrico,63.333333333333336,NA,NA,88.25,NA,NA,NA,NA,50
+218,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,87.5,NA,88.25,NA,NA,NA,NA,50
+218,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,NA,NA,95,NA,NA,NA,26.666666666666668,NA,50
+219,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Vehículo eléctrico,NA,NA,NA,NA,NA,NA,47.333333333333336,NA,47.5
+219,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistema de refrigeración,65.2,NA,NA,NA,NA,NA,NA,NA,47.5
+219,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,65.2,NA,NA,NA,NA,NA,NA,NA,47.5
+22,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Agua caliente sanitaria,43.2,NA,NA,NA,NA,NA,NA,38.5,37.5
+22,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Kits solares de balcón,NA,NA,NA,NA,NA,40.2,48.666666666666664,38.5,NA
+22,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,NA,NA,62,NA,NA,40.2,NA,NA,37.5
+220,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Calefacción fósil o biomasa,NA,NA,NA,75,NA,NA,NA,NA,NA
+220,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,56.2,67.33333333333333,NA,75,NA,NA,NA,NA,NA
+220,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,56.2,67.33333333333333,NA,75,NA,NA,NA,NA,NA
+221,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,91,NA,NA,90.75,NA,NA,NA,NA,42
+221,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,91,NA,NA,90.75,NA,NA,NA,NA,42
+222,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Comunidad energética,NA,NA,NA,76.5,NA,45.8,NA,NA,0
+222,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Bomba de calor,NA,NA,72,76.5,NA,NA,3,NA,NA
+223,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,NA,73.75,NA,NA,NA,NA,37.5
+223,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Vehículo eléctrico,61,NA,NA,NA,NA,NA,NA,NA,37.5
+224,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,NA,NA,NA,NA,NA,NA,13.333333333333334,NA,52.5
+224,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Bomba de calor,28,NA,76.25,NA,NA,NA,NA,NA,52.5
+224,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,28,NA,76.25,NA,NA,NA,NA,NA,52.5
+225,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Calefacción fósil o biomasa,NA,NA,67.6,80.66666666666667,NA,NA,NA,NA,49
+226,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,56.6,NA,NA,57.25,NA,NA,NA,NA,18
+226,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Bomba de calor,56.6,NA,NA,NA,57.5,NA,NA,NA,18
+226,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,56.6,NA,NA,NA,57.5,NA,NA,NA,18
+227,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,71,NA,75,NA,NA,NA,NA,NA,32.5
+227,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,71,NA,75,NA,NA,NA,NA,NA,32.5
+228,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,NA,67.5,NA,75,NA,NA,NA,NA,NA
+230,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Calefacción fósil o biomasa,56.333333333333336,NA,NA,NA,NA,NA,NA,NA,NA
+231,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Bomba de calor,NA,NA,NA,NA,75.5,NA,NA,NA,42.5
+231,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,68.33333333333333,70.33333333333333,65.8,NA,NA,NA,NA,NA,NA
+232,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,NA,53.75,58,NA,NA,NA,NA,NA,35
+232,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,NA,53.75,NA,NA,75,NA,NA,NA,35
+233,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Comunidad energética,NA,NA,NA,74,NA,34.666666666666664,NA,NA,37
+233,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Vehículo eléctrico,38.5,72,NA,NA,NA,NA,NA,NA,37
+234,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,NA,76.25,NA,NA,NA,NA,NA
+235,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,NA,82.75,NA,NA,NA,NA,20
+235,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,NA,46,NA,NA,NA,NA,NA,NA,NA
+236,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,NA,NA,NA,NA,74.5
+237,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,53,NA,NA,35
+237,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,46.75,NA,84.2,NA,NA,NA,NA,NA,35
+237,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Sistema de refrigeración,46.75,NA,NA,NA,NA,NA,NA,NA,35
+238,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,NA,NA,NA,NA,NA,NA,0,NA,NA
+238,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,NA,NA,NA,NA,NA
+238,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,NA,NA,NA,NA,NA,NA
+240,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,NA,NA,NA,NA,NA,NA,NA,NA,34.5
+241,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Ventilación con recuperador,48.75,70,65,NA,NA,NA,NA,NA,NA
+242,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,62.5,NA,NA,52.5,NA,85,NA,NA,NA
+242,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Ventilación con recuperador,62.5,NA,NA,52.5,NA,NA,23.333333333333332,NA,NA
+243,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Electrodomésticos eficientes,70.33333333333333,NA,NA,NA,NA,NA,NA,NA,NA
+243,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,NA,67.25,NA,NA,NA,NA,NA,NA,NA
+243,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,NA,67.25,62.25,NA,NA,NA,NA,NA,NA
+244,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Cambio de tarifa eléctrica,53.4,NA,NA,NA,NA,NA,NA,NA,49.5
+244,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,53.4,NA,NA,NA,NA,NA,NA,NA,49.5
+245,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Comunidad energética,67.5,79.5,NA,NA,NA,NA,NA,NA,75
+246,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Comunidad energética,54.25,NA,NA,NA,NA,63.2,NA,NA,47.5
+246,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Bomba de calor,54.25,NA,NA,77.75,NA,NA,NA,NA,47.5
+246,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,54.25,NA,NA,77.75,NA,NA,NA,NA,NA
+247,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,NA,NA,NA,65.5,NA,NA,35,NA,52
+247,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Almacenamiento energético,NA,NA,NA,65.5,NA,NA,35,NA,52
+247,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,NA,NA,65.5,NA,66,NA,NA,52
+248,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,70.2,NA,NA,75.33333333333333,NA,NA,NA,NA,53.5
+248,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Renovación de envolvente,70.2,NA,79.6,NA,NA,NA,NA,NA,53.5
+248,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,NA,79.6,75.33333333333333,NA,NA,NA,NA,53.5
+250,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Bomba de calor,NA,NA,NA,NA,NA,NA,NA,NA,26
+250,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,44,NA,NA,NA,NA,81.33333333333333,NA,NA,26
+250,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,NA,NA,83.75,72,NA,NA,NA,26
+251,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Agua caliente sanitaria,NA,NA,NA,76,NA,NA,30,NA,58.5
+251,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,NA,68,76,NA,NA,NA,NA,58.5
+251,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,NA,NA,NA,NA,NA,30,NA,58.5
+252,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Calefacción fósil o biomasa,NA,90.66666666666667,NA,NA,NA,NA,NA,NA,NA
+252,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,NA,90.66666666666667,NA,NA,NA,NA,NA,NA,NA
+253,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Ascensor,NA,NA,NA,NA,84,NA,NA,NA,NA
+253,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,68.8,NA,71,NA,NA,NA,NA,NA,NA
+254,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,NA,NA,NA,NA,NA,NA,51
+254,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Agua caliente sanitaria,62,NA,NA,70,NA,NA,NA,NA,51
+255,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Vehículo eléctrico,40,NA,NA,57.75,NA,NA,NA,NA,49
+255,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,40,NA,65.6,NA,NA,NA,NA,NA,49
+256,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Calefacción fósil o biomasa,74,NA,NA,NA,72,NA,NA,NA,54
+256,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Almacenamiento energético,74,NA,NA,NA,NA,NA,NA,NA,NA
+257,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,NA,68.5,NA,NA,NA,NA,52
+257,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,NA,NA,NA,68.5,NA,NA,29,NA,52
+258,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,51,47.5,NA,NA,80,NA,NA,NA,NA
+258,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Ventilación con recuperador,NA,NA,NA,NA,80,NA,NA,NA,NA
+259,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,NA,NA,74.2,NA,71,NA,NA,NA,26.5
+259,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,NA,NA,74.2,NA,NA,NA,6.333333333333333,NA,26.5
+259,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,NA,89.25,74.2,72,NA,NA,NA,NA,NA
+261,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Cambio de tarifa eléctrica,71.5,NA,NA,NA,NA,NA,NA,NA,43
+262,G4_HomoEconomicus,Homo economicus,Done,Implementada,Comunidad energética,37,NA,NA,75,NA,NA,NA,NA,NA
+262,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Sistema de refrigeración,NA,NA,67,NA,NA,NA,NA,NA,NA
+262,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,60,NA,NA,NA,NA,NA,NA,NA
+263,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Electrodomésticos eficientes,23,NA,NA,NA,12.5,NA,NA,NA,NA
+263,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Agua caliente sanitaria,NA,NA,NA,NA,12.5,NA,1.6666666666666667,NA,NA
+265,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Medidas de microeficiencia,89.66666666666667,NA,NA,NA,NA,NA,NA,NA,NA
+265,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,89.66666666666667,NA,NA,NA,NA,NA,NA,NA,NA
+266,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Comunidad energética,NA,NA,NA,46.25,NA,NA,NA,NA,NA
+266,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Ascensor,37.8,NA,75.4,NA,65,NA,NA,NA,NA
+266,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,37.8,NA,75.4,NA,NA,49.8,NA,NA,NA
+267,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,60,NA,NA,10,NA,NA,NA,NA,10
+267,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Ventilación con recuperador,60,NA,64,NA,NA,NA,NA,NA,NA
+268,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,56.4,NA,NA,NA,61.5,NA,NA,NA,40.5
+268,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,56.4,NA,NA,NA,61.5,NA,NA,NA,40.5
+268,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,56.4,NA,NA,NA,61.5,NA,NA,NA,40.5
+269,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,67,NA,NA,NA,NA,NA,NA,NA,NA
+271,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,NA,11.5,NA,35.5
+271,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,43.8,NA,75,NA,NA,NA,11.5,NA,NA
+271,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,43.8,NA,75,64.75,NA,NA,NA,NA,NA
+272,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,NA,NA,NA,NA,NA,NA,50
+272,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Ascensor,NA,NA,NA,NA,NA,NA,0,NA,NA
+272,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,NA,NA,NA,NA,NA,NA,0,NA,NA
+274,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,43,79.66666666666667,NA,NA,NA,NA,NA,NA,NA
+274,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Comunidad energética,NA,79.66666666666667,77.4,65.75,NA,NA,NA,NA,NA
+274,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,43,79.66666666666667,NA,65.75,NA,NA,NA,NA,NA
+275,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Calefacción fósil o biomasa,NA,75,NA,NA,95,NA,NA,NA,20
+276,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Vehículo eléctrico,NA,NA,85.6,NA,NA,NA,53.333333333333336,NA,55
+276,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,NA,75.75,53.333333333333336,NA,55
+276,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,NA,81.25,NA,NA,NA,NA,53.333333333333336,NA,55
+278,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,67.5,NA,NA,NA,NA,NA,NA,38
+278,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,67.5,NA,NA,NA,NA,23,NA,38
+279,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,NA,84.5,NA,NA,NA,NA,NA
+279,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Almacenamiento energético,NA,NA,NA,84.5,NA,NA,NA,NA,NA
+279,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,NA,NA,74,NA,NA,NA,NA,NA,NA
+280,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,NA,NA,94,NA,NA,NA,47.5,NA,42.5
+280,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Medidas de microeficiencia,NA,NA,94,NA,NA,NA,47.5,NA,42.5
+280,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,86.25,94,NA,NA,NA,NA,NA,42.5
+281,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Bomba de calor,NA,NA,NA,NA,NA,NA,NA,NA,37.5
+281,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,NA,NA,NA,NA,NA,NA,NA,37.5
+281,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,NA,NA,NA,50,NA,NA,NA,NA
+282,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,NA,NA,NA,NA,11.5
+282,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,NA,NA,NA,NA,NA,NA,NA,NA,11.5
+283,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Agua caliente sanitaria,NA,NA,88,60.5,NA,NA,NA,NA,20
+283,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Agua caliente sanitaria,NA,NA,88,60.5,NA,NA,NA,NA,20
+284,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Vehículo eléctrico,NA,NA,NA,NA,NA,NA,NA,NA,22.5
+285,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,41.666666666666664,70,58.333333333333336,NA,NA,NA,NA,NA
+286,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Electrodomésticos eficientes,43.2,NA,NA,NA,74.5,NA,NA,NA,NA
+287,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,72,NA,NA,NA,NA,NA,NA,NA,NA
+288,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Electrodomésticos eficientes,40,NA,NA,70,NA,NA,NA,NA,15
+288,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,40,NA,NA,70,NA,NA,NA,NA,15
+289,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,67.5,NA,NA,68,59,NA,NA,NA,NA
+290,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,88.33333333333333,88.33333333333333,NA,NA,NA,NA,NA,NA,NA
+290,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Vehículo eléctrico,88.33333333333333,NA,61.8,NA,NA,NA,NA,NA,72
+290,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Sistema de refrigeración,88.33333333333333,NA,61.8,NA,NA,NA,NA,NA,NA
+291,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Bomba de calor,NA,NA,NA,NA,87.5,NA,6.666666666666667,NA,50
+291,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Calefacción fósil o biomasa,NA,NA,NA,98.5,NA,NA,6.666666666666667,NA,50
+292,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Medidas de microeficiencia,NA,NA,NA,NA,NA,NA,NA,NA,25
+292,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,NA,NA,NA,NA,NA,NA,NA,25
+293,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,28,NA,NA,65,68,NA,NA,NA,NA
+293,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,28,NA,76.5,65,NA,NA,NA,NA,NA
+294,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,NA,NA,NA,NA,NA,NA,NA,NA,40
+294,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,NA,71.25,NA,NA,NA,NA,NA,NA,NA
+295,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,22.5,NA,68,NA,NA,NA,NA,NA,37.5
+295,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,NA,NA,NA,NA,NA,NA,NA,37.5
+296,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,NA,89,NA,NA,NA,NA,NA
+296,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Bomba de calor,28,NA,53.8,NA,NA,NA,NA,NA,45
+296,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,28,NA,53.8,NA,NA,NA,NA,NA,45
+297,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,NA,NA,79,43.2,NA,NA,14
+297,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,NA,NA,NA,79,NA,39,NA,14
+299,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,NA,NA,70.2,83,NA,NA,NA,NA,75
+299,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,66.4,NA,70.2,NA,NA,NA,NA,NA,75
+300,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,66.2,NA,NA,96.5,NA,NA,NA,NA,NA
+300,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Almacenamiento energético,66.2,100,NA,96.5,NA,NA,NA,NA,NA
+300,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,66.2,NA,NA,96.5,NA,NA,NA,NA,NA
+301,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,NA,NA,NA,36.666666666666664,35,NA,NA,NA,50
+301,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,NA,37,0,NA,50
+302,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,65,NA,NA,NA,65,NA,NA,NA,NA
+302,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Comunidad energética,NA,78.33333333333333,78,77.5,NA,NA,NA,NA,NA
+303,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Ventilación con recuperador,NA,NA,NA,NA,57.5,NA,NA,NA,NA
+303,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,45.4,NA,NA,NA,NA,NA,NA,NA,NA
+303,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,45.4,NA,NA,NA,NA,NA,NA,NA,NA
+304,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Cambio de tarifa eléctrica,38,NA,NA,NA,NA,59,NA,NA,42.5
+304,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Comunidad energética,NA,58.75,NA,53.75,NA,NA,NA,NA,42.5
+305,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Electrodomésticos eficientes,NA,NA,72,NA,NA,NA,NA,NA,78
+305,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,NA,72,NA,NA,NA,NA,NA,78
+305,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,NA,77.5,NA,NA,NA,NA,NA,NA,NA
+306,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Medidas de microeficiencia,78.33333333333333,NA,NA,NA,NA,NA,NA,NA,49
+306,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,78.33333333333333,NA,NA,NA,80,NA,NA,NA,49
+307,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,33,NA,NA,NA,60,NA,NA,NA,30
+307,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Comunidad energética,33,74,NA,NA,NA,NA,NA,NA,30
+308,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Ascensor,NA,NA,NA,NA,NA,NA,NA,NA,7.5
+309,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,68.6,NA,NA,NA,73,NA,40,NA,NA
+309,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,68.6,NA,NA,NA,NA,NA,40,NA,40
+309,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,68.6,NA,NA,NA,NA,NA,NA,NA,40
+310,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,58.333333333333336,NA,68.33333333333333,NA,60.5,NA,NA,NA,NA
+310,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Almacenamiento energético,58.333333333333336,65,68.33333333333333,NA,NA,NA,NA,NA,NA
+311,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,NA,NA,NA,56
+311,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Medidas de microeficiencia,NA,NA,NA,NA,NA,NA,NA,NA,56
+312,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Bomba de calor,NA,NA,NA,100,NA,NA,NA,NA,NA
+312,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Vehículo eléctrico,NA,NA,NA,100,NA,NA,NA,NA,NA
+312,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,100,NA,NA,NA,NA,NA
+313,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Calefacción fósil o biomasa,NA,NA,NA,76.75,72,NA,NA,NA,48.5
+313,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,62.8,NA,NA,76.75,72,NA,NA,NA,NA
+313,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,62.8,NA,NA,76.75,72,NA,NA,NA,NA
+314,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,NA,80,NA,NA,NA,NA,NA
+314,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,80,NA,NA,NA,NA,NA
+315,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,53.333333333333336,NA,NA,NA,80,NA,NA,NA,70
+315,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Sistema de refrigeración,53.333333333333336,NA,NA,NA,80,NA,NA,NA,70
+315,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,53.333333333333336,NA,NA,NA,80,NA,NA,NA,70
+316,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,53.25,NA,66.66666666666667,NA,NA,NA,NA,NA,43
+317,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Comunidad energética,54.5,NA,NA,NA,NA,NA,27,NA,54
+317,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,54.5,NA,58,69,NA,NA,NA,NA,NA
+318,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,NA,85,NA,58.75,NA,NA,NA,NA,15
+318,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,44,NA,69,58.75,NA,NA,NA,NA,NA
+319,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,62.6,NA,NA,52.75,NA,NA,25,NA,NA
+319,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,62.6,NA,63,NA,NA,NA,25,NA,NA
+319,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,62.6,62.75,NA,NA,NA,NA,25,NA,NA
+320,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,49.5,NA,NA,0
+321,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,68,NA,NA,NA,NA,65,NA,NA,77.5
+322,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,91,38.333333333333336,NA,85
+322,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,92.2,NA,NA,NA,38.333333333333336,NA,NA
+322,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,NA,NA,NA,95,91,NA,NA,NA
+323,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Comunidad energética,NA,NA,70,NA,NA,64,NA,NA,70
+323,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,55,NA,47.5,NA,70
+323,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,NA,NA,30,NA,NA,47.5,NA,70
+325,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Electrodomésticos eficientes,70,NA,NA,NA,NA,NA,NA,NA,37.5
+325,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,70,NA,NA,NA,NA,NA,58.333333333333336,NA,37.5
+326,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,77,91.25,NA,NA,85,NA,NA,NA,NA
+326,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,NA,NA,NA,NA,NA,66.25,NA,NA,NA
+326,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,77,91.25,NA,NA,NA,66.25,NA,NA,NA
+328,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,62,NA,NA,66.66666666666667,NA,NA,NA,NA,15
+329,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Bomba de calor,70.75,NA,86.6,NA,98,NA,NA,NA,NA
+329,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,77.66666666666667,NA,NA,NA,NA,65
+333,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Calefacción fósil o biomasa,38.5,73.5,NA,NA,NA,NA,NA,NA,46
+333,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Almacenamiento energético,38.5,NA,NA,NA,NA,NA,NA,NA,46
+333,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,38.5,NA,NA,NA,NA,NA,NA,NA,46
+334,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,NA,NA,NA,NA,52.5,NA,NA,NA,NA
+334,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,45.25,NA,52.25,NA,NA,NA,NA,NA,15.5
+334,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,45.25,NA,52.25,NA,NA,NA,NA,NA,15.5
+335,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,67.2,NA,NA,71.33333333333333,NA,NA,NA,NA,NA
+335,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,67.2,NA,NA,71.33333333333333,NA,NA,NA,NA,NA
+335,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,67.2,NA,NA,NA,NA,NA,NA,NA,NA
+336,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,79.4,NA,90,NA,35,NA,NA
+336,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Comunidad energética,50,NA,79.4,NA,NA,NA,35,NA,NA
+337,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Electrodomésticos eficientes,56,NA,NA,47.666666666666664,NA,NA,NA,NA,73
+337,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Almacenamiento energético,56,66.75,NA,NA,NA,NA,NA,NA,73
+337,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,56,66.75,NA,NA,NA,NA,NA,NA,73
+339,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Vehículo eléctrico,NA,NA,NA,NA,NA,NA,NA,NA,12
+339,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Medidas de microeficiencia,NA,NA,NA,NA,NA,NA,NA,NA,12
+339,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,NA,NA,NA,NA,NA,NA,NA,NA,12
+340,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,38,NA,NA,99.25,NA,100,NA,NA,NA
+340,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,38,NA,NA,99.25,NA,100,NA,NA,NA
+340,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,38,NA,NA,99.25,NA,100,NA,NA,NA
+341,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,NA,NA,65,NA,14.5,NA,NA,NA,46
+341,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Comunidad energética,40.333333333333336,NA,NA,68,NA,NA,NA,NA,46
+341,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,40.333333333333336,NA,NA,NA,14.5,NA,NA,NA,46
+342,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Comunidad energética,NA,NA,NA,NA,51.5,41.5,NA,NA,33.5
+342,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Bomba de calor,41.25,NA,76,NA,NA,NA,NA,NA,33.5
+342,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,41.25,86.66666666666667,76,NA,NA,NA,NA,NA,NA
+343,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,NA,NA,NA,75,NA,NA,NA,NA,NA
+343,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,57.5,NA,NA,75,60,NA,NA,NA,NA
+343,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,57.5,73,NA,75,NA,NA,NA,NA,NA
+344,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Electrodomésticos eficientes,NA,NA,NA,NA,NA,NA,NA,NA,48
+345,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,70.75,70,73.75,NA,NA,NA,NA,NA,NA
+345,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,70.75,70,73.75,NA,NA,NA,NA,NA,NA
+346,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Bomba de calor,NA,NA,NA,59.75,68.5,NA,NA,NA,46
+346,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,NA,NA,62.2,59.75,NA,63.8,NA,NA,NA
+347,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,NA,NA,NA,75,NA,NA,NA,NA,100
+348,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,70,NA,NA,59,NA,NA,23
+348,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Comunidad energética,29.25,NA,NA,47.75,NA,NA,NA,NA,23
+348,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,29.25,NA,70,NA,NA,59,NA,NA,NA
+349,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,NA,NA,NA,NA,NA,NA,NA,NA,NA
+349,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,NA,NA,80,NA,NA
+350,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,61.25,NA,NA,NA
+350,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Ascensor,32.8,NA,NA,NA,NA,NA,NA,NA,NA
+352,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Electrodomésticos eficientes,NA,NA,NA,NA,NA,NA,NA,NA,19.5
+352,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Comunidad energética,NA,NA,NA,NA,NA,NA,NA,NA,19.5
+353,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Ventilación con recuperador,33,NA,NA,NA,78,NA,NA,NA,37.5
+353,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Bomba de calor,33,NA,NA,NA,78,NA,NA,NA,37.5
+353,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,33,NA,NA,NA,NA,39.6,NA,NA,37.5
+354,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Ascensor,NA,NA,71,NA,NA,NA,NA,NA,NA
+355,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Electrodomésticos eficientes,41.5,62,NA,NA,NA,NA,NA,NA,44
+356,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,NA,NA,NA,NA,NA,NA,40
+356,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Sistema de refrigeración,26.2,NA,72,NA,NA,NA,NA,NA,40
+356,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,26.2,NA,72,NA,NA,NA,NA,NA,40
+357,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Comunidad energética,33.333333333333336,NA,NA,100,NA,NA,NA,NA,50
+357,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,33.333333333333336,NA,NA,100,NA,NA,NA,NA,50
+357,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,33.333333333333336,NA,NA,100,NA,NA,NA,NA,50
+359,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,12.666666666666666,NA,NA,36.666666666666664,NA,NA,17.333333333333332,NA,NA
+360,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,56.2,NA,NA,88,NA,NA,NA,NA,36
+360,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Almacenamiento energético,56.2,NA,NA,88,NA,NA,NA,NA,36
+360,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Ascensor,NA,40.666666666666664,61,NA,NA,NA,0,NA,NA
+361,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,89.8,NA,NA,NA,NA,NA,NA,NA,37.5
+361,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Bomba de calor,NA,NA,NA,NA,NA,NA,NA,NA,37.5
+361,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,NA,NA,97.8,NA,NA,NA,NA,NA,37.5
+362,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,68.4,NA,NA,NA,44.333333333333336,NA,49.5
+362,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,NA,NA,68.4,58.75,NA,NA,NA,NA,49.5
+363,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,NA,NA,NA,NA,NA,NA,50
+363,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,36.6,NA,NA,NA,NA,NA,NA,NA,NA
+365,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,91,NA,NA,NA,100,NA,NA,NA,85
+366,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Electrodomésticos eficientes,61.666666666666664,NA,NA,75,NA,NA,35,NA,NA
+366,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,61.666666666666664,61.666666666666664,NA,NA,NA,NA,NA,NA,47.5
+366,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,61.666666666666664,NA,NA,NA,NA,NA,NA,NA,47.5
+367,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Renovación de envolvente,65.4,NA,NA,62.75,NA,NA,NA,NA,NA
+367,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,65.4,NA,NA,62.75,NA,56.4,NA,NA,NA
+367,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,65.4,NA,NA,62.75,NA,NA,NA,NA,26.5
+368,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Sistema de refrigeración,NA,NA,NA,80.5,81,NA,NA,NA,NA
+368,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,43.8,NA,NA,NA,NA,NA,NA,NA,NA
+369,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Cambio de tarifa eléctrica,64.5,NA,84.4,66.5,NA,NA,NA,NA,NA
+371,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Medidas de microeficiencia,73.8,NA,NA,NA,65.5,NA,NA,NA,NA
+371,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,73.8,NA,NA,80.75,65.5,NA,NA,NA,NA
+371,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,73.8,NA,NA,80.75,65.5,NA,NA,NA,NA
+372,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Sistemas inteligentes del hogar,46,NA,NA,NA,65,NA,NA,NA,61
+372,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,46,NA,NA,NA,65,NA,NA,NA,61
+372,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,46,NA,NA,NA,65,NA,NA,NA,61
+PROLIFIC_56ab6fd869b24700065cbdbd,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Electrodomésticos eficientes,80.2,NA,85.4,NA,NA,NA,NA,NA,39.5
+PROLIFIC_57e928630cb6700001dd8f8a,G4_HomoEconomicus,Homo economicus,Done,Implementada,Kits solares de balcón,60.2,NA,71.4,72.75,NA,NA,NA,NA,NA
+PROLIFIC_57e928630cb6700001dd8f8a,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Almacenamiento energético,60.2,NA,71.4,72.75,NA,NA,NA,NA,NA
+PROLIFIC_5a2310ebdf5bd00001b37474,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,NA,79.5,NA,NA,63,NA,NA,NA,31
+PROLIFIC_5a2310ebdf5bd00001b37474,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Ventilación con recuperador,NA,79.5,NA,NA,63,NA,NA,NA,31
+PROLIFIC_5b3f242f9c2ec600014ef9fc,G4_HomoEconomicus,Homo economicus,Done,Implementada,Sistema de refrigeración,NA,NA,NA,77.5,100,NA,NA,NA,NA
+PROLIFIC_5b3f242f9c2ec600014ef9fc,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Vehículo eléctrico,90,70,NA,77.5,NA,NA,NA,NA,NA
+PROLIFIC_5b3f242f9c2ec600014ef9fc,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,90,NA,NA,77.5,100,NA,NA,NA,NA
+PROLIFIC_5c66cc9246bfc200019044b8,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistema de refrigeración,71,90,NA,NA,92.5,NA,NA,NA,NA
+PROLIFIC_5c66cc9246bfc200019044b8,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Kits solares de balcón,71,90,NA,NA,92.5,NA,NA,NA,NA
+PROLIFIC_5cd53d40aeb4100001c18aa8,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Electrodomésticos eficientes,NA,NA,NA,NA,NA,NA,NA,NA,36.5
+PROLIFIC_5cd53d40aeb4100001c18aa8,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,50.25,NA,NA,NA,NA,NA,NA,NA,36.5
+PROLIFIC_5cd53d40aeb4100001c18aa8,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,50.25,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5cf101ea48405a0018415d09,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,36.4,NA,69.8,NA,NA,NA,NA,NA,NA
+PROLIFIC_5cf101ea48405a0018415d09,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Bomba de calor,36.4,NA,NA,NA,85.5,NA,NA,NA,NA
+PROLIFIC_5cf101ea48405a0018415d09,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,36.4,73,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5cf510ccb0bafb00161ffd56,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Cambio de tarifa eléctrica,64.4,69,NA,NA,NA,NA,NA,NA,52.5
+PROLIFIC_5cf510ccb0bafb00161ffd56,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Almacenamiento energético,64.4,NA,NA,69.5,67,NA,NA,NA,NA
+PROLIFIC_5d1f54b95538e6001a843293,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Electrodomésticos eficientes,56.4,NA,79.8,NA,91.5,NA,NA,NA,NA
+PROLIFIC_5d1f54b95538e6001a843293,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,56.4,NA,NA,NA,91.5,48.2,NA,NA,NA
+PROLIFIC_5d1f54b95538e6001a843293,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,56.4,NA,NA,93.5,91.5,NA,NA,NA,NA
+PROLIFIC_5d24b3cfa433c000166f91bf,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,67,NA,NA,65.75,NA,NA,NA,NA,NA
+PROLIFIC_5d24b3cfa433c000166f91bf,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Sistema de refrigeración,NA,NA,NA,NA,68,NA,NA,NA,NA
+PROLIFIC_5d24b3cfa433c000166f91bf,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,67,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5d6558fa16871700012ea47b,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,93.6,NA,NA,NA,100,NA,38.333333333333336,NA,NA
+PROLIFIC_5d6558fa16871700012ea47b,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Ascensor,NA,94.75,NA,87.75,NA,66.8,NA,NA,NA
+PROLIFIC_5d6558fa16871700012ea47b,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,NA,NA,70.2,NA,NA,NA,38.333333333333336,64,NA
+PROLIFIC_5d7e41aea60f7b00013cf1af,G4_HomoEconomicus,Homo economicus,Done,Implementada,Electrodomésticos eficientes,NA,NA,NA,79.25,77.5,NA,NA,NA,29.5
+PROLIFIC_5d7e41aea60f7b00013cf1af,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,73,NA,NA,NA,77.5,NA,NA,NA,29.5
+PROLIFIC_5e35394d2149184e1a3d0450,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Sistemas inteligentes del hogar,32.2,NA,62,NA,NA,NA,NA,NA,32.5
+PROLIFIC_5e35394d2149184e1a3d0450,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,32.2,70.5,NA,NA,NA,NA,NA,NA,32.5
+PROLIFIC_5e35394d2149184e1a3d0450,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,32.2,NA,62,NA,NA,NA,NA,NA,32.5
+PROLIFIC_5e4f73d0ca55663b5b9d18b0,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Medidas de microeficiencia,NA,NA,62.6,NA,NA,NA,NA,NA,31
+PROLIFIC_5e4f73d0ca55663b5b9d18b0,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,60.6,75,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5e4f73d0ca55663b5b9d18b0,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,60.6,75,NA,NA,NA,NA,NA,NA,31
+PROLIFIC_5e86e0a50a340d32316afe9d,G4_HomoEconomicus,Homo economicus,Done,Implementada,Calefacción fósil o biomasa,74.2,27,NA,53.25,NA,NA,NA,NA,NA
+PROLIFIC_5e8f740429529124dfc3e7a5,G4_HomoEconomicus,Homo economicus,Done,Implementada,Electrodomésticos eficientes,63,NA,NA,NA,NA,NA,NA,NA,36
+PROLIFIC_5e8f740429529124dfc3e7a5,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Agua caliente sanitaria,NA,NA,NA,NA,NA,41,NA,NA,NA
+PROLIFIC_5e8f740429529124dfc3e7a5,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Cambio de tarifa eléctrica,63,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5e92267dcc3d6c553eb8c817,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,72.5,NA,65,56.25,NA,NA,NA,NA,NA
+PROLIFIC_5e92267dcc3d6c553eb8c817,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,72.5,NA,NA,NA,60,NA,NA,47.5,NA
+PROLIFIC_5e92267dcc3d6c553eb8c817,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ascensor,NA,NA,65,NA,60,38.8,NA,NA,NA
+PROLIFIC_5eda1423dd2241017d85fd44,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Sistema de refrigeración,67,NA,NA,NA,62.5,NA,50,NA,NA
+PROLIFIC_5eda1423dd2241017d85fd44,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Kits solares de balcón,67,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5eda1423dd2241017d85fd44,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,85,79,NA,NA,NA,NA,NA,NA
+PROLIFIC_5f21ff288900cb4709dd49aa,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Sistemas inteligentes del hogar,NA,87,NA,NA,NA,NA,67.33333333333333,NA,66
+PROLIFIC_5f21ff288900cb4709dd49aa,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,NA,87,86.8,NA,NA,NA,NA,NA,66
+PROLIFIC_5f21ff288900cb4709dd49aa,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,NA,NA,NA,NA,NA,NA,NA,66
+PROLIFIC_5f2af36061a10a452cd8dc4e,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Sistemas inteligentes del hogar,53,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5f2af36061a10a452cd8dc4e,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,53,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5f2af36061a10a452cd8dc4e,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,53,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5f2dcc4c7989510ff7699cab,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,45,NA,81.2,75,NA,NA,NA,NA,NA
+PROLIFIC_5f2dcc4c7989510ff7699cab,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Kits solares de balcón,NA,NA,NA,75,NA,NA,NA,NA,50
+PROLIFIC_5fbbc75f884010d82bf37532,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Cambio de tarifa eléctrica,62,NA,NA,NA,NA,NA,NA,18.5,NA
+PROLIFIC_5fbbc75f884010d82bf37532,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Sistema de refrigeración,NA,NA,NA,NA,45,NA,NA,18.5,NA
+PROLIFIC_5fe328a0a53c57f645dc0b19,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,67.6,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_5fe328a0a53c57f645dc0b19,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Medidas de microeficiencia,67.6,NA,NA,NA,NA,NA,NA,NA,37.5
+PROLIFIC_6034e1952ed073efce57a8a7,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Electrodomésticos eficientes,59.8,75,74.2,NA,NA,NA,NA,NA,NA
+PROLIFIC_6034e1952ed073efce57a8a7,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,59.8,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6034e1952ed073efce57a8a7,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,59.8,NA,NA,74.75,NA,NA,NA,NA,NA
+PROLIFIC_60456799ca80066961f3fa3c,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,43.8,NA,NA,NA,NA,NA,NA,NA,33.5
+PROLIFIC_60456799ca80066961f3fa3c,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,NA,NA,NA,NA,NA,NA,52,NA,33.5
+PROLIFIC_60456799ca80066961f3fa3c,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,NA,NA,NA,62.25,NA,NA,NA,NA,33.5
+PROLIFIC_60827e52a046c9b82574d391,G4_HomoEconomicus,Homo economicus,Done,Implementada,Medidas de microeficiencia,61.6,NA,62,61.5,NA,NA,NA,NA,NA
+PROLIFIC_60827e52a046c9b82574d391,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Almacenamiento energético,61.6,NA,62,61.5,NA,NA,NA,NA,NA
+PROLIFIC_60827e52a046c9b82574d391,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,61.6,NA,62,61.5,NA,NA,NA,NA,NA
+PROLIFIC_609077b2d5f119a0c819a6cd,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Cambio de tarifa eléctrica,81,65,71,NA,NA,NA,NA,NA,NA
+PROLIFIC_609077b2d5f119a0c819a6cd,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,81,65,NA,77.5,NA,NA,NA,NA,NA
+PROLIFIC_61034f24da19cc56177b8b59,G4_HomoEconomicus,Homo economicus,Done,Implementada,Agua caliente sanitaria,78.25,88.75,NA,74,NA,NA,NA,NA,NA
+PROLIFIC_61034f24da19cc56177b8b59,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Electrodomésticos eficientes,78.25,88.75,79.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_61034f24da19cc56177b8b59,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,78.25,88.75,NA,74,NA,NA,NA,NA,NA
+PROLIFIC_6103a3ece71ab061d5624402,G4_HomoEconomicus,Homo economicus,Done,Implementada,Electrodomésticos eficientes,NA,73.75,NA,NA,70,NA,NA,NA,40
+PROLIFIC_6103a3ece71ab061d5624402,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Kits solares de balcón,77,73.75,NA,NA,NA,NA,NA,NA,40
+PROLIFIC_6103a3ece71ab061d5624402,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,77,73.75,NA,NA,70,NA,NA,NA,NA
+PROLIFIC_6111037143ad4a71cf9e2852,G4_HomoEconomicus,Homo economicus,Done,Implementada,Electrodomésticos eficientes,70,NA,NA,NA,NA,NA,NA,NA,42.5
+PROLIFIC_6111037143ad4a71cf9e2852,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,70,NA,NA,NA,NA,NA,NA,NA,42.5
+PROLIFIC_6119075f1fe00f92c8153747,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,71.4,56.5,62,NA,NA,NA,NA,NA,NA
+PROLIFIC_6119075f1fe00f92c8153747,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,71.4,NA,62,NA,NA,NA,30,NA,NA
+PROLIFIC_6119075f1fe00f92c8153747,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,71.4,NA,62,NA,NA,54.8,NA,NA,NA
+PROLIFIC_6136cb52db0f1cb2262bbf5d,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Cambio de tarifa eléctrica,74,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6136cb52db0f1cb2262bbf5d,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,NA,NA,66.25,70,NA,NA,NA,NA
+PROLIFIC_6167579b785195f0db610d94,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistema de refrigeración,63.4,NA,61.8,NA,86.5,NA,NA,NA,NA
+PROLIFIC_6167579b785195f0db610d94,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,63.4,NA,NA,NA,NA,NA,36,NA,29.5
+PROLIFIC_62ead0772116e6bc70b7cd09,G4_HomoEconomicus,Homo economicus,Done,Implementada,Electrodomésticos eficientes,85.6,NA,NA,NA,NA,59,NA,NA,13.5
+PROLIFIC_62ead0772116e6bc70b7cd09,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Ascensor,85.6,83.5,NA,NA,NA,NA,NA,NA,13.5
+PROLIFIC_62ead0772116e6bc70b7cd09,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,85.6,NA,NA,NA,NA,NA,26.666666666666668,NA,13.5
+PROLIFIC_63b3377ca1ccdfc7cc567503,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Agua caliente sanitaria,56.8,83.5,75.8,NA,NA,NA,NA,NA,NA
+PROLIFIC_63b3377ca1ccdfc7cc567503,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,56.8,83.5,75.8,NA,NA,NA,NA,NA,NA
+PROLIFIC_63b3377ca1ccdfc7cc567503,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,56.8,83.5,75.8,NA,NA,NA,NA,NA,NA
+PROLIFIC_63ed0392b8b24c34aaf26310,G4_HomoEconomicus,Homo economicus,Done,Implementada,Cambio de tarifa eléctrica,72,74,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_63ed0392b8b24c34aaf26310,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Sistema de refrigeración,NA,NA,NA,NA,82,NA,NA,NA,NA
+PROLIFIC_646219bb0b91a6f3327e39fb,G4_HomoEconomicus,Homo economicus,Done,Implementada,Cambio de tarifa eléctrica,51,NA,61,76.25,NA,NA,NA,NA,NA
+PROLIFIC_646219bb0b91a6f3327e39fb,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Kits solares de balcón,51,NA,61,76.25,NA,NA,NA,NA,NA
+PROLIFIC_646219bb0b91a6f3327e39fb,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,51,NA,61,NA,NA,NA,NA,NA,17.5
+PROLIFIC_6470e501cc85b0287c8da951,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Electrodomésticos eficientes,55,NA,NA,85,50,NA,NA,NA,NA
+PROLIFIC_6470e501cc85b0287c8da951,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Renovación de envolvente,55,92.5,NA,85,NA,NA,NA,NA,NA
+PROLIFIC_6470e501cc85b0287c8da951,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,55,92.5,79,NA,NA,NA,NA,NA,NA
+PROLIFIC_64a814776d0d667482bcf926,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Bomba de calor,64.8,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_64e91e9b7ac897d0afa22985,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,58.2,80.25,NA,60,NA,NA,NA,NA,NA
+PROLIFIC_64edf002c925fb837ee0a770,G4_HomoEconomicus,Homo economicus,Done,Implementada,Bomba de calor,51.2,NA,NA,69,NA,NA,NA,NA,NA
+PROLIFIC_64edf002c925fb837ee0a770,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Vehículo eléctrico,51.2,61.25,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_65410ad762a7e3c570b6273c,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistema de refrigeración,NA,NA,NA,NA,55.5,55.6,NA,NA,50.5
+PROLIFIC_654e38a9bd1961e9942af916,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,72.2,68,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_654e38a9bd1961e9942af916,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,72.2,68,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6597f6dc6f784e1f69bfadfa,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,49.4,NA,NA,NA,65,NA,NA,NA,24
+PROLIFIC_6597f6dc6f784e1f69bfadfa,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Renovación de envolvente,49.4,NA,56,NA,NA,NA,22.666666666666668,NA,NA
+PROLIFIC_6597f6dc6f784e1f69bfadfa,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Cambio de tarifa eléctrica,49.4,64.5,NA,NA,NA,NA,22.666666666666668,NA,NA
+PROLIFIC_65b271a26aba0246730964f3,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Vehículo eléctrico,NA,NA,NA,62.75,NA,NA,NA,NA,NA
+PROLIFIC_65b271a26aba0246730964f3,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,NA,NA,62.75,NA,NA,NA,NA,NA
+PROLIFIC_6605852ff5914c22f592a372,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,81.4,NA,NA,NA,NA,57.8,NA,NA,59.5
+PROLIFIC_6605852ff5914c22f592a372,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Bomba de calor,81.4,NA,NA,NA,79.5,NA,NA,NA,59.5
+PROLIFIC_661581f5ba8868414baed7ca,G4_HomoEconomicus,Homo economicus,Done,Implementada,Sistema de refrigeración,NA,NA,NA,NA,56.5,NA,NA,NA,NA
+PROLIFIC_66316420ced02e8c467d22a2,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Cambio de tarifa eléctrica,72,NA,NA,72.5,NA,12,NA,NA,NA
+PROLIFIC_66316420ced02e8c467d22a2,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Kits solares de balcón,72,51.25,81,NA,NA,NA,NA,NA,NA
+PROLIFIC_6646044a0b635b10c98237fb,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Medidas de microeficiencia,99.6,NA,NA,NA,80,NA,NA,NA,0
+PROLIFIC_6646044a0b635b10c98237fb,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,99.6,66.66666666666667,NA,NA,NA,NA,NA,NA,0
+PROLIFIC_6654840c725f74f1b0a206f9,G4_HomoEconomicus,Homo economicus,Done,Implementada,Medidas de microeficiencia,72,NA,NA,NA,NA,NA,15.333333333333334,NA,52.5
+PROLIFIC_6654840c725f74f1b0a206f9,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,72,66.75,NA,NA,NA,NA,NA,NA,52.5
+PROLIFIC_667971a555af1f83d3f29ae7,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistema de refrigeración,59,NA,NA,NA,85,NA,NA,NA,NA
+PROLIFIC_667971a555af1f83d3f29ae7,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,59,NA,NA,69,NA,NA,NA,NA,NA
+PROLIFIC_667971a555af1f83d3f29ae7,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,59,63.75,69,NA,NA,NA,NA,NA,NA
+PROLIFIC_669f4716791267ee6337641f,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,53.6,58.25,NA,52.75,NA,NA,NA,NA,NA
+PROLIFIC_66bf543c179dbc75f790396c,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Agua caliente sanitaria,49.6,NA,NA,NA,NA,NA,NA,NA,70.5
+PROLIFIC_66bf543c179dbc75f790396c,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,49.6,NA,84.4,NA,47.5,NA,NA,NA,NA
+PROLIFIC_66cc80d93247b5e14b3b7112,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Almacenamiento energético,51.6,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_66cc80d93247b5e14b3b7112,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,NA,NA,73,NA,NA,NA,19,NA
+PROLIFIC_66cc80d93247b5e14b3b7112,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,51.6,79.25,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_672b6f50809e58bcc13a57b4,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,59.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_672b6f50809e58bcc13a57b4,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Comunidad energética,59.4,71.75,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_672b6f50809e58bcc13a57b4,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,59.4,NA,NA,NA,75,NA,NA,NA,NA
+PROLIFIC_67458e548861194752950b3e,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,62.75,NA,NA,NA,NA,NA,NA,68.5,NA
+PROLIFIC_692479671925a3943fce7055,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Bomba de calor,67.5,NA,NA,NA,NA,NA,NA,NA,35
+PROLIFIC_692479671925a3943fce7055,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Medidas de microeficiencia,67.5,NA,NA,NA,NA,NA,NA,NA,35
+PROLIFIC_69249f2bf89992510c44179e,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Kits solares de balcón,68.6,85.75,84.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_69249f2bf89992510c44179e,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,68.6,NA,NA,NA,NA,58.6,NA,NA,57.5
+PROLIFIC_6928b5026c84fcd91c5a7a68,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Cambio de tarifa eléctrica,68.4,NA,NA,NA,NA,NA,55,NA,59
+PROLIFIC_6928b5026c84fcd91c5a7a68,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,68.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69307ef5fe254a61dee79a78,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Sistema de refrigeración,NA,NA,NA,NA,NA,22,NA,NA,NA
+PROLIFIC_69307ef5fe254a61dee79a78,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,56.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6932b69b5d8649b7a1021ff0,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Sistema de refrigeración,NA,NA,NA,NA,77,NA,NA,NA,NA
+PROLIFIC_6932b69b5d8649b7a1021ff0,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,65.6,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6932bf332627def0f1f8a46b,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,77.2,NA,NA,NA,85,NA,NA,NA,NA
+PROLIFIC_6932bf332627def0f1f8a46b,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Almacenamiento energético,77.2,NA,NA,NA,NA,NA,NA,NA,34.5
+PROLIFIC_6932bf332627def0f1f8a46b,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,77.2,NA,NA,NA,85,NA,NA,NA,34.5
+PROLIFIC_6933207fdfdffc10571420a8,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,75,NA,71,NA,94,NA,NA,NA,NA
+PROLIFIC_696c724484bccbd980cd0e88,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistema de refrigeración,NA,NA,NA,62.5,82.5,NA,33.333333333333336,NA,NA
+PROLIFIC_696c724484bccbd980cd0e88,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,68.5,70,NA,NA,36,NA,NA,NA
+PROLIFIC_696c724484bccbd980cd0e88,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,58,NA,NA,NA,82.5,NA,NA,NA,30
+PROLIFIC_6973653f34c609a7c3420e1c,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,71,NA,NA,NA,70,28,NA,NA,NA
+PROLIFIC_6973653f34c609a7c3420e1c,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,71,56.25,NA,NA,70,NA,NA,NA,NA
+PROLIFIC_6976fca13dd3674fd0702a52,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,76,NA,NA,75,NA,NA,NA,NA,47.5
+PROLIFIC_6976fca13dd3674fd0702a52,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,76,NA,NA,75,NA,NA,NA,NA,47.5
+PROLIFIC_6976fca13dd3674fd0702a52,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,76,NA,NA,NA,NA,NA,NA,47.5,47.5
+PROLIFIC_6978bbc0ecc89bfa720fac28,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Comunidad energética,NA,80.25,NA,NA,NA,NA,54,NA,78.5
+PROLIFIC_6978bbc0ecc89bfa720fac28,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,NA,71.8,NA,71,70.8,NA,NA,NA
+PROLIFIC_697907c3546949f10030ddf1,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Electrodomésticos eficientes,NA,NA,NA,NA,NA,NA,NA,NA,25
+PROLIFIC_697907c3546949f10030ddf1,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,NA,NA,NA,NA,NA,NA,NA,25
+PROLIFIC_697907c3546949f10030ddf1,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,NA,NA,NA,NA,NA,NA,NA,25
+PROLIFIC_697a77ec6ca000317de70f17,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Comunidad energética,NA,NA,NA,NA,NA,48.8,NA,NA,37.5
+PROLIFIC_697a77ec6ca000317de70f17,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,58.2,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_697a77ec6ca000317de70f17,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,NA,NA,NA,NA,NA,NA,NA,26,NA
+PROLIFIC_697b1a2669af0b3f24790e20,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,90.6,52.75,NA,NA,45.5,NA,NA,NA,NA
+PROLIFIC_697b1a2669af0b3f24790e20,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistema de refrigeración,90.6,NA,NA,NA,45.5,NA,NA,NA,88
+PROLIFIC_697b1a2669af0b3f24790e20,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,90.6,52.75,NA,NA,45.5,NA,NA,NA,NA
+PROLIFIC_697b30411f746b578812b981,G4_HomoEconomicus,Homo economicus,Done,Implementada,Cambio de tarifa eléctrica,79,85.5,80.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_697b30411f746b578812b981,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,NA,85.5,NA,75.25,NA,NA,NA,NA,0.5
+PROLIFIC_697b30411f746b578812b981,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Sistema de refrigeración,79,85.5,80.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_697b4452d0057be21360d8d6,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Sistemas inteligentes del hogar,78.6,89.25,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_697b4452d0057be21360d8d6,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,78.6,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_697b4452d0057be21360d8d6,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,78.6,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_697cae93b9bd8250922a71ce,G4_HomoEconomicus,Homo economicus,Done,Implementada,Cambio de tarifa eléctrica,62,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_697cae93b9bd8250922a71ce,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,62,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_697f4a00c858108580e08f4b,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Ascensor,93.6,72.75,NA,NA,NA,NA,NA,NA,84
+PROLIFIC_697f4f0f25cc7707716e04f5,G4_HomoEconomicus,Homo economicus,Done,Implementada,Cambio de tarifa eléctrica,NA,NA,NA,64,NA,NA,NA,NA,NA
+PROLIFIC_697f4f0f25cc7707716e04f5,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Kits solares de balcón,60.6,NA,63.4,64,NA,NA,NA,NA,NA
+PROLIFIC_697f4f0f25cc7707716e04f5,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Medidas de microeficiencia,NA,NA,NA,64,NA,NA,NA,NA,NA
+PROLIFIC_69807a8271a61e4d75ab96c4,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,60.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69809ce77983b24e7e0729b4,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Renovación de envolvente,57,NA,NA,61.25,NA,NA,NA,NA,45
+PROLIFIC_69809ce77983b24e7e0729b4,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,57,NA,NA,61.25,NA,NA,NA,NA,45
+PROLIFIC_69809ce77983b24e7e0729b4,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,NA,63.75,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6980bdf135e5d99f4cd191e6,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,63.2,83.25,NA,NA,NA,NA,NA,NA,48
+PROLIFIC_6980bdf135e5d99f4cd191e6,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,63.2,83.25,NA,NA,NA,NA,NA,NA,48
+PROLIFIC_6980bdf135e5d99f4cd191e6,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,63.2,83.25,NA,NA,NA,NA,NA,NA,48
+PROLIFIC_698257587a4d2edcdc29a350,G4_HomoEconomicus,Homo economicus,Done,Implementada,Kits solares de balcón,NA,NA,NA,79.75,86.5,NA,58.333333333333336,NA,NA
+PROLIFIC_698257587a4d2edcdc29a350,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Vehículo eléctrico,45.6,79.75,81.2,NA,NA,NA,NA,NA,NA
+PROLIFIC_698359ee7148b5a9731164bb,G4_HomoEconomicus,Homo economicus,Done,Implementada,Medidas de microeficiencia,78.6,NA,78,76.75,NA,NA,NA,NA,NA
+PROLIFIC_698359ee7148b5a9731164bb,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,78.6,NA,NA,76.75,NA,NA,NA,NA,NA
+PROLIFIC_698359ee7148b5a9731164bb,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,78.6,NA,NA,76.75,NA,NA,NA,NA,NA
+PROLIFIC_69836e23196469e9a4825346,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Cambio de tarifa eléctrica,92,NA,NA,75,NA,NA,NA,NA,5
+PROLIFIC_69836e23196469e9a4825346,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,92,NA,NA,NA,60,NA,NA,NA,5
+PROLIFIC_6984258cb12947550bff2d1a,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,60,NA,100,NA,97,NA,NA,NA,NA
+PROLIFIC_6984258cb12947550bff2d1a,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,60,NA,100,100,NA,NA,NA,NA,NA
+PROLIFIC_6984b719db2917412dfc3135,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Cambio de tarifa eléctrica,57,NA,NA,76.25,NA,NA,NA,NA,47.5
+PROLIFIC_6984b719db2917412dfc3135,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Kits solares de balcón,57,NA,NA,76.25,NA,NA,NA,NA,47.5
+PROLIFIC_6984b719db2917412dfc3135,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,57,NA,NA,76.25,NA,NA,NA,NA,47.5
+PROLIFIC_6985f197cf1559ac62ea5dc3,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Agua caliente sanitaria,61,NA,NA,76.25,NA,NA,NA,NA,NA
+PROLIFIC_6985f197cf1559ac62ea5dc3,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Vehículo eléctrico,NA,81.5,NA,NA,NA,NA,55,NA,47.5
+PROLIFIC_6985f197cf1559ac62ea5dc3,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,61,NA,NA,NA,NA,NA,NA,NA,47.5
+PROLIFIC_69864a7ee88ba6c6a6f798fc,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistema de refrigeración,63,60.5,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_698b10e112e204e2d1f0c126,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,70,NA,91,NA,52.5,NA,NA,NA,NA
+PROLIFIC_698b10e112e204e2d1f0c126,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistema de refrigeración,70,NA,91,NA,52.5,NA,NA,NA,NA
+PROLIFIC_698b10e112e204e2d1f0c126,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,70,NA,91,NA,52.5,NA,NA,NA,NA
+PROLIFIC_698df153dc723dada19b1dab,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,53,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_698df4a194fabefa716596ec,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistemas inteligentes del hogar,NA,65.75,NA,NA,67.5,NA,61.333333333333336,NA,NA
+PROLIFIC_698e1fb406f80868c041565a,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistemas inteligentes del hogar,84,NA,NA,NA,90,NA,NA,NA,NA
+PROLIFIC_698e1fb406f80868c041565a,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,84,85,NA,NA,NA,59,NA,NA,NA
+PROLIFIC_698e260e1c956e03673d79ab,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistemas inteligentes del hogar,NA,NA,NA,59.25,NA,NA,NA,NA,NA
+PROLIFIC_698e260e1c956e03673d79ab,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Kits solares de balcón,86.6,NA,NA,NA,NA,24.6,NA,NA,NA
+PROLIFIC_698e260e1c956e03673d79ab,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,86.6,62.5,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_698eea589bb7dd5212c5e3c9,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,54,NA,NA,NA,80,NA,NA,NA,34
+PROLIFIC_698eea589bb7dd5212c5e3c9,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Kits solares de balcón,NA,NA,NA,78.75,NA,NA,35,NA,34
+PROLIFIC_698eea589bb7dd5212c5e3c9,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,54,NA,NA,NA,NA,NA,35,NA,34
+PROLIFIC_698ef5093a80fcd19f394ab2,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,78,84.5,NA,NA,NA,NA,46,NA,NA
+PROLIFIC_698ef5093a80fcd19f394ab2,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,78,84.5,NA,65.25,NA,NA,NA,NA,NA
+PROLIFIC_698f1a372de6aef866bec656,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,77.8,75.25,NA,82.5,NA,NA,NA,NA,NA
+PROLIFIC_698f1a372de6aef866bec656,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,NA,75.25,NA,82.5,NA,NA,32.333333333333336,NA,NA
+PROLIFIC_698fa8ec85144121c0643338,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistemas inteligentes del hogar,65.2,39,NA,69.25,NA,NA,NA,NA,NA
+PROLIFIC_698fa8ec85144121c0643338,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Almacenamiento energético,65.2,NA,NA,69.25,NA,NA,NA,66,NA
+PROLIFIC_6990691f5ced735f10ff3bba,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Agua caliente sanitaria,72,83.75,NA,NA,80,NA,NA,NA,NA
+PROLIFIC_6990691f5ced735f10ff3bba,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,72,83.75,NA,NA,80,NA,NA,NA,NA
+PROLIFIC_69946a0579d779ee49dca2c5,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,50,NA,74,NA,NA,NA,NA,NA,15
+PROLIFIC_699776549800aa3b0399d642,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,62.6,NA,NA,88.5,NA,NA,NA,NA,16.5
+PROLIFIC_699776549800aa3b0399d642,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Kits solares de balcón,62.6,82.5,NA,NA,NA,NA,NA,NA,16.5
+PROLIFIC_699776549800aa3b0399d642,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,62.6,82.5,NA,88.5,NA,NA,NA,NA,NA
+PROLIFIC_699b5130e75520d8cda5a642,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,73,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_699b5130e75520d8cda5a642,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Kits solares de balcón,73,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_699b5130e75520d8cda5a642,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,73,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_699e007dc8f8cbd074222f56,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Bomba de calor,62.8,66.5,NA,NA,NA,NA,NA,81,NA
+PROLIFIC_699e007dc8f8cbd074222f56,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistema de refrigeración,62.8,66.5,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_699e007dc8f8cbd074222f56,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,NA,NA,73,NA,NA,NA,NA,NA
+PROLIFIC_69a5621021a584cfa45f5f38,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,46.6,NA,79.2,79,NA,NA,NA,NA,NA
+PROLIFIC_69a5621021a584cfa45f5f38,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Ventilación con recuperador,46.6,76.25,79.2,NA,NA,NA,NA,NA,NA
+PROLIFIC_69a5621021a584cfa45f5f38,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistema de refrigeración,46.6,NA,79.2,79,NA,NA,NA,NA,NA
+PROLIFIC_69a6fd75a40ab271c0a54fd7,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,74,NA,94.6,NA,NA,NA,NA,NA,45
+PROLIFIC_69b1d8fe4b310c4186bcbbcc,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,NA,NA,75.4,76.25,NA,48,NA,NA,NA
+PROLIFIC_69b1d8fe4b310c4186bcbbcc,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Almacenamiento energético,75.4,NA,75.4,76.25,NA,NA,NA,NA,NA
+PROLIFIC_69b1d8fe4b310c4186bcbbcc,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,75.4,NA,75.4,76.25,NA,NA,NA,NA,NA
+PROLIFIC_69b9bf5f0faac70cd0e24cf6,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,65.75,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69b9bf5f0faac70cd0e24cf6,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Vehículo eléctrico,65.75,NA,NA,77,NA,NA,NA,NA,NA
+PROLIFIC_69c648e30d13356cd9780c9a,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,80,NA,70.4,67.5,NA,NA,NA,NA,NA
+PROLIFIC_69c648e30d13356cd9780c9a,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Almacenamiento energético,80,NA,70.4,NA,NA,NA,NA,NA,NA
+PROLIFIC_69c648e30d13356cd9780c9a,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,NA,NA,NA,NA,NA,25
+PROLIFIC_69c6a6aade93df9f06f725a2,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,NA,NA,NA,NA,NA,NA,NA,NA,43.5
+PROLIFIC_69c6a6aade93df9f06f725a2,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,NA,NA,NA,NA,NA,NA,NA,NA,43.5
+PROLIFIC_69c6a6aade93df9f06f725a2,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,44.5,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69cac7e6b4b245b2c38f9112,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,72.6,NA,NA,58.5,NA,NA,NA,NA,50
+PROLIFIC_69cac7e6b4b245b2c38f9112,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Vehículo eléctrico,72.6,NA,NA,58.5,NA,NA,42,NA,NA
+PROLIFIC_69d023c8f299f5b1cc355e64,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,72.4,76,77,NA,NA,NA,NA,NA,NA
+PROLIFIC_69d023c8f299f5b1cc355e64,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,72.4,NA,NA,71.5,57,NA,NA,NA,NA
+PROLIFIC_69d023c8f299f5b1cc355e64,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,72.4,NA,NA,71.5,NA,74.5,NA,NA,NA
+PROLIFIC_69d671f03dd875c20e4c0ce0,G4_HomoEconomicus,Homo economicus,Done,Implementada,Sistemas inteligentes del hogar,NA,NA,NA,58.75,60,NA,NA,NA,35
+PROLIFIC_69d671f03dd875c20e4c0ce0,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,46,50,NA,58.75,NA,NA,NA,NA,NA
+PROLIFIC_69d671f03dd875c20e4c0ce0,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,46,50,NA,58.75,NA,NA,NA,NA,NA
+PROLIFIC_69d763affd0080c0bffcd367,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,62,NA,NA,NA,82.5,NA,NA,NA,45
+PROLIFIC_69d763affd0080c0bffcd367,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Almacenamiento energético,62,NA,NA,NA,82.5,NA,NA,NA,45
+PROLIFIC_69d763affd0080c0bffcd367,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,62,NA,NA,NA,82.5,NA,NA,NA,NA
+PROLIFIC_69d7f5e13c624f3ce83d2cfb,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Kits solares de balcón,NA,NA,NA,NA,85.5,NA,63.333333333333336,49,NA
+PROLIFIC_69d7f5e13c624f3ce83d2cfb,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,62.6,79.75,83.8,NA,NA,NA,NA,NA,NA
+PROLIFIC_69d801b7ff73fd8726f49404,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,74,93.25,NA,NA,NA,NA,NA,NA,37.5
+PROLIFIC_69d801b7ff73fd8726f49404,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,74,NA,NA,NA,NA,NA,24.666666666666668,21.5,NA
+PROLIFIC_69d801b7ff73fd8726f49404,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,74,NA,NA,NA,NA,NA,24.666666666666668,NA,NA
+PROLIFIC_69d8d2f724abed404eb4935d,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Cambio de tarifa eléctrica,62.6,76,NA,71.75,NA,NA,NA,NA,NA
+PROLIFIC_69d8d2f724abed404eb4935d,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,62.6,76,NA,71.75,NA,NA,NA,NA,NA
+PROLIFIC_69de0876fb4170e1b31c0f7b,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,33,NA,NA,NA,NA,NA,33.333333333333336,NA,42.5
+PROLIFIC_69de0876fb4170e1b31c0f7b,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,NA,42,NA,NA,NA,33.333333333333336,NA,42.5
+PROLIFIC_69e213021f9224d147d5908b,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Vehículo eléctrico,76,76.25,NA,NA,NA,NA,NA,NA,40
+PROLIFIC_69e213021f9224d147d5908b,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Almacenamiento energético,76,76.25,NA,NA,NA,NA,6.666666666666667,NA,NA
+PROLIFIC_69e213021f9224d147d5908b,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,76,76.25,NA,NA,NA,NA,NA,NA,40
+PROLIFIC_69e7b977a16a3c9a2b839a87,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Medidas de microeficiencia,NA,74.33333333333333,NA,84.25,99.5,NA,NA,NA,NA
+PROLIFIC_69e7b977a16a3c9a2b839a87,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,63.8,74.33333333333333,NA,84.25,NA,NA,NA,NA,NA
+PROLIFIC_69eca1e06533d42ff1306a24,G4_HomoEconomicus,Homo economicus,Done,Implementada,Medidas de microeficiencia,44,NA,51,35,NA,NA,NA,NA,NA
+PROLIFIC_69eca1e06533d42ff1306a24,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,44,NA,NA,35,NA,NA,NA,NA,5
+PROLIFIC_69eca1e06533d42ff1306a24,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,44,NA,NA,35,NA,NA,NA,NA,5
+PROLIFIC_69edcc3c9f52558843ab7d99,G4_HomoEconomicus,Homo economicus,Done,Implementada,Electrodomésticos eficientes,NA,NA,NA,83.75,NA,NA,NA,NA,NA
+PROLIFIC_69edcc3c9f52558843ab7d99,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Vehículo eléctrico,61,NA,74,NA,NA,NA,NA,NA,NA
+PROLIFIC_69edcc3c9f52558843ab7d99,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,61,NA,74,83.75,NA,NA,NA,NA,NA
+PROLIFIC_69ee50cfb4f7f782d21e0238,G4_HomoEconomicus,Homo economicus,Done,Implementada,Cambio de tarifa eléctrica,91.8,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69f0ef9892bba1b2c3596e76,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,70,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69f3101cd619e2288f7cffa7,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Agua caliente sanitaria,62.4,NA,71,57.75,NA,NA,NA,NA,NA
+PROLIFIC_69f3101cd619e2288f7cffa7,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,62.4,62.25,NA,57.75,NA,NA,NA,NA,NA
+PROLIFIC_69f3101cd619e2288f7cffa7,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,62.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69f349141b7a57cdd52b671c,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Renovación de envolvente,58.6,NA,NA,NA,64,NA,NA,NA,NA
+PROLIFIC_69f349141b7a57cdd52b671c,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,58.6,NA,NA,63.25,NA,NA,NA,NA,NA
+PROLIFIC_69f349141b7a57cdd52b671c,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,NA,NA,NA,NA,NA,NA,37.666666666666664,42.5,44.5
+PROLIFIC_69f732a6afef1c53157db063,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Bomba de calor,73.75,NA,NA,69.75,NA,NA,NA,NA,46.5
+PROLIFIC_69f732a6afef1c53157db063,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Kits solares de balcón,73.75,NA,NA,69.75,NA,NA,NA,NA,46.5
+PROLIFIC_69f732a6afef1c53157db063,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,73.75,72,NA,69.75,NA,NA,NA,NA,NA
+PROLIFIC_69f9f16dd6f231903e2a6b41,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Electrodomésticos eficientes,64.4,NA,NA,NA,48.5,NA,NA,NA,32
+PROLIFIC_69f9f16dd6f231903e2a6b41,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Kits solares de balcón,64.4,NA,NA,53,NA,NA,NA,NA,32
+PROLIFIC_69f9f16dd6f231903e2a6b41,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,NA,80.25,75.2,NA,NA,NA,NA,NA,32
+PROLIFIC_69fb3f396267d7f728885605,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,83.2,NA,NA,NA,NA,NA,42.666666666666664,NA,NA
+PROLIFIC_69fb3f396267d7f728885605,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,83.2,NA,66,NA,NA,NA,42.666666666666664,NA,NA
+PROLIFIC_69fb3f396267d7f728885605,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Medidas de microeficiencia,83.2,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69fc2d7674f4ab68ebfd7559,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Cambio de tarifa eléctrica,63.6,NA,NA,51.5,NA,NA,NA,NA,5.5
+PROLIFIC_69fc2d7674f4ab68ebfd7559,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,63.6,NA,NA,NA,71,NA,NA,NA,5.5
+PROLIFIC_69fc2d7674f4ab68ebfd7559,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ascensor,63.6,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_69fc62a553e31d1f955c7d1e,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Ascensor,NA,80.25,81.6,75.5,NA,NA,NA,NA,NA
+PROLIFIC_69fc62a553e31d1f955c7d1e,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,75.4,80.25,81.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_69fc88ab52f8fd41bd554aee,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,64,NA,NA,81.25,85,NA,NA,NA,NA
+PROLIFIC_69fc88ab52f8fd41bd554aee,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,64,70,NA,NA,NA,NA,NA,NA,40
+PROLIFIC_69fc88ab52f8fd41bd554aee,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,64,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a005381c9f64426562d2587,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Bomba de calor,75,90,NA,NA,70,NA,NA,NA,NA
+PROLIFIC_6a005381c9f64426562d2587,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Kits solares de balcón,NA,90,NA,83.33333333333333,70,NA,NA,NA,NA
+PROLIFIC_6a005381c9f64426562d2587,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,75,90,NA,83.33333333333333,NA,NA,NA,NA,NA
+PROLIFIC_6a00c9657d955585296f7301,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistema de refrigeración,56.2,NA,NA,NA,NA,NA,NA,19.5,NA
+PROLIFIC_6a00c9657d955585296f7301,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Renovación de envolvente,56.2,NA,NA,NA,NA,NA,NA,NA,52
+PROLIFIC_6a00c9657d955585296f7301,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,56.2,37.5,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a00ddf17a4ca511079ba36,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Sistemas inteligentes del hogar,NA,49.25,53.8,62.25,NA,NA,NA,NA,NA
+PROLIFIC_6a00ddf17a4ca511079ba36,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,66.6,49.25,NA,NA,NA,NA,NA,NA,75
+PROLIFIC_6a00ddf17a4ca511079ba36,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,NA,49.25,NA,62.25,NA,NA,NA,50.5,NA
+PROLIFIC_6a01a5353d69fb639148aa20,G4_HomoEconomicus,Homo economicus,Done,Implementada,Sistemas inteligentes del hogar,64,63.333333333333336,NA,NA,NA,NA,NA,NA,42.5
+PROLIFIC_6a01a5353d69fb639148aa20,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Kits solares de balcón,64,NA,NA,61.25,NA,NA,58.333333333333336,NA,NA
+PROLIFIC_6a01a5353d69fb639148aa20,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,64,NA,NA,61.25,NA,NA,58.333333333333336,NA,NA
+PROLIFIC_6a01d2282cff0f54d29e9ce9,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Ascensor,63.6,76.25,NA,NA,55,NA,NA,NA,NA
+PROLIFIC_6a01d2282cff0f54d29e9ce9,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,63.6,NA,NA,66.33333333333333,55,NA,NA,NA,NA
+PROLIFIC_6a01d315cd2cd32b1511e127,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Sistema de refrigeración,58,NA,59,NA,70,NA,NA,NA,NA
+PROLIFIC_6a01d315cd2cd32b1511e127,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Agua caliente sanitaria,58,NA,59,NA,70,NA,NA,NA,NA
+PROLIFIC_6a01f97615e1e34226c0c6de,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Sistema de refrigeración,NA,78.75,NA,71,75,NA,NA,NA,NA
+PROLIFIC_6a01f97615e1e34226c0c6de,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,68.4,78.75,NA,NA,75,NA,NA,NA,NA
+PROLIFIC_6a0202e1fdb933b3a6bc8fe9,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,NA,94,76.8,NA,87.5,NA,NA,NA,NA
+PROLIFIC_6a0202e1fdb933b3a6bc8fe9,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,NA,NA,76.8,83.5,87.5,NA,NA,NA,NA
+PROLIFIC_6a021400594777c9049633a4,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Agua caliente sanitaria,79.2,NA,94.8,89.75,NA,NA,NA,NA,NA
+PROLIFIC_6a021400594777c9049633a4,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Renovación de envolvente,79.2,NA,94.8,NA,NA,NA,NA,NA,36.5
+PROLIFIC_6a021400594777c9049633a4,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,NA,NA,59.8,NA,21,36.5
+PROLIFIC_6a0252dc959d360ed8448c2f,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Bomba de calor,73,NA,75.4,71,NA,NA,NA,NA,NA
+PROLIFIC_6a0252dc959d360ed8448c2f,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,73,NA,NA,71,74,NA,NA,NA,NA
+PROLIFIC_6a03950c7926c7ee5b8589ae,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Medidas de microeficiencia,62,NA,NA,67,NA,NA,NA,NA,32.5
+PROLIFIC_6a03950c7926c7ee5b8589ae,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,90.75,NA,NA,NA,NA,27.666666666666668,NA,NA
+PROLIFIC_6a03950c7926c7ee5b8589ae,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,62,NA,NA,67,NA,NA,NA,NA,NA
+PROLIFIC_6a0631964347cec04dfa71d1,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Calefacción fósil o biomasa,73.2,NA,88.8,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a0631964347cec04dfa71d1,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,73.2,NA,NA,77.5,NA,NA,NA,NA,NA
+PROLIFIC_6a064be60a1feb17a9dfe824,G4_HomoEconomicus,Homo economicus,Done,Implementada,Cambio de tarifa eléctrica,80.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a064be60a1feb17a9dfe824,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Electrodomésticos eficientes,80.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a064be60a1feb17a9dfe824,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,80.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a06ce99e7948a2b48b807b8,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Cambio de tarifa eléctrica,57.6,NA,NA,85.5,NA,NA,NA,NA,NA
+PROLIFIC_6a06ce99e7948a2b48b807b8,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,57.6,NA,NA,NA,NA,NA,NA,NA,3.5
+PROLIFIC_6a07020572ab3b4d691a391c,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,72.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a07020572ab3b4d691a391c,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,72.4,NA,85.6,82.5,NA,NA,NA,NA,NA
+PROLIFIC_6a07318351b163db6f9887f1,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,75.33333333333333,NA,NA,100,100,NA,NA,NA,NA
+PROLIFIC_6a07318351b163db6f9887f1,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,75.33333333333333,NA,NA,100,100,NA,NA,NA,NA
+PROLIFIC_6a081474f37bbaf455c26332,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Kits solares de balcón,60.8,NA,NA,56.5,73.5,NA,NA,NA,NA
+PROLIFIC_6a081474f37bbaf455c26332,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,60.8,NA,68.6,NA,NA,66.4,NA,NA,NA
+PROLIFIC_6a081474f37bbaf455c26332,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,NA,68.25,NA,56.5,NA,66.4,NA,NA,NA
+PROLIFIC_6a098c627878fd02b2b0766e,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,48,46.5,NA,NA,NA,NA,NA,7,NA
+PROLIFIC_6a098c627878fd02b2b0766e,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,48,NA,NA,57.25,NA,NA,NA,NA,13.5
+PROLIFIC_6a0c1bc666f7cca388e60c9c,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,84,95,NA,NA,90,NA,NA,NA,NA
+PROLIFIC_6a0c1bc666f7cca388e60c9c,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,84,95,NA,68.75,NA,NA,NA,NA,NA
+PROLIFIC_6a0c5d35ab86f12c44875ea0,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistema de refrigeración,90,96.33333333333333,NA,NA,97.5,NA,NA,NA,NA
+PROLIFIC_6a0c5d35ab86f12c44875ea0,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,90,96.33333333333333,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a0d70f4edf77457443338ce,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Comunidad energética,NA,NA,NA,NA,63,61,65,NA,NA
+PROLIFIC_6a0d70f4edf77457443338ce,G1_Activist_Stubborn_Sentient,Activista,Considering,La conoce / la consideraría,Sistema de refrigeración,62,NA,NA,NA,NA,NA,NA,38,72
+PROLIFIC_6a0d70f4edf77457443338ce,G1_Activist_Stubborn_Sentient,Activista,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,62,NA,63.2,NA,NA,NA,NA,NA,72
+PROLIFIC_6a0d86760c5c5b905946bc00,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Sistemas inteligentes del hogar,79.4,81.75,70.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a0d86760c5c5b905946bc00,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Electrodomésticos eficientes,79.4,81.75,70.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a0d9e9144c2414b7e6adeda,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Agua caliente sanitaria,NA,NA,NA,NA,82.5,NA,NA,NA,NA
+PROLIFIC_6a0d9e9144c2414b7e6adeda,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,NA,NA,76.2,68.5,82.5,NA,NA,NA,NA
+PROLIFIC_6a0daf62ec01cd69c04d1da8,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistemas inteligentes del hogar,65.4,64.25,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a0daf62ec01cd69c04d1da8,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,65.4,NA,NA,NA,NA,NA,42.666666666666664,NA,NA
+PROLIFIC_6a0dbd152f8b5e278c18f1c2,G1_Activist_Stubborn_Sentient,Activista,Done,Implementada,Sistema de refrigeración,NA,NA,NA,80.25,NA,NA,78.66666666666667,NA,82.5
+PROLIFIC_6a0f3e08be88e41f0e239e45,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Agua caliente sanitaria,NA,NA,51,76.5,NA,NA,NA,NA,NA
+PROLIFIC_6a0f3e08be88e41f0e239e45,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Medidas de microeficiencia,80.2,70,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a0f3e08be88e41f0e239e45,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,80.2,70,NA,NA,77.5,NA,NA,NA,NA
+PROLIFIC_6a10442ceffde6b06d1cef3d,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Electrodomésticos eficientes,53,69,NA,NA,NA,NA,NA,NA,36
+PROLIFIC_6a10442ceffde6b06d1cef3d,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,53,NA,NA,NA,NA,NA,NA,48,NA
+PROLIFIC_6a10442ceffde6b06d1cef3d,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,53,69,69.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a115c6b3c86f8c79ae47f0d,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Vehículo eléctrico,80.8,NA,NA,NA,82,NA,NA,NA,53.5
+PROLIFIC_6a115c6b3c86f8c79ae47f0d,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,80.8,82.5,75,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a134c7b06246f028cc08800,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistemas inteligentes del hogar,NA,NA,75.4,55,NA,NA,45.333333333333336,NA,NA
+PROLIFIC_6a134c7b06246f028cc08800,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,69.8,51.333333333333336,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a134c7b06246f028cc08800,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,NA,NA,56.4,NA,24.5,52.5
+PROLIFIC_6a1614592a9d17aadbee6b06,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Sistema de refrigeración,NA,NA,NA,71.25,NA,NA,NA,NA,NA
+PROLIFIC_6a1614592a9d17aadbee6b06,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,73.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a1614592a9d17aadbee6b06,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,71.25,NA,NA,NA,NA,50.5
+PROLIFIC_6a19a8b91331b2d709fef8b0,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Renovación de envolvente,65.4,82,NA,NA,59.5,NA,NA,NA,NA
+PROLIFIC_6a19a8b91331b2d709fef8b0,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Cambio de tarifa eléctrica,65.4,82,NA,73,NA,NA,NA,NA,NA
+PROLIFIC_6a1b5f584a440643c54aed9a,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Vehículo eléctrico,62.4,NA,NA,NA,NA,NA,NA,52.5,NA
+PROLIFIC_6a1b5f584a440643c54aed9a,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,62.4,NA,NA,NA,NA,NA,NA,NA,46.5
+PROLIFIC_6a1b5f584a440643c54aed9a,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,62.4,NA,NA,NA,NA,NA,70,NA,NA
+PROLIFIC_6a1d394cf761db518876cad8,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Cambio de tarifa eléctrica,70.6,NA,73.25,69,NA,NA,NA,NA,NA
+PROLIFIC_6a1d394cf761db518876cad8,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Renovación de envolvente,NA,NA,NA,NA,70.5,58.2,44.333333333333336,NA,NA
+PROLIFIC_6a1d394cf761db518876cad8,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,NA,NA,NA,NA,NA,58.2,NA,52.5,46
+PROLIFIC_6a1eb7c1fd14b832013fb983,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,68,59,NA,NA,65.5,NA,NA,NA,NA
+PROLIFIC_6a1eb7c1fd14b832013fb983,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,68,NA,82,NA,NA,NA,NA,NA,46
+PROLIFIC_6a1eba8c12fabb0fa7678822,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Medidas de microeficiencia,57.4,NA,NA,64.75,NA,NA,NA,NA,46.5
+PROLIFIC_6a1eba8c12fabb0fa7678822,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,57.4,NA,NA,NA,NA,NA,NA,13,NA
+PROLIFIC_6a1f136140310048eef382ce,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Bomba de calor,66.6,68.25,58.2,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a1f136140310048eef382ce,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Renovación de envolvente,66.6,NA,58.2,57.75,NA,NA,NA,NA,NA
+PROLIFIC_6a1f136140310048eef382ce,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Calefacción fósil o biomasa,NA,68.25,NA,57.75,95,NA,NA,NA,NA
+PROLIFIC_6a204321d4201071efadc417,G4_HomoEconomicus,Homo economicus,Done,Implementada,Medidas de microeficiencia,99.8,100,NA,NA,NA,NA,NA,100,NA
+PROLIFIC_6a204321d4201071efadc417,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Agua caliente sanitaria,99.8,100,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a204321d4201071efadc417,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,99.8,100,NA,100,NA,NA,NA,NA,NA
+PROLIFIC_6a2055cd337ccac293eb2ef8,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,60,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a2055cd337ccac293eb2ef8,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,NA,NA,NA,55.333333333333336,NA,NA,NA,NA,NA
+PROLIFIC_6a211e87adf7c98358c1602b,G1_Activist_Stubborn_Sentient,Sensible,Done,Implementada,Renovación de envolvente,69,NA,NA,78.75,NA,NA,NA,NA,35
+PROLIFIC_6a211e87adf7c98358c1602b,G1_Activist_Stubborn_Sentient,Sensible,Considering,La conoce / la consideraría,Comunidad energética,69,NA,77,NA,NA,56,NA,NA,NA
+PROLIFIC_6a211e87adf7c98358c1602b,G1_Activist_Stubborn_Sentient,Sensible,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,69,NA,NA,78.75,NA,NA,NA,NA,35
+PROLIFIC_6a21ea8132a0738c3116b9e0,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Cambio de tarifa eléctrica,NA,100,89,NA,87.5,NA,NA,NA,NA
+PROLIFIC_6a21ea8132a0738c3116b9e0,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Renovación de envolvente,73.6,NA,NA,NA,87.5,NA,NA,NA,47
+PROLIFIC_6a21ea8132a0738c3116b9e0,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Bomba de calor,73.6,100,NA,NA,NA,NA,NA,NA,47
+PROLIFIC_6a2287e1de4099ccf09eac69,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Renovación de envolvente,53.333333333333336,NA,79.6,NA,63.5,NA,NA,NA,NA
+PROLIFIC_6a2287e1de4099ccf09eac69,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Sistema de refrigeración,53.333333333333336,68.25,NA,NA,63.5,NA,NA,NA,NA
+PROLIFIC_6a2287e1de4099ccf09eac69,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,53.333333333333336,68.25,NA,NA,63.5,NA,NA,NA,NA
+PROLIFIC_6a229862a12b21ee07229d8a,G4_HomoEconomicus,Homo economicus,Done,Implementada,Sistema de refrigeración,NA,NA,70.4,70,72,NA,NA,NA,NA
+PROLIFIC_6a229862a12b21ee07229d8a,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Vehículo eléctrico,63,NA,70.4,70,NA,NA,NA,NA,NA
+PROLIFIC_6a229862a12b21ee07229d8a,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Medidas de microeficiencia,63,75.25,NA,70,NA,NA,NA,NA,NA
+PROLIFIC_6a229976e46891722ff3f05f,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,63.8,NA,NA,NA,NA,NA,NA,NA,28
+PROLIFIC_6a229976e46891722ff3f05f,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,NA,NA,NA,NA,NA,NA,14.333333333333334,NA,28
+PROLIFIC_6a229a11e392c08625a712bd,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,84.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a229a11e392c08625a712bd,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Medidas de microeficiencia,NA,NA,NA,NA,NA,NA,74,NA,NA
+PROLIFIC_6a229a11e392c08625a712bd,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Electrodomésticos eficientes,84.4,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a229a63b2044a3b6694cdf5,G4_HomoEconomicus,Homo economicus,Done,Implementada,Medidas de microeficiencia,69,NA,NA,73.75,NA,NA,NA,NA,42.5
+PROLIFIC_6a229a63b2044a3b6694cdf5,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Renovación de envolvente,69,NA,NA,73.75,NA,NA,NA,NA,42.5
+PROLIFIC_6a229a63b2044a3b6694cdf5,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Comunidad energética,69,NA,NA,73.75,NA,NA,NA,NA,42.5
+PROLIFIC_6a229b5352a32f629034f221,G3_Fearful_Careful,Cuidadoso/a,Done,Implementada,Electrodomésticos eficientes,76.25,NA,92,NA,0,NA,NA,NA,NA
+PROLIFIC_6a229b5352a32f629034f221,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,76.25,68.75,NA,NA,NA,NA,NA,NA,52.5
+PROLIFIC_6a229b5352a32f629034f221,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Ventilación con recuperador,76.25,68.75,NA,NA,NA,NA,NA,NA,52.5
+PROLIFIC_6a229bc24afaa132a0944070,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Agua caliente sanitaria,59.2,NA,NA,NA,75,NA,NA,NA,77
+PROLIFIC_6a22e126f41c2f91aaf90b28,G4_HomoEconomicus,Homo economicus,Done,Implementada,Renovación de envolvente,76,NA,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a22e126f41c2f91aaf90b28,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Vehículo eléctrico,76,NA,NA,80,NA,NA,NA,NA,27.5
+PROLIFIC_6a22e126f41c2f91aaf90b28,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,76,NA,NA,80,NA,NA,NA,NA,27.5
+PROLIFIC_6a22f1c96d813b77a267cc7d,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Sistema de refrigeración,65,NA,NA,79,NA,NA,NA,55.5,NA
+PROLIFIC_6a22f1c96d813b77a267cc7d,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Vehículo eléctrico,65,NA,NA,NA,71.5,65,NA,NA,NA
+PROLIFIC_6a22f1c96d813b77a267cc7d,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Medidas de microeficiencia,NA,NA,NA,NA,NA,NA,NA,NA,38
+PROLIFIC_6a23a4399395a8963b79587f,G3_Fearful_Careful,Cuidadoso/a,Considering,La conoce / la consideraría,Cambio de tarifa eléctrica,53.6,NA,NA,86.75,NA,NA,NA,NA,NA
+PROLIFIC_6a23a4399395a8963b79587f,G3_Fearful_Careful,Cuidadoso/a,Knowledge,"No la conoce, pero le genera curiosidad",Sistemas inteligentes del hogar,53.6,NA,NA,86.75,NA,NA,24,NA,NA
+PROLIFIC_6a23e0de47bc759d7dfabea7,G4_HomoEconomicus,Homo economicus,Done,Implementada,Agua caliente sanitaria,74.8,59.25,76.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a23e0de47bc759d7dfabea7,G4_HomoEconomicus,Homo economicus,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,74.8,59.25,NA,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a23e0de47bc759d7dfabea7,G4_HomoEconomicus,Homo economicus,Knowledge,"No la conoce, pero le genera curiosidad",Kits solares de balcón,74.8,59.25,76.6,NA,NA,NA,NA,NA,NA
+PROLIFIC_6a25a6b9390e0020e7ef226e,G3_Fearful_Careful,Temeroso/a,Done,Implementada,Sistema de refrigeración,NA,NA,NA,NA,79,NA,56.666666666666664,32,NA
+PROLIFIC_6a25a6b9390e0020e7ef226e,G3_Fearful_Careful,Temeroso/a,Considering,La conoce / la consideraría,Sistemas inteligentes del hogar,NA,78.75,NA,68,NA,62,NA,NA,NA
+PROLIFIC_6a25a6b9390e0020e7ef226e,G3_Fearful_Careful,Temeroso/a,Knowledge,"No la conoce, pero le genera curiosidad",Almacenamiento energético,67.2,NA,79.8,68,NA,NA,NA,NA,NA
+PROLIFIC_qwertyuiop,G2_EarlyAdopter_Influencer,Influyente,Done,Implementada,Comunidad energética,NA,NA,NA,82,NA,NA,NA,NA,NA
+PROLIFIC_qwertyuiop,G2_EarlyAdopter_Influencer,Influyente,Considering,La conoce / la consideraría,Renovación de envolvente,NA,NA,NA,82,NA,NA,NA,NA,NA
+PROLIFIC_qwertyuiop,G2_EarlyAdopter_Influencer,Influyente,Knowledge,"No la conoce, pero le genera curiosidad",Renovación de envolvente,19,NA,NA,82,NA,NA,78,NA,NA

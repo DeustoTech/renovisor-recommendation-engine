@@ -1,6 +1,5 @@
 variable,category,n,percentage
-tipo de voto,Abstención,2,0.5
-tipo de voto,No vota / blanco / nulo,37,9.4
+tipo de voto,No vota / blanco / nulo,39,9.9
 tipo de voto,Otras opciones,31,7.9
 tipo de voto,Partidos nacionales,70,17.8
 tipo de voto,Partidos regionalistas/independentistas,108,27.5

@@ -1,0 +1,4 @@
+sample_label,sample_label_es,n_participants,boot_id,model_type,model_label,status,estado_modelo,AIC,BIC,logLik,warnings
+full,muestra completa,0,0,M0,M0: solo arquetipo,error,error,NA,NA,NA,
+full,muestra completa,0,0,M1,M1: arquetipo + dimensiones,error,error,NA,NA,NA,
+full,muestra completa,0,0,M2,M2: interacción arquetipo x dimensiones,error,error,NA,NA,NA,

@@ -1,27 +1,27 @@
 variable,category,n,percentage
+país,Alemania,24,6.1
 país,Austria,2,0.5
-país,Belgium,7,1.8
 país,Bulgaria,3,0.8
-país,Czech Republic,5,1.3
-país,Denmark,4,1
+país,Bélgica,7,1.8
+país,Dinamarca,4,1
+país,Eslovaquia,4,1
+país,Eslovenia,4,1
+país,España,186,47
 país,Estonia,4,1
-país,Finland,4,1
-país,France,25,6.3
-país,Germany,24,6.1
-país,Greece,5,1.3
-país,Hungary,4,1
-país,Ireland,3,0.8
-país,Italy,27,6.8
-país,Latvia,4,1
-país,Lithuania,1,0.3
-país,Luxembourg,1,0.3
-país,Netherlands,11,2.8
-país,Norway,2,0.5
-país,Poland,26,6.6
+país,Finlandia,4,1
+país,Francia,25,6.3
+país,Grecia,5,1.3
+país,Hungría,4,1
+país,Irlanda,3,0.8
+país,Italia,27,6.8
+país,Letonia,4,1
+país,Lituania,1,0.3
+país,Luxemburgo,1,0.3
+país,Noruega,2,0.5
+país,Países Bajos,11,2.8
+país,Polonia,26,6.6
 país,Portugal,4,1
-país,Romania,8,2
-país,Slovakia,4,1
-país,Slovenia,4,1
-país,Spain,186,47
-país,Sweden,3,0.8
-país,United Kingdom,25,6.3
+país,Reino Unido,25,6.3
+país,República Checa,5,1.3
+país,Rumanía,8,2
+país,Suecia,3,0.8
