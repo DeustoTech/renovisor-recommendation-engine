@@ -1,7 +1,9 @@
-sample_label,sample_label_es,n_participants,boot_id,model_type,model_label,status,estado_modelo,AIC,BIC,logLik,warnings
-full,muestra completa,5000,0,M2,M2: interacción arquetipo x dimensiones,ok,ajustado correctamente,14265.898529221173,14661.920414185559,-7080.949264610586,"(3) Model is nearly unidentifiable: large eigenvalue ratio
+sample_label,sample_label_es,n_participants,boot_id,model_type,model_label,status,AIC,BIC,logLik,warnings
+full,muestra completa,1000,0,M2_FULL,M2 completo: interacción arquetipo x todas las dimensiones,ok,2870.6752416907775,3183.0063552085903,-1383.3376208453888,"(3) Model is nearly unidentifiable: large eigenvalue ratio
  - Rescale variables? 
 In addition: Absolute and relative convergence criteria were met"
-full,muestra completa,5000,0,M1,M1: arquetipo + dimensiones,ok,ajustado correctamente,18099.31906167361,18221.17194935496,-9033.659530836805,
-full,muestra completa,5000,0,M0,M0: solo arquetipo,ok,ajustado correctamente,30309.53711961877,30362.84775797936,-15147.768559809385,"(-1) Model failed to converge with max|grad| = 1.89184e-06 (tol = 1e-06) 
-In addition: step factor reduced below minimum"
+full,muestra completa,1000,0,M2_REDUCED,M2 reducido: interacciones teóricas,ok,3010.3432538026855,3226.5724862380944,-1469.1716269013427,"(3) Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables? 
+In addition: Absolute and relative convergence criteria were met"
+full,muestra completa,1000,0,M1,M1: arquetipo + dimensiones,ok,3634.753932892399,3730.855813974803,-1801.3769664461995,
+full,muestra completa,1000,0,M0,M0: solo arquetipo,ok,6038.1105819585555,6080.1551549321075,-3012.0552909792777,

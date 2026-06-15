@@ -43,15 +43,12 @@ tamaño de ciudad,Ciudad pequeña (50.000-250.000 hab.),77,19.1
 tamaño de ciudad,Metrópolis (>1.000.000 hab.),39,9.7
 tamaño de ciudad,Municipio mediano (10.000-50.000 hab.),92,22.8
 tamaño de ciudad,Municipio pequeño (1.000-10.000 hab.),59,14.6
-zona climática,Clima continental templado,42,10.4
-zona climática,Clima de transición,66,16.4
-zona climática,Clima frío,17,4.2
-zona climática,Clima mediterráneo/subtropical,160,39.7
-zona climática,Clima oceánico,118,29.3
-situación laboral,Desempleado/a,19,4.9
+zona climática,Clima cálido/mediterráneo,160,39.7
+zona climática,Clima frío/polar,17,4.2
+zona climática,Clima templado,226,56.1
 situación laboral,Empleado/a,290,74.6
 situación laboral,Estudiante,30,7.7
-situación laboral,Otra situación inactiva,50,12.9
+situación laboral,Otra situación laboral,69,17.7
 nivel educativo,No universitaria,93,23.9
 nivel educativo,Universitaria,296,76.1
 trabajo/estudio desde casa,No,156,41.3

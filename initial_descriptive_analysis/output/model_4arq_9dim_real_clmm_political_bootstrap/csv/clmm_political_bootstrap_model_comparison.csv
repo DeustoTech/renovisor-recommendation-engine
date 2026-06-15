@@ -1,4 +1,0 @@
-model_type,model_label,n_boot,n_ok,convergence_rate,tasa_convergencia,mean_n_participants,min_n_participants,max_n_participants,mean_AIC,sd_AIC,mean_BIC,sd_BIC,mean_logLik,sd_logLik,mean_terms_with_p,mean_significant_terms,n_with_warnings,n_con_advertencias
-M0,M0: solo arquetipo,5,0,0,0,0,0,0,NA,NA,NA,NA,NA,NA,NA,NA,0,0
-M1,M1: arquetipo + dimensiones,5,0,0,0,0,0,0,NA,NA,NA,NA,NA,NA,NA,NA,0,0
-M2,M2: interacción arquetipo x dimensiones,5,0,0,0,0,0,0,NA,NA,NA,NA,NA,NA,NA,NA,0,0

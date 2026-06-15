@@ -1,0 +1,105 @@
+age_group,gender_pyramid,generation_pyramid,n,total_valid,pct_total,pct_signed,n_signed
+19-24,Hombre,Generación Z,10,381,2.6246719160104988,-2.6246719160104988,-10
+19-24,Hombre,Millennials,0,381,0,-0,0
+19-24,Hombre,Generación X,0,381,0,-0,0
+19-24,Hombre,Boomers + generación silenciosa,0,381,0,-0,0
+19-24,Mujer,Generación Z,20,381,5.2493438320209975,5.2493438320209975,20
+19-24,Mujer,Millennials,0,381,0,0,0
+19-24,Mujer,Generación X,0,381,0,0,0
+19-24,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+25-29,Hombre,Generación Z,1,381,0.26246719160104987,-0.26246719160104987,-1
+25-29,Hombre,Millennials,14,381,3.674540682414698,-3.674540682414698,-14
+25-29,Hombre,Generación X,0,381,0,-0,0
+25-29,Hombre,Boomers + generación silenciosa,0,381,0,-0,0
+25-29,Mujer,Generación Z,5,381,1.3123359580052494,1.3123359580052494,5
+25-29,Mujer,Millennials,32,381,8.398950131233596,8.398950131233596,32
+25-29,Mujer,Generación X,0,381,0,0,0
+25-29,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+30-34,Hombre,Generación Z,0,381,0,-0,0
+30-34,Hombre,Millennials,18,381,4.724409448818897,-4.724409448818897,-18
+30-34,Hombre,Generación X,0,381,0,-0,0
+30-34,Hombre,Boomers + generación silenciosa,0,381,0,-0,0
+30-34,Mujer,Generación Z,0,381,0,0,0
+30-34,Mujer,Millennials,31,381,8.136482939632545,8.136482939632545,31
+30-34,Mujer,Generación X,0,381,0,0,0
+30-34,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+35-39,Hombre,Generación Z,0,381,0,-0,0
+35-39,Hombre,Millennials,17,381,4.4619422572178475,-4.4619422572178475,-17
+35-39,Hombre,Generación X,0,381,0,-0,0
+35-39,Hombre,Boomers + generación silenciosa,0,381,0,-0,0
+35-39,Mujer,Generación Z,0,381,0,0,0
+35-39,Mujer,Millennials,23,381,6.036745406824147,6.036745406824147,23
+35-39,Mujer,Generación X,0,381,0,0,0
+35-39,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+40-44,Hombre,Generación Z,0,381,0,-0,0
+40-44,Hombre,Millennials,0,381,0,-0,0
+40-44,Hombre,Generación X,17,381,4.4619422572178475,-4.4619422572178475,-17
+40-44,Hombre,Boomers + generación silenciosa,0,381,0,-0,0
+40-44,Mujer,Generación Z,0,381,0,0,0
+40-44,Mujer,Millennials,6,381,1.5748031496062993,1.5748031496062993,6
+40-44,Mujer,Generación X,15,381,3.937007874015748,3.937007874015748,15
+40-44,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+45-49,Hombre,Generación Z,0,381,0,-0,0
+45-49,Hombre,Millennials,0,381,0,-0,0
+45-49,Hombre,Generación X,20,381,5.2493438320209975,-5.2493438320209975,-20
+45-49,Hombre,Boomers + generación silenciosa,0,381,0,-0,0
+45-49,Mujer,Generación Z,0,381,0,0,0
+45-49,Mujer,Millennials,0,381,0,0,0
+45-49,Mujer,Generación X,13,381,3.4120734908136483,3.4120734908136483,13
+45-49,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+50-54,Hombre,Generación Z,0,381,0,-0,0
+50-54,Hombre,Millennials,0,381,0,-0,0
+50-54,Hombre,Generación X,16,381,4.199475065616798,-4.199475065616798,-16
+50-54,Hombre,Boomers + generación silenciosa,0,381,0,-0,0
+50-54,Mujer,Generación Z,0,381,0,0,0
+50-54,Mujer,Millennials,0,381,0,0,0
+50-54,Mujer,Generación X,13,381,3.4120734908136483,3.4120734908136483,13
+50-54,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+55-59,Hombre,Generación Z,0,381,0,-0,0
+55-59,Hombre,Millennials,0,381,0,-0,0
+55-59,Hombre,Generación X,3,381,0.7874015748031497,-0.7874015748031497,-3
+55-59,Hombre,Boomers + generación silenciosa,22,381,5.774278215223097,-5.774278215223097,-22
+55-59,Mujer,Generación Z,0,381,0,0,0
+55-59,Mujer,Millennials,0,381,0,0,0
+55-59,Mujer,Generación X,3,381,0.7874015748031497,0.7874015748031497,3
+55-59,Mujer,Boomers + generación silenciosa,13,381,3.4120734908136483,3.4120734908136483,13
+60-64,Hombre,Generación Z,0,381,0,-0,0
+60-64,Hombre,Millennials,0,381,0,-0,0
+60-64,Hombre,Generación X,0,381,0,-0,0
+60-64,Hombre,Boomers + generación silenciosa,21,381,5.511811023622047,-5.511811023622047,-21
+60-64,Mujer,Generación Z,0,381,0,0,0
+60-64,Mujer,Millennials,0,381,0,0,0
+60-64,Mujer,Generación X,0,381,0,0,0
+60-64,Mujer,Boomers + generación silenciosa,10,381,2.6246719160104988,2.6246719160104988,10
+65-69,Hombre,Generación Z,0,381,0,-0,0
+65-69,Hombre,Millennials,0,381,0,-0,0
+65-69,Hombre,Generación X,0,381,0,-0,0
+65-69,Hombre,Boomers + generación silenciosa,16,381,4.199475065616798,-4.199475065616798,-16
+65-69,Mujer,Generación Z,0,381,0,0,0
+65-69,Mujer,Millennials,0,381,0,0,0
+65-69,Mujer,Generación X,0,381,0,0,0
+65-69,Mujer,Boomers + generación silenciosa,6,381,1.5748031496062993,1.5748031496062993,6
+70-74,Hombre,Generación Z,0,381,0,-0,0
+70-74,Hombre,Millennials,0,381,0,-0,0
+70-74,Hombre,Generación X,0,381,0,-0,0
+70-74,Hombre,Boomers + generación silenciosa,9,381,2.3622047244094486,-2.3622047244094486,-9
+70-74,Mujer,Generación Z,0,381,0,0,0
+70-74,Mujer,Millennials,0,381,0,0,0
+70-74,Mujer,Generación X,0,381,0,0,0
+70-74,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+75-79,Hombre,Generación Z,0,381,0,-0,0
+75-79,Hombre,Millennials,0,381,0,-0,0
+75-79,Hombre,Generación X,0,381,0,-0,0
+75-79,Hombre,Boomers + generación silenciosa,5,381,1.3123359580052494,-1.3123359580052494,-5
+75-79,Mujer,Generación Z,0,381,0,0,0
+75-79,Mujer,Millennials,0,381,0,0,0
+75-79,Mujer,Generación X,0,381,0,0,0
+75-79,Mujer,Boomers + generación silenciosa,0,381,0,0,0
+80+,Hombre,Generación Z,0,381,0,-0,0
+80+,Hombre,Millennials,0,381,0,-0,0
+80+,Hombre,Generación X,0,381,0,-0,0
+80+,Hombre,Boomers + generación silenciosa,1,381,0.26246719160104987,-0.26246719160104987,-1
+80+,Mujer,Generación Z,0,381,0,0,0
+80+,Mujer,Millennials,0,381,0,0,0
+80+,Mujer,Generación X,0,381,0,0,0
+80+,Mujer,Boomers + generación silenciosa,1,381,0.26246719160104987,0.26246719160104987,1

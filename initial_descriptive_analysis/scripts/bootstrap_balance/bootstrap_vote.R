@@ -1,22 +1,18 @@
-
+# ==============================================================================
 # SCRIPT 19 - BOOTSTRAP POLITICAL PROFILE 3 BLOCKS
-
+# ==============================================================================
 # Objetivo:
 #   Generar 1000 muestras bootstrap estratificadas por perfil político:
 #     Left     = 13.76%
 #     Moderate = 34.16%
 #     Right    = 52.08%
 #
-# Cambio respecto a la versión anterior:
+# Cambio metodológico:
 #   - Se unen Conservative + Authoritarian en un único bloque Right.
-#   - Esto evita sobrerrepresentar artificialmente el grupo Authoritarian,
-#     que tenía muy pocos casos reales.
-#
-# Importante:
 #   - Se usa SOLO la escala política 0-100.
 #   - No se usa abstención como estrato.
 #   - El remuestreo se hace a nivel participante.
-
+# ==============================================================================
 
 library(readr)
 library(dplyr)
@@ -27,8 +23,10 @@ library(tibble)
 
 set.seed(123)
 
-
+# ==============================================================================
 # 1. CONFIGURACIÓN
+# ==============================================================================
+
 input_file <- "initial_descriptive_analysis/output/clean_datasets/df_clean_general.csv"
 
 output_dir <- "initial_descriptive_analysis/output/bootstrap_political_profile"
@@ -54,7 +52,10 @@ id_candidates <- c(
   "response_id"
 )
 
+# ==============================================================================
 # 2. FUNCIONES
+# ==============================================================================
+
 clean_political_bootstrap <- function(x) {
   x <- suppressWarnings(as.numeric(x))
   
@@ -67,8 +68,10 @@ clean_political_bootstrap <- function(x) {
   )
 }
 
-
+# ==============================================================================
 # 3. CARGAR DATOS
+# ==============================================================================
+
 df <- read_csv(input_file, show_col_types = FALSE)
 
 cat("Datos cargados\n")
@@ -92,8 +95,10 @@ if (length(existing_ids) > 0) {
   cat("No se encontró ID. Se ha creado participant_id con row_number().\n\n")
 }
 
-
+# ==============================================================================
 # 4. CREAR BLOQUE POLÍTICO
+# ==============================================================================
+
 df <- df %>%
   mutate(
     political_spectrum = suppressWarnings(as.numeric(.data[[spectrum_col]])),
@@ -106,8 +111,10 @@ participant_political <- df %>%
 
 cat("Participantes con escala política válida:", nrow(participant_political), "\n\n")
 
-
+# ==============================================================================
 # 5. DISTRIBUCIÓN OBSERVADA
+# ==============================================================================
+
 observed_distribution <- participant_political %>%
   count(political_profile, name = "n_observed") %>%
   mutate(
@@ -123,18 +130,13 @@ write_csv(
   file.path(diagnostics_dir, "observed_political_distribution.csv")
 )
 
+# ==============================================================================
 # 6. DISTRIBUCIÓN OBJETIVO
+# ==============================================================================
+
 target_distribution <- tibble(
-  political_profile = c(
-    "Left",
-    "Moderate",
-    "Right"
-  ),
-  target_prop = c(
-    0.1376,
-    0.3416,
-    0.5208
-  )
+  political_profile = c("Left", "Moderate", "Right"),
+  target_prop = c(0.1376, 0.3416, 0.5208)
 )
 
 if (abs(sum(target_distribution$target_prop) - 1) > 0.001) {
@@ -157,7 +159,10 @@ write_csv(
   file.path(diagnostics_dir, "target_vs_observed_political_distribution.csv")
 )
 
+# ==============================================================================
 # 7. CALCULAR N OBJETIVO POR GRUPO
+# ==============================================================================
+
 n_target <- nrow(participant_political)
 
 target_counts <- target_distribution %>%
@@ -187,8 +192,10 @@ write_csv(
   file.path(diagnostics_dir, "target_counts_political_profile.csv")
 )
 
-
+# ==============================================================================
 # 8. FUNCIÓN BOOTSTRAP
+# ==============================================================================
+
 make_bootstrap_draws <- function(boot_id) {
   
   target_counts %>%
@@ -196,7 +203,7 @@ make_bootstrap_draws <- function(boot_id) {
     pmap_dfr(function(political_profile, n_target) {
       
       available_ids <- participant_political %>%
-        filter(political_profile == !!political_profile) %>%
+        filter(.data$political_profile == political_profile) %>%
         pull(participant_id)
       
       if (length(available_ids) == 0) {
@@ -205,7 +212,7 @@ make_bootstrap_draws <- function(boot_id) {
       
       tibble(
         bootstrap_id = boot_id,
-        political_profile  = political_profile,
+        political_profile = political_profile,
         participant_id_original = sample(
           available_ids,
           size = n_target,
@@ -225,8 +232,10 @@ make_bootstrap_draws <- function(boot_id) {
     )
 }
 
-
+# ==============================================================================
 # 9. GENERAR BOOTSTRAPS
+# ==============================================================================
+
 all_draws <- map_dfr(seq_len(n_boot), function(b) {
   cat("Generando bootstrap", b, "de", n_boot, "\n")
   make_bootstrap_draws(b)
@@ -237,8 +246,10 @@ write_csv(
   file.path(draws_dir, "bootstrap_political_profile_draws.csv")
 )
 
-
+# ==============================================================================
 # 10. DIAGNÓSTICOS
+# ==============================================================================
+
 bootstrap_diagnostics <- all_draws %>%
   count(bootstrap_id, political_profile, name = "n") %>%
   group_by(bootstrap_id) %>%
@@ -272,7 +283,10 @@ write_csv(
   file.path(diagnostics_dir, "bootstrap_political_profile_summary.csv")
 )
 
+# ==============================================================================
 # 11. FUNCIÓN PARA MATERIALIZAR UNA MUESTRA COMPLETA
+# ==============================================================================
+
 get_bootstrap_dataset <- function(boot_id, original_df = df, draws_df = all_draws) {
   
   selected_draws <- draws_df %>%
@@ -299,7 +313,7 @@ get_bootstrap_dataset <- function(boot_id, original_df = df, draws_df = all_draw
       -participant_id_bootstrap
     )
   
-  return(boot_df)
+  boot_df
 }
 
 boot_1 <- get_bootstrap_dataset(1)
@@ -309,7 +323,10 @@ write_csv(
   file.path(examples_dir, "example_bootstrap_sample_1.csv")
 )
 
+# ==============================================================================
 # 12. DIAGNÓSTICO DE PARTICIPANTES ÚNICOS POR BOOTSTRAP
+# ==============================================================================
+
 unique_participants_summary <- all_draws %>%
   group_by(bootstrap_id, political_profile) %>%
   summarise(
@@ -333,6 +350,7 @@ write_csv(
   file.path(diagnostics_dir, "unique_original_participants_by_bootstrap.csv")
 )
 
+cat("\nBootstrap terminado correctamente.\n")
 cat("Draws guardados en:", draws_dir, "\n")
 cat("Diagnósticos guardados en:", diagnostics_dir, "\n")
 cat("Ejemplo guardado en:", examples_dir, "\n")

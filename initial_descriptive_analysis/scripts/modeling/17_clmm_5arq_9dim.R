@@ -1,20 +1,22 @@
-
-# SCRIPT 17 - CLMM DATOS SINTÉTICOS 5 MACROARQUETIPOS x 3 ETAPAS x 9 DIMENSIONES
-
+# ==============================================================================
+# SCRIPT 17 - CLMM DATOS SINTÉTICOS
+# 5 MACROARQUETIPOS x 3 ETAPAS x 9 DIMENSIONES
+# ==============================================================================
 # Objetivo:
 #   Ajustar modelos CLMM sobre datos sintéticos.
 #
 # Cambio metodológico:
-#   - Las dimensiones se construyen a partir de determinantes estandarizados.
+#   - Las dimensiones se construyen a partir de determinantes estandarizados,
+#     cuando los determinantes están disponibles.
 #   - Los determinantes ausentes / no seleccionados se codifican como 0
 #     en escala estandarizada.
-#   - Por tanto, 0 significa ausencia de contribución / ausencia de señal,
-#     no intensidad media sustantiva.
+#   - 0 significa ausencia de contribución / ausencia de señal.
 #
 # Modelos:
 #   M0: adoption_stage ~ macro_archetype_5 + (1 | participant_id)
 #   M1: adoption_stage ~ macro_archetype_5 + dimensiones + (1 | participant_id)
 #   M2: adoption_stage ~ macro_archetype_5 * dimensiones + (1 | participant_id)
+# ==============================================================================
 
 library(dplyr)
 library(tidyr)
@@ -27,19 +29,21 @@ library(broom.mixed)
 
 set.seed(123)
 
+# ==============================================================================
+# 1. CONFIGURACIÓN
+# ==============================================================================
 
-# 1. CONFIGURACIÓN GENERAL
 RUN_BOOTSTRAPS <- TRUE
 
-# Primero prueba con 5 o 10.
-# Luego puedes subirlo.
-N_BOOTSTRAPS_TO_RUN <- 5
+N_BOOTSTRAPS_PER_SIZE <- 100
 # N_BOOTSTRAPS_TO_RUN <- Inf
 
 INCLUDE_TECHNOLOGY <- FALSE
 SAVE_MODEL_RDS <- FALSE
 
-MODELS_TO_RUN <- c("M0", "M1", "M2")
+MODELS_TO_RUN <- c("M0", "M1", "M2_REDUCED", "M2_FULL")
+
+MAX_FULL_PARTICIPANTS <- 1000
 
 synthetic_csv_dir <- "initial_descriptive_analysis/output/model_5arq_9dim/csv"
 synthetic_bootstrap_dir <- "initial_descriptive_analysis/output/model_5arq_9dim/bootstrap"
@@ -52,8 +56,6 @@ mapping_candidates <- c(
   file.path(synthetic_csv_dir, "dimension_determinant_mapping_long.csv")
 )
 
-
-# 2. CARPETAS
 base_output_dir <- "initial_descriptive_analysis/output/model_5arq_9dim_clmm_standardized_determinants"
 
 csv_dir <- file.path(base_output_dir, "csv")
@@ -64,7 +66,10 @@ dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(bootstrap_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(models_dir, recursive = TRUE, showWarnings = FALSE)
 
-# 3. DICCIONARIOS
+# ==============================================================================
+# 2. DICCIONARIOS
+# ==============================================================================
+
 dimension_dictionary <- tibble(
   dimension_key = c(
     "FINANCIAL",
@@ -117,11 +122,12 @@ macro_archetype_dictionary <- tibble(
 )
 
 model_dictionary <- tibble(
-  model_type = c("M0", "M1", "M2"),
+  model_type = c("M0", "M1", "M2_REDUCED", "M2_FULL"),
   model_label = c(
     "M0: solo arquetipo",
     "M1: arquetipo + dimensiones",
-    "M2: interacción arquetipo x dimensiones"
+    "M2 reducido: interacciones teóricas",
+    "M2 completo: interacción arquetipo x todas las dimensiones"
   )
 )
 
@@ -133,8 +139,10 @@ write_csv(stage_dictionary, file.path(csv_dir, "stage_dictionary_castellano.csv"
 write_csv(macro_archetype_dictionary, file.path(csv_dir, "macro_archetype_dictionary_castellano.csv"))
 write_csv(model_dictionary, file.path(csv_dir, "model_dictionary_castellano.csv"))
 
+# ==============================================================================
+# 3. FUNCIONES
+# ==============================================================================
 
-# 4. FUNCIONES AUXILIARES
 safe_z_zero <- function(x) {
   x <- suppressWarnings(as.numeric(x))
   
@@ -163,7 +171,7 @@ read_determinant_mapping <- function() {
   existing_mapping <- mapping_candidates[file.exists(mapping_candidates)]
   
   if (length(existing_mapping) == 0) {
-    warning("No se encontró dimension_determinant_mapping_long.csv. Se usarán las dimensiones existentes si están disponibles.")
+    warning("No se encontró dimension_determinant_mapping_long.csv. Se usarán dimensiones existentes si están disponibles.")
     return(tibble())
   }
   
@@ -182,15 +190,6 @@ get_dimension_label <- function(dimension_key) {
   label
 }
 
-get_stage_label <- function(stage_key) {
-  label <- stage_dictionary %>%
-    filter(adoption_stage == !!stage_key) %>%
-    pull(adoption_stage_label)
-  
-  if (length(label) == 0) return(stage_key)
-  label
-}
-
 get_model_label <- function(model_type_i) {
   label <- model_dictionary %>%
     filter(model_type == !!model_type_i) %>%
@@ -200,72 +199,27 @@ get_model_label <- function(model_type_i) {
   label
 }
 
-translate_formula <- function(formula_txt) {
-  
-  formula_out <- formula_txt
-  
-  formula_out <- str_replace_all(formula_out, fixed("adoption_stage"), "etapa_adopcion")
-  formula_out <- str_replace_all(formula_out, fixed("macro_archetype_5"), "arquetipo_macro_5")
-  formula_out <- str_replace_all(formula_out, fixed("participant_id"), "participante")
-  formula_out <- str_replace_all(formula_out, fixed("technology"), "tecnologia")
-  
-  for (i in seq_len(nrow(dimension_dictionary))) {
-    key_i <- dimension_dictionary$dimension_key[i]
-    label_i <- dimension_dictionary$dimension_label[i]
-    
-    formula_out <- str_replace_all(
-      formula_out,
-      fixed(paste0("z_", key_i)),
-      paste0("z_", str_replace_all(str_to_lower(label_i), " ", "_"))
-    )
-  }
-  
-  formula_out
-}
-
-translate_term_component <- function(term_component) {
-  
-  term_component <- str_squish(term_component)
-  
-  if (str_detect(term_component, "^z_")) {
-    dim_key <- str_remove(term_component, "^z_")
-    return(paste0("Dimensión: ", get_dimension_label(dim_key)))
-  }
-  
-  if (str_detect(term_component, "^macro_archetype_5")) {
-    archetype_value <- str_remove(term_component, "^macro_archetype_5")
-    archetype_value <- str_replace_all(archetype_value, "_", " ")
-    return(paste0("Arquetipo: ", archetype_value))
-  }
-  
-  if (str_detect(term_component, "\\|")) {
-    stage_parts <- str_split(term_component, "\\|", simplify = TRUE)
-    
-    if (ncol(stage_parts) == 2) {
-      return(
-        paste0(
-          get_stage_label(stage_parts[1]),
-          " | ",
-          get_stage_label(stage_parts[2])
-        )
-      )
-    }
-  }
-  
-  if (str_detect(term_component, "^technology")) {
-    technology_value <- str_remove(term_component, "^technology")
-    technology_value <- str_replace_all(technology_value, "_", " ")
-    return(paste0("Tecnología: ", technology_value))
-  }
-  
-  term_component
-}
-
 translate_term <- function(term) {
   if (is.na(term)) return(NA_character_)
   
   components <- str_split(term, ":", simplify = FALSE)[[1]]
-  translated_components <- map_chr(components, translate_term_component)
+  
+  translated_components <- map_chr(components, function(x) {
+    x <- str_squish(x)
+    
+    if (str_detect(x, "^z_")) {
+      dim_key <- str_remove(x, "^z_")
+      return(paste0("Dimensión: ", get_dimension_label(dim_key)))
+    }
+    
+    if (str_detect(x, "^macro_archetype_5")) {
+      archetype_value <- str_remove(x, "^macro_archetype_5")
+      archetype_value <- str_replace_all(archetype_value, "_", " ")
+      return(paste0("Arquetipo: ", archetype_value))
+    }
+    
+    x
+  })
   
   paste(translated_components, collapse = " x ")
 }
@@ -278,7 +232,10 @@ get_sample_label_es <- function(sample_label) {
   )
 }
 
-# 5. RECONSTRUIR DIMENSIONES DESDE DETERMINANTES ESTANDARIZADOS
+# ==============================================================================
+# 4. RECONSTRUIR DIMENSIONES
+# ==============================================================================
+
 determinant_mapping <- read_determinant_mapping()
 
 rebuild_dimensions_from_standardized_determinants <- function(data_i, dataset_label = "dataset") {
@@ -297,26 +254,26 @@ rebuild_dimensions_from_standardized_determinants <- function(data_i, dataset_la
     }
     
     warning(
-      "No se han encontrado determinantes/mapeo. Se usan las dimensiones existentes en ",
+      "No se han encontrado determinantes/mapeo. Se usan dimensiones existentes en ",
       dataset_label,
-      " sustituyendo NA por 0. Esto no recompone dimensiones desde determinantes."
+      " sustituyendo NA por 0."
     )
     
-    data_i <- data_i %>%
-      mutate(
-        across(
-          all_of(dimensions),
-          ~ {
-            x <- suppressWarnings(as.numeric(.x))
-            x[is.na(x)] <- 0
-            x[is.nan(x)] <- 0
-            x[is.infinite(x)] <- 0
-            x
-          }
+    return(
+      data_i %>%
+        mutate(
+          across(
+            all_of(dimensions),
+            ~ {
+              x <- suppressWarnings(as.numeric(.x))
+              x[is.na(x)] <- 0
+              x[is.nan(x)] <- 0
+              x[is.infinite(x)] <- 0
+              x
+            }
+          )
         )
-      )
-    
-    return(data_i)
+    )
   }
   
   determinant_cols <- intersect(determinant_mapping$determinant_id, names(data_i))
@@ -340,21 +297,21 @@ rebuild_dimensions_from_standardized_determinants <- function(data_i, dataset_la
       ". Se usan dimensiones existentes sustituyendo NA por 0."
     )
     
-    data_i <- data_i %>%
-      mutate(
-        across(
-          all_of(dimensions),
-          ~ {
-            x <- suppressWarnings(as.numeric(.x))
-            x[is.na(x)] <- 0
-            x[is.nan(x)] <- 0
-            x[is.infinite(x)] <- 0
-            x
-          }
+    return(
+      data_i %>%
+        mutate(
+          across(
+            all_of(dimensions),
+            ~ {
+              x <- suppressWarnings(as.numeric(.x))
+              x[is.na(x)] <- 0
+              x[is.nan(x)] <- 0
+              x[is.infinite(x)] <- 0
+              x
+            }
+          )
         )
-      )
-    
-    return(data_i)
+    )
   }
   
   cat("\nReconstruyendo dimensiones desde determinantes estandarizados -", dataset_label, "\n")
@@ -398,19 +355,35 @@ rebuild_dimensions_from_standardized_determinants <- function(data_i, dataset_la
     }
   )
   
-  data_out <- data_z %>%
+  data_z %>%
     select(-any_of(dimensions)) %>%
     bind_cols(dimension_scores)
-  
-  data_out
 }
 
-# 6. CARGAR DATOS SINTÉTICOS
+# ==============================================================================
+# 5. CARGAR DATOS SINTÉTICOS
+# ==============================================================================
+
 if (!file.exists(synthetic_full_path)) {
   stop("No existe synthetic_5arq_9dim.csv en: ", synthetic_full_path)
 }
 
 df_full_raw <- read_csv(synthetic_full_path, show_col_types = FALSE)
+
+if (!is.null(MAX_FULL_PARTICIPANTS)) {
+  
+  participant_pool <- df_full_raw %>%
+    distinct(participant_id)
+  
+  n_to_sample <- min(MAX_FULL_PARTICIPANTS, nrow(participant_pool))
+  
+  selected_full_participants <- participant_pool %>%
+    slice_sample(n = n_to_sample) %>%
+    pull(participant_id)
+  
+  df_full_raw <- df_full_raw %>%
+    filter(participant_id %in% selected_full_participants)
+}
 
 df_full <- rebuild_dimensions_from_standardized_determinants(
   df_full_raw,
@@ -426,7 +399,6 @@ if (RUN_BOOTSTRAPS) {
   df_bootstrap_raw <- read_csv(synthetic_bootstrap_path, show_col_types = FALSE)
   
 } else {
-  
   df_bootstrap_raw <- tibble()
 }
 
@@ -434,36 +406,46 @@ cat("\nDatos sintéticos cargados correctamente\n")
 cat("Filas dataset completo:", nrow(df_full), "\n")
 cat("Participantes dataset completo:", n_distinct(df_full$participant_id), "\n")
 
+# ==============================================================================
+# 6. PREPARAR CLMM
+# ==============================================================================
 
-# 7. VALIDACIONES
-required_cols <- c(
+required_base_cols <- c(
   "participant_id",
   "macro_archetype_5",
-  "adoption_stage",
-  dimensions
+  "adoption_stage"
 )
 
-missing_full <- setdiff(required_cols, names(df_full))
+missing_full_base <- setdiff(required_base_cols, names(df_full))
 
-if (length(missing_full) > 0) {
-  stop("Faltan columnas en df_full: ", paste(missing_full, collapse = ", "))
+if (length(missing_full_base) > 0) {
+  stop("Faltan columnas base en df_full: ", paste(missing_full_base, collapse = ", "))
+}
+
+missing_full_dims <- setdiff(dimensions, names(df_full))
+
+if (length(missing_full_dims) > 0) {
+  stop("Faltan dimensiones en df_full tras reconstrucción: ", paste(missing_full_dims, collapse = ", "))
 }
 
 if (RUN_BOOTSTRAPS) {
   
-  missing_boot <- setdiff(
-    c("n_participants", "boot_id", required_cols),
+  missing_boot_base <- setdiff(
+    c("n_participants", "boot_id", required_base_cols),
     names(df_bootstrap_raw)
   )
   
-  if (length(missing_boot) > 0) {
-    stop("Faltan columnas en df_bootstrap_raw: ", paste(missing_boot, collapse = ", "))
+  if (length(missing_boot_base) > 0) {
+    stop("Faltan columnas base en df_bootstrap_raw: ", paste(missing_boot_base, collapse = ", "))
   }
 }
 
-
-# 8. PREPARAR DATOS CLMM
 prepare_clmm_data <- function(data_i) {
+  
+  if (!"technology" %in% names(data_i)) {
+    data_i <- data_i %>%
+      mutate(technology = NA_character_)
+  }
   
   macro_levels <- c(
     "G1_Activist_Stubborn_Sentient",
@@ -475,22 +457,10 @@ prepare_clmm_data <- function(data_i) {
   
   data_i %>%
     mutate(
-      adoption_stage = ordered(
-        adoption_stage,
-        levels = stage_levels
-      ),
-      adoption_stage_label = case_when(
-        as.character(adoption_stage) == "Knowledge" ~ "Conocimiento / curiosidad",
-        as.character(adoption_stage) == "Considering" ~ "Consideración",
-        as.character(adoption_stage) == "Done" ~ "Implementada",
-        TRUE ~ NA_character_
-      ),
-      macro_archetype_5 = factor(
-        macro_archetype_5,
-        levels = macro_levels
-      ),
+      adoption_stage = ordered(adoption_stage, levels = stage_levels),
+      macro_archetype_5 = factor(macro_archetype_5, levels = macro_levels),
       participant_id = factor(participant_id),
-      technology = if ("technology" %in% names(.)) factor(technology) else NA
+      technology = factor(technology)
     ) %>%
     mutate(
       across(
@@ -512,11 +482,17 @@ prepare_clmm_data <- function(data_i) {
     )
 }
 
-
-# 9. FÓRMULAS
 build_formula <- function(model_type) {
   
   z_dims <- paste0("z_", dimensions)
+  
+  z_dims_reduced <- c(
+    "z_STIMULATION",
+    "z_PHYSIOLOGICAL",
+    "z_FINANCIAL",
+    "z_AUTONOMY",
+    "z_MEANING"
+  )
   
   tech_part <- if (INCLUDE_TECHNOLOGY) {
     " + technology"
@@ -541,7 +517,19 @@ build_formula <- function(model_type) {
       " + (1 | participant_id)"
     )
     
-  } else if (model_type == "M2") {
+  } else if (model_type == "M2_REDUCED") {
+    
+    formula_txt <- paste0(
+      "adoption_stage ~ macro_archetype_5 + ",
+      paste(z_dims, collapse = " + "),
+      " + macro_archetype_5:(",
+      paste(z_dims_reduced, collapse = " + "),
+      ")",
+      tech_part,
+      " + (1 | participant_id)"
+    )
+    
+  } else if (model_type == "M2_FULL") {
     
     formula_txt <- paste0(
       "adoption_stage ~ macro_archetype_5 * (",
@@ -558,19 +546,44 @@ build_formula <- function(model_type) {
   as.formula(formula_txt)
 }
 
-
-# 10. AJUSTE SEGURO
 fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot_id) {
   
   formula_i <- build_formula(model_type)
   formula_txt <- paste(deparse(formula_i), collapse = " ")
-  formula_castellano <- translate_formula(formula_txt)
   model_label_i <- get_model_label(model_type)
   
   warning_messages <- character()
   
   cat("\nAjustando", model_type, "-", model_label_i, "-", sample_label, "- boot", boot_id, "\n")
   cat("Filas:", nrow(data_i), "| Participantes:", n_distinct(data_i$participant_id), "\n")
+  
+  if (nrow(data_i) == 0 || n_distinct(data_i$adoption_stage) < 2) {
+    return(
+      list(
+        model = NULL,
+        summary = tibble(
+          sample_label = sample_label,
+          sample_label_es = get_sample_label_es(sample_label),
+          n_participants = n_participants,
+          boot_id = boot_id,
+          model_type = model_type,
+          model_label = model_label_i,
+          formula = formula_txt,
+          status = "error",
+          error_message = "Dataset vacío o con menos de 2 etapas",
+          warnings = NA_character_,
+          n_rows = nrow(data_i),
+          n_unique_participants = n_distinct(data_i$participant_id),
+          AIC = NA_real_,
+          BIC = NA_real_,
+          logLik = NA_real_,
+          n_terms_with_p = NA_integer_,
+          n_significant_terms = NA_integer_
+        ),
+        terms = tibble()
+      )
+    )
+  }
   
   model_i <- tryCatch(
     withCallingHandlers(
@@ -597,7 +610,6 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
   )
   
   if (inherits(model_i, "error")) {
-    
     return(
       list(
         model = NULL,
@@ -609,9 +621,7 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
           model_type = model_type,
           model_label = model_label_i,
           formula = formula_txt,
-          formula_castellano = formula_castellano,
           status = "error",
-          estado_modelo = "error",
           error_message = conditionMessage(model_i),
           warnings = paste(unique(attr(model_i, "warning_messages")), collapse = " | "),
           n_rows = nrow(data_i),
@@ -643,13 +653,10 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
   )
   
   if (is.null(tidy_i)) {
-    
     terms_i <- tibble()
     n_terms_with_p <- NA_integer_
     n_significant_terms <- NA_integer_
-    
   } else {
-    
     terms_i <- tidy_i %>%
       mutate(
         sample_label = sample_label,
@@ -659,15 +666,11 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
         model_type = model_type,
         model_label = model_label_i,
         formula = formula_txt,
-        formula_castellano = formula_castellano,
         term_label = map_chr(term, translate_term),
-        is_dimension_term = str_detect(term, "^z_"),
-        is_interaction_term = str_detect(term, ":"),
-        is_archetype_term = str_detect(term, "^macro_archetype_5"),
         tipo_termino = case_when(
-          is_interaction_term ~ "Interacción",
-          is_dimension_term ~ "Dimensión",
-          is_archetype_term ~ "Arquetipo",
+          str_detect(term, ":") ~ "Interacción",
+          str_detect(term, "^z_") ~ "Dimensión",
+          str_detect(term, "^macro_archetype_5") ~ "Arquetipo",
           str_detect(term, "\\|") ~ "Umbral de etapa",
           TRUE ~ "Otro"
         ),
@@ -676,13 +679,6 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
           TRUE,
           FALSE,
           missing = FALSE
-        ),
-        significacion = case_when(
-          is.na(p.value) ~ "sin p-valor",
-          p.value < 0.001 ~ "p < 0.001",
-          p.value < 0.01 ~ "p < 0.01",
-          p.value < 0.05 ~ "p < 0.05",
-          TRUE ~ "no significativo"
         )
       )
     
@@ -698,9 +694,7 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
     model_type = model_type,
     model_label = model_label_i,
     formula = formula_txt,
-    formula_castellano = formula_castellano,
     status = "ok",
-    estado_modelo = "ajustado correctamente",
     error_message = NA_character_,
     warnings = paste(unique(warning_messages), collapse = " | "),
     n_rows = nrow(data_i),
@@ -719,8 +713,10 @@ fit_clmm_safe <- function(data_i, model_type, sample_label, n_participants, boot
   )
 }
 
+# ==============================================================================
+# 7. MODELOS SOBRE DATASET COMPLETO
+# ==============================================================================
 
-# 11. MODELOS SOBRE DATASET COMPLETO
 df_full_clmm <- prepare_clmm_data(df_full)
 
 write_csv(
@@ -731,18 +727,6 @@ write_csv(
 cat("\nDataset sintético preparado:\n")
 cat("Filas:", nrow(df_full_clmm), "\n")
 cat("Participantes:", n_distinct(df_full_clmm$participant_id), "\n")
-
-cat("\nDistribución macroarquetipo x etapa:\n")
-print(
-  df_full_clmm %>%
-    count(macro_archetype_5, adoption_stage) %>%
-    pivot_wider(
-      names_from = adoption_stage,
-      values_from = n,
-      values_fill = 0
-    ),
-  n = Inf
-)
 
 full_results <- map(
   MODELS_TO_RUN,
@@ -766,17 +750,21 @@ write_csv(full_model_terms, file.path(csv_dir, "clmm_synthetic_full_model_terms.
 cat("\nResumen modelos sintéticos completos:\n")
 print(full_model_summary, n = Inf)
 
+# ==============================================================================
+# 8. MODELOS SOBRE BOOTSTRAPS SINTÉTICOS
+# ==============================================================================
 
-# 12. MODELOS SOBRE BOOTSTRAPS SINTÉTICOS
 if (RUN_BOOTSTRAPS) {
   
   bootstrap_keys <- df_bootstrap_raw %>%
     distinct(n_participants, boot_id) %>%
     arrange(n_participants, boot_id)
   
-  if (!is.infinite(N_BOOTSTRAPS_TO_RUN)) {
+  if (!is.infinite(N_BOOTSTRAPS_PER_SIZE)) {
     bootstrap_keys <- bootstrap_keys %>%
-      slice_head(n = N_BOOTSTRAPS_TO_RUN)
+      group_by(n_participants) %>%
+      slice_head(n = N_BOOTSTRAPS_PER_SIZE) %>%
+      ungroup()
   }
   
   write_csv(
@@ -830,23 +818,25 @@ if (RUN_BOOTSTRAPS) {
   bootstrap_model_summary <- map_dfr(bootstrap_results_flat, "summary")
   bootstrap_model_terms <- map_dfr(bootstrap_results_flat, "terms")
   
-  write_csv(
-    bootstrap_model_summary,
-    file.path(csv_dir, "clmm_synthetic_bootstrap_model_summary.csv")
-  )
-  
-  write_csv(
-    bootstrap_model_terms,
-    file.path(csv_dir, "clmm_synthetic_bootstrap_model_terms.csv")
-  )
-  
 } else {
-  
   bootstrap_model_summary <- tibble()
   bootstrap_model_terms <- tibble()
 }
 
-# 13. COMPARACIÓN DE MODELOS
+write_csv(
+  bootstrap_model_summary,
+  file.path(csv_dir, "clmm_synthetic_bootstrap_model_summary.csv")
+)
+
+write_csv(
+  bootstrap_model_terms,
+  file.path(csv_dir, "clmm_synthetic_bootstrap_model_terms.csv")
+)
+
+# ==============================================================================
+# 9. COMPARACIONES Y TÉRMINOS
+# ==============================================================================
+
 model_comparison_full <- full_model_summary %>%
   select(
     sample_label,
@@ -856,7 +846,6 @@ model_comparison_full <- full_model_summary %>%
     model_type,
     model_label,
     status,
-    estado_modelo,
     AIC,
     BIC,
     logLik,
@@ -877,7 +866,6 @@ if (nrow(bootstrap_model_summary) > 0) {
       n_boot = n_distinct(boot_id),
       n_ok = sum(status == "ok"),
       convergence_rate = n_ok / n_boot,
-      tasa_convergencia = convergence_rate,
       mean_AIC = mean(AIC, na.rm = TRUE),
       sd_AIC = sd(AIC, na.rm = TRUE),
       mean_BIC = mean(BIC, na.rm = TRUE),
@@ -895,23 +883,6 @@ if (nrow(bootstrap_model_summary) > 0) {
     model_comparison_bootstrap,
     file.path(csv_dir, "clmm_synthetic_bootstrap_model_comparison.csv")
   )
-}
-
-# 14. TÉRMINOS SIGNIFICATIVOS
-significant_terms_full <- full_model_terms %>%
-  filter(!is.na(p.value)) %>%
-  arrange(model_type, p.value)
-
-write_csv(
-  significant_terms_full,
-  file.path(csv_dir, "clmm_synthetic_full_significant_terms_ordered.csv")
-)
-
-if (nrow(bootstrap_model_terms) > 0) {
-  
-  bootstrap_ok_by_model <- bootstrap_model_summary %>%
-    filter(status == "ok") %>%
-    count(n_participants, model_type, model_label, name = "n_ok_models")
   
   significant_terms_summary <- bootstrap_model_terms %>%
     filter(!is.na(p.value)) %>%
@@ -928,26 +899,22 @@ if (nrow(bootstrap_model_terms) > 0) {
       n_significant = sum(p.value < 0.05, na.rm = TRUE),
       mean_estimate = mean(estimate, na.rm = TRUE),
       sd_estimate = sd(estimate, na.rm = TRUE),
-      mean_std_error = mean(std.error, na.rm = TRUE),
       mean_p_value = mean(p.value, na.rm = TRUE),
       median_p_value = median(p.value, na.rm = TRUE),
       .groups = "drop"
     ) %>%
     left_join(
-      bootstrap_ok_by_model,
+      bootstrap_model_summary %>%
+        filter(status == "ok") %>%
+        count(n_participants, model_type, model_label, name = "n_ok_models"),
       by = c("n_participants", "model_type", "model_label")
     ) %>%
     mutate(
       significance_rate = n_significant / n_ok_models,
-      tasa_significacion = significance_rate,
+      conditional_significance_rate = n_significant / n_boot_with_term,
       term_presence_rate = n_boot_with_term / n_ok_models
     ) %>%
-    arrange(
-      n_participants,
-      model_type,
-      desc(significance_rate),
-      mean_p_value
-    )
+    arrange(n_participants, model_type, desc(significance_rate), mean_p_value)
   
   write_csv(
     significant_terms_summary,
@@ -955,14 +922,5 @@ if (nrow(bootstrap_model_terms) > 0) {
   )
 }
 
-cat("Archivos en:\n")
+cat("Archivos creados en:\n")
 cat(csv_dir, "\n")
-
-cat("\nPrincipales:\n")
-cat("- clmm_synthetic_full_model_summary.csv\n")
-cat("- clmm_synthetic_full_model_terms.csv\n")
-cat("- clmm_synthetic_full_model_comparison.csv\n")
-cat("- clmm_synthetic_bootstrap_model_summary.csv\n")
-cat("- clmm_synthetic_bootstrap_model_terms.csv\n")
-cat("- clmm_synthetic_bootstrap_model_comparison.csv\n")
-cat("- clmm_synthetic_bootstrap_significant_terms_summary.csv\n")

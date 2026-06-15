@@ -1,5 +1,0 @@
-sample_label,n_participants,boot_id,model_type,status,AIC,BIC,logLik,warnings
-full,5000,0,M2,ok,14239.729276864602,14635.751161828988,-7067.864638432301,
-full,5000,0,M1,ok,18099.31906185952,18221.171949540872,-9033.65953092976,
-full,5000,0,M0,ok,30309.53711961877,30362.84775797936,-15147.768559809385,"(-1) Model failed to converge with max|grad| = 1.89184e-06 (tol = 1e-06) 
-In addition: step factor reduced below minimum"

@@ -1,6 +1,4 @@
 variable,category,n,percentage
-zona climática,Clima continental templado,42,10.4
-zona climática,Clima de transición,66,16.4
-zona climática,Clima frío,17,4.2
-zona climática,Clima mediterráneo/subtropical,160,39.7
-zona climática,Clima oceánico,118,29.3
+zona climática,Clima cálido/mediterráneo,160,39.7
+zona climática,Clima frío/polar,17,4.2
+zona climática,Clima templado,226,56.1

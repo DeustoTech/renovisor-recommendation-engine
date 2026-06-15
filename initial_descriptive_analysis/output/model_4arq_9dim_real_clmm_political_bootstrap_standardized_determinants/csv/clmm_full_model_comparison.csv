@@ -1,0 +1,5 @@
+sample_label,sample_label_es,n_participants,boot_id,model_type,model_label,status,AIC,BIC,logLik,warnings
+full,muestra completa,346,0,M0,M0: solo arquetipo,ok,1767.419941928071,1795.557537543145,-877.7099709640355,
+full,muestra completa,346,0,M1,M1: arquetipo + dimensiones,ok,1777.639093329472,1847.9830823671564,-873.819546664736,
+full,muestra completa,346,0,M2_REDUCED,M2 reducido: interacciones teóricas,ok,1788.503262000211,1929.19124007558,-864.2516310001055,
+full,muestra completa,346,0,M2_FULL,M2 completo: interacción arquetipo x todas las dimensiones,ok,1808.575175055222,2005.5383443607386,-862.287587527611,
