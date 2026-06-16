@@ -1,0 +1,100 @@
+variable,profile_group,denominator_non_missing,sum_categories,check_ok
+age_group,Total,387,387,TRUE
+age_group,Cuidadoso/a,77,77,TRUE
+age_group,Activista,67,67,TRUE
+age_group,Temeroso/a,66,66,TRUE
+age_group,Homo economicus,59,59,TRUE
+age_group,Sensible,55,55,TRUE
+age_group,Influyente,35,35,TRUE
+age_group,Desinteresado/a,9,9,TRUE
+age_group,Pionero,1,1,TRUE
+gender,Total,388,388,TRUE
+gender,Cuidadoso/a,76,76,TRUE
+gender,Activista,68,68,TRUE
+gender,Temeroso/a,67,67,TRUE
+gender,Homo economicus,60,60,TRUE
+gender,Sensible,55,55,TRUE
+gender,Influyente,34,34,TRUE
+gender,Desinteresado/a,9,9,TRUE
+gender,Pionero,1,1,TRUE
+country_group,Total,396,396,TRUE
+country_group,Cuidadoso/a,81,81,TRUE
+country_group,Activista,70,70,TRUE
+country_group,Temeroso/a,68,68,TRUE
+country_group,Homo economicus,60,60,TRUE
+country_group,Sensible,51,51,TRUE
+country_group,Influyente,35,35,TRUE
+country_group,Desinteresado/a,9,9,TRUE
+country_group,Pionero,1,1,TRUE
+residence_region,Total,396,396,TRUE
+residence_region,Cuidadoso/a,81,81,TRUE
+residence_region,Activista,70,70,TRUE
+residence_region,Temeroso/a,68,68,TRUE
+residence_region,Homo economicus,60,60,TRUE
+residence_region,Sensible,51,51,TRUE
+residence_region,Influyente,35,35,TRUE
+residence_region,Desinteresado/a,9,9,TRUE
+residence_region,Pionero,1,1,TRUE
+education_group,Total,389,389,TRUE
+education_group,Cuidadoso/a,77,77,TRUE
+education_group,Activista,68,68,TRUE
+education_group,Temeroso/a,67,67,TRUE
+education_group,Homo economicus,59,59,TRUE
+education_group,Sensible,55,55,TRUE
+education_group,Influyente,35,35,TRUE
+education_group,Desinteresado/a,9,9,TRUE
+education_group,Pionero,1,1,TRUE
+employment_3,Total,389,389,TRUE
+employment_3,Cuidadoso/a,77,77,TRUE
+employment_3,Activista,69,69,TRUE
+employment_3,Temeroso/a,67,67,TRUE
+employment_3,Homo economicus,59,59,TRUE
+employment_3,Sensible,55,55,TRUE
+employment_3,Influyente,35,35,TRUE
+employment_3,Desinteresado/a,8,8,TRUE
+employment_3,Pionero,1,1,TRUE
+work_home,Total,378,378,TRUE
+work_home,Cuidadoso/a,75,75,TRUE
+work_home,Activista,67,67,TRUE
+work_home,Temeroso/a,66,66,TRUE
+work_home,Homo economicus,57,57,TRUE
+work_home,Sensible,54,54,TRUE
+work_home,Influyente,34,34,TRUE
+work_home,Desinteresado/a,9,9,TRUE
+work_home,Pionero,1,1,TRUE
+type_house,Total,381,381,TRUE
+type_house,Cuidadoso/a,75,75,TRUE
+type_house,Activista,67,67,TRUE
+type_house,Temeroso/a,67,67,TRUE
+type_house,Homo economicus,56,56,TRUE
+type_house,Sensible,54,54,TRUE
+type_house,Influyente,35,35,TRUE
+type_house,Desinteresado/a,9,9,TRUE
+type_house,Pionero,1,1,TRUE
+tenure,Total,396,396,TRUE
+tenure,Cuidadoso/a,79,79,TRUE
+tenure,Activista,70,70,TRUE
+tenure,Temeroso/a,68,68,TRUE
+tenure,Homo economicus,60,60,TRUE
+tenure,Sensible,54,54,TRUE
+tenure,Influyente,35,35,TRUE
+tenure,Desinteresado/a,9,9,TRUE
+tenure,Pionero,1,1,TRUE
+climate_zone_3,Total,403,403,TRUE
+climate_zone_3,Cuidadoso/a,82,82,TRUE
+climate_zone_3,Activista,71,71,TRUE
+climate_zone_3,Temeroso/a,68,68,TRUE
+climate_zone_3,Homo economicus,60,60,TRUE
+climate_zone_3,Sensible,55,55,TRUE
+climate_zone_3,Influyente,35,35,TRUE
+climate_zone_3,Desinteresado/a,9,9,TRUE
+climate_zone_3,Pionero,1,1,TRUE
+political_orientation,Total,383,383,TRUE
+political_orientation,Cuidadoso/a,72,72,TRUE
+political_orientation,Activista,68,68,TRUE
+political_orientation,Temeroso/a,65,65,TRUE
+political_orientation,Homo economicus,58,58,TRUE
+political_orientation,Sensible,54,54,TRUE
+political_orientation,Influyente,35,35,TRUE
+political_orientation,Desinteresado/a,9,9,TRUE
+political_orientation,Pionero,1,1,TRUE

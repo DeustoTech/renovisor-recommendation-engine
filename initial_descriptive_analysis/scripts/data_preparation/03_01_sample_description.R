@@ -1090,14 +1090,6 @@ cat("- sample_description_all_plots.pdf\n")
 # TABLA SOCIODEMOGRÁFICA TIPO PAPER POR ARQUETIPO AUTOCLASIFICADO
 # ==============================================================================
 
-# Esta tabla resume la muestra total y la composición sociodemográfica
-# por los 8 arquetipos de autoclasificación.
-#
-# Salidas:
-# - CSV largo
-# - CSV ancho, listo para revisar
-# - DOCX tipo paper, si tienes instalados flextable y officer
-
 library(readr)
 library(dplyr)
 library(tidyr)
@@ -1182,23 +1174,22 @@ sample_description_archetype <- sample_description %>%
   mutate(
     self_profile = factor(self_profile, levels = archetype_order),
     
-    # Variable compacta de país para que la tabla no sea enorme
     country_group = case_when(
       is.na(country) ~ NA_character_,
-      country == "Spain" ~ "España",
+      country == "España" ~ "España",
       TRUE ~ "Otro país europeo"
     ),
     
-    # Agrupación climática en 3 grupos
     climate_zone_3 = case_when(
       is.na(climate_zone) ~ NA_character_,
-      climate_zone %in% c("Clima mediterráneo") ~ "Clima cálido/mediterráneo",
-      climate_zone %in% c("Clima oceánico", "Clima continental", "Clima de transición") ~ "Clima templado",
-      climate_zone %in% c("Clima frío") ~ "Clima frío/polar",
+      climate_zone %in% c(
+        "Clima cálido/mediterráneo",
+        "Clima templado",
+        "Clima frío/polar"
+      ) ~ climate_zone,
       TRUE ~ "Otro clima"
     ),
     
-    # Situación laboral en 3 grupos
     employment_3 = case_when(
       is.na(employment) ~ NA_character_,
       employment == "Empleado/a" ~ "Empleado/a",
@@ -1217,8 +1208,22 @@ cat("Filas:", nrow(sample_description_archetype), "\n")
 cat("Con arquetipo válido:", sum(!is.na(sample_description_archetype$self_profile)), "\n")
 
 # ------------------------------------------------------------------------------
-# 3. Funciones para tabla tipo paper
+# 3. Preparar datos largos con Total + arquetipos
 # ------------------------------------------------------------------------------
+
+profile_columns <- c("Total", archetype_order)
+
+table_data_long <- bind_rows(
+  sample_description_archetype %>%
+    mutate(profile_group = "Total"),
+  
+  sample_description_archetype %>%
+    filter(!is.na(self_profile)) %>%
+    mutate(profile_group = as.character(self_profile))
+) %>%
+  mutate(
+    profile_group = factor(profile_group, levels = profile_columns)
+  )
 
 format_n_pct <- function(n, denom) {
   n <- ifelse(is.na(n), 0, n)
@@ -1235,49 +1240,33 @@ format_mean_sd <- function(mean_value, sd_value, n_valid) {
     return("")
   }
   
+  if (is.na(sd_value)) {
+    return(paste0(sprintf("%.1f", mean_value), " (NA)"))
+  }
+  
   paste0(sprintf("%.1f", mean_value), " (", sprintf("%.1f", sd_value), ")")
 }
 
-profile_columns <- c("Total", archetype_order)
-
-# Duplicamos los datos:
-# - una copia para Total
-# - una copia para cada arquetipo
-table_data_long <- bind_rows(
-  sample_description_archetype %>%
-    mutate(profile_group = "Total"),
-  
-  sample_description_archetype %>%
-    filter(!is.na(self_profile)) %>%
-    mutate(profile_group = as.character(self_profile))
-) %>%
-  mutate(
-    profile_group = factor(profile_group, levels = profile_columns)
-  )
-
 # ------------------------------------------------------------------------------
-# 4. Fila de N por columna
+# 4. Funciones corregidas para construir filas alineadas
 # ------------------------------------------------------------------------------
 
-make_n_row <- function(data) {
+make_n_rows <- function(data) {
   data %>%
     distinct(profile_group, participant_id) %>%
     count(profile_group, name = "n") %>%
     complete(profile_group = profile_columns, fill = list(n = 0)) %>%
     mutate(
-      row_id = 1,
+      section_order = 1,
+      row_order = 1,
       row_type = "data",
       characteristic = "N participantes",
       value = as.character(n)
     ) %>%
-    select(row_id, row_type, characteristic, profile_group, value)
+    select(section_order, row_order, row_type, characteristic, profile_group, value)
 }
 
-# ------------------------------------------------------------------------------
-# 5. Fila edad: media y desviación típica
-# ------------------------------------------------------------------------------
-
-make_age_row <- function(data) {
+make_age_rows <- function(data) {
   data %>%
     group_by(profile_group) %>%
     summarise(
@@ -1288,21 +1277,27 @@ make_age_row <- function(data) {
     ) %>%
     complete(profile_group = profile_columns) %>%
     mutate(
-      row_id = 2,
+      section_order = 2,
+      row_order = 1,
       row_type = "data",
       characteristic = "Edad, años (media (DE))",
       value = mapply(format_mean_sd, mean_age, sd_age, n_valid)
     ) %>%
-    select(row_id, row_type, characteristic, profile_group, value)
+    select(section_order, row_order, row_type, characteristic, profile_group, value)
 }
 
-# ------------------------------------------------------------------------------
-# 6. Bloques categóricos
-# ------------------------------------------------------------------------------
-
-make_categorical_block <- function(data, var_name, label, levels_vec, start_row_id) {
+make_categorical_section <- function(data, var_name, label, levels_vec, section_order_value) {
   
-  denom <- data %>%
+  header <- tibble(
+    section_order = section_order_value,
+    row_order = 0,
+    row_type = "header",
+    characteristic = label,
+    profile_group = factor(profile_columns, levels = profile_columns),
+    value = ""
+  )
+  
+  denoms <- data %>%
     filter(!is.na(.data[[var_name]])) %>%
     count(profile_group, name = "denom")
   
@@ -1311,37 +1306,42 @@ make_categorical_block <- function(data, var_name, label, levels_vec, start_row_
     mutate(category = as.character(.data[[var_name]])) %>%
     count(profile_group, category, name = "n")
   
-  header <- tibble(
-    row_id = start_row_id,
-    row_type = "header",
-    characteristic = label,
-    profile_group = factor(profile_columns, levels = profile_columns),
-    value = ""
-  )
-  
   rows <- expand_grid(
-    profile_group = factor(profile_columns, levels = profile_columns),
-    category = levels_vec
+    row_order = seq_along(levels_vec),
+    category = levels_vec,
+    profile_group = factor(profile_columns, levels = profile_columns)
   ) %>%
-    left_join(counts, by = c("profile_group", "category")) %>%
-    left_join(denom, by = "profile_group") %>%
     mutate(
-      n = ifelse(is.na(n), 0, n),
-      row_id = start_row_id + row_number(),
+      characteristic = paste0("  ", category)
+    ) %>%
+    left_join(counts, by = c("profile_group", "category")) %>%
+    left_join(denoms, by = "profile_group") %>%
+    mutate(
+      section_order = section_order_value,
       row_type = "data",
-      characteristic = paste0("  ", category),
+      n = ifelse(is.na(n), 0, n),
       value = mapply(format_n_pct, n, denom)
     ) %>%
-    select(row_id, row_type, characteristic, profile_group, value)
+    select(section_order, row_order, row_type, characteristic, profile_group, value)
   
   bind_rows(header, rows)
 }
 
 # ------------------------------------------------------------------------------
-# 7. Variables que van a la tabla
+# 5. Variables incluidas en la tabla
 # ------------------------------------------------------------------------------
 
 table_blocks <- list(
+  list(
+    var = "age_group",
+    label = "Generación",
+    levels = c(
+      "Generación Z",
+      "Millennials",
+      "Generación X",
+      "Boomers + generación silenciosa"
+    )
+  ),
   list(
     var = "gender",
     label = "Género",
@@ -1355,7 +1355,13 @@ table_blocks <- list(
   list(
     var = "residence_region",
     label = "Región europea",
-    levels = c("Europa del Norte", "Europa Occidental", "Europa del Sur", "Europa del Este", "Otra región")
+    levels = c(
+      "Europa del Norte",
+      "Europa Occidental",
+      "Europa del Sur",
+      "Europa del Este",
+      "Otra región"
+    )
   ),
   list(
     var = "education_group",
@@ -1375,66 +1381,91 @@ table_blocks <- list(
   list(
     var = "type_house",
     label = "Tipo de hogar",
-    levels = c("Vive solo/a", "Pareja sin hijos", "Hogar con hijos", "Vivienda compartida", "Otro tipo de hogar")
+    levels = c(
+      "Vive solo/a",
+      "Pareja sin hijos",
+      "Hogar con hijos",
+      "Vivienda compartida",
+      "Otro tipo de hogar"
+    )
   ),
   list(
     var = "tenure",
     label = "Régimen de tenencia",
-    levels = c("Propiedad sin hipoteca", "Propiedad con hipoteca", "Alquiler", "Otro régimen")
+    levels = c(
+      "Propiedad sin hipoteca",
+      "Propiedad con hipoteca",
+      "Alquiler",
+      "Otro régimen"
+    )
   ),
   list(
     var = "climate_zone_3",
     label = "Zona climática",
-    levels = c("Clima cálido/mediterráneo", "Clima templado", "Clima frío/polar", "Otro clima")
+    levels = c(
+      "Clima cálido/mediterráneo",
+      "Clima templado",
+      "Clima frío/polar",
+      "Otro clima"
+    )
   ),
   list(
     var = "political_orientation",
     label = "Orientación política",
-    levels = c("Extrema izquierda", "Izquierda", "Centro", "Derecha", "Extrema derecha")
+    levels = c(
+      "Extrema izquierda",
+      "Izquierda",
+      "Centro",
+      "Derecha",
+      "Extrema derecha"
+    )
   )
 )
 
 # ------------------------------------------------------------------------------
-# 8. Construir tabla larga
+# 6. Construir tabla larga corregida
 # ------------------------------------------------------------------------------
 
 table_long_parts <- list(
-  make_n_row(table_data_long),
-  make_age_row(table_data_long)
+  make_n_rows(table_data_long),
+  make_age_rows(table_data_long)
 )
 
-current_row_id <- 10
-
-for (block in table_blocks) {
-  table_long_parts[[length(table_long_parts) + 1]] <- make_categorical_block(
+for (i in seq_along(table_blocks)) {
+  block <- table_blocks[[i]]
+  
+  table_long_parts[[length(table_long_parts) + 1]] <- make_categorical_section(
     data = table_data_long,
     var_name = block$var,
     label = block$label,
     levels_vec = block$levels,
-    start_row_id = current_row_id
+    section_order_value = i + 2
   )
-  
-  current_row_id <- current_row_id + length(block$levels) + 10
 }
 
 sociodemographic_by_archetype_long <- bind_rows(table_long_parts) %>%
-  mutate(profile_group = as.character(profile_group)) %>%
-  arrange(row_id, profile_group)
+  mutate(
+    profile_group = as.character(profile_group)
+  ) %>%
+  arrange(section_order, row_order, characteristic, profile_group)
 
 # ------------------------------------------------------------------------------
-# 9. Pasar a formato ancho tipo paper
+# 7. Pasar a formato ancho tipo paper
 # ------------------------------------------------------------------------------
 
 sociodemographic_by_archetype_wide <- sociodemographic_by_archetype_long %>%
-  select(row_id, row_type, characteristic, profile_group, value) %>%
+  select(section_order, row_order, row_type, characteristic, profile_group, value) %>%
   pivot_wider(
     names_from = profile_group,
-    values_from = value
+    values_from = value,
+    values_fill = ""
   ) %>%
-  arrange(row_id) %>%
-  select(row_id, row_type, characteristic, all_of(profile_columns))
+  arrange(section_order, row_order) %>%
+  select(section_order, row_order, row_type, characteristic, all_of(profile_columns))
 
-# Guardar versión completa con columnas auxiliares
+sociodemographic_by_archetype_for_word <- sociodemographic_by_archetype_wide %>%
+  select(-section_order, -row_order, -row_type)
+
 write_csv(
   sociodemographic_by_archetype_long,
   file.path(csv_dir, "sociodemographic_by_archetype_long.csv")
@@ -1445,21 +1476,16 @@ write_csv(
   file.path(csv_dir, "sociodemographic_by_archetype_wide.csv")
 )
 
-# Guardar versión limpia para copiar en Word
-sociodemographic_by_archetype_for_word <- sociodemographic_by_archetype_wide %>%
-  select(-row_id, -row_type)
-
 write_csv(
   sociodemographic_by_archetype_for_word,
   file.path(csv_dir, "sociodemographic_by_archetype_for_word.csv")
 )
 
-cat("Tabla por arquetipo exportada en CSV.\n")
-cat("Archivo principal:\n")
+cat("Tabla por arquetipo exportada correctamente en CSV.\n")
 cat(file.path(csv_dir, "sociodemographic_by_archetype_for_word.csv"), "\n")
 
 # ------------------------------------------------------------------------------
-# 10. Exportar a XLSX si openxlsx está instalado
+# 8. Exportar a XLSX
 # ------------------------------------------------------------------------------
 
 if (requireNamespace("openxlsx", quietly = TRUE)) {
@@ -1471,14 +1497,14 @@ if (requireNamespace("openxlsx", quietly = TRUE)) {
     overwrite = TRUE
   )
   
-  cat("Tabla exportada también en XLSX:\n")
+  cat("Tabla exportada en XLSX:\n")
   cat(xlsx_path, "\n")
 } else {
   cat("Paquete openxlsx no instalado. Se omite exportación XLSX.\n")
 }
 
 # ------------------------------------------------------------------------------
-# 11. Exportar a DOCX tipo paper si flextable y officer están instalados
+# 9. Exportar a DOCX
 # ------------------------------------------------------------------------------
 
 if (
@@ -1487,7 +1513,7 @@ if (
 ) {
   
   table_for_docx <- sociodemographic_by_archetype_wide %>%
-    select(-row_id)
+    select(-section_order, -row_order)
   
   header_rows <- which(table_for_docx$row_type == "header")
   
@@ -1503,12 +1529,12 @@ if (
   ft <- flextable::bold(ft, i = header_rows, bold = TRUE, part = "body")
   ft <- flextable::align(ft, j = 2:ncol(table_for_docx_clean), align = "center", part = "all")
   ft <- flextable::align(ft, j = 1, align = "left", part = "all")
-  ft <- flextable::width(ft, j = 1, width = 2.4)
+  ft <- flextable::width(ft, j = 1, width = 2.7)
   ft <- flextable::width(ft, j = 2:ncol(table_for_docx_clean), width = 0.9)
   
   ft <- flextable::add_footer_lines(
     ft,
-    values = "Nota. Los porcentajes se calculan dentro de cada columna excluyendo valores faltantes. Los perfiles con tamaños muy reducidos, especialmente Pionero, deben interpretarse con cautela."
+    values = "Nota. Los porcentajes se calculan dentro de cada columna excluyendo valores faltantes. Los perfiles con tamaños muestrales reducidos, especialmente Desinteresado/a y Pionero, deben interpretarse con cautela."
   )
   
   section_landscape <- officer::prop_section(
@@ -1524,12 +1550,12 @@ if (
   docx_path <- file.path(csv_dir, "sociodemographic_by_archetype_for_word.docx")
   
   flextable::save_as_docx(
-    "Tabla. Características sociodemográficas de la muestra total y por arquetipo autoclasificado" = ft,
+    "Tabla 13. Características sociodemográficas de la muestra total y por arquetipo autoclasificado" = ft,
     path = docx_path,
     pr_section = section_landscape
   )
   
-  cat("Tabla exportada también en DOCX:\n")
+  cat("Tabla exportada en DOCX:\n")
   cat(docx_path, "\n")
   
 } else {
@@ -1537,24 +1563,68 @@ if (
 }
 
 # ==============================================================================
-# PIRÁMIDE DE POBLACIÓN POR GÉNERO Y GENERACIÓN
-# Eje Y = generaciones, para que cada barra tenga un solo color
+# PIRÁMIDE DE POBLACIÓN POR EDAD, GÉNERO Y GENERACIÓN
+# Eje Y = rangos de edad alineados con generaciones
+# Menores abajo, mayores arriba
 # ==============================================================================
 
+# Rangos definidos para no cortar generaciones dentro de una misma barra:
+# Generación Z: 19-25
+# Millennials: 26-40
+# Generación X: 41-55
+# Boomers + generación silenciosa: 56+
+
+age_levels_pyramid <- c(
+  "19-25",
+  "26-30",
+  "31-35",
+  "36-40",
+  "41-45",
+  "46-50",
+  "51-55",
+  "56-60",
+  "61-65",
+  "66-70",
+  "71-75",
+  "76-79",
+  "80+"
+)
+
 generation_levels_pyramid <- c(
-  "Boomers + generación silenciosa\n(56+)",
-  "Generación X\n(41-55)",
-  "Millennials\n(26-40)",
-  "Generación Z\n(19-25)",
-  
+  "Generación Z",
+  "Millennials",
+  "Generación X",
+  "Boomers + generación silenciosa"
 )
 
 generation_colors_pyramid <- c(
-  "Generación Z\n(19-25)" = "#8EC1B8",
-  "Millennials\n(26-40)" = "#E8E6A0",
-  "Generación X\n(41-55)" = "#B4B0D0",
-  "Boomers + generación silenciosa\n(56+)" = "#E58373"
+  "Generación Z" = "#8EC1B8",
+  "Millennials" = "#E8E6A0",
+  "Generación X" = "#B4B0D0",
+  "Boomers + generación silenciosa" = "#E58373"
 )
+
+# ------------------------------------------------------------------------------
+# Conteo para el subtítulo
+# ------------------------------------------------------------------------------
+
+# n válido = participantes con edad válida y género Hombre/Mujer
+# n missing = participantes excluidos por edad faltante o género no binario/faltante
+
+pyramid_counts <- sample_description %>%
+  summarise(
+    n_total = n(),
+    n_valid = sum(!is.na(age) & gender %in% c("Hombre", "Mujer")),
+    n_missing = n_total - n_valid
+  )
+
+n_total_pyramid <- pyramid_counts$n_total[1]
+n_valid_pyramid <- pyramid_counts$n_valid[1]
+n_missing_pyramid <- pyramid_counts$n_missing[1]
+
+# ------------------------------------------------------------------------------
+# Preparar datos
+# ------------------------------------------------------------------------------
 
 pyramid_data <- sample_description %>%
   filter(
@@ -1563,105 +1633,174 @@ pyramid_data <- sample_description %>%
     gender %in% c("Hombre", "Mujer")
   ) %>%
   mutate(
+    age_group_pyramid = case_when(
+      age >= 19 & age <= 25 ~ "19-25",
+      age >= 26 & age <= 30 ~ "26-30",
+      age >= 31 & age <= 35 ~ "31-35",
+      age >= 36 & age <= 40 ~ "36-40",
+      age >= 41 & age <= 45 ~ "41-45",
+      age >= 46 & age <= 50 ~ "46-50",
+      age >= 51 & age <= 55 ~ "51-55",
+      age >= 56 & age <= 60 ~ "56-60",
+      age >= 61 & age <= 65 ~ "61-65",
+      age >= 66 & age <= 70 ~ "66-70",
+      age >= 71 & age <= 75 ~ "71-75",
+      age >= 76 & age <= 79 ~ "76-79",
+      age >= 80             ~ "80+",
+      TRUE ~ NA_character_
+    ),
+    
     generation_pyramid = case_when(
-      age >= 19 & age <= 25 ~ "Generación Z\n(19-25)",
-      age >= 26 & age <= 40 ~ "Millennials\n(26-40)",
-      age >= 41 & age <= 55 ~ "Generación X\n(41-55)",
-      age >= 56             ~ "Boomers + generación silenciosa\n(56+)",
+      age >= 19 & age <= 25 ~ "Generación Z",
+      age >= 26 & age <= 40 ~ "Millennials",
+      age >= 41 & age <= 55 ~ "Generación X",
+      age >= 56             ~ "Boomers + generación silenciosa",
       TRUE ~ NA_character_
     )
   ) %>%
-  filter(!is.na(generation_pyramid)) %>%
-  count(generation_pyramid, gender, name = "n") %>%
+  filter(
+    !is.na(age_group_pyramid),
+    !is.na(generation_pyramid)
+  ) %>%
+  count(age_group_pyramid, generation_pyramid, gender, name = "n") %>%
   complete(
-    generation_pyramid = generation_levels_pyramid,
+    age_group_pyramid = age_levels_pyramid,
     gender = c("Hombre", "Mujer"),
     fill = list(n = 0)
   ) %>%
   mutate(
+    generation_pyramid = case_when(
+      age_group_pyramid == "19-25" ~ "Generación Z",
+      age_group_pyramid %in% c("26-30", "31-35", "36-40") ~ "Millennials",
+      age_group_pyramid %in% c("41-45", "46-50", "51-55") ~ "Generación X",
+      age_group_pyramid %in% c(
+        "56-60", "61-65", "66-70", "71-75", "76-79", "80+"
+      ) ~ "Boomers + generación silenciosa",
+      TRUE ~ NA_character_
+    ),
+    
+    age_group_pyramid = factor(
+      age_group_pyramid,
+      levels = age_levels_pyramid
+    ),
+    
     generation_pyramid = factor(
       generation_pyramid,
       levels = generation_levels_pyramid
     ),
-    total_valid = sum(n),
+    
+    total_valid = n_valid_pyramid,
     percentage = round(100 * n / total_valid, 1),
     percentage_plot = if_else(gender == "Hombre", -percentage, percentage)
   )
 
-max_axis <- ceiling(max(abs(pyramid_data$percentage_plot), na.rm = TRUE) / 5) * 5
+# Guardar tabla auxiliar
+write_csv(
+  pyramid_data %>%
+    select(age_group_pyramid, gender, generation_pyramid, n, percentage),
+  file.path(csv_dir, "sample_description_population_pyramid_age_gender_generation.csv")
+)
+
+# ------------------------------------------------------------------------------
+# Crear gráfico
+# ------------------------------------------------------------------------------
+
+max_axis <- ceiling(max(abs(pyramid_data$percentage_plot), na.rm = TRUE) / 2) * 2
 
 plot_population_pyramid <- ggplot(
   pyramid_data,
   aes(
     x = percentage_plot,
-    y = generation_pyramid,
+    y = age_group_pyramid,
     fill = generation_pyramid
   )
 ) +
-  geom_col(width = 0.75, color = "white", linewidth = 0.4) +
-  geom_vline(xintercept = 0, color = "#333333", linewidth = 0.7) +
-  geom_text(
-    data = pyramid_data %>% filter(n > 0),
-    aes(
-      label = paste0(percentage, "%"),
-      x = if_else(
-        gender == "Hombre",
-        percentage_plot - max_axis * 0.04,
-        percentage_plot + max_axis * 0.04
-      )
-    ),
-    size = 4.2,
-    fontface = "bold"
+  geom_col(
+    width = 0.82,
+    color = "white",
+    linewidth = 0.25
+  ) +
+  geom_vline(
+    xintercept = 0,
+    color = "#333333",
+    linewidth = 0.7
   ) +
   annotate(
     "text",
     x = -max_axis * 0.55,
-    y = length(generation_levels_pyramid) + 0.45,
+    y = length(age_levels_pyramid) + 0.45,
     label = "Hombres",
-    size = 5.5,
+    size = 5.2,
     fontface = "bold"
   ) +
   annotate(
     "text",
     x = max_axis * 0.55,
-    y = length(generation_levels_pyramid) + 0.45,
+    y = length(age_levels_pyramid) + 0.45,
     label = "Mujeres",
-    size = 5.5,
+    size = 5.2,
     fontface = "bold"
   ) +
   scale_x_continuous(
     limits = c(-max_axis * 1.15, max_axis * 1.15),
-    breaks = seq(-max_axis, max_axis, by = 5),
+    breaks = seq(-max_axis, max_axis, by = 2),
     labels = function(x) paste0(abs(x), "%")
   ) +
   scale_y_discrete(
-    limits = rev(generation_levels_pyramid)
+    limits = age_levels_pyramid
   ) +
   scale_fill_manual(
     values = generation_colors_pyramid,
-    name = "Generación"
+    name = "Generación",
+    drop = FALSE
   ) +
   labs(
     title = "Pirámide de edad y género de la muestra",
-    subtitle = "Porcentaje sobre participantes con edad y género válidos",
+    subtitle = paste0(
+      "Porcentaje sobre participantes con edad y género válidos\n",
+      "n válido = ", n_valid_pyramid,
+      "; n missing = ", n_missing_pyramid,
+      "; n total = ", n_total_pyramid
+    ),
     x = "Porcentaje de la muestra",
-    y = "Grupo generacional"
+    y = "Grupo de edad"
   ) +
   theme_sample_tfm() +
   theme(
     legend.position = "bottom",
     legend.title = element_text(face = "bold"),
     axis.text.y = element_text(size = 14),
+    plot.subtitle = element_text(size = 13, lineheight = 1.05),
     plot.margin = margin(12, 25, 12, 25)
   )
 
 print(plot_population_pyramid)
 
+# ------------------------------------------------------------------------------
+# Guardar gráfico
+# ------------------------------------------------------------------------------
+
+ggsave(
+  file.path(plots_dir, "sample_description_population_pyramid_age_gender_generation.png"),
+  plot_population_pyramid,
+  width = 11,
+  height = 7,
+  dpi = 300
+)
+
+ggsave(
+  file.path(pdf_dir, "sample_description_population_pyramid_age_gender_generation.pdf"),
+  plot_population_pyramid,
+  width = 11,
+  height = 7
+)
+
+# Sobrescribir nombres anteriores para evitar abrir gráficos antiguos por error
 ggsave(
   file.path(plots_dir, "sample_description_population_pyramid_generation.png"),
   plot_population_pyramid,
   width = 11,
-  height = 6,
+  height = 7,
   dpi = 300
 )
 
@@ -1669,15 +1808,14 @@ ggsave(
   file.path(pdf_dir, "sample_description_population_pyramid_generation.pdf"),
   plot_population_pyramid,
   width = 11,
-  height = 6
+  height = 7
 )
 
-# Sobrescribe también el nombre antiguo para no confundirte al abrir archivos
 ggsave(
   file.path(plots_dir, "population_pyramid_age_gender_generation.png"),
   plot_population_pyramid,
   width = 11,
-  height = 6,
+  height = 7,
   dpi = 300
 )
 
@@ -1685,13 +1823,8 @@ ggsave(
   file.path(pdf_dir, "population_pyramid_age_gender_generation.pdf"),
   plot_population_pyramid,
   width = 11,
-  height = 6
+  height = 7
 )
 
-write_csv(
-  pyramid_data %>%
-    select(generation_pyramid, gender, n, percentage),
-  file.path(csv_dir, "sample_description_population_pyramid_generation.csv")
-)
-
-sample_plots[["population_pyramid_generation"]] <- plot_population_pyramid
+# Añadir al PDF conjunto
+sample_plots[["population_pyramid_age_gender_generation"]] <- plot_population_pyramid

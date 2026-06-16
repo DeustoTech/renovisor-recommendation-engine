@@ -1,0 +1,12 @@
+variable,var_name,n_valid,n_missing,n_total
+Edad / generación,age_group,387,16,403
+Género,gender,388,15,403
+País,country_group,396,7,403
+Región europea,residence_region,396,7,403
+Nivel educativo,education_group,389,14,403
+Situación laboral,employment_3,389,14,403
+Trabajo/estudio desde casa,work_home,378,25,403
+Tipo de hogar,type_house,381,22,403
+Régimen de tenencia,tenure,396,7,403
+Zona climática,climate_zone_3,403,0,403
+Orientación política,political_orientation,383,20,403

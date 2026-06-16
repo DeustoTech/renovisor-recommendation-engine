@@ -1,328 +1,167 @@
 characteristic,Total,Cuidadoso/a,Activista,Temeroso/a,Homo economicus,Sensible,Influyente,Desinteresado/a,Pionero
 N participantes,403,82,71,68,60,55,35,9,1
 "Edad, años (media (DE))",43.9 (14.9),34.6 (10.9),46.7 (15.6),46.1 (16.1),37.5 (11.3),50.6 (13.0),53.7 (12.7),34.4 (11.1),28.0 (NA)
+Generación,,,,,,,,,
+  Boomers + generación silenciosa,105 (27.1%),7 (9.1%),23 (34.3%),21 (31.8%),6 (10.2%),21 (38.2%),19 (54.3%),0 (0.0%),0 (0.0%)
+  Generación X,103 (26.6%),12 (15.6%),18 (26.9%),18 (27.3%),12 (20.3%),23 (41.8%),10 (28.6%),3 (33.3%),0 (0.0%)
+  Generación Z,36 (9.3%),11 (14.3%),7 (10.4%),6 (9.1%),8 (13.6%),2 (3.6%),0 (0.0%),2 (22.2%),0 (0.0%)
+  Millennials,143 (37.0%),47 (61.0%),19 (28.4%),21 (31.8%),33 (55.9%),9 (16.4%),6 (17.1%),4 (44.4%),1 (100.0%)
+  Boomers + generación silenciosa,105 (27.1%),7 (9.1%),23 (34.3%),21 (31.8%),6 (10.2%),21 (38.2%),19 (54.3%),0 (0.0%),0 (0.0%)
+  Generación X,103 (26.6%),12 (15.6%),18 (26.9%),18 (27.3%),12 (20.3%),23 (41.8%),10 (28.6%),3 (33.3%),0 (0.0%)
+  Generación Z,36 (9.3%),11 (14.3%),7 (10.4%),6 (9.1%),8 (13.6%),2 (3.6%),0 (0.0%),2 (22.2%),0 (0.0%)
+  Millennials,143 (37.0%),47 (61.0%),19 (28.4%),21 (31.8%),33 (55.9%),9 (16.4%),6 (17.1%),4 (44.4%),1 (100.0%)
+  Boomers + generación silenciosa,105 (27.1%),7 (9.1%),23 (34.3%),21 (31.8%),6 (10.2%),21 (38.2%),19 (54.3%),0 (0.0%),0 (0.0%)
+  Generación X,103 (26.6%),12 (15.6%),18 (26.9%),18 (27.3%),12 (20.3%),23 (41.8%),10 (28.6%),3 (33.3%),0 (0.0%)
+  Generación Z,36 (9.3%),11 (14.3%),7 (10.4%),6 (9.1%),8 (13.6%),2 (3.6%),0 (0.0%),2 (22.2%),0 (0.0%)
+  Millennials,143 (37.0%),47 (61.0%),19 (28.4%),21 (31.8%),33 (55.9%),9 (16.4%),6 (17.1%),4 (44.4%),1 (100.0%)
+  Boomers + generación silenciosa,105 (27.1%),7 (9.1%),23 (34.3%),21 (31.8%),6 (10.2%),21 (38.2%),19 (54.3%),0 (0.0%),0 (0.0%)
+  Generación X,103 (26.6%),12 (15.6%),18 (26.9%),18 (27.3%),12 (20.3%),23 (41.8%),10 (28.6%),3 (33.3%),0 (0.0%)
+  Generación Z,36 (9.3%),11 (14.3%),7 (10.4%),6 (9.1%),8 (13.6%),2 (3.6%),0 (0.0%),2 (22.2%),0 (0.0%)
+  Millennials,143 (37.0%),47 (61.0%),19 (28.4%),21 (31.8%),33 (55.9%),9 (16.4%),6 (17.1%),4 (44.4%),1 (100.0%)
 Género,,,,,,,,,
-  Mujer,192 (49.5%),NA,NA,NA,NA,NA,NA,NA,NA
-  Hombre,192 (49.5%),NA,NA,NA,NA,NA,NA,NA,NA
-  Otro / Prefiere no decirlo,4 (1.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  Mujer,NA,48 (63.2%),NA,NA,NA,NA,NA,NA,NA
-  Hombre,NA,28 (36.8%),NA,NA,NA,NA,NA,NA,NA
-  Otro / Prefiere no decirlo,NA,0 (0.0%),NA,NA,NA,NA,NA,NA,NA
-  Mujer,NA,NA,27 (39.7%),NA,NA,NA,NA,NA,NA
-  Hombre,NA,NA,39 (57.4%),NA,NA,NA,NA,NA,NA
-  Otro / Prefiere no decirlo,NA,NA,2 (2.9%),NA,NA,NA,NA,NA,NA
-  Mujer,NA,NA,NA,35 (52.2%),NA,NA,NA,NA,NA
-  Hombre,NA,NA,NA,32 (47.8%),NA,NA,NA,NA,NA
-  Otro / Prefiere no decirlo,NA,NA,NA,0 (0.0%),NA,NA,NA,NA,NA
+  Hombre,192 (49.5%),28 (36.8%),39 (57.4%),32 (47.8%),16 (26.7%),44 (80.0%),22 (64.7%),3 (33.3%),0 (0.0%)
+  Mujer,192 (49.5%),48 (63.2%),27 (39.7%),35 (52.2%),44 (73.3%),10 (18.2%),12 (35.3%),5 (55.6%),1 (100.0%)
+  Otro / Prefiere no decirlo,4 (1.0%),0 (0.0%),2 (2.9%),0 (0.0%),0 (0.0%),1 (1.8%),0 (0.0%),1 (11.1%),0 (0.0%)
+  Hombre,192 (49.5%),28 (36.8%),39 (57.4%),32 (47.8%),16 (26.7%),44 (80.0%),22 (64.7%),3 (33.3%),0 (0.0%)
+  Mujer,192 (49.5%),48 (63.2%),27 (39.7%),35 (52.2%),44 (73.3%),10 (18.2%),12 (35.3%),5 (55.6%),1 (100.0%)
+  Otro / Prefiere no decirlo,4 (1.0%),0 (0.0%),2 (2.9%),0 (0.0%),0 (0.0%),1 (1.8%),0 (0.0%),1 (11.1%),0 (0.0%)
+  Hombre,192 (49.5%),28 (36.8%),39 (57.4%),32 (47.8%),16 (26.7%),44 (80.0%),22 (64.7%),3 (33.3%),0 (0.0%)
+  Mujer,192 (49.5%),48 (63.2%),27 (39.7%),35 (52.2%),44 (73.3%),10 (18.2%),12 (35.3%),5 (55.6%),1 (100.0%)
+  Otro / Prefiere no decirlo,4 (1.0%),0 (0.0%),2 (2.9%),0 (0.0%),0 (0.0%),1 (1.8%),0 (0.0%),1 (11.1%),0 (0.0%)
 País de residencia,,,,,,,,,
-  Mujer,NA,NA,NA,NA,44 (73.3%),NA,NA,NA,NA
-  Hombre,NA,NA,NA,NA,16 (26.7%),NA,NA,NA,NA
-  España,0 (0.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  Otro / Prefiere no decirlo,NA,NA,NA,NA,0 (0.0%),NA,NA,NA,NA
-  Otro país europeo,396 (100.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  España,NA,0 (0.0%),NA,NA,NA,NA,NA,NA,NA
-  Mujer,NA,NA,NA,NA,NA,10 (18.2%),NA,NA,NA
-  Otro país europeo,NA,81 (100.0%),NA,NA,NA,NA,NA,NA,NA
-  Hombre,NA,NA,NA,NA,NA,44 (80.0%),NA,NA,NA
-  España,NA,NA,0 (0.0%),NA,NA,NA,NA,NA,NA
-  Otro / Prefiere no decirlo,NA,NA,NA,NA,NA,1 (1.8%),NA,NA,NA
-  Otro país europeo,NA,NA,70 (100.0%),NA,NA,NA,NA,NA,NA
-  Mujer,NA,NA,NA,NA,NA,NA,12 (35.3%),NA,NA
-  Hombre,NA,NA,NA,NA,NA,NA,22 (64.7%),NA,NA
-  España,NA,NA,NA,0 (0.0%),NA,NA,NA,NA,NA
-  Otro / Prefiere no decirlo,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Otro país europeo,NA,NA,NA,68 (100.0%),NA,NA,NA,NA,NA
-  Mujer,NA,NA,NA,NA,NA,NA,NA,5 (55.6%),NA
-  España,NA,NA,NA,NA,0 (0.0%),NA,NA,NA,NA
-  Hombre,NA,NA,NA,NA,NA,NA,NA,3 (33.3%),NA
-  Otro país europeo,NA,NA,NA,NA,60 (100.0%),NA,NA,NA,NA
-  Otro / Prefiere no decirlo,NA,NA,NA,NA,NA,NA,NA,1 (11.1%),NA
-  España,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
+  España,186 (47.0%),9 (11.1%),40 (57.1%),36 (52.9%),9 (15.0%),45 (88.2%),31 (88.6%),3 (33.3%),0 (0.0%)
+  Otro país europeo,210 (53.0%),72 (88.9%),30 (42.9%),32 (47.1%),51 (85.0%),6 (11.8%),4 (11.4%),6 (66.7%),1 (100.0%)
+  España,186 (47.0%),9 (11.1%),40 (57.1%),36 (52.9%),9 (15.0%),45 (88.2%),31 (88.6%),3 (33.3%),0 (0.0%)
+  Otro país europeo,210 (53.0%),72 (88.9%),30 (42.9%),32 (47.1%),51 (85.0%),6 (11.8%),4 (11.4%),6 (66.7%),1 (100.0%)
 Región europea,,,,,,,,,
-  Mujer,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  Otro país europeo,NA,NA,NA,NA,NA,51 (100.0%),NA,NA,NA
-  España,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Hombre,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Europa del Norte,50 (12.6%),NA,NA,NA,NA,NA,NA,NA,NA
-  Otro país europeo,NA,NA,NA,NA,NA,NA,35 (100.0%),NA,NA
-  Otro / Prefiere no decirlo,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Europa Occidental,70 (17.7%),NA,NA,NA,NA,NA,NA,NA,NA
-  España,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Europa del Sur,226 (57.1%),NA,NA,NA,NA,NA,NA,NA,NA
-  Otro país europeo,NA,NA,NA,NA,NA,NA,NA,9 (100.0%),NA
-  Europa del Este,50 (12.6%),NA,NA,NA,NA,NA,NA,NA,NA
-  España,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Otra región,0 (0.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  Europa del Norte,NA,20 (24.7%),NA,NA,NA,NA,NA,NA,NA
-  Otro país europeo,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  Europa Occidental,NA,21 (25.9%),NA,NA,NA,NA,NA,NA,NA
-  Europa del Sur,NA,21 (25.9%),NA,NA,NA,NA,NA,NA,NA
-  Europa del Este,NA,19 (23.5%),NA,NA,NA,NA,NA,NA,NA
-  Otra región,NA,0 (0.0%),NA,NA,NA,NA,NA,NA,NA
-  Europa del Norte,NA,NA,11 (15.7%),NA,NA,NA,NA,NA,NA
-  Europa Occidental,NA,NA,12 (17.1%),NA,NA,NA,NA,NA,NA
-  Europa del Sur,NA,NA,44 (62.9%),NA,NA,NA,NA,NA,NA
-  Europa del Este,NA,NA,3 (4.3%),NA,NA,NA,NA,NA,NA
-  Otra región,NA,NA,0 (0.0%),NA,NA,NA,NA,NA,NA
+  Europa Occidental,70 (17.7%),21 (25.9%),12 (17.1%),7 (10.3%),20 (33.3%),4 (7.8%),1 (2.9%),2 (22.2%),1 (100.0%)
+  Europa del Este,50 (12.6%),19 (23.5%),3 (4.3%),10 (14.7%),14 (23.3%),1 (2.0%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Europa del Norte,50 (12.6%),20 (24.7%),11 (15.7%),5 (7.4%),9 (15.0%),0 (0.0%),2 (5.7%),2 (22.2%),0 (0.0%)
+  Europa del Sur,226 (57.1%),21 (25.9%),44 (62.9%),46 (67.6%),17 (28.3%),46 (90.2%),31 (88.6%),4 (44.4%),0 (0.0%)
+  Otra región,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Europa Occidental,70 (17.7%),21 (25.9%),12 (17.1%),7 (10.3%),20 (33.3%),4 (7.8%),1 (2.9%),2 (22.2%),1 (100.0%)
+  Europa del Este,50 (12.6%),19 (23.5%),3 (4.3%),10 (14.7%),14 (23.3%),1 (2.0%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Europa del Norte,50 (12.6%),20 (24.7%),11 (15.7%),5 (7.4%),9 (15.0%),0 (0.0%),2 (5.7%),2 (22.2%),0 (0.0%)
+  Europa del Sur,226 (57.1%),21 (25.9%),44 (62.9%),46 (67.6%),17 (28.3%),46 (90.2%),31 (88.6%),4 (44.4%),0 (0.0%)
+  Otra región,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Europa Occidental,70 (17.7%),21 (25.9%),12 (17.1%),7 (10.3%),20 (33.3%),4 (7.8%),1 (2.9%),2 (22.2%),1 (100.0%)
+  Europa del Este,50 (12.6%),19 (23.5%),3 (4.3%),10 (14.7%),14 (23.3%),1 (2.0%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Europa del Norte,50 (12.6%),20 (24.7%),11 (15.7%),5 (7.4%),9 (15.0%),0 (0.0%),2 (5.7%),2 (22.2%),0 (0.0%)
+  Europa del Sur,226 (57.1%),21 (25.9%),44 (62.9%),46 (67.6%),17 (28.3%),46 (90.2%),31 (88.6%),4 (44.4%),0 (0.0%)
+  Otra región,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Europa Occidental,70 (17.7%),21 (25.9%),12 (17.1%),7 (10.3%),20 (33.3%),4 (7.8%),1 (2.9%),2 (22.2%),1 (100.0%)
+  Europa del Este,50 (12.6%),19 (23.5%),3 (4.3%),10 (14.7%),14 (23.3%),1 (2.0%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Europa del Norte,50 (12.6%),20 (24.7%),11 (15.7%),5 (7.4%),9 (15.0%),0 (0.0%),2 (5.7%),2 (22.2%),0 (0.0%)
+  Europa del Sur,226 (57.1%),21 (25.9%),44 (62.9%),46 (67.6%),17 (28.3%),46 (90.2%),31 (88.6%),4 (44.4%),0 (0.0%)
+  Otra región,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Europa Occidental,70 (17.7%),21 (25.9%),12 (17.1%),7 (10.3%),20 (33.3%),4 (7.8%),1 (2.9%),2 (22.2%),1 (100.0%)
+  Europa del Este,50 (12.6%),19 (23.5%),3 (4.3%),10 (14.7%),14 (23.3%),1 (2.0%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Europa del Norte,50 (12.6%),20 (24.7%),11 (15.7%),5 (7.4%),9 (15.0%),0 (0.0%),2 (5.7%),2 (22.2%),0 (0.0%)
+  Europa del Sur,226 (57.1%),21 (25.9%),44 (62.9%),46 (67.6%),17 (28.3%),46 (90.2%),31 (88.6%),4 (44.4%),0 (0.0%)
+  Otra región,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
 Nivel educativo,,,,,,,,,
-  Europa del Norte,NA,NA,NA,5 (7.4%),NA,NA,NA,NA,NA
-  No universitaria,93 (23.9%),NA,NA,NA,NA,NA,NA,NA,NA
-  Europa Occidental,NA,NA,NA,7 (10.3%),NA,NA,NA,NA,NA
-  Universitaria,296 (76.1%),NA,NA,NA,NA,NA,NA,NA,NA
-  No universitaria,NA,16 (20.8%),NA,NA,NA,NA,NA,NA,NA
-  Europa del Sur,NA,NA,NA,46 (67.6%),NA,NA,NA,NA,NA
-  Universitaria,NA,61 (79.2%),NA,NA,NA,NA,NA,NA,NA
-  Europa del Este,NA,NA,NA,10 (14.7%),NA,NA,NA,NA,NA
-  No universitaria,NA,NA,14 (20.6%),NA,NA,NA,NA,NA,NA
-  Otra región,NA,NA,NA,0 (0.0%),NA,NA,NA,NA,NA
-  Universitaria,NA,NA,54 (79.4%),NA,NA,NA,NA,NA,NA
-  Europa del Norte,NA,NA,NA,NA,9 (15.0%),NA,NA,NA,NA
-  Europa Occidental,NA,NA,NA,NA,20 (33.3%),NA,NA,NA,NA
-  No universitaria,NA,NA,NA,14 (20.9%),NA,NA,NA,NA,NA
-  Europa del Sur,NA,NA,NA,NA,17 (28.3%),NA,NA,NA,NA
-  Universitaria,NA,NA,NA,53 (79.1%),NA,NA,NA,NA,NA
-  Europa del Este,NA,NA,NA,NA,14 (23.3%),NA,NA,NA,NA
-  No universitaria,NA,NA,NA,NA,18 (30.5%),NA,NA,NA,NA
-  Otra región,NA,NA,NA,NA,0 (0.0%),NA,NA,NA,NA
-  Universitaria,NA,NA,NA,NA,41 (69.5%),NA,NA,NA,NA
-  Europa del Norte,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
-  No universitaria,NA,NA,NA,NA,NA,15 (27.3%),NA,NA,NA
+  No universitaria,93 (23.9%),16 (20.8%),14 (20.6%),14 (20.9%),18 (30.5%),15 (27.3%),12 (34.3%),2 (22.2%),0 (0.0%)
+  Universitaria,296 (76.1%),61 (79.2%),54 (79.4%),53 (79.1%),41 (69.5%),40 (72.7%),23 (65.7%),7 (77.8%),1 (100.0%)
+  No universitaria,93 (23.9%),16 (20.8%),14 (20.6%),14 (20.9%),18 (30.5%),15 (27.3%),12 (34.3%),2 (22.2%),0 (0.0%)
+  Universitaria,296 (76.1%),61 (79.2%),54 (79.4%),53 (79.1%),41 (69.5%),40 (72.7%),23 (65.7%),7 (77.8%),1 (100.0%)
 Situación laboral,,,,,,,,,
-  Europa Occidental,NA,NA,NA,NA,NA,4 (7.8%),NA,NA,NA
-  Universitaria,NA,NA,NA,NA,NA,40 (72.7%),NA,NA,NA
-  No universitaria,NA,NA,NA,NA,NA,NA,12 (34.3%),NA,NA
-  Europa del Sur,NA,NA,NA,NA,NA,46 (90.2%),NA,NA,NA
-  Empleado/a,290 (74.6%),NA,NA,NA,NA,NA,NA,NA,NA
-  Universitaria,NA,NA,NA,NA,NA,NA,23 (65.7%),NA,NA
-  Europa del Este,NA,NA,NA,NA,NA,1 (2.0%),NA,NA,NA
-  Estudiante,30 (7.7%),NA,NA,NA,NA,NA,NA,NA,NA
-  No universitaria,NA,NA,NA,NA,NA,NA,NA,2 (22.2%),NA
-  Otra región,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
-  Otra situación laboral,69 (17.7%),NA,NA,NA,NA,NA,NA,NA,NA
-  Empleado/a,NA,58 (75.3%),NA,NA,NA,NA,NA,NA,NA
-  Universitaria,NA,NA,NA,NA,NA,NA,NA,7 (77.8%),NA
-  Europa del Norte,NA,NA,NA,NA,NA,NA,2 (5.7%),NA,NA
-  Estudiante,NA,11 (14.3%),NA,NA,NA,NA,NA,NA,NA
-  Europa Occidental,NA,NA,NA,NA,NA,NA,1 (2.9%),NA,NA
-  No universitaria,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Otra situación laboral,NA,8 (10.4%),NA,NA,NA,NA,NA,NA,NA
-  Europa del Sur,NA,NA,NA,NA,NA,NA,31 (88.6%),NA,NA
-  Universitaria,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  Empleado/a,NA,NA,54 (78.3%),NA,NA,NA,NA,NA,NA
-  Europa del Este,NA,NA,NA,NA,NA,NA,1 (2.9%),NA,NA
-  Estudiante,NA,NA,4 (5.8%),NA,NA,NA,NA,NA,NA
-  Otra región,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Otra situación laboral,NA,NA,11 (15.9%),NA,NA,NA,NA,NA,NA
-  Europa del Norte,NA,NA,NA,NA,NA,NA,NA,2 (22.2%),NA
-  Europa Occidental,NA,NA,NA,NA,NA,NA,NA,2 (22.2%),NA
-  Empleado/a,NA,NA,NA,43 (64.2%),NA,NA,NA,NA,NA
-  Europa del Sur,NA,NA,NA,NA,NA,NA,NA,4 (44.4%),NA
-  Estudiante,NA,NA,NA,7 (10.4%),NA,NA,NA,NA,NA
-  Europa del Este,NA,NA,NA,NA,NA,NA,NA,1 (11.1%),NA
-  Otra situación laboral,NA,NA,NA,17 (25.4%),NA,NA,NA,NA,NA
+  Empleado/a,290 (74.6%),58 (75.3%),54 (78.3%),43 (64.2%),47 (79.7%),43 (78.2%),25 (71.4%),6 (75.0%),1 (100.0%)
+  Estudiante,30 (7.7%),11 (14.3%),4 (5.8%),7 (10.4%),6 (10.2%),0 (0.0%),0 (0.0%),2 (25.0%),0 (0.0%)
+  Otra situación laboral,69 (17.7%),8 (10.4%),11 (15.9%),17 (25.4%),6 (10.2%),12 (21.8%),10 (28.6%),0 (0.0%),0 (0.0%)
+  Empleado/a,290 (74.6%),58 (75.3%),54 (78.3%),43 (64.2%),47 (79.7%),43 (78.2%),25 (71.4%),6 (75.0%),1 (100.0%)
+  Estudiante,30 (7.7%),11 (14.3%),4 (5.8%),7 (10.4%),6 (10.2%),0 (0.0%),0 (0.0%),2 (25.0%),0 (0.0%)
+  Otra situación laboral,69 (17.7%),8 (10.4%),11 (15.9%),17 (25.4%),6 (10.2%),12 (21.8%),10 (28.6%),0 (0.0%),0 (0.0%)
+  Empleado/a,290 (74.6%),58 (75.3%),54 (78.3%),43 (64.2%),47 (79.7%),43 (78.2%),25 (71.4%),6 (75.0%),1 (100.0%)
+  Estudiante,30 (7.7%),11 (14.3%),4 (5.8%),7 (10.4%),6 (10.2%),0 (0.0%),0 (0.0%),2 (25.0%),0 (0.0%)
+  Otra situación laboral,69 (17.7%),8 (10.4%),11 (15.9%),17 (25.4%),6 (10.2%),12 (21.8%),10 (28.6%),0 (0.0%),0 (0.0%)
 Trabajo/estudio desde casa,,,,,,,,,
-  Otra región,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Empleado/a,NA,NA,NA,NA,47 (79.7%),NA,NA,NA,NA
-  Estudiante,NA,NA,NA,NA,6 (10.2%),NA,NA,NA,NA
-  Europa del Norte,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Sí,222 (58.7%),NA,NA,NA,NA,NA,NA,NA,NA
-  Otra situación laboral,NA,NA,NA,NA,6 (10.2%),NA,NA,NA,NA
-  Europa Occidental,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  No,156 (41.3%),NA,NA,NA,NA,NA,NA,NA,NA
-  Sí,NA,55 (73.3%),NA,NA,NA,NA,NA,NA,NA
-  Europa del Sur,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Empleado/a,NA,NA,NA,NA,NA,43 (78.2%),NA,NA,NA
-  No,NA,20 (26.7%),NA,NA,NA,NA,NA,NA,NA
-  Europa del Este,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Estudiante,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
-  Sí,NA,NA,41 (61.2%),NA,NA,NA,NA,NA,NA
-  Otra región,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Otra situación laboral,NA,NA,NA,NA,NA,12 (21.8%),NA,NA,NA
-  No,NA,NA,26 (38.8%),NA,NA,NA,NA,NA,NA
-  Empleado/a,NA,NA,NA,NA,NA,NA,25 (71.4%),NA,NA
-  Estudiante,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Sí,NA,NA,NA,36 (54.5%),NA,NA,NA,NA,NA
-  Otra situación laboral,NA,NA,NA,NA,NA,NA,10 (28.6%),NA,NA
-  No,NA,NA,NA,30 (45.5%),NA,NA,NA,NA,NA
-  Empleado/a,NA,NA,NA,NA,NA,NA,NA,6 (75.0%),NA
-  Sí,NA,NA,NA,NA,42 (73.7%),NA,NA,NA,NA
-  Estudiante,NA,NA,NA,NA,NA,NA,NA,2 (25.0%),NA
-  No,NA,NA,NA,NA,15 (26.3%),NA,NA,NA,NA
-  Otra situación laboral,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Sí,NA,NA,NA,NA,NA,24 (44.4%),NA,NA,NA
+  No,156 (41.3%),20 (26.7%),26 (38.8%),30 (45.5%),15 (26.3%),30 (55.6%),23 (67.6%),3 (33.3%),0 (0.0%)
+  Sí,222 (58.7%),55 (73.3%),41 (61.2%),36 (54.5%),42 (73.7%),24 (44.4%),11 (32.4%),6 (66.7%),1 (100.0%)
+  No,156 (41.3%),20 (26.7%),26 (38.8%),30 (45.5%),15 (26.3%),30 (55.6%),23 (67.6%),3 (33.3%),0 (0.0%)
+  Sí,222 (58.7%),55 (73.3%),41 (61.2%),36 (54.5%),42 (73.7%),24 (44.4%),11 (32.4%),6 (66.7%),1 (100.0%)
 Tipo de hogar,,,,,,,,,
-  Empleado/a,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  No,NA,NA,NA,NA,NA,30 (55.6%),NA,NA,NA
-  Sí,NA,NA,NA,NA,NA,NA,11 (32.4%),NA,NA
-  Estudiante,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Vive solo/a,70 (18.4%),NA,NA,NA,NA,NA,NA,NA,NA
-  No,NA,NA,NA,NA,NA,NA,23 (67.6%),NA,NA
-  Otra situación laboral,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Pareja sin hijos,126 (33.1%),NA,NA,NA,NA,NA,NA,NA,NA
-  Sí,NA,NA,NA,NA,NA,NA,NA,6 (66.7%),NA
-  Hogar con hijos,172 (45.1%),NA,NA,NA,NA,NA,NA,NA,NA
-  No,NA,NA,NA,NA,NA,NA,NA,3 (33.3%),NA
-  Vivienda compartida,9 (2.4%),NA,NA,NA,NA,NA,NA,NA,NA
-  Sí,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  Otro tipo de hogar,4 (1.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  Vive solo/a,NA,13 (17.3%),NA,NA,NA,NA,NA,NA,NA
-  No,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Pareja sin hijos,NA,37 (49.3%),NA,NA,NA,NA,NA,NA,NA
-  Hogar con hijos,NA,19 (25.3%),NA,NA,NA,NA,NA,NA,NA
-  Vivienda compartida,NA,5 (6.7%),NA,NA,NA,NA,NA,NA,NA
-  Otro tipo de hogar,NA,1 (1.3%),NA,NA,NA,NA,NA,NA,NA
-  Vive solo/a,NA,NA,11 (16.4%),NA,NA,NA,NA,NA,NA
-  Pareja sin hijos,NA,NA,24 (35.8%),NA,NA,NA,NA,NA,NA
-  Hogar con hijos,NA,NA,31 (46.3%),NA,NA,NA,NA,NA,NA
-  Vivienda compartida,NA,NA,1 (1.5%),NA,NA,NA,NA,NA,NA
-  Otro tipo de hogar,NA,NA,0 (0.0%),NA,NA,NA,NA,NA,NA
+  Hogar con hijos,172 (45.1%),19 (25.3%),31 (46.3%),35 (52.2%),31 (55.4%),29 (53.7%),14 (40.0%),4 (44.4%),0 (0.0%)
+  Otro tipo de hogar,4 (1.0%),1 (1.3%),0 (0.0%),0 (0.0%),1 (1.8%),2 (3.7%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Pareja sin hijos,126 (33.1%),37 (49.3%),24 (35.8%),19 (28.4%),16 (28.6%),14 (25.9%),8 (22.9%),1 (11.1%),1 (100.0%)
+  Vive solo/a,70 (18.4%),13 (17.3%),11 (16.4%),12 (17.9%),7 (12.5%),9 (16.7%),12 (34.3%),4 (44.4%),0 (0.0%)
+  Vivienda compartida,9 (2.4%),5 (6.7%),1 (1.5%),1 (1.5%),1 (1.8%),0 (0.0%),1 (2.9%),0 (0.0%),0 (0.0%)
+  Hogar con hijos,172 (45.1%),19 (25.3%),31 (46.3%),35 (52.2%),31 (55.4%),29 (53.7%),14 (40.0%),4 (44.4%),0 (0.0%)
+  Otro tipo de hogar,4 (1.0%),1 (1.3%),0 (0.0%),0 (0.0%),1 (1.8%),2 (3.7%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Pareja sin hijos,126 (33.1%),37 (49.3%),24 (35.8%),19 (28.4%),16 (28.6%),14 (25.9%),8 (22.9%),1 (11.1%),1 (100.0%)
+  Vive solo/a,70 (18.4%),13 (17.3%),11 (16.4%),12 (17.9%),7 (12.5%),9 (16.7%),12 (34.3%),4 (44.4%),0 (0.0%)
+  Vivienda compartida,9 (2.4%),5 (6.7%),1 (1.5%),1 (1.5%),1 (1.8%),0 (0.0%),1 (2.9%),0 (0.0%),0 (0.0%)
+  Hogar con hijos,172 (45.1%),19 (25.3%),31 (46.3%),35 (52.2%),31 (55.4%),29 (53.7%),14 (40.0%),4 (44.4%),0 (0.0%)
+  Otro tipo de hogar,4 (1.0%),1 (1.3%),0 (0.0%),0 (0.0%),1 (1.8%),2 (3.7%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Pareja sin hijos,126 (33.1%),37 (49.3%),24 (35.8%),19 (28.4%),16 (28.6%),14 (25.9%),8 (22.9%),1 (11.1%),1 (100.0%)
+  Vive solo/a,70 (18.4%),13 (17.3%),11 (16.4%),12 (17.9%),7 (12.5%),9 (16.7%),12 (34.3%),4 (44.4%),0 (0.0%)
+  Vivienda compartida,9 (2.4%),5 (6.7%),1 (1.5%),1 (1.5%),1 (1.8%),0 (0.0%),1 (2.9%),0 (0.0%),0 (0.0%)
+  Hogar con hijos,172 (45.1%),19 (25.3%),31 (46.3%),35 (52.2%),31 (55.4%),29 (53.7%),14 (40.0%),4 (44.4%),0 (0.0%)
+  Otro tipo de hogar,4 (1.0%),1 (1.3%),0 (0.0%),0 (0.0%),1 (1.8%),2 (3.7%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Pareja sin hijos,126 (33.1%),37 (49.3%),24 (35.8%),19 (28.4%),16 (28.6%),14 (25.9%),8 (22.9%),1 (11.1%),1 (100.0%)
+  Vive solo/a,70 (18.4%),13 (17.3%),11 (16.4%),12 (17.9%),7 (12.5%),9 (16.7%),12 (34.3%),4 (44.4%),0 (0.0%)
+  Vivienda compartida,9 (2.4%),5 (6.7%),1 (1.5%),1 (1.5%),1 (1.8%),0 (0.0%),1 (2.9%),0 (0.0%),0 (0.0%)
+  Hogar con hijos,172 (45.1%),19 (25.3%),31 (46.3%),35 (52.2%),31 (55.4%),29 (53.7%),14 (40.0%),4 (44.4%),0 (0.0%)
+  Otro tipo de hogar,4 (1.0%),1 (1.3%),0 (0.0%),0 (0.0%),1 (1.8%),2 (3.7%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Pareja sin hijos,126 (33.1%),37 (49.3%),24 (35.8%),19 (28.4%),16 (28.6%),14 (25.9%),8 (22.9%),1 (11.1%),1 (100.0%)
+  Vive solo/a,70 (18.4%),13 (17.3%),11 (16.4%),12 (17.9%),7 (12.5%),9 (16.7%),12 (34.3%),4 (44.4%),0 (0.0%)
+  Vivienda compartida,9 (2.4%),5 (6.7%),1 (1.5%),1 (1.5%),1 (1.8%),0 (0.0%),1 (2.9%),0 (0.0%),0 (0.0%)
 Régimen de tenencia,,,,,,,,,
-  Vive solo/a,NA,NA,NA,12 (17.9%),NA,NA,NA,NA,NA
-  Propiedad sin hipoteca,185 (46.7%),NA,NA,NA,NA,NA,NA,NA,NA
-  Pareja sin hijos,NA,NA,NA,19 (28.4%),NA,NA,NA,NA,NA
-  Propiedad con hipoteca,109 (27.5%),NA,NA,NA,NA,NA,NA,NA,NA
-  Hogar con hijos,NA,NA,NA,35 (52.2%),NA,NA,NA,NA,NA
-  Alquiler,88 (22.2%),NA,NA,NA,NA,NA,NA,NA,NA
-  Vivienda compartida,NA,NA,NA,1 (1.5%),NA,NA,NA,NA,NA
-  Otro régimen,14 (3.5%),NA,NA,NA,NA,NA,NA,NA,NA
-  Propiedad sin hipoteca,NA,26 (32.9%),NA,NA,NA,NA,NA,NA,NA
-  Otro tipo de hogar,NA,NA,NA,0 (0.0%),NA,NA,NA,NA,NA
-  Propiedad con hipoteca,NA,19 (24.1%),NA,NA,NA,NA,NA,NA,NA
-  Vive solo/a,NA,NA,NA,NA,7 (12.5%),NA,NA,NA,NA
-  Alquiler,NA,32 (40.5%),NA,NA,NA,NA,NA,NA,NA
-  Pareja sin hijos,NA,NA,NA,NA,16 (28.6%),NA,NA,NA,NA
-  Otro régimen,NA,2 (2.5%),NA,NA,NA,NA,NA,NA,NA
-  Hogar con hijos,NA,NA,NA,NA,31 (55.4%),NA,NA,NA,NA
-  Propiedad sin hipoteca,NA,NA,31 (44.3%),NA,NA,NA,NA,NA,NA
-  Vivienda compartida,NA,NA,NA,NA,1 (1.8%),NA,NA,NA,NA
-  Propiedad con hipoteca,NA,NA,26 (37.1%),NA,NA,NA,NA,NA,NA
-  Otro tipo de hogar,NA,NA,NA,NA,1 (1.8%),NA,NA,NA,NA
-  Alquiler,NA,NA,11 (15.7%),NA,NA,NA,NA,NA,NA
-  Vive solo/a,NA,NA,NA,NA,NA,9 (16.7%),NA,NA,NA
-  Otro régimen,NA,NA,2 (2.9%),NA,NA,NA,NA,NA,NA
-  Pareja sin hijos,NA,NA,NA,NA,NA,14 (25.9%),NA,NA,NA
-  Hogar con hijos,NA,NA,NA,NA,NA,29 (53.7%),NA,NA,NA
-  Propiedad sin hipoteca,NA,NA,NA,31 (45.6%),NA,NA,NA,NA,NA
+  Alquiler,88 (22.2%),32 (40.5%),11 (15.7%),20 (29.4%),19 (31.7%),1 (1.9%),3 (8.6%),1 (11.1%),0 (0.0%)
+  Otro régimen,14 (3.5%),2 (2.5%),2 (2.9%),2 (2.9%),4 (6.7%),3 (5.6%),0 (0.0%),0 (0.0%),1 (100.0%)
+  Propiedad con hipoteca,109 (27.5%),19 (24.1%),26 (37.1%),15 (22.1%),17 (28.3%),15 (27.8%),8 (22.9%),2 (22.2%),0 (0.0%)
+  Propiedad sin hipoteca,185 (46.7%),26 (32.9%),31 (44.3%),31 (45.6%),20 (33.3%),35 (64.8%),24 (68.6%),6 (66.7%),0 (0.0%)
+  Alquiler,88 (22.2%),32 (40.5%),11 (15.7%),20 (29.4%),19 (31.7%),1 (1.9%),3 (8.6%),1 (11.1%),0 (0.0%)
+  Otro régimen,14 (3.5%),2 (2.5%),2 (2.9%),2 (2.9%),4 (6.7%),3 (5.6%),0 (0.0%),0 (0.0%),1 (100.0%)
+  Propiedad con hipoteca,109 (27.5%),19 (24.1%),26 (37.1%),15 (22.1%),17 (28.3%),15 (27.8%),8 (22.9%),2 (22.2%),0 (0.0%)
+  Propiedad sin hipoteca,185 (46.7%),26 (32.9%),31 (44.3%),31 (45.6%),20 (33.3%),35 (64.8%),24 (68.6%),6 (66.7%),0 (0.0%)
+  Alquiler,88 (22.2%),32 (40.5%),11 (15.7%),20 (29.4%),19 (31.7%),1 (1.9%),3 (8.6%),1 (11.1%),0 (0.0%)
+  Otro régimen,14 (3.5%),2 (2.5%),2 (2.9%),2 (2.9%),4 (6.7%),3 (5.6%),0 (0.0%),0 (0.0%),1 (100.0%)
+  Propiedad con hipoteca,109 (27.5%),19 (24.1%),26 (37.1%),15 (22.1%),17 (28.3%),15 (27.8%),8 (22.9%),2 (22.2%),0 (0.0%)
+  Propiedad sin hipoteca,185 (46.7%),26 (32.9%),31 (44.3%),31 (45.6%),20 (33.3%),35 (64.8%),24 (68.6%),6 (66.7%),0 (0.0%)
+  Alquiler,88 (22.2%),32 (40.5%),11 (15.7%),20 (29.4%),19 (31.7%),1 (1.9%),3 (8.6%),1 (11.1%),0 (0.0%)
+  Otro régimen,14 (3.5%),2 (2.5%),2 (2.9%),2 (2.9%),4 (6.7%),3 (5.6%),0 (0.0%),0 (0.0%),1 (100.0%)
+  Propiedad con hipoteca,109 (27.5%),19 (24.1%),26 (37.1%),15 (22.1%),17 (28.3%),15 (27.8%),8 (22.9%),2 (22.2%),0 (0.0%)
+  Propiedad sin hipoteca,185 (46.7%),26 (32.9%),31 (44.3%),31 (45.6%),20 (33.3%),35 (64.8%),24 (68.6%),6 (66.7%),0 (0.0%)
 Zona climática,,,,,,,,,
-  Vivienda compartida,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
-  Propiedad con hipoteca,NA,NA,NA,15 (22.1%),NA,NA,NA,NA,NA
-  Otro tipo de hogar,NA,NA,NA,NA,NA,2 (3.7%),NA,NA,NA
-  Alquiler,NA,NA,NA,20 (29.4%),NA,NA,NA,NA,NA
-  Clima cálido/mediterráneo,0 (0.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  Vive solo/a,NA,NA,NA,NA,NA,NA,12 (34.3%),NA,NA
-  Otro régimen,NA,NA,NA,2 (2.9%),NA,NA,NA,NA,NA
-  Clima templado,0 (0.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  Propiedad sin hipoteca,NA,NA,NA,NA,20 (33.3%),NA,NA,NA,NA
-  Pareja sin hijos,NA,NA,NA,NA,NA,NA,8 (22.9%),NA,NA
-  Clima frío/polar,0 (0.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  Propiedad con hipoteca,NA,NA,NA,NA,17 (28.3%),NA,NA,NA,NA
-  Hogar con hijos,NA,NA,NA,NA,NA,NA,14 (40.0%),NA,NA
-  Otro clima,403 (100.0%),NA,NA,NA,NA,NA,NA,NA,NA
-  Clima cálido/mediterráneo,NA,0 (0.0%),NA,NA,NA,NA,NA,NA,NA
-  Alquiler,NA,NA,NA,NA,19 (31.7%),NA,NA,NA,NA
-  Vivienda compartida,NA,NA,NA,NA,NA,NA,1 (2.9%),NA,NA
-  Clima templado,NA,0 (0.0%),NA,NA,NA,NA,NA,NA,NA
-  Otro régimen,NA,NA,NA,NA,4 (6.7%),NA,NA,NA,NA
-  Otro tipo de hogar,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Clima frío/polar,NA,0 (0.0%),NA,NA,NA,NA,NA,NA,NA
-  Vive solo/a,NA,NA,NA,NA,NA,NA,NA,4 (44.4%),NA
-  Propiedad sin hipoteca,NA,NA,NA,NA,NA,35 (64.8%),NA,NA,NA
-  Otro clima,NA,82 (100.0%),NA,NA,NA,NA,NA,NA,NA
-  Pareja sin hijos,NA,NA,NA,NA,NA,NA,NA,1 (11.1%),NA
-  Propiedad con hipoteca,NA,NA,NA,NA,NA,15 (27.8%),NA,NA,NA
-  Clima cálido/mediterráneo,NA,NA,0 (0.0%),NA,NA,NA,NA,NA,NA
-  Hogar con hijos,NA,NA,NA,NA,NA,NA,NA,4 (44.4%),NA
-  Alquiler,NA,NA,NA,NA,NA,1 (1.9%),NA,NA,NA
-  Clima templado,NA,NA,0 (0.0%),NA,NA,NA,NA,NA,NA
-  Vivienda compartida,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Otro régimen,NA,NA,NA,NA,NA,3 (5.6%),NA,NA,NA
-  Clima frío/polar,NA,NA,0 (0.0%),NA,NA,NA,NA,NA,NA
-  Otro tipo de hogar,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Propiedad sin hipoteca,NA,NA,NA,NA,NA,NA,24 (68.6%),NA,NA
-  Otro clima,NA,NA,71 (100.0%),NA,NA,NA,NA,NA,NA
-  Propiedad con hipoteca,NA,NA,NA,NA,NA,NA,8 (22.9%),NA,NA
-  Vive solo/a,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Alquiler,NA,NA,NA,NA,NA,NA,3 (8.6%),NA,NA
-  Pareja sin hijos,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  Clima cálido/mediterráneo,NA,NA,NA,0 (0.0%),NA,NA,NA,NA,NA
+  Clima cálido/mediterráneo,160 (39.7%),19 (23.2%),24 (33.8%),40 (58.8%),12 (20.0%),22 (40.0%),28 (80.0%),2 (22.2%),0 (0.0%)
+  Clima frío/polar,17 (4.2%),6 (7.3%),2 (2.8%),4 (5.9%),1 (1.7%),2 (3.6%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Clima templado,226 (56.1%),57 (69.5%),45 (63.4%),24 (35.3%),47 (78.3%),31 (56.4%),6 (17.1%),6 (66.7%),1 (100.0%)
+  Otro clima,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Clima cálido/mediterráneo,160 (39.7%),19 (23.2%),24 (33.8%),40 (58.8%),12 (20.0%),22 (40.0%),28 (80.0%),2 (22.2%),0 (0.0%)
+  Clima frío/polar,17 (4.2%),6 (7.3%),2 (2.8%),4 (5.9%),1 (1.7%),2 (3.6%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Clima templado,226 (56.1%),57 (69.5%),45 (63.4%),24 (35.3%),47 (78.3%),31 (56.4%),6 (17.1%),6 (66.7%),1 (100.0%)
+  Otro clima,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Clima cálido/mediterráneo,160 (39.7%),19 (23.2%),24 (33.8%),40 (58.8%),12 (20.0%),22 (40.0%),28 (80.0%),2 (22.2%),0 (0.0%)
+  Clima frío/polar,17 (4.2%),6 (7.3%),2 (2.8%),4 (5.9%),1 (1.7%),2 (3.6%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Clima templado,226 (56.1%),57 (69.5%),45 (63.4%),24 (35.3%),47 (78.3%),31 (56.4%),6 (17.1%),6 (66.7%),1 (100.0%)
+  Otro clima,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Clima cálido/mediterráneo,160 (39.7%),19 (23.2%),24 (33.8%),40 (58.8%),12 (20.0%),22 (40.0%),28 (80.0%),2 (22.2%),0 (0.0%)
+  Clima frío/polar,17 (4.2%),6 (7.3%),2 (2.8%),4 (5.9%),1 (1.7%),2 (3.6%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Clima templado,226 (56.1%),57 (69.5%),45 (63.4%),24 (35.3%),47 (78.3%),31 (56.4%),6 (17.1%),6 (66.7%),1 (100.0%)
+  Otro clima,0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
 Orientación política,,,,,,,,,
-  Otro régimen,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Hogar con hijos,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Clima templado,NA,NA,NA,0 (0.0%),NA,NA,NA,NA,NA
-  Propiedad sin hipoteca,NA,NA,NA,NA,NA,NA,NA,6 (66.7%),NA
-  Vivienda compartida,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Clima frío/polar,NA,NA,NA,0 (0.0%),NA,NA,NA,NA,NA
-  Extrema izquierda,145 (37.9%),NA,NA,NA,NA,NA,NA,NA,NA
-  Propiedad con hipoteca,NA,NA,NA,NA,NA,NA,NA,2 (22.2%),NA
-  Otro tipo de hogar,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Otro clima,NA,NA,NA,68 (100.0%),NA,NA,NA,NA,NA
-  Izquierda,130 (33.9%),NA,NA,NA,NA,NA,NA,NA,NA
-  Alquiler,NA,NA,NA,NA,NA,NA,NA,1 (11.1%),NA
-  Clima cálido/mediterráneo,NA,NA,NA,NA,0 (0.0%),NA,NA,NA,NA
-  Centro,73 (19.1%),NA,NA,NA,NA,NA,NA,NA,NA
-  Otro régimen,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Clima templado,NA,NA,NA,NA,0 (0.0%),NA,NA,NA,NA
-  Derecha,29 (7.6%),NA,NA,NA,NA,NA,NA,NA,NA
-  Clima frío/polar,NA,NA,NA,NA,0 (0.0%),NA,NA,NA,NA
-  Propiedad sin hipoteca,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Extrema derecha,6 (1.6%),NA,NA,NA,NA,NA,NA,NA,NA
-  Extrema izquierda,NA,21 (29.2%),NA,NA,NA,NA,NA,NA,NA
-  Otro clima,NA,NA,NA,NA,60 (100.0%),NA,NA,NA,NA
-  Propiedad con hipoteca,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Izquierda,NA,21 (29.2%),NA,NA,NA,NA,NA,NA,NA
-  Alquiler,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Clima cálido/mediterráneo,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
-  Centro,NA,21 (29.2%),NA,NA,NA,NA,NA,NA,NA
-  Otro régimen,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  Clima templado,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
-  Derecha,NA,6 (8.3%),NA,NA,NA,NA,NA,NA,NA
-  Clima frío/polar,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
-  Extrema derecha,NA,3 (4.2%),NA,NA,NA,NA,NA,NA,NA
-  Otro clima,NA,NA,NA,NA,NA,55 (100.0%),NA,NA,NA
-  Extrema izquierda,NA,NA,27 (39.7%),NA,NA,NA,NA,NA,NA
-  Clima cálido/mediterráneo,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Izquierda,NA,NA,25 (36.8%),NA,NA,NA,NA,NA,NA
-  Clima templado,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Centro,NA,NA,12 (17.6%),NA,NA,NA,NA,NA,NA
-  Clima frío/polar,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Derecha,NA,NA,4 (5.9%),NA,NA,NA,NA,NA,NA
-  Otro clima,NA,NA,NA,NA,NA,NA,35 (100.0%),NA,NA
-  Extrema derecha,NA,NA,0 (0.0%),NA,NA,NA,NA,NA,NA
-  Clima cálido/mediterráneo,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Clima templado,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Extrema izquierda,NA,NA,NA,18 (27.7%),NA,NA,NA,NA,NA
-  Clima frío/polar,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Izquierda,NA,NA,NA,25 (38.5%),NA,NA,NA,NA,NA
-  Otro clima,NA,NA,NA,NA,NA,NA,NA,9 (100.0%),NA
-  Centro,NA,NA,NA,11 (16.9%),NA,NA,NA,NA,NA
-  Clima cálido/mediterráneo,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Derecha,NA,NA,NA,10 (15.4%),NA,NA,NA,NA,NA
-  Clima templado,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Extrema derecha,NA,NA,NA,1 (1.5%),NA,NA,NA,NA,NA
-  Extrema izquierda,NA,NA,NA,NA,14 (24.1%),NA,NA,NA,NA
-  Clima frío/polar,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Izquierda,NA,NA,NA,NA,17 (29.3%),NA,NA,NA,NA
-  Otro clima,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  Centro,NA,NA,NA,NA,21 (36.2%),NA,NA,NA,NA
-  Derecha,NA,NA,NA,NA,5 (8.6%),NA,NA,NA,NA
-  Extrema derecha,NA,NA,NA,NA,1 (1.7%),NA,NA,NA,NA
-  Extrema izquierda,NA,NA,NA,NA,NA,32 (59.3%),NA,NA,NA
-  Izquierda,NA,NA,NA,NA,NA,19 (35.2%),NA,NA,NA
-  Centro,NA,NA,NA,NA,NA,2 (3.7%),NA,NA,NA
-  Derecha,NA,NA,NA,NA,NA,1 (1.9%),NA,NA,NA
-  Extrema derecha,NA,NA,NA,NA,NA,0 (0.0%),NA,NA,NA
-  Extrema izquierda,NA,NA,NA,NA,NA,NA,17 (48.6%),NA,NA
-  Izquierda,NA,NA,NA,NA,NA,NA,15 (42.9%),NA,NA
-  Centro,NA,NA,NA,NA,NA,NA,2 (5.7%),NA,NA
-  Derecha,NA,NA,NA,NA,NA,NA,1 (2.9%),NA,NA
-  Extrema derecha,NA,NA,NA,NA,NA,NA,0 (0.0%),NA,NA
-  Extrema izquierda,NA,NA,NA,NA,NA,NA,NA,5 (55.6%),NA
-  Izquierda,NA,NA,NA,NA,NA,NA,NA,2 (22.2%),NA
-  Centro,NA,NA,NA,NA,NA,NA,NA,1 (11.1%),NA
-  Derecha,NA,NA,NA,NA,NA,NA,NA,1 (11.1%),NA
-  Extrema derecha,NA,NA,NA,NA,NA,NA,NA,0 (0.0%),NA
-  Extrema izquierda,NA,NA,NA,NA,NA,NA,NA,NA,1 (100.0%)
-  Izquierda,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Centro,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Derecha,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
-  Extrema derecha,NA,NA,NA,NA,NA,NA,NA,NA,0 (0.0%)
+  Centro,73 (19.1%),21 (29.2%),12 (17.6%),11 (16.9%),21 (36.2%),2 (3.7%),2 (5.7%),1 (11.1%),0 (0.0%)
+  Derecha,29 (7.6%),6 (8.3%),4 (5.9%),10 (15.4%),5 (8.6%),1 (1.9%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Extrema derecha,6 (1.6%),3 (4.2%),0 (0.0%),1 (1.5%),1 (1.7%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Extrema izquierda,145 (37.9%),21 (29.2%),27 (39.7%),18 (27.7%),14 (24.1%),32 (59.3%),17 (48.6%),5 (55.6%),1 (100.0%)
+  Izquierda,130 (33.9%),21 (29.2%),25 (36.8%),25 (38.5%),17 (29.3%),19 (35.2%),15 (42.9%),2 (22.2%),0 (0.0%)
+  Centro,73 (19.1%),21 (29.2%),12 (17.6%),11 (16.9%),21 (36.2%),2 (3.7%),2 (5.7%),1 (11.1%),0 (0.0%)
+  Derecha,29 (7.6%),6 (8.3%),4 (5.9%),10 (15.4%),5 (8.6%),1 (1.9%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Extrema derecha,6 (1.6%),3 (4.2%),0 (0.0%),1 (1.5%),1 (1.7%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Extrema izquierda,145 (37.9%),21 (29.2%),27 (39.7%),18 (27.7%),14 (24.1%),32 (59.3%),17 (48.6%),5 (55.6%),1 (100.0%)
+  Izquierda,130 (33.9%),21 (29.2%),25 (36.8%),25 (38.5%),17 (29.3%),19 (35.2%),15 (42.9%),2 (22.2%),0 (0.0%)
+  Centro,73 (19.1%),21 (29.2%),12 (17.6%),11 (16.9%),21 (36.2%),2 (3.7%),2 (5.7%),1 (11.1%),0 (0.0%)
+  Derecha,29 (7.6%),6 (8.3%),4 (5.9%),10 (15.4%),5 (8.6%),1 (1.9%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Extrema derecha,6 (1.6%),3 (4.2%),0 (0.0%),1 (1.5%),1 (1.7%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Extrema izquierda,145 (37.9%),21 (29.2%),27 (39.7%),18 (27.7%),14 (24.1%),32 (59.3%),17 (48.6%),5 (55.6%),1 (100.0%)
+  Izquierda,130 (33.9%),21 (29.2%),25 (36.8%),25 (38.5%),17 (29.3%),19 (35.2%),15 (42.9%),2 (22.2%),0 (0.0%)
+  Centro,73 (19.1%),21 (29.2%),12 (17.6%),11 (16.9%),21 (36.2%),2 (3.7%),2 (5.7%),1 (11.1%),0 (0.0%)
+  Derecha,29 (7.6%),6 (8.3%),4 (5.9%),10 (15.4%),5 (8.6%),1 (1.9%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Extrema derecha,6 (1.6%),3 (4.2%),0 (0.0%),1 (1.5%),1 (1.7%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Extrema izquierda,145 (37.9%),21 (29.2%),27 (39.7%),18 (27.7%),14 (24.1%),32 (59.3%),17 (48.6%),5 (55.6%),1 (100.0%)
+  Izquierda,130 (33.9%),21 (29.2%),25 (36.8%),25 (38.5%),17 (29.3%),19 (35.2%),15 (42.9%),2 (22.2%),0 (0.0%)
+  Centro,73 (19.1%),21 (29.2%),12 (17.6%),11 (16.9%),21 (36.2%),2 (3.7%),2 (5.7%),1 (11.1%),0 (0.0%)
+  Derecha,29 (7.6%),6 (8.3%),4 (5.9%),10 (15.4%),5 (8.6%),1 (1.9%),1 (2.9%),1 (11.1%),0 (0.0%)
+  Extrema derecha,6 (1.6%),3 (4.2%),0 (0.0%),1 (1.5%),1 (1.7%),0 (0.0%),0 (0.0%),0 (0.0%),0 (0.0%)
+  Extrema izquierda,145 (37.9%),21 (29.2%),27 (39.7%),18 (27.7%),14 (24.1%),32 (59.3%),17 (48.6%),5 (55.6%),1 (100.0%)
+  Izquierda,130 (33.9%),21 (29.2%),25 (36.8%),25 (38.5%),17 (29.3%),19 (35.2%),15 (42.9%),2 (22.2%),0 (0.0%)
