@@ -1,0 +1,33 @@
+self_profile,determinant_id,determinant_label,n,mean,median,sd
+Homo economicus,cost_efficiency,Cost efficiency,57,82.6842105263158,84,12.550125063032013
+Homo economicus,knowledge,Knowledge,57,81.35087719298245,85,19.49678657412015
+Homo economicus,legal,Legal compliance,54,77.42592592592592,81,21.251949390586972
+Homo economicus,trust,Trust,55,75.9090909090909,77,15.959755784904878
+Homo economicus,technical_fit,Technical fit,58,75.06896551724138,75,15.856662852120166
+Homo economicus,adherence,Adherence,54,74.9074074074074,75.5,17.365405338937656
+Homo economicus,wellbeing,Wellbeing,57,74.73684210526316,75,16.882499725825003
+Homo economicus,self_satisfaction,Self-satisfaction,58,74.41379310344827,75.5,15.342904506425274
+Homo economicus,commitment,Commitment,55,72.83636363636364,73,16.703031036049886
+Homo economicus,risk_profile,Risk profile,57,71.9298245614035,70,15.83492934839533
+Homo economicus,safety,Safety,57,71.29824561403508,73,21.925983372865353
+Homo economicus,coziness,Comfort,56,70.25,71,16.843936054799716
+Homo economicus,rights_and_duties,Rights and duties,56,69.64285714285714,70.5,19.190365548111114
+Homo economicus,profits,Economic profit,58,67.51724137931035,66,19.971243694688713
+Homo economicus,frugality,Frugality,55,67.50909090909092,70,22.098996732106556
+Homo economicus,environmental_concerns,Environmental concerns,56,65.67857142857143,65.5,19.772439167926414
+Homo economicus,credit_score_access_to_funding,Access to funding,56,64.23214285714286,65,25.005447458451982
+Homo economicus,own_competence,Own competence,55,63.872727272727275,67,22.065604661801338
+Homo economicus,climate_protection,Climate protection,55,63.69090909090909,70,20.590246456957455
+Homo economicus,autarky,Self-sufficiency,57,62.19298245614035,65,22.03441998692956
+Homo economicus,agreement,Agreement,52,60.98076923076923,65,25.542344990857362
+Homo economicus,added_value,Added value,52,60.03846153846154,60,19.885911397180944
+Homo economicus,own_significance,Personal significance,54,55.12962962962963,60,20.50590922314309
+Homo economicus,novelty,Novelty,54,44.37037037037037,44,21.55142712631793
+Homo economicus,support,Social support,51,43.88235294117647,42,21.641300384980127
+Homo economicus,fun,Fun,54,37.51851851851852,37.5,27.5788685448956
+Homo economicus,peer_pressure,Peer pressure,57,33.3859649122807,28,24.248530431145216
+Homo economicus,authority,Authority,53,32.320754716981135,30,24.293694643249474
+Homo economicus,trends,Trends,54,28,20.5,24.810983568983662
+Homo economicus,socialising,Socialising,54,23.629629629629626,18.5,23.981357772548126
+Homo economicus,recognition,Recognition,55,22.18181818181818,14,24.794780595543592
+Homo economicus,approval,Approval,56,19,15.5,17.71491410699419

@@ -13,15 +13,15 @@ age_group_pyramid,gender,generation_pyramid,n,percentage
 46-50,Mujer,Generación X,14,3.7
 51-55,Hombre,Generación X,17,4.5
 51-55,Mujer,Generación X,14,3.7
-56-60,Hombre,Boomers + generación silenciosa,25,6.6
-56-60,Mujer,Boomers + generación silenciosa,14,3.7
-61-65,Hombre,Boomers + generación silenciosa,24,6.3
-61-65,Mujer,Boomers + generación silenciosa,11,2.9
-66-70,Hombre,Boomers + generación silenciosa,14,3.7
-66-70,Mujer,Boomers + generación silenciosa,4,1
-71-75,Hombre,Boomers + generación silenciosa,5,1.3
-71-75,Mujer,Boomers + generación silenciosa,0,0
-76-79,Hombre,Boomers + generación silenciosa,5,1.3
-76-79,Mujer,Boomers + generación silenciosa,0,0
-80+,Hombre,Boomers + generación silenciosa,1,0.3
-80+,Mujer,Boomers + generación silenciosa,1,0.3
+56-60,Hombre,Boomers +,25,6.6
+56-60,Mujer,Boomers +,14,3.7
+61-65,Hombre,Boomers +,24,6.3
+61-65,Mujer,Boomers +,11,2.9
+66-70,Hombre,Boomers +,14,3.7
+66-70,Mujer,Boomers +,4,1
+71-75,Hombre,Boomers +,5,1.3
+71-75,Mujer,Boomers +,0,0
+76-79,Hombre,Boomers +,5,1.3
+76-79,Mujer,Boomers +,0,0
+80+,Hombre,Boomers +,1,0.3
+80+,Mujer,Boomers +,1,0.3

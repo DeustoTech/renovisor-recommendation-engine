@@ -1,0 +1,76 @@
+variable,category,n,percentage
+generation,Boomers +,105,27.1
+generation,Generation X,103,26.6
+generation,Generation Z,36,9.3
+generation,Millennials,143,37
+gender,Female,192,49.5
+gender,Male,192,49.5
+gender,Other / Prefer not to say,4,1
+country,Austria,2,0.5
+country,Belgium,7,1.8
+country,Bulgaria,3,0.8
+country,Czech Republic,5,1.3
+country,Denmark,4,1
+country,Estonia,4,1
+country,Finland,4,1
+country,France,25,6.3
+country,Germany,24,6.1
+country,Greece,5,1.3
+country,Hungary,4,1
+country,Ireland,3,0.8
+country,Italy,27,6.8
+country,Latvia,4,1
+country,Lithuania,1,0.3
+country,Luxembourg,1,0.3
+country,Netherlands,11,2.8
+country,Norway,2,0.5
+country,Poland,26,6.6
+country,Portugal,4,1
+country,Romania,8,2
+country,Slovakia,4,1
+country,Slovenia,4,1
+country,Spain,186,47
+country,Sweden,3,0.8
+country,United Kingdom,25,6.3
+European region,Eastern Europe,50,12.6
+European region,Northern Europe,50,12.6
+European region,Southern Europe,226,57.1
+European region,Western Europe,70,17.7
+city size,"Large city (500,000-1,000,000 inhabitants)",45,11.2
+city size,"Medium-sized city (250,000-500,000 inhabitants)",57,14.1
+city size,"Metropolis (>1,000,000 inhabitants)",39,9.7
+city size,"Small city (50,000-250,000 inhabitants)",77,19.1
+city size,"Small town (1,000-10,000 inhabitants)",59,14.6
+city size,"Town (10,000-50,000 inhabitants)",92,22.8
+city size,"Village or rural area (<1,000 inhabitants)",34,8.4
+climate zone,Cold/Polar climate,17,4.2
+climate zone,Temperate climate,226,56.1
+climate zone,Warm/Mediterranean climate,160,39.7
+employment status,Employed,290,74.6
+employment status,Other employment status,69,17.7
+employment status,Student,30,7.7
+education level,Non-university education,93,23.9
+education level,University education,296,76.1
+work/study from home,No,156,41.3
+work/study from home,Yes,222,58.7
+household type,Couple without children,126,33.1
+household type,Household with children,172,45.1
+household type,Other,83,21.8
+tenure status,Homeowner with mortgage,109,27.5
+tenure status,Homeowner without mortgage,185,46.7
+tenure status,Non-homeowner,102,25.8
+political orientation,Centre,73,19.1
+political orientation,Far left,145,37.9
+political orientation,Far right,6,1.6
+political orientation,Left,130,33.9
+political orientation,Right,29,7.6
+voting type,Does not vote / blank / null vote,39,9.9
+voting type,National parties,70,17.8
+voting type,Other options,31,7.9
+voting type,Regionalist/independence parties,108,27.5
+voting type,Variable vote depending on candidate/programme,145,36.9
+source survey,Concerns survey,12,3
+source survey,Decision survey,385,95.5
+source survey,RVS survey,6,1.5
+identifier type,No identifier,208,51.6
+identifier type,Prolific ID,195,48.4

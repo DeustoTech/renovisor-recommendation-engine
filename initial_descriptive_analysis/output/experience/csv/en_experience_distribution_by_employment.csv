@@ -1,0 +1,25 @@
+group,experience_short,n,total_group,percentage
+Employed,Already present,501,4393,11.40450717049852
+Employed,Implemented,873,4393,19.872524470748917
+Employed,Searched for information,657,4393,14.955611199635785
+Employed,Aware / would consider,1336,4393,30.412019121329386
+Employed,Unaware,584,4393,13.293876621898477
+Employed,Would never use it,442,4393,10.061461415888914
+Other inactive status,Already present,80,720,11.11111111111111
+Other inactive status,Implemented,178,720,24.72222222222222
+Other inactive status,Searched for information,97,720,13.472222222222221
+Other inactive status,Aware / would consider,216,720,30
+Other inactive status,Unaware,83,720,11.527777777777779
+Other inactive status,Would never use it,66,720,9.166666666666666
+Student,Already present,49,476,10.294117647058822
+Student,Implemented,77,476,16.176470588235293
+Student,Searched for information,75,476,15.756302521008402
+Student,Aware / would consider,131,476,27.521008403361346
+Student,Unaware,106,476,22.268907563025213
+Student,Would never use it,38,476,7.9831932773109235
+Unemployed,Already present,34,301,11.295681063122924
+Unemployed,Implemented,32,301,10.631229235880399
+Unemployed,Searched for information,39,301,12.956810631229235
+Unemployed,Aware / would consider,87,301,28.903654485049834
+Unemployed,Unaware,66,301,21.92691029900332
+Unemployed,Would never use it,43,301,14.285714285714285

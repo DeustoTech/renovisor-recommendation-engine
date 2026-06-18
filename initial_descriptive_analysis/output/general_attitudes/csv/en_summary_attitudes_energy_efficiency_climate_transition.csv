@@ -1,0 +1,4 @@
+variable,n,mean,median,sd,q1,q3,min,max
+Energy efficiency goal,392,74.7,76.5,17.93,66.75,85,0,100
+Climate change awareness,399,91.07,100,14.55,88,100,1,100
+Energy transition awareness,384,68.38,70,20.47,60,81,0,100

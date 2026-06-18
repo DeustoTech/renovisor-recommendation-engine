@@ -1,0 +1,27 @@
+stage_dimension_id,participant_id,stage,technology,dimension_key,dimension,n_determinants_linked,n_determinants_filled,n_determinants_missing
+34,PROLIFIC_69932173fe3deef35c4f7e70,Implemented,Energy-efficient appliances,MEANING,Meaning,2,0,2
+432,212,Implemented,Electricity tariff change,MEANING,Meaning,2,0,2
+468,228,Implemented,Envelope renovation,FINANCIAL,Financial security,5,0,5
+487,238,Implemented,Envelope renovation,PHYSIOLOGICAL,Materiality,2,0,2
+489,238,Implemented,Envelope renovation,MEANING,Meaning,2,0,2
+599,300,Implemented,Envelope renovation,MEANING,Meaning,2,0,2
+688,349,Implemented,Envelope renovation,MEANING,Meaning,2,0,2
+702,358,Implemented,Envelope renovation,PHYSIOLOGICAL,Materiality,2,0,2
+1209,185,Aware / would consider,Heat pump,PHYSIOLOGICAL,Materiality,2,0,2
+1257,212,Aware / would consider,Envelope renovation,MEANING,Meaning,2,0,2
+1313,238,Aware / would consider,Energy community,COMPETENCE,Competence,5,0,5
+1314,238,Aware / would consider,Energy community,RELATEDNESS,Relatedness,5,0,5
+1315,238,Aware / would consider,Energy community,MEANING,Meaning,2,0,2
+1356,263,Aware / would consider,Energy-efficient appliances,MEANING,Meaning,2,0,2
+1361,265,Aware / would consider,Envelope renovation,MEANING,Meaning,2,0,2
+1389,278,Aware / would consider,Energy-efficient appliances,FINANCIAL,Financial security,5,0,5
+1556,358,Aware / would consider,Smart home systems,PHYSIOLOGICAL,Materiality,2,0,2
+2002,216,Unaware but curious,Electric vehicle,AUTONOMY,Autonomy,4,0,4
+2027,238,Unaware but curious,Energy community,COMPETENCE,Competence,5,0,5
+2028,238,Unaware but curious,Energy community,RELATEDNESS,Relatedness,5,0,5
+2029,238,Unaware but curious,Energy community,MEANING,Meaning,2,0,2
+2068,263,Unaware but curious,Domestic hot water system,MEANING,Meaning,2,0,2
+2111,300,Unaware but curious,Heat pump,MEANING,Meaning,2,0,2
+2145,329,Unaware but curious,Energy community,STIMULATION,Stimulation,3,0,3
+2178,347,Unaware but curious,Energy storage systems,FINANCIAL,Financial security,5,0,5
+2195,358,Unaware but curious,Heat recovery ventilation,PHYSIOLOGICAL,Materiality,2,0,2

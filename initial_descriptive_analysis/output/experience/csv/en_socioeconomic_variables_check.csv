@@ -1,0 +1,398 @@
+participant_id,year_of_birth,age_group,gender,country,residence_region,city_size,climate_zone,employment,education_group,work_home,type_house,tenure,political_orientation
+PROLIFIC_6a229a11e392c08625a712bd,1988,Millennials,Female,Bulgaria,Eastern Europe,Large city,Warm/Mediterranean climate,Employed,University education,No,Other household type,Homeowner without mortgage,Centre
+PROLIFIC_69f0ef9892bba1b2c3596e76,1998,Millennials,Female,Lithuania,Northern Europe,Metropolis,Temperate climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Centre
+PROLIFIC_69249f2bf89992510c44179e,NA,NA,Female,Czech Republic,Eastern Europe,Metropolis,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_69864a7ee88ba6c6a6f798fc,1998,Millennials,Female,Denmark,Northern Europe,Large city,Temperate climate,Employed,University education,No,Shared household,Rented home,Far left
+PROLIFIC_6a229bc24afaa132a0944070,1989,Millennials,Female,Bulgaria,Eastern Europe,Metropolis,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Right
+PROLIFIC_5f2dcc4c7989510ff7699cab,1995,Millennials,Female,Denmark,Northern Europe,Large city,Temperate climate,Student,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_661581f5ba8868414baed7ca,2004,Generation Z,Female,Slovakia,Eastern Europe,Small town,Temperate climate,Employed,Non-university education,Yes,Household with children,Homeowner without mortgage,Far left
+PROLIFIC_5aeb24e22bd17300018779f2,1994,Millennials,Female,Estonia,Northern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Living alone,Rented home,Far left
+PROLIFIC_6597f6dc6f784e1f69bfadfa,2004,Generation Z,Female,Slovakia,Eastern Europe,Town,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner without mortgage,Far left
+PROLIFIC_698b10e112e204e2d1f0c126,1992,Millennials,Female,Finland,Northern Europe,Medium-sized city,Cold/Polar climate,Student,University education,Yes,Living alone,Rented home,NA
+PROLIFIC_6a22e126f41c2f91aaf90b28,2006,Generation Z,Female,Slovakia,Eastern Europe,Small city,Temperate climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Far left
+PROLIFIC_697b4452d0057be21360d8d6,1986,Millennials,Female,Sweden,Northern Europe,Metropolis,Cold/Polar climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Centre
+PROLIFIC_604dedd2805fe682c5bc51c0,1984,Generation X,Female,Hungary,Eastern Europe,Metropolis,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Right
+PROLIFIC_5d1f54b95538e6001a843293,1983,Generation X,Female,Belgium,Western Europe,Small city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+PROLIFIC_69a6fd75a40ab271c0a54fd7,1983,Generation X,Female,Romania,Eastern Europe,Small city,Temperate climate,Employed,University education,Yes,Shared household,Rented home,Far left
+PROLIFIC_69932173fe3deef35c4f7e70,1990,Millennials,Female,Luxembourg,Western Europe,Small city,Temperate climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Left
+PROLIFIC_69edcc3c9f52558843ab7d99,2001,Generation Z,Female,Belgium,Western Europe,Village or rural area,Temperate climate,Employed,University education,No,Couple without children,Rented home,Right
+PROLIFIC_6a229976e46891722ff3f05f,1997,Millennials,Female,Finland,Northern Europe,Medium-sized city,Cold/Polar climate,Unemployed,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_69eca1e06533d42ff1306a24,1998,Millennials,Female,France,Western Europe,Town,Temperate climate,Employed,Non-university education,Yes,Couple without children,Homeowner without mortgage,Centre
+22,2004,Generation Z,Female,Czech Republic,Eastern Europe,Village or rural area,Temperate climate,Employed,Non-university education,Yes,Household with children,Homeowner with mortgage,Centre
+PROLIFIC_69d763affd0080c0bffcd367,1973,Generation X,Female,Belgium,Western Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Centre
+PROLIFIC_6103a3ece71ab061d5624402,2001,Generation Z,Female,Latvia,Northern Europe,Small town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_69e213021f9224d147d5908b,1983,Generation X,Female,Finland,Northern Europe,Medium-sized city,Cold/Polar climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Right
+PROLIFIC_672b6f50809e58bcc13a57b4,1986,Millennials,Female,Slovenia,Southern Europe,Town,Temperate climate,NA,University education,No,Household with children,Homeowner with mortgage,Centre
+PROLIFIC_699776549800aa3b0399d642,1999,Millennials,Female,Poland,Eastern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_6a229862a12b21ee07229d8a,NA,NA,Male,Bulgaria,Eastern Europe,Metropolis,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner without mortgage,Far right
+PROLIFIC_66045ed49119e654e5454985,1994,Millennials,Other / Prefer not to say,Greece,Southern Europe,Large city,Warm/Mediterranean climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Far left
+PROLIFIC_5d6558fa16871700012ea47b,1969,Boomers + Silent Generation,Female,Slovenia,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_6a0c5d35ab86f12c44875ea0,1977,Generation X,Female,Poland,Eastern Europe,Metropolis,Temperate climate,Other inactive status,University education,No,Household with children,Homeowner with mortgage,Far left
+PROLIFIC_57e928630cb6700001dd8f8a,1993,Millennials,Female,Portugal,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+PROLIFIC_698fa8ec85144121c0643338,2000,Millennials,Female,Poland,Eastern Europe,Metropolis,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Centre
+PROLIFIC_697907c3546949f10030ddf1,1981,Generation X,Female,Germany,Western Europe,Metropolis,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Centre
+PROLIFIC_5eda1423dd2241017d85fd44,1995,Millennials,Male,Finland,Northern Europe,Town,Cold/Polar climate,Employed,Non-university education,Yes,Couple without children,Rented home,Centre
+PROLIFIC_698eea589bb7dd5212c5e3c9,1994,Millennials,Female,France,Western Europe,Small city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+PROLIFIC_69b9bf5f0faac70cd0e24cf6,1979,Generation X,Female,France,Western Europe,Small town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_6a0daf62ec01cd69c04d1da8,1991,Millennials,Male,United Kingdom,Northern Europe,Small city,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+PROLIFIC_6990691f5ced735f10ff3bba,1996,Millennials,Female,Poland,Eastern Europe,Large city,Temperate climate,Unemployed,University education,No,Other household type,Rented home,Left
+PROLIFIC_61034f24da19cc56177b8b59,1989,Millennials,Female,Czech Republic,Eastern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_697b1a2669af0b3f24790e20,1993,Millennials,Female,France,Western Europe,Village or rural area,Temperate climate,Employed,Non-university education,Yes,Couple without children,Other tenure status,Centre
+PROLIFIC_6a0c1bc666f7cca388e60c9c,1965,Boomers + Silent Generation,Female,Sweden,Northern Europe,Small city,Temperate climate,Unemployed,University education,Yes,Couple without children,Homeowner without mortgage,NA
+PROLIFIC_698ef5093a80fcd19f394ab2,1984,Generation X,Female,Poland,Eastern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Household with children,Rented home,Left
+PROLIFIC_6a2287e1de4099ccf09eac69,1987,Millennials,Female,Italy,Southern Europe,Large city,Warm/Mediterranean climate,Student,University education,Yes,Living alone,Homeowner with mortgage,Left
+PROLIFIC_64edf002c925fb837ee0a770,1992,Millennials,Male,Estonia,Northern Europe,Small town,Temperate climate,Employed,Non-university education,Yes,Household with children,Homeowner with mortgage,Right
+PROLIFIC_6a06ce99e7948a2b48b807b8,1994,Millennials,Female,Italy,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Living alone,Homeowner with mortgage,Left
+PROLIFIC_69f349141b7a57cdd52b671c,1998,Millennials,Female,Poland,Eastern Europe,Small city,Temperate climate,Employed,Non-university education,Yes,Couple without children,Other tenure status,Far left
+PROLIFIC_69f732a6afef1c53157db063,1979,Generation X,Female,Germany,Western Europe,Small town,Temperate climate,Employed,University education,Yes,Living alone,Rented home,Centre
+PROLIFIC_6a01d2282cff0f54d29e9ce9,1988,Millennials,Female,France,Western Europe,Small city,Temperate climate,Other inactive status,University education,Yes,Household with children,Rented home,Left
+PROLIFIC_5e9c3ff1cf719d151612648f,1969,Boomers + Silent Generation,Female,Italy,Southern Europe,Large city,Warm/Mediterranean climate,Employed,Non-university education,No,Living alone,Homeowner with mortgage,Centre
+PROLIFIC_5cf101ea48405a0018415d09,1974,Generation X,Female,Poland,Eastern Europe,Small city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,NA
+PROLIFIC_5f21ff288900cb4709dd49aa,1960,Boomers + Silent Generation,Female,Italy,Southern Europe,Metropolis,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_5d7e41aea60f7b00013cf1af,1999,Millennials,Female,Poland,Eastern Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_6a204321d4201071efadc417,1987,Millennials,Female,France,Western Europe,Small town,Warm/Mediterranean climate,Other inactive status,NA,Yes,Household with children,Homeowner with mortgage,Centre
+PROLIFIC_6976fca13dd3674fd0702a52,1984,Generation X,Male,Czech Republic,Eastern Europe,Small city,Temperate climate,Employed,Non-university education,Yes,Household with children,Homeowner without mortgage,Right
+PROLIFIC_6a098c627878fd02b2b0766e,1994,Millennials,Female,Germany,Western Europe,Large city,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_6973653f34c609a7c3420e1c,1990,Millennials,Female,Poland,Eastern Europe,Large city,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Centre
+PROLIFIC_698f1a372de6aef866bec656,1983,Generation X,Male,Poland,Eastern Europe,Large city,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Centre
+PROLIFIC_69fc2d7674f4ab68ebfd7559,1967,Boomers + Silent Generation,Female,United Kingdom,Northern Europe,Small town,Temperate climate,Employed,University education,Yes,Living alone,Rented home,Left
+PROLIFIC_6a19a8b91331b2d709fef8b0,2005,Generation Z,Female,Germany,Western Europe,Town,Temperate climate,Unemployed,Non-university education,No,Household with children,Rented home,Centre
+PROLIFIC_6a005381c9f64426562d2587,1995,Millennials,Female,Poland,Eastern Europe,Large city,Temperate climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Far left
+PROLIFIC_69cac7e6b4b245b2c38f9112,2000,Millennials,Female,France,Western Europe,Small city,Temperate climate,Student,University education,Yes,Couple without children,Homeowner with mortgage,Left
+PROLIFIC_69f4823b807f06208c1f8ff8,1973,Generation X,Female,Italy,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Far left
+PROLIFIC_67458e548861194752950b3e,2003,Generation Z,Male,Latvia,Northern Europe,Large city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Right
+PROLIFIC_69c6a6aade93df9f06f725a2,1969,Boomers + Silent Generation,Female,France,Western Europe,Large city,Temperate climate,Unemployed,University education,Yes,Household with children,Homeowner with mortgage,Left
+PROLIFIC_69f3101cd619e2288f7cffa7,2002,Generation Z,Female,Italy,Southern Europe,Metropolis,Warm/Mediterranean climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_5e92267dcc3d6c553eb8c817,2001,Generation Z,Male,Poland,Eastern Europe,Small city,Temperate climate,Employed,Non-university education,Yes,Household with children,NA,NA
+PROLIFIC_6a229b5352a32f629034f221,1992,Millennials,Male,Slovenia,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_6a23e0de47bc759d7dfabea7,2003,Generation Z,Female,Belgium,Western Europe,Small city,Temperate climate,Student,University education,Yes,Household with children,Other tenure status,NA
+PROLIFIC_6a21ea8132a0738c3116b9e0,1998,Millennials,Female,Italy,Southern Europe,Small city,Warm/Mediterranean climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_6932b69b5d8649b7a1021ff0,2004,Generation Z,Male,Slovakia,Eastern Europe,Town,Temperate climate,Student,Non-university education,No,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_697f4f0f25cc7707716e04f5,2004,Generation Z,Male,France,Western Europe,Large city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+PROLIFIC_69d801b7ff73fd8726f49404,1989,Millennials,Female,Germany,Western Europe,Large city,Temperate climate,Unemployed,University education,No,Couple without children,Rented home,Far left
+PROLIFIC_6928b5026c84fcd91c5a7a68,1988,Millennials,Female,France,Western Europe,Metropolis,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner with mortgage,Right
+PROLIFIC_6a00ddf17a4ca511079ba36,2005,Generation Z,Female,Italy,Southern Europe,Large city,Warm/Mediterranean climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_6a22f1c96d813b77a267cc7d,1999,Millennials,Male,Italy,Southern Europe,Large city,Temperate climate,Student,University education,Yes,Living alone,Other tenure status,NA
+PROLIFIC_6a0d86760c5c5b905946bc00,1968,Boomers + Silent Generation,Female,Italy,Southern Europe,Large city,Temperate climate,Unemployed,University education,No,Household with children,Rented home,Far left
+PROLIFIC_646219bb0b91a6f3327e39fb,1991,Millennials,Female,Germany,Western Europe,Metropolis,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_6a0631964347cec04dfa71d1,1994,Millennials,Female,Poland,Eastern Europe,Small town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Right
+PROLIFIC_6a064be60a1feb17a9dfe824,1977,Generation X,Female,United Kingdom,Northern Europe,Small city,Temperate climate,Employed,Non-university education,No,Couple without children,Rented home,Centre
+PROLIFIC_66cc80d93247b5e14b3b7112,1995,Millennials,Female,Italy,Southern Europe,Town,Warm/Mediterranean climate,Student,University education,Yes,Household with children,Homeowner with mortgage,Far left
+PROLIFIC_6980bdf135e5d99f4cd191e6,1992,Millennials,Female,Romania,Eastern Europe,Small city,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Centre
+PROLIFIC_602fe67919eaccd752eea5a5,1999,Millennials,Female,Portugal,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+PROLIFIC_6a10442ceffde6b06d1cef3d,1996,Millennials,Female,United Kingdom,Northern Europe,Small city,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Right
+PROLIFIC_6470e501cc85b0287c8da951,1999,Millennials,Female,France,Western Europe,Metropolis,Temperate climate,Employed,University education,Yes,Living alone,Rented home,Centre
+PROLIFIC_6985f197cf1559ac62ea5dc3,1995,Millennials,Male,France,Western Europe,Town,Temperate climate,Employed,University education,Yes,Shared household,Rented home,Centre
+PROLIFIC_6a00c9657d955585296f7301,2006,Generation Z,Male,France,Western Europe,Small town,Temperate climate,Student,Non-university education,Yes,Couple without children,Homeowner without mortgage,Right
+PROLIFIC_5c66cc9246bfc200019044b8,1989,Millennials,NA,Hungary,Eastern Europe,Small town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Right
+PROLIFIC_5e86e0a50a340d32316afe9d,1986,Millennials,Female,Latvia,Northern Europe,Large city,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_69d7f5e13c624f3ce83d2cfb,1994,Millennials,Male,Germany,Western Europe,Town,Cold/Polar climate,Employed,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_6a0d9e9144c2414b7e6adeda,2001,Generation Z,Female,Germany,Western Europe,Small city,Temperate climate,Employed,University education,No,Shared household,Rented home,Centre
+PROLIFIC_6111037143ad4a71cf9e2852,1999,Millennials,Female,Hungary,Eastern Europe,Metropolis,Temperate climate,Unemployed,University education,No,Couple without children,Rented home,Far left
+PROLIFIC_6a25a6b9390e0020e7ef226e,2007,Generation Z,Female,Poland,Eastern Europe,Town,Temperate climate,Employed,Non-university education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_69fb35cf0deb774f95e2f6cb,1989,Millennials,Female,France,Western Europe,Metropolis,Temperate climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Centre
+PROLIFIC_69fc88ab52f8fd41bd554aee,1965,Boomers + Silent Generation,Female,United Kingdom,Northern Europe,Village or rural area,Temperate climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Left
+PROLIFIC_69f9f16dd6f231903e2a6b41,1997,Millennials,Female,Germany,Western Europe,Metropolis,Temperate climate,Unemployed,University education,No,Couple without children,Rented home,Centre
+PROLIFIC_6a229a63b2044a3b6694cdf5,1982,Generation X,Female,Romania,Eastern Europe,Small city,Temperate climate,Employed,Non-university education,Yes,Couple without children,Homeowner without mortgage,Left
+PROLIFIC_69de0876fb4170e1b31c0f7b,1985,Generation X,Male,Germany,Western Europe,Small city,Temperate climate,Employed,Non-university education,Yes,Household with children,Rented home,Left
+PROLIFIC_6a07318351b163db6f9887f1,1984,Generation X,Female,Italy,Southern Europe,Small town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Centre
+PROLIFIC_69d023c8f299f5b1cc355e64,1988,Millennials,Female,Germany,Western Europe,Small city,Temperate climate,Employed,University education,No,Shared household,Rented home,Centre
+PROLIFIC_698359ee7148b5a9731164bb,1994,Millennials,Male,Romania,Eastern Europe,Medium-sized city,Temperate climate,Employed,University education,No,Couple without children,Rented home,Centre
+PROLIFIC_66316420ced02e8c467d22a2,1997,Millennials,Male,Denmark,Northern Europe,Medium-sized city,Temperate climate,Employed,Non-university education,Yes,Couple without children,Rented home,Left
+PROLIFIC_698e260e1c956e03673d79ab,1992,Millennials,Female,Sweden,Northern Europe,Small city,Temperate climate,Student,University education,Yes,Couple without children,Rented home,Centre
+PROLIFIC_6654840c725f74f1b0a206f9,2002,Generation Z,Female,Estonia,Northern Europe,Small city,Temperate climate,Student,Non-university education,Yes,Living alone,Rented home,Left
+PROLIFIC_69d671f03dd875c20e4c0ce0,1993,Millennials,Female,Germany,Western Europe,Metropolis,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_60456799ca80066961f3fa3c,1998,Millennials,Female,Portugal,Southern Europe,Large city,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_69e7b977a16a3c9a2b839a87,1995,Millennials,Male,Italy,Southern Europe,Small city,Warm/Mediterranean climate,Employed,Non-university education,Yes,Living alone,Homeowner without mortgage,Centre
+PROLIFIC_62ead0772116e6bc70b7cd09,1971,Generation X,Female,United Kingdom,Northern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Centre
+PROLIFIC_6a0f3e08be88e41f0e239e45,2006,Generation Z,Female,Italy,Southern Europe,Large city,Warm/Mediterranean climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Right
+PROLIFIC_6984b719db2917412dfc3135,1988,Millennials,Male,Germany,Western Europe,Town,Temperate climate,Employed,Non-university education,Yes,Living alone,Rented home,Far left
+PROLIFIC_6167579b785195f0db610d94,2002,Generation Z,Female,Latvia,Northern Europe,Large city,Temperate climate,Employed,University education,Yes,Living alone,Other tenure status,Far left
+PROLIFIC_667971a555af1f83d3f29ae7,1994,Millennials,Male,Poland,Eastern Europe,Metropolis,Temperate climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Centre
+PROLIFIC_6a0d70f4edf77457443338ce,1988,Millennials,Male,United Kingdom,Northern Europe,Large city,Temperate climate,Employed,University education,Yes,Household with children,Rented home,Right
+PROLIFIC_697a77ec6ca000317de70f17,2000,Millennials,Female,France,Western Europe,Small town,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Left
+PROLIFIC_64a814776d0d667482bcf926,2001,Generation Z,Female,Slovenia,Southern Europe,Small city,Temperate climate,Student,University education,Yes,Household with children,Homeowner without mortgage,Right
+PROLIFIC_5cf510ccb0bafb00161ffd56,1998,Millennials,Female,United Kingdom,Northern Europe,Medium-sized city,Temperate climate,Employed,Non-university education,No,Household with children,Rented home,Left
+PROLIFIC_6932bf332627def0f1f8a46b,1985,Generation X,Female,Hungary,Eastern Europe,Metropolis,Temperate climate,Employed,University education,Yes,NA,Homeowner without mortgage,Centre
+PROLIFIC_6646044a0b635b10c98237fb,1993,Millennials,Female,Poland,Eastern Europe,Small city,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Far left
+PROLIFIC_5b3f242f9c2ec600014ef9fc,1980,Generation X,Female,Italy,Southern Europe,Town,Warm/Mediterranean climate,Employed,Non-university education,Yes,Living alone,Other tenure status,Left
+PROLIFIC_697cae93b9bd8250922a71ce,1988,Millennials,Female,Denmark,Northern Europe,Large city,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Left
+PROLIFIC_6a0202e1fdb933b3a6bc8fe9,2002,Generation Z,Female,France,Western Europe,Large city,Warm/Mediterranean climate,Student,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_6a2055cd337ccac293eb2ef8,1998,Millennials,Male,United Kingdom,Northern Europe,Town,Temperate climate,Employed,Non-university education,No,Shared household,Rented home,NA
+PROLIFIC_6a01a5353d69fb639148aa20,1990,Millennials,Male,Italy,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,Yes,Living alone,Rented home,Right
+PROLIFIC_696c724484bccbd980cd0e88,2004,Generation Z,Male,Poland,Eastern Europe,Small city,Temperate climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_63ed0392b8b24c34aaf26310,1979,Generation X,Female,United Kingdom,Northern Europe,Large city,Temperate climate,Employed,Non-university education,Yes,Household with children,Rented home,Centre
+PROLIFIC_6a01f97615e1e34226c0c6de,2002,Generation Z,Female,Italy,Southern Europe,Small city,Warm/Mediterranean climate,Unemployed,University education,Yes,Household with children,Homeowner with mortgage,Left
+PROLIFIC_60827e52a046c9b82574d391,1993,Millennials,Male,France,Western Europe,Small town,Warm/Mediterranean climate,Employed,University education,Yes,Living alone,Rented home,Centre
+PROLIFIC_5e8f740429529124dfc3e7a5,2000,Millennials,Male,Poland,Eastern Europe,Medium-sized city,Temperate climate,Student,University education,Yes,Household with children,Homeowner without mortgage,Right
+PROLIFIC_6a0252dc959d360ed8448c2f,2000,Millennials,Female,United Kingdom,Northern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Living alone,Rented home,Far left
+PROLIFIC_6a115c6b3c86f8c79ae47f0d,1997,Millennials,Male,United Kingdom,Northern Europe,Medium-sized city,Cold/Polar climate,Employed,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_5d24b3cfa433c000166f91bf,1996,Millennials,Male,Germany,Western Europe,Village or rural area,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_69a5621021a584cfa45f5f38,1992,Millennials,Female,Portugal,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Left
+PROLIFIC_5e4f73d0ca55663b5b9d18b0,1980,Generation X,Female,France,Western Europe,Town,Warm/Mediterranean climate,Employed,University education,Yes,Living alone,Rented home,Centre
+PROLIFIC_6a081474f37bbaf455c26332,1997,Millennials,Male,Germany,Western Europe,Small city,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Right
+PROLIFIC_698257587a4d2edcdc29a350,1995,Millennials,Female,Germany,Western Europe,Town,Cold/Polar climate,Employed,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_5cd53d40aeb4100001c18aa8,1986,Millennials,Female,Italy,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_6a211e87adf7c98358c1602b,2004,Generation Z,Male,France,Western Europe,Large city,Warm/Mediterranean climate,Unemployed,Non-university education,No,Household with children,Homeowner without mortgage,Far left
+PROLIFIC_6a05cedc9a4299116a07fc59,2004,Generation Z,Female,Poland,Eastern Europe,Large city,Temperate climate,Student,Non-university education,No,Living alone,Homeowner without mortgage,Far left
+PROLIFIC_5e35394d2149184e1a3d0450,1996,Millennials,Female,United Kingdom,Northern Europe,Town,Temperate climate,Employed,Non-university education,Yes,Couple without children,Homeowner with mortgage,Far left
+PROLIFIC_6a23a4399395a8963b79587f,1989,Millennials,Male,Italy,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Centre
+PROLIFIC_698df4a194fabefa716596ec,2007,Generation Z,Male,Poland,Eastern Europe,Metropolis,Temperate climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_6a134c7b06246f028cc08800,2001,Generation Z,Female,Germany,Western Europe,Medium-sized city,Temperate climate,Student,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_69307ef5fe254a61dee79a78,1990,Millennials,Female,Czech Republic,Eastern Europe,Metropolis,Temperate climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Left
+PROLIFIC_69d8d2f724abed404eb4935d,2000,Millennials,Female,France,Western Europe,Large city,Temperate climate,Unemployed,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_6034e1952ed073efce57a8a7,1994,Millennials,Male,Greece,Southern Europe,Metropolis,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Left
+PROLIFIC_5f4d6c27b03547a378fcb44a,1995,Millennials,Female,Greece,Southern Europe,Metropolis,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Centre
+PROLIFIC_5f2af36061a10a452cd8dc4e,1998,Millennials,Female,United Kingdom,Northern Europe,Large city,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner without mortgage,Far left
+PROLIFIC_6119075f1fe00f92c8153747,1996,Millennials,Female,Estonia,Northern Europe,Town,Temperate climate,Employed,University education,Yes,Couple without children,Rented home,Far left
+PROLIFIC_6a021400594777c9049633a4,1988,Millennials,Female,United Kingdom,Northern Europe,Village or rural area,Temperate climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Far left
+PROLIFIC_69946a0579d779ee49dca2c5,1989,Millennials,Female,France,Western Europe,Town,Temperate climate,Employed,University education,Yes,Other household type,Other tenure status,Far left
+PROLIFIC_64e91e9b7ac897d0afa22985,2000,Millennials,Male,United Kingdom,Northern Europe,Town,Temperate climate,Unemployed,University education,No,Couple without children,Rented home,Centre
+PROLIFIC_69fc62a553e31d1f955c7d1e,1991,Millennials,Male,Poland,Eastern Europe,Large city,Temperate climate,Employed,University education,Yes,Living alone,Rented home,Left
+PROLIFIC_6978bbc0ecc89bfa720fac28,2006,Generation Z,Female,Italy,Southern Europe,Town,Temperate climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_698df153dc723dada19b1dab,2002,Generation Z,Female,Poland,Eastern Europe,Town,Temperate climate,Employed,Non-university education,No,Living alone,Rented home,Centre
+PROLIFIC_6a1f136140310048eef382ce,1984,Generation X,Female,Germany,Western Europe,Small town,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Centre
+PROLIFIC_5a2310ebdf5bd00001b37474,1984,Generation X,Female,Poland,Eastern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Household with children,Rented home,Centre
+PROLIFIC_699b5130e75520d8cda5a642,1993,Millennials,Female,Romania,Eastern Europe,Large city,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,NA
+PROLIFIC_5d6eb49ab682cc000173982b,1964,Boomers + Silent Generation,Female,Greece,Southern Europe,Large city,Warm/Mediterranean climate,Unemployed,Non-university education,No,Household with children,Rented home,Centre
+PROLIFIC_6a1d394cf761db518876cad8,2000,Millennials,Female,United Kingdom,Northern Europe,Village or rural area,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Centre
+PROLIFIC_6a1b5f584a440643c54aed9a,1988,Millennials,Female,United Kingdom,Northern Europe,Small town,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Right
+PROLIFIC_69c648e30d13356cd9780c9a,1996,Millennials,Male,Belgium,Western Europe,Town,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Right
+PROLIFIC_69ee50cfb4f7f782d21e0238,2000,Millennials,Male,Italy,Southern Europe,Metropolis,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Right
+PROLIFIC_6a1eb7c1fd14b832013fb983,1992,Millennials,Female,Germany,Western Europe,Metropolis,Temperate climate,Employed,Non-university education,Yes,Household with children,Rented home,Left
+PROLIFIC_69fb3f396267d7f728885605,1985,Generation X,Female,Germany,Western Europe,Town,Temperate climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Far right
+PROLIFIC_6a03950c7926c7ee5b8589ae,2004,Generation Z,Male,Italy,Southern Europe,Metropolis,Warm/Mediterranean climate,Student,University education,Yes,Household with children,Homeowner with mortgage,Right
+PROLIFIC_6a1614592a9d17aadbee6b06,1999,Millennials,Female,Italy,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,No,Couple without children,Homeowner without mortgage,Right
+PROLIFIC_65b271a26aba0246730964f3,1999,Millennials,Female,Norway,Northern Europe,Small city,Cold/Polar climate,Employed,University education,No,Living alone,Rented home,Left
+PROLIFIC_6a01d315cd2cd32b1511e127,2003,Generation Z,Male,France,Western Europe,Small city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_6a1836e6fc7d5c0c2643e609,2004,Generation Z,Female,Belgium,Western Europe,Large city,Temperate climate,Student,Non-university education,Yes,Household with children,Homeowner with mortgage,Right
+PROLIFIC_6a07020572ab3b4d691a391c,1991,Millennials,Female,United Kingdom,Northern Europe,Village or rural area,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Far left
+PROLIFIC_6a1eba8c12fabb0fa7678822,1998,Millennials,Female,United Kingdom,Northern Europe,Metropolis,Temperate climate,Unemployed,University education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_6a0dbd152f8b5e278c18f1c2,2002,Generation Z,Female,Italy,Southern Europe,Town,Warm/Mediterranean climate,Student,University education,Yes,Couple without children,Homeowner without mortgage,Right
+179,1965,Boomers + Silent Generation,Female,Netherlands,Western Europe,Small city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Centre
+180,1978,Generation X,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,No,Household with children,Homeowner without mortgage,Far left
+181,1959,Boomers + Silent Generation,Male,Netherlands,Western Europe,Small town,Temperate climate,Other inactive status,University education,NA,Couple without children,Homeowner without mortgage,Centre
+182,1952,Boomers + Silent Generation,Male,Netherlands,Western Europe,Town,Temperate climate,Other inactive status,University education,Yes,Couple without children,Homeowner with mortgage,NA
+183,1976,Generation X,Female,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,No,Living alone,Rented home,Far left
+184,1986,Millennials,Female,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Left
+185,1961,Boomers + Silent Generation,Female,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Left
+186,1969,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner with mortgage,Far left
+187,1998,Millennials,Female,Netherlands,Western Europe,Large city,Temperate climate,Employed,University education,Yes,Couple without children,Other tenure status,Far left
+188,1981,Generation X,Male,Spain,Southern Europe,Small city,Temperate climate,Employed,University education,No,Household with children,Other tenure status,Far left
+189,1956,Boomers + Silent Generation,Other / Prefer not to say,Netherlands,Western Europe,Small town,Temperate climate,Other inactive status,University education,Yes,Couple without children,Homeowner with mortgage,Left
+190,1955,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,Yes,Couple without children,Homeowner without mortgage,Left
+191,1984,Generation X,Male,Spain,Southern Europe,Small city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Far left
+192,1979,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Living alone,Homeowner with mortgage,Left
+193,1988,Millennials,Female,Netherlands,Western Europe,Large city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+194,1973,Generation X,Male,Netherlands,Western Europe,Large city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+195,1979,Generation X,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,Non-university education,Yes,Household with children,Homeowner with mortgage,Far left
+196,NA,NA,Male,Netherlands,Western Europe,Large city,Temperate climate,Other inactive status,University education,Yes,Living alone,Homeowner with mortgage,Far left
+197,1962,Boomers + Silent Generation,Female,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Other inactive status,Non-university education,No,Couple without children,Homeowner without mortgage,Left
+199,1979,Generation X,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Far left
+200,1973,Generation X,Male,Spain,Southern Europe,Village or rural area,Temperate climate,Employed,Non-university education,No,Other household type,Other tenure status,Far left
+201,1957,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Left
+202,1990,Millennials,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner with mortgage,Left
+203,1982,Generation X,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Living alone,Rented home,Far left
+204,1953,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,No,Living alone,Rented home,Far left
+205,1969,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Centre
+206,1964,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Temperate climate,Other inactive status,University education,No,Household with children,Homeowner without mortgage,Left
+207,1972,Generation X,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Rented home,Far left
+209,1985,Generation X,Female,Spain,Southern Europe,Village or rural area,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Left
+210,1977,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+211,1965,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Far left
+212,1961,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Left
+213,1979,Generation X,Female,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+214,1965,Boomers + Silent Generation,Male,NA,NA,Village or rural area,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Far left
+215,1973,Generation X,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,No,Couple without children,Rented home,Far left
+216,1981,Generation X,Male,Spain,Southern Europe,Small town,Cold/Polar climate,Employed,University education,No,Living alone,Homeowner without mortgage,Left
+217,1960,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Far left
+218,1986,Millennials,Female,Spain,Southern Europe,Town,Cold/Polar climate,Employed,University education,No,Household with children,Homeowner without mortgage,Far left
+219,1967,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Centre
+220,1979,Generation X,NA,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+221,1968,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Left
+222,1984,Generation X,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,No,Living alone,Homeowner with mortgage,Left
+223,1985,Generation X,Male,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Far left
+224,1967,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Far left
+225,1977,Generation X,Female,Spain,Southern Europe,Small town,Cold/Polar climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Far left
+226,1965,Boomers + Silent Generation,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+227,1966,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,No,Living alone,Homeowner without mortgage,Left
+228,1982,Generation X,Male,Spain,Southern Europe,Medium-sized city,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Far left
+229,1977,Generation X,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Left
+230,1965,Boomers + Silent Generation,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,No,Living alone,Homeowner without mortgage,NA
+231,1988,Millennials,Female,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+232,1993,Millennials,Male,Spain,Southern Europe,Small city,Cold/Polar climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Far left
+233,1967,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,No,Living alone,Homeowner with mortgage,Far left
+234,1970,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,No,Couple without children,Homeowner without mortgage,Far left
+235,1973,Generation X,Female,Spain,Southern Europe,Medium-sized city,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Far left
+236,1977,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Left
+237,1967,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Cold/Polar climate,Employed,Non-university education,Yes,Household with children,Homeowner without mortgage,Far left
+238,1963,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Far left
+239,1950,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,Non-university education,No,Couple without children,Homeowner without mortgage,Left
+240,1978,Generation X,Female,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Far left
+241,1970,Boomers + Silent Generation,Female,Spain,Southern Europe,Village or rural area,Temperate climate,Employed,University education,No,Couple without children,Other tenure status,Far left
+242,1996,Millennials,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Far left
+243,1983,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Left
+244,1969,Boomers + Silent Generation,Female,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Far left
+245,1962,Boomers + Silent Generation,Female,Spain,Southern Europe,Town,Warm/Mediterranean climate,Other inactive status,University education,No,Household with children,Homeowner without mortgage,Far right
+246,1957,Boomers + Silent Generation,Female,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner with mortgage,Left
+247,1971,Generation X,Female,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Far left
+248,1972,Generation X,Female,Spain,Southern Europe,Large city,Warm/Mediterranean climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Far left
+249,1976,Generation X,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Far left
+250,1959,Boomers + Silent Generation,Male,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Left
+251,1958,Boomers + Silent Generation,Female,Spain,Southern Europe,Small city,Temperate climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Far left
+252,1964,Boomers + Silent Generation,Male,NA,NA,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Far left
+253,1962,Boomers + Silent Generation,Female,NA,NA,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,Yes,Household with children,Homeowner without mortgage,Left
+254,1974,Generation X,Female,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Other inactive status,Non-university education,No,Household with children,Homeowner with mortgage,Left
+255,1956,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Left
+256,1949,Boomers + Silent Generation,Male,NA,NA,Village or rural area,Temperate climate,Other inactive status,University education,Yes,Couple without children,Homeowner without mortgage,Far left
+257,1981,Generation X,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,Non-university education,Yes,Living alone,Homeowner without mortgage,Left
+258,1969,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Far left
+259,1966,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Temperate climate,Employed,Non-university education,No,Couple without children,Homeowner without mortgage,Far left
+PROLIFIC_qwertyuiop,1945,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Other inactive status,Non-university education,No,Living alone,Homeowner without mortgage,Far left
+261,1965,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Left
+262,1972,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Left
+263,1962,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,No,Couple without children,Homeowner without mortgage,Left
+264,1979,Generation X,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Left
+265,1969,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Temperate climate,Employed,University education,Yes,Living alone,Rented home,Left
+266,1974,Generation X,Male,NA,NA,Town,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+267,1963,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Left
+268,1967,Boomers + Silent Generation,Female,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,Yes,Living alone,Homeowner without mortgage,Far left
+269,1969,Boomers + Silent Generation,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+270,1958,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,Yes,Household with children,Homeowner without mortgage,Left
+272,1973,Generation X,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Left
+274,1963,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Other tenure status,Left
+275,1991,Millennials,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Far left
+276,1959,Boomers + Silent Generation,Male,Spain,Southern Europe,Village or rural area,Temperate climate,Other inactive status,Non-university education,Yes,Household with children,Homeowner without mortgage,Far left
+277,1977,Generation X,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+278,1946,Boomers + Silent Generation,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,NA,Shared household,Rented home,Left
+279,1958,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Other inactive status,University education,NA,Living alone,Homeowner without mortgage,Left
+280,1959,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,NA,Couple without children,Homeowner without mortgage,Left
+281,1966,Boomers + Silent Generation,Female,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Centre
+282,1963,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Far left
+283,1985,Generation X,Male,Spain,Southern Europe,Small city,Temperate climate,Unemployed,Non-university education,No,Living alone,NA,Far left
+284,1961,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Left
+285,1961,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Left
+286,1956,Boomers + Silent Generation,Male,NA,NA,Small city,Temperate climate,Other inactive status,University education,NA,Couple without children,Homeowner without mortgage,Far left
+287,1990,Millennials,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Left
+288,1973,Generation X,Female,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Left
+289,1982,Generation X,Female,Spain,Southern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Living alone,Rented home,Far left
+290,1990,Millennials,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Left
+291,1964,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+292,1980,Generation X,Female,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Left
+293,1980,Generation X,Male,Spain,Southern Europe,Small city,Temperate climate,Employed,University education,Yes,NA,Homeowner without mortgage,Far left
+294,1973,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Left
+295,1977,Generation X,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+296,1972,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Far left
+297,1981,Generation X,Male,Spain,Southern Europe,Small city,Temperate climate,Employed,Non-university education,No,Household with children,Other tenure status,Far left
+298,1979,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Far left
+299,1967,Boomers + Silent Generation,Male,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Right
+300,1968,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Left
+301,1968,Boomers + Silent Generation,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,No,Living alone,Homeowner with mortgage,Left
+302,1949,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Temperate climate,Other inactive status,University education,Yes,Living alone,Homeowner without mortgage,Left
+303,1961,Boomers + Silent Generation,Female,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,NA
+304,1985,Generation X,Male,Spain,Southern Europe,Small city,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Far left
+305,1947,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Left
+306,1971,Generation X,Female,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Far left
+307,1968,Boomers + Silent Generation,Female,Spain,Southern Europe,Large city,Temperate climate,Employed,University education,No,Living alone,Homeowner without mortgage,Far left
+308,1961,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Temperate climate,Employed,University education,No,Living alone,Homeowner without mortgage,Far left
+309,1971,Generation X,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+310,1981,Generation X,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+311,1988,Millennials,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,No,Household with children,Homeowner without mortgage,Left
+312,1960,Boomers + Silent Generation,Male,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Other inactive status,University education,No,Living alone,Homeowner with mortgage,Far left
+313,1963,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,Non-university education,No,Couple without children,Homeowner without mortgage,Far left
+314,1970,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Far left
+315,1972,Generation X,Female,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+316,1970,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Far left
+317,1993,Millennials,Female,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Far left
+318,1983,Generation X,Female,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Living alone,Other tenure status,Far left
+319,1971,Generation X,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,NA,No,Household with children,Homeowner with mortgage,Left
+320,1966,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Far left
+321,1990,Millennials,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Left
+322,1953,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Temperate climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Far left
+323,1958,Boomers + Silent Generation,Male,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Other inactive status,Non-university education,NA,Couple without children,Homeowner without mortgage,Left
+324,1965,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Right
+325,1977,Generation X,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+326,1977,Generation X,Female,Spain,Southern Europe,Small city,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,NA
+327,1962,Boomers + Silent Generation,Male,Spain,Southern Europe,Village or rural area,Temperate climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Far left
+328,1981,Generation X,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+329,1967,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,No,Couple without children,Homeowner without mortgage,Left
+330,1992,Millennials,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Far left
+331,1989,Millennials,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Right
+332,1975,Generation X,Female,Spain,Southern Europe,Large city,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+333,1975,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Far left
+334,1957,Boomers + Silent Generation,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,NA,Couple without children,Homeowner with mortgage,Far left
+335,1964,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,Non-university education,Yes,Household with children,Homeowner without mortgage,Far left
+336,1982,Generation X,Male,Spain,Southern Europe,Village or rural area,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner with mortgage,Far left
+337,1977,Generation X,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Left
+338,1969,Boomers + Silent Generation,Male,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,Non-university education,No,Living alone,Homeowner without mortgage,Far left
+339,1950,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Far left
+340,1985,Generation X,Other / Prefer not to say,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,Non-university education,No,Couple without children,Homeowner without mortgage,Far left
+341,1956,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,No,Living alone,Homeowner without mortgage,Far left
+342,1975,Generation X,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Far left
+343,1983,Generation X,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Far left
+344,1968,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner without mortgage,Far left
+345,1964,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,Non-university education,No,Couple without children,Homeowner without mortgage,NA
+346,1984,Generation X,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Couple without children,Homeowner with mortgage,Left
+347,1968,Boomers + Silent Generation,Female,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Left
+348,1989,Millennials,Male,Spain,Southern Europe,Village or rural area,Temperate climate,Unemployed,Non-university education,Yes,Couple without children,Homeowner without mortgage,Far left
+349,NA,NA,NA,Spain,Southern Europe,Town,Temperate climate,Other inactive status,University education,Yes,Couple without children,Homeowner without mortgage,Left
+350,1975,Generation X,Female,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+351,1987,Millennials,Male,Spain,Southern Europe,Town,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner with mortgage,Far left
+352,1963,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Temperate climate,Other inactive status,University education,Yes,Household with children,Homeowner without mortgage,Far left
+353,1968,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Far left
+354,1961,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,Yes,Couple without children,Homeowner with mortgage,Left
+355,1952,Boomers + Silent Generation,Male,Spain,Southern Europe,Small town,Temperate climate,Other inactive status,University education,No,Couple without children,Homeowner without mortgage,Left
+356,1967,Boomers + Silent Generation,Male,Spain,Southern Europe,Village or rural area,Temperate climate,Employed,University education,No,Household with children,Homeowner with mortgage,Left
+357,1971,Generation X,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,No,Household with children,Homeowner without mortgage,Far left
+358,1970,Boomers + Silent Generation,Female,Spain,Southern Europe,Small town,Warm/Mediterranean climate,Employed,University education,No,Living alone,Homeowner without mortgage,NA
+359,1956,Boomers + Silent Generation,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Other inactive status,University education,Yes,Couple without children,Homeowner with mortgage,Far left
+360,1976,Generation X,Female,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Left
+361,1961,Boomers + Silent Generation,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Other inactive status,University education,No,Household with children,Homeowner without mortgage,Centre
+362,1987,Millennials,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,Non-university education,No,Living alone,Rented home,Far left
+363,1970,Boomers + Silent Generation,Male,Spain,Southern Europe,Town,Temperate climate,Employed,Non-university education,No,Living alone,Homeowner with mortgage,Far left
+364,1992,Millennials,Male,Spain,Southern Europe,Village or rural area,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Far left
+365,1977,Generation X,Other / Prefer not to say,Spain,Southern Europe,Town,Temperate climate,Employed,University education,No,Living alone,Homeowner without mortgage,Far left
+366,1974,Generation X,Male,Spain,Southern Europe,Small town,Temperate climate,Employed,University education,No,Household with children,Homeowner without mortgage,Left
+367,1972,Generation X,Male,Spain,Southern Europe,Village or rural area,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+368,1987,Millennials,Male,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Far left
+369,1984,Generation X,Male,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+371,1996,Millennials,Female,Spain,Southern Europe,Small city,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+372,1972,Generation X,Male,Norway,Northern Europe,Small city,Cold/Polar climate,Employed,University education,No,Household with children,Rented home,Far left
+PROLIFIC_6136cb52db0f1cb2262bbf5d,1996,Millennials,Male,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_692479671925a3943fce7055,1994,Millennials,Female,Germany,Western Europe,Metropolis,Temperate climate,Unemployed,University education,Yes,Couple without children,Rented home,Left
+PROLIFIC_5fe328a0a53c57f645dc0b19,1984,Generation X,Male,Italy,Southern Europe,Metropolis,Warm/Mediterranean climate,Employed,Non-university education,No,Couple without children,Rented home,Far left
+PROLIFIC_696e3c3ad994d9435948d3d1,1997,Millennials,Female,France,Western Europe,Town,Temperate climate,NA,University education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_6605852ff5914c22f592a372,1976,Generation X,Male,Greece,Southern Europe,Metropolis,Warm/Mediterranean climate,Employed,University education,Yes,Living alone,Homeowner without mortgage,Centre
+PROLIFIC_6984258cb12947550bff2d1a,1996,Millennials,Female,France,Western Europe,Town,Warm/Mediterranean climate,Other inactive status,University education,Yes,Household with children,Homeowner with mortgage,Far right
+PROLIFIC_6310c063bd0cce86b0289d20,1997,Millennials,Male,United Kingdom,Northern Europe,Town,Temperate climate,Employed,University education,Yes,Living alone,Homeowner with mortgage,Far left
+PROLIFIC_69b1d8fe4b310c4186bcbbcc,2006,Generation Z,Male,Netherlands,Western Europe,Large city,Temperate climate,Student,Non-university education,Yes,Living alone,Homeowner with mortgage,Far left
+PROLIFIC_69807a8271a61e4d75ab96c4,1994,Millennials,Female,Romania,Eastern Europe,Large city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Left
+PROLIFIC_5fbbc75f884010d82bf37532,1997,Millennials,Male,Poland,Eastern Europe,Metropolis,Temperate climate,Employed,University education,Yes,Shared household,Rented home,Left
+PROLIFIC_6933207fdfdffc10571420a8,2002,Generation Z,Female,Austria,Western Europe,Metropolis,Temperate climate,Student,Non-university education,Yes,Household with children,Rented home,Left
+PROLIFIC_698e1fb406f80868c041565a,2000,Millennials,Male,Poland,Eastern Europe,Town,Temperate climate,Employed,Non-university education,No,Couple without children,Rented home,Far right
+PROLIFIC_69836e23196469e9a4825346,1998,Millennials,Male,Romania,Eastern Europe,Metropolis,Temperate climate,Employed,University education,Yes,Couple without children,Homeowner without mortgage,Centre
+PROLIFIC_697b30411f746b578812b981,1999,Millennials,Female,Italy,Southern Europe,Town,Warm/Mediterranean climate,Student,Non-university education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_669f4716791267ee6337641f,1969,Boomers + Silent Generation,Male,Italy,Southern Europe,Town,Warm/Mediterranean climate,Employed,Non-university education,No,NA,Homeowner without mortgage,Centre
+PROLIFIC_63b3377ca1ccdfc7cc567503,1962,Boomers + Silent Generation,Male,United Kingdom,Northern Europe,Medium-sized city,Temperate climate,Employed,University education,Yes,Household with children,Homeowner with mortgage,Centre
+PROLIFIC_69809ce77983b24e7e0729b4,1999,Millennials,Female,Romania,Eastern Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Right
+PROLIFIC_699e007dc8f8cbd074222f56,1988,Millennials,Male,France,Western Europe,Town,Temperate climate,Employed,University education,Yes,Household with children,Homeowner without mortgage,Centre
+PROLIFIC_56ab6fd869b24700065cbdbd,1968,Boomers + Silent Generation,Male,United Kingdom,Northern Europe,Town,Temperate climate,Employed,Non-university education,Yes,Couple without children,Homeowner without mortgage,Centre
+PROLIFIC_66bf543c179dbc75f790396c,2000,Millennials,Female,Spain,Southern Europe,Town,Warm/Mediterranean climate,Employed,University education,No,NA,Rented home,Far left
+PROLIFIC_697263ffdf4adff3cfd20053,1998,Millennials,Female,Poland,Eastern Europe,Metropolis,Temperate climate,Employed,Non-university education,No,Household with children,Homeowner without mortgage,NA
+PROLIFIC_654e38a9bd1961e9942af916,1999,Millennials,Female,United Kingdom,Northern Europe,Metropolis,Temperate climate,Employed,University education,No,Shared household,Rented home,NA
+PROLIFIC_697f4a00c858108580e08f4b,2000,Millennials,Female,United Kingdom,Northern Europe,Large city,Cold/Polar climate,Employed,University education,Yes,Couple without children,Rented home,Far right
+PROLIFIC_609077b2d5f119a0c819a6cd,1997,Millennials,Male,Austria,Western Europe,Medium-sized city,Temperate climate,Employed,Non-university education,Yes,Couple without children,Rented home,Centre
+PROLIFIC_65410ad762a7e3c570b6273c,1989,Millennials,Male,Germany,Western Europe,Town,Warm/Mediterranean climate,Unemployed,Non-university education,No,Household with children,Rented home,Left
+412,NA,NA,NA,Netherlands,Western Europe,Large city,Temperate climate,NA,NA,NA,NA,Homeowner with mortgage,Left
+413,NA,NA,NA,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,NA,NA,NA,NA,Homeowner without mortgage,NA
+414,NA,NA,NA,Spain,Southern Europe,Town,Warm/Mediterranean climate,NA,NA,NA,NA,Homeowner with mortgage,Left
+415,NA,NA,NA,Ireland,Northern Europe,Town,Temperate climate,NA,NA,NA,NA,Homeowner without mortgage,Centre
+416,NA,NA,NA,Spain,Southern Europe,Small city,Warm/Mediterranean climate,NA,NA,NA,NA,Homeowner without mortgage,Left
+417,NA,NA,NA,Belgium,Western Europe,Metropolis,Temperate climate,NA,NA,NA,NA,Rented home,Left
+418,NA,NA,NA,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,NA,NA,NA,NA,Homeowner without mortgage,Far left
+419,NA,NA,NA,Spain,Southern Europe,Town,Warm/Mediterranean climate,NA,NA,NA,NA,NA,Far left
+420,NA,NA,NA,Ireland,Northern Europe,Town,Temperate climate,NA,NA,NA,NA,NA,NA
+421,NA,NA,NA,Netherlands,Western Europe,Metropolis,Temperate climate,NA,NA,NA,NA,NA,Left
+422,NA,NA,NA,Germany,Western Europe,Small city,Temperate climate,NA,NA,NA,NA,NA,Left
+423,NA,NA,NA,Spain,Southern Europe,Medium-sized city,Warm/Mediterranean climate,NA,NA,NA,NA,NA,Far left
+424,2000,Millennials,Male,NA,NA,Medium-sized city,Warm/Mediterranean climate,Employed,University education,NA,NA,Homeowner without mortgage,Centre

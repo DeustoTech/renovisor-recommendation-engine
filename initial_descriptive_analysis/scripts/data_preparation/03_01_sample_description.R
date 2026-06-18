@@ -306,11 +306,10 @@ clean_type_house <- function(x) {
   
   case_when(
     is.na(x) ~ NA_character_,
-    str_detect(x, regex("Uni-personal", ignore_case = TRUE)) ~ "Vive solo/a",
     str_detect(x, regex("Dual Income No Kids|Ageing family", ignore_case = TRUE)) ~ "Pareja sin hijos",
     str_detect(x, regex("Traditional family|Large family|Single parenthood", ignore_case = TRUE)) ~ "Hogar con hijos",
-    str_detect(x, regex("Poly-nuclear", ignore_case = TRUE)) ~ "Vivienda compartida",
-    TRUE ~ "Otro tipo de hogar"
+    str_detect(x, regex("Uni-personal|Poly-nuclear", ignore_case = TRUE)) ~ "Otros",
+    TRUE ~ "Otros"
   )
 }
 
@@ -321,8 +320,8 @@ clean_tenure <- function(x) {
     is.na(x) ~ NA_character_,
     str_detect(x, regex("own the home outright|fully paid-off", ignore_case = TRUE)) ~ "Propiedad sin hipoteca",
     str_detect(x, regex("mortgage|outstanding payments", ignore_case = TRUE)) ~ "Propiedad con hipoteca",
-    str_detect(x, regex("rent|rental", ignore_case = TRUE)) ~ "Alquiler",
-    TRUE ~ "Otro régimen"
+    str_detect(x, regex("rent|rental", ignore_case = TRUE)) ~ "No propietarios",
+    TRUE ~ "No propietarios"
   )
 }
 
@@ -390,7 +389,7 @@ df <- df %>%
       year_of_birth_clean >= 2001 & year_of_birth_clean <= 2007 ~ "Generación Z",
       year_of_birth_clean >= 1986 & year_of_birth_clean <= 2000 ~ "Millennials",
       year_of_birth_clean >= 1971 & year_of_birth_clean <= 1985 ~ "Generación X",
-      year_of_birth_clean >= 1932 & year_of_birth_clean <= 1970 ~ "Boomers + generación silenciosa",
+      year_of_birth_clean >= 1932 & year_of_birth_clean <= 1970 ~ "Boomers +",
       TRUE ~ NA_character_
     )
   )
@@ -448,7 +447,7 @@ natural_orders <- list(
     "Generación Z",
     "Millennials",
     "Generación X",
-    "Boomers + generación silenciosa"
+    "Boomers +"
   ),
   gender = c(
     "Mujer",
@@ -490,17 +489,14 @@ natural_orders <- list(
     "No"
   ),
   type_house = c(
-    "Vive solo/a",
     "Pareja sin hijos",
     "Hogar con hijos",
-    "Vivienda compartida",
-    "Otro tipo de hogar"
+    "Otros"
   ),
   tenure = c(
     "Propiedad sin hipoteca",
     "Propiedad con hipoteca",
-    "Alquiler",
-    "Otro régimen"
+    "No propietarios"
   ),
   political_orientation = c(
     "Extrema izquierda",
@@ -536,7 +532,7 @@ sample_colors <- list(
     "Generación Z" = "#56B4E9",
     "Millennials" = "#009E73",
     "Generación X" = "#E69F00",
-    "Boomers + generación silenciosa" = "#CC79A7"
+    "Boomers +" = "#CC79A7"
   ),
   gender = c(
     "Mujer" = "#009E73",
@@ -1339,7 +1335,7 @@ table_blocks <- list(
       "Generación Z",
       "Millennials",
       "Generación X",
-      "Boomers + generación silenciosa"
+      "Boomers +"
     )
   ),
   list(
@@ -1382,11 +1378,9 @@ table_blocks <- list(
     var = "type_house",
     label = "Tipo de hogar",
     levels = c(
-      "Vive solo/a",
       "Pareja sin hijos",
       "Hogar con hijos",
-      "Vivienda compartida",
-      "Otro tipo de hogar"
+      "Otros"
     )
   ),
   list(
@@ -1395,8 +1389,7 @@ table_blocks <- list(
     levels = c(
       "Propiedad sin hipoteca",
       "Propiedad con hipoteca",
-      "Alquiler",
-      "Otro régimen"
+      "No propietarios"
     )
   ),
   list(
@@ -1572,7 +1565,7 @@ if (
 # Generación Z: 19-25
 # Millennials: 26-40
 # Generación X: 41-55
-# Boomers + generación silenciosa: 56+
+# Boomers +: 56+
 
 age_levels_pyramid <- c(
   "19-25",
@@ -1594,14 +1587,14 @@ generation_levels_pyramid <- c(
   "Generación Z",
   "Millennials",
   "Generación X",
-  "Boomers + generación silenciosa"
+  "Boomers +"
 )
 
 generation_colors_pyramid <- c(
   "Generación Z" = "#8EC1B8",
   "Millennials" = "#E8E6A0",
   "Generación X" = "#B4B0D0",
-  "Boomers + generación silenciosa" = "#E58373"
+  "Boomers +" = "#E58373"
 )
 
 # ------------------------------------------------------------------------------
@@ -1654,7 +1647,7 @@ pyramid_data <- sample_description %>%
       age >= 19 & age <= 25 ~ "Generación Z",
       age >= 26 & age <= 40 ~ "Millennials",
       age >= 41 & age <= 55 ~ "Generación X",
-      age >= 56             ~ "Boomers + generación silenciosa",
+      age >= 56             ~ "Boomers +",
       TRUE ~ NA_character_
     )
   ) %>%
@@ -1675,7 +1668,7 @@ pyramid_data <- sample_description %>%
       age_group_pyramid %in% c("41-45", "46-50", "51-55") ~ "Generación X",
       age_group_pyramid %in% c(
         "56-60", "61-65", "66-70", "71-75", "76-79", "80+"
-      ) ~ "Boomers + generación silenciosa",
+      ) ~ "Boomers +",
       TRUE ~ NA_character_
     ),
     

@@ -1,0 +1,415 @@
+variable,group,n_participants,experience_short,n_pairs,total_pairs,percentage
+Generation,Boomers + Silent Generation,105,Already present,153,1533,9.980430528375733
+Generation,Boomers + Silent Generation,105,Implemented,409,1533,26.679712981082844
+Generation,Boomers + Silent Generation,105,Searched for information,192,1533,12.524461839530332
+Generation,Boomers + Silent Generation,105,Aware / would consider,477,1533,31.115459882583167
+Generation,Boomers + Silent Generation,105,Unaware,176,1533,11.480756686236138
+Generation,Boomers + Silent Generation,105,Would never use it,126,1533,8.21917808219178
+Generation,Generation X,100,Already present,173,1550,11.161290322580646
+Generation,Generation X,100,Implemented,336,1550,21.677419354838708
+Generation,Generation X,100,Searched for information,212,1550,13.67741935483871
+Generation,Generation X,100,Aware / would consider,502,1550,32.387096774193544
+Generation,Generation X,100,Unaware,152,1550,9.806451612903226
+Generation,Generation X,100,Would never use it,175,1550,11.29032258064516
+Generation,Generation Z,36,Already present,68,572,11.888111888111888
+Generation,Generation Z,36,Implemented,87,572,15.209790209790212
+Generation,Generation Z,36,Searched for information,77,572,13.461538461538462
+Generation,Generation Z,36,Aware / would consider,145,572,25.34965034965035
+Generation,Generation Z,36,Unaware,141,572,24.65034965034965
+Generation,Generation Z,36,Would never use it,54,572,9.44055944055944
+Generation,Millennials,140,Already present,266,2203,12.074443940081707
+Generation,Millennials,140,Implemented,332,2203,15.070358601906491
+Generation,Millennials,140,Searched for information,376,2203,17.067635043123015
+Generation,Millennials,140,Aware / would consider,636,2203,28.869723104857016
+Generation,Millennials,140,Unaware,359,2203,16.295960054471177
+Generation,Millennials,140,Would never use it,234,2203,10.6218792555606
+Gender,Female,188,Already present,325,2950,11.016949152542372
+Gender,Female,188,Implemented,497,2950,16.847457627118644
+Gender,Female,188,Searched for information,366,2950,12.40677966101695
+Gender,Female,188,Aware / would consider,893,2950,30.271186440677965
+Gender,Female,188,Unaware,526,2950,17.83050847457627
+Gender,Female,188,Would never use it,343,2950,11.627118644067796
+Gender,Male,190,Already present,337,2863,11.770869717079986
+Gender,Male,190,Implemented,647,2863,22.59867272092211
+Gender,Male,190,Searched for information,483,2863,16.87041564792176
+Gender,Male,190,Aware / would consider,852,2863,29.758994062172544
+Gender,Male,190,Unaware,301,2863,10.513447432762836
+Gender,Male,190,Would never use it,243,2863,8.487600419140762
+Gender,Other / Prefer not to say,4,Already present,6,62,9.67741935483871
+Gender,Other / Prefer not to say,4,Implemented,17,62,27.419354838709676
+Gender,Other / Prefer not to say,4,Searched for information,11,62,17.741935483870968
+Gender,Other / Prefer not to say,4,Aware / would consider,16,62,25.806451612903224
+Gender,Other / Prefer not to say,4,Unaware,6,62,9.67741935483871
+Gender,Other / Prefer not to say,4,Would never use it,6,62,9.67741935483871
+Country,Austria,2,Already present,8,32,25
+Country,Austria,2,Implemented,3,32,9.375
+Country,Austria,2,Searched for information,5,32,15.625
+Country,Austria,2,Aware / would consider,5,32,15.625
+Country,Austria,2,Unaware,6,32,18.75
+Country,Austria,2,Would never use it,5,32,15.625
+Country,Belgium,7,Already present,14,107,13.084112149532709
+Country,Belgium,7,Implemented,13,107,12.149532710280374
+Country,Belgium,7,Searched for information,15,107,14.018691588785046
+Country,Belgium,7,Aware / would consider,21,107,19.626168224299064
+Country,Belgium,7,Unaware,38,107,35.51401869158878
+Country,Belgium,7,Would never use it,6,107,5.607476635514018
+Country,Bulgaria,3,Already present,3,46,6.521739130434782
+Country,Bulgaria,3,Implemented,4,46,8.695652173913043
+Country,Bulgaria,3,Searched for information,9,46,19.565217391304348
+Country,Bulgaria,3,Aware / would consider,18,46,39.130434782608695
+Country,Bulgaria,3,Unaware,10,46,21.73913043478261
+Country,Bulgaria,3,Would never use it,2,46,4.3478260869565215
+Country,Czech Republic,5,Already present,14,80,17.5
+Country,Czech Republic,5,Implemented,5,80,6.25
+Country,Czech Republic,5,Searched for information,11,80,13.750000000000002
+Country,Czech Republic,5,Aware / would consider,19,80,23.75
+Country,Czech Republic,5,Unaware,23,80,28.749999999999996
+Country,Czech Republic,5,Would never use it,8,80,10
+Country,Denmark,4,Already present,6,63,9.523809523809524
+Country,Denmark,4,Implemented,11,63,17.46031746031746
+Country,Denmark,4,Searched for information,8,63,12.698412698412698
+Country,Denmark,4,Aware / would consider,20,63,31.746031746031743
+Country,Denmark,4,Unaware,7,63,11.11111111111111
+Country,Denmark,4,Would never use it,11,63,17.46031746031746
+Country,Estonia,4,Already present,10,63,15.873015873015872
+Country,Estonia,4,Implemented,8,63,12.698412698412698
+Country,Estonia,4,Searched for information,7,63,11.11111111111111
+Country,Estonia,4,Aware / would consider,20,63,31.746031746031743
+Country,Estonia,4,Unaware,12,63,19.047619047619047
+Country,Estonia,4,Would never use it,6,63,9.523809523809524
+Country,Finland,4,Already present,8,64,12.5
+Country,Finland,4,Implemented,6,64,9.375
+Country,Finland,4,Searched for information,11,64,17.1875
+Country,Finland,4,Aware / would consider,24,64,37.5
+Country,Finland,4,Unaware,8,64,12.5
+Country,Finland,4,Would never use it,7,64,10.9375
+Country,France,25,Already present,44,395,11.139240506329113
+Country,France,25,Implemented,54,395,13.670886075949367
+Country,France,25,Searched for information,63,395,15.949367088607595
+Country,France,25,Aware / would consider,116,395,29.367088607594937
+Country,France,25,Unaware,64,395,16.20253164556962
+Country,France,25,Would never use it,54,395,13.670886075949367
+Country,Germany,23,Already present,36,361,9.97229916897507
+Country,Germany,23,Implemented,51,361,14.127423822714682
+Country,Germany,23,Searched for information,88,361,24.37673130193906
+Country,Germany,23,Aware / would consider,101,361,27.977839335180054
+Country,Germany,23,Unaware,58,361,16.06648199445983
+Country,Germany,23,Would never use it,27,361,7.479224376731302
+Country,Greece,5,Already present,11,78,14.102564102564102
+Country,Greece,5,Implemented,18,78,23.076923076923077
+Country,Greece,5,Searched for information,8,78,10.256410256410255
+Country,Greece,5,Aware / would consider,19,78,24.358974358974358
+Country,Greece,5,Unaware,10,78,12.82051282051282
+Country,Greece,5,Would never use it,12,78,15.384615384615385
+Country,Hungary,4,Already present,3,63,4.761904761904762
+Country,Hungary,4,Implemented,9,63,14.285714285714285
+Country,Hungary,4,Searched for information,11,63,17.46031746031746
+Country,Hungary,4,Aware / would consider,32,63,50.79365079365079
+Country,Hungary,4,Unaware,5,63,7.936507936507936
+Country,Hungary,4,Would never use it,3,63,4.761904761904762
+Country,Ireland,2,Already present,1,22,4.545454545454546
+Country,Ireland,2,Implemented,8,22,36.36363636363637
+Country,Ireland,2,Searched for information,8,22,36.36363636363637
+Country,Ireland,2,Aware / would consider,0,22,0
+Country,Ireland,2,Unaware,1,22,4.545454545454546
+Country,Ireland,2,Would never use it,4,22,18.181818181818183
+Country,Italy,27,Already present,51,425,12
+Country,Italy,27,Implemented,81,425,19.058823529411764
+Country,Italy,27,Searched for information,81,425,19.058823529411764
+Country,Italy,27,Aware / would consider,122,425,28.705882352941174
+Country,Italy,27,Unaware,56,425,13.176470588235295
+Country,Italy,27,Would never use it,34,425,8
+Country,Latvia,4,Already present,8,64,12.5
+Country,Latvia,4,Implemented,11,64,17.1875
+Country,Latvia,4,Searched for information,9,64,14.0625
+Country,Latvia,4,Aware / would consider,14,64,21.875
+Country,Latvia,4,Unaware,17,64,26.5625
+Country,Latvia,4,Would never use it,5,64,7.8125
+Country,Lithuania,1,Already present,3,16,18.75
+Country,Lithuania,1,Implemented,8,16,50
+Country,Lithuania,1,Searched for information,0,16,0
+Country,Lithuania,1,Aware / would consider,2,16,12.5
+Country,Lithuania,1,Unaware,0,16,0
+Country,Lithuania,1,Would never use it,3,16,18.75
+Country,Luxembourg,1,Already present,0,14,0
+Country,Luxembourg,1,Implemented,2,14,14.285714285714285
+Country,Luxembourg,1,Searched for information,4,14,28.57142857142857
+Country,Luxembourg,1,Aware / would consider,8,14,57.14285714285714
+Country,Luxembourg,1,Unaware,0,14,0
+Country,Luxembourg,1,Would never use it,0,14,0
+Country,Netherlands,11,Already present,15,166,9.036144578313253
+Country,Netherlands,11,Implemented,44,166,26.506024096385545
+Country,Netherlands,11,Searched for information,35,166,21.084337349397593
+Country,Netherlands,11,Aware / would consider,31,166,18.67469879518072
+Country,Netherlands,11,Unaware,11,166,6.626506024096386
+Country,Netherlands,11,Would never use it,30,166,18.072289156626507
+Country,Norway,2,Already present,1,32,3.125
+Country,Norway,2,Implemented,8,32,25
+Country,Norway,2,Searched for information,2,32,6.25
+Country,Norway,2,Aware / would consider,7,32,21.875
+Country,Norway,2,Unaware,12,32,37.5
+Country,Norway,2,Would never use it,2,32,6.25
+Country,Poland,26,Already present,42,412,10.194174757281553
+Country,Poland,26,Implemented,57,412,13.834951456310678
+Country,Poland,26,Searched for information,59,412,14.320388349514563
+Country,Poland,26,Aware / would consider,135,412,32.76699029126214
+Country,Poland,26,Unaware,62,412,15.048543689320388
+Country,Poland,26,Would never use it,57,412,13.834951456310678
+Country,Portugal,4,Already present,5,64,7.8125
+Country,Portugal,4,Implemented,7,64,10.9375
+Country,Portugal,4,Searched for information,16,64,25
+Country,Portugal,4,Aware / would consider,16,64,25
+Country,Portugal,4,Unaware,16,64,25
+Country,Portugal,4,Would never use it,4,64,6.25
+Country,Romania,8,Already present,18,126,14.285714285714285
+Country,Romania,8,Implemented,18,126,14.285714285714285
+Country,Romania,8,Searched for information,36,126,28.57142857142857
+Country,Romania,8,Aware / would consider,25,126,19.841269841269842
+Country,Romania,8,Unaware,19,126,15.079365079365079
+Country,Romania,8,Would never use it,10,126,7.936507936507936
+Country,Slovakia,4,Already present,1,62,1.6129032258064515
+Country,Slovakia,4,Implemented,12,62,19.35483870967742
+Country,Slovakia,4,Searched for information,5,62,8.064516129032258
+Country,Slovakia,4,Aware / would consider,17,62,27.419354838709676
+Country,Slovakia,4,Unaware,16,62,25.806451612903224
+Country,Slovakia,4,Would never use it,11,62,17.741935483870968
+Country,Slovenia,4,Already present,8,63,12.698412698412698
+Country,Slovenia,4,Implemented,16,63,25.396825396825395
+Country,Slovenia,4,Searched for information,8,63,12.698412698412698
+Country,Slovenia,4,Aware / would consider,18,63,28.57142857142857
+Country,Slovenia,4,Unaware,8,63,12.698412698412698
+Country,Slovenia,4,Would never use it,5,63,7.936507936507936
+Country,Spain,182,Already present,302,2706,11.160384331116038
+Country,Spain,182,Implemented,661,2706,24.42719881744272
+Country,Spain,182,Searched for information,373,2706,13.78418329637842
+Country,Spain,182,Aware / would consider,857,2706,31.670362158167038
+Country,Spain,182,Unaware,302,2706,11.160384331116038
+Country,Spain,182,Would never use it,211,2706,7.797487065779748
+Country,Sweden,3,Already present,4,48,8.333333333333332
+Country,Sweden,3,Implemented,8,48,16.666666666666664
+Country,Sweden,3,Searched for information,10,48,20.833333333333336
+Country,Sweden,3,Aware / would consider,7,48,14.583333333333334
+Country,Sweden,3,Unaware,16,48,33.33333333333333
+Country,Sweden,3,Would never use it,3,48,6.25
+Country,United Kingdom,25,Already present,59,394,14.974619289340103
+Country,United Kingdom,25,Implemented,49,394,12.436548223350254
+Country,United Kingdom,25,Searched for information,39,394,9.898477157360407
+Country,United Kingdom,25,Aware / would consider,106,394,26.903553299492383
+Country,United Kingdom,25,Unaware,71,394,18.02030456852792
+Country,United Kingdom,25,Would never use it,70,394,17.766497461928935
+European region,Eastern Europe,50,Already present,81,789,10.26615969581749
+European region,Eastern Europe,50,Implemented,105,789,13.307984790874524
+European region,Eastern Europe,50,Searched for information,131,789,16.603295310519645
+European region,Eastern Europe,50,Aware / would consider,246,789,31.1787072243346
+European region,Eastern Europe,50,Unaware,135,789,17.110266159695815
+European region,Eastern Europe,50,Would never use it,91,789,11.533586818757922
+European region,Northern Europe,49,Already present,100,766,13.054830287206268
+European region,Northern Europe,49,Implemented,117,766,15.274151436031334
+European region,Northern Europe,49,Searched for information,94,766,12.27154046997389
+European region,Northern Europe,49,Aware / would consider,200,766,26.109660574412537
+European region,Northern Europe,49,Unaware,144,766,18.79895561357702
+European region,Northern Europe,49,Would never use it,111,766,14.490861618798956
+European region,Southern Europe,222,Already present,377,3336,11.30095923261391
+European region,Southern Europe,222,Implemented,783,3336,23.471223021582734
+European region,Southern Europe,222,Searched for information,486,3336,14.568345323741008
+European region,Southern Europe,222,Aware / would consider,1032,3336,30.935251798561154
+European region,Southern Europe,222,Unaware,392,3336,11.750599520383693
+European region,Southern Europe,222,Would never use it,266,3336,7.973621103117506
+European region,Western Europe,69,Already present,117,1075,10.883720930232558
+European region,Western Europe,69,Implemented,167,1075,15.534883720930232
+European region,Western Europe,69,Searched for information,210,1075,19.53488372093023
+European region,Western Europe,69,Aware / would consider,282,1075,26.232558139534884
+European region,Western Europe,69,Unaware,177,1075,16.465116279069765
+European region,Western Europe,69,Would never use it,122,1075,11.348837209302326
+City size,Large city,45,Already present,95,707,13.437057991513438
+City size,Large city,45,Implemented,120,707,16.973125884016973
+City size,Large city,45,Searched for information,97,707,13.719943422913719
+City size,Large city,45,Aware / would consider,162,707,22.913719943422915
+City size,Large city,45,Unaware,122,707,17.256011315417254
+City size,Large city,45,Would never use it,111,707,15.700141442715701
+City size,Medium-sized city,55,Already present,143,840,17.023809523809526
+City size,Medium-sized city,55,Implemented,121,840,14.404761904761903
+City size,Medium-sized city,55,Searched for information,91,840,10.833333333333334
+City size,Medium-sized city,55,Aware / would consider,274,840,32.61904761904762
+City size,Medium-sized city,55,Unaware,110,840,13.095238095238097
+City size,Medium-sized city,55,Would never use it,101,840,12.023809523809524
+City size,Metropolis,38,Already present,69,593,11.63575042158516
+City size,Metropolis,38,Implemented,79,593,13.322091062394604
+City size,Metropolis,38,Searched for information,126,593,21.247892074198987
+City size,Metropolis,38,Aware / would consider,168,593,28.330522765598655
+City size,Metropolis,38,Unaware,100,593,16.863406408094438
+City size,Metropolis,38,Would never use it,51,593,8.600337268128163
+City size,Small city,77,Already present,119,1195,9.9581589958159
+City size,Small city,77,Implemented,214,1195,17.90794979079498
+City size,Small city,77,Searched for information,184,1195,15.397489539748953
+City size,Small city,77,Aware / would consider,387,1195,32.38493723849372
+City size,Small city,77,Unaware,193,1195,16.150627615062763
+City size,Small city,77,Would never use it,98,1195,8.200836820083682
+City size,Small town,59,Already present,94,904,10.398230088495575
+City size,Small town,59,Implemented,233,904,25.77433628318584
+City size,Small town,59,Searched for information,141,904,15.597345132743362
+City size,Small town,59,Aware / would consider,271,904,29.97787610619469
+City size,Small town,59,Unaware,96,904,10.619469026548673
+City size,Small town,59,Would never use it,69,904,7.6327433628318575
+City size,Town,89,Already present,127,1349,9.414381022979985
+City size,Town,89,Implemented,294,1349,21.7939214232765
+City size,Town,89,Searched for information,210,1349,15.567086730911786
+City size,Town,89,Aware / would consider,413,1349,30.61527057079318
+City size,Town,89,Unaware,178,1349,13.194959229058561
+City size,Town,89,Would never use it,127,1349,9.414381022979985
+City size,Village or rural area,34,Already present,38,473,8.0338266384778
+City size,Village or rural area,34,Implemented,131,473,27.695560253699792
+City size,Village or rural area,34,Searched for information,79,473,16.701902748414376
+City size,Village or rural area,34,Aware / would consider,115,473,24.312896405919663
+City size,Village or rural area,34,Unaware,57,473,12.050739957716702
+City size,Village or rural area,34,Would never use it,53,473,11.20507399577167
+Climate zone,Cold/Polar climate,16,Already present,35,254,13.779527559055119
+Climate zone,Cold/Polar climate,16,Implemented,37,254,14.566929133858267
+Climate zone,Cold/Polar climate,16,Searched for information,51,254,20.078740157480315
+Climate zone,Cold/Polar climate,16,Aware / would consider,75,254,29.527559055118108
+Climate zone,Cold/Polar climate,16,Unaware,41,254,16.141732283464567
+Climate zone,Cold/Polar climate,16,Would never use it,15,254,5.905511811023622
+Climate zone,Temperate climate,224,Already present,351,3442,10.19755955839628
+Climate zone,Temperate climate,224,Implemented,575,3442,16.705403834979663
+Climate zone,Temperate climate,224,Searched for information,528,3442,15.339918651946544
+Climate zone,Temperate climate,224,Aware / would consider,1051,3442,30.53457292271935
+Climate zone,Temperate climate,224,Unaware,522,3442,15.165601394538058
+Climate zone,Temperate climate,224,Would never use it,415,3442,12.056943637420105
+Climate zone,Warm/Mediterranean climate,157,Already present,299,2365,12.642706131078224
+Climate zone,Warm/Mediterranean climate,157,Implemented,580,2365,24.52431289640592
+Climate zone,Warm/Mediterranean climate,157,Searched for information,349,2365,14.756871035940803
+Climate zone,Warm/Mediterranean climate,157,Aware / would consider,664,2365,28.076109936575055
+Climate zone,Warm/Mediterranean climate,157,Unaware,293,2365,12.389006342494714
+Climate zone,Warm/Mediterranean climate,157,Would never use it,180,2365,7.6109936575052854
+Employment status,Employed,284,Already present,501,4393,11.40450717049852
+Employment status,Employed,284,Implemented,873,4393,19.872524470748917
+Employment status,Employed,284,Searched for information,657,4393,14.955611199635785
+Employment status,Employed,284,Aware / would consider,1336,4393,30.412019121329386
+Employment status,Employed,284,Unaware,584,4393,13.293876621898477
+Employment status,Employed,284,Would never use it,442,4393,10.061461415888914
+Employment status,Other inactive status,50,Already present,80,720,11.11111111111111
+Employment status,Other inactive status,50,Implemented,178,720,24.72222222222222
+Employment status,Other inactive status,50,Searched for information,97,720,13.472222222222221
+Employment status,Other inactive status,50,Aware / would consider,216,720,30
+Employment status,Other inactive status,50,Unaware,83,720,11.527777777777779
+Employment status,Other inactive status,50,Would never use it,66,720,9.166666666666666
+Employment status,Student,30,Already present,49,476,10.294117647058822
+Employment status,Student,30,Implemented,77,476,16.176470588235293
+Employment status,Student,30,Searched for information,75,476,15.756302521008402
+Employment status,Student,30,Aware / would consider,131,476,27.521008403361346
+Employment status,Student,30,Unaware,106,476,22.268907563025213
+Employment status,Student,30,Would never use it,38,476,7.9831932773109235
+Employment status,Unemployed,19,Already present,34,301,11.295681063122924
+Employment status,Unemployed,19,Implemented,32,301,10.631229235880399
+Employment status,Unemployed,19,Searched for information,39,301,12.956810631229235
+Employment status,Unemployed,19,Aware / would consider,87,301,28.903654485049834
+Employment status,Unemployed,19,Unaware,66,301,21.92691029900332
+Employment status,Unemployed,19,Would never use it,43,301,14.285714285714285
+Education level,Non-university education,93,Already present,145,1411,10.276399716513112
+Education level,Non-university education,93,Implemented,288,1411,20.41105598866052
+Education level,Non-university education,93,Searched for information,213,1411,15.095676824946846
+Education level,Non-university education,93,Aware / would consider,397,1411,28.13607370659107
+Education level,Non-university education,93,Unaware,216,1411,15.308291991495393
+Education level,Non-university education,93,Would never use it,152,1411,10.772501771793054
+Education level,University education,290,Already present,522,4479,11.654387139986603
+Education level,University education,290,Implemented,867,4479,19.356999330207636
+Education level,University education,290,Searched for information,651,4479,14.534494306764904
+Education level,University education,290,Aware / would consider,1377,4479,30.74346952444742
+Education level,University education,290,Unaware,619,4479,13.82004911810672
+Education level,University education,290,Would never use it,443,4479,9.890600580486716
+Work/study from home,No,156,Already present,289,2361,12.240576027107158
+Work/study from home,No,156,Implemented,501,2361,21.21982210927573
+Work/study from home,No,156,Searched for information,321,2361,13.595933926302415
+Work/study from home,No,156,Aware / would consider,714,2361,30.241423125794153
+Work/study from home,No,156,Unaware,312,2361,13.214739517153747
+Work/study from home,No,156,Would never use it,224,2361,9.487505294366795
+Work/study from home,Yes,221,Already present,371,3454,10.741169658367111
+Work/study from home,Yes,221,Implemented,626,3454,18.12391430225825
+Work/study from home,Yes,221,Searched for information,543,3454,15.720903300521135
+Work/study from home,Yes,221,Aware / would consider,1042,3454,30.1679212507238
+Work/study from home,Yes,221,Unaware,515,3454,14.910248986682106
+Work/study from home,Yes,221,Would never use it,357,3454,10.335842501447596
+Household type,Couple without children,126,Already present,240,1945,12.339331619537274
+Household type,Couple without children,126,Implemented,361,1945,18.560411311053983
+Household type,Couple without children,126,Searched for information,321,1945,16.503856041131105
+Household type,Couple without children,126,Aware / would consider,600,1945,30.848329048843187
+Household type,Couple without children,126,Unaware,249,1945,12.802056555269923
+Household type,Couple without children,126,Would never use it,174,1945,8.946015424164525
+Household type,Household with children,171,Already present,261,2630,9.923954372623573
+Household type,Household with children,171,Implemented,561,2630,21.330798479087456
+Household type,Household with children,171,Searched for information,383,2630,14.562737642585551
+Household type,Household with children,171,Aware / would consider,766,2630,29.125475285171103
+Household type,Household with children,171,Unaware,376,2630,14.29657794676806
+Household type,Household with children,171,Would never use it,283,2630,10.760456273764259
+Household type,Living alone,70,Already present,143,1087,13.155473781048757
+Household type,Living alone,70,Implemented,219,1087,20.14719411223551
+Household type,Living alone,70,Searched for information,117,1087,10.763569457221712
+Household type,Living alone,70,Aware / would consider,326,1087,29.990800367985283
+Household type,Living alone,70,Unaware,171,1087,15.731370745170192
+Household type,Living alone,70,Would never use it,111,1087,10.211591536338545
+Household type,Other household type,4,Already present,2,48,4.166666666666666
+Household type,Other household type,4,Implemented,3,48,6.25
+Household type,Other household type,4,Searched for information,6,48,12.5
+Household type,Other household type,4,Aware / would consider,25,48,52.083333333333336
+Household type,Other household type,4,Unaware,10,48,20.833333333333336
+Household type,Other household type,4,Would never use it,2,48,4.166666666666666
+Household type,Shared household,9,Already present,21,141,14.893617021276595
+Household type,Shared household,9,Implemented,12,141,8.51063829787234
+Household type,Shared household,9,Searched for information,32,141,22.69503546099291
+Household type,Shared household,9,Aware / would consider,30,141,21.27659574468085
+Household type,Shared household,9,Unaware,29,141,20.56737588652482
+Household type,Shared household,9,Would never use it,17,141,12.056737588652481
+Tenure status,Homeowner with mortgage,106,Already present,173,1625,10.646153846153846
+Tenure status,Homeowner with mortgage,106,Implemented,359,1625,22.092307692307692
+Tenure status,Homeowner with mortgage,106,Searched for information,219,1625,13.476923076923079
+Tenure status,Homeowner with mortgage,106,Aware / would consider,458,1625,28.184615384615384
+Tenure status,Homeowner with mortgage,106,Unaware,222,1625,13.661538461538461
+Tenure status,Homeowner with mortgage,106,Would never use it,194,1625,11.938461538461539
+Tenure status,Homeowner without mortgage,183,Already present,266,2777,9.578682030968672
+Tenure status,Homeowner without mortgage,183,Implemented,608,2777,21.89413035649982
+Tenure status,Homeowner without mortgage,183,Searched for information,442,2777,15.916456607850199
+Tenure status,Homeowner without mortgage,183,Aware / would consider,869,2777,31.29276197335254
+Tenure status,Homeowner without mortgage,183,Unaware,354,2777,12.747569319409436
+Tenure status,Homeowner without mortgage,183,Would never use it,238,2777,8.570399711919336
+Tenure status,Other tenure status,14,Already present,23,200,11.5
+Tenure status,Other tenure status,14,Implemented,33,200,16.5
+Tenure status,Other tenure status,14,Searched for information,25,200,12.5
+Tenure status,Other tenure status,14,Aware / would consider,60,200,30
+Tenure status,Other tenure status,14,Unaware,40,200,20
+Tenure status,Other tenure status,14,Would never use it,19,200,9.5
+Tenure status,Rented home,87,Already present,211,1369,15.412710007304604
+Tenure status,Rented home,87,Implemented,171,1369,12.490869247626005
+Tenure status,Rented home,87,Searched for information,205,1369,14.974433893352812
+Tenure status,Rented home,87,Aware / would consider,395,1369,28.85317750182615
+Tenure status,Rented home,87,Unaware,238,1369,17.384952520087655
+Tenure status,Rented home,87,Would never use it,149,1369,10.883856829802776
+Political orientation,Centre,73,Already present,130,1133,11.47396293027361
+Political orientation,Centre,73,Implemented,207,1133,18.27007943512798
+Political orientation,Centre,73,Searched for information,182,1133,16.063548102383056
+Political orientation,Centre,73,Aware / would consider,274,1133,24.18358340688438
+Political orientation,Centre,73,Unaware,183,1133,16.15180935569285
+Political orientation,Centre,73,Would never use it,157,1133,13.857016769638127
+Political orientation,Far left,142,Already present,252,2165,11.639722863741339
+Political orientation,Far left,142,Implemented,433,2165,20
+Political orientation,Far left,142,Searched for information,297,2165,13.718244803695152
+Political orientation,Far left,142,Aware / would consider,686,2165,31.685912240184756
+Political orientation,Far left,142,Unaware,300,2165,13.856812933025402
+Political orientation,Far left,142,Would never use it,197,2165,9.099307159353348
+Political orientation,Far right,6,Already present,16,93,17.20430107526882
+Political orientation,Far right,6,Implemented,14,93,15.053763440860216
+Political orientation,Far right,6,Searched for information,20,93,21.50537634408602
+Political orientation,Far right,6,Aware / would consider,22,93,23.655913978494624
+Political orientation,Far right,6,Unaware,15,93,16.129032258064516
+Political orientation,Far right,6,Would never use it,6,93,6.451612903225806
+Political orientation,Left,129,Already present,207,1954,10.59365404298874
+Political orientation,Left,129,Implemented,385,1954,19.703172978505627
+Political orientation,Left,129,Searched for information,312,1954,15.967246673490276
+Political orientation,Left,129,Aware / would consider,592,1954,30.296827021494373
+Political orientation,Left,129,Unaware,271,1954,13.868986693961105
+Political orientation,Left,129,Would never use it,187,1954,9.570112589559878
+Political orientation,Right,29,Already present,44,444,9.90990990990991
+Political orientation,Right,29,Implemented,93,444,20.945945945945947
+Political orientation,Right,29,Searched for information,79,444,17.792792792792792
+Political orientation,Right,29,Aware / would consider,133,444,29.954954954954953
+Political orientation,Right,29,Unaware,52,444,11.711711711711711
+Political orientation,Right,29,Would never use it,43,444,9.684684684684685

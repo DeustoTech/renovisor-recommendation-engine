@@ -1,0 +1,27 @@
+variable,category,n,percentage
+country,Austria,2,0.5
+country,Belgium,7,1.8
+country,Bulgaria,3,0.8
+country,Czech Republic,5,1.3
+country,Denmark,4,1
+country,Estonia,4,1
+country,Finland,4,1
+country,France,25,6.3
+country,Germany,24,6.1
+country,Greece,5,1.3
+country,Hungary,4,1
+country,Ireland,3,0.8
+country,Italy,27,6.8
+country,Latvia,4,1
+country,Lithuania,1,0.3
+country,Luxembourg,1,0.3
+country,Netherlands,11,2.8
+country,Norway,2,0.5
+country,Poland,26,6.6
+country,Portugal,4,1
+country,Romania,8,2
+country,Slovakia,4,1
+country,Slovenia,4,1
+country,Spain,186,47
+country,Sweden,3,0.8
+country,United Kingdom,25,6.3

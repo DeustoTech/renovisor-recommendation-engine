@@ -1,5 +1,5 @@
 variable,category,n,percentage
-generación,Boomers + generación silenciosa,105,27.1
+generación,Boomers +,105,27.1
 generación,Generación X,103,26.6
 generación,Generación Z,36,9.3
 generación,Millennials,143,37
@@ -54,12 +54,9 @@ nivel educativo,Universitaria,296,76.1
 trabajo/estudio desde casa,No,156,41.3
 trabajo/estudio desde casa,Sí,222,58.7
 tipo de hogar,Hogar con hijos,172,45.1
-tipo de hogar,Otro tipo de hogar,4,1
+tipo de hogar,Otros,83,21.8
 tipo de hogar,Pareja sin hijos,126,33.1
-tipo de hogar,Vive solo/a,70,18.4
-tipo de hogar,Vivienda compartida,9,2.4
-régimen de tenencia,Alquiler,88,22.2
-régimen de tenencia,Otro régimen,14,3.5
+régimen de tenencia,No propietarios,102,25.8
 régimen de tenencia,Propiedad con hipoteca,109,27.5
 régimen de tenencia,Propiedad sin hipoteca,185,46.7
 orientación política,Centro,73,19.1

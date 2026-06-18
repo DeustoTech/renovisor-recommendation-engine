@@ -1,0 +1,31 @@
+group,experience_short,n,total_group,percentage
+Centre,Already present,130,1133,11.47396293027361
+Centre,Implemented,207,1133,18.27007943512798
+Centre,Searched for information,182,1133,16.063548102383056
+Centre,Aware / would consider,274,1133,24.18358340688438
+Centre,Unaware,183,1133,16.15180935569285
+Centre,Would never use it,157,1133,13.857016769638127
+Far left,Already present,252,2165,11.639722863741339
+Far left,Implemented,433,2165,20
+Far left,Searched for information,297,2165,13.718244803695152
+Far left,Aware / would consider,686,2165,31.685912240184756
+Far left,Unaware,300,2165,13.856812933025402
+Far left,Would never use it,197,2165,9.099307159353348
+Far right,Already present,16,93,17.20430107526882
+Far right,Implemented,14,93,15.053763440860216
+Far right,Searched for information,20,93,21.50537634408602
+Far right,Aware / would consider,22,93,23.655913978494624
+Far right,Unaware,15,93,16.129032258064516
+Far right,Would never use it,6,93,6.451612903225806
+Left,Already present,207,1954,10.59365404298874
+Left,Implemented,385,1954,19.703172978505627
+Left,Searched for information,312,1954,15.967246673490276
+Left,Aware / would consider,592,1954,30.296827021494373
+Left,Unaware,271,1954,13.868986693961105
+Left,Would never use it,187,1954,9.570112589559878
+Right,Already present,44,444,9.90990990990991
+Right,Implemented,93,444,20.945945945945947
+Right,Searched for information,79,444,17.792792792792792
+Right,Aware / would consider,133,444,29.954954954954953
+Right,Unaware,52,444,11.711711711711711
+Right,Would never use it,43,444,9.684684684684685

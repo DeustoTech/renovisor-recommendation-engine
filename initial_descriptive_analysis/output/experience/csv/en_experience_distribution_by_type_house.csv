@@ -1,0 +1,31 @@
+group,experience_short,n,total_group,percentage
+Couple without children,Already present,240,1945,12.339331619537274
+Couple without children,Implemented,361,1945,18.560411311053983
+Couple without children,Searched for information,321,1945,16.503856041131105
+Couple without children,Aware / would consider,600,1945,30.848329048843187
+Couple without children,Unaware,249,1945,12.802056555269923
+Couple without children,Would never use it,174,1945,8.946015424164525
+Household with children,Already present,261,2630,9.923954372623573
+Household with children,Implemented,561,2630,21.330798479087456
+Household with children,Searched for information,383,2630,14.562737642585551
+Household with children,Aware / would consider,766,2630,29.125475285171103
+Household with children,Unaware,376,2630,14.29657794676806
+Household with children,Would never use it,283,2630,10.760456273764259
+Living alone,Already present,143,1087,13.155473781048757
+Living alone,Implemented,219,1087,20.14719411223551
+Living alone,Searched for information,117,1087,10.763569457221712
+Living alone,Aware / would consider,326,1087,29.990800367985283
+Living alone,Unaware,171,1087,15.731370745170192
+Living alone,Would never use it,111,1087,10.211591536338545
+Other household type,Already present,2,48,4.166666666666666
+Other household type,Implemented,3,48,6.25
+Other household type,Searched for information,6,48,12.5
+Other household type,Aware / would consider,25,48,52.083333333333336
+Other household type,Unaware,10,48,20.833333333333336
+Other household type,Would never use it,2,48,4.166666666666666
+Shared household,Already present,21,141,14.893617021276595
+Shared household,Implemented,12,141,8.51063829787234
+Shared household,Searched for information,32,141,22.69503546099291
+Shared household,Aware / would consider,30,141,21.27659574468085
+Shared household,Unaware,29,141,20.56737588652482
+Shared household,Would never use it,17,141,12.056737588652481

@@ -1,0 +1,25 @@
+group,experience_short,n,total_group,percentage
+Homeowner with mortgage,Already present,173,1625,10.646153846153846
+Homeowner with mortgage,Implemented,359,1625,22.092307692307692
+Homeowner with mortgage,Searched for information,219,1625,13.476923076923079
+Homeowner with mortgage,Aware / would consider,458,1625,28.184615384615384
+Homeowner with mortgage,Unaware,222,1625,13.661538461538461
+Homeowner with mortgage,Would never use it,194,1625,11.938461538461539
+Homeowner without mortgage,Already present,266,2777,9.578682030968672
+Homeowner without mortgage,Implemented,608,2777,21.89413035649982
+Homeowner without mortgage,Searched for information,442,2777,15.916456607850199
+Homeowner without mortgage,Aware / would consider,869,2777,31.29276197335254
+Homeowner without mortgage,Unaware,354,2777,12.747569319409436
+Homeowner without mortgage,Would never use it,238,2777,8.570399711919336
+Other tenure status,Already present,23,200,11.5
+Other tenure status,Implemented,33,200,16.5
+Other tenure status,Searched for information,25,200,12.5
+Other tenure status,Aware / would consider,60,200,30
+Other tenure status,Unaware,40,200,20
+Other tenure status,Would never use it,19,200,9.5
+Rented home,Already present,211,1369,15.412710007304604
+Rented home,Implemented,171,1369,12.490869247626005
+Rented home,Searched for information,205,1369,14.974433893352812
+Rented home,Aware / would consider,395,1369,28.85317750182615
+Rented home,Unaware,238,1369,17.384952520087655
+Rented home,Would never use it,149,1369,10.883856829802776

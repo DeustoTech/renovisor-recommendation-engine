@@ -1,0 +1,4 @@
+variable,category,n,percentage
+source survey,Concerns survey,12,3
+source survey,Decision survey,385,95.5
+source survey,RVS survey,6,1.5

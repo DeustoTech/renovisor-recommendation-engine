@@ -1,0 +1,33 @@
+self_profile,determinant_id,determinant_label,n,mean,median,sd
+Stubborn-Sensible,knowledge,Knowledge,50,80.16,80,16.445779807275414
+Stubborn-Sensible,climate_protection,Climate protection,52,79.09615384615384,80,15.441552821672268
+Stubborn-Sensible,technical_fit,Technical fit,48,78.85416666666667,81,16.353787489393
+Stubborn-Sensible,environmental_concerns,Environmental concerns,50,78.7,80,18.1313236681491
+Stubborn-Sensible,wellbeing,Wellbeing,45,78.37777777777778,76,14.82670945055959
+Stubborn-Sensible,commitment,Commitment,50,77.34,75,14.918294480404978
+Stubborn-Sensible,safety,Safety,40,76.45,78.5,15.96944197281411
+Stubborn-Sensible,trust,Trust,47,71.93617021276596,75,19.762067590428355
+Stubborn-Sensible,adherence,Adherence,41,70.60975609756098,74,22.024847387417342
+Stubborn-Sensible,self_satisfaction,Self-satisfaction,45,69.06666666666666,75,22.74003278161865
+Stubborn-Sensible,coziness,Comfort,44,69,70,18.374653928081045
+Stubborn-Sensible,support,Social support,45,66.4,65,19.28659449650786
+Stubborn-Sensible,legal,Legal compliance,39,63.61538461538461,72,27.081373852088806
+Stubborn-Sensible,added_value,Added value,42,62.333333333333336,70,19.646468889787766
+Stubborn-Sensible,autarky,Self-sufficiency,47,62.255319148936174,72,26.888229269803077
+Stubborn-Sensible,rights_and_duties,Rights and duties,45,60.71111111111111,65,27.636127723607654
+Stubborn-Sensible,agreement,Agreement,44,58.40909090909091,67.5,27.160434785897394
+Stubborn-Sensible,own_significance,Personal significance,44,58.18181818181818,62,25.60275487291265
+Stubborn-Sensible,cost_efficiency,Cost efficiency,48,57.9375,61,25.949546997234886
+Stubborn-Sensible,credit_score_access_to_funding,Access to funding,38,57.78947368421053,64,27.227924750189676
+Stubborn-Sensible,own_competence,Own competence,40,55.7,61,30.37306499059779
+Stubborn-Sensible,risk_profile,Risk profile,40,52.75,50,24.923215415886183
+Stubborn-Sensible,frugality,Frugality,40,47.075,52,26.644273450261462
+Stubborn-Sensible,peer_pressure,Peer pressure,44,42.86363636363637,42,29.30242541679023
+Stubborn-Sensible,profits,Economic profit,48,38.375,31.5,29.176371232520886
+Stubborn-Sensible,novelty,Novelty,44,37.97727272727273,33,25.86772132103048
+Stubborn-Sensible,socialising,Socialising,44,34.65909090909091,25,29.946419735392205
+Stubborn-Sensible,fun,Fun,48,28.395833333333336,20,26.732512345682302
+Stubborn-Sensible,trends,Trends,48,26.854166666666664,22,23.720885476756937
+Stubborn-Sensible,authority,Authority,46,26.608695652173914,21.5,22.47317241203096
+Stubborn-Sensible,approval,Approval,54,19.59259259259259,17,18.647189599081543
+Stubborn-Sensible,recognition,Recognition,46,18.97826086956522,10,23.33189436556728

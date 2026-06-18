@@ -1,0 +1,43 @@
+group,experience_short,n,total_group,percentage
+Large city,Already present,95,707,13.437057991513438
+Large city,Implemented,120,707,16.973125884016973
+Large city,Searched for information,97,707,13.719943422913719
+Large city,Aware / would consider,162,707,22.913719943422915
+Large city,Unaware,122,707,17.256011315417254
+Large city,Would never use it,111,707,15.700141442715701
+Medium-sized city,Already present,143,840,17.023809523809526
+Medium-sized city,Implemented,121,840,14.404761904761903
+Medium-sized city,Searched for information,91,840,10.833333333333334
+Medium-sized city,Aware / would consider,274,840,32.61904761904762
+Medium-sized city,Unaware,110,840,13.095238095238097
+Medium-sized city,Would never use it,101,840,12.023809523809524
+Metropolis,Already present,69,593,11.63575042158516
+Metropolis,Implemented,79,593,13.322091062394604
+Metropolis,Searched for information,126,593,21.247892074198987
+Metropolis,Aware / would consider,168,593,28.330522765598655
+Metropolis,Unaware,100,593,16.863406408094438
+Metropolis,Would never use it,51,593,8.600337268128163
+Small city,Already present,119,1195,9.9581589958159
+Small city,Implemented,214,1195,17.90794979079498
+Small city,Searched for information,184,1195,15.397489539748953
+Small city,Aware / would consider,387,1195,32.38493723849372
+Small city,Unaware,193,1195,16.150627615062763
+Small city,Would never use it,98,1195,8.200836820083682
+Small town,Already present,94,904,10.398230088495575
+Small town,Implemented,233,904,25.77433628318584
+Small town,Searched for information,141,904,15.597345132743362
+Small town,Aware / would consider,271,904,29.97787610619469
+Small town,Unaware,96,904,10.619469026548673
+Small town,Would never use it,69,904,7.6327433628318575
+Town,Already present,127,1349,9.414381022979985
+Town,Implemented,294,1349,21.7939214232765
+Town,Searched for information,210,1349,15.567086730911786
+Town,Aware / would consider,413,1349,30.61527057079318
+Town,Unaware,178,1349,13.194959229058561
+Town,Would never use it,127,1349,9.414381022979985
+Village or rural area,Already present,38,473,8.0338266384778
+Village or rural area,Implemented,131,473,27.695560253699792
+Village or rural area,Searched for information,79,473,16.701902748414376
+Village or rural area,Aware / would consider,115,473,24.312896405919663
+Village or rural area,Unaware,57,473,12.050739957716702
+Village or rural area,Would never use it,53,473,11.20507399577167

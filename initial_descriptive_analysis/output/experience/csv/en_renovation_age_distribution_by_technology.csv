@@ -1,0 +1,159 @@
+technology,renovation_age_clean,n,total_technology,percentage,label
+Balcony solar kits,Less than 5 years ago,9,24,37.5,"38%
+(n=9)"
+Balcony solar kits,5-15 years ago,6,24,25,"25%
+(n=6)"
+Balcony solar kits,15-25 years ago,1,24,4.166666666666666,"4%
+(n=1)"
+Balcony solar kits,More than 25 years ago / never updated,5,24,20.833333333333336,"21%
+(n=5)"
+Balcony solar kits,I do not know,3,24,12.5,"12%
+(n=3)"
+Cooling system,Less than 5 years ago,44,86,51.162790697674424,"51%
+(n=44)"
+Cooling system,5-15 years ago,20,86,23.25581395348837,"23%
+(n=20)"
+Cooling system,15-25 years ago,6,86,6.976744186046512,"7%
+(n=6)"
+Cooling system,More than 25 years ago / never updated,8,86,9.30232558139535,"9%
+(n=8)"
+Cooling system,I do not know,8,86,9.30232558139535,"9%
+(n=8)"
+Domestic hot water system,Less than 5 years ago,62,257,24.124513618677042,"24%
+(n=62)"
+Domestic hot water system,5-15 years ago,77,257,29.961089494163424,"30%
+(n=77)"
+Domestic hot water system,15-25 years ago,59,257,22.957198443579767,"23%
+(n=59)"
+Domestic hot water system,More than 25 years ago / never updated,38,257,14.785992217898833,"15%
+(n=38)"
+Domestic hot water system,I do not know,21,257,8.171206225680933,"8%
+(n=21)"
+Electric vehicle,Less than 5 years ago,38,56,67.85714285714286,"68%
+(n=38)"
+Electric vehicle,5-15 years ago,11,56,19.642857142857142,"20%
+(n=11)"
+Electric vehicle,15-25 years ago,0,56,0,
+Electric vehicle,More than 25 years ago / never updated,4,56,7.142857142857142,"7%
+(n=4)"
+Electric vehicle,I do not know,3,56,5.357142857142857,"5%
+(n=3)"
+Electricity tariff change,Less than 5 years ago,84,146,57.534246575342465,"58%
+(n=84)"
+Electricity tariff change,5-15 years ago,43,146,29.45205479452055,"29%
+(n=43)"
+Electricity tariff change,15-25 years ago,6,146,4.10958904109589,"4%
+(n=6)"
+Electricity tariff change,More than 25 years ago / never updated,3,146,2.054794520547945,"2%
+(n=3)"
+Electricity tariff change,I do not know,10,146,6.8493150684931505,"7%
+(n=10)"
+Elevator,Less than 5 years ago,15,160,9.375,"9%
+(n=15)"
+Elevator,5-15 years ago,30,160,18.75,"19%
+(n=30)"
+Elevator,15-25 years ago,41,160,25.624999999999996,"26%
+(n=41)"
+Elevator,More than 25 years ago / never updated,57,160,35.625,"36%
+(n=57)"
+Elevator,I do not know,17,160,10.625,"11%
+(n=17)"
+Energy community,Less than 5 years ago,38,69,55.072463768115945,"55%
+(n=38)"
+Energy community,5-15 years ago,22,69,31.88405797101449,"32%
+(n=22)"
+Energy community,15-25 years ago,2,69,2.898550724637681,"3%
+(n=2)"
+Energy community,More than 25 years ago / never updated,4,69,5.797101449275362,"6%
+(n=4)"
+Energy community,I do not know,3,69,4.3478260869565215,"4%
+(n=3)"
+Energy storage systems,Less than 5 years ago,22,38,57.89473684210527,"58%
+(n=22)"
+Energy storage systems,5-15 years ago,4,38,10.526315789473683,"11%
+(n=4)"
+Energy storage systems,15-25 years ago,2,38,5.263157894736842,"5%
+(n=2)"
+Energy storage systems,More than 25 years ago / never updated,3,38,7.894736842105263,"8%
+(n=3)"
+Energy storage systems,I do not know,7,38,18.421052631578945,"18%
+(n=7)"
+Energy-efficient appliances,Less than 5 years ago,85,191,44.50261780104712,"45%
+(n=85)"
+Energy-efficient appliances,5-15 years ago,71,191,37.17277486910995,"37%
+(n=71)"
+Energy-efficient appliances,15-25 years ago,15,191,7.853403141361256,"8%
+(n=15)"
+Energy-efficient appliances,More than 25 years ago / never updated,4,191,2.094240837696335,"2%
+(n=4)"
+Energy-efficient appliances,I do not know,16,191,8.37696335078534,"8%
+(n=16)"
+Envelope renovation,Less than 5 years ago,62,191,32.460732984293195,"32%
+(n=62)"
+Envelope renovation,5-15 years ago,72,191,37.696335078534034,"38%
+(n=72)"
+Envelope renovation,15-25 years ago,25,191,13.089005235602095,"13%
+(n=25)"
+Envelope renovation,More than 25 years ago / never updated,11,191,5.7591623036649215,"6%
+(n=11)"
+Envelope renovation,I do not know,21,191,10.99476439790576,"11%
+(n=21)"
+Fossil fuel or biomass heating,Less than 5 years ago,18,98,18.367346938775512,"18%
+(n=18)"
+Fossil fuel or biomass heating,5-15 years ago,22,98,22.448979591836736,"22%
+(n=22)"
+Fossil fuel or biomass heating,15-25 years ago,26,98,26.53061224489796,"27%
+(n=26)"
+Fossil fuel or biomass heating,More than 25 years ago / never updated,20,98,20.408163265306122,"20%
+(n=20)"
+Fossil fuel or biomass heating,I do not know,12,98,12.244897959183673,"12%
+(n=12)"
+Heat pump,Less than 5 years ago,36,68,52.94117647058824,"53%
+(n=36)"
+Heat pump,5-15 years ago,10,68,14.705882352941178,"15%
+(n=10)"
+Heat pump,15-25 years ago,10,68,14.705882352941178,"15%
+(n=10)"
+Heat pump,More than 25 years ago / never updated,6,68,8.823529411764707,"9%
+(n=6)"
+Heat pump,I do not know,6,68,8.823529411764707,"9%
+(n=6)"
+Heat recovery ventilation,Less than 5 years ago,12,33,36.36363636363637,"36%
+(n=12)"
+Heat recovery ventilation,5-15 years ago,12,33,36.36363636363637,"36%
+(n=12)"
+Heat recovery ventilation,15-25 years ago,1,33,3.0303030303030303,"3%
+(n=1)"
+Heat recovery ventilation,More than 25 years ago / never updated,3,33,9.090909090909092,"9%
+(n=3)"
+Heat recovery ventilation,I do not know,5,33,15.151515151515152,"15%
+(n=5)"
+Micro-efficiency measures,Less than 5 years ago,65,227,28.634361233480178,"29%
+(n=65)"
+Micro-efficiency measures,5-15 years ago,84,227,37.00440528634361,"37%
+(n=84)"
+Micro-efficiency measures,15-25 years ago,33,227,14.537444933920703,"15%
+(n=33)"
+Micro-efficiency measures,More than 25 years ago / never updated,19,227,8.370044052863436,"8%
+(n=19)"
+Micro-efficiency measures,I do not know,26,227,11.45374449339207,"11%
+(n=26)"
+Rooftop photovoltaic system,Less than 5 years ago,40,76,52.63157894736842,"53%
+(n=40)"
+Rooftop photovoltaic system,5-15 years ago,24,76,31.57894736842105,"32%
+(n=24)"
+Rooftop photovoltaic system,15-25 years ago,4,76,5.263157894736842,"5%
+(n=4)"
+Rooftop photovoltaic system,More than 25 years ago / never updated,5,76,6.578947368421052,"7%
+(n=5)"
+Rooftop photovoltaic system,I do not know,3,76,3.9473684210526314,"4%
+(n=3)"
+Smart home systems,Less than 5 years ago,51,67,76.11940298507463,"76%
+(n=51)"
+Smart home systems,5-15 years ago,11,67,16.417910447761194,"16%
+(n=11)"
+Smart home systems,15-25 years ago,0,67,0,
+Smart home systems,More than 25 years ago / never updated,1,67,1.4925373134328357,"1%
+(n=1)"
+Smart home systems,I do not know,4,67,5.970149253731343,"6%
+(n=4)"
