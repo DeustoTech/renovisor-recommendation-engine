@@ -1,0 +1,8 @@
+source_survey,merge_status,n
+concerns1,extra_survey_appended,12
+concerns2,external_unmatched_appended,114
+decision,decision_only_no_external_match,348
+decision,decision_with_external_match,73
+energy_crisis,external_unmatched_appended,119
+poverty,external_unmatched_appended,41
+rvs,extra_survey_appended,8

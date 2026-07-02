@@ -55,7 +55,9 @@ library(tibble)
 library(purrr)
 library(ggplot2)
 
+# ==============================================================================
 # 1. LOAD DATA AND DEFINE OUTPUT FOLDERS
+# ==============================================================================
 
 df <- read_csv(
   "initial_descriptive_analysis/output/clean_datasets/df_clean_general.csv",
@@ -92,8 +94,9 @@ df <- df %>%
     )
   )
 
-
+# ==============================================================================
 # 2. SAVE PLOT FUNCTION
+# ==============================================================================
 
 save_plot_png <- function(plot, filename, width = 10, height = 6) {
   ggsave(
@@ -105,8 +108,49 @@ save_plot_png <- function(plot, filename, width = 10, height = 6) {
   )
 }
 
-
+# ==============================================================================
 # 3. VISUAL CONFIGURATION
+# ==============================================================================
+
+# Common palette used across all scripts.
+# Rule:
+# category 1 = colour 1
+# category 2 = colour 2
+# category 3 = colour 3
+# etc.
+
+main_palette <- c(
+  "#0072B2", "#56B4E9", "#009E73", "#E69F00",
+  "#D55E00", "#CC79A7", "#F0E442", "#999999",
+  "#332288", "#88CCEE", "#44AA99", "#DDCC77",
+  "#117733", "#882255", "#AA4499", "#661100",
+  "#6699CC", "#AA4466", "#4477AA", "#228833",
+  "#CC6677", "#AA3377", "#BBBBBB", "#000000",
+  "#66CCEE", "#CCBB44", "#EE6677", "#EE7733",
+  "#0077BB", "#33BBEE", "#009988", "#EE3377"
+)
+
+make_named_palette <- function(levels_vec) {
+  levels_vec <- as.character(levels_vec)
+  colors <- rep(main_palette, length.out = length(levels_vec))
+  names(colors) <- levels_vec
+  colors
+}
+
+stage_levels <- c(
+  "Implemented",
+  "Aware / would consider",
+  "Unaware but curious"
+)
+
+stage_levels_with_never <- c(
+  "Implemented",
+  "Aware / would consider",
+  "Unaware but curious",
+  "Would never use it"
+)
+
+stage_colors <- make_named_palette(stage_levels_with_never)
 
 plot_base_size <- 15
 plot_title_size <- 18
@@ -119,6 +163,16 @@ plot_legend_text_size <- 13
 
 plot_label_size <- 4
 plot_heatmap_label_size <- 3.8
+
+label_color_by_position <- function(x, levels_vec) {
+  idx <- match(as.character(x), as.character(levels_vec))
+  
+  if_else(
+    idx %in% c(1, 3, 5, 6, 9, 13, 16, 18, 20, 21, 24, 27, 30),
+    "white",
+    "black"
+  )
+}
 
 theme_ttm <- theme_minimal(base_size = plot_base_size) +
   theme(
@@ -152,8 +206,9 @@ theme_ttm_heatmap <- theme_minimal(base_size = plot_base_size) +
     plot.margin = margin(12, 20, 12, 12)
   )
 
-
+# ==============================================================================
 # 4. DETERMINANT DICTIONARY
+# ==============================================================================
 
 determinant_ids <- c(
   "profits",
@@ -225,6 +280,8 @@ determinant_labels <- c(
   "Personal significance"
 )
 
+determinant_colors <- make_named_palette(determinant_labels)
+
 determinant_cols <- map_chr(determinant_ids, function(id) {
   
   matches <- names(df)[str_detect(names(df), paste0("^", id, "_"))]
@@ -258,8 +315,9 @@ write_csv(
 
 print(determinant_dictionary, n = Inf)
 
-
+# ==============================================================================
 # 5. DIMENSION -> DETERMINANT MAPPING
+# ==============================================================================
 
 dimension_determinant_mapping <- tibble(
   dimension = c(
@@ -321,9 +379,9 @@ write_csv(
   out_file(csv_dir, "dimension_determinant_mapping.csv")
 )
 
-
+# ==============================================================================
 # 6. HELPER FUNCTIONS
-
+# ==============================================================================
 
 clean_determinant_score <- function(x) {
   x <- suppressWarnings(as.numeric(x))
@@ -390,6 +448,8 @@ dimension_dictionary <- tibble(
   )
 )
 
+dimension_colors <- make_named_palette(dimension_dictionary$dimension_label)
+
 extract_dimensions <- function(x) {
   x <- str_squish(as.character(x))
   
@@ -408,9 +468,9 @@ extract_dimensions <- function(x) {
   detected
 }
 
-
+# ==============================================================================
 # 7. DETERMINANT MATRIX BY PARTICIPANT
-
+# ==============================================================================
 
 determinants_wide <- df %>%
   select(participant_id, all_of(determinant_cols)) %>%
@@ -441,9 +501,9 @@ write_csv(
   out_file(csv_dir, "ttm_determinants_wide.csv")
 )
 
-
+# ==============================================================================
 # 8. LOCATE STAGE / DIMENSION COLUMNS
-
+# ==============================================================================
 
 find_unique_col <- function(pattern, label, exclude_pattern = NULL) {
   
@@ -528,9 +588,9 @@ cat("Curiosity technology:", curious_technology_col, "\n")
 cat("Curiosity dimensions:", curious_dimensions_col, "\n")
 cat("Never-use technology:", never_technology_col, "\n")
 
-
+# ==============================================================================
 # 9. CREATE STAGE - TECHNOLOGY - DIMENSION TABLE
-
+# ==============================================================================
 
 implemented_stage <- df %>%
   transmute(
@@ -584,8 +644,9 @@ write_csv(
   out_file(csv_dir, "ttm_stage_technology_raw.csv")
 )
 
-
+# ==============================================================================
 # 10. EXPAND SELECTED DIMENSIONS
+# ==============================================================================
 
 ttm_stage_dimension_long <- ttm_stage_raw %>%
   unnest_longer(
@@ -620,9 +681,9 @@ write_csv(
 
 print(ttm_stage_dimension_long, n = 100)
 
-
+# ==============================================================================
 # 11. SUMMARY OF TECHNOLOGIES BY STAGE
-
+# ==============================================================================
 
 summary_technology_by_stage <- ttm_stage_dimension_long %>%
   distinct(participant_id, stage, technology) %>%
@@ -645,8 +706,9 @@ write_csv(
 
 print(summary_technology_by_stage, n = Inf)
 
-
+# ==============================================================================
 # 12. SUMMARY OF DIMENSIONS BY STAGE
+# ==============================================================================
 
 summary_dimension_by_stage <- ttm_stage_dimension_long %>%
   filter(!is.na(dimension)) %>%
@@ -669,8 +731,10 @@ write_csv(
 
 print(summary_dimension_by_stage, n = Inf)
 
-
+# ==============================================================================
 # 13. PREPARE DIMENSION -> DETERMINANTS MAPPING
+# ==============================================================================
+
 dimension_determinant_mapping_fixed <- dimension_determinant_mapping %>%
   rename(dimension_key = dimension) %>%
   mutate(
@@ -704,8 +768,10 @@ print(
   n = Inf
 )
 
-
+# ==============================================================================
 # 14. BUILD 32-DETERMINANT VECTOR BY STAGE / DIMENSION
+# ==============================================================================
+
 determinants_long_scores <- determinants_wide %>%
   pivot_longer(
     cols = all_of(determinant_ids),
@@ -820,8 +886,9 @@ write_csv(
   out_file(csv_dir, "ttm_stage_determinant_vector_wide_valid.csv")
 )
 
-
-# 15. SUMMARY OF DETERMINANTS BY STAG
+# ==============================================================================
+# 15. SUMMARY OF DETERMINANTS BY STAGE
+# ==============================================================================
 
 summary_determinants_by_stage <- ttm_stage_determinant_vector_long %>%
   filter(
@@ -839,6 +906,12 @@ summary_determinants_by_stage <- ttm_stage_determinant_vector_long %>%
     median_score = median(determinant_score_stage, na.rm = TRUE),
     .groups = "drop"
   ) %>%
+  group_by(stage) %>%
+  mutate(
+    total_mentions_stage = sum(n_mentions),
+    percentage = n_mentions / total_mentions_stage * 100
+  ) %>%
+  ungroup() %>%
   arrange(
     stage,
     desc(n_mentions),
@@ -852,14 +925,9 @@ write_csv(
 
 print(summary_determinants_by_stage, n = Inf)
 
-
+# ==============================================================================
 # 16. FINAL STAGE / INTERVENTION / DIMENSION / VECTOR PLOT
-
-stage_levels <- c(
-  "Implemented",
-  "Aware / would consider",
-  "Unaware but curious"
-)
+# ==============================================================================
 
 top_technologies_by_stage <- ttm_stage_dimension_long %>%
   filter(
@@ -873,7 +941,8 @@ top_technologies_by_stage <- ttm_stage_dimension_long %>%
 
 vector_final_plot_data <- ttm_stage_determinant_vector_long %>%
   mutate(
-    stage = factor(stage, levels = stage_levels)
+    stage = factor(stage, levels = stage_levels),
+    dimension = factor(dimension, levels = dimension_dictionary$dimension_label)
   ) %>%
   filter(
     is_linked == 1,
@@ -910,24 +979,19 @@ plot_final_stage_technology_dimension_vector <- ggplot(
   )
 ) +
   geom_tile(color = "black", linewidth = 0.2) +
-  geom_text(
-    aes(label = round(mean_score, 0)),
-    size = plot_heatmap_label_size
-  ) +
   facet_grid(
     rows = vars(stage),
     cols = vars(technology),
     scales = "free_x",
     space = "free_x"
   ) +
-  scale_fill_gradient(
-    low = "white",
-    high = "#0072B2",
+  scale_fill_gradientn(
+    colours = c("white", main_palette[1], main_palette[2], main_palette[3], main_palette[5]),
     limits = c(0, 100)
   ) +
   labs(
     title = "Mean determinant vector by stage, technology and dimension",
-    subtitle = "Only the most frequent technologies within each stage are shown. Mean values on a 0-100 scale",
+    subtitle = "Only the most frequent technologies within each stage are shown. Colour indicates mean values on a 0-100 scale",
     x = "Selected dimension",
     y = "Determinant",
     fill = "Mean"
@@ -943,18 +1007,19 @@ save_plot_png(
   height = 14
 )
 
-
+# ==============================================================================
 # 17. TECHNOLOGIES BY STAGE
-
+# ==============================================================================
 
 plot_technology_by_stage <- summary_technology_by_stage %>%
   group_by(stage) %>%
   slice_max(n_participants, n = 10, with_ties = FALSE) %>%
   ungroup() %>%
   mutate(
-    stage = factor(stage, levels = c(stage_levels, "Would never use it")),
+    stage = factor(stage, levels = stage_levels_with_never),
     technology = str_wrap(technology, width = 28),
-    technology = reorder(technology, n_participants)
+    technology = reorder(technology, n_participants),
+    label_npct = paste0(n_participants, " (", round(percentage, 0), "%)")
   ) %>%
   ggplot(
     aes(
@@ -963,16 +1028,17 @@ plot_technology_by_stage <- summary_technology_by_stage %>%
       fill = stage
     )
   ) +
-  geom_col(show.legend = FALSE) +
+  geom_col(color = "black", linewidth = 0.15, show.legend = FALSE) +
   geom_text(
-    aes(label = n_participants),
+    aes(label = label_npct),
     hjust = -0.1,
     size = plot_label_size
   ) +
   coord_flip(clip = "off") +
   facet_wrap(~ stage, scales = "free_y") +
+  scale_fill_manual(values = stage_colors, drop = FALSE) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0.15))
+    expand = expansion(mult = c(0, 0.25))
   ) +
   labs(
     title = "Most frequent technologies by TTM stage",
@@ -991,14 +1057,20 @@ save_plot_png(
   height = 9
 )
 
-
+# ==============================================================================
 # 18. DIMENSIONS BY STAGE
-
+# ==============================================================================
 
 plot_dimensions_by_stage_percentage <- summary_dimension_by_stage %>%
   mutate(
     stage = factor(stage, levels = stage_levels),
-    dimension = factor(dimension, levels = dimension_dictionary$dimension_label)
+    dimension = factor(dimension, levels = dimension_dictionary$dimension_label),
+    label_npct = if_else(
+      percentage >= 5,
+      paste0(n_mentions, " (", round(percentage, 0), "%)"),
+      ""
+    ),
+    label_color = label_color_by_position(dimension, dimension_dictionary$dimension_label)
   ) %>%
   ggplot(
     aes(
@@ -1010,16 +1082,16 @@ plot_dimensions_by_stage_percentage <- summary_dimension_by_stage %>%
   geom_col(color = "black", linewidth = 0.2) +
   geom_text(
     aes(
-      label = if_else(
-        percentage >= 5,
-        paste0(round(percentage, 0), "%"),
-        ""
-      )
+      label = label_npct,
+      color = label_color
     ),
     position = position_stack(vjust = 0.5),
-    size = plot_label_size
+    size = plot_label_size,
+    show.legend = FALSE
   ) +
   scale_x_discrete(limits = rev(stage_levels)) +
+  scale_fill_manual(values = dimension_colors, drop = FALSE) +
+  scale_color_identity() +
   scale_y_continuous(
     limits = c(0, 100),
     labels = function(x) paste0(x, "%")
@@ -1043,9 +1115,9 @@ save_plot_png(
   height = 7
 )
 
-
+# ==============================================================================
 # 19. STAGE X DIMENSION HEATMAP
-
+# ==============================================================================
 
 plot_heatmap_dimensions_by_stage <- summary_dimension_by_stage %>%
   mutate(
@@ -1060,26 +1132,13 @@ plot_heatmap_dimensions_by_stage <- summary_dimension_by_stage %>%
     )
   ) +
   geom_tile(color = "black", linewidth = 0.25) +
-  geom_text(
-    aes(
-      label = paste0(
-        round(percentage, 0),
-        "%\n(n=",
-        n_mentions,
-        ")"
-      )
-    ),
-    size = plot_heatmap_label_size,
-    lineheight = 0.9
-  ) +
   scale_y_discrete(limits = rev(stage_levels)) +
-  scale_fill_gradient(
-    low = "white",
-    high = "#0072B2"
+  scale_fill_gradientn(
+    colours = c("white", main_palette[1], main_palette[2], main_palette[3], main_palette[5])
   ) +
   labs(
     title = "Selected dimensions by TTM stage",
-    subtitle = "Percentage and number of mentions within each stage",
+    subtitle = "Colour indicates percentage of mentions within each stage",
     x = "Dimension",
     y = NULL,
     fill = "Percentage"
@@ -1095,17 +1154,19 @@ save_plot_png(
   height = 7
 )
 
-
+# ==============================================================================
 # 20. TOP DETERMINANTS BY STAGE
-
+# ==============================================================================
 
 plot_top_determinants_by_stage <- summary_determinants_by_stage %>%
   group_by(stage) %>%
   slice_max(n_mentions, n = 8, with_ties = FALSE) %>%
   ungroup() %>%
   mutate(
+    stage = factor(stage, levels = stage_levels),
     determinant_label = str_wrap(determinant_label, width = 24),
-    determinant_label = reorder(determinant_label, n_mentions)
+    determinant_label = reorder(determinant_label, n_mentions),
+    label_npct = paste0(n_mentions, " (", round(percentage, 0), "%)")
   ) %>%
   ggplot(
     aes(
@@ -1114,16 +1175,17 @@ plot_top_determinants_by_stage <- summary_determinants_by_stage %>%
       fill = stage
     )
   ) +
-  geom_col(show.legend = FALSE) +
+  geom_col(color = "black", linewidth = 0.15, show.legend = FALSE) +
   geom_text(
-    aes(label = n_mentions),
+    aes(label = label_npct),
     hjust = -0.1,
     size = plot_label_size
   ) +
   coord_flip(clip = "off") +
   facet_wrap(~ stage, scales = "free_y") +
+  scale_fill_manual(values = stage_colors, drop = FALSE) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0.15))
+    expand = expansion(mult = c(0, 0.25))
   ) +
   labs(
     title = "Most frequent determinants by TTM stage",
@@ -1142,9 +1204,9 @@ save_plot_png(
   height = 9
 )
 
-
+# ==============================================================================
 # 21. HEATMAP OF MEAN DETERMINANT SCORES BY STAGE
-
+# ==============================================================================
 
 plot_heatmap_determinants_mean_score <- summary_determinants_by_stage %>%
   group_by(determinant_label) %>%
@@ -1154,6 +1216,7 @@ plot_heatmap_determinants_mean_score <- summary_determinants_by_stage %>%
   ungroup() %>%
   filter(total_mentions >= 5) %>%
   mutate(
+    stage = factor(stage, levels = stage_levels),
     determinant_label = factor(
       determinant_label,
       levels = rev(unique(determinant_label[order(total_mentions)]))
@@ -1167,18 +1230,13 @@ plot_heatmap_determinants_mean_score <- summary_determinants_by_stage %>%
     )
   ) +
   geom_tile(color = "black", linewidth = 0.2) +
-  geom_text(
-    aes(label = round(mean_score, 1)),
-    size = plot_heatmap_label_size
-  ) +
-  scale_fill_gradient(
-    low = "white",
-    high = "#0072B2",
+  scale_fill_gradientn(
+    colours = c("white", main_palette[1], main_palette[2], main_palette[3], main_palette[5]),
     limits = c(0, 100)
   ) +
   labs(
     title = "Mean determinant value by TTM stage",
-    subtitle = "Only determinants with at least 5 total mentions",
+    subtitle = "Only determinants with at least 5 total mentions. Colour indicates mean score",
     x = NULL,
     y = NULL,
     fill = "Mean"
@@ -1194,10 +1252,13 @@ save_plot_png(
   height = 11
 )
 
-
+# ==============================================================================
 # 22. SAVE ALL PLOTS IN A SINGLE PDF
+# ==============================================================================
 
 save_plots_pdf <- function(plot_list, filename, width = 14, height = 9) {
+  
+  plot_list <- plot_list[!sapply(plot_list, is.null)]
   
   pdf(
     file = out_file(pdf_dir, filename),

@@ -10,8 +10,10 @@ library(purrr)
 library(gridExtra)
 library(grid)
 
-
+# ==============================================================================
 # 1. LOAD TABLE
+# ==============================================================================
+
 df <- read_csv(
   file.path(
     "initial_descriptive_analysis/output/ttm_stage_analysis/csv",
@@ -22,15 +24,23 @@ df <- read_csv(
 
 glimpse(df)
 
-
+# ==============================================================================
 # 2. DEFINE KEY COLUMNS
+# ==============================================================================
+
 id_col <- "participant_id"
 stage_col <- "stage"
 technology_col <- "technology"
 dimension_col <- "dimension"
 
+df <- df %>%
+  mutate(
+    participant_id = as.character(.data[[id_col]])
+  )
 
+# ==============================================================================
 # 3. DICTIONARIES IN ENGLISH
+# ==============================================================================
 
 determinant_dictionary <- tibble(
   determinant_id = c(
@@ -132,6 +142,41 @@ determinant_label_levels <- determinant_dictionary$determinant_label
 determinant_id_levels <- determinant_dictionary$determinant_id
 dimension_label_levels <- dimension_dictionary$dimension_label
 
+stage_levels <- c(
+  "General",
+  "Implemented",
+  "Aware / would consider",
+  "Unaware but curious"
+)
+
+stage_order_profile <- c(
+  "Implemented",
+  "Aware / would consider",
+  "Unaware but curious"
+)
+
+profile_order <- c(
+  "Careful",
+  "Activist",
+  "Fearful",
+  "Homo economicus",
+  "Stubborn",
+  "Influencer",
+  "Uninterested",
+  "Early adopter"
+)
+
+rank_levels <- c(
+  "1st",
+  "2nd",
+  "3rd",
+  "4th",
+  "5th",
+  "6th-10th",
+  "11th-15th",
+  "Rest"
+)
+
 recode_dimension_label <- function(x) {
   x <- as.character(x)
   
@@ -179,8 +224,9 @@ clean_filename <- function(x) {
     str_replace_all("^_|_$", "")
 }
 
-
+# ==============================================================================
 # 4. DEFINE DETERMINANT COLUMNS
+# ==============================================================================
 
 non_determinant_cols <- c(
   id_col,
@@ -202,9 +248,9 @@ determinant_cols <- determinant_cols[
 cat("Number of determinants detected:", length(determinant_cols), "\n")
 print(determinant_cols)
 
-
+# ==============================================================================
 # 5. OUTPUT FOLDERS
-
+# ==============================================================================
 
 base_output_dir <- "initial_descriptive_analysis/output/boxplots_ttm_determinants"
 
@@ -225,8 +271,45 @@ out_file <- function(directory, filename) {
   file.path(directory, paste0(output_prefix, filename))
 }
 
-
+# ==============================================================================
 # 6. VISUAL CONFIGURATION
+# ==============================================================================
+
+# Common palette used across all scripts.
+# Rule:
+# category 1 = colour 1
+# category 2 = colour 2
+# category 3 = colour 3
+# etc.
+
+main_palette <- c(
+  "#0072B2", "#56B4E9", "#009E73", "#E69F00",
+  "#D55E00", "#CC79A7", "#F0E442", "#999999",
+  "#332288", "#88CCEE", "#44AA99", "#DDCC77",
+  "#117733", "#882255", "#AA4499", "#661100",
+  "#6699CC", "#AA4466", "#4477AA", "#228833",
+  "#CC6677", "#AA3377", "#BBBBBB", "#000000",
+  "#66CCEE", "#CCBB44", "#EE6677", "#EE7733",
+  "#0077BB", "#33BBEE", "#009988", "#EE3377"
+)
+
+make_named_palette <- function(levels_vec) {
+  levels_vec <- as.character(levels_vec)
+  colors <- rep(main_palette, length.out = length(levels_vec))
+  names(colors) <- levels_vec
+  colors
+}
+
+stage_colors <- make_named_palette(stage_levels)
+stage_profile_colors <- make_named_palette(stage_order_profile)
+determinant_colors <- make_named_palette(determinant_label_levels)
+dimension_colors <- make_named_palette(dimension_label_levels)
+profile_colors <- make_named_palette(profile_order)
+rank_colors <- make_named_palette(rank_levels)
+
+box_color <- "#2C3E50"
+outlier_color <- "#4F4F4F"
+other_fill_color <- "#D9D9D9"
 
 plot_base_size <- 15
 plot_title_size <- 18
@@ -239,10 +322,6 @@ plot_legend_text_size <- 13
 
 plot_label_size <- 4
 plot_dense_label_size <- 3.8
-
-box_fill <- "#BDE3FF"
-box_color <- "#2C3E50"
-outlier_color <- "#4F4F4F"
 
 theme_boxplot <- theme_minimal(base_size = plot_base_size) +
   theme(
@@ -276,9 +355,9 @@ theme_boxplot_facets <- theme_minimal(base_size = plot_base_size) +
     plot.margin = margin(12, 45, 12, 12)
   )
 
-
+# ==============================================================================
 # 7. HELPER FUNCTIONS
-
+# ==============================================================================
 
 save_plot <- function(plot, filename, width = 12, height = 7) {
   ggsave(
@@ -297,9 +376,9 @@ make_subtitle <- function(data) {
   )
 }
 
-
+# ==============================================================================
 # 8. LONG FORMAT AND TRANSLATION OF DETERMINANTS / DIMENSIONS / STAGES
-
+# ==============================================================================
 
 df_long <- df %>%
   pivot_longer(
@@ -309,6 +388,7 @@ df_long <- df %>%
   ) %>%
   filter(!is.na(value)) %>%
   mutate(
+    participant_id = as.character(participant_id),
     value = as.numeric(value),
     stage = recode_stage_label(.data[[stage_col]]),
     dimension = recode_dimension_label(.data[[dimension_col]])
@@ -331,9 +411,9 @@ write_csv(
 
 glimpse(df_long)
 
-
+# ==============================================================================
 # 9. CREATE GENERAL DATASET
-
+# ==============================================================================
 
 df_general_long <- df_long %>%
   mutate(stage = "General")
@@ -345,20 +425,15 @@ df_all_long <- bind_rows(
   mutate(
     stage = factor(
       stage,
-      levels = c(
-        "General",
-        "Implemented",
-        "Aware / would consider",
-        "Unaware but curious"
-      )
+      levels = stage_levels
     ),
     determinant = factor(determinant, levels = determinant_label_levels),
     dimension = factor(dimension, levels = dimension_label_levels)
   )
 
-
+# ==============================================================================
 # 10. BOXPLOTS OF 32 DETERMINANTS BY STAGE
-
+# ==============================================================================
 
 create_32det_boxplot <- function(data, selected_stage, title) {
   
@@ -368,13 +443,21 @@ create_32det_boxplot <- function(data, selected_stage, title) {
       determinant = reorder(determinant, value, median)
     )
   
-  ggplot(data_filtered, aes(x = determinant, y = value)) +
+  ggplot(
+    data_filtered,
+    aes(
+      x = determinant,
+      y = value,
+      fill = determinant
+    )
+  ) +
     geom_boxplot(
-      fill = box_fill,
       color = box_color,
       outlier.color = outlier_color,
       outlier.alpha = 0.45
     ) +
+    scale_fill_manual(values = determinant_colors, drop = FALSE) +
+    guides(fill = "none") +
     labs(
       title = title,
       subtitle = make_subtitle(data_filtered),
@@ -433,9 +516,9 @@ for (p in plots_32) {
 
 dev.off()
 
-
+# ==============================================================================
 # 11. 2x2 COMPARISON
-
+# ==============================================================================
 
 plot_32_comparison_2x2 <- grid.arrange(
   plot_32_general,
@@ -470,19 +553,26 @@ ggsave(
 # ==============================================================================
 
 plot_determinants_by_stage <- df_all_long %>%
-  ggplot(aes(x = stage, y = value)) +
+  ggplot(
+    aes(
+      x = stage,
+      y = value,
+      fill = stage
+    )
+  ) +
   geom_boxplot(
-    fill = box_fill,
     color = box_color,
     outlier.color = outlier_color,
     outlier.alpha = 0.3
   ) +
+  scale_fill_manual(values = stage_colors, drop = FALSE) +
   facet_wrap(~ determinant, scales = "free_y") +
   labs(
     title = "Comparison of determinants by stage",
     subtitle = make_subtitle(df_all_long),
     x = "Stage",
-    y = "Value"
+    y = "Value",
+    fill = "Stage"
   ) +
   theme_boxplot_facets
 
@@ -502,8 +592,9 @@ ggsave(
   height = 15
 )
 
-
+# ==============================================================================
 # 13. BOXPLOTS BY PROFILE: DETERMINANTS BY STAGE WITH RANKING COLOUR
+# ==============================================================================
 
 df_profile <- read_csv(
   file.path(
@@ -531,58 +622,19 @@ df_self_profile <- df_profile %>%
     
     self_profile = case_when(
       is.na(self_response_raw) ~ "Missing",
+      str_detect(self_response_raw, regex("comfort", ignore_case = TRUE)) ~ "Careful",
       str_detect(self_response_raw, regex("environmental impact", ignore_case = TRUE)) ~ "Activist",
       str_detect(self_response_raw, regex("safety", ignore_case = TRUE)) ~ "Fearful",
-      str_detect(self_response_raw, regex("social status", ignore_case = TRUE)) ~ "Influencer",
-      str_detect(self_response_raw, regex("comfort", ignore_case = TRUE)) ~ "Careful",
-      str_detect(self_response_raw, regex("not very interested", ignore_case = TRUE)) ~ "Disinterested",
-      str_detect(self_response_raw, regex("early adopter", ignore_case = TRUE)) ~ "Early adopter",
-      str_detect(self_response_raw, regex("ethical", ignore_case = TRUE)) ~ "Stubborn-Sensible",
       str_detect(self_response_raw, regex("cost-effective", ignore_case = TRUE)) ~ "Homo economicus",
+      str_detect(self_response_raw, regex("ethical", ignore_case = TRUE)) ~ "Stubborn",
+      str_detect(self_response_raw, regex("social status", ignore_case = TRUE)) ~ "Influencer",
+      str_detect(self_response_raw, regex("not very interested", ignore_case = TRUE)) ~ "Uninterested",
+      str_detect(self_response_raw, regex("early adopter", ignore_case = TRUE)) ~ "Early adopter",
       str_detect(self_response_raw, regex("[NΝ]one of the above", ignore_case = TRUE)) ~ "Unclassified",
       TRUE ~ "Other"
     )
   ) %>%
   select(participant_id, self_profile)
-
-profile_order <- c(
-  "Activist",
-  "Stubborn-Sensible",
-  "Careful",
-  "Fearful",
-  "Homo economicus",
-  "Disinterested",
-  "Influencer",
-  "Early adopter"
-)
-
-stage_order_profile <- c(
-  "Implemented",
-  "Aware / would consider",
-  "Unaware but curious"
-)
-
-rank_colors <- c(
-  "1st" = "#8B0000",
-  "2nd" = "#D7191C",
-  "3rd" = "#F46D43",
-  "4th" = "#FDAE61",
-  "5th" = "#FEE08B",
-  "6th-10th" = "#D9EF8B",
-  "11th-15th" = "#A6D96A",
-  "Rest" = "#1A9641"
-)
-
-rank_levels <- c(
-  "1st",
-  "2nd",
-  "3rd",
-  "4th",
-  "5th",
-  "6th-10th",
-  "11th-15th",
-  "Rest"
-)
 
 df_all_long_profile <- df_all_long %>%
   left_join(df_self_profile, by = "participant_id") %>%
@@ -657,7 +709,13 @@ for (prof in profiles_to_plot) {
     )
   
   plot_prof <- data_prof %>%
-    ggplot(aes(x = stage, y = value, fill = rank_group)) +
+    ggplot(
+      aes(
+        x = stage,
+        y = value,
+        fill = rank_group
+      )
+    ) +
     geom_boxplot(
       color = box_color,
       outlier.color = outlier_color,
@@ -720,23 +778,31 @@ for (p in plots_profile_stage_rank) {
 
 dev.off()
 
-
+# ==============================================================================
 # 14. AGGREGATED BOXPLOT BY DIMENSION
+# ==============================================================================
 
 plot_dimensions_by_stage <- df_all_long %>%
-  ggplot(aes(x = stage, y = value)) +
+  ggplot(
+    aes(
+      x = stage,
+      y = value,
+      fill = stage
+    )
+  ) +
   geom_boxplot(
-    fill = box_fill,
     color = box_color,
     outlier.color = outlier_color,
     outlier.alpha = 0.3
   ) +
+  scale_fill_manual(values = stage_colors, drop = FALSE) +
   facet_wrap(~ dimension, scales = "free_y") +
   labs(
     title = "Distribution of values by dimension and stage",
     subtitle = make_subtitle(df_all_long),
     x = "Stage",
-    y = "Value"
+    y = "Value",
+    fill = "Stage"
   ) +
   theme_boxplot_facets
 
@@ -756,7 +822,10 @@ ggsave(
   height = 10
 )
 
+# ==============================================================================
 # 15. 32 DETERMINANTS HIGHLIGHTING EACH DIMENSION
+# ==============================================================================
+
 determinant_dimension_map <- read_csv(
   file.path(
     "initial_descriptive_analysis/output/ttm_stage_analysis/csv",
@@ -795,6 +864,14 @@ for (dim_i in dimensions) {
       determinant = reorder(determinant, value, median)
     )
   
+  highlight_values <- setNames(
+    c(main_palette[1], other_fill_color),
+    c(
+      paste0("Belongs to dimension: ", dim_i),
+      "Other determinants"
+    )
+  )
+  
   plot_dim_32det <- ggplot(
     data_dim_highlight,
     aes(
@@ -810,13 +887,8 @@ for (dim_i in dimensions) {
     ) +
     facet_wrap(~ stage, ncol = 2) +
     scale_fill_manual(
-      values = setNames(
-        c("#0072B2", "#D9D9D9"),
-        c(
-          paste0("Belongs to dimension: ", dim_i),
-          "Other determinants"
-        )
-      )
+      values = highlight_values,
+      drop = FALSE
     ) +
     labs(
       title = paste("32 determinants highlighting dimension:", dim_i),
@@ -892,6 +964,11 @@ grid.arrange(
 )
 
 print(plot_determinants_by_stage)
+
+for (p in plots_profile_stage_rank) {
+  print(p)
+}
+
 print(plot_dimensions_by_stage)
 
 for (p in plots_32det_by_dimension) {

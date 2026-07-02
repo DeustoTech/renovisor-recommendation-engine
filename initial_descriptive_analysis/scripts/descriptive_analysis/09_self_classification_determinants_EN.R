@@ -10,7 +10,10 @@ library(purrr)
 library(gridExtra)
 library(grid)
 
+# ==============================================================================
 # 1. LOAD CLEAN DATA
+# ==============================================================================
+
 df <- read_csv(
   "initial_descriptive_analysis/output/clean_datasets/df_clean_general.csv",
   show_col_types = FALSE
@@ -18,8 +21,10 @@ df <- read_csv(
 
 glimpse(df)
 
-
+# ==============================================================================
 # 2. ENSURE PARTICIPANT_ID
+# ==============================================================================
+
 if (!"participant_id" %in% names(df)) {
   df <- df %>%
     mutate(
@@ -37,7 +42,10 @@ if (!"participant_id" %in% names(df)) {
 
 cat("Rows used in Script 09:", nrow(df), "\n")
 
+# ==============================================================================
 # 3. ROBUST DETERMINANT DICTIONARY IN ENGLISH
+# ==============================================================================
+
 determinant_dictionary <- tribble(
   ~determinant_id, ~determinant_label, ~determinant_prefix,
   "profits", "Economic profit", "profits",
@@ -101,7 +109,10 @@ determinant_label_levels <- determinant_dictionary$determinant_label
 cat("Number of determinants detected:", length(determinant_cols), "\n")
 print(determinant_dictionary %>% select(determinant_id, determinant_label, determinant_col))
 
+# ==============================================================================
 # 4. DETECT SELF-CLASSIFICATION COLUMN 4.3
+# ==============================================================================
+
 self_col_candidates <- c(
   "which_statement_best_describes_you_when_making_an_investment_decision_related_to_your_household_final",
   "which_statement_best_describes_you_when_making_an_investment_decision_related_to_your_household"
@@ -115,8 +126,9 @@ if (is.na(self_col)) {
 
 cat("Column used for self-classification:", self_col, "\n")
 
-
+# ==============================================================================
 # 5. OUTPUT FOLDERS
+# ==============================================================================
 
 base_output_dir <- "initial_descriptive_analysis/output/self_classification"
 
@@ -137,12 +149,55 @@ out_file <- function(directory, filename) {
 
 excluded_plot_profiles <- c("Missing", "Unclassified", "Other")
 
+# ==============================================================================
+# 6. COMMON PALETTE AND VISUAL CONFIGURATION
+# ==============================================================================
 
-# 6. VISUAL CONFIGURATION
-box_fill <- "#BDE3FF"
+# Common palette used across all scripts.
+#
+# Rule:
+# category 1 = colour 1
+# category 2 = colour 2
+# category 3 = colour 3
+# etc.
+#
+# The first 8 colours preserve the original reference palette.
+# Additional colours are included for plots with more than 8 categories.
+
+main_palette <- c(
+  "#0072B2", "#56B4E9", "#009E73", "#E69F00",
+  "#D55E00", "#CC79A7", "#F0E442", "#999999",
+  "#332288", "#88CCEE", "#44AA99", "#DDCC77",
+  "#117733", "#882255", "#AA4499", "#661100",
+  "#6699CC", "#AA4466", "#4477AA", "#228833",
+  "#CC6677", "#AA3377", "#BBBBBB", "#000000",
+  "#66CCEE", "#CCBB44", "#EE6677", "#EE7733",
+  "#0077BB", "#33BBEE", "#009988", "#EE3377"
+)
+
+make_named_palette <- function(levels_vec) {
+  levels_vec <- as.character(levels_vec)
+  colors <- rep(main_palette, length.out = length(levels_vec))
+  names(colors) <- levels_vec
+  colors
+}
+
+profile_order <- c(
+  "Careful",
+  "Activist",
+  "Fearful",
+  "Homo economicus",
+  "Stubborn",
+  "Influencer",
+  "Uninterested",
+  "Early adopter"
+)
+
+profile_colors <- make_named_palette(profile_order)
+determinant_colors <- make_named_palette(determinant_label_levels)
+
 box_color <- "#2C3E50"
 outlier_color <- "#4F4F4F"
-bar_fill <- "#BDE3FF"
 bar_color <- "#2C3E50"
 
 plot_base_size <- 15
@@ -153,9 +208,6 @@ plot_axis_text_size <- 15
 plot_strip_text_size <- 13
 plot_legend_title_size <- 14
 plot_legend_text_size <- 13
-
-plot_label_size <- 4.5
-plot_heatmap_label_size <- 3.8
 
 theme_self <- theme_minimal(base_size = plot_base_size) +
   theme(
@@ -188,8 +240,10 @@ theme_self_heatmap <- theme_minimal(base_size = plot_base_size) +
     plot.margin = margin(12, 20, 12, 12)
   )
 
-
+# ==============================================================================
 # 7. HELPER FUNCTIONS
+# ==============================================================================
+
 make_subtitle_self <- function(data) {
   paste0(
     "n participants = ", n_distinct(data$participant_id),
@@ -237,7 +291,9 @@ clean_filename <- function(x) {
     str_replace_all("^_|_$", "")
 }
 
+# ==============================================================================
 # 8. RECODE SELF-CLASSIFICATION 4.3 IN ENGLISH
+# ==============================================================================
 
 df_self <- df %>%
   mutate(
@@ -253,23 +309,16 @@ df_self <- df %>%
       str_detect(self_response_raw, regex("cost-effective", ignore_case = TRUE)) ~ "Homo economicus",
       str_detect(self_response_raw, regex("ethical", ignore_case = TRUE)) ~ "Stubborn",
       str_detect(self_response_raw, regex("social status", ignore_case = TRUE)) ~ "Influencer",
-      str_detect(self_response_raw, regex("not very interested", ignore_case = TRUE)) ~ "Disinterested",
+      str_detect(self_response_raw, regex("not very interested", ignore_case = TRUE)) ~ "Uninterested",
       str_detect(self_response_raw, regex("early adopter", ignore_case = TRUE)) ~ "Early adopter",
       str_detect(self_response_raw, regex("[NΝ]one of the above", ignore_case = TRUE)) ~ "Unclassified",
       TRUE ~ "Other"
+    ),
+    self_profile = factor(
+      self_profile,
+      levels = c(profile_order, excluded_plot_profiles)
     )
   )
-
-profile_order <- c(
-  "Careful",
-  "Activist",
-  "Fearful",
-  "Homo economicus",
-  "Stubborn",
-  "Influencer",
-  "Disinterested",
-  "Early adopter"
-)
 
 # ==============================================================================
 # EXTRA: SELF-CLASSIFICATION DISTRIBUTION BY COUNTRY GROUP
@@ -277,6 +326,7 @@ profile_order <- c(
 # ==============================================================================
 
 # 1. Detect country column
+
 country_col_candidates <- c(
   "country_clean",
   "in_which_country_do_you_currently_live_final"
@@ -291,6 +341,7 @@ if (is.na(country_col)) {
 cat("Column used for Spain / Rest grouping:", country_col, "\n")
 
 # 2. Create Spain / Rest variable
+
 df_self <- df_self %>%
   mutate(
     country_raw = as.character(.data[[country_col]]),
@@ -307,6 +358,7 @@ df_self <- df_self %>%
   )
 
 # 3. Check number of participants by group
+
 country_group_counts <- df_self %>%
   count(country_group, name = "n_participants") %>%
   arrange(country_group)
@@ -319,6 +371,7 @@ write_csv(
 print(country_group_counts)
 
 # 4. Function to create self-classification plot by country group
+
 create_self_counts_country_group_plot <- function(data, selected_country_group, filename_suffix) {
   
   self_profile_counts_group <- data %>%
@@ -326,10 +379,10 @@ create_self_counts_country_group_plot <- function(data, selected_country_group, 
     mutate(
       self_profile = factor(
         self_profile,
-        levels = c(profile_order, "Missing", "Unclassified", "Other")
+        levels = c(profile_order, excluded_plot_profiles)
       )
     ) %>%
-    count(self_profile, name = "n_participants") %>%
+    count(self_profile, name = "n_participants", .drop = FALSE) %>%
     arrange(self_profile)
   
   write_csv(
@@ -344,14 +397,14 @@ create_self_counts_country_group_plot <- function(data, selected_country_group, 
     mutate(
       self_profile = factor(self_profile, levels = rev(profile_order))
     ) %>%
-    ggplot(aes(x = self_profile, y = n_participants)) +
-    geom_col(fill = bar_fill, color = bar_color) +
-    geom_text(
-      aes(label = n_participants),
-      hjust = -0.2,
-      size = plot_label_size
-    ) +
+    ggplot(aes(x = self_profile, y = n_participants, fill = self_profile)) +
+    geom_col(color = bar_color) +
     coord_flip(clip = "off") +
+    scale_fill_manual(
+      values = profile_colors,
+      drop = FALSE
+    ) +
+    guides(fill = "none") +
     scale_y_continuous(
       expand = expansion(mult = c(0, 0.15))
     ) +
@@ -379,6 +432,7 @@ create_self_counts_country_group_plot <- function(data, selected_country_group, 
 }
 
 # 5. Generate Spain plot
+
 plot_self_counts_spain <- create_self_counts_country_group_plot(
   data = df_self,
   selected_country_group = "Spain",
@@ -386,13 +440,17 @@ plot_self_counts_spain <- create_self_counts_country_group_plot(
 )
 
 # 6. Generate Rest of sample plot
+
 plot_self_counts_rest <- create_self_counts_country_group_plot(
   data = df_self,
   selected_country_group = "Rest of sample",
   filename_suffix = "rest_of_sample"
 )
 
+# ==============================================================================
 # 9. LONG TABLE OF DETERMINANTS + SELF-CLASSIFICATION
+# ==============================================================================
+
 determinants_self_long <- df_self %>%
   select(
     participant_id,
@@ -424,7 +482,7 @@ determinants_self_long <- df_self %>%
     ),
     self_profile = factor(
       self_profile,
-      levels = c(profile_order, "Missing", "Unclassified", "Other")
+      levels = c(profile_order, excluded_plot_profiles)
     )
   )
 
@@ -434,19 +492,23 @@ write_csv(
 )
 
 determinants_self_long_plot <- determinants_self_long %>%
-  filter(!self_profile %in% excluded_plot_profiles)
+  filter(!self_profile %in% excluded_plot_profiles) %>%
+  mutate(
+    self_profile = factor(self_profile, levels = profile_order)
+  )
 
-
+# ==============================================================================
 # 10. SELF-CLASSIFICATION DISTRIBUTION
+# ==============================================================================
 
 self_profile_counts <- df_self %>%
   mutate(
     self_profile = factor(
       self_profile,
-      levels = c(profile_order, "Missing", "Unclassified", "Other")
+      levels = c(profile_order, excluded_plot_profiles)
     )
   ) %>%
-  count(self_profile, name = "n_participants") %>%
+  count(self_profile, name = "n_participants", .drop = FALSE) %>%
   arrange(self_profile)
 
 write_csv(
@@ -461,14 +523,14 @@ plot_self_counts <- self_profile_counts_plot %>%
   mutate(
     self_profile = factor(self_profile, levels = rev(profile_order))
   ) %>%
-  ggplot(aes(x = self_profile, y = n_participants)) +
-  geom_col(fill = bar_fill, color = bar_color) +
-  geom_text(
-    aes(label = n_participants),
-    hjust = -0.2,
-    size = plot_label_size
-  ) +
+  ggplot(aes(x = self_profile, y = n_participants, fill = self_profile)) +
+  geom_col(color = bar_color) +
   coord_flip(clip = "off") +
+  scale_fill_manual(
+    values = profile_colors,
+    drop = FALSE
+  ) +
+  guides(fill = "none") +
   scale_y_continuous(
     expand = expansion(mult = c(0, 0.15))
   ) +
@@ -492,7 +554,10 @@ save_plot(
   height = 7
 )
 
+# ==============================================================================
 # 11. MEAN DETERMINANTS BY PROFILE
+# ==============================================================================
+
 summary_self_determinants <- determinants_self_long %>%
   group_by(self_profile, determinant_id, determinant_label) %>%
   summarise(
@@ -509,10 +574,16 @@ write_csv(
 )
 
 summary_self_determinants_plot <- summary_self_determinants %>%
-  filter(!self_profile %in% excluded_plot_profiles)
+  filter(!self_profile %in% excluded_plot_profiles) %>%
+  mutate(
+    self_profile = factor(self_profile, levels = profile_order),
+    determinant_label = factor(determinant_label, levels = determinant_label_levels)
+  )
 
-
+# ==============================================================================
 # 12. HEATMAP PROFILE X DETERMINANTS
+# ==============================================================================
+
 plot_heatmap_self <- summary_self_determinants_plot %>%
   mutate(
     self_profile = factor(
@@ -526,9 +597,8 @@ plot_heatmap_self <- summary_self_determinants_plot %>%
   ) %>%
   ggplot(aes(x = self_profile, y = determinant_label, fill = mean)) +
   geom_tile(color = "white", linewidth = 0.3) +
-  scale_fill_gradient(
-    low = "white",
-    high = "#4DADE8",
+  scale_fill_gradientn(
+    colours = c("white", main_palette[2], main_palette[3], main_palette[4], main_palette[5]),
     limits = c(0, 100)
   ) +
   labs(
@@ -549,18 +619,9 @@ save_plot(
   height = 12
 )
 
-
+# ==============================================================================
 # 13. RANKED HEATMAP WITHIN EACH PROFILE
-rank_colors <- c(
-  "1st" = "#8B0000",
-  "2nd" = "#D7191C",
-  "3rd" = "#F46D43",
-  "4th" = "#FDAE61",
-  "5th" = "#FEE08B",
-  "6th-10th" = "#D9EF8B",
-  "11th-15th" = "#A6D96A",
-  "Rest" = "#1A9641"
-)
+# ==============================================================================
 
 rank_levels <- c(
   "1st",
@@ -572,6 +633,8 @@ rank_levels <- c(
   "11th-15th",
   "Rest"
 )
+
+rank_colors <- make_named_palette(rank_levels)
 
 plot_heatmap_self_ranked <- summary_self_determinants_plot %>%
   group_by(self_profile) %>%
@@ -603,10 +666,6 @@ plot_heatmap_self_ranked <- summary_self_determinants_plot %>%
   ) %>%
   ggplot(aes(x = self_profile, y = determinant_label, fill = rank_group)) +
   geom_tile(color = "white", linewidth = 0.3) +
-  geom_text(
-    aes(label = round(mean, 0)),
-    size = plot_heatmap_label_size
-  ) +
   scale_fill_manual(
     values = rank_colors,
     drop = FALSE,
@@ -632,8 +691,10 @@ save_plot(
   height = 12
 )
 
-
+# ==============================================================================
 # 14. BOXPLOTS OF ALL DETERMINANTS BY SELF-CLASSIFICATION
+# ==============================================================================
+
 plot_boxplots_self_all <- determinants_self_long_plot %>%
   mutate(
     determinant_label = factor(
@@ -645,13 +706,17 @@ plot_boxplots_self_all <- determinants_self_long_plot %>%
       levels = profile_order
     )
   ) %>%
-  ggplot(aes(x = self_profile, y = response_numeric)) +
+  ggplot(aes(x = self_profile, y = response_numeric, fill = self_profile)) +
   geom_boxplot(
-    fill = box_fill,
     color = box_color,
     outlier.color = outlier_color,
     outlier.alpha = 0.35
   ) +
+  scale_fill_manual(
+    values = profile_colors,
+    drop = FALSE
+  ) +
+  guides(fill = "none") +
   facet_wrap(~ determinant_label, scales = "free_y") +
   labs(
     title = "Distribution of determinants by self-classification",
@@ -670,8 +735,10 @@ save_plot(
   height = 16
 )
 
-
+# ==============================================================================
 # 15. BOXPLOTS OF KEY DETERMINANTS
+# ==============================================================================
+
 key_determinants <- c(
   "novelty",
   "trends",
@@ -700,13 +767,17 @@ plot_key_determinants <- determinants_self_long_plot %>%
       levels = profile_order
     )
   ) %>%
-  ggplot(aes(x = self_profile, y = response_numeric)) +
+  ggplot(aes(x = self_profile, y = response_numeric, fill = self_profile)) +
   geom_boxplot(
-    fill = box_fill,
     color = box_color,
     outlier.color = outlier_color,
     outlier.alpha = 0.4
   ) +
+  scale_fill_manual(
+    values = profile_colors,
+    drop = FALSE
+  ) +
+  guides(fill = "none") +
   facet_wrap(~ determinant_label, scales = "free_y") +
   labs(
     title = "Key determinants by self-classification",
@@ -728,8 +799,10 @@ save_plot(
   height = 12
 )
 
-
+# ==============================================================================
 # 16. INDIVIDUAL BOXPLOTS BY SELF-CLASSIFIED PROFILE
+# ==============================================================================
+
 profiles_boxplots <- determinants_self_long_plot %>%
   pull(self_profile) %>%
   as.character() %>%
@@ -750,6 +823,12 @@ for (prof in profiles_boxplots) {
     filter(
       as.character(self_profile) == prof,
       determinant_id %in% top_dets_prof
+    ) %>%
+    mutate(
+      determinant_label = factor(
+        determinant_label,
+        levels = determinant_label_levels
+      )
     )
   
   filename_clean <- clean_filename(prof)
@@ -763,13 +842,17 @@ for (prof in profiles_boxplots) {
         na.rm = TRUE
       )
     ) %>%
-    ggplot(aes(x = determinant_label, y = response_numeric)) +
+    ggplot(aes(x = determinant_label, y = response_numeric, fill = determinant_label)) +
     geom_boxplot(
-      fill = box_fill,
       color = box_color,
       outlier.color = outlier_color,
       outlier.alpha = 0.4
     ) +
+    scale_fill_manual(
+      values = determinant_colors,
+      drop = FALSE
+    ) +
+    guides(fill = "none") +
     coord_flip() +
     labs(
       title = paste("Determinant boxplot -", prof),
@@ -795,8 +878,10 @@ for (prof in profiles_boxplots) {
   profile_boxplot_list[[prof]] <- plot_profile_box
 }
 
-
+# ==============================================================================
 # 17. MEAN DETERMINANT PROFILES BY SELF-CLASSIFICATION
+# ==============================================================================
+
 profiles <- summary_self_determinants_plot %>%
   pull(self_profile) %>%
   as.character() %>%
@@ -810,7 +895,13 @@ for (prof in profiles) {
   
   profile_data <- summary_self_determinants_plot %>%
     filter(as.character(self_profile) == prof) %>%
-    arrange(desc(mean))
+    arrange(desc(mean)) %>%
+    mutate(
+      determinant_label = factor(
+        determinant_label,
+        levels = determinant_label_levels
+      )
+    )
   
   filename_clean <- clean_filename(prof)
   
@@ -823,8 +914,13 @@ for (prof in profiles) {
     mutate(
       determinant_label = reorder(determinant_label, mean)
     ) %>%
-    ggplot(aes(x = determinant_label, y = mean)) +
-    geom_col(fill = bar_fill, color = bar_color) +
+    ggplot(aes(x = determinant_label, y = mean, fill = determinant_label)) +
+    geom_col(color = bar_color) +
+    scale_fill_manual(
+      values = determinant_colors,
+      drop = FALSE
+    ) +
+    guides(fill = "none") +
     coord_flip() +
     labs(
       title = paste("Mean determinant profile -", prof),
@@ -853,8 +949,9 @@ for (prof in profiles) {
   profile_plots[[prof]] <- plot_profile
 }
 
-
+# ==============================================================================
 # 18. MULTIPAGE PDF WITH MEAN PROFILES
+# ==============================================================================
 
 pdf(
   file = out_file(pdf_dir, "all_self_profiles_determinants.pdf"),
@@ -868,8 +965,9 @@ for (p in profile_plots) {
 
 dev.off()
 
-
+# ==============================================================================
 # 19. MULTIPAGE PDF WITH PROFILE BOXPLOTS
+# ==============================================================================
 
 pdf(
   file = out_file(pdf_dir, "all_self_profiles_boxplots.pdf"),
@@ -883,8 +981,9 @@ for (p in profile_boxplot_list) {
 
 dev.off()
 
-
+# ==============================================================================
 # 20. 2x2 COMPARISON PLOTS
+# ==============================================================================
 
 if (length(profile_plots) > 0) {
   comparison_profiles <- marrangeGrob(
@@ -924,8 +1023,9 @@ if (length(profile_boxplot_list) > 0) {
   )
 }
 
-
+# ==============================================================================
 # 21. FINAL PDF WITH ALL SCRIPT 09 FIGURES
+# ==============================================================================
 
 pdf(
   file = out_file(pdf_dir, "self_classification_determinants_ALL.pdf"),
@@ -934,6 +1034,8 @@ pdf(
 )
 
 print(plot_self_counts)
+print(plot_self_counts_spain)
+print(plot_self_counts_rest)
 print(plot_heatmap_self)
 print(plot_heatmap_self_ranked)
 print(plot_boxplots_self_all)
@@ -958,6 +1060,8 @@ cat("- en_determinants_by_self_classification_long.csv\n")
 cat("- en_self_classification_counts.csv\n")
 cat("- en_summary_self_profile_determinants.csv\n")
 cat("- en_self_classification_counts.png\n")
+cat("- en_self_classification_counts_spain.png\n")
+cat("- en_self_classification_counts_rest_of_sample.png\n")
 cat("- en_heatmap_self_classification_determinants.pdf\n")
 cat("- en_heatmap_self_classification_determinants_ranked.pdf\n")
 cat("- en_boxplots_all_determinants_by_self_classification.pdf\n")

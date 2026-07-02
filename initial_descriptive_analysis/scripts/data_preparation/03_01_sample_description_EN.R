@@ -1,6 +1,4 @@
-
 # SCRIPT 03.1 - SAMPLE DESCRIPTION - EN
-
 
 library(readr)
 library(dplyr)
@@ -9,7 +7,9 @@ library(ggplot2)
 library(tidyr)
 library(tibble)
 
+# ==============================================================================
 # PATHS
+# ==============================================================================
 
 base_input_dir <- "initial_descriptive_analysis/output/clean_datasets"
 base_output_dir <- "initial_descriptive_analysis/output/sample_description"
@@ -31,7 +31,9 @@ out_file <- function(directory, filename) {
   file.path(directory, paste0(output_prefix, filename))
 }
 
+# ==============================================================================
 # LOAD DATA
+# ==============================================================================
 
 df <- read_csv(
   file.path(base_input_dir, "df_clean_sociodemographic.csv"),
@@ -42,8 +44,9 @@ cat("Dataset loaded: df_clean_sociodemographic.csv\n")
 cat("Rows:", nrow(df), "\n")
 cat("Columns:", ncol(df), "\n")
 
+# ==============================================================================
 # GENERAL HELPER FUNCTIONS
-
+# ==============================================================================
 
 clean_text_basic <- function(x) {
   x <- str_squish(as.character(x))
@@ -85,7 +88,10 @@ clean_filename <- function(x) {
     str_replace_all("^_|_$", "")
 }
 
+# ==============================================================================
 # CREATE PARTICIPANT ID
+# ==============================================================================
+
 df <- df %>%
   mutate(
     participant_id = coalesce(
@@ -97,8 +103,9 @@ df <- df %>%
     )
   )
 
-
+# ==============================================================================
 # COLUMN DEFINITIONS
+# ==============================================================================
 
 year_of_birth_candidates <- c(
   "year_of_birth_clean",
@@ -125,7 +132,9 @@ tenure_col <- "what_is_the_current_tenure_status_of_your_home_final"
 political_col <- "on_a_scale_from_0_to_100_where_0_means_most_left_and_100_means_most_right_where_would_you_place_yourself_politically_final"
 vote_col <- "which_of_the_following_best_describes_your_general_approach_to_voting_in_elections_final"
 
+# ==============================================================================
 # SOCIODEMOGRAPHIC CLEANING FUNCTIONS
+# ==============================================================================
 
 clean_gender <- function(x) {
   x <- clean_text_basic(x)
@@ -407,9 +416,9 @@ clean_identifier_type <- function(x) {
   )
 }
 
-
+# ==============================================================================
 # CLEAN AGE AND GENERATION
-
+# ==============================================================================
 
 project_year <- 2026
 
@@ -448,7 +457,9 @@ df <- df %>%
     )
   )
 
+# ==============================================================================
 # CREATE SAMPLE DESCRIPTION TABLE
+# ==============================================================================
 
 country_raw <- get_optional_col(df, country_col)
 country_clean_from_dataset <- get_optional_col(df, country_clean_col)
@@ -493,7 +504,9 @@ write_csv(
 
 cat("Unique participants in sample_description:", nrow(sample_description), "\n")
 
+# ==============================================================================
 # NATURAL ORDERS AND COLOUR PALETTES
+# ==============================================================================
 
 natural_orders <- list(
   age_group = c(
@@ -579,57 +592,50 @@ natural_orders <- list(
   )
 )
 
-sample_colors <- list(
-  age_group = c(
-    "Generation Z" = "#56B4E9",
-    "Millennials" = "#009E73",
-    "Generation X" = "#E69F00",
-    "Boomers +" = "#CC79A7"
-  ),
-  gender = c(
-    "Female" = "#009E73",
-    "Male" = "#0072B2",
-    "Other / Prefer not to say" = "#999999"
-  ),
-  residence_region = c(
-    "Northern Europe" = "#56B4E9",
-    "Western Europe" = "#009E73",
-    "Southern Europe" = "#E69F00",
-    "Eastern Europe" = "#D55E00",
-    "Other region" = "#999999"
-  )
+# Common RenoVisor palette.
+# The first 8 colours are the original reference palette.
+# Extra colours are included for plots with more than 8 categories.
+#
+# Colour assignment rule:
+# Category 1 = colour 1
+# Category 2 = colour 2
+# Category 3 = colour 3
+# etc.
+#
+# The order is taken from natural_orders when available.
+
+main_palette <- c(
+  "#0072B2", "#56B4E9", "#009E73", "#E69F00",
+  "#D55E00", "#CC79A7", "#F0E442", "#999999",
+  "#332288", "#88CCEE", "#44AA99", "#DDCC77"
 )
 
-default_sample_colors <- c(
-  "#0072B2", "#56B4E9", "#009E73", "#E69F00",
-  "#D55E00", "#CC79A7", "#F0E442", "#999999"
-)
+default_sample_colors <- main_palette
 
 get_sample_colors <- function(variable_name, categories) {
   categories <- as.character(categories)
   
-  if (variable_name %in% names(sample_colors)) {
-    colors <- sample_colors[[variable_name]]
-    colors <- colors[names(colors) %in% categories]
+  if (variable_name %in% names(natural_orders)) {
+    ordered_categories <- natural_orders[[variable_name]]
+    ordered_categories <- ordered_categories[ordered_categories %in% categories]
     
-    missing_categories <- setdiff(categories, names(colors))
-    
-    if (length(missing_categories) > 0) {
-      extra_colors <- rep(default_sample_colors, length.out = length(missing_categories))
-      names(extra_colors) <- missing_categories
-      colors <- c(colors, extra_colors)
-    }
-    
-    return(colors)
+    extra_categories <- setdiff(categories, ordered_categories)
+    ordered_categories <- c(ordered_categories, extra_categories)
+  } else {
+    ordered_categories <- categories
   }
   
-  colors <- rep(default_sample_colors, length.out = length(categories))
-  names(colors) <- categories
-  colors
+  colors <- rep(default_sample_colors, length.out = length(ordered_categories))
+  names(colors) <- ordered_categories
+  
+  colors <- colors[categories]
+  
+  return(colors)
 }
 
-
+# ==============================================================================
 # VISUAL CONFIGURATION
+# ==============================================================================
 
 plot_base_size <- 16
 plot_title_size <- 19
@@ -668,7 +674,55 @@ theme_sample_tfm <- function() {
     )
 }
 
+safe_print_plot <- function(p, plot_name = "plot") {
+  if (!inherits(p, "ggplot")) {
+    message("Skipped non-ggplot object: ", plot_name)
+    return(invisible(NULL))
+  }
+  
+  tryCatch(
+    {
+      print(p)
+    },
+    error = function(e) {
+      message("Plot preview skipped for ", plot_name, ": ", conditionMessage(e))
+    }
+  )
+  
+  invisible(p)
+}
+
+safe_save_plot <- function(filename, plot, width, height, dpi = NULL) {
+  tryCatch(
+    {
+      if (is.null(dpi)) {
+        ggsave(
+          filename = filename,
+          plot = plot,
+          width = width,
+          height = height
+        )
+      } else {
+        ggsave(
+          filename = filename,
+          plot = plot,
+          width = width,
+          height = height,
+          dpi = dpi
+        )
+      }
+    },
+    error = function(e) {
+      message("Plot saving failed for ", filename, ": ", conditionMessage(e))
+    }
+  )
+  
+  invisible(NULL)
+}
+
+# ==============================================================================
 # TABLE AND PLOT FUNCTIONS
+# ==============================================================================
 
 get_variable_order <- function(variable_name, data_summary) {
   if (variable_name %in% names(natural_orders)) {
@@ -743,21 +797,21 @@ plot_sample_variable <- function(data, variable_name, variable_label, width = 9,
     ) +
     theme_sample_tfm()
   
-  print(p)
-  
   filename <- paste0("sample_description_", clean_filename(variable_name))
   
-  ggsave(
-    out_file(plots_dir, paste0(filename, ".png")),
-    p,
+  safe_print_plot(p, filename)
+  
+  safe_save_plot(
+    filename = out_file(plots_dir, paste0(filename, ".png")),
+    plot = p,
     width = width,
     height = height,
     dpi = 300
   )
   
-  ggsave(
-    out_file(pdf_dir, paste0(filename, ".pdf")),
-    p,
+  safe_save_plot(
+    filename = out_file(pdf_dir, paste0(filename, ".pdf")),
+    plot = p,
     width = width,
     height = height
   )
@@ -822,21 +876,21 @@ plot_sample_variable_percentage <- function(data, variable_name, variable_label,
     ) +
     theme_sample_tfm()
   
-  print(p)
-  
   filename <- paste0("sample_description_", clean_filename(variable_name), "_percentage")
   
-  ggsave(
-    out_file(plots_dir, paste0(filename, ".png")),
-    p,
+  safe_print_plot(p, filename)
+  
+  safe_save_plot(
+    filename = out_file(plots_dir, paste0(filename, ".png")),
+    plot = p,
     width = width,
     height = height,
     dpi = 300
   )
   
-  ggsave(
-    out_file(pdf_dir, paste0(filename, ".pdf")),
-    p,
+  safe_save_plot(
+    filename = out_file(pdf_dir, paste0(filename, ".pdf")),
+    plot = p,
     width = width,
     height = height
   )
@@ -893,21 +947,21 @@ plot_sample_variable_ordered <- function(data, variable_name, variable_label, wi
     ) +
     theme_sample_tfm()
   
-  print(p)
-  
   filename <- paste0("sample_description_", clean_filename(variable_name), "_ordered")
   
-  ggsave(
-    out_file(plots_dir, paste0(filename, ".png")),
-    p,
+  safe_print_plot(p, filename)
+  
+  safe_save_plot(
+    filename = out_file(plots_dir, paste0(filename, ".png")),
+    plot = p,
     width = width,
     height = height,
     dpi = 300
   )
   
-  ggsave(
-    out_file(pdf_dir, paste0(filename, ".pdf")),
-    p,
+  safe_save_plot(
+    filename = out_file(pdf_dir, paste0(filename, ".pdf")),
+    plot = p,
     width = width,
     height = height
   )
@@ -915,7 +969,9 @@ plot_sample_variable_ordered <- function(data, variable_name, variable_label, wi
   return(p)
 }
 
+# ==============================================================================
 # VARIABLES TO DESCRIBE
+# ==============================================================================
 
 sample_variables <- tibble(
   variable_name = c(
@@ -969,7 +1025,9 @@ write_csv(
   out_file(csv_dir, "sample_description_variables_used.csv")
 )
 
+# ==============================================================================
 # SUMMARY TABLES
+# ==============================================================================
 
 summary_sample_all <- sample_variables %>%
   rowwise() %>%
@@ -989,9 +1047,9 @@ write_csv(
 
 print(summary_sample_all, n = Inf)
 
-
+# ==============================================================================
 # CATEGORICAL PLOTS
-
+# ==============================================================================
 
 sample_plots <- list()
 
@@ -1027,10 +1085,14 @@ for (i in seq_len(nrow(sample_variables))) {
   )
 }
 
-sample_plots <- sample_plots[!sapply(sample_plots, is.null)]
+sample_plots <- Filter(
+  f = function(x) inherits(x, "ggplot"),
+  x = sample_plots
+)
 
+# ==============================================================================
 # NUMERICAL AGE SUMMARY AND HISTOGRAM
-
+# ==============================================================================
 
 age_summary <- sample_description %>%
   summarise(
@@ -1056,7 +1118,7 @@ if (sum(!is.na(sample_description$age)) > 0) {
     ggplot(aes(x = age)) +
     geom_histogram(
       bins = 15,
-      fill = "#56B4E9",
+      fill = main_palette[2],
       color = "#2C3E50"
     ) +
     labs(
@@ -1070,19 +1132,19 @@ if (sum(!is.na(sample_description$age)) > 0) {
     ) +
     theme_sample_tfm()
   
-  print(plot_age_numeric)
+  safe_print_plot(plot_age_numeric, "sample_description_age_numeric")
   
-  ggsave(
-    out_file(plots_dir, "sample_description_age_numeric.png"),
-    plot_age_numeric,
+  safe_save_plot(
+    filename = out_file(plots_dir, "sample_description_age_numeric.png"),
+    plot = plot_age_numeric,
     width = 9,
     height = 5.5,
     dpi = 300
   )
   
-  ggsave(
-    out_file(pdf_dir, "sample_description_age_numeric.pdf"),
-    plot_age_numeric,
+  safe_save_plot(
+    filename = out_file(pdf_dir, "sample_description_age_numeric.pdf"),
+    plot = plot_age_numeric,
     width = 9,
     height = 5.5
   )
@@ -1090,8 +1152,9 @@ if (sum(!is.na(sample_description$age)) > 0) {
   sample_plots[["age_numeric"]] <- plot_age_numeric
 }
 
-
+# ==============================================================================
 # MISSING VALUES BY VARIABLE
+# ==============================================================================
 
 missing_sample_description <- sample_description %>%
   summarise(across(-participant_id, ~ sum(is.na(.x)))) %>%
@@ -1114,8 +1177,9 @@ write_csv(
 
 print(missing_sample_description, n = Inf)
 
-
+# ==============================================================================
 # SOCIODEMOGRAPHIC TABLE BY SELF-CLASSIFIED ARCHETYPE
+# ==============================================================================
 
 df_general_self <- read_csv(
   file.path(base_input_dir, "df_clean_general.csv"),
@@ -1161,7 +1225,7 @@ self_profiles <- df_general_self %>%
       str_detect(self_response_raw, regex("comfort", ignore_case = TRUE)) ~ "Careful",
       str_detect(self_response_raw, regex("not very interested", ignore_case = TRUE)) ~ "Uninterested",
       str_detect(self_response_raw, regex("early adopter", ignore_case = TRUE)) ~ "Early adopter",
-      str_detect(self_response_raw, regex("ethical", ignore_case = TRUE)) ~ "Sentient",
+      str_detect(self_response_raw, regex("ethical", ignore_case = TRUE)) ~ "Stubborn",
       str_detect(self_response_raw, regex("cost-effective", ignore_case = TRUE)) ~ "Homo economicus",
       str_detect(self_response_raw, regex("[NΝ]one of the above", ignore_case = TRUE)) ~ "Unclassified",
       TRUE ~ "Other"
@@ -1175,7 +1239,7 @@ archetype_order <- c(
   "Activist",
   "Fearful",
   "Homo economicus",
-  "Sentient",
+  "Stubborn",
   "Influencer",
   "Uninterested",
   "Early adopter"
@@ -1220,8 +1284,9 @@ cat("Base table with archetypes created.\n")
 cat("Rows:", nrow(sample_description_archetype), "\n")
 cat("With valid archetype:", sum(!is.na(sample_description_archetype$self_profile)), "\n")
 
-
+# ==============================================================================
 # LONG TABLE WITH TOTAL + ARCHETYPES
+# ==============================================================================
 
 profile_columns <- c("Total", archetype_order)
 
@@ -1482,7 +1547,9 @@ write_csv(
 cat("Archetype table correctly exported as CSV.\n")
 cat(out_file(csv_dir, "sociodemographic_by_archetype_for_word.csv"), "\n")
 
+# ==============================================================================
 # EXPORT TABLE TO XLSX
+# ==============================================================================
 
 if (requireNamespace("openxlsx", quietly = TRUE)) {
   xlsx_path <- out_file(csv_dir, "sociodemographic_by_archetype_for_word.xlsx")
@@ -1499,7 +1566,9 @@ if (requireNamespace("openxlsx", quietly = TRUE)) {
   cat("Package openxlsx is not installed. XLSX export skipped.\n")
 }
 
+# ==============================================================================
 # EXPORT TABLE TO DOCX
+# ==============================================================================
 
 if (
   requireNamespace("flextable", quietly = TRUE) &&
@@ -1544,7 +1613,7 @@ if (
   docx_path <- out_file(csv_dir, "sociodemographic_by_archetype_for_word.docx")
   
   flextable::save_as_docx(
-    "Table 13. Sociodemographic characteristics of the total sample and by self-classified archetype" = ft,
+    "Table 7. Sociodemographic characteristics of the total sample and by self-classified archetype" = ft,
     path = docx_path,
     pr_section = section_landscape
   )
@@ -1556,8 +1625,9 @@ if (
   cat("Packages flextable/officer are not installed. DOCX export skipped.\n")
 }
 
-
+# ==============================================================================
 # POPULATION PYRAMID BY AGE, GENDER AND GENERATION
+# ==============================================================================
 
 age_levels_pyramid <- c(
   "19-25",
@@ -1582,11 +1652,9 @@ generation_levels_pyramid <- c(
   "Boomers +"
 )
 
-generation_colors_pyramid <- c(
-  "Generation Z" = "#8EC1B8",
-  "Millennials" = "#E8E6A0",
-  "Generation X" = "#B4B0D0",
-  "Boomers +" = "#E58373"
+generation_colors_pyramid <- get_sample_colors(
+  variable_name = "age_group",
+  categories = generation_levels_pyramid
 )
 
 pyramid_counts <- sample_description %>%
@@ -1735,71 +1803,100 @@ plot_population_pyramid <- ggplot(
     plot.margin = margin(12, 25, 12, 25)
   )
 
-print(plot_population_pyramid)
+safe_print_plot(plot_population_pyramid, "population_pyramid_age_gender_generation")
 
-ggsave(
-  out_file(plots_dir, "sample_description_population_pyramid_age_gender_generation.png"),
-  plot_population_pyramid,
+safe_save_plot(
+  filename = out_file(plots_dir, "sample_description_population_pyramid_age_gender_generation.png"),
+  plot = plot_population_pyramid,
   width = 11,
   height = 7,
   dpi = 300
 )
 
-ggsave(
-  out_file(pdf_dir, "sample_description_population_pyramid_age_gender_generation.pdf"),
-  plot_population_pyramid,
+safe_save_plot(
+  filename = out_file(pdf_dir, "sample_description_population_pyramid_age_gender_generation.pdf"),
+  plot = plot_population_pyramid,
   width = 11,
   height = 7
 )
 
-ggsave(
-  out_file(plots_dir, "sample_description_population_pyramid_generation.png"),
-  plot_population_pyramid,
+safe_save_plot(
+  filename = out_file(plots_dir, "sample_description_population_pyramid_generation.png"),
+  plot = plot_population_pyramid,
   width = 11,
   height = 7,
   dpi = 300
 )
 
-ggsave(
-  out_file(pdf_dir, "sample_description_population_pyramid_generation.pdf"),
-  plot_population_pyramid,
+safe_save_plot(
+  filename = out_file(pdf_dir, "sample_description_population_pyramid_generation.pdf"),
+  plot = plot_population_pyramid,
   width = 11,
   height = 7
 )
 
-ggsave(
-  out_file(plots_dir, "population_pyramid_age_gender_generation.png"),
-  plot_population_pyramid,
+safe_save_plot(
+  filename = out_file(plots_dir, "population_pyramid_age_gender_generation.png"),
+  plot = plot_population_pyramid,
   width = 11,
   height = 7,
   dpi = 300
 )
 
-ggsave(
-  out_file(pdf_dir, "population_pyramid_age_gender_generation.pdf"),
-  plot_population_pyramid,
+safe_save_plot(
+  filename = out_file(pdf_dir, "population_pyramid_age_gender_generation.pdf"),
+  plot = plot_population_pyramid,
   width = 11,
   height = 7
 )
 
 sample_plots[["population_pyramid_age_gender_generation"]] <- plot_population_pyramid
 
-# FINAL PDF WITH ALL PLOTS
+# ==============================================================================
+# FINAL PDF WITH ALL VALID PLOTS
+# ==============================================================================
 
-pdf(
-  file = out_file(pdf_dir, "sample_description_all_plots.pdf"),
-  width = 12,
-  height = 7,
-  onefile = TRUE
+sample_plots <- Filter(
+  f = function(x) inherits(x, "ggplot"),
+  x = sample_plots
 )
 
-for (p in sample_plots) {
-  print(p)
+if (length(sample_plots) > 0) {
+  
+  pdf_opened <- FALSE
+  
+  tryCatch(
+    {
+      pdf(
+        file = out_file(pdf_dir, "sample_description_all_plots.pdf"),
+        width = 12,
+        height = 7,
+        onefile = TRUE
+      )
+      
+      pdf_opened <- TRUE
+      
+      for (plot_name in names(sample_plots)) {
+        safe_print_plot(sample_plots[[plot_name]], plot_name)
+      }
+    },
+    error = function(e) {
+      message("Final PDF generation failed: ", conditionMessage(e))
+    },
+    finally = {
+      if (pdf_opened) {
+        dev.off()
+      }
+    }
+  )
+  
+} else {
+  message("No valid ggplot objects found for the final PDF.")
 }
 
-dev.off()
-
+# ==============================================================================
 # FINAL CHECKS
+# ==============================================================================
 
 cat("\nSample description generated in:\n")
 cat(base_output_dir, "\n")

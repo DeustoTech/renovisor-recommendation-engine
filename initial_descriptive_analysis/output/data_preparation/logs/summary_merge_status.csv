@@ -1,0 +1,5 @@
+merge_status,n,percentage
+decision_only_no_external_match,348,48.7
+external_unmatched_appended,274,38.3
+decision_with_external_match,73,10.2
+extra_survey_appended,20,2.8

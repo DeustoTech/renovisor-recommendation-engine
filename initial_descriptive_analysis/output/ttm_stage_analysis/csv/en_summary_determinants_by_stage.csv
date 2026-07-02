@@ -1,97 +1,97 @@
-stage,determinant_id,determinant_label,n_mentions,mean_score,median_score
-Aware / would consider,profits,Economic profit,220,58.077272727272735,62.5
-Aware / would consider,added_value,Added value,218,62.78440366972476,65
-Aware / would consider,credit_score_access_to_funding,Access to funding,214,65.53271028037382,70
-Aware / would consider,risk_profile,Risk profile,212,63.72641509433963,66.5
-Aware / would consider,frugality,Frugality,211,58.63507109004738,62
-Aware / would consider,approval,Approval,132,19.333333333333332,16
-Aware / would consider,own_significance,Personal significance,129,63.201550387596896,70
-Aware / would consider,commitment,Commitment,108,73.89814814814815,74
-Aware / would consider,adherence,Adherence,104,75.3173076923077,75
-Aware / would consider,self_satisfaction,Self-satisfaction,104,74.625,75
-Aware / would consider,autonomy,Self-sufficiency,104,64.6923076923077,71
-Aware / would consider,climate_protection,Climate protection,92,70.21739130434783,74.5
-Aware / would consider,legal,Legal compliance,91,76.18681318681318,80
-Aware / would consider,trust,Trust,89,76.10112359550561,79
-Aware / would consider,safety,Safety,87,77.05747126436782,80
-Aware / would consider,technical_fit,Technical fit,77,77.57142857142857,80
-Aware / would consider,environmental_concerns,Environmental concern,76,75.3157894736842,77
-Aware / would consider,knowledge,Knowledge,73,78.56164383561644,80
-Aware / would consider,wellbeing,Wellbeing,72,75.65277777777777,76
-Aware / would consider,cost_efficiency,Cost efficiency,72,68.20833333333334,70
-Aware / would consider,own_competence,Own competence,71,62.4225352112676,70
-Aware / would consider,coziness,Comfort,66,67.51515151515152,69.5
-Aware / would consider,recognition,Recognition,47,22.25531914893617,23
-Aware / would consider,novelty,Novelty,44,49.22727272727273,55.5
-Aware / would consider,fun,Fun,40,33.65,32.5
-Aware / would consider,peer_pressure,Peer pressure,27,46.74074074074074,52
-Aware / would consider,agreement,Agreement,26,72.15384615384616,76
-Aware / would consider,rights_and_duties,Rights and duties,25,65.56,71
-Aware / would consider,support,Social support,25,55.8,62
-Aware / would consider,socialising,Socialising,25,46.36,50
-Aware / would consider,trends,Trends,11,40.81818181818182,38
-Aware / would consider,authority,Authority,10,36.9,28
-Implemented,profits,Economic profit,193,61.683937823834206,66
-Implemented,added_value,Added value,190,60.59473684210527,62.5
-Implemented,frugality,Frugality,186,60.75806451612904,66
-Implemented,credit_score_access_to_funding,Access to funding,185,66.78378378378378,71
-Implemented,risk_profile,Risk profile,183,67.15300546448086,70
-Implemented,approval,Approval,150,20.593333333333334,17
-Implemented,own_significance,Personal significance,146,65.5068493150685,67
-Implemented,autonomy,Self-sufficiency,115,66.84347826086956,71
-Implemented,commitment,Commitment,114,73.36842105263159,74
-Implemented,self_satisfaction,Self-satisfaction,113,72.19469026548673,74
-Implemented,adherence,Adherence,111,72.61261261261261,75
-Implemented,wellbeing,Wellbeing,95,77.62105263157895,79
-Implemented,coziness,Comfort,88,70.39772727272727,73
-Implemented,environmental_concerns,Environmental concern,69,70.07246376811594,75
-Implemented,knowledge,Knowledge,68,81.61764705882354,83.5
-Implemented,technical_fit,Technical fit,68,76.91176470588235,77
-Implemented,cost_efficiency,Cost efficiency,68,72.10294117647058,74
-Implemented,own_competence,Own competence,62,65.87096774193549,70
-Implemented,trust,Trust,61,74.14754098360656,79
-Implemented,safety,Safety,60,75.55,80
-Implemented,legal,Legal compliance,58,77.94827586206897,80
-Implemented,climate_protection,Climate protection,58,65.06896551724138,67.5
-Implemented,recognition,Recognition,39,25.051282051282055,20
-Implemented,novelty,Novelty,38,55.23684210526316,59
-Implemented,fun,Fun,37,44.45945945945947,40
-Implemented,support,Social support,28,68.10714285714286,70.5
-Implemented,peer_pressure,Peer pressure,28,45.142857142857146,52
-Implemented,rights_and_duties,Rights and duties,27,73.85185185185185,76
-Implemented,agreement,Agreement,27,66.92592592592592,75
-Implemented,socialising,Socialising,25,39.2,35
-Implemented,authority,Authority,15,51.13333333333333,39
-Implemented,trends,Trends,13,37.38461538461539,29
-Unaware but curious,profits,Economic profit,166,59.5,63.5
-Unaware but curious,added_value,Added value,161,59.63354037267081,60
-Unaware but curious,credit_score_access_to_funding,Access to funding,160,67.60625000000002,71
-Unaware but curious,frugality,Frugality,160,58.53749999999999,62.5
-Unaware but curious,risk_profile,Risk profile,158,67.83544303797467,70
-Unaware but curious,approval,Approval,100,23.19,20
-Unaware but curious,own_significance,Personal significance,98,61.01020408163265,65
-Unaware but curious,commitment,Commitment,89,72.53932584269663,73
-Unaware but curious,adherence,Adherence,87,75.643678160919535,76
-Unaware but curious,self_satisfaction,Self-satisfaction,85,73.34117647058824,75
-Unaware but curious,autonomy,Self-sufficiency,85,64.15294117647059,69
-Unaware but curious,climate_protection,Climate protection,72,66.98611111111111,70.5
-Unaware but curious,legal,Legal compliance,71,77.54929577464789,80
-Unaware but curious,environmental_concerns,Environmental concern,71,72.94366197183099,75
-Unaware but curious,safety,Safety,71,71.80281690140845,75
-Unaware but curious,technical_fit,Technical fit,70,76.65714285714286,79
-Unaware but curious,trust,Trust,70,74.21428571428571,77.5
-Unaware but curious,knowledge,Knowledge,67,82.01492537313433,85
-Unaware but curious,cost_efficiency,Cost efficiency,67,69.2089552238806,72
-Unaware but curious,own_competence,Own competence,63,62.523809523809526,71
-Unaware but curious,wellbeing,Wellbeing,46,75.32608695652173,76.5
-Unaware but curious,coziness,Comfort,45,66.13333333333334,70
-Unaware but curious,peer_pressure,Peer pressure,23,51.78260869565217,64
-Unaware but curious,novelty,Novelty,23,45.56521739130435,42
-Unaware but curious,recognition,Recognition,23,15.652173913043478,10
-Unaware but curious,fun,Fun,22,31.68181818181818,25
-Unaware but curious,agreement,Agreement,21,78.76190476190476,80
-Unaware but curious,rights_and_duties,Rights and duties,20,70.6,76
-Unaware but curious,support,Social support,20,64.8,65
-Unaware but curious,socialising,Socialising,19,40.31578947368421,35
-Unaware but curious,trends,Trends,9,42.44444444444444,38
-Unaware but curious,authority,Authority,9,38.888888888888886,33
+stage,determinant_id,determinant_label,n_mentions,mean_score,median_score,total_mentions_stage,percentage
+Aware / would consider,profits,Economic profit,220,58.077272727272735,62.5,2902,7.580978635423846
+Aware / would consider,added_value,Added value,218,62.78440366972476,65,2902,7.512060647829083
+Aware / would consider,credit_score_access_to_funding,Access to funding,214,65.53271028037382,70,2902,7.374224672639559
+Aware / would consider,risk_profile,Risk profile,212,63.72641509433963,66.5,2902,7.305306685044796
+Aware / would consider,frugality,Frugality,211,58.63507109004738,62,2902,7.270847691247416
+Aware / would consider,approval,Approval,132,19.333333333333332,16,2902,4.548587181254307
+Aware / would consider,own_significance,Personal significance,129,63.201550387596896,70,2902,4.445210199862164
+Aware / would consider,commitment,Commitment,108,73.89814814814815,74,2902,3.7215713301171607
+Aware / would consider,adherence,Adherence,104,75.3173076923077,75,2902,3.5837353549276365
+Aware / would consider,self_satisfaction,Self-satisfaction,104,74.625,75,2902,3.5837353549276365
+Aware / would consider,autonomy,Self-sufficiency,104,64.6923076923077,71,2902,3.5837353549276365
+Aware / would consider,climate_protection,Climate protection,92,70.21739130434783,74.5,2902,3.1702274293590627
+Aware / would consider,legal,Legal compliance,91,76.18681318681318,80,2902,3.135768435561682
+Aware / would consider,trust,Trust,89,76.10112359550561,79,2902,3.066850447966919
+Aware / would consider,safety,Safety,87,77.05747126436782,80,2902,2.997932460372157
+Aware / would consider,technical_fit,Technical fit,77,77.57142857142857,80,2902,2.653342522398346
+Aware / would consider,environmental_concerns,Environmental concern,76,75.3157894736842,77,2902,2.6188835286009646
+Aware / would consider,knowledge,Knowledge,73,78.56164383561644,80,2902,2.5155065472088216
+Aware / would consider,wellbeing,Wellbeing,72,75.65277777777777,76,2902,2.4810475534114405
+Aware / would consider,cost_efficiency,Cost efficiency,72,68.20833333333334,70,2902,2.4810475534114405
+Aware / would consider,own_competence,Own competence,71,62.4225352112676,70,2902,2.4465885596140593
+Aware / would consider,coziness,Comfort,66,67.51515151515152,69.5,2902,2.2742935906271535
+Aware / would consider,recognition,Recognition,47,22.25531914893617,23,2902,1.6195727084769125
+Aware / would consider,novelty,Novelty,44,49.22727272727273,55.5,2902,1.5161957270847692
+Aware / would consider,fun,Fun,40,33.65,32.5,2902,1.3783597518952446
+Aware / would consider,peer_pressure,Peer pressure,27,46.74074074074074,52,2902,0.9303928325292902
+Aware / would consider,agreement,Agreement,26,72.15384615384616,76,2902,0.8959338387319091
+Aware / would consider,rights_and_duties,Rights and duties,25,65.56,71,2902,0.861474844934528
+Aware / would consider,support,Social support,25,55.8,62,2902,0.861474844934528
+Aware / would consider,socialising,Socialising,25,46.36,50,2902,0.861474844934528
+Aware / would consider,trends,Trends,11,40.81818181818182,38,2902,0.3790489317711923
+Aware / would consider,authority,Authority,10,36.9,28,2902,0.34458993797381116
+Implemented,profits,Economic profit,193,61.683937823834206,66,2718,7.100809418690214
+Implemented,added_value,Added value,190,60.59473684210527,62.5,2718,6.990434142752024
+Implemented,frugality,Frugality,186,60.75806451612904,66,2718,6.843267108167771
+Implemented,credit_score_access_to_funding,Access to funding,185,66.78378378378378,71,2718,6.8064753495217065
+Implemented,risk_profile,Risk profile,183,67.15300546448086,70,2718,6.73289183222958
+Implemented,approval,Approval,150,20.593333333333334,17,2718,5.518763796909492
+Implemented,own_significance,Personal significance,146,65.5068493150685,67,2718,5.371596762325239
+Implemented,autonomy,Self-sufficiency,115,66.84347826086956,71,2718,4.2310522442972776
+Implemented,commitment,Commitment,114,73.36842105263159,74,2718,4.194260485651214
+Implemented,self_satisfaction,Self-satisfaction,113,72.19469026548673,74,2718,4.157468727005151
+Implemented,adherence,Adherence,111,72.61261261261261,75,2718,4.083885209713024
+Implemented,wellbeing,Wellbeing,95,77.62105263157895,79,2718,3.495217071376012
+Implemented,coziness,Comfort,88,70.39772727272727,73,2718,3.237674760853569
+Implemented,environmental_concerns,Environmental concern,69,70.07246376811594,75,2718,2.5386313465783665
+Implemented,knowledge,Knowledge,68,81.61764705882354,83.5,2718,2.501839587932303
+Implemented,technical_fit,Technical fit,68,76.91176470588235,77,2718,2.501839587932303
+Implemented,cost_efficiency,Cost efficiency,68,72.10294117647058,74,2718,2.501839587932303
+Implemented,own_competence,Own competence,62,65.87096774193549,70,2718,2.2810890360559237
+Implemented,trust,Trust,61,74.14754098360656,79,2718,2.2442972774098604
+Implemented,safety,Safety,60,75.55,80,2718,2.207505518763797
+Implemented,legal,Legal compliance,58,77.94827586206897,80,2718,2.1339220014716704
+Implemented,climate_protection,Climate protection,58,65.06896551724138,67.5,2718,2.1339220014716704
+Implemented,recognition,Recognition,39,25.051282051282055,20,2718,1.434878587196468
+Implemented,novelty,Novelty,38,55.23684210526316,59,2718,1.398086828550405
+Implemented,fun,Fun,37,44.45945945945947,40,2718,1.3612950699043413
+Implemented,support,Social support,28,68.10714285714286,70.5,2718,1.030169242089772
+Implemented,peer_pressure,Peer pressure,28,45.142857142857146,52,2718,1.030169242089772
+Implemented,rights_and_duties,Rights and duties,27,73.85185185185185,76,2718,0.9933774834437087
+Implemented,agreement,Agreement,27,66.92592592592592,75,2718,0.9933774834437087
+Implemented,socialising,Socialising,25,39.2,35,2718,0.919793966151582
+Implemented,authority,Authority,15,51.13333333333333,39,2718,0.5518763796909493
+Implemented,trends,Trends,13,37.38461538461539,29,2718,0.4782928623988227
+Unaware but curious,profits,Economic profit,166,59.5,63.5,2251,7.3745002221235
+Unaware but curious,added_value,Added value,161,59.63354037267081,60,2251,7.152376721457131
+Unaware but curious,credit_score_access_to_funding,Access to funding,160,67.60625000000002,71,2251,7.107952021323856
+Unaware but curious,frugality,Frugality,160,58.53749999999999,62.5,2251,7.107952021323856
+Unaware but curious,risk_profile,Risk profile,158,67.83544303797467,70,2251,7.019102621057308
+Unaware but curious,approval,Approval,100,23.19,20,2251,4.4424700133274095
+Unaware but curious,own_significance,Personal significance,98,61.01020408163265,65,2251,4.353620613060862
+Unaware but curious,commitment,Commitment,89,72.53932584269663,73,2251,3.9537983118613953
+Unaware but curious,adherence,Adherence,87,75.643678160919535,76,2251,3.8649489115948468
+Unaware but curious,self_satisfaction,Self-satisfaction,85,73.34117647058824,75,2251,3.7760995113282987
+Unaware but curious,autonomy,Self-sufficiency,85,64.15294117647059,69,2251,3.7760995113282987
+Unaware but curious,climate_protection,Climate protection,72,66.98611111111111,70.5,2251,3.198578409595735
+Unaware but curious,legal,Legal compliance,71,77.54929577464789,80,2251,3.1541537094624608
+Unaware but curious,environmental_concerns,Environmental concern,71,72.94366197183099,75,2251,3.1541537094624608
+Unaware but curious,safety,Safety,71,71.80281690140845,75,2251,3.1541537094624608
+Unaware but curious,technical_fit,Technical fit,70,76.65714285714286,79,2251,3.109729009329187
+Unaware but curious,trust,Trust,70,74.21428571428571,77.5,2251,3.109729009329187
+Unaware but curious,knowledge,Knowledge,67,82.01492537313433,85,2251,2.9764549089293646
+Unaware but curious,cost_efficiency,Cost efficiency,67,69.2089552238806,72,2251,2.9764549089293646
+Unaware but curious,own_competence,Own competence,63,62.523809523809526,71,2251,2.798756108396268
+Unaware but curious,wellbeing,Wellbeing,46,75.32608695652173,76.5,2251,2.0435362061306086
+Unaware but curious,coziness,Comfort,45,66.13333333333334,70,2251,1.9991115059973346
+Unaware but curious,peer_pressure,Peer pressure,23,51.78260869565217,64,2251,1.0217681030653043
+Unaware but curious,novelty,Novelty,23,45.56521739130435,42,2251,1.0217681030653043
+Unaware but curious,recognition,Recognition,23,15.652173913043478,10,2251,1.0217681030653043
+Unaware but curious,fun,Fun,22,31.68181818181818,25,2251,0.9773434029320303
+Unaware but curious,agreement,Agreement,21,78.76190476190476,80,2251,0.9329187027987561
+Unaware but curious,rights_and_duties,Rights and duties,20,70.6,76,2251,0.888494002665482
+Unaware but curious,support,Social support,20,64.8,65,2251,0.888494002665482
+Unaware but curious,socialising,Socialising,19,40.31578947368421,35,2251,0.8440693025322079
+Unaware but curious,trends,Trends,9,42.44444444444444,38,2251,0.3998223011994669
+Unaware but curious,authority,Authority,9,38.888888888888886,33,2251,0.3998223011994669

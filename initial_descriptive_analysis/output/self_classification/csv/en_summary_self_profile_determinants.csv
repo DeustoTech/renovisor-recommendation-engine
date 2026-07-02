@@ -191,38 +191,38 @@ Influencer,technical_fit,Technical fit,29,81.58620689655173,81,16.94848758819186
 Influencer,trends,Trends,31,30.967741935483872,19,29.577563423387605
 Influencer,trust,Trust,33,71.75757575757575,75,18.839835294911527
 Influencer,wellbeing,Wellbeing,31,68.2258064516129,70,22.282593621358885
-Disinterested,added_value,Added value,8,57,60.5,16.578816087318867
-Disinterested,adherence,Adherence,8,67.125,73,22.781179575630908
-Disinterested,agreement,Agreement,9,58.333333333333336,56,27.459060435491963
-Disinterested,approval,Approval,9,28.444444444444443,24,27.870733355578892
-Disinterested,autarky,Self-sufficiency,9,51.55555555555556,41,27.06525037345448
-Disinterested,authority,Authority,9,24.555555555555557,27,26.353894926135258
-Disinterested,climate_protection,Climate protection,9,60,64,20.359273071502333
-Disinterested,commitment,Commitment,9,64.77777777777777,70,21.798955122767797
-Disinterested,cost_efficiency,Cost efficiency,9,74.44444444444444,62,18.08390936102528
-Disinterested,coziness,Comfort,9,69.66666666666667,74,15.811388300841896
-Disinterested,credit_score_access_to_funding,Access to funding,8,60.375,71.5,37.22878110893698
-Disinterested,environmental_concerns,Environmental concerns,9,63.666666666666664,67,19.58315602756614
-Disinterested,frugality,Frugality,9,62.44444444444444,66,15.500896031448562
-Disinterested,fun,Fun,9,37.22222222222222,28,27.21570216702932
-Disinterested,knowledge,Knowledge,9,71.55555555555556,74,17.21998193314319
-Disinterested,legal,Legal compliance,9,69,69,20.334699407662754
-Disinterested,novelty,Novelty,9,23.77777777777778,18,25.35634919392862
-Disinterested,own_competence,Own competence,9,70.77777777777777,78,22.055485586231026
-Disinterested,own_significance,Personal significance,9,77.55555555555556,77,8.762292952063277
-Disinterested,peer_pressure,Peer pressure,9,42.22222222222222,40,29.94068209718083
-Disinterested,profits,Economic profit,9,56,51,27.004629232781554
-Disinterested,recognition,Recognition,9,26,13,32.58450552026223
-Disinterested,rights_and_duties,Rights and duties,9,71.33333333333333,71,19.32614809008769
-Disinterested,risk_profile,Risk profile,9,56.55555555555556,62,20.494579229098065
-Disinterested,safety,Safety,9,62.55555555555556,64,16.786237749352228
-Disinterested,self_satisfaction,Self-satisfaction,9,75.66666666666667,71,22.371857321197094
-Disinterested,socialising,Socialising,9,26.22222222222222,25,18.342421989596804
-Disinterested,support,Social support,8,55.625,53,26.959957079236712
-Disinterested,technical_fit,Technical fit,9,73.33333333333333,70,12.806248474865697
-Disinterested,trends,Trends,9,32.888888888888886,25,25.876845076459983
-Disinterested,trust,Trust,9,72.66666666666667,73,20.6579282601136
-Disinterested,wellbeing,Wellbeing,8,73.5,79,10.757057484009543
+Uninterested,added_value,Added value,8,57,60.5,16.578816087318867
+Uninterested,adherence,Adherence,8,67.125,73,22.781179575630908
+Uninterested,agreement,Agreement,9,58.333333333333336,56,27.459060435491963
+Uninterested,approval,Approval,9,28.444444444444443,24,27.870733355578892
+Uninterested,autarky,Self-sufficiency,9,51.55555555555556,41,27.06525037345448
+Uninterested,authority,Authority,9,24.555555555555557,27,26.353894926135258
+Uninterested,climate_protection,Climate protection,9,60,64,20.359273071502333
+Uninterested,commitment,Commitment,9,64.77777777777777,70,21.798955122767797
+Uninterested,cost_efficiency,Cost efficiency,9,74.44444444444444,62,18.08390936102528
+Uninterested,coziness,Comfort,9,69.66666666666667,74,15.811388300841896
+Uninterested,credit_score_access_to_funding,Access to funding,8,60.375,71.5,37.22878110893698
+Uninterested,environmental_concerns,Environmental concerns,9,63.666666666666664,67,19.58315602756614
+Uninterested,frugality,Frugality,9,62.44444444444444,66,15.500896031448562
+Uninterested,fun,Fun,9,37.22222222222222,28,27.21570216702932
+Uninterested,knowledge,Knowledge,9,71.55555555555556,74,17.21998193314319
+Uninterested,legal,Legal compliance,9,69,69,20.334699407662754
+Uninterested,novelty,Novelty,9,23.77777777777778,18,25.35634919392862
+Uninterested,own_competence,Own competence,9,70.77777777777777,78,22.055485586231026
+Uninterested,own_significance,Personal significance,9,77.55555555555556,77,8.762292952063277
+Uninterested,peer_pressure,Peer pressure,9,42.22222222222222,40,29.94068209718083
+Uninterested,profits,Economic profit,9,56,51,27.004629232781554
+Uninterested,recognition,Recognition,9,26,13,32.58450552026223
+Uninterested,rights_and_duties,Rights and duties,9,71.33333333333333,71,19.32614809008769
+Uninterested,risk_profile,Risk profile,9,56.55555555555556,62,20.494579229098065
+Uninterested,safety,Safety,9,62.55555555555556,64,16.786237749352228
+Uninterested,self_satisfaction,Self-satisfaction,9,75.66666666666667,71,22.371857321197094
+Uninterested,socialising,Socialising,9,26.22222222222222,25,18.342421989596804
+Uninterested,support,Social support,8,55.625,53,26.959957079236712
+Uninterested,technical_fit,Technical fit,9,73.33333333333333,70,12.806248474865697
+Uninterested,trends,Trends,9,32.888888888888886,25,25.876845076459983
+Uninterested,trust,Trust,9,72.66666666666667,73,20.6579282601136
+Uninterested,wellbeing,Wellbeing,8,73.5,79,10.757057484009543
 Early adopter,agreement,Agreement,1,70,70,NA
 Early adopter,authority,Authority,1,59,59,NA
 Early adopter,commitment,Commitment,1,61,61,NA

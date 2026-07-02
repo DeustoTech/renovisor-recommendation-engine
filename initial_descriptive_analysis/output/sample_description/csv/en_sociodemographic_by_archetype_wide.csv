@@ -1,4 +1,4 @@
-section_order,row_order,row_type,characteristic,Total,Careful,Activist,Fearful,Homo economicus,Sentient,Influencer,Uninterested,Early adopter
+section_order,row_order,row_type,characteristic,Total,Careful,Activist,Fearful,Homo economicus,Stubborn,Influencer,Uninterested,Early adopter
 1,1,data,N participants,403,82,71,68,60,55,35,9,1
 2,1,data,"Age, years (mean (SD))",43.9 (14.9),34.6 (10.9),46.7 (15.6),46.1 (16.1),37.5 (11.3),50.6 (13.0),53.7 (12.7),34.4 (11.1),28.0 (NA)
 3,0,header,Generation,,,,,,,,,
