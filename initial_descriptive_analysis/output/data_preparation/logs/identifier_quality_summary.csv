@@ -1,0 +1,15 @@
+source_survey,identifier_type,n,percentage
+concerns1,code,12,100
+concerns2,prolific,98,86
+concerns2,code,10,8.8
+concerns2,no_identifier,6,5.3
+decision,prolific,211,50.1
+decision,no_identifier,123,29.2
+decision,code,87,20.7
+energy_crisis,prolific,102,85.7
+energy_crisis,no_identifier,11,9.2
+energy_crisis,code,6,5
+poverty,prolific,20,48.8
+poverty,no_identifier,16,39
+poverty,code,5,12.2
+rvs,no_identifier,8,100

@@ -1,0 +1,59 @@
+row_id_global,source_survey,merge_status,idioma,fecha,join_key,identifier_type,duplicate_type,n_rows_join_key,n_surveys_join_key,surveys_join_key,response_quality
+369,decision,decision_with_external_match,ES,2026-05-07,CODE_12345,code,problematic_duplicate_in_decision,3,1,decision,problematic_merge
+210,decision,decision_with_external_match,ES,2026-05-15,CODE_12345,code,problematic_duplicate_in_decision,3,1,decision,problematic_merge
+201,decision,decision_with_external_match,ES,2026-05-19,CODE_12345,code,problematic_duplicate_in_decision,3,1,decision,problematic_merge
+702,concerns1,extra_survey_appended,EN,2026-02-11,CODE_AAL81,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+415,decision,decision_only_no_external_match,EN,2026-02-11,CODE_AAL81,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+441,concerns2,external_unmatched_appended,EN,2026-04-23,CODE_AD85A,code,expected_cross_survey_link,2,2,concerns2; energy_crisis,attention_check_fallido
+593,energy_crisis,external_unmatched_appended,ES,2026-04-23,CODE_AD85A,code,expected_cross_survey_link,2,2,concerns2; energy_crisis,attention_check_fallido
+707,concerns1,extra_survey_appended,EN,2026-02-10,CODE_CEB83,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+421,decision,decision_only_no_external_match,EN,2026-02-10,CODE_CEB83,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+701,concerns1,extra_survey_appended,EN,2026-02-11,CODE_DGC00,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+412,decision,decision_only_no_external_match,EN,2026-02-12,CODE_DGC00,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+706,concerns1,extra_survey_appended,EN,2026-02-10,CODE_EOCLR,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+420,decision,decision_only_no_external_match,EN,2026-02-10,CODE_EOCLR,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+700,concerns1,extra_survey_appended,EN,2026-02-11,CODE_HL990,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+414,decision,decision_only_no_external_match,EN,2026-02-11,CODE_HL990,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+696,concerns1,extra_survey_appended,EN,2026-02-16,CODE_MO125,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+410,decision,decision_only_no_external_match,EN,2026-02-16,CODE_MO125,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+424,concerns2,external_unmatched_appended,EN,2026-06-08,CODE_N2005,code,expected_cross_survey_link,2,2,concerns2; energy_crisis,usable
+577,energy_crisis,external_unmatched_appended,EN,2026-06-08,CODE_N2005,code,expected_cross_survey_link,2,2,concerns2; energy_crisis,sin_sociodemografico
+428,concerns2,external_unmatched_appended,ES,2026-05-30,CODE_NKN61,code,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,sin_sociodemografico
+578,energy_crisis,external_unmatched_appended,ES,2026-05-30,CODE_NKN61,code,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,usable
+539,poverty,external_unmatched_appended,ES,2026-05-30,CODE_NKN61,code,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,usable
+697,concerns1,extra_survey_appended,EN,2026-02-15,CODE_QWERT,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+411,decision,decision_only_no_external_match,EN,2026-02-15,CODE_QWERT,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+705,concerns1,extra_survey_appended,EN,2026-02-10,CODE_TE996,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+419,decision,decision_only_no_external_match,EN,2026-02-10,CODE_TE996,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+698,concerns1,extra_survey_appended,EN,2026-02-12,CODE_VVVVV,code,expected_cross_survey_link,2,2,decision; concerns1,usable
+413,decision,decision_only_no_external_match,EN,2026-02-12,CODE_VVVVV,code,expected_cross_survey_link,2,2,decision; concerns1,sin_sociodemografico
+620,energy_crisis,external_unmatched_appended,EN,2026-03-27,PROLIFIC_5a0c036857cee70001767a58,prolific,expected_cross_survey_link,2,2,poverty; energy_crisis,sin_sociodemografico
+575,poverty,external_unmatched_appended,EN,2026-03-26,PROLIFIC_5a0c036857cee70001767a58,prolific,expected_cross_survey_link,2,2,poverty; energy_crisis,usable
+532,concerns2,external_unmatched_appended,EN,2026-03-26,PROLIFIC_5b339152afe1d00001c6c509,prolific,expected_cross_survey_link,2,2,concerns2; energy_crisis,attention_check_fallido
+657,energy_crisis,external_unmatched_appended,EN,2026-03-27,PROLIFIC_5b339152afe1d00001c6c509,prolific,expected_cross_survey_link,2,2,concerns2; energy_crisis,sin_sociodemografico
+535,concerns2,external_unmatched_appended,EN,2026-03-26,PROLIFIC_5f8639cd12e4d71876c9348e,prolific,expected_cross_survey_link,2,2,concerns2; energy_crisis,attention_check_fallido
+676,energy_crisis,external_unmatched_appended,EN,2026-03-27,PROLIFIC_5f8639cd12e4d71876c9348e,prolific,expected_cross_survey_link,2,2,concerns2; energy_crisis,attention_check_fallido
+480,concerns2,external_unmatched_appended,EN,2026-03-27,PROLIFIC_5f985f3a4bc1cf120675f408,prolific,expected_cross_survey_link,2,2,concerns2; poverty,usable
+568,poverty,external_unmatched_appended,EN,2026-03-27,PROLIFIC_5f985f3a4bc1cf120675f408,prolific,expected_cross_survey_link,2,2,concerns2; poverty,sin_sociodemografico
+596,energy_crisis,external_unmatched_appended,EN,2026-03-27,PROLIFIC_608bcd3f3ad49610529c4e60,prolific,duplicate_within_same_survey,2,1,energy_crisis,duplicado_problematico
+597,energy_crisis,external_unmatched_appended,EN,2026-03-27,PROLIFIC_608bcd3f3ad49610529c4e60,prolific,duplicate_within_same_survey,2,1,energy_crisis,duplicado_problematico
+503,concerns2,external_unmatched_appended,EN,2026-03-27,PROLIFIC_697b285a08403d9b7c098b32,prolific,expected_cross_survey_link,2,2,concerns2; poverty,attention_check_fallido
+569,poverty,external_unmatched_appended,EN,2026-03-27,PROLIFIC_697b285a08403d9b7c098b32,prolific,expected_cross_survey_link,2,2,concerns2; poverty,sin_sociodemografico
+601,energy_crisis,external_unmatched_appended,EN,2026-03-27,PROLIFIC_6981ff02edd47c5bb3b88029,prolific,expected_cross_survey_link,2,2,poverty; energy_crisis,usable
+566,poverty,external_unmatched_appended,EN,2026-03-27,PROLIFIC_6981ff02edd47c5bb3b88029,prolific,expected_cross_survey_link,2,2,poverty; energy_crisis,sin_sociodemografico
+646,energy_crisis,external_unmatched_appended,EN,2026-03-27,PROLIFIC_69a93a5adfa13828e9e2b291,prolific,expected_cross_survey_link,2,2,poverty; energy_crisis,usable
+567,poverty,external_unmatched_appended,EN,2026-03-27,PROLIFIC_69a93a5adfa13828e9e2b291,prolific,expected_cross_survey_link,2,2,poverty; energy_crisis,sin_sociodemografico
+560,poverty,external_unmatched_appended,EU,2026-05-08,PROLIFIC_c5pqdyqa,prolific,duplicate_within_same_survey,2,1,poverty,suspicious_identifier
+551,poverty,external_unmatched_appended,EU,2026-05-09,PROLIFIC_c5pqdyqa,prolific,duplicate_within_same_survey,2,1,poverty,suspicious_identifier
+435,concerns2,external_unmatched_appended,EU,2026-05-12,PROLIFIC_jb993,prolific,expected_cross_survey_link,2,2,concerns2; energy_crisis,suspicious_identifier
+584,energy_crisis,external_unmatched_appended,ES,2026-05-12,PROLIFIC_jb993,prolific,expected_cross_survey_link,2,2,concerns2; energy_crisis,suspicious_identifier
+431,concerns2,external_unmatched_appended,ES,2026-05-14,PROLIFIC_jzn56,prolific,expected_cross_survey_link,2,2,concerns2; energy_crisis,suspicious_identifier
+586,energy_crisis,external_unmatched_appended,ES,2026-05-10,PROLIFIC_jzn56,prolific,expected_cross_survey_link,2,2,concerns2; energy_crisis,suspicious_identifier
+582,energy_crisis,external_unmatched_appended,ES,2026-05-12,PROLIFIC_kiki2026j,prolific,expected_cross_survey_link,2,2,poverty; energy_crisis,suspicious_identifier
+543,poverty,external_unmatched_appended,ES,2026-05-12,PROLIFIC_kiki2026j,prolific,expected_cross_survey_link,2,2,poverty; energy_crisis,suspicious_identifier
+439,concerns2,external_unmatched_appended,EU,2026-05-08,PROLIFIC_poiuy,prolific,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,suspicious_identifier
+591,energy_crisis,external_unmatched_appended,EU,2026-05-08,PROLIFIC_poiuy,prolific,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,suspicious_identifier
+562,poverty,external_unmatched_appended,EU,2026-05-07,PROLIFIC_poiuy,prolific,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,suspicious_identifier
+438,concerns2,external_unmatched_appended,ES,2026-05-08,PROLIFIC_rre68,prolific,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,suspicious_identifier
+587,energy_crisis,external_unmatched_appended,ES,2026-05-08,PROLIFIC_rre68,prolific,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,suspicious_identifier
+558,poverty,external_unmatched_appended,ES,2026-05-08,PROLIFIC_rre68,prolific,expected_cross_survey_link,3,3,concerns2; poverty; energy_crisis,suspicious_identifier

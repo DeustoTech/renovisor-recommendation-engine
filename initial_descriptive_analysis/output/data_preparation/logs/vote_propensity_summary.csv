@@ -1,0 +1,2 @@
+n_rows,n_with_vote_response_raw,n_classified_as_voter,n_classified_as_abstainer,n_uncertain_or_missing,observed_abstention_rate,mean_p_abstain_model,mean_p_vote_model,n_training_rows,n_predictors_used
+715,632,563,69,83,10.9,9.5,90.5,414,7
