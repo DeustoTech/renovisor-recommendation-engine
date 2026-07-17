@@ -49,3 +49,11 @@ po/*~
 rsconnect/
 
 data/processed/9_top3/
+
+# Bootstrap indexes grandes
+paper1_cluster/data/processed/04_1_propensity_bootstrap_eu_detailed/bootstrap_samples_index.csv
+paper1_cluster/data/processed/04_2_propensity_bootstrap_eu_pfe_esn_renew_greens_merged/bootstrap_samples_index.csv
+paper1_cluster/data/processed/04_3_propensity_bootstrap_tfg_blocks/bootstrap_samples_index.csv
+
+# Archivos pesados generados
+paper1_cluster/data/processed/**/bootstrap_samples_index.csv
