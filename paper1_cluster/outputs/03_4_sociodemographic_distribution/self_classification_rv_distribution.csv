@@ -1,0 +1,11 @@
+variable,category,n,total_n,prop
+self_classification_archetype_model,Careful,324,1229,0.2636289666395443
+self_classification_archetype_model,Homo economicus,280,1229,0.22782750203417412
+self_classification_archetype_model,Fearful,168,1229,0.13669650122050447
+self_classification_archetype_model,Activist,136,1229,0.11065907241659886
+self_classification_archetype_model,Missing,114,1229,0.09275834011391375
+self_classification_archetype_model,Stubborn,88,1229,0.07160292921074043
+self_classification_archetype_model,Influencer,46,1229,0.03742880390561432
+self_classification_archetype_model,Uninterested,33,1229,0.026851098454027666
+self_classification_archetype_model,None,29,1229,0.023596419853539462
+self_classification_archetype_model,Early adopter,11,1229,0.008950366151342554
