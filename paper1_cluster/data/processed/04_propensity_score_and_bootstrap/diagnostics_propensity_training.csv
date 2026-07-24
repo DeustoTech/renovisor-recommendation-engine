@@ -1,0 +1,12 @@
+metric,value
+n_training_rows,374
+n_training_voters,307
+n_training_abstainers,67
+training_only_complete_predictors,FALSE
+n_model_predictors,4
+target_abstention_share,0.5065
+target_voter_share,0.4935
+n_boot,20
+boot_sample_size,1000
+n_abstention_target_per_bootstrap,506
+n_voter_target_per_bootstrap,494

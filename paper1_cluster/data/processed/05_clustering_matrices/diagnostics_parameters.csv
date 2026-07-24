@@ -1,0 +1,9 @@
+parameter,value
+K_DEFAULT,8
+MAX_POS,50
+Q3_EXT,25
+NF_DEFAULT,15
+K_GRID,"4,5,6,7,8"
+D_GRID,"4,5,6,7,8,9,10,11,12,13,14,15"
+input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+output_dir,paper1_cluster/data/processed/05_clustering_matrices

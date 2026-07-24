@@ -1,0 +1,5 @@
+electoral_group_model,n_pool,target_n_in_bootstrap,target_share_global,pool_empty,pool_to_target_ratio,target_to_pool_ratio,pool_diagnostic
+MODERATE,173,169,0.1685796,FALSE,1.0236686390532543,0.976878612716763,good_pool
+CONSERVATIVE,112,129,0.12885285000000002,FALSE,0.8682170542635659,1.1517857142857142,acceptable_some_repetition
+AUTHORITARIAN,37,128,0.12816195,FALSE,0.2890625,3.4594594594594597,weak_high_repetition
+LEFT,516,68,0.06790560000000001,FALSE,7.588235294117647,0.13178294573643412,good_pool

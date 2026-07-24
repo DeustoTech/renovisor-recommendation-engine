@@ -1,0 +1,6 @@
+step,file,n_rows,n_cols
+01_integrated,paper1_cluster/data/processed/01_mergeData/all_sources_integrated.csv,4118,939
+02_clean,paper1_cluster/data/processed/01_1_harmonize_sociodemographics/all_sources_integrated_clean.csv,4118,123
+03_quality,paper1_cluster/data/processed/03_component_quality/all_sources_integrated_component_quality.csv,4118,1126
+03_2_phase_scores,paper1_cluster/data/processed/03_2_phase_dimension_scores/all_sources_integrated_component_quality_phase_scores.csv,4118,1406
+matrix_32det_for_clustering,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv,3764,116

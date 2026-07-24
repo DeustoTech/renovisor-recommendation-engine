@@ -1,0 +1,6 @@
+target_electoral_group,target_label,rv_41_rule,rv_42_rule,external_weight_raw,target_sample_type,target_share_within_voters,target_share_global,target_n_in_bootstrap
+MODERATE,Moderate,voter with left-right position,40 <= x < 60,34.16,voter,0.34159999999999996,0.1685796,169
+CONSERVATIVE,Conservative,voter with left-right position,60 <= x < 80,26.11,voter,0.2611,0.12885285000000002,129
+AUTHORITARIAN,Authoritarian,voter with left-right position,x >= 80,25.97,voter,0.2597,0.12816195,128
+LEFT,Left,voter with left-right position,x < 40,13.76,voter,0.1376,0.06790560000000001,68
+ABSTENTION,Abstention / blank / null / no vote,abstention,not used,NA,abstention,NA,0.5065,506

@@ -1,0 +1,6 @@
+target_sample_type,target_electoral_group,fallback_used,n,prop
+abstention,ABSTENTION,FALSE,506000,1
+voter,AUTHORITARIAN,FALSE,128000,1
+voter,CONSERVATIVE,FALSE,129000,1
+voter,LEFT,FALSE,68000,1
+voter,MODERATE,FALSE,169000,1

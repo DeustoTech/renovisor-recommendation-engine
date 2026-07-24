@@ -1,0 +1,5 @@
+dataset_source,n_rows,n_with_any_det,n_complete_32_det,mean_n_det_non_missing,min_n_det_non_missing,max_n_det_non_missing
+diego,1899,1899,1899,32,32,32
+rv,1229,955,599,23.589096826688397,0,32
+why,990,981,808,31.235353535353532,0,32
+TOTAL,4118,3835,3306,29.305973773676456,0,32

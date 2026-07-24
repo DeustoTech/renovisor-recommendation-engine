@@ -1,0 +1,5 @@
+dataset_source,n_rows,n_usable_for_clustering,prop_usable_for_clustering,n_usable_complete,n_usable_partial,n_no_determinants,n_too_many_missing,n_low_variability,n_high_extreme_share,n_invalid_values,mean_n_det_valid,min_n_det_valid,max_n_det_valid,mean_det_row_sd
+diego,1899,1899,1,1899,0,0,0,0,0,0,32,32,32,26.245692264226285
+rv,703,365,0.519203413940256,185,180,287,49,1,1,0,17.14651493598862,0,32,26.489404434252904
+why,871,854,0.9804822043628014,715,139,9,7,0,1,0,31.21239954075775,0,32,24.762692646753916
+TOTAL,3473,3118,0.8977828966311546,2799,319,296,56,1,2,0,28.795853728764758,0,32,25.875579415387293

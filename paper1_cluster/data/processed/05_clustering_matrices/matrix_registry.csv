@@ -1,0 +1,12 @@
+matrix_name,file,intended_use,description
+matrix_32_raw_0_100_imputed50,matrix_32_raw_0_100_imputed50.csv,diagnostic_old_scale,Original 0-100 values with NA imputed to 50.
+matrix_32_raw_0_1,matrix_32_raw_0_1.csv,kmeans_efa_greedy,Original values divided by 100; NA becomes 0.5.
+matrix_32_pos_0_1,matrix_32_pos_0_1.csv,kmeans_efa_greedy_positive_high_values,Only values >= MAX_POS keep their value/100; the rest becomes neutral 0.5.
+matrix_32_ext_0_1,matrix_32_ext_0_1.csv,kmeans_efa_greedy_extreme_values,"Absolute distance from 50, thresholded at Q3_EXT and scaled by /50; non-extreme values become 0."
+matrix_32_z_abs,matrix_32_z_abs.csv,kmeans_efa_greedy_relative_deviation,Absolute z-score; NA becomes 0.
+matrix_32_pos_mask_for_greedy,matrix_32_pos_mask_for_greedy.csv,greedy_binarisation_only,Old-style positive mask: values < MAX_POS become NA. For later top-D binarisation.
+matrix_32_ext_mask_for_greedy,matrix_32_ext_mask_for_greedy.csv,greedy_binarisation_only,Old-style extreme mask: abs(x-50) < Q3_EXT becomes NA. For later top-D binarisation.
+matrix_9dim_raw_0_1,matrix_9dim_raw_0_1.csv,kmeans_efa_dimension_level,Mean of raw_0_1 determinants by theoretical dimension.
+matrix_9dim_pos_0_1,matrix_9dim_pos_0_1.csv,kmeans_efa_dimension_level_positive,Mean of pos_0_1 determinants by theoretical dimension.
+matrix_9dim_ext_0_1,matrix_9dim_ext_0_1.csv,kmeans_efa_dimension_level_extreme,Mean of ext_0_1 determinants by theoretical dimension.
+matrix_9dim_z_abs,matrix_9dim_z_abs.csv,kmeans_efa_dimension_level_relative_deviation,Mean of z_abs determinants by theoretical dimension.

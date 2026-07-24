@@ -1,0 +1,11 @@
+target_electoral_group,target_label,rv_41_rule,rv_42_rule,external_weight_raw,target_sample_type,target_share_within_voters,target_share_global,target_n_in_bootstrap
+EPP,European People's Party,national,40 <= x < 60,12.68,voter,0.2466926070038911,0.12174280155642027,122
+SD,Progressive Alliance of Socialists and Democrats,national,20 <= x < 40,10.21,voter,0.1986381322957199,0.09802791828793778,98
+PFE,Patriots for Europe,national,80 <= x < 90,5.83,voter,0.11342412451361869,0.05597480544747083,56
+ECR,European Conservatives and Reformists,national,60 <= x < 80,5.55,voter,0.10797665369649807,0.0532864785992218,53
+RENEW,Renew Europe,regionalist,x >= 40,5.48,voter,0.10661478599221792,0.05261439688715955,53
+GREENS_EFA,Greens / European Free Alliance,regionalist,x < 40,3.63,voter,0.07062256809338523,0.034852237354085616,35
+GUE_NGL,The Left in the European Parliament - GUE/NGL,national,x < 20,3.36,voter,0.06536964980544747,0.032259922178988334,32
+NI,Non-attached / Other options,other,any,2.4,voter,0.04669260700389106,0.023042801556420238,23
+ESN,Europe of Sovereign Nations,national,x >= 90,2.26,voter,0.04396887159533074,0.021698638132295722,22
+ABSTENTION,Abstention / blank / null / no vote,abstention,not used,NA,abstention,NA,0.5065,506

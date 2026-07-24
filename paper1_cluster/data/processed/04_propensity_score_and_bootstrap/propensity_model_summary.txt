@@ -1,0 +1,39 @@
+
+Call:
+glm(formula = propensity_formula, family = binomial(), data = train_model_df)
+
+Coefficients:
+                                     Estimate Std. Error z value Pr(>|z|)   
+(Intercept)                           1.50470    0.55215   2.725  0.00643 **
+f_age_group_model25_34               -0.76876    0.52038  -1.477  0.13959   
+f_age_group_model55_64                0.36232    0.64453   0.562  0.57401   
+f_age_group_model35_44               -0.08474    0.55180  -0.154  0.87794   
+f_age_group_model18_24               -0.71710    0.65325  -1.098  0.27231   
+f_age_group_model65_PLUS              0.24879    1.16447   0.214  0.83082   
+f_age_group_modelUNKNOWN_MODEL       -0.08389    0.57031  -0.147  0.88306   
+f_gender_modelMALE                   -0.01139    0.32847  -0.035  0.97233   
+f_gender_modelOTHER_MODEL            -1.16468    0.72489  -1.607  0.10812   
+f_country_model_groupedOTHER_MODEL   -0.24217    0.51518  -0.470  0.63830   
+f_country_model_groupedES             0.40010    0.52550   0.761  0.44643   
+f_country_model_groupedIT             0.16961    0.69851   0.243  0.80815   
+f_country_model_groupedPL             0.28328    0.65108   0.435  0.66350   
+f_country_model_groupedGR             0.14360    0.94409   0.152  0.87910   
+f_country_model_groupedFR             0.20703    0.70664   0.293  0.76954   
+f_country_model_groupedNL             0.22177    0.91130   0.243  0.80773   
+f_country_model_groupedDE            -0.15242    0.70432  -0.216  0.82867   
+f_employment_modelEMPLOYED            0.10481    0.33308   0.315  0.75302   
+f_employment_modelUNEMPLOYED         -0.13972    0.75524  -0.185  0.85322   
+f_employment_modelSTUDENT            -0.48751    0.73019  -0.668  0.50436   
+f_employment_modelOTHER_MODEL        16.71940 4607.64381   0.004  0.99710   
+f_employment_modelRETIRED            16.61696  963.98820   0.017  0.98625   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 351.63  on 373  degrees of freedom
+Residual deviance: 312.64  on 352  degrees of freedom
+AIC: 356.64
+
+Number of Fisher Scoring iterations: 17
+

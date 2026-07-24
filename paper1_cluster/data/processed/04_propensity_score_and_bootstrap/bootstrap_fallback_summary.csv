@@ -1,0 +1,11 @@
+target_sample_type,target_electoral_group,fallback_used,n,prop
+abstention,ABSTENTION,FALSE,10120,1
+voter,ECR,FALSE,1060,1
+voter,EPP,FALSE,2440,1
+voter,ESN,FALSE,440,1
+voter,GREENS_EFA,FALSE,700,1
+voter,GUE_NGL,FALSE,640,1
+voter,NI,FALSE,460,1
+voter,PFE,FALSE,1120,1
+voter,RENEW,FALSE,1060,1
+voter,SD,FALSE,1960,1
