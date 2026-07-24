@@ -1,20 +1,35 @@
-# ============================================================
-# 06_kmeans_bootstrap.R
-# ============================================================
-#
+
 # Objetivo:
-# Ejecutar K-means sobre las muestras bootstrap.
+# Preparar las matrices de 32 determinantes para clustering:
 #
-# Para cada bootstrap b:
-#   para cada matriz:
-#     para K = 4,...,8:
-#       1. seleccionar las filas del bootstrap
-#       2. unirlas con la matriz de determinantes por integrated_row_id
-#       3. ejecutar K-means
-#       4. guardar clusters, centroides, distancias y heatmaps
+# 1. raw_0_1:
+#    determinantes originales 0-100 pasados a 0-1.
+#    NA -> 50 antes de transformar; por tanto NA -> 0.5.
 #
-# Este script SÍ usa bootstrap.
-# El script 05 solo preparaba las matrices base.
+# 2. pos_0_1:
+#    mantiene valores positivos/altos.
+#    corte como en script antiguo: MAX = 50.
+#    valores < 50 se mandan a neutral 0.5.
+#
+# 3. ext_0_1:
+#    mide extremidad respecto al punto neutro 50.
+#    ext = abs(x - 50)
+#    corte como en script antiguo: Q3 = 25.
+#    valores con ext < 25 se mandan a 0.
+#
+# 4. z_abs:
+#    z-score absoluto.
+#    z = abs((x - media) / sd)
+#    NA -> 0 después de calcular z.
+#
+# También guarda matrices auxiliares para Greedy:
+# - pos_mask_for_greedy
+# - ext_mask_for_greedy
+#
+# Este script NO usa todavía bootstrap político.
+# Las matrices se guardan por integrated_row_id.
+# Luego, si hay bootstrap_samples_index.csv, se usarán esos IDs
+# para seleccionar filas de estas matrices.
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -25,32 +40,18 @@ suppressPackageStartupMessages({
 
 set.seed(123)
 
-# ============================================================
-# 1. Parámetros
-# ============================================================
+# Parámetros
+processed_root <- "paper1_cluster/data/processed"
 
-project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
-processed_root <- file.path(project_root, "paper1_cluster/data/processed")
-
-# Escenario principal elegido:
-# PFE + ESN fusionados
-# GREENS_EFA + RENEW fusionados
-BOOTSTRAP_SCENARIO <- "04_2_propensity_bootstrap_eu_pfe_esn_renew_greens_merged"
-
-bootstrap_file <- file.path(
+in_file <- file.path(
   processed_root,
-  BOOTSTRAP_SCENARIO,
-  "bootstrap_samples_index.csv"
-)
-
-matrix_dir <- file.path(
-  processed_root,
-  "05_clustering_matrices"
+  "03_component_quality",
+  "matrix_32det_for_clustering.csv"
 )
 
 out_dir <- file.path(
   processed_root,
-  "06_kmeans_bootstrap"
+  "05_clustering_matrices"
 )
 
 fig_dir <- file.path(out_dir, "figures")
@@ -58,768 +59,585 @@ fig_dir <- file.path(out_dir, "figures")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 
-# Matrices de 32 determinantes
-MATRICES_TO_RUN <- c(
-  "matrix_32_raw_0_1",
-  "matrix_32_pos_0_1",
-  "matrix_32_ext_0_1",
-  "matrix_32_z_abs"
-)
+# Cortes heredados del script antiguo
+K_DEFAULT <- 8
+MAX_POS <- 50
+Q3_EXT <- 25
+NF_DEFAULT <- 15
 
-# K = número de clusters / perfiles
+# Rango que se explorará después, no se usa todavía aquí
 K_GRID <- 4:8
+D_GRID <- 4:15
 
-# Parámetros de K-means
-NSTART <- 25
-ITER_MAX <- 100
 
-# Para usar todos los bootstraps disponibles, dejar Inf.
-# Para probar rápido, poner por ejemplo 20.
-MAX_BOOTSTRAPS <- Inf
-
-# Guardar asignaciones fila-cluster.
-# Con 200 bootstraps:
-# 200 x 1000 x 4 matrices x 5 K = aprox. 4 millones de filas.
-SAVE_ASSIGNMENTS <- TRUE
-
-# Guardar heatmaps medios de centroides
-SAVE_HEATMAPS <- TRUE
-
-# ============================================================
-# 2. Leer bootstrap
-# ============================================================
-
-if (!file.exists(bootstrap_file)) {
-  stop("No encuentro el archivo bootstrap: ", bootstrap_file)
+# Lectura
+if (!file.exists(in_file)) {
+  stop("No encuentro el archivo de entrada: ", in_file)
 }
 
-bootstrap_index <- read_csv(
-  bootstrap_file,
-  show_col_types = FALSE
+df <- read_csv(
+  in_file,
+  show_col_types = FALSE,
+  col_types = cols(.default = col_character())
 )
 
-if (!"bootstrap_id" %in% names(bootstrap_index)) {
-  stop("El bootstrap_samples_index.csv no tiene columna bootstrap_id.")
-}
+det_cols <- names(df)[str_detect(names(df), "^det_\\d{2}_")]
 
-if (!"integrated_row_id" %in% names(bootstrap_index)) {
-  stop("El bootstrap_samples_index.csv no tiene columna integrated_row_id.")
-}
-
-if (!"draw_id" %in% names(bootstrap_index)) {
-  bootstrap_index <- bootstrap_index %>%
-    group_by(bootstrap_id) %>%
-    mutate(draw_id = row_number()) %>%
-    ungroup()
-}
-
-bootstrap_index <- bootstrap_index %>%
-  mutate(
-    bootstrap_id = as.integer(bootstrap_id),
-    draw_id = as.integer(draw_id),
-    integrated_row_id = as.character(integrated_row_id)
+if (length(det_cols) != 32) {
+  stop(
+    "Se esperaban 32 determinantes, pero se han encontrado ",
+    length(det_cols),
+    ". Revisa nombres de columnas ^det_\\d{2}_"
   )
-
-boot_ids <- sort(unique(bootstrap_index$bootstrap_id))
-
-if (is.finite(MAX_BOOTSTRAPS)) {
-  boot_ids <- head(boot_ids, MAX_BOOTSTRAPS)
 }
 
-bootstrap_index <- bootstrap_index %>%
-  filter(bootstrap_id %in% boot_ids)
+id_cols <- c(
+  "integrated_row_id",
+  "global_participant_key",
+  "dataset_source",
+  "source_survey",
+  "country_model",
+  "country_model_grouped",
+  "age_group_model",
+  "gender_model",
+  "employment_model",
+  "row_quality_final",
+  "usable_for_clustering",
+  "usable_for_main_analysis",
+  "n_det_valid"
+)
 
-cat("\n============================================================\n")
-cat("BOOTSTRAP CARGADO\n")
-cat("============================================================\n")
-cat("Escenario bootstrap:", BOOTSTRAP_SCENARIO, "\n")
-cat("N bootstraps usados:", length(boot_ids), "\n")
-cat("N draws totales:", nrow(bootstrap_index), "\n")
+id_cols <- id_cols[id_cols %in% names(df)]
 
-# ============================================================
-# 3. Funciones auxiliares
-# ============================================================
-
-read_matrix_file <- function(matrix_name) {
-  
-  file <- file.path(matrix_dir, paste0(matrix_name, ".csv"))
-  
-  if (!file.exists(file)) {
-    stop("No encuentro la matriz: ", file)
-  }
-  
-  mat_df <- read_csv(
-    file,
-    show_col_types = FALSE
-  ) %>%
-    mutate(
-      integrated_row_id = as.character(integrated_row_id)
-    ) %>%
-    distinct(integrated_row_id, .keep_all = TRUE)
-  
-  feature_cols <- names(mat_df)[str_detect(names(mat_df), "^det_\\d{2}_")]
-  
-  if (length(feature_cols) != 32) {
-    stop(
-      "La matriz ",
-      matrix_name,
-      " debería tener 32 determinantes y tiene ",
-      length(feature_cols)
+# Funciones auxiliares
+as_num <- function(x) {
+  suppressWarnings(
+    readr::parse_number(
+      as.character(x),
+      locale = locale(decimal_mark = ".", grouping_mark = ",")
     )
-  }
-  
-  mat_df <- mat_df %>%
-    select(integrated_row_id, all_of(feature_cols)) %>%
-    mutate(across(all_of(feature_cols), as.numeric))
-  
-  list(
-    data = mat_df,
-    feature_cols = feature_cols
   )
 }
 
-safe_kmeans <- function(x, k, nstart = 25, iter.max = 100) {
-  tryCatch(
-    kmeans(
-      x = x,
-      centers = k,
-      nstart = nstart,
-      iter.max = iter.max
-    ),
-    error = function(e) e
+save_plot <- function(plot, filename, width = 10, height = 6) {
+  ggsave(
+    filename = file.path(fig_dir, filename),
+    plot = plot,
+    width = width,
+    height = height,
+    dpi = 300
   )
 }
 
-make_distance_long <- function(centers_ordered, matrix_name, bootstrap_id, k) {
-  
-  feature_cols <- names(centers_ordered)[str_detect(names(centers_ordered), "^det_\\d{2}_")]
-  
-  center_matrix <- centers_ordered %>%
-    arrange(cluster_rank) %>%
-    select(all_of(feature_cols)) %>%
-    as.matrix()
-  
-  dmat <- as.matrix(dist(center_matrix, method = "euclidean"))
-  
-  out <- as_tibble(dmat) %>%
-    mutate(cluster_a = row_number()) %>%
-    pivot_longer(
-      cols = starts_with("V"),
-      names_to = "cluster_b_raw",
-      values_to = "euclidean_distance"
-    ) %>%
-    mutate(
-      cluster_b = as.integer(str_remove(cluster_b_raw, "^V")),
-      matrix_name = matrix_name,
-      bootstrap_id = bootstrap_id,
-      k = k
-    ) %>%
-    filter(cluster_a < cluster_b) %>%
-    select(
-      matrix_name,
-      bootstrap_id,
-      k,
-      cluster_a,
-      cluster_b,
-      euclidean_distance
-    )
-  
-  out
-}
-
-run_one_kmeans <- function(
-    bootstrap_id_current,
-    matrix_name_current,
-    matrix_index_current,
-    matrix_df,
-    feature_cols,
-    k_current
-) {
-  
-  meta_cols <- c(
-    "bootstrap_id",
-    "draw_id",
-    "integrated_row_id",
-    "target_sample_type",
-    "target_electoral_group",
-    "dataset_source",
-    "source_survey",
-    "row_quality_final",
-    "usable_for_clustering"
+write_matrix <- function(mat, name) {
+  out <- bind_cols(
+    df %>% select(any_of(id_cols)),
+    as_tibble(mat)
   )
   
-  boot_b <- bootstrap_index %>%
-    filter(bootstrap_id == bootstrap_id_current) %>%
-    select(any_of(meta_cols))
-  
-  sample_df <- boot_b %>%
-    left_join(matrix_df, by = "integrated_row_id")
-  
-  sample_use <- sample_df %>%
-    filter(if_all(all_of(feature_cols), ~ !is.na(.x)))
-  
-  n_bootstrap_draws <- nrow(boot_b)
-  n_rows_used <- nrow(sample_use)
-  n_rows_dropped <- n_bootstrap_draws - n_rows_used
-  prop_rows_used <- n_rows_used / n_bootstrap_draws
-  
-  if (n_rows_used < k_current) {
-    
-    metrics <- tibble(
-      matrix_name = matrix_name_current,
-      bootstrap_id = bootstrap_id_current,
-      k = k_current,
-      status = "skipped_too_few_rows",
-      n_bootstrap_draws = n_bootstrap_draws,
-      n_rows_used = n_rows_used,
-      n_rows_dropped = n_rows_dropped,
-      prop_rows_used = prop_rows_used,
-      totss = NA_real_,
-      tot_withinss = NA_real_,
-      betweenss = NA_real_,
-      between_over_total = NA_real_,
-      mean_cluster_distance = NA_real_,
-      min_cluster_distance = NA_real_,
-      max_cluster_distance = NA_real_,
-      iter = NA_integer_,
-      ifault = NA_integer_,
-      error_message = "Too few rows for K"
-    )
-    
-    return(list(
-      metrics = metrics,
-      centers_long = tibble(),
-      cluster_sizes = tibble(),
-      assignments = tibble(),
-      distances = tibble(),
-      composition = tibble()
-    ))
-  }
-  
-  x <- sample_use %>%
-    select(all_of(feature_cols)) %>%
-    as.matrix()
-  
-  set.seed(
-    1000000 +
-      bootstrap_id_current * 1000 +
-      matrix_index_current * 100 +
-      k_current
-  )
-  
-  km <- safe_kmeans(
-    x = x,
-    k = k_current,
-    nstart = NSTART,
-    iter.max = ITER_MAX
-  )
-  
-  if (inherits(km, "error")) {
-    
-    metrics <- tibble(
-      matrix_name = matrix_name_current,
-      bootstrap_id = bootstrap_id_current,
-      k = k_current,
-      status = "error",
-      n_bootstrap_draws = n_bootstrap_draws,
-      n_rows_used = n_rows_used,
-      n_rows_dropped = n_rows_dropped,
-      prop_rows_used = prop_rows_used,
-      totss = NA_real_,
-      tot_withinss = NA_real_,
-      betweenss = NA_real_,
-      between_over_total = NA_real_,
-      mean_cluster_distance = NA_real_,
-      min_cluster_distance = NA_real_,
-      max_cluster_distance = NA_real_,
-      iter = NA_integer_,
-      ifault = NA_integer_,
-      error_message = km$message
-    )
-    
-    return(list(
-      metrics = metrics,
-      centers_long = tibble(),
-      cluster_sizes = tibble(),
-      assignments = tibble(),
-      distances = tibble(),
-      composition = tibble()
-    ))
-  }
-  
-  centers_df <- as_tibble(km$centers, rownames = "cluster_original") %>%
-    mutate(
-      cluster_original = as.integer(cluster_original)
-    )
-  
-  # Ordenamos los clusters por intensidad media del centroide.
-  # Esto ayuda a comparar heatmaps entre bootstraps.
-  # Nota: no resuelve perfectamente el label switching, pero es suficiente
-  # para un primer análisis estable y legible.
-  center_order <- centers_df %>%
-    mutate(
-      center_mean = rowMeans(
-        as.matrix(across(all_of(feature_cols))),
-        na.rm = TRUE
-      )
-    ) %>%
-    arrange(desc(center_mean), cluster_original) %>%
-    mutate(
-      cluster_rank = row_number()
-    ) %>%
-    select(cluster_original, cluster_rank, center_mean)
-  
-  assignments <- tibble(
-    matrix_name = matrix_name_current,
-    bootstrap_id = bootstrap_id_current,
-    k = k_current,
-    draw_id = sample_use$draw_id,
-    integrated_row_id = sample_use$integrated_row_id,
-    target_sample_type = if ("target_sample_type" %in% names(sample_use)) sample_use$target_sample_type else NA_character_,
-    target_electoral_group = if ("target_electoral_group" %in% names(sample_use)) sample_use$target_electoral_group else NA_character_,
-    dataset_source = if ("dataset_source" %in% names(sample_use)) sample_use$dataset_source else NA_character_,
-    row_quality_final = if ("row_quality_final" %in% names(sample_use)) sample_use$row_quality_final else NA_character_,
-    cluster_original = as.integer(km$cluster)
-  ) %>%
-    left_join(center_order, by = "cluster_original") %>%
-    select(
-      matrix_name,
-      bootstrap_id,
-      k,
-      draw_id,
-      integrated_row_id,
-      target_sample_type,
-      target_electoral_group,
-      dataset_source,
-      row_quality_final,
-      cluster_rank,
-      cluster_original
-    )
-  
-  cluster_sizes <- assignments %>%
-    count(
-      matrix_name,
-      bootstrap_id,
-      k,
-      cluster_rank,
-      name = "n_cluster"
-    ) %>%
-    complete(
-      matrix_name,
-      bootstrap_id,
-      k,
-      cluster_rank = seq_len(k_current),
-      fill = list(n_cluster = 0)
-    ) %>%
-    group_by(matrix_name, bootstrap_id, k) %>%
-    mutate(
-      prop_cluster = n_cluster / sum(n_cluster)
-    ) %>%
-    ungroup()
-  
-  centers_ordered <- centers_df %>%
-    left_join(center_order, by = "cluster_original") %>%
-    mutate(
-      matrix_name = matrix_name_current,
-      bootstrap_id = bootstrap_id_current,
-      k = k_current
-    ) %>%
-    select(
-      matrix_name,
-      bootstrap_id,
-      k,
-      cluster_rank,
-      cluster_original,
-      center_mean,
-      all_of(feature_cols)
-    )
-  
-  centers_long <- centers_ordered %>%
-    pivot_longer(
-      cols = all_of(feature_cols),
-      names_to = "determinant",
-      values_to = "center_value"
-    )
-  
-  distances <- make_distance_long(
-    centers_ordered = centers_ordered,
-    matrix_name = matrix_name_current,
-    bootstrap_id = bootstrap_id_current,
-    k = k_current
-  )
-  
-  composition <- assignments %>%
-    mutate(
-      target_sample_type = replace_na(target_sample_type, "NO_TARGET"),
-      target_electoral_group = replace_na(target_electoral_group, "NO_TARGET")
-    ) %>%
-    count(
-      matrix_name,
-      bootstrap_id,
-      k,
-      cluster_rank,
-      target_sample_type,
-      target_electoral_group,
-      name = "n"
-    ) %>%
-    group_by(matrix_name, bootstrap_id, k, cluster_rank) %>%
-    mutate(
-      prop_within_cluster = n / sum(n)
-    ) %>%
-    ungroup()
-  
-  metrics <- tibble(
-    matrix_name = matrix_name_current,
-    bootstrap_id = bootstrap_id_current,
-    k = k_current,
-    status = "ok",
-    n_bootstrap_draws = n_bootstrap_draws,
-    n_rows_used = n_rows_used,
-    n_rows_dropped = n_rows_dropped,
-    prop_rows_used = prop_rows_used,
-    totss = km$totss,
-    tot_withinss = km$tot.withinss,
-    betweenss = km$betweenss,
-    between_over_total = km$betweenss / km$totss,
-    mean_cluster_distance = mean(distances$euclidean_distance, na.rm = TRUE),
-    min_cluster_distance = min(distances$euclidean_distance, na.rm = TRUE),
-    max_cluster_distance = max(distances$euclidean_distance, na.rm = TRUE),
-    iter = km$iter,
-    ifault = ifelse(is.null(km$ifault), NA_integer_, km$ifault),
-    error_message = NA_character_
-  )
-  
-  list(
-    metrics = metrics,
-    centers_long = centers_long,
-    cluster_sizes = cluster_sizes,
-    assignments = assignments,
-    distances = distances,
-    composition = composition
-  )
-}
-
-# ============================================================
-# 4. Ejecutar K-means sobre bootstraps
-# ============================================================
-
-metrics_list <- list()
-centers_list <- list()
-sizes_list <- list()
-assignments_list <- list()
-distances_list <- list()
-composition_list <- list()
-
-run_counter <- 0
-
-for (matrix_index in seq_along(MATRICES_TO_RUN)) {
-  
-  matrix_name <- MATRICES_TO_RUN[matrix_index]
-  
-  cat("\n============================================================\n")
-  cat("Matriz:", matrix_name, "\n")
-  cat("============================================================\n")
-  
-  matrix_obj <- read_matrix_file(matrix_name)
-  matrix_df <- matrix_obj$data
-  feature_cols <- matrix_obj$feature_cols
-  
-  for (k in K_GRID) {
-    
-    cat("  K =", k, "\n")
-    
-    for (b in boot_ids) {
-      
-      run_counter <- run_counter + 1
-      
-      res <- run_one_kmeans(
-        bootstrap_id_current = b,
-        matrix_name_current = matrix_name,
-        matrix_index_current = matrix_index,
-        matrix_df = matrix_df,
-        feature_cols = feature_cols,
-        k_current = k
-      )
-      
-      metrics_list[[run_counter]] <- res$metrics
-      centers_list[[run_counter]] <- res$centers_long
-      sizes_list[[run_counter]] <- res$cluster_sizes
-      distances_list[[run_counter]] <- res$distances
-      composition_list[[run_counter]] <- res$composition
-      
-      if (SAVE_ASSIGNMENTS) {
-        assignments_list[[run_counter]] <- res$assignments
-      }
-    }
-  }
-}
-
-kmeans_metrics <- bind_rows(metrics_list)
-kmeans_centers_long <- bind_rows(centers_list)
-kmeans_cluster_sizes <- bind_rows(sizes_list)
-kmeans_cluster_distances <- bind_rows(distances_list)
-kmeans_cluster_composition <- bind_rows(composition_list)
-
-if (SAVE_ASSIGNMENTS) {
-  kmeans_assignments <- bind_rows(assignments_list)
-} else {
-  kmeans_assignments <- tibble()
-}
-
-# ============================================================
-# 5. Resúmenes
-# ============================================================
-
-kmeans_metrics_summary <- kmeans_metrics %>%
-  group_by(matrix_name, k) %>%
-  summarise(
-    n_runs = n(),
-    n_ok = sum(status == "ok"),
-    n_error = sum(status != "ok"),
-    mean_n_rows_used = mean(n_rows_used, na.rm = TRUE),
-    mean_n_rows_dropped = mean(n_rows_dropped, na.rm = TRUE),
-    mean_prop_rows_used = mean(prop_rows_used, na.rm = TRUE),
-    mean_tot_withinss = mean(tot_withinss, na.rm = TRUE),
-    sd_tot_withinss = sd(tot_withinss, na.rm = TRUE),
-    mean_between_over_total = mean(between_over_total, na.rm = TRUE),
-    sd_between_over_total = sd(between_over_total, na.rm = TRUE),
-    mean_cluster_distance = mean(mean_cluster_distance, na.rm = TRUE),
-    sd_cluster_distance = sd(mean_cluster_distance, na.rm = TRUE),
-    mean_min_cluster_distance = mean(min_cluster_distance, na.rm = TRUE),
-    mean_max_cluster_distance = mean(max_cluster_distance, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  arrange(matrix_name, k)
-
-cluster_size_summary <- kmeans_cluster_sizes %>%
-  group_by(matrix_name, k, cluster_rank) %>%
-  summarise(
-    mean_n_cluster = mean(n_cluster, na.rm = TRUE),
-    sd_n_cluster = sd(n_cluster, na.rm = TRUE),
-    min_n_cluster = min(n_cluster, na.rm = TRUE),
-    max_n_cluster = max(n_cluster, na.rm = TRUE),
-    mean_prop_cluster = mean(prop_cluster, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  arrange(matrix_name, k, cluster_rank)
-
-kmeans_centers_mean <- kmeans_centers_long %>%
-  group_by(matrix_name, k, cluster_rank, determinant) %>%
-  summarise(
-    mean_center_value = mean(center_value, na.rm = TRUE),
-    sd_center_value = sd(center_value, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  arrange(matrix_name, k, cluster_rank, determinant)
-
-cluster_distance_summary <- kmeans_cluster_distances %>%
-  group_by(matrix_name, k) %>%
-  summarise(
-    n_distances = n(),
-    mean_distance = mean(euclidean_distance, na.rm = TRUE),
-    sd_distance = sd(euclidean_distance, na.rm = TRUE),
-    min_distance = min(euclidean_distance, na.rm = TRUE),
-    q25_distance = quantile(euclidean_distance, 0.25, na.rm = TRUE),
-    median_distance = median(euclidean_distance, na.rm = TRUE),
-    q75_distance = quantile(euclidean_distance, 0.75, na.rm = TRUE),
-    max_distance = max(euclidean_distance, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  arrange(matrix_name, k)
-
-cluster_composition_summary <- kmeans_cluster_composition %>%
-  group_by(
-    matrix_name,
-    k,
-    cluster_rank,
-    target_sample_type,
-    target_electoral_group
-  ) %>%
-  summarise(
-    mean_n = mean(n, na.rm = TRUE),
-    mean_prop_within_cluster = mean(prop_within_cluster, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  arrange(matrix_name, k, cluster_rank, desc(mean_prop_within_cluster))
-
-# ============================================================
-# 6. Guardar outputs
-# ============================================================
-
-write_csv(
-  kmeans_metrics,
-  file.path(out_dir, "kmeans_metrics_by_run.csv")
-)
-
-write_csv(
-  kmeans_metrics_summary,
-  file.path(out_dir, "kmeans_metrics_summary.csv")
-)
-
-write_csv(
-  kmeans_cluster_sizes,
-  file.path(out_dir, "kmeans_cluster_sizes_by_run.csv")
-)
-
-write_csv(
-  cluster_size_summary,
-  file.path(out_dir, "kmeans_cluster_size_summary.csv")
-)
-
-write_csv(
-  kmeans_centers_long,
-  file.path(out_dir, "kmeans_centers_long.csv")
-)
-
-write_csv(
-  kmeans_centers_mean,
-  file.path(out_dir, "kmeans_centers_mean_across_bootstraps.csv")
-)
-
-write_csv(
-  kmeans_cluster_distances,
-  file.path(out_dir, "kmeans_cluster_distances_by_run.csv")
-)
-
-write_csv(
-  cluster_distance_summary,
-  file.path(out_dir, "kmeans_cluster_distance_summary.csv")
-)
-
-write_csv(
-  kmeans_cluster_composition,
-  file.path(out_dir, "kmeans_cluster_composition_by_run.csv")
-)
-
-write_csv(
-  cluster_composition_summary,
-  file.path(out_dir, "kmeans_cluster_composition_summary.csv")
-)
-
-if (SAVE_ASSIGNMENTS) {
   write_csv(
-    kmeans_assignments,
-    file.path(out_dir, "kmeans_assignments_index.csv")
+    out,
+    file.path(out_dir, paste0(name, ".csv"))
+  )
+  
+  invisible(out)
+}
+
+summarise_matrix <- function(mat, matrix_name) {
+  values <- as.numeric(as.matrix(mat))
+  
+  tibble(
+    matrix_name = matrix_name,
+    n_rows = nrow(mat),
+    n_determinants = ncol(mat),
+    n_values = length(values),
+    n_missing = sum(is.na(values)),
+    prop_missing = n_missing / n_values,
+    mean_value = mean(values, na.rm = TRUE),
+    sd_value = sd(values, na.rm = TRUE),
+    min_value = min(values, na.rm = TRUE),
+    q25_value = quantile(values, 0.25, na.rm = TRUE),
+    median_value = median(values, na.rm = TRUE),
+    q75_value = quantile(values, 0.75, na.rm = TRUE),
+    max_value = max(values, na.rm = TRUE)
   )
 }
 
-parameters <- tibble(
+# Matriz base 0-100
+det_0_100_original <- df %>%
+  select(all_of(det_cols)) %>%
+  mutate(across(everything(), as_num))
+
+# Valores fuera de rango se tratan como NA por seguridad
+det_0_100_clean <- det_0_100_original %>%
+  mutate(
+    across(
+      everything(),
+      ~ if_else(.x >= 0 & .x <= 100, .x, NA_real_)
+    )
+  )
+
+# Imputación neutral para matrices 0-100
+det_0_100_imputed50 <- det_0_100_clean %>%
+  mutate(across(everything(), ~ replace_na(.x, 50)))
+
+# Matriz 1: raw / 100
+
+matrix_raw_0_1 <- det_0_100_imputed50 / 100
+names(matrix_raw_0_1) <- det_cols
+
+# Matriz 2: pos / 100
+# Hereda el corte del script antiguo:
+# pos[pos < MAX] <- NA
+#
+# Para clustering no dejamos NA, sino neutral 0.5.
+# Es decir:
+# - si x >= 50: x / 100
+# - si x < 50: 0.5
+#
+# También guardamos pos_mask_for_greedy con NA, para Greedy posterior.
+
+pos_mask_for_greedy <- det_0_100_imputed50 %>%
+  mutate(
+    across(
+      everything(),
+      ~ if_else(.x >= MAX_POS, .x, NA_real_)
+    )
+  )
+
+matrix_pos_0_1 <- pos_mask_for_greedy %>%
+  mutate(
+    across(
+      everything(),
+      ~ replace_na(.x / 100, 0.5)
+    )
+  )
+
+names(matrix_pos_0_1) <- det_cols
+names(pos_mask_for_greedy) <- det_cols
+
+# Matriz 3: ext
+# Hereda la lógica del script antiguo:
+# ext = abs(x - 50)
+# ext[ext < Q3] <- NA
+#
+# Para clustering:
+# - si ext >= 25: ext / 50
+# - si ext < 25: 0
+#
+# Nota:
+# Aquí el valor neutral es 0, no 0.5.
+# Porque ext mide distancia respecto al centro.
+#
+# También guardamos ext_mask_for_greedy con NA, para Greedy posterior.
+
+ext_distance_0_50 <- abs(det_0_100_imputed50 - 50)
+
+ext_mask_for_greedy <- ext_distance_0_50 %>%
+  mutate(
+    across(
+      everything(),
+      ~ if_else(.x >= Q3_EXT, .x, NA_real_)
+    )
+  )
+
+matrix_ext_0_1 <- ext_mask_for_greedy %>%
+  mutate(
+    across(
+      everything(),
+      ~ replace_na(.x / 50, 0)
+    )
+  )
+
+names(matrix_ext_0_1) <- det_cols
+names(ext_mask_for_greedy) <- det_cols
+
+
+# Matriz 4: z-score absoluto
+#
+# Primero se calcula el z-score con los datos observados.
+# Después:
+# - valor absoluto
+# - NA -> 0
+#
+# 0 significa "no destaca respecto a la media".
+
+det_means <- map_dbl(det_0_100_clean, ~ mean(.x, na.rm = TRUE))
+det_sds <- map_dbl(det_0_100_clean, ~ sd(.x, na.rm = TRUE))
+
+# Evitar división por cero
+det_sds[is.na(det_sds) | det_sds == 0] <- 1
+
+matrix_z_abs <- map2_dfc(
+  det_0_100_clean,
+  seq_along(det_cols),
+  function(x, j) {
+    z <- (x - det_means[j]) / det_sds[j]
+    z_abs <- abs(z)
+    z_abs[is.na(z_abs)] <- 0
+    tibble(!!det_cols[j] := z_abs)
+  }
+)
+
+
+# Matrices 9 dimensiones
+
+# Estas matrices son opcionales, pero útiles para comparar 32 determinantes
+# frente a 9 dimensiones.
+#
+# Agregamos por MEDIA de determinantes dentro de cada dimensión,
+# no por suma, para que las dimensiones con más determinantes no pesen más.
+
+dimension_determinant_map <- tribble(
+  ~dimension, ~det_col,
+  
+  "FINANCIAL", "det_01_profits",
+  "FINANCIAL", "det_02_credit_score",
+  "FINANCIAL", "det_03_risk_profile",
+  "FINANCIAL", "det_04_added_value",
+  "FINANCIAL", "det_05_frugality",
+  
+  "SECURITY", "det_07_legal",
+  "SECURITY", "det_08_trust",
+  "SECURITY", "det_09_safety",
+  
+  "COMPETENCE", "det_10_cost_efficiency",
+  "COMPETENCE", "det_11_knowledge",
+  "COMPETENCE", "det_12_own_competence",
+  "COMPETENCE", "det_13_technical_fit",
+  
+  "AUTONOMY", "det_15_self_satisfaction",
+  "AUTONOMY", "det_16_commitment",
+  "AUTONOMY", "det_17_adherence",
+  "AUTONOMY", "det_18_autonomy",
+  
+  "PHYSIOLOGICAL", "det_19_wellbeing",
+  "PHYSIOLOGICAL", "det_20_coziness",
+  
+  "RELATEDNESS", "det_21_rights_and_duties",
+  "RELATEDNESS", "det_22_peer_pressure",
+  "RELATEDNESS", "det_23_support",
+  "RELATEDNESS", "det_24_socialising",
+  "RELATEDNESS", "det_25_agreement",
+  
+  "STIMULATION", "det_26_novelty",
+  "STIMULATION", "det_27_fun",
+  
+  "POPULARITY", "det_28_recognition",
+  "POPULARITY", "det_29_trends",
+  "POPULARITY", "det_30_authority",
+  "POPULARITY", "det_31_approval",
+  
+  "MEANING", "det_06_climate_protection",
+  "MEANING", "det_14_environmental_concerns",
+  "MEANING", "det_32_own_significance"
+)
+
+aggregate_to_dimensions <- function(mat, matrix_name) {
+  map_dfc(
+    unique(dimension_determinant_map$dimension),
+    function(dim) {
+      cols_dim <- dimension_determinant_map %>%
+        filter(dimension == dim) %>%
+        pull(det_col)
+      
+      cols_dim <- cols_dim[cols_dim %in% names(mat)]
+      
+      if (length(cols_dim) == 0) {
+        value <- rep(NA_real_, nrow(mat))
+      } else {
+        value <- rowMeans(
+          as.matrix(mat[, cols_dim, drop = FALSE]),
+          na.rm = TRUE
+        )
+      }
+      
+      tibble(!!paste0("dim_", str_to_lower(dim)) := value)
+    }
+  )
+}
+
+matrix_dim9_raw_0_1 <- aggregate_to_dimensions(matrix_raw_0_1, "raw")
+matrix_dim9_pos_0_1 <- aggregate_to_dimensions(matrix_pos_0_1, "pos")
+matrix_dim9_ext_0_1 <- aggregate_to_dimensions(matrix_ext_0_1, "ext")
+matrix_dim9_z_abs <- aggregate_to_dimensions(matrix_z_abs, "z_abs")
+
+
+# Guardar matrices
+write_matrix(det_0_100_imputed50, "matrix_32_raw_0_100_imputed50")
+write_matrix(matrix_raw_0_1, "matrix_32_raw_0_1")
+write_matrix(matrix_pos_0_1, "matrix_32_pos_0_1")
+write_matrix(matrix_ext_0_1, "matrix_32_ext_0_1")
+write_matrix(matrix_z_abs, "matrix_32_z_abs")
+
+write_matrix(pos_mask_for_greedy, "matrix_32_pos_mask_for_greedy")
+write_matrix(ext_mask_for_greedy, "matrix_32_ext_mask_for_greedy")
+
+write_matrix(matrix_dim9_raw_0_1, "matrix_9dim_raw_0_1")
+write_matrix(matrix_dim9_pos_0_1, "matrix_9dim_pos_0_1")
+write_matrix(matrix_dim9_ext_0_1, "matrix_9dim_ext_0_1")
+write_matrix(matrix_dim9_z_abs, "matrix_9dim_z_abs")
+
+# Diagnósticos
+diagnostics_parameters <- tibble(
   parameter = c(
-    "bootstrap_scenario",
-    "bootstrap_file",
-    "matrix_dir",
-    "matrices_to_run",
-    "k_grid",
-    "nstart",
-    "iter_max",
-    "max_bootstraps",
-    "save_assignments",
-    "save_heatmaps"
+    "K_DEFAULT",
+    "MAX_POS",
+    "Q3_EXT",
+    "NF_DEFAULT",
+    "K_GRID",
+    "D_GRID",
+    "input_file",
+    "output_dir"
   ),
   value = c(
-    BOOTSTRAP_SCENARIO,
-    bootstrap_file,
-    matrix_dir,
-    paste(MATRICES_TO_RUN, collapse = ", "),
-    paste(K_GRID, collapse = ", "),
-    as.character(NSTART),
-    as.character(ITER_MAX),
-    as.character(MAX_BOOTSTRAPS),
-    as.character(SAVE_ASSIGNMENTS),
-    as.character(SAVE_HEATMAPS)
+    as.character(K_DEFAULT),
+    as.character(MAX_POS),
+    as.character(Q3_EXT),
+    as.character(NF_DEFAULT),
+    paste(K_GRID, collapse = ","),
+    paste(D_GRID, collapse = ","),
+    in_file,
+    out_dir
+  )
+)
+
+diagnostics_input_missing <- det_0_100_clean %>%
+  mutate(integrated_row_id = df$integrated_row_id) %>%
+  pivot_longer(
+    cols = all_of(det_cols),
+    names_to = "determinant",
+    values_to = "value"
+  ) %>%
+  mutate(
+    is_missing = is.na(value)
+  ) %>%
+  group_by(determinant) %>%
+  summarise(
+    n_rows = n(),
+    n_missing = sum(is_missing),
+    prop_missing = n_missing / n_rows,
+    mean_observed = mean(value, na.rm = TRUE),
+    sd_observed = sd(value, na.rm = TRUE),
+    min_observed = min(value, na.rm = TRUE),
+    max_observed = max(value, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(prop_missing), determinant)
+
+diagnostics_matrix_summary <- bind_rows(
+  summarise_matrix(matrix_raw_0_1, "matrix_32_raw_0_1"),
+  summarise_matrix(matrix_pos_0_1, "matrix_32_pos_0_1"),
+  summarise_matrix(matrix_ext_0_1, "matrix_32_ext_0_1"),
+  summarise_matrix(matrix_z_abs, "matrix_32_z_abs"),
+  summarise_matrix(matrix_dim9_raw_0_1, "matrix_9dim_raw_0_1"),
+  summarise_matrix(matrix_dim9_pos_0_1, "matrix_9dim_pos_0_1"),
+  summarise_matrix(matrix_dim9_ext_0_1, "matrix_9dim_ext_0_1"),
+  summarise_matrix(matrix_dim9_z_abs, "matrix_9dim_z_abs")
+)
+
+diagnostics_threshold_counts <- tibble(
+  determinant = det_cols,
+  n_pos_ge_MAX = map_int(
+    det_0_100_imputed50[det_cols],
+    ~ sum(.x >= MAX_POS, na.rm = TRUE)
+  ),
+  prop_pos_ge_MAX = n_pos_ge_MAX / nrow(det_0_100_imputed50),
+  n_ext_ge_Q3 = map_int(
+    ext_distance_0_50[det_cols],
+    ~ sum(.x >= Q3_EXT, na.rm = TRUE)
+  ),
+  prop_ext_ge_Q3 = n_ext_ge_Q3 / nrow(ext_distance_0_50),
+  mean_raw_0_100 = map_dbl(
+    det_0_100_imputed50[det_cols],
+    ~ mean(.x, na.rm = TRUE)
+  ),
+  sd_raw_0_100 = map_dbl(
+    det_0_100_imputed50[det_cols],
+    ~ sd(.x, na.rm = TRUE)
+  )
+)
+
+matrix_registry <- tibble(
+  matrix_name = c(
+    "matrix_32_raw_0_100_imputed50",
+    "matrix_32_raw_0_1",
+    "matrix_32_pos_0_1",
+    "matrix_32_ext_0_1",
+    "matrix_32_z_abs",
+    "matrix_32_pos_mask_for_greedy",
+    "matrix_32_ext_mask_for_greedy",
+    "matrix_9dim_raw_0_1",
+    "matrix_9dim_pos_0_1",
+    "matrix_9dim_ext_0_1",
+    "matrix_9dim_z_abs"
+  ),
+  file = paste0(matrix_name, ".csv"),
+  intended_use = c(
+    "diagnostic_old_scale",
+    "kmeans_efa_greedy",
+    "kmeans_efa_greedy_positive_high_values",
+    "kmeans_efa_greedy_extreme_values",
+    "kmeans_efa_greedy_relative_deviation",
+    "greedy_binarisation_only",
+    "greedy_binarisation_only",
+    "kmeans_efa_dimension_level",
+    "kmeans_efa_dimension_level_positive",
+    "kmeans_efa_dimension_level_extreme",
+    "kmeans_efa_dimension_level_relative_deviation"
+  ),
+  description = c(
+    "Original 0-100 values with NA imputed to 50.",
+    "Original values divided by 100; NA becomes 0.5.",
+    "Only values >= MAX_POS keep their value/100; the rest becomes neutral 0.5.",
+    "Absolute distance from 50, thresholded at Q3_EXT and scaled by /50; non-extreme values become 0.",
+    "Absolute z-score; NA becomes 0.",
+    "Old-style positive mask: values < MAX_POS become NA. For later top-D binarisation.",
+    "Old-style extreme mask: abs(x-50) < Q3_EXT becomes NA. For later top-D binarisation.",
+    "Mean of raw_0_1 determinants by theoretical dimension.",
+    "Mean of pos_0_1 determinants by theoretical dimension.",
+    "Mean of ext_0_1 determinants by theoretical dimension.",
+    "Mean of z_abs determinants by theoretical dimension."
   )
 )
 
 write_csv(
-  parameters,
-  file.path(out_dir, "kmeans_bootstrap_parameters.csv")
+  diagnostics_parameters,
+  file.path(out_dir, "diagnostics_parameters.csv")
 )
 
-# ============================================================
-# 7. Heatmaps medios de centroides
-# ============================================================
+write_csv(
+  diagnostics_input_missing,
+  file.path(out_dir, "diagnostics_input_missing_by_determinant.csv")
+)
 
-if (SAVE_HEATMAPS && nrow(kmeans_centers_mean) > 0) {
+write_csv(
+  diagnostics_matrix_summary,
+  file.path(out_dir, "diagnostics_matrix_summary.csv")
+)
+
+write_csv(
+  diagnostics_threshold_counts,
+  file.path(out_dir, "diagnostics_threshold_counts.csv")
+)
+
+write_csv(
+  matrix_registry,
+  file.path(out_dir, "matrix_registry.csv")
+)
+
+write_csv(
+  dimension_determinant_map,
+  file.path(out_dir, "dimension_determinant_map_used.csv")
+)
+
+# Gráficos rápidos
+plot_matrix_summary <- diagnostics_matrix_summary %>%
+  mutate(matrix_name = factor(matrix_name, levels = matrix_name)) %>%
+  ggplot(aes(x = matrix_name, y = mean_value)) +
+  geom_col() +
+  geom_errorbar(
+    aes(
+      ymin = mean_value - sd_value,
+      ymax = mean_value + sd_value
+    ),
+    width = 0.2
+  ) +
+  coord_flip() +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "Mean and SD by clustering matrix",
+    x = "Matrix",
+    y = "Mean value ± SD"
+  )
+
+save_plot(plot_matrix_summary, "01_matrix_summary_mean_sd.png", width = 10, height = 6)
+
+plot_thresholds <- diagnostics_threshold_counts %>%
+  select(determinant, prop_pos_ge_MAX, prop_ext_ge_Q3) %>%
+  pivot_longer(
+    cols = c(prop_pos_ge_MAX, prop_ext_ge_Q3),
+    names_to = "threshold_type",
+    values_to = "prop"
+  ) %>%
+  mutate(
+    threshold_type = recode(
+      threshold_type,
+      prop_pos_ge_MAX = paste0("Positive >= ", MAX_POS),
+      prop_ext_ge_Q3 = paste0("Extreme |x-50| >= ", Q3_EXT)
+    ),
+    determinant = factor(determinant, levels = rev(det_cols))
+  ) %>%
+  ggplot(aes(x = determinant, y = prop, fill = threshold_type)) +
+  geom_col(position = "dodge") +
+  coord_flip() +
+  theme_minimal(base_size = 10) +
+  labs(
+    title = "Share of rows passing positive/extreme thresholds",
+    x = "Determinant",
+    y = "Share of rows",
+    fill = "Threshold"
+  )
+
+save_plot(plot_thresholds, "02_threshold_counts_by_determinant.png", width = 12, height = 9)
+
+
+# Gráfico compacto de distribución de valores
+boxplot_matrix_values <- bind_rows(
+  matrix_raw_0_1 %>%
+    mutate(matrix_name = "matrix_32_raw_0_1"),
   
-  for (matrix_name_current in unique(kmeans_centers_mean$matrix_name)) {
-    
-    for (k_current in sort(unique(kmeans_centers_mean$k))) {
-      
-      plot_data <- kmeans_centers_mean %>%
-        filter(
-          matrix_name == matrix_name_current,
-          k == k_current
-        ) %>%
-        mutate(
-          cluster_rank = factor(cluster_rank),
-          determinant = factor(
-            determinant,
-            levels = rev(sort(unique(determinant)))
-          )
-        )
-      
-      p <- ggplot(
-        plot_data,
-        aes(
-          x = cluster_rank,
-          y = determinant,
-          fill = mean_center_value
-        )
-      ) +
-        geom_tile() +
-        theme_minimal(base_size = 10) +
-        labs(
-          title = paste0("K-means mean centers | ", matrix_name_current, " | K = ", k_current),
-          subtitle = paste0("Averaged across ", length(boot_ids), " bootstrap samples"),
-          x = "Cluster rank",
-          y = "Determinant",
-          fill = "Mean center"
-        )
-      
-      ggsave(
-        filename = file.path(
-          fig_dir,
-          paste0("heatmap_", matrix_name_current, "_K", k_current, ".png")
-        ),
-        plot = p,
-        width = 9,
-        height = 8,
-        dpi = 300
-      )
-    }
-  }
-}
+  matrix_pos_0_1 %>%
+    mutate(matrix_name = "matrix_32_pos_0_1"),
+  
+  matrix_ext_0_1 %>%
+    mutate(matrix_name = "matrix_32_ext_0_1"),
+  
+  matrix_z_abs %>%
+    mutate(matrix_name = "matrix_32_z_abs")
+) %>%
+  pivot_longer(
+    cols = all_of(det_cols),
+    names_to = "determinant",
+    values_to = "value"
+  )
 
-# ============================================================
-# 8. Resumen consola
-# ============================================================
+plot_matrix_boxplot <- ggplot(
+  boxplot_matrix_values,
+  aes(x = matrix_name, y = value, fill = matrix_name)
+) +
+  geom_boxplot(outlier.alpha = 0.15) +
+  coord_flip() +
+  theme_minimal(base_size = 12) +
+  guides(fill = "none") +
+  labs(
+    title = "Distribution of values by clustering matrix",
+    x = "Matrix",
+    y = "Value"
+  )
 
+save_plot(
+  plot_matrix_boxplot,
+  "03_matrix_value_boxplot_32det.png",
+  width = 10,
+  height = 6
+)
+
+# Consola
 cat("\n============================================================\n")
-cat("06. K-MEANS SOBRE BOOTSTRAPS COMPLETADO\n")
+cat("05. CLUSTERING MATRICES COMPLETADO\n")
 cat("============================================================\n")
 
-cat("\nEscenario bootstrap usado:\n")
-cat(BOOTSTRAP_SCENARIO, "\n")
+cat("\nArchivo de entrada:\n")
+cat(in_file, "\n")
 
-cat("\nBootstraps usados:\n")
-cat(length(boot_ids), "\n")
-
-cat("\nMatrices usadas:\n")
-print(MATRICES_TO_RUN)
-
-cat("\nK explorados:\n")
-print(K_GRID)
-
-cat("\nResumen de métricas:\n")
-print(kmeans_metrics_summary, n = Inf, width = Inf)
-
-cat("\nResumen de distancias entre clusters:\n")
-print(cluster_distance_summary, n = Inf, width = Inf)
-
-cat("\nResumen de tamaño de clusters:\n")
-print(cluster_size_summary, n = Inf, width = Inf)
-
-cat("\nOutputs guardados en:\n")
+cat("\nMatrices guardadas en:\n")
 cat(out_dir, "\n")
 
-message("\nListo. K-means bootstrap guardado en: ", out_dir)
+cat("\nFiguras guardadas en:\n")
+cat(fig_dir, "\n")
+
+cat("\nMatrices creadas:\n")
+print(matrix_registry$matrix_name)
+
+message("\nListo. Matrices de clustering guardadas.")

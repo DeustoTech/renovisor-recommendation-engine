@@ -286,6 +286,19 @@ country_name_to_iso2 <- c(
   "serbia" = "RS",
   "albania" = "AL",
   "moldova" = "MD",
+  "norway" = "NO", "noruega" = "NO",
+  "iceland" = "IS", "islandia" = "IS",
+  "liechtenstein" = "LI",
+  "monaco" = "MC", "monaco" = "MC",
+  "andorra" = "AD",
+  "bosnia and herzegovina" = "BA", "bosnia y herzegovina" = "BA", "bosnia" = "BA",
+  "montenegro" = "ME",
+  "north macedonia" = "MK", "macedonia del norte" = "MK",
+  "san marino" = "SM",
+  "belarus" = "BY", "bielorrusia" = "BY",
+  "moldova" = "MD", "moldavia" = "MD",
+  "rumania" = "RO",
+  "republica checa" = "CZ",
   "other eu country" = "OTHER_EU",
   "other eu countries" = "OTHER_EU",
   "other european country" = "OTHER_EU",
@@ -787,6 +800,64 @@ recode_education <- function(x) {
   )
 }
 
+recode_education_tfm <- function(x) {
+  x_raw <- clean_text(x)
+  x_low <- normalise_text(x_raw)
+  
+  case_when(
+    is.na(x_low) ~ "unknown",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
+    
+    str_detect(
+      x_low,
+      "phd|doctor|doctoral|master|msc|postgraduate|bachelor|undergraduate|degree|university|universit|tertiary|higher education|grado|licenciatura|diploma universitario"
+    ) ~ "university",
+    
+    str_detect(
+      x_low,
+      "vocational|professional training|upper secondary|secondary|high school|bachiller|formacion profesional|\\bfp\\b|college|primary|basic|lower secondary|no formal|less than|sin estudios|primaria"
+    ) ~ "non_university",
+    
+    str_detect(x_low, "prefer not|no answer|dont know|do not know") ~ "unknown",
+    
+    TRUE ~ "other"
+  )
+}
+
+recode_residence_region <- function(country_code) {
+  
+  country_code <- str_to_upper(clean_text(country_code))
+  
+  case_when(
+    is.na(country_code) | country_code == "" ~ "unknown",
+    str_detect(country_code, "\\s\\|\\s") ~ "conflict",
+    
+    country_code %in% c(
+      "DK", "EE", "FI", "IE", "IS",
+      "LV", "LT", "NO", "GB", "SE"
+    ) ~ "northern_europe",
+    
+    country_code %in% c(
+      "DE", "AT", "BE", "FR", "LI",
+      "LU", "MC", "NL", "CH"
+    ) ~ "western_europe",
+    
+    country_code %in% c(
+      "AL", "AD", "BA", "HR",
+      "SI", "ES", "GR", "IT", "MT",
+      "ME", "PT", "MK", "SM",
+      "RS", "CY"
+    ) ~ "southern_europe",
+    
+    country_code %in% c(
+      "BY", "BG", "SK", "HU",
+      "MD", "PL", "CZ", "RO",
+      "RU", "UA"
+    ) ~ "eastern_europe",
+    
+    TRUE ~ "other_region"
+  )
+}
 recode_employment <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
@@ -870,7 +941,37 @@ recode_tenure <- function(x) {
     TRUE ~ "other"
   )
 }
-
+recode_tenure_tfm <- function(x) {
+  x_raw <- clean_text(x)
+  x_low <- normalise_text(x_raw)
+  
+  case_when(
+    is.na(x_low) ~ "unknown",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
+    
+    str_detect(
+      x_low,
+      "own the home outright|fully paid-off|without mortgage|sin hipoteca"
+    ) ~ "Homeowner without mortgage",
+    
+    str_detect(
+      x_low,
+      "mortgage|outstanding payments|hipoteca"
+    ) ~ "Homeowner with mortgage",
+    
+    str_detect(
+      x_low,
+      "rent|rental|tenant|alquil|family|relative|parents"
+    ) ~ "Non-homeowner",
+    
+    str_detect(
+      x_low,
+      "own|owner|propiedad"
+    ) ~ "Homeowner without mortgage",
+    
+    TRUE ~ "Non-homeowner"
+  )
+}
 recode_yes_no <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
@@ -1082,16 +1183,20 @@ all_sources_integrated_clean <- all_sources_integrated %>%
     
     gender_model = recode_gender(gender_raw_clean),
     education_model = recode_education(education_raw_clean),
+    education_tfm_model = recode_education_tfm(education_raw_clean),
     employment_model = recode_employment(employment_raw_clean),
     student_status_model = recode_student_status(student_status_raw_clean),
     city_size_model = recode_city_size(city_size_raw_clean),
     tenure_model = recode_tenure(tenure_raw_clean),
+    tenure_tfm_model = recode_tenure_tfm(tenure_raw_clean),
     health_condition_model = recode_yes_no(health_raw_clean),
     work_from_home_model = recode_yes_no(work_from_home_raw_clean),
     income_model = recode_income(income_raw_clean),
     num_children_model = num_children_vec,
     
     country_model = country_model_vec,
+    country_region_model = recode_residence_region(country_model_vec),
+    
     country_birth_model = country_birth_model_vec,
     nationality_model = case_when(
       is.na(nationality_raw_clean) ~ "unknown",
@@ -1329,16 +1434,19 @@ sociodemographic_clean_cols <- c(
   "age_group_model",
   "gender_model",
   "education_model",
+  "education_tfm_model",
   "employment_model",
   "student_status_model",
   "city_size_model",
   "tenure_model",
+  "tenure_tfm_model",
   "health_condition_model",
   "work_from_home_model",
   "income_model",
   "num_children_model",
   "country_model",
   "country_model_grouped",
+  "country_region_model",
   "country_birth_model",
   "nationality_model",
   "ethnicity_model",
