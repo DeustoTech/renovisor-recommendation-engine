@@ -331,6 +331,22 @@ context,variable,dataset_source,category,n,total_n,prop
 01_all_integrated_rows,self_classification_raw,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,1229,8.136696501220504e-4
 01_all_integrated_rows,self_classification_raw,rv,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,1229,8.136696501220504e-4
 01_all_integrated_rows,self_classification_raw,why,Missing,990,990,1
+01_all_integrated_rows,self_classification_raw_clean,diego,Missing,1899,1899,1
+01_all_integrated_rows,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,323,1229,0.2628152969894223
+01_all_integrated_rows,self_classification_raw_clean,rv,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,280,1229,0.22782750203417412
+01_all_integrated_rows,self_classification_raw_clean,rv,I am more likely to invest if it improves my safety or that of my household.,167,1229,0.13588283157038242
+01_all_integrated_rows,self_classification_raw_clean,rv,I am more likely to invest if it helps reduce my environmental impact.,135,1229,0.10984540276647681
+01_all_integrated_rows,self_classification_raw_clean,rv,Missing,114,1229,0.09275834011391375
+01_all_integrated_rows,self_classification_raw_clean,rv,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",88,1229,0.07160292921074043
+01_all_integrated_rows,self_classification_raw_clean,rv,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",46,1229,0.03742880390561432
+01_all_integrated_rows,self_classification_raw_clean,rv,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",32,1229,0.026037428803905614
+01_all_integrated_rows,self_classification_raw_clean,rv,Νone of the above.,29,1229,0.023596419853539462
+01_all_integrated_rows,self_classification_raw_clean,rv,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",11,1229,0.008950366151342554
+01_all_integrated_rows,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it helps reduce my environmental impact.,1,1229,8.136696501220504e-4
+01_all_integrated_rows,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,1229,8.136696501220504e-4
+01_all_integrated_rows,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,1229,8.136696501220504e-4
+01_all_integrated_rows,self_classification_raw_clean,rv,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,1229,8.136696501220504e-4
+01_all_integrated_rows,self_classification_raw_clean,why,Missing,990,990,1
 01_all_integrated_rows,self_classification_archetype_model,diego,Missing,1899,1899,1
 01_all_integrated_rows,self_classification_archetype_model,rv,Careful,324,1229,0.2636289666395443
 01_all_integrated_rows,self_classification_archetype_model,rv,Homo economicus,280,1229,0.22782750203417412
@@ -696,6 +712,21 @@ context,variable,dataset_source,category,n,total_n,prop
 02_usable_for_main_analysis,self_classification_raw,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,894,0.0011185682326621924
 02_usable_for_main_analysis,self_classification_raw,rv,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,894,0.0011185682326621924
 02_usable_for_main_analysis,self_classification_raw,why,Missing,971,971,1
+02_usable_for_main_analysis,self_classification_raw_clean,diego,Missing,1899,1899,1
+02_usable_for_main_analysis,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,249,894,0.2785234899328859
+02_usable_for_main_analysis,self_classification_raw_clean,rv,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,214,894,0.23937360178970918
+02_usable_for_main_analysis,self_classification_raw_clean,rv,I am more likely to invest if it improves my safety or that of my household.,128,894,0.14317673378076062
+02_usable_for_main_analysis,self_classification_raw_clean,rv,I am more likely to invest if it helps reduce my environmental impact.,101,894,0.11297539149888143
+02_usable_for_main_analysis,self_classification_raw_clean,rv,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",55,894,0.06152125279642058
+02_usable_for_main_analysis,self_classification_raw_clean,rv,Missing,55,894,0.06152125279642058
+02_usable_for_main_analysis,self_classification_raw_clean,rv,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",38,894,0.042505592841163314
+02_usable_for_main_analysis,self_classification_raw_clean,rv,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",27,894,0.030201342281879196
+02_usable_for_main_analysis,self_classification_raw_clean,rv,Νone of the above.,17,894,0.01901565995525727
+02_usable_for_main_analysis,self_classification_raw_clean,rv,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",7,894,0.007829977628635347
+02_usable_for_main_analysis,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,894,0.0011185682326621924
+02_usable_for_main_analysis,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,894,0.0011185682326621924
+02_usable_for_main_analysis,self_classification_raw_clean,rv,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,894,0.0011185682326621924
+02_usable_for_main_analysis,self_classification_raw_clean,why,Missing,971,971,1
 02_usable_for_main_analysis,self_classification_archetype_model,diego,Missing,1899,1899,1
 02_usable_for_main_analysis,self_classification_archetype_model,rv,Careful,250,894,0.2796420581655481
 02_usable_for_main_analysis,self_classification_archetype_model,rv,Homo economicus,214,894,0.23937360178970918
@@ -1051,6 +1082,21 @@ context,variable,dataset_source,category,n,total_n,prop
 03_usable_for_clustering,self_classification_raw,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,894,0.0011185682326621924
 03_usable_for_clustering,self_classification_raw,rv,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,894,0.0011185682326621924
 03_usable_for_clustering,self_classification_raw,why,Missing,971,971,1
+03_usable_for_clustering,self_classification_raw_clean,diego,Missing,1899,1899,1
+03_usable_for_clustering,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,249,894,0.2785234899328859
+03_usable_for_clustering,self_classification_raw_clean,rv,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,214,894,0.23937360178970918
+03_usable_for_clustering,self_classification_raw_clean,rv,I am more likely to invest if it improves my safety or that of my household.,128,894,0.14317673378076062
+03_usable_for_clustering,self_classification_raw_clean,rv,I am more likely to invest if it helps reduce my environmental impact.,101,894,0.11297539149888143
+03_usable_for_clustering,self_classification_raw_clean,rv,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",55,894,0.06152125279642058
+03_usable_for_clustering,self_classification_raw_clean,rv,Missing,55,894,0.06152125279642058
+03_usable_for_clustering,self_classification_raw_clean,rv,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",38,894,0.042505592841163314
+03_usable_for_clustering,self_classification_raw_clean,rv,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",27,894,0.030201342281879196
+03_usable_for_clustering,self_classification_raw_clean,rv,Νone of the above.,17,894,0.01901565995525727
+03_usable_for_clustering,self_classification_raw_clean,rv,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",7,894,0.007829977628635347
+03_usable_for_clustering,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,894,0.0011185682326621924
+03_usable_for_clustering,self_classification_raw_clean,rv,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,894,0.0011185682326621924
+03_usable_for_clustering,self_classification_raw_clean,rv,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,894,0.0011185682326621924
+03_usable_for_clustering,self_classification_raw_clean,why,Missing,971,971,1
 03_usable_for_clustering,self_classification_archetype_model,diego,Missing,1899,1899,1
 03_usable_for_clustering,self_classification_archetype_model,rv,Careful,250,894,0.2796420581655481
 03_usable_for_clustering,self_classification_archetype_model,rv,Homo economicus,214,894,0.23937360178970918

@@ -224,6 +224,20 @@ self_classification_raw,I am more likely to invest if it maximizes my comfort or
 self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it helps reduce my environmental impact.,1.0857142857142856,0.305482618180278,1000,0,0.0010857142857142858,3.0548261818027806e-4,140
 self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1.04,0.19694638556693225,1000,0,0.0010400000000000001,1.9694638556693245e-4,100
 self_classification_raw,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1.0235294117647058,0.1524772104935291,1000,0,0.001023529411764706,1.5247721049352914e-4,85
+self_classification_raw_clean,Missing,382.701,9.609992245103584,1000,0,0.382701,0.009609992245103593,1000
+self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,178.711,11.522857946501592,1000,0,0.178711,0.0115228579465016,1000
+self_classification_raw_clean,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,172.218,11.436663555131515,1000,0,0.172218,0.01143666355513149,1000
+self_classification_raw_clean,I am more likely to invest if it improves my safety or that of my household.,88.266,8.579560178287274,1000,0,0.088266,0.008579560178287282,1000
+self_classification_raw_clean,I am more likely to invest if it helps reduce my environmental impact.,71.825,8.039839178367545,1000,0,0.071825,0.008039839178367548,1000
+self_classification_raw_clean,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",41.663,5.969175995232675,1000,0,0.041663,0.005969175995232704,1000
+self_classification_raw_clean,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",26.52,5.130879644459217,1000,0,0.026520000000000002,0.005130879644459211,1000
+self_classification_raw_clean,Νone of the above.,15.419,3.7389060456794607,1000,0,0.015419,0.003738906045679458,1000
+self_classification_raw_clean,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",14.41,3.6531144582732726,1000,0,0.01441,0.0036531144582732746,1000
+self_classification_raw_clean,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",7.549,2.6613308102679762,1000,0,0.007549000000000001,0.0026613308102679993,1000
+self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1.194267515923567,0.4562301473773057,1000,0,0.001194267515923567,4.562301473773059e-4,314
+self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it helps reduce my environmental impact.,1.0857142857142856,0.305482618180278,1000,0,0.0010857142857142858,3.0548261818027806e-4,140
+self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1.04,0.19694638556693225,1000,0,0.0010400000000000001,1.9694638556693245e-4,100
+self_classification_raw_clean,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1.0235294117647058,0.1524772104935291,1000,0,0.001023529411764706,1.5247721049352914e-4,85
 source_survey,decision,505.734,12.139794834288534,1000,0,0.505734,0.012139794834288552,1000
 source_survey,Survey_September2023_cleaned,232.24,11.03939619129,1000,0,0.23224,0.011039396191290012,1000
 source_survey,Investment_Arquetypes_2022,135.121,9.992207123714124,1000,0,0.135121,0.009992207123714118,1000
@@ -240,16 +254,6 @@ source_survey,decision;energy_crisis;poverty,1.477638640429338,0.712749337628024
 source_survey,concerns2;energy_crisis,1.3317972350230414,0.56089090745137,1000,0,0.0013317972350230414,5.608909074513697e-4,434
 source_survey,energy_crisis;poverty,1.1603053435114503,0.39763272476338607,1000,0,0.0011603053435114503,3.976327247633865e-4,262
 source_survey,decision;poverty,1.0495049504950495,0.21800172585382774,1000,0,0.0010495049504950496,2.1800172585382776e-4,101
-target_electoral_group,ABSTENTION,506,0,1000,0,0.506,0,1000
-target_electoral_group,EPP,122,0,1000,0,0.122,0,1000
-target_electoral_group,SD,98,0,1000,0,0.098,0,1000
-target_electoral_group,GREENS_EFA_RENEW,88,0,1000,0,0.088,0,1000
-target_electoral_group,PFE_ESN,78,0,1000,0,0.078,0,1000
-target_electoral_group,ECR,53,0,1000,0,0.053,0,1000
-target_electoral_group,GUE_NGL,32,0,1000,0,0.032,0,1000
-target_electoral_group,NI,23,0,1000,0,0.023,0,1000
-target_sample_type,abstention,506,0,1000,0,0.506,0,1000
-target_sample_type,voter,494,0,1000,0,0.494,0,1000
 tenure_model,owner_with_mortgage,399.736,12.822352230254662,1000,0,0.399736,0.012822352230254668,1000
 tenure_model,unknown,382.752,9.65316941111465,1000,0,0.382752,0.009653169411114668,1000
 tenure_model,rent,195.073,12.117033196847048,1000,0,0.195073,0.012117033196847062,1000
