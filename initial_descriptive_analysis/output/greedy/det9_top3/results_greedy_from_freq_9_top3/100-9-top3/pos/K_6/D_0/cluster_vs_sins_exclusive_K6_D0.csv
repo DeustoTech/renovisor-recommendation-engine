@@ -1,0 +1,7 @@
+"cluster","best_match","pct_match","active_determinants","n_active_dets"
+"cluster_1","Uninterested",60,"COMPETENCE; AUTONOMY; PHYSICALNESS",3
+"cluster_2","Stubborn",60,"SECURITY; COMPETENCE; AUTONOMY",3
+"cluster_3","Homo.Economicus",50,"FINANCIAL; COMPETENCE; AUTONOMY",3
+"cluster_4","Careful",42.8571428571429,"SECURITY; AUTONOMY; PHYSICALNESS",3
+"cluster_5","Influencer",16.6666666666667,"COMPETENCE; AUTONOMY",2
+"cluster_6","Fearful",42.8571428571429,"FINANCIAL; AUTONOMY; PHYSICALNESS",3

@@ -1,0 +1,33 @@
+"cluster","expert","vol_cluster","vol_expert","vol_common","pct_cluster_covered","pct_expert_covered","jaccard"
+"cluster_1","Early Adopter",0,6,0,0,0,0
+"cluster_1","Uninterested",0,5,0,0,0,0
+"cluster_1","Homo Economicus",0,9,0,0,0,0
+"cluster_1","Fearful",0,9,0,0,0,0
+"cluster_1","Stubborn",0,3,0,0,0,0
+"cluster_1","Influencer",0,3,0,0,0,0
+"cluster_1","Careful",0,12,0,0,0,0
+"cluster_1","Activist",0,6,0,0,0,0
+"cluster_2","Early Adopter",5,6,1,20,16.6666666666667,10
+"cluster_2","Uninterested",5,5,1,20,20,11.1111111111111
+"cluster_2","Homo Economicus",5,9,0,0,0,0
+"cluster_2","Fearful",5,9,0,0,0,0
+"cluster_2","Stubborn",5,3,0,0,0,0
+"cluster_2","Influencer",5,3,1,20,33.3333333333333,14.2857142857143
+"cluster_2","Careful",5,12,0,0,0,0
+"cluster_2","Activist",5,6,0,0,0,0
+"cluster_3","Early Adopter",7,6,2,28.5714285714286,33.3333333333333,18.1818181818182
+"cluster_3","Uninterested",7,5,1,14.2857142857143,20,9.09090909090909
+"cluster_3","Homo Economicus",7,9,1,14.2857142857143,11.1111111111111,6.66666666666667
+"cluster_3","Fearful",7,9,1,14.2857142857143,11.1111111111111,6.66666666666667
+"cluster_3","Stubborn",7,3,1,14.2857142857143,33.3333333333333,11.1111111111111
+"cluster_3","Influencer",7,3,2,28.5714285714286,66.6666666666667,25
+"cluster_3","Careful",7,12,1,14.2857142857143,8.33333333333333,5.55555555555556
+"cluster_3","Activist",7,6,0,0,0,0
+"cluster_4","Early Adopter",2,6,1,50,16.6666666666667,14.2857142857143
+"cluster_4","Uninterested",2,5,0,0,0,0
+"cluster_4","Homo Economicus",2,9,2,100,22.2222222222222,22.2222222222222
+"cluster_4","Fearful",2,9,1,50,11.1111111111111,10
+"cluster_4","Stubborn",2,3,1,50,33.3333333333333,25
+"cluster_4","Influencer",2,3,0,0,0,0
+"cluster_4","Careful",2,12,1,50,8.33333333333333,7.69230769230769
+"cluster_4","Activist",2,6,1,50,16.6666666666667,14.2857142857143

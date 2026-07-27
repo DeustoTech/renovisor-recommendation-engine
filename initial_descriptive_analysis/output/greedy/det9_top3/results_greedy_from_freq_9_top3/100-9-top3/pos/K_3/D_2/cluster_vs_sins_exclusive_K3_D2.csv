@@ -1,0 +1,4 @@
+"cluster","best_match","pct_match","active_determinants","n_active_dets"
+"cluster_1","Uninterested",60,"COMPETENCE; AUTONOMY; PHYSICALNESS",3
+"cluster_2","Homo.Economicus",100,"FINANCIAL; SECURITY; COMPETENCE",3
+"cluster_3","Stubborn",33.3333333333333,"FINANCIAL; AUTONOMY; STIMULATION",3

@@ -1,0 +1,553 @@
+"scenario","type","reference","K","D","D_order","archetypes_used","n_patterns_covered","freq_covered","pct_covered"
+"100-9-top3","pos","experts",1,0,4,"Stubborn",0,0,0
+"100-9-top3","pos","experts",1,2,4,"Stubborn",4,72514,0.906425
+"100-9-top3","pos","experts",1,4,4,"Stubborn",59,7998990,99.987375
+"100-9-top3","pos","experts",1,6,4,"Stubborn",91,8000000,100
+"100-9-top3","pos","experts",1,8,4,"Stubborn",91,8000000,100
+"100-9-top3","pos","experts",1,10,4,"Stubborn",91,8000000,100
+"100-9-top3","pos","experts",2,0,4,"Stubborn | Activist",0,0,0
+"100-9-top3","pos","experts",2,2,4,"Stubborn | Activist",4,72514,0.906425
+"100-9-top3","pos","experts",2,4,4,"Stubborn | Activist",59,7998990,99.987375
+"100-9-top3","pos","experts",2,6,4,"Stubborn | Activist",91,8000000,100
+"100-9-top3","pos","experts",2,8,4,"Stubborn | Activist",91,8000000,100
+"100-9-top3","pos","experts",2,10,4,"Stubborn | Activist",91,8000000,100
+"100-9-top3","pos","experts",3,0,4,"Stubborn | Activist | Homo.Economicus",0,0,0
+"100-9-top3","pos","experts",3,2,4,"Stubborn | Activist | Homo.Economicus",4,72514,0.906425
+"100-9-top3","pos","experts",3,4,4,"Stubborn | Activist | Homo.Economicus",59,7998990,99.987375
+"100-9-top3","pos","experts",3,6,4,"Stubborn | Activist | Homo.Economicus",91,8000000,100
+"100-9-top3","pos","experts",3,8,4,"Stubborn | Activist | Homo.Economicus",91,8000000,100
+"100-9-top3","pos","experts",3,10,4,"Stubborn | Activist | Homo.Economicus",91,8000000,100
+"100-9-top3","pos","experts",4,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",0,0,0
+"100-9-top3","pos","experts",4,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",4,72514,0.906425
+"100-9-top3","pos","experts",4,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",59,7998990,99.987375
+"100-9-top3","pos","experts",4,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",91,8000000,100
+"100-9-top3","pos","experts",4,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",91,8000000,100
+"100-9-top3","pos","experts",4,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",91,8000000,100
+"100-9-top3","pos","experts",5,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",0,0,0
+"100-9-top3","pos","experts",5,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",4,72514,0.906425
+"100-9-top3","pos","experts",5,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",60,7999143,99.9892875
+"100-9-top3","pos","experts",5,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",91,8000000,100
+"100-9-top3","pos","experts",5,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",91,8000000,100
+"100-9-top3","pos","experts",5,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",91,8000000,100
+"100-9-top3","pos","experts",6,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",0,0,0
+"100-9-top3","pos","experts",6,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",4,72514,0.906425
+"100-9-top3","pos","experts",6,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",63,7999206,99.990075
+"100-9-top3","pos","experts",6,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",91,8000000,100
+"100-9-top3","pos","experts",6,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",91,8000000,100
+"100-9-top3","pos","experts",6,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",91,8000000,100
+"100-9-top3","pos","experts",7,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",0,0,0
+"100-9-top3","pos","experts",7,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",4,72514,0.906425
+"100-9-top3","pos","experts",7,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",64,7999209,99.9901125
+"100-9-top3","pos","experts",7,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",91,8000000,100
+"100-9-top3","pos","experts",7,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",91,8000000,100
+"100-9-top3","pos","experts",7,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",91,8000000,100
+"100-9-top3","pos","experts",8,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",0,0,0
+"100-9-top3","pos","experts",8,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",4,72514,0.906425
+"100-9-top3","pos","experts",8,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",64,7999209,99.9901125
+"100-9-top3","pos","experts",8,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",91,8000000,100
+"100-9-top3","pos","experts",8,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",91,8000000,100
+"100-9-top3","pos","experts",8,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",91,8000000,100
+"100-9-top3","pos","kmeans",1,0,4,"Careful",0,0,0
+"100-9-top3","pos","kmeans",1,2,4,"Careful",0,0,0
+"100-9-top3","pos","kmeans",1,4,4,"Careful",20,7961044,99.51305
+"100-9-top3","pos","kmeans",1,6,4,"Careful",71,7999645,99.9955625
+"100-9-top3","pos","kmeans",1,8,4,"Careful",91,8000000,100
+"100-9-top3","pos","kmeans",1,10,4,"Careful",91,8000000,100
+"100-9-top3","pos","kmeans",2,0,4,"Careful | Early.Adopter",0,0,0
+"100-9-top3","pos","kmeans",2,2,4,"Careful | Early.Adopter",0,0,0
+"100-9-top3","pos","kmeans",2,4,4,"Careful | Early.Adopter",20,7961044,99.51305
+"100-9-top3","pos","kmeans",2,6,4,"Careful | Early.Adopter",77,7999814,99.997675
+"100-9-top3","pos","kmeans",2,8,4,"Careful | Early.Adopter",91,8000000,100
+"100-9-top3","pos","kmeans",2,10,4,"Careful | Early.Adopter",91,8000000,100
+"100-9-top3","pos","kmeans",3,0,4,"Careful | Early.Adopter | Fearful",0,0,0
+"100-9-top3","pos","kmeans",3,2,4,"Careful | Early.Adopter | Fearful",0,0,0
+"100-9-top3","pos","kmeans",3,4,4,"Careful | Early.Adopter | Fearful",20,7961044,99.51305
+"100-9-top3","pos","kmeans",3,6,4,"Careful | Early.Adopter | Fearful",77,7999814,99.997675
+"100-9-top3","pos","kmeans",3,8,4,"Careful | Early.Adopter | Fearful",91,8000000,100
+"100-9-top3","pos","kmeans",3,10,4,"Careful | Early.Adopter | Fearful",91,8000000,100
+"100-9-top3","pos","kmeans",4,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",0,0,0
+"100-9-top3","pos","kmeans",4,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",0,0,0
+"100-9-top3","pos","kmeans",4,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",20,7961044,99.51305
+"100-9-top3","pos","kmeans",4,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",77,7999814,99.997675
+"100-9-top3","pos","kmeans",4,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",91,8000000,100
+"100-9-top3","pos","kmeans",4,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",91,8000000,100
+"100-9-top3","pos","kmeans",5,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",0,0,0
+"100-9-top3","pos","kmeans",5,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",0,0,0
+"100-9-top3","pos","kmeans",5,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",20,7961044,99.51305
+"100-9-top3","pos","kmeans",5,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",86,7999872,99.9984
+"100-9-top3","pos","kmeans",5,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",91,8000000,100
+"100-9-top3","pos","kmeans",5,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",91,8000000,100
+"100-9-top3","pos","kmeans",6,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",0,0,0
+"100-9-top3","pos","kmeans",6,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",0,0,0
+"100-9-top3","pos","kmeans",6,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",20,7961044,99.51305
+"100-9-top3","pos","kmeans",6,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",86,7999872,99.9984
+"100-9-top3","pos","kmeans",6,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",91,8000000,100
+"100-9-top3","pos","kmeans",6,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",91,8000000,100
+"100-9-top3","pos","kmeans",7,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",0,0,0
+"100-9-top3","pos","kmeans",7,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",0,0,0
+"100-9-top3","pos","kmeans",7,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",20,7961044,99.51305
+"100-9-top3","pos","kmeans",7,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",88,7999943,99.9992875
+"100-9-top3","pos","kmeans",7,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",91,8000000,100
+"100-9-top3","pos","kmeans",7,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",91,8000000,100
+"100-9-top3","pos","kmeans",8,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",0,0,0
+"100-9-top3","pos","kmeans",8,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",0,0,0
+"100-9-top3","pos","kmeans",8,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",20,7961044,99.51305
+"100-9-top3","pos","kmeans",8,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",88,7999943,99.9992875
+"100-9-top3","pos","kmeans",8,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",91,8000000,100
+"100-9-top3","pos","kmeans",8,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",91,8000000,100
+"100-9-top3","pos","sins",1,0,4,"Uninterested",0,0,0
+"100-9-top3","pos","sins",1,2,4,"Uninterested",0,0,0
+"100-9-top3","pos","sins",1,4,4,"Uninterested",7,4527223,56.5902875
+"100-9-top3","pos","sins",1,6,4,"Uninterested",64,7995070,99.938375
+"100-9-top3","pos","sins",1,8,4,"Uninterested",91,8000000,100
+"100-9-top3","pos","sins",1,10,4,"Uninterested",91,8000000,100
+"100-9-top3","pos","sins",2,0,4,"Uninterested | Homo.Economicus",0,0,0
+"100-9-top3","pos","sins",2,2,4,"Uninterested | Homo.Economicus",3,4594,0.057425
+"100-9-top3","pos","sins",2,4,4,"Uninterested | Homo.Economicus",47,7951979,99.3997375
+"100-9-top3","pos","sins",2,6,4,"Uninterested | Homo.Economicus",91,8000000,100
+"100-9-top3","pos","sins",2,8,4,"Uninterested | Homo.Economicus",91,8000000,100
+"100-9-top3","pos","sins",2,10,4,"Uninterested | Homo.Economicus",91,8000000,100
+"100-9-top3","pos","sins",3,0,4,"Uninterested | Homo.Economicus | Influencer",0,0,0
+"100-9-top3","pos","sins",3,2,4,"Uninterested | Homo.Economicus | Influencer",3,4594,0.057425
+"100-9-top3","pos","sins",3,4,4,"Uninterested | Homo.Economicus | Influencer",55,7952019,99.4002375
+"100-9-top3","pos","sins",3,6,4,"Uninterested | Homo.Economicus | Influencer",91,8000000,100
+"100-9-top3","pos","sins",3,8,4,"Uninterested | Homo.Economicus | Influencer",91,8000000,100
+"100-9-top3","pos","sins",3,10,4,"Uninterested | Homo.Economicus | Influencer",91,8000000,100
+"100-9-top3","pos","sins",4,0,4,"Uninterested | Homo.Economicus | Influencer | Careful",0,0,0
+"100-9-top3","pos","sins",4,2,4,"Uninterested | Homo.Economicus | Influencer | Careful",3,4594,0.057425
+"100-9-top3","pos","sins",4,4,4,"Uninterested | Homo.Economicus | Influencer | Careful",55,7952019,99.4002375
+"100-9-top3","pos","sins",4,6,4,"Uninterested | Homo.Economicus | Influencer | Careful",91,8000000,100
+"100-9-top3","pos","sins",4,8,4,"Uninterested | Homo.Economicus | Influencer | Careful",91,8000000,100
+"100-9-top3","pos","sins",4,10,4,"Uninterested | Homo.Economicus | Influencer | Careful",91,8000000,100
+"100-9-top3","pos","sins",5,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",0,0,0
+"100-9-top3","pos","sins",5,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",3,4594,0.057425
+"100-9-top3","pos","sins",5,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",55,7952019,99.4002375
+"100-9-top3","pos","sins",5,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",91,8000000,100
+"100-9-top3","pos","sins",5,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",91,8000000,100
+"100-9-top3","pos","sins",5,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",91,8000000,100
+"100-9-top3","pos","sins",6,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",0,0,0
+"100-9-top3","pos","sins",6,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",3,4594,0.057425
+"100-9-top3","pos","sins",6,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",55,7952019,99.4002375
+"100-9-top3","pos","sins",6,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",91,8000000,100
+"100-9-top3","pos","sins",6,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",91,8000000,100
+"100-9-top3","pos","sins",6,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",91,8000000,100
+"100-9-top3","pos","sins",7,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",0,0,0
+"100-9-top3","pos","sins",7,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",3,4594,0.057425
+"100-9-top3","pos","sins",7,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",55,7952019,99.4002375
+"100-9-top3","pos","sins",7,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",91,8000000,100
+"100-9-top3","pos","sins",7,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",91,8000000,100
+"100-9-top3","pos","sins",7,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",91,8000000,100
+"100-9-top3","ext","experts",1,0,4,"Stubborn",0,0,0
+"100-9-top3","ext","experts",1,2,4,"Stubborn",4,2833832,35.4229
+"100-9-top3","ext","experts",1,4,4,"Stubborn",74,7766205,97.0775625
+"100-9-top3","ext","experts",1,6,4,"Stubborn",96,8000000,100
+"100-9-top3","ext","experts",1,8,4,"Stubborn",96,8000000,100
+"100-9-top3","ext","experts",1,10,4,"Stubborn",96,8000000,100
+"100-9-top3","ext","experts",2,0,4,"Stubborn | Activist",0,0,0
+"100-9-top3","ext","experts",2,2,4,"Stubborn | Activist",4,2833832,35.4229
+"100-9-top3","ext","experts",2,4,4,"Stubborn | Activist",74,7766205,97.0775625
+"100-9-top3","ext","experts",2,6,4,"Stubborn | Activist",96,8000000,100
+"100-9-top3","ext","experts",2,8,4,"Stubborn | Activist",96,8000000,100
+"100-9-top3","ext","experts",2,10,4,"Stubborn | Activist",96,8000000,100
+"100-9-top3","ext","experts",3,0,4,"Stubborn | Activist | Early.Adopter",0,0,0
+"100-9-top3","ext","experts",3,2,4,"Stubborn | Activist | Early.Adopter",4,2833832,35.4229
+"100-9-top3","ext","experts",3,4,4,"Stubborn | Activist | Early.Adopter",74,7766205,97.0775625
+"100-9-top3","ext","experts",3,6,4,"Stubborn | Activist | Early.Adopter",96,8000000,100
+"100-9-top3","ext","experts",3,8,4,"Stubborn | Activist | Early.Adopter",96,8000000,100
+"100-9-top3","ext","experts",3,10,4,"Stubborn | Activist | Early.Adopter",96,8000000,100
+"100-9-top3","ext","experts",4,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",0,0,0
+"100-9-top3","ext","experts",4,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",4,2833832,35.4229
+"100-9-top3","ext","experts",4,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",74,7766205,97.0775625
+"100-9-top3","ext","experts",4,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",96,8000000,100
+"100-9-top3","ext","experts",4,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",96,8000000,100
+"100-9-top3","ext","experts",4,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",96,8000000,100
+"100-9-top3","ext","experts",5,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",0,0,0
+"100-9-top3","ext","experts",5,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",4,2833832,35.4229
+"100-9-top3","ext","experts",5,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",75,7766232,97.0779
+"100-9-top3","ext","experts",5,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",96,8000000,100
+"100-9-top3","ext","experts",5,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",96,8000000,100
+"100-9-top3","ext","experts",5,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",96,8000000,100
+"100-9-top3","ext","experts",6,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",0,0,0
+"100-9-top3","ext","experts",6,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",4,2833832,35.4229
+"100-9-top3","ext","experts",6,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",76,7766234,97.077925
+"100-9-top3","ext","experts",6,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",96,8000000,100
+"100-9-top3","ext","experts",6,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",96,8000000,100
+"100-9-top3","ext","experts",6,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",96,8000000,100
+"100-9-top3","ext","experts",7,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",0,0,0
+"100-9-top3","ext","experts",7,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",4,2833832,35.4229
+"100-9-top3","ext","experts",7,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",78,7766562,97.082025
+"100-9-top3","ext","experts",7,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",96,8000000,100
+"100-9-top3","ext","experts",7,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",96,8000000,100
+"100-9-top3","ext","experts",7,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",96,8000000,100
+"100-9-top3","ext","experts",8,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",0,0,0
+"100-9-top3","ext","experts",8,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",4,2833832,35.4229
+"100-9-top3","ext","experts",8,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",78,7766562,97.082025
+"100-9-top3","ext","experts",8,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",96,8000000,100
+"100-9-top3","ext","experts",8,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",96,8000000,100
+"100-9-top3","ext","experts",8,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",96,8000000,100
+"100-9-top3","ext","kmeans",1,0,4,"Careful",0,0,0
+"100-9-top3","ext","kmeans",1,2,4,"Careful",0,0,0
+"100-9-top3","ext","kmeans",1,4,4,"Careful",19,3018928,37.7366
+"100-9-top3","ext","kmeans",1,6,4,"Careful",77,6871280,85.891
+"100-9-top3","ext","kmeans",1,8,4,"Careful",96,8000000,100
+"100-9-top3","ext","kmeans",1,10,4,"Careful",96,8000000,100
+"100-9-top3","ext","kmeans",2,0,4,"Careful | Early.Adopter",0,0,0
+"100-9-top3","ext","kmeans",2,2,4,"Careful | Early.Adopter",0,0,0
+"100-9-top3","ext","kmeans",2,4,4,"Careful | Early.Adopter",19,3018928,37.7366
+"100-9-top3","ext","kmeans",2,6,4,"Careful | Early.Adopter",85,7965885,99.5735625
+"100-9-top3","ext","kmeans",2,8,4,"Careful | Early.Adopter",96,8000000,100
+"100-9-top3","ext","kmeans",2,10,4,"Careful | Early.Adopter",96,8000000,100
+"100-9-top3","ext","kmeans",3,0,4,"Careful | Early.Adopter | Fearful",0,0,0
+"100-9-top3","ext","kmeans",3,2,4,"Careful | Early.Adopter | Fearful",0,0,0
+"100-9-top3","ext","kmeans",3,4,4,"Careful | Early.Adopter | Fearful",19,3018928,37.7366
+"100-9-top3","ext","kmeans",3,6,4,"Careful | Early.Adopter | Fearful",85,7965885,99.5735625
+"100-9-top3","ext","kmeans",3,8,4,"Careful | Early.Adopter | Fearful",96,8000000,100
+"100-9-top3","ext","kmeans",3,10,4,"Careful | Early.Adopter | Fearful",96,8000000,100
+"100-9-top3","ext","kmeans",4,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",0,0,0
+"100-9-top3","ext","kmeans",4,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",0,0,0
+"100-9-top3","ext","kmeans",4,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",19,3018928,37.7366
+"100-9-top3","ext","kmeans",4,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",85,7965885,99.5735625
+"100-9-top3","ext","kmeans",4,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",96,8000000,100
+"100-9-top3","ext","kmeans",4,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",96,8000000,100
+"100-9-top3","ext","kmeans",5,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",0,0,0
+"100-9-top3","ext","kmeans",5,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",0,0,0
+"100-9-top3","ext","kmeans",5,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",19,3018928,37.7366
+"100-9-top3","ext","kmeans",5,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",91,7987550,99.844375
+"100-9-top3","ext","kmeans",5,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",96,8000000,100
+"100-9-top3","ext","kmeans",5,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",96,8000000,100
+"100-9-top3","ext","kmeans",6,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",0,0,0
+"100-9-top3","ext","kmeans",6,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",0,0,0
+"100-9-top3","ext","kmeans",6,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",19,3018928,37.7366
+"100-9-top3","ext","kmeans",6,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",91,7987550,99.844375
+"100-9-top3","ext","kmeans",6,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",96,8000000,100
+"100-9-top3","ext","kmeans",6,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",96,8000000,100
+"100-9-top3","ext","kmeans",7,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",0,0,0
+"100-9-top3","ext","kmeans",7,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",0,0,0
+"100-9-top3","ext","kmeans",7,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",19,3018928,37.7366
+"100-9-top3","ext","kmeans",7,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",93,7999916,99.99895
+"100-9-top3","ext","kmeans",7,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",96,8000000,100
+"100-9-top3","ext","kmeans",7,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",96,8000000,100
+"100-9-top3","ext","kmeans",8,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",0,0,0
+"100-9-top3","ext","kmeans",8,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",0,0,0
+"100-9-top3","ext","kmeans",8,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",19,3018928,37.7366
+"100-9-top3","ext","kmeans",8,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",93,7999916,99.99895
+"100-9-top3","ext","kmeans",8,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",96,8000000,100
+"100-9-top3","ext","kmeans",8,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",96,8000000,100
+"100-9-top3","ext","sins",1,0,4,"Homo.Economicus",0,0,0
+"100-9-top3","ext","sins",1,2,4,"Homo.Economicus",2,331,0.0041375
+"100-9-top3","ext","sins",1,4,4,"Homo.Economicus",42,3901274,48.765925
+"100-9-top3","ext","sins",1,6,4,"Homo.Economicus",96,8000000,100
+"100-9-top3","ext","sins",1,8,4,"Homo.Economicus",96,8000000,100
+"100-9-top3","ext","sins",1,10,4,"Homo.Economicus",96,8000000,100
+"100-9-top3","ext","sins",2,0,4,"Homo.Economicus | Uninterested",0,0,0
+"100-9-top3","ext","sins",2,2,4,"Homo.Economicus | Uninterested",2,331,0.0041375
+"100-9-top3","ext","sins",2,4,4,"Homo.Economicus | Uninterested",48,5984832,74.8104
+"100-9-top3","ext","sins",2,6,4,"Homo.Economicus | Uninterested",96,8000000,100
+"100-9-top3","ext","sins",2,8,4,"Homo.Economicus | Uninterested",96,8000000,100
+"100-9-top3","ext","sins",2,10,4,"Homo.Economicus | Uninterested",96,8000000,100
+"100-9-top3","ext","sins",3,0,4,"Homo.Economicus | Uninterested | Influencer",0,0,0
+"100-9-top3","ext","sins",3,2,4,"Homo.Economicus | Uninterested | Influencer",2,331,0.0041375
+"100-9-top3","ext","sins",3,4,4,"Homo.Economicus | Uninterested | Influencer",56,6112819,76.4102375
+"100-9-top3","ext","sins",3,6,4,"Homo.Economicus | Uninterested | Influencer",96,8000000,100
+"100-9-top3","ext","sins",3,8,4,"Homo.Economicus | Uninterested | Influencer",96,8000000,100
+"100-9-top3","ext","sins",3,10,4,"Homo.Economicus | Uninterested | Influencer",96,8000000,100
+"100-9-top3","ext","sins",4,0,4,"Homo.Economicus | Uninterested | Influencer | Careful",0,0,0
+"100-9-top3","ext","sins",4,2,4,"Homo.Economicus | Uninterested | Influencer | Careful",2,331,0.0041375
+"100-9-top3","ext","sins",4,4,4,"Homo.Economicus | Uninterested | Influencer | Careful",56,6112819,76.4102375
+"100-9-top3","ext","sins",4,6,4,"Homo.Economicus | Uninterested | Influencer | Careful",96,8000000,100
+"100-9-top3","ext","sins",4,8,4,"Homo.Economicus | Uninterested | Influencer | Careful",96,8000000,100
+"100-9-top3","ext","sins",4,10,4,"Homo.Economicus | Uninterested | Influencer | Careful",96,8000000,100
+"100-9-top3","ext","sins",5,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",0,0,0
+"100-9-top3","ext","sins",5,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",2,331,0.0041375
+"100-9-top3","ext","sins",5,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",56,6112819,76.4102375
+"100-9-top3","ext","sins",5,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",96,8000000,100
+"100-9-top3","ext","sins",5,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",96,8000000,100
+"100-9-top3","ext","sins",5,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",96,8000000,100
+"100-9-top3","ext","sins",6,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",0,0,0
+"100-9-top3","ext","sins",6,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",2,331,0.0041375
+"100-9-top3","ext","sins",6,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",56,6112819,76.4102375
+"100-9-top3","ext","sins",6,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",96,8000000,100
+"100-9-top3","ext","sins",6,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",96,8000000,100
+"100-9-top3","ext","sins",6,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",96,8000000,100
+"100-9-top3","ext","sins",7,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",0,0,0
+"100-9-top3","ext","sins",7,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",2,331,0.0041375
+"100-9-top3","ext","sins",7,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",56,6112819,76.4102375
+"100-9-top3","ext","sins",7,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",96,8000000,100
+"100-9-top3","ext","sins",7,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",96,8000000,100
+"100-9-top3","ext","sins",7,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",96,8000000,100
+"10-9-top3","pos","experts",1,0,4,"Stubborn",0,0,0
+"10-9-top3","pos","experts",1,2,4,"Stubborn",4,50823,0.6352875
+"10-9-top3","pos","experts",1,4,4,"Stubborn",58,7998946,99.986825
+"10-9-top3","pos","experts",1,6,4,"Stubborn",89,8000000,100
+"10-9-top3","pos","experts",1,8,4,"Stubborn",89,8000000,100
+"10-9-top3","pos","experts",1,10,4,"Stubborn",89,8000000,100
+"10-9-top3","pos","experts",2,0,4,"Stubborn | Activist",0,0,0
+"10-9-top3","pos","experts",2,2,4,"Stubborn | Activist",4,50823,0.6352875
+"10-9-top3","pos","experts",2,4,4,"Stubborn | Activist",58,7998946,99.986825
+"10-9-top3","pos","experts",2,6,4,"Stubborn | Activist",89,8000000,100
+"10-9-top3","pos","experts",2,8,4,"Stubborn | Activist",89,8000000,100
+"10-9-top3","pos","experts",2,10,4,"Stubborn | Activist",89,8000000,100
+"10-9-top3","pos","experts",3,0,4,"Stubborn | Activist | Homo.Economicus",0,0,0
+"10-9-top3","pos","experts",3,2,4,"Stubborn | Activist | Homo.Economicus",4,50823,0.6352875
+"10-9-top3","pos","experts",3,4,4,"Stubborn | Activist | Homo.Economicus",58,7998946,99.986825
+"10-9-top3","pos","experts",3,6,4,"Stubborn | Activist | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","experts",3,8,4,"Stubborn | Activist | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","experts",3,10,4,"Stubborn | Activist | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","experts",4,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",0,0,0
+"10-9-top3","pos","experts",4,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",4,50823,0.6352875
+"10-9-top3","pos","experts",4,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",58,7998946,99.986825
+"10-9-top3","pos","experts",4,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",89,8000000,100
+"10-9-top3","pos","experts",4,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",89,8000000,100
+"10-9-top3","pos","experts",4,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter",89,8000000,100
+"10-9-top3","pos","experts",5,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",0,0,0
+"10-9-top3","pos","experts",5,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",4,50823,0.6352875
+"10-9-top3","pos","experts",5,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",59,7999209,99.9901125
+"10-9-top3","pos","experts",5,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","experts",5,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","experts",5,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","experts",6,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",0,0,0
+"10-9-top3","pos","experts",6,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",4,50823,0.6352875
+"10-9-top3","pos","experts",6,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",60,7999282,99.991025
+"10-9-top3","pos","experts",6,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",89,8000000,100
+"10-9-top3","pos","experts",6,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",89,8000000,100
+"10-9-top3","pos","experts",6,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested",89,8000000,100
+"10-9-top3","pos","experts",7,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",0,0,0
+"10-9-top3","pos","experts",7,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",4,50823,0.6352875
+"10-9-top3","pos","experts",7,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",61,7999284,99.99105
+"10-9-top3","pos","experts",7,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",89,8000000,100
+"10-9-top3","pos","experts",7,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",89,8000000,100
+"10-9-top3","pos","experts",7,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer",89,8000000,100
+"10-9-top3","pos","experts",8,0,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",0,0,0
+"10-9-top3","pos","experts",8,2,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",4,50823,0.6352875
+"10-9-top3","pos","experts",8,4,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",61,7999284,99.99105
+"10-9-top3","pos","experts",8,6,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","experts",8,8,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","experts",8,10,4,"Stubborn | Activist | Homo.Economicus | Early.Adopter | Fearful | Uninterested | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","kmeans",1,0,4,"Careful",0,0,0
+"10-9-top3","pos","kmeans",1,2,4,"Careful",0,0,0
+"10-9-top3","pos","kmeans",1,4,4,"Careful",19,7970180,99.62725
+"10-9-top3","pos","kmeans",1,6,4,"Careful",69,7999722,99.996525
+"10-9-top3","pos","kmeans",1,8,4,"Careful",89,8000000,100
+"10-9-top3","pos","kmeans",1,10,4,"Careful",89,8000000,100
+"10-9-top3","pos","kmeans",2,0,4,"Careful | Early.Adopter",0,0,0
+"10-9-top3","pos","kmeans",2,2,4,"Careful | Early.Adopter",0,0,0
+"10-9-top3","pos","kmeans",2,4,4,"Careful | Early.Adopter",19,7970180,99.62725
+"10-9-top3","pos","kmeans",2,6,4,"Careful | Early.Adopter",75,7999850,99.998125
+"10-9-top3","pos","kmeans",2,8,4,"Careful | Early.Adopter",89,8000000,100
+"10-9-top3","pos","kmeans",2,10,4,"Careful | Early.Adopter",89,8000000,100
+"10-9-top3","pos","kmeans",3,0,4,"Careful | Early.Adopter | Fearful",0,0,0
+"10-9-top3","pos","kmeans",3,2,4,"Careful | Early.Adopter | Fearful",0,0,0
+"10-9-top3","pos","kmeans",3,4,4,"Careful | Early.Adopter | Fearful",19,7970180,99.62725
+"10-9-top3","pos","kmeans",3,6,4,"Careful | Early.Adopter | Fearful",75,7999850,99.998125
+"10-9-top3","pos","kmeans",3,8,4,"Careful | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","kmeans",3,10,4,"Careful | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","kmeans",4,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",0,0,0
+"10-9-top3","pos","kmeans",4,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",0,0,0
+"10-9-top3","pos","kmeans",4,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",19,7970180,99.62725
+"10-9-top3","pos","kmeans",4,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",75,7999850,99.998125
+"10-9-top3","pos","kmeans",4,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","kmeans",4,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","kmeans",5,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",0,0,0
+"10-9-top3","pos","kmeans",5,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",0,0,0
+"10-9-top3","pos","kmeans",5,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",19,7970180,99.62725
+"10-9-top3","pos","kmeans",5,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",84,7999913,99.9989125
+"10-9-top3","pos","kmeans",5,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",89,8000000,100
+"10-9-top3","pos","kmeans",5,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",89,8000000,100
+"10-9-top3","pos","kmeans",6,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",0,0,0
+"10-9-top3","pos","kmeans",6,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",0,0,0
+"10-9-top3","pos","kmeans",6,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",19,7970180,99.62725
+"10-9-top3","pos","kmeans",6,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",84,7999913,99.9989125
+"10-9-top3","pos","kmeans",6,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",89,8000000,100
+"10-9-top3","pos","kmeans",6,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",89,8000000,100
+"10-9-top3","pos","kmeans",7,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",0,0,0
+"10-9-top3","pos","kmeans",7,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",0,0,0
+"10-9-top3","pos","kmeans",7,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",19,7970180,99.62725
+"10-9-top3","pos","kmeans",7,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",85,7999962,99.999525
+"10-9-top3","pos","kmeans",7,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",89,8000000,100
+"10-9-top3","pos","kmeans",7,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",89,8000000,100
+"10-9-top3","pos","kmeans",8,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",0,0,0
+"10-9-top3","pos","kmeans",8,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",0,0,0
+"10-9-top3","pos","kmeans",8,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",19,7970180,99.62725
+"10-9-top3","pos","kmeans",8,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",85,7999962,99.999525
+"10-9-top3","pos","kmeans",8,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",89,8000000,100
+"10-9-top3","pos","kmeans",8,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",89,8000000,100
+"10-9-top3","pos","sins",1,0,4,"Uninterested",0,0,0
+"10-9-top3","pos","sins",1,2,4,"Uninterested",0,0,0
+"10-9-top3","pos","sins",1,4,4,"Uninterested",6,4524414,56.555175
+"10-9-top3","pos","sins",1,6,4,"Uninterested",61,7995208,99.9401
+"10-9-top3","pos","sins",1,8,4,"Uninterested",89,8000000,100
+"10-9-top3","pos","sins",1,10,4,"Uninterested",89,8000000,100
+"10-9-top3","pos","sins",2,0,4,"Uninterested | Homo.Economicus",0,0,0
+"10-9-top3","pos","sins",2,2,4,"Uninterested | Homo.Economicus",3,5567,0.0695875
+"10-9-top3","pos","sins",2,4,4,"Uninterested | Homo.Economicus",46,7959452,99.49315
+"10-9-top3","pos","sins",2,6,4,"Uninterested | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","sins",2,8,4,"Uninterested | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","sins",2,10,4,"Uninterested | Homo.Economicus",89,8000000,100
+"10-9-top3","pos","sins",3,0,4,"Uninterested | Homo.Economicus | Influencer",0,0,0
+"10-9-top3","pos","sins",3,2,4,"Uninterested | Homo.Economicus | Influencer",3,5567,0.0695875
+"10-9-top3","pos","sins",3,4,4,"Uninterested | Homo.Economicus | Influencer",53,7959490,99.493625
+"10-9-top3","pos","sins",3,6,4,"Uninterested | Homo.Economicus | Influencer",89,8000000,100
+"10-9-top3","pos","sins",3,8,4,"Uninterested | Homo.Economicus | Influencer",89,8000000,100
+"10-9-top3","pos","sins",3,10,4,"Uninterested | Homo.Economicus | Influencer",89,8000000,100
+"10-9-top3","pos","sins",4,0,4,"Uninterested | Homo.Economicus | Influencer | Careful",0,0,0
+"10-9-top3","pos","sins",4,2,4,"Uninterested | Homo.Economicus | Influencer | Careful",3,5567,0.0695875
+"10-9-top3","pos","sins",4,4,4,"Uninterested | Homo.Economicus | Influencer | Careful",53,7959490,99.493625
+"10-9-top3","pos","sins",4,6,4,"Uninterested | Homo.Economicus | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","sins",4,8,4,"Uninterested | Homo.Economicus | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","sins",4,10,4,"Uninterested | Homo.Economicus | Influencer | Careful",89,8000000,100
+"10-9-top3","pos","sins",5,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",0,0,0
+"10-9-top3","pos","sins",5,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",3,5567,0.0695875
+"10-9-top3","pos","sins",5,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",53,7959490,99.493625
+"10-9-top3","pos","sins",5,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",89,8000000,100
+"10-9-top3","pos","sins",5,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",89,8000000,100
+"10-9-top3","pos","sins",5,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter",89,8000000,100
+"10-9-top3","pos","sins",6,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",0,0,0
+"10-9-top3","pos","sins",6,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",3,5567,0.0695875
+"10-9-top3","pos","sins",6,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",53,7959490,99.493625
+"10-9-top3","pos","sins",6,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","sins",6,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","sins",6,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful",89,8000000,100
+"10-9-top3","pos","sins",7,0,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",0,0,0
+"10-9-top3","pos","sins",7,2,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",3,5567,0.0695875
+"10-9-top3","pos","sins",7,4,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",53,7959490,99.493625
+"10-9-top3","pos","sins",7,6,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",89,8000000,100
+"10-9-top3","pos","sins",7,8,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",89,8000000,100
+"10-9-top3","pos","sins",7,10,4,"Uninterested | Homo.Economicus | Influencer | Careful | Early.Adopter | Fearful | Stubborn",89,8000000,100
+"10-9-top3","ext","experts",1,0,4,"Stubborn",0,0,0
+"10-9-top3","ext","experts",1,2,4,"Stubborn",4,2794863,34.9357875
+"10-9-top3","ext","experts",1,4,4,"Stubborn",77,7735483,96.6935375
+"10-9-top3","ext","experts",1,6,4,"Stubborn",101,8000000,100
+"10-9-top3","ext","experts",1,8,4,"Stubborn",101,8000000,100
+"10-9-top3","ext","experts",1,10,4,"Stubborn",101,8000000,100
+"10-9-top3","ext","experts",2,0,4,"Stubborn | Activist",0,0,0
+"10-9-top3","ext","experts",2,2,4,"Stubborn | Activist",4,2794863,34.9357875
+"10-9-top3","ext","experts",2,4,4,"Stubborn | Activist",77,7735483,96.6935375
+"10-9-top3","ext","experts",2,6,4,"Stubborn | Activist",101,8000000,100
+"10-9-top3","ext","experts",2,8,4,"Stubborn | Activist",101,8000000,100
+"10-9-top3","ext","experts",2,10,4,"Stubborn | Activist",101,8000000,100
+"10-9-top3","ext","experts",3,0,4,"Stubborn | Activist | Early.Adopter",0,0,0
+"10-9-top3","ext","experts",3,2,4,"Stubborn | Activist | Early.Adopter",4,2794863,34.9357875
+"10-9-top3","ext","experts",3,4,4,"Stubborn | Activist | Early.Adopter",77,7735483,96.6935375
+"10-9-top3","ext","experts",3,6,4,"Stubborn | Activist | Early.Adopter",101,8000000,100
+"10-9-top3","ext","experts",3,8,4,"Stubborn | Activist | Early.Adopter",101,8000000,100
+"10-9-top3","ext","experts",3,10,4,"Stubborn | Activist | Early.Adopter",101,8000000,100
+"10-9-top3","ext","experts",4,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",0,0,0
+"10-9-top3","ext","experts",4,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",4,2794863,34.9357875
+"10-9-top3","ext","experts",4,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",77,7735483,96.6935375
+"10-9-top3","ext","experts",4,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",101,8000000,100
+"10-9-top3","ext","experts",4,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",101,8000000,100
+"10-9-top3","ext","experts",4,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus",101,8000000,100
+"10-9-top3","ext","experts",5,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",0,0,0
+"10-9-top3","ext","experts",5,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",4,2794863,34.9357875
+"10-9-top3","ext","experts",5,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",78,7735541,96.6942625
+"10-9-top3","ext","experts",5,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",101,8000000,100
+"10-9-top3","ext","experts",5,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",101,8000000,100
+"10-9-top3","ext","experts",5,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful",101,8000000,100
+"10-9-top3","ext","experts",6,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",0,0,0
+"10-9-top3","ext","experts",6,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",4,2794863,34.9357875
+"10-9-top3","ext","experts",6,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",79,7735543,96.6942875
+"10-9-top3","ext","experts",6,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",101,8000000,100
+"10-9-top3","ext","experts",6,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",101,8000000,100
+"10-9-top3","ext","experts",6,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer",101,8000000,100
+"10-9-top3","ext","experts",7,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",0,0,0
+"10-9-top3","ext","experts",7,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",4,2794863,34.9357875
+"10-9-top3","ext","experts",7,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",81,7735912,96.6989
+"10-9-top3","ext","experts",7,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",101,8000000,100
+"10-9-top3","ext","experts",7,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",101,8000000,100
+"10-9-top3","ext","experts",7,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested",101,8000000,100
+"10-9-top3","ext","experts",8,0,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",0,0,0
+"10-9-top3","ext","experts",8,2,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",4,2794863,34.9357875
+"10-9-top3","ext","experts",8,4,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",81,7735912,96.6989
+"10-9-top3","ext","experts",8,6,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",101,8000000,100
+"10-9-top3","ext","experts",8,8,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",101,8000000,100
+"10-9-top3","ext","experts",8,10,4,"Stubborn | Activist | Early.Adopter | Homo.Economicus | Fearful | Influencer | Uninterested | Careful",101,8000000,100
+"10-9-top3","ext","kmeans",1,0,4,"Careful",0,0,0
+"10-9-top3","ext","kmeans",1,2,4,"Careful",0,0,0
+"10-9-top3","ext","kmeans",1,4,4,"Careful",20,3054957,38.1869625
+"10-9-top3","ext","kmeans",1,6,4,"Careful",80,6854142,85.676775
+"10-9-top3","ext","kmeans",1,8,4,"Careful",101,8000000,100
+"10-9-top3","ext","kmeans",1,10,4,"Careful",101,8000000,100
+"10-9-top3","ext","kmeans",2,0,4,"Careful | Early.Adopter",0,0,0
+"10-9-top3","ext","kmeans",2,2,4,"Careful | Early.Adopter",0,0,0
+"10-9-top3","ext","kmeans",2,4,4,"Careful | Early.Adopter",20,3054957,38.1869625
+"10-9-top3","ext","kmeans",2,6,4,"Careful | Early.Adopter",89,7972301,99.6537625
+"10-9-top3","ext","kmeans",2,8,4,"Careful | Early.Adopter",101,8000000,100
+"10-9-top3","ext","kmeans",2,10,4,"Careful | Early.Adopter",101,8000000,100
+"10-9-top3","ext","kmeans",3,0,4,"Careful | Early.Adopter | Fearful",0,0,0
+"10-9-top3","ext","kmeans",3,2,4,"Careful | Early.Adopter | Fearful",0,0,0
+"10-9-top3","ext","kmeans",3,4,4,"Careful | Early.Adopter | Fearful",20,3054957,38.1869625
+"10-9-top3","ext","kmeans",3,6,4,"Careful | Early.Adopter | Fearful",89,7972301,99.6537625
+"10-9-top3","ext","kmeans",3,8,4,"Careful | Early.Adopter | Fearful",101,8000000,100
+"10-9-top3","ext","kmeans",3,10,4,"Careful | Early.Adopter | Fearful",101,8000000,100
+"10-9-top3","ext","kmeans",4,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",0,0,0
+"10-9-top3","ext","kmeans",4,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",0,0,0
+"10-9-top3","ext","kmeans",4,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",20,3054957,38.1869625
+"10-9-top3","ext","kmeans",4,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",89,7972301,99.6537625
+"10-9-top3","ext","kmeans",4,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",101,8000000,100
+"10-9-top3","ext","kmeans",4,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus",101,8000000,100
+"10-9-top3","ext","kmeans",5,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",0,0,0
+"10-9-top3","ext","kmeans",5,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",0,0,0
+"10-9-top3","ext","kmeans",5,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",20,3054957,38.1869625
+"10-9-top3","ext","kmeans",5,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",96,7986127,99.8265875
+"10-9-top3","ext","kmeans",5,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",101,8000000,100
+"10-9-top3","ext","kmeans",5,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer",101,8000000,100
+"10-9-top3","ext","kmeans",6,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",0,0,0
+"10-9-top3","ext","kmeans",6,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",0,0,0
+"10-9-top3","ext","kmeans",6,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",20,3054957,38.1869625
+"10-9-top3","ext","kmeans",6,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",96,7986127,99.8265875
+"10-9-top3","ext","kmeans",6,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",101,8000000,100
+"10-9-top3","ext","kmeans",6,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn",101,8000000,100
+"10-9-top3","ext","kmeans",7,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",0,0,0
+"10-9-top3","ext","kmeans",7,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",0,0,0
+"10-9-top3","ext","kmeans",7,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",20,3054957,38.1869625
+"10-9-top3","ext","kmeans",7,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",98,7999928,99.9991
+"10-9-top3","ext","kmeans",7,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",101,8000000,100
+"10-9-top3","ext","kmeans",7,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested",101,8000000,100
+"10-9-top3","ext","kmeans",8,0,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",0,0,0
+"10-9-top3","ext","kmeans",8,2,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",0,0,0
+"10-9-top3","ext","kmeans",8,4,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",20,3054957,38.1869625
+"10-9-top3","ext","kmeans",8,6,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",98,7999928,99.9991
+"10-9-top3","ext","kmeans",8,8,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",101,8000000,100
+"10-9-top3","ext","kmeans",8,10,4,"Careful | Early.Adopter | Fearful | Homo.Economicus | Influencer | Stubborn | Uninterested | X8",101,8000000,100
+"10-9-top3","ext","sins",1,0,4,"Homo.Economicus",0,0,0
+"10-9-top3","ext","sins",1,2,4,"Homo.Economicus",2,350,0.004375
+"10-9-top3","ext","sins",1,4,4,"Homo.Economicus",46,3880549,48.5068625
+"10-9-top3","ext","sins",1,6,4,"Homo.Economicus",101,8000000,100
+"10-9-top3","ext","sins",1,8,4,"Homo.Economicus",101,8000000,100
+"10-9-top3","ext","sins",1,10,4,"Homo.Economicus",101,8000000,100
+"10-9-top3","ext","sins",2,0,4,"Homo.Economicus | Uninterested",0,0,0
+"10-9-top3","ext","sins",2,2,4,"Homo.Economicus | Uninterested",2,350,0.004375
+"10-9-top3","ext","sins",2,4,4,"Homo.Economicus | Uninterested",52,5982159,74.7769875
+"10-9-top3","ext","sins",2,6,4,"Homo.Economicus | Uninterested",101,8000000,100
+"10-9-top3","ext","sins",2,8,4,"Homo.Economicus | Uninterested",101,8000000,100
+"10-9-top3","ext","sins",2,10,4,"Homo.Economicus | Uninterested",101,8000000,100
+"10-9-top3","ext","sins",3,0,4,"Homo.Economicus | Uninterested | Influencer",0,0,0
+"10-9-top3","ext","sins",3,2,4,"Homo.Economicus | Uninterested | Influencer",2,350,0.004375
+"10-9-top3","ext","sins",3,4,4,"Homo.Economicus | Uninterested | Influencer",61,6102496,76.2812
+"10-9-top3","ext","sins",3,6,4,"Homo.Economicus | Uninterested | Influencer",101,8000000,100
+"10-9-top3","ext","sins",3,8,4,"Homo.Economicus | Uninterested | Influencer",101,8000000,100
+"10-9-top3","ext","sins",3,10,4,"Homo.Economicus | Uninterested | Influencer",101,8000000,100
+"10-9-top3","ext","sins",4,0,4,"Homo.Economicus | Uninterested | Influencer | Careful",0,0,0
+"10-9-top3","ext","sins",4,2,4,"Homo.Economicus | Uninterested | Influencer | Careful",2,350,0.004375
+"10-9-top3","ext","sins",4,4,4,"Homo.Economicus | Uninterested | Influencer | Careful",61,6102496,76.2812
+"10-9-top3","ext","sins",4,6,4,"Homo.Economicus | Uninterested | Influencer | Careful",101,8000000,100
+"10-9-top3","ext","sins",4,8,4,"Homo.Economicus | Uninterested | Influencer | Careful",101,8000000,100
+"10-9-top3","ext","sins",4,10,4,"Homo.Economicus | Uninterested | Influencer | Careful",101,8000000,100
+"10-9-top3","ext","sins",5,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",0,0,0
+"10-9-top3","ext","sins",5,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",2,350,0.004375
+"10-9-top3","ext","sins",5,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",61,6102496,76.2812
+"10-9-top3","ext","sins",5,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",101,8000000,100
+"10-9-top3","ext","sins",5,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",101,8000000,100
+"10-9-top3","ext","sins",5,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",101,8000000,100
+"10-9-top3","ext","sins",6,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",0,0,0
+"10-9-top3","ext","sins",6,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",2,350,0.004375
+"10-9-top3","ext","sins",6,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",61,6102496,76.2812
+"10-9-top3","ext","sins",6,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",101,8000000,100
+"10-9-top3","ext","sins",6,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",101,8000000,100
+"10-9-top3","ext","sins",6,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",101,8000000,100
+"10-9-top3","ext","sins",7,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",0,0,0
+"10-9-top3","ext","sins",7,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",2,350,0.004375
+"10-9-top3","ext","sins",7,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",61,6102496,76.2812
+"10-9-top3","ext","sins",7,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",101,8000000,100
+"10-9-top3","ext","sins",7,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",101,8000000,100
+"10-9-top3","ext","sins",7,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",101,8000000,100

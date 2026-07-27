@@ -1,0 +1,10 @@
+"archetype","best_pattern","best_pattern_idx","best_dist","best_pattern_freq"
+"expert_1","pattern_1",1,0,112420
+"expert_2","pattern_30945",30945,3,1
+"expert_3","pattern_123",123,2,72
+"expert_4","pattern_5155",5155,1,31
+"expert_5","pattern_3190",3190,1,10
+"expert_6","pattern_21389",21389,2,2
+"expert_7","pattern_2461",2461,3,5
+"expert_8","pattern_7660",7660,2,4
+"expert_9","pattern_9525",9525,2,1

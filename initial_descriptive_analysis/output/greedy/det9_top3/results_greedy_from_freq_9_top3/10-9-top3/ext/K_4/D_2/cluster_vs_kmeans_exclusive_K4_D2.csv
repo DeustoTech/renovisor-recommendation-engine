@@ -1,0 +1,5 @@
+"cluster","best_match","pct_match","active_determinants","n_active_dets"
+"cluster_1","Fearful",0,"",0
+"cluster_2","Careful",60,"COMPETENCE; AUTONOMY; PHYSICALNESS",3
+"cluster_3","Early.Adopter",42.8571428571429,"STIMULATION; POPULARITY; MEANING",3
+"cluster_4","Influencer",42.8571428571429,"SECURITY; COMPETENCE; POPULARITY",3

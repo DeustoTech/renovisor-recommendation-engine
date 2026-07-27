@@ -1,0 +1,43 @@
+"scenario","type","reference","K","D","D_order","archetypes_used","n_patterns_covered","freq_covered","pct_covered"
+"10-9-top3","ext","sins",1,0,4,"Homo.Economicus",0,0,0
+"10-9-top3","ext","sins",1,2,4,"Homo.Economicus",2,350,0.004375
+"10-9-top3","ext","sins",1,4,4,"Homo.Economicus",46,3880549,48.5068625
+"10-9-top3","ext","sins",1,6,4,"Homo.Economicus",101,8000000,100
+"10-9-top3","ext","sins",1,8,4,"Homo.Economicus",101,8000000,100
+"10-9-top3","ext","sins",1,10,4,"Homo.Economicus",101,8000000,100
+"10-9-top3","ext","sins",2,0,4,"Homo.Economicus | Uninterested",0,0,0
+"10-9-top3","ext","sins",2,2,4,"Homo.Economicus | Uninterested",2,350,0.004375
+"10-9-top3","ext","sins",2,4,4,"Homo.Economicus | Uninterested",52,5982159,74.7769875
+"10-9-top3","ext","sins",2,6,4,"Homo.Economicus | Uninterested",101,8000000,100
+"10-9-top3","ext","sins",2,8,4,"Homo.Economicus | Uninterested",101,8000000,100
+"10-9-top3","ext","sins",2,10,4,"Homo.Economicus | Uninterested",101,8000000,100
+"10-9-top3","ext","sins",3,0,4,"Homo.Economicus | Uninterested | Influencer",0,0,0
+"10-9-top3","ext","sins",3,2,4,"Homo.Economicus | Uninterested | Influencer",2,350,0.004375
+"10-9-top3","ext","sins",3,4,4,"Homo.Economicus | Uninterested | Influencer",61,6102496,76.2812
+"10-9-top3","ext","sins",3,6,4,"Homo.Economicus | Uninterested | Influencer",101,8000000,100
+"10-9-top3","ext","sins",3,8,4,"Homo.Economicus | Uninterested | Influencer",101,8000000,100
+"10-9-top3","ext","sins",3,10,4,"Homo.Economicus | Uninterested | Influencer",101,8000000,100
+"10-9-top3","ext","sins",4,0,4,"Homo.Economicus | Uninterested | Influencer | Careful",0,0,0
+"10-9-top3","ext","sins",4,2,4,"Homo.Economicus | Uninterested | Influencer | Careful",2,350,0.004375
+"10-9-top3","ext","sins",4,4,4,"Homo.Economicus | Uninterested | Influencer | Careful",61,6102496,76.2812
+"10-9-top3","ext","sins",4,6,4,"Homo.Economicus | Uninterested | Influencer | Careful",101,8000000,100
+"10-9-top3","ext","sins",4,8,4,"Homo.Economicus | Uninterested | Influencer | Careful",101,8000000,100
+"10-9-top3","ext","sins",4,10,4,"Homo.Economicus | Uninterested | Influencer | Careful",101,8000000,100
+"10-9-top3","ext","sins",5,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",0,0,0
+"10-9-top3","ext","sins",5,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",2,350,0.004375
+"10-9-top3","ext","sins",5,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",61,6102496,76.2812
+"10-9-top3","ext","sins",5,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",101,8000000,100
+"10-9-top3","ext","sins",5,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",101,8000000,100
+"10-9-top3","ext","sins",5,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter",101,8000000,100
+"10-9-top3","ext","sins",6,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",0,0,0
+"10-9-top3","ext","sins",6,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",2,350,0.004375
+"10-9-top3","ext","sins",6,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",61,6102496,76.2812
+"10-9-top3","ext","sins",6,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",101,8000000,100
+"10-9-top3","ext","sins",6,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",101,8000000,100
+"10-9-top3","ext","sins",6,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful",101,8000000,100
+"10-9-top3","ext","sins",7,0,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",0,0,0
+"10-9-top3","ext","sins",7,2,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",2,350,0.004375
+"10-9-top3","ext","sins",7,4,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",61,6102496,76.2812
+"10-9-top3","ext","sins",7,6,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",101,8000000,100
+"10-9-top3","ext","sins",7,8,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",101,8000000,100
+"10-9-top3","ext","sins",7,10,4,"Homo.Economicus | Uninterested | Influencer | Careful | Early.Adopter | Fearful | Stubborn",101,8000000,100

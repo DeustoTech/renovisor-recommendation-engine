@@ -1,0 +1,17 @@
+"cluster","expert","vol_cluster","vol_expert","vol_common","pct_cluster_covered","pct_expert_covered","jaccard"
+"cluster_1","Early.Adopter",5,4,2,40,50,28.5714285714286
+"cluster_1","Uninterested",5,5,3,60,60,42.8571428571429
+"cluster_1","Homo.Economicus",5,4,4,80,100,80
+"cluster_1","Fearful",5,4,4,80,100,80
+"cluster_1","Stubborn",5,2,2,40,100,40
+"cluster_1","Influencer",5,4,1,20,25,12.5
+"cluster_1","Careful",5,5,5,100,100,100
+"cluster_1","Activist",5,3,3,60,100,60
+"cluster_2","Early.Adopter",5,4,2,40,50,28.5714285714286
+"cluster_2","Uninterested",5,5,2,40,40,25
+"cluster_2","Homo.Economicus",5,4,1,20,25,12.5
+"cluster_2","Fearful",5,4,1,20,25,12.5
+"cluster_2","Stubborn",5,2,0,0,0,0
+"cluster_2","Influencer",5,4,3,60,75,50
+"cluster_2","Careful",5,5,1,20,20,11.1111111111111
+"cluster_2","Activist",5,3,0,0,0,0

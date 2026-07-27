@@ -1,0 +1,4 @@
+"cluster","best_match","pct_match","active_determinants","n_active_dets"
+"cluster_1","Careful",100,"FINANCIAL; SECURITY; COMPETENCE; AUTONOMY; PHYSICALNESS",5
+"cluster_2","Homo.Economicus",100,"FINANCIAL; SECURITY; COMPETENCE; AUTONOMY; RELATEDNESS; STIMULATION; POPULARITY; MEANING",8
+"cluster_3","Early.Adopter",0,"",0

@@ -1,0 +1,7 @@
+"cluster","best_match","pct_match","active_determinants","n_active_dets"
+"cluster_1","Fearful",0,"",0
+"cluster_2","Uninterested",60,"COMPETENCE; AUTONOMY; PHYSICALNESS",3
+"cluster_3","Early.Adopter",33.3333333333333,"STIMULATION; POPULARITY",2
+"cluster_4","Influencer",20,"POPULARITY",1
+"cluster_5","Homo.Economicus",33.3333333333333,"COMPETENCE",1
+"cluster_6","Careful",25,"AUTONOMY; PHYSICALNESS; POPULARITY",3
