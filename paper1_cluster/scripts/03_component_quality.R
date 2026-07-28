@@ -381,11 +381,133 @@ poverty_cols <- unique(c(
   )
 ))
 
-attention_quality_cols <- find_component_cols(
-  df,
-  "attention|check|please_select|please select|option_4|option 4|strongly_disagree|strongly disagree",
-  exclude = generic_exclude
-)
+# ============================================================
+# Attention checks reales
+# ============================================================
+
+find_first_attention_col <- function(data, patterns, check_id) {
+  
+  cols <- names(data)
+  
+  hits <- unique(unlist(
+    map(
+      patterns,
+      ~ cols[str_detect(cols, regex(.x, ignore_case = TRUE))]
+    )
+  ))
+  
+  hits <- hits[hits %in% cols]
+  
+  if (length(hits) == 0) {
+    warning("No se encontró columna para attention check: ", check_id)
+    return(NA_character_)
+  }
+  
+  if (length(hits) > 1) {
+    warning(
+      "Más de una columna encontrada para attention check: ",
+      check_id,
+      "\nUsando la primera:\n",
+      hits[1],
+      "\nCandidatas:\n",
+      paste(hits, collapse = "\n")
+    )
+  }
+  
+  hits[1]
+}
+
+attention_check_specs <- tribble(
+  ~check_id, ~expected_type, ~patterns,
+  
+  # RV Decision: select 42
+  "rv_decision_select_42",
+  "select_42",
+  list(c(
+    "^rv_decision__.*select.*42",
+    "^rv_decision__.*choose.*42",
+    "^rv_decision__.*answer.*42",
+    "^rv_decision__.*\\b42\\b"
+  )),
+  
+  # RV Decision: línea más larga
+  "rv_decision_longest_line",
+  "longest_line",
+  list(c(
+    "^rv_decision__.*longest.*line",
+    "^rv_decision__.*line.*longest",
+    "^rv_decision__.*largest.*line",
+    "^rv_decision__.*line.*largest",
+    "^rv_decision__.*linea.*larga",
+    "^rv_decision__.*línea.*larga"
+  )),
+  
+  # RV Concerns2: option 4
+  "rv_concerns2_option_4",
+  "option_4",
+  list(c(
+    "^rv_concerns2__.*select.*option.*4",
+    "^rv_concerns2__.*option_4",
+    "^rv_concerns2__.*select_option_4"
+  )),
+  
+  # RV Concerns2: strongly disagree
+  "rv_concerns2_strongly_disagree",
+  "strongly_disagree",
+  list(c(
+    "^rv_concerns2__.*please_select_strongly_disagree",
+    "^rv_concerns2__.*strongly_disagree",
+    "^rv_concerns2__.*strongly.*disagree"
+  )),
+  
+  # RV Energy crisis: option 4
+  "rv_energy_crisis_option_4",
+  "option_4",
+  list(c(
+    "^rv_energy_crisis__.*select.*option.*4",
+    "^rv_energy_crisis__.*option_4",
+    "^rv_energy_crisis__.*select_option_4"
+  )),
+  
+  # RV Energy crisis: strongly disagree
+  "rv_energy_crisis_strongly_disagree",
+  "strongly_disagree",
+  list(c(
+    "^rv_energy_crisis__.*please_select_strongly_disagree",
+    "^rv_energy_crisis__.*strongly_disagree",
+    "^rv_energy_crisis__.*strongly.*disagree"
+  )),
+  
+  # RV Poverty: disagree
+  "rv_poverty_disagree",
+  "disagree",
+  list(c(
+    "^rv_poverty__.*please_select_disagree",
+    "^rv_poverty__.*select.*disagree"
+  )),
+  
+  # WHY: zero
+  "why_select_zero",
+  "zero",
+  list(c(
+    "^why__.*please_select_zero",
+    "^why__.*select.*zero",
+    "^why__.*select.*0"
+  ))
+) %>%
+  mutate(
+    column = pmap_chr(
+      list(patterns, check_id),
+      ~ find_first_attention_col(
+        data = df,
+        patterns = ..1,
+        check_id = ..2
+      )
+    )
+  ) %>%
+  filter(!is.na(column))
+
+attention_quality_cols <- attention_check_specs$column
 
 component_columns <- list(
   determinants_32 = det_cols,
@@ -784,6 +906,158 @@ attention_quality_df <- component_stats(
   attention_quality_cols
 )
 
+# ============================================================
+# Attention checks: acierto / fallo explícito
+# ============================================================
+
+normalise_attention_response <- function(x) {
+  x <- clean_text(x)
+  x <- str_to_lower(x)
+  x <- str_replace_all(x, "_", " ")
+  x <- str_replace_all(x, "\\s+", " ")
+  str_squish(x)
+}
+
+attention_passes_expected <- function(x, expected_type) {
+  
+  x_clean <- clean_text(x)
+  x_low <- normalise_attention_response(x)
+  x_num <- parse_num_clean(x)
+  
+  if (is.na(x_clean)) {
+    return(NA)
+  }
+  
+  case_when(
+    expected_type == "select_42" ~
+      (!is.na(x_num) & x_num == 42) |
+      str_detect(x_low, "^42$") |
+      str_detect(x_low, "\\b42\\b"),
+    
+    expected_type == "longest_line" ~
+      str_detect(x_low, "longest") |
+      str_detect(x_low, "largest") |
+      str_detect(x_low, "linea mas larga") |
+      str_detect(x_low, "línea más larga"),
+    
+    expected_type == "option_4" ~
+      (!is.na(x_num) & x_num == 4) |
+      str_detect(x_low, "^4$") |
+      str_detect(x_low, "\\boption\\s*4\\b") |
+      str_detect(x_low, "\\bopcion\\s*4\\b") |
+      str_detect(x_low, "\\bopción\\s*4\\b"),
+    
+    expected_type == "strongly_disagree" ~
+      str_detect(x_low, "strongly disagree") |
+      str_detect(x_low, "totalmente en desacuerdo") |
+      str_detect(x_low, "muy en desacuerdo"),
+    
+    expected_type == "disagree" ~
+      (
+        str_detect(x_low, "^disagree$") |
+          str_detect(x_low, "\\bdisagree\\b") |
+          str_detect(x_low, "\\ben desacuerdo\\b")
+      ) &
+      !str_detect(x_low, "strongly") &
+      !str_detect(x_low, "totalmente") &
+      !str_detect(x_low, "muy"),
+    
+    expected_type == "zero" ~
+      (!is.na(x_num) & x_num == 0) |
+      str_detect(x_low, "^0$") |
+      str_detect(x_low, "^zero$") |
+      str_detect(x_low, "^cero$"),
+    
+    TRUE ~ NA
+  )
+}
+
+attention_check_long <- pmap_dfr(
+  attention_check_specs,
+  function(check_id, expected_type, patterns, column) {
+    
+    response_raw <- df[[column]]
+    
+    passed <- map_lgl(
+      response_raw,
+      ~ {
+        res <- attention_passes_expected(.x, expected_type)
+        ifelse(is.na(res), FALSE, res)
+      }
+    )
+    
+    available <- !is.na(clean_text(response_raw))
+    failed <- available & !passed
+    
+    tibble(
+      row_index_attention = seq_len(nrow(df)),
+      check_id = check_id,
+      attention_check_column = column,
+      expected_type = expected_type,
+      response_raw = as.character(response_raw),
+      attention_check_available = available,
+      attention_check_passed = if_else(available, passed, NA),
+      attention_check_failed = if_else(available, failed, NA)
+    )
+  }
+)
+
+attention_check_df <- attention_check_long %>%
+  group_by(row_index_attention) %>%
+  summarise(
+    n_attention_checks_available_explicit = sum(attention_check_available, na.rm = TRUE),
+    n_attention_checks_passed_explicit = sum(attention_check_passed == TRUE, na.rm = TRUE),
+    n_attention_checks_failed_explicit = sum(attention_check_failed == TRUE, na.rm = TRUE),
+    
+    attention_check_failed_any =
+      n_attention_checks_failed_explicit > 0,
+    
+    attention_check_failed_all_available =
+      n_attention_checks_available_explicit > 0 &
+      n_attention_checks_failed_explicit == n_attention_checks_available_explicit,
+    
+    attention_check_failed_all_4 =
+      n_attention_checks_available_explicit == 4 &
+      n_attention_checks_failed_explicit == 4,
+    
+    attention_check_failed_4_or_more =
+      n_attention_checks_failed_explicit >= 4,
+    
+    failed_attention_check_ids = paste(
+      check_id[attention_check_failed == TRUE],
+      collapse = "; "
+    ),
+    
+    .groups = "drop"
+  ) %>%
+  mutate(
+    failed_attention_check_ids = na_if(failed_attention_check_ids, ""),
+    
+    attention_check_status_explicit = case_when(
+      n_attention_checks_available_explicit == 0 ~ "not_available",
+      n_attention_checks_failed_explicit == 0 ~ "passed_all_available",
+      attention_check_failed_all_available ~ "failed_all_available",
+      n_attention_checks_failed_explicit > 0 ~ "failed_some",
+      TRUE ~ "review"
+    )
+  ) %>%
+  right_join(
+    tibble(row_index_attention = seq_len(nrow(df))),
+    by = "row_index_attention"
+  ) %>%
+  arrange(row_index_attention) %>%
+  mutate(
+    n_attention_checks_available_explicit = replace_na(n_attention_checks_available_explicit, 0L),
+    n_attention_checks_passed_explicit = replace_na(n_attention_checks_passed_explicit, 0L),
+    n_attention_checks_failed_explicit = replace_na(n_attention_checks_failed_explicit, 0L),
+    attention_check_failed_any = replace_na(attention_check_failed_any, FALSE),
+    attention_check_failed_all_available = replace_na(attention_check_failed_all_available, FALSE),
+    attention_check_failed_all_4 = replace_na(attention_check_failed_all_4, FALSE),
+    attention_check_failed_4_or_more = replace_na(attention_check_failed_4_or_more, FALSE),
+    attention_check_status_explicit = replace_na(attention_check_status_explicit, "not_available")
+  ) %>%
+  select(-row_index_attention)
+
 
 # Dataset final con calidad
 df_quality <- bind_cols(
@@ -798,7 +1072,8 @@ df_quality <- bind_cols(
   trust_quality_df,
   energy_crisis_quality_df,
   poverty_quality_df,
-  attention_quality_df
+  attention_quality_df,
+  attention_check_df
 ) %>%
   mutate(
     row_quality_final = case_when(

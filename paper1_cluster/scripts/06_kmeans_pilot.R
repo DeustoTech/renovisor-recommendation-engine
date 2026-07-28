@@ -1,8 +1,25 @@
 
 # Objetivo:
-# Ejecutar K-means sobre las muestras bootstrap.
+# Ejecutar K-means sobre las muestras bootstrap. SE HACE SOBRE LAS MUESTRAS DE BOOTSTRAP CON 
+# 1000 MUESTRAS CON DETERMINANTES 04_2b!!!!!!!!!!
 #
-# Para cada bootstrap b:
+# Para cada bootstrap b(
+# El 06 junta esas dos cosas.
+# 
+# Para cada bootstrap, hace:
+#   
+#   cojo los integrated_row_id de bootstrap_id = 1
+# busco sus determinantes en la matriz del 05
+# con esas 1000 filas hago K-means
+# 
+# Luego repite:
+#   
+#   bootstrap_id = 2
+# bootstrap_id = 3
+# ...
+# bootstrap_id = 1000
+# 
+# Y además lo repite para varias matrices y varios K.):
 #   para cada matriz:
 #     para K = 4,...,8:
 #       1. seleccionar las filas del bootstrap
@@ -10,8 +27,12 @@
 #       3. ejecutar K-means
 #       4. guardar clusters, centroides, distancias y heatmaps
 #
-# Este script SÍ usa bootstrap.
-# El script 05 solo preparaba las matrices base.
+# preguntas a las que responde:
+# A) ¿Los clusters son estables?
+# B) ¿Qué K funciona mejor?
+# C) ¿Qué transformación de matriz funciona mejor?
+
+
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -30,7 +51,9 @@ processed_root <- file.path(project_root, "paper1_cluster/data/processed")
 # Escenario principal elegido:
 # PFE + ESN fusionados
 # GREENS_EFA + RENEW fusionados
-BOOTSTRAP_SCENARIO <- "04_2_propensity_bootstrap_eu_pfe_esn_renew_greens_merged"
+
+# hecho SOLO con filas que SI tienen determinantes 
+BOOTSTRAP_SCENARIO <- "04_2b_propensity_bootstrap_eu_pfe_esn_renew_greens_merged_clustering_usable"
 
 bootstrap_file <- file.path(
   processed_root,
@@ -68,14 +91,19 @@ K_GRID <- 4:8
 NSTART <- 25
 ITER_MAX <- 100
 
-# Para usar todos los bootstraps disponibles, dejar Inf.
-# Para probar rápido, poner por ejemplo 20.
+# Para usar todos los bootstraps disponibles,  Inf
 MAX_BOOTSTRAPS <- Inf
+#MAX_BOOTSTRAPS <- 5
+#MAX_BOOTSTRAPS <- 20
+#MAX_BOOTSTRAPS <- 100
+
+
 
 # Guardar asignaciones fila-cluster.
 # Con 200 bootstraps:
 # 200 x 1000 x 4 matrices x 5 K = aprox. 4 millones de filas.
-SAVE_ASSIGNMENTS <- TRUE
+#SAVE_ASSIGNMENTS <- TRUE
+SAVE_ASSIGNMENTS <- FALSE
 
 # Guardar heatmaps medios de centroides
 SAVE_HEATMAPS <- TRUE
@@ -182,7 +210,22 @@ safe_kmeans <- function(x, k, nstart = 25, iter.max = 100) {
 
 make_distance_long <- function(centers_ordered, matrix_name, bootstrap_id, k) {
   
-  feature_cols <- names(centers_ordered)[str_detect(names(centers_ordered), "^det_\\d{2}_")]
+  feature_cols <- names(centers_ordered)[
+    str_detect(names(centers_ordered), "^det_\\d{2}_")
+  ]
+  
+  if (length(feature_cols) == 0) {
+    return(
+      tibble(
+        matrix_name = character(),
+        bootstrap_id = integer(),
+        k = integer(),
+        cluster_a = integer(),
+        cluster_b = integer(),
+        euclidean_distance = numeric()
+      )
+    )
+  }
   
   center_matrix <- centers_ordered %>%
     arrange(cluster_rank) %>%
@@ -191,28 +234,18 @@ make_distance_long <- function(centers_ordered, matrix_name, bootstrap_id, k) {
   
   dmat <- as.matrix(dist(center_matrix, method = "euclidean"))
   
-  out <- as_tibble(dmat) %>%
-    mutate(cluster_a = row_number()) %>%
-    pivot_longer(
-      cols = starts_with("V"),
-      names_to = "cluster_b_raw",
-      values_to = "euclidean_distance"
-    ) %>%
-    mutate(
-      cluster_b = as.integer(str_remove(cluster_b_raw, "^V")),
-      matrix_name = matrix_name,
-      bootstrap_id = bootstrap_id,
-      k = k
-    ) %>%
-    filter(cluster_a < cluster_b) %>%
-    select(
-      matrix_name,
-      bootstrap_id,
-      k,
-      cluster_a,
-      cluster_b,
-      euclidean_distance
-    )
+  # Cogemos solo la parte superior de la matriz de distancias:
+  # cluster 1 vs 2, 1 vs 3, 2 vs 3, etc.
+  idx <- which(upper.tri(dmat), arr.ind = TRUE)
+  
+  out <- tibble(
+    matrix_name = matrix_name,
+    bootstrap_id = bootstrap_id,
+    k = k,
+    cluster_a = as.integer(idx[, "row"]),
+    cluster_b = as.integer(idx[, "col"]),
+    euclidean_distance = as.numeric(dmat[idx])
+  )
   
   out
 }

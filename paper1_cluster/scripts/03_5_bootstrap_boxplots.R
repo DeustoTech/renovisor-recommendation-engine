@@ -6,8 +6,6 @@
 # - Boxplot de arquetipos de autoclasificación RV.
 # - Boxplots para todas las variables sociodemográficas/políticas/calidad.
 #
-# Este script NO modifica datos.
-# Lee solo columnas necesarias para no consumir demasiada memoria.
 #
 # Salidas:
 # - CSV/tablas -> paper1_cluster/outputs/03_5_bootstrap_boxplots
