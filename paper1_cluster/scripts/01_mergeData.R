@@ -43,7 +43,7 @@ dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 # Si está en escala 0-5, dejar "0_5".
 DIEGO_SCALE <- "1_5"
 
-# Ruido opcional.
+# Ruido opcional
 # Para este primer merge, lo dejo en FALSE porque esto es transformación, no aumento.
 ADD_DIEGO_NOISE <- TRUE
 DIEGO_NOISE_SD <- 1

@@ -1,5 +1,5 @@
 
-# Objetivo:
+
 # Ejecutar K-means sobre las muestras bootstrap. SE HACE SOBRE LAS MUESTRAS DE BOOTSTRAP CON 
 # 1000 MUESTRAS CON DETERMINANTES 04_2b!!!!!!!!!!
 #
@@ -8,13 +8,13 @@
 # 
 # Para cada bootstrap, hace:
 #   
-#   cojo los integrated_row_id de bootstrap_id = 1
+# cojo los integrated_row_id de bootstrap_id = 1
 # busco sus determinantes en la matriz del 05
 # con esas 1000 filas hago K-means
 # 
 # Luego repite:
 #   
-#   bootstrap_id = 2
+# bootstrap_id = 2
 # bootstrap_id = 3
 # ...
 # bootstrap_id = 1000
@@ -33,7 +33,6 @@
 # C) ¿Qué transformación de matriz funciona mejor?
 
 
-
 suppressPackageStartupMessages({
   library(tidyverse)
   library(readr)
@@ -43,12 +42,10 @@ suppressPackageStartupMessages({
 
 set.seed(123)
 
-
-# Parámetros
 project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
 processed_root <- file.path(project_root, "paper1_cluster/data/processed")
 
-# Escenario principal elegido:
+# Escenario principal:
 # PFE + ESN fusionados
 # GREENS_EFA + RENEW fusionados
 
@@ -77,29 +74,23 @@ dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 
 # Matrices de 32 determinantes
-MATRICES_TO_RUN <- c(
-  "matrix_32_raw_0_1",
-  "matrix_32_pos_0_1",
-  "matrix_32_ext_0_1",
-  "matrix_32_z_abs"
-)
+MATRICES_TO_RUN <- c( "matrix_32_raw_0_1", "matrix_32_pos_0_1", "matrix_32_ext_0_1", "matrix_32_z_abs")
 
 # K = número de clusters / perfiles
-K_GRID <- 4:8
+K_GRID <- 2:8
 
 # Parámetros de K-means
 NSTART <- 25
 ITER_MAX <- 100
 
 # Para usar todos los bootstraps disponibles,  Inf
-MAX_BOOTSTRAPS <- Inf
+# MAX_BOOTSTRAPS <- Inf
 #MAX_BOOTSTRAPS <- 5
 #MAX_BOOTSTRAPS <- 20
-#MAX_BOOTSTRAPS <- 100
+MAX_BOOTSTRAPS <- 100
 
 
-
-# Guardar asignaciones fila-cluster.
+# Guardar asignaciones fila-cluster
 # Con 200 bootstraps:
 # 200 x 1000 x 4 matrices x 5 K = aprox. 4 millones de filas.
 #SAVE_ASSIGNMENTS <- TRUE
@@ -149,9 +140,7 @@ if (is.finite(MAX_BOOTSTRAPS)) {
 bootstrap_index <- bootstrap_index %>%
   filter(bootstrap_id %in% boot_ids)
 
-cat("\n============================================================\n")
 cat("BOOTSTRAP CARGADO\n")
-cat("============================================================\n")
 cat("Escenario bootstrap:", BOOTSTRAP_SCENARIO, "\n")
 cat("N bootstraps usados:", length(boot_ids), "\n")
 cat("N draws totales:", nrow(bootstrap_index), "\n")
@@ -301,6 +290,8 @@ run_one_kmeans <- function(
       tot_withinss = NA_real_,
       betweenss = NA_real_,
       between_over_total = NA_real_,
+      calinski_harabasz = NA_real_,
+      mean_silhouette = NA_real_,
       mean_cluster_distance = NA_real_,
       min_cluster_distance = NA_real_,
       max_cluster_distance = NA_real_,
@@ -352,6 +343,7 @@ run_one_kmeans <- function(
       tot_withinss = NA_real_,
       betweenss = NA_real_,
       between_over_total = NA_real_,
+      calinski_harabasz = NA_real_,
       mean_cluster_distance = NA_real_,
       min_cluster_distance = NA_real_,
       max_cluster_distance = NA_real_,
@@ -369,6 +361,17 @@ run_one_kmeans <- function(
       composition = tibble()
     ))
   }
+  
+  
+  silhouette_obj <- cluster::silhouette(
+    km$cluster,
+    dist(x, method = "euclidean")
+  )
+  
+  mean_silhouette <- mean(
+    silhouette_obj[, "sil_width"],
+    na.rm = TRUE
+  )
   
   centers_df <- as_tibble(km$centers, rownames = "cluster_original") %>%
     mutate(
@@ -504,6 +507,19 @@ run_one_kmeans <- function(
     tot_withinss = km$tot.withinss,
     betweenss = km$betweenss,
     between_over_total = km$betweenss / km$totss,
+    # ÍNDICE CALINSKI-HARABASZ    
+    # Evalúa conjuntamente:
+    #
+    #   - separación ENTRE clusters
+    #   - compactación DENTRO de clusters
+    #
+    # CH más alto = mejor.
+    #
+    # Se utilizará como criterio complementario para decidir K.
+    calinski_harabasz =
+      (km$betweenss / (k_current - 1)) /
+      (km$tot.withinss / (n_rows_used - k_current)),
+    mean_silhouette = mean_silhouette,
     mean_cluster_distance = mean(distances$euclidean_distance, na.rm = TRUE),
     min_cluster_distance = min(distances$euclidean_distance, na.rm = TRUE),
     max_cluster_distance = max(distances$euclidean_distance, na.rm = TRUE),
@@ -522,7 +538,6 @@ run_one_kmeans <- function(
   )
 }
 
-
 # Ejecutar K-means sobre bootstraps
 metrics_list <- list()
 centers_list <- list()
@@ -537,9 +552,7 @@ for (matrix_index in seq_along(MATRICES_TO_RUN)) {
   
   matrix_name <- MATRICES_TO_RUN[matrix_index]
   
-  cat("\n============================================================\n")
   cat("Matriz:", matrix_name, "\n")
-  cat("============================================================\n")
   
   matrix_obj <- read_matrix_file(matrix_name)
   matrix_df <- matrix_obj$data
@@ -602,8 +615,12 @@ kmeans_metrics_summary <- kmeans_metrics %>%
     sd_tot_withinss = sd(tot_withinss, na.rm = TRUE),
     mean_between_over_total = mean(between_over_total, na.rm = TRUE),
     sd_between_over_total = sd(between_over_total, na.rm = TRUE),
-    mean_cluster_distance = mean(mean_cluster_distance, na.rm = TRUE),
-    sd_cluster_distance = sd(mean_cluster_distance, na.rm = TRUE),
+    mean_calinski_harabasz = mean(calinski_harabasz, na.rm = TRUE), # metrica de calidad
+    sd_calinski_harabasz = sd(calinski_harabasz,na.rm = TRUE),
+    mean_silhouette_boot = mean(mean_silhouette,na.rm = TRUE),
+    sd_silhouette_boot = sd(mean_silhouette,na.rm = TRUE),
+    mean_cluster_distance_boot = mean(mean_cluster_distance, na.rm = TRUE),
+    sd_cluster_distance_boot = sd(mean_cluster_distance, na.rm = TRUE),
     mean_min_cluster_distance = mean(min_cluster_distance, na.rm = TRUE),
     mean_max_cluster_distance = mean(max_cluster_distance, na.rm = TRUE),
     .groups = "drop"
@@ -663,61 +680,27 @@ cluster_composition_summary <- kmeans_cluster_composition %>%
 
 
 #  Guardar outputs
-write_csv(
-  kmeans_metrics,
-  file.path(out_dir, "kmeans_metrics_by_run.csv")
-)
+write_csv(kmeans_metrics, file.path(out_dir, "kmeans_metrics_by_run.csv"))
 
-write_csv(
-  kmeans_metrics_summary,
-  file.path(out_dir, "kmeans_metrics_summary.csv")
-)
+write_csv(kmeans_metrics_summary,file.path(out_dir, "kmeans_metrics_summary.csv"))
 
-write_csv(
-  kmeans_cluster_sizes,
-  file.path(out_dir, "kmeans_cluster_sizes_by_run.csv")
-)
+write_csv(kmeans_cluster_sizes,file.path(out_dir, "kmeans_cluster_sizes_by_run.csv"))
 
-write_csv(
-  cluster_size_summary,
-  file.path(out_dir, "kmeans_cluster_size_summary.csv")
-)
+write_csv(cluster_size_summary, file.path(out_dir, "kmeans_cluster_size_summary.csv"))
 
-write_csv(
-  kmeans_centers_long,
-  file.path(out_dir, "kmeans_centers_long.csv")
-)
+write_csv(kmeans_centers_long,file.path(out_dir, "kmeans_centers_long.csv"))
 
-write_csv(
-  kmeans_centers_mean,
-  file.path(out_dir, "kmeans_centers_mean_across_bootstraps.csv")
-)
+write_csv(kmeans_centers_mean,file.path(out_dir, "kmeans_centers_mean_across_bootstraps.csv"))
 
-write_csv(
-  kmeans_cluster_distances,
-  file.path(out_dir, "kmeans_cluster_distances_by_run.csv")
-)
+write_csv(kmeans_cluster_distances,file.path(out_dir, "kmeans_cluster_distances_by_run.csv"))
 
-write_csv(
-  cluster_distance_summary,
-  file.path(out_dir, "kmeans_cluster_distance_summary.csv")
-)
+write_csv(cluster_distance_summary,file.path(out_dir, "kmeans_cluster_distance_summary.csv"))
 
-write_csv(
-  kmeans_cluster_composition,
-  file.path(out_dir, "kmeans_cluster_composition_by_run.csv")
-)
+write_csv(kmeans_cluster_composition,file.path(out_dir, "kmeans_cluster_composition_by_run.csv"))
 
-write_csv(
-  cluster_composition_summary,
-  file.path(out_dir, "kmeans_cluster_composition_summary.csv")
-)
+write_csv( cluster_composition_summary, file.path(out_dir, "kmeans_cluster_composition_summary.csv"))
 
-if (SAVE_ASSIGNMENTS) {
-  write_csv(
-    kmeans_assignments,
-    file.path(out_dir, "kmeans_assignments_index.csv")
-  )
+if (SAVE_ASSIGNMENTS) {write_csv( kmeans_assignments, file.path(out_dir, "kmeans_assignments_index.csv"))
 }
 
 parameters <- tibble(
@@ -747,11 +730,7 @@ parameters <- tibble(
   )
 )
 
-write_csv(
-  parameters,
-  file.path(out_dir, "kmeans_bootstrap_parameters.csv")
-)
-
+write_csv(parameters,file.path(out_dir, "kmeans_bootstrap_parameters.csv"))
 
 # Heatmaps medios de centroides
 if (SAVE_HEATMAPS && nrow(kmeans_centers_mean) > 0) {
@@ -805,11 +784,8 @@ if (SAVE_HEATMAPS && nrow(kmeans_centers_mean) > 0) {
   }
 }
 
-
 # Resumen consola
-cat("\n============================================================\n")
-cat("06. K-MEANS SOBRE BOOTSTRAPS COMPLETADO\n")
-cat("============================================================\n")
+cat("K-MEANS SOBRE BOOTSTRAPS COMPLETADO\n")
 
 cat("\nEscenario bootstrap usado:\n")
 cat(BOOTSTRAP_SCENARIO, "\n")
