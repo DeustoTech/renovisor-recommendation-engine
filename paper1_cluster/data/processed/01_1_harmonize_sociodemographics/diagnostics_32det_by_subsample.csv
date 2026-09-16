@@ -1,0 +1,5 @@
+comparison_region,subsample,dataset_source,n_rows,n_with_any_det,n_complete_32_det,pct_complete_32_det,mean_n_det_non_missing,min_n_det_non_missing,max_n_det_non_missing
+EUROPE,DIEGO,diego,1899,1899,1899,100,32,32,32
+EUROPE,RENOVISOR,rv,1229,955,599,48.73881204231082,23.589096826688397,0,32
+EUROPE,WHY_EUROPE,why,990,981,808,81.61616161616162,31.235353535353532,0,32
+LATAM,WHY_LATAM,why,638,627,484,75.86206896551724,30.605015673981185,0,32

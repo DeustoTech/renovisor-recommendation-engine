@@ -1,0 +1,16 @@
+country_code,income_band,n_sample,n_valid_income,sample_prop,country,target_pct,target_prop,target_type,available_band,target_prop_available_raw,available_target_mass,unavailable_target_mass,target_prop_effective,poststrat_ratio,probability_per_person
+MX,<15000,183,347,0.5273775216138329,Mexico,84.8,0.848,population_income_distribution,TRUE,0.848,1,0,0.848,1.6079562841530053,0.0046338797814207645
+MX,15000_30000,82,347,0.23631123919308358,Mexico,11.2,0.112,population_income_distribution,TRUE,0.112,1,0,0.112,0.4739512195121951,0.0013658536585365855
+MX,30000_50000,38,347,0.10951008645533142,Mexico,2.8,0.02799999999999999,population_income_distribution,TRUE,0.02799999999999999,1,0,0.02799999999999999,0.2556842105263157,7.368421052631576e-4
+MX,50000_100000,32,347,0.09221902017291066,Mexico,0.8,0.008,population_income_distribution,TRUE,0.008,1,0,0.008,0.08675000000000001,2.5e-4
+MX,>100000,12,347,0.0345821325648415,Mexico,0.4,0.004,population_income_distribution,TRUE,0.004,1,0,0.004,0.11566666666666665,3.333333333333333e-4
+CL,<15000,26,66,0.3939393939393939,Chile,75.4,0.754,population_income_distribution,TRUE,0.754,1,0,0.754,1.9140000000000001,0.029
+CL,15000_30000,23,66,0.3484848484848485,Chile,16.1,0.161,population_income_distribution,TRUE,0.161,1,0,0.161,0.46199999999999997,0.007
+CL,30000_50000,8,66,0.12121212121212122,Chile,5.2,0.052,population_income_distribution,TRUE,0.052,1,0,0.052,0.429,0.0065
+CL,50000_100000,8,66,0.12121212121212122,Chile,2.4,0.024,population_income_distribution,TRUE,0.024,1,0,0.024,0.198,0.003
+CL,>100000,1,66,0.015151515151515152,Chile,0.9,0.009,population_income_distribution,TRUE,0.009,1,0,0.009,0.594,0.009
+CO,<15000,2,3,0.6666666666666666,Colombia,88.9,0.889,population_income_distribution,TRUE,0.889,0.97,0.03,0.9164948453608248,1.3747422680412373,0.4582474226804124
+CO,15000_30000,1,3,0.3333333333333333,Colombia,8.1,0.081,population_income_distribution,TRUE,0.081,0.97,0.03,0.08350515463917527,0.2505154639175258,0.08350515463917527
+CO,30000_50000,0,3,0,Colombia,1.9,0.019,population_income_distribution,FALSE,0,0.97,0.03,0,NA,0
+CO,50000_100000,0,3,0,Colombia,0.8,0.008,population_income_distribution,FALSE,0,0.97,0.03,0,NA,0
+CO,>100000,0,3,0,Colombia,0.3,0.003,population_income_distribution,FALSE,0,0.97,0.03,0,NA,0

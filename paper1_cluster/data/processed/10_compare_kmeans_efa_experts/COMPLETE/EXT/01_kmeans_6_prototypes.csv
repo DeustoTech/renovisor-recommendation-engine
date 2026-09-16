@@ -1,0 +1,7 @@
+id,prototype,determinants,incremental_covered_pct,cumulative_covered_pct
+KM1,1,det_10_cost_efficiency; det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,32.07190476190417,32.07190476190417
+KM2,2,det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_17_adherence; det_19_wellbeing; det_24_socialising; det_28_recognition; det_31_approval,17.341666666666377,49.41357142857055
+KM3,3,det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_19_wellbeing,19.641428571428243,69.0549999999988
+KM4,4,det_07_legal; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_19_wellbeing; det_31_approval,8.80928571428558,77.86428571428438
+KM5,5,det_01_profits; det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_19_wellbeing,4.953571428571345,82.81785714285571
+KM6,6,det_07_legal; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_21_rights_and_duties,1.7447619047618768,84.56261904761759

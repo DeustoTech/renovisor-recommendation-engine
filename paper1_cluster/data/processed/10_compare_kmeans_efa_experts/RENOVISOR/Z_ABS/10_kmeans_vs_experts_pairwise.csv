@@ -1,0 +1,49 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,Activist,8,6,0,0,0,0,
+KM1,Careful,8,12,0,0,0,0,
+KM1,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_26_novelty; det_29_trends
+KM1,Fearful,8,9,0,0,0,0,
+KM1,Homo.Economicus,8,9,0,0,0,0,
+KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+KM1,Stubborn,8,3,0,0,0,0,
+KM1,Uninterested,8,6,2,25,33.333333333333336,16.666666666666668,det_22_peer_pressure; det_30_authority
+KM2,Activist,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_17_adherence
+KM2,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_06_climate_protection; det_09_safety; det_14_environmental_concerns; det_17_adherence
+KM2,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_17_adherence
+KM2,Fearful,8,9,3,37.5,33.333333333333336,21.428571428571427,det_02_credit_score; det_07_legal; det_09_safety
+KM2,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_04_added_value; det_07_legal; det_09_safety
+KM2,Influencer,8,5,0,0,0,0,
+KM2,Stubborn,8,3,1,12.5,33.333333333333336,10,det_17_adherence
+KM2,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_07_legal
+KM3,Activist,8,6,2,25,33.333333333333336,16.666666666666668,det_13_technical_fit; det_15_self_satisfaction
+KM3,Careful,8,12,3,37.5,25,17.647058823529413,det_03_risk_profile; det_09_safety; det_12_own_competence
+KM3,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_15_self_satisfaction
+KM3,Fearful,8,9,3,37.5,33.333333333333336,21.428571428571427,det_03_risk_profile; det_09_safety; det_13_technical_fit
+KM3,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_09_safety; det_13_technical_fit; det_15_self_satisfaction
+KM3,Influencer,8,5,0,0,0,0,
+KM3,Stubborn,8,3,1,12.5,33.333333333333336,10,det_15_self_satisfaction
+KM3,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_13_technical_fit
+KM4,Activist,8,6,2,25,33.333333333333336,16.666666666666668,det_13_technical_fit; det_17_adherence
+KM4,Careful,8,12,4,50,33.333333333333336,25,det_03_risk_profile; det_10_cost_efficiency; det_17_adherence; det_19_wellbeing
+KM4,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_17_adherence
+KM4,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_03_risk_profile; det_10_cost_efficiency; det_13_technical_fit; det_19_wellbeing
+KM4,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_01_profits; det_10_cost_efficiency; det_13_technical_fit
+KM4,Influencer,8,5,0,0,0,0,
+KM4,Stubborn,8,3,1,12.5,33.333333333333336,10,det_17_adherence
+KM4,Uninterested,8,6,3,37.5,50,27.272727272727273,det_13_technical_fit; det_19_wellbeing; det_20_coziness
+KM5,Activist,8,6,2,25,33.333333333333336,16.666666666666668,det_08_trust; det_13_technical_fit
+KM5,Careful,8,12,1,12.5,8.333333333333334,5.2631578947368425,det_08_trust
+KM5,Early.Adopter,8,6,0,0,0,0,
+KM5,Fearful,8,9,2,25,22.22222222222222,13.333333333333334,det_08_trust; det_13_technical_fit
+KM5,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_04_added_value; det_08_trust; det_13_technical_fit
+KM5,Influencer,8,5,2,25,40,18.181818181818183,det_24_socialising; det_28_recognition
+KM5,Stubborn,8,3,0,0,0,0,
+KM5,Uninterested,8,6,3,37.5,50,27.272727272727273,det_13_technical_fit; det_20_coziness; det_30_authority
+KM6,Activist,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_14_environmental_concerns
+KM6,Careful,8,12,4,50,33.333333333333336,25,det_03_risk_profile; det_10_cost_efficiency; det_12_own_competence; det_14_environmental_concerns
+KM6,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_14_environmental_concerns
+KM6,Fearful,8,9,2,25,22.22222222222222,13.333333333333334,det_03_risk_profile; det_10_cost_efficiency
+KM6,Homo.Economicus,8,9,2,25,22.22222222222222,13.333333333333334,det_01_profits; det_10_cost_efficiency
+KM6,Influencer,8,5,0,0,0,0,
+KM6,Stubborn,8,3,0,0,0,0,
+KM6,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_20_coziness

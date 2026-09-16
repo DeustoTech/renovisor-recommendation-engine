@@ -4,7 +4,7 @@ n_training_voters,484
 n_training_abstainers,142
 training_only_complete_predictors,FALSE
 use_quality_filter_in_bootstrap,FALSE
-bootstrap_scope,clustering_usable_ids_from_matrix_32_raw_0_1
+bootstrap_scope,clustering_usable_ids_from_03_component_quality
 n_model_predictors,4
 target_abstention_share,0.5065
 target_voter_share,0.4935
@@ -12,6 +12,6 @@ n_boot,1000
 boot_sample_size,1000
 n_abstention_target_per_bootstrap,506
 n_voter_target_per_bootstrap,494
-n_clustering_ids,3764
-n_df_propensity,4118
+n_clustering_ids,4372
+n_df_propensity,4756
 n_df_bootstrap_base,3764

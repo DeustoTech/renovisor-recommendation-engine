@@ -1,0 +1,15 @@
+parameter,value
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+matrices,"RAW, POS, EXT, Z_ABS"
+d_det_grid,"8, 9, 10, 11, 12, 13, 14, 15"
+hamming_grid,"0, 2, 4, 6, 8, 10"
+reference_common_pct,75
+greedy_weighting,equal_candidate
+reference_D,8
+reference_H,4
+reference_n_prototypes,6
+reference_n_efa_factors,6
+matching_threshold,>50
+KM_EFA_metric,overlap_left_pct
+KM_EXPERTS_metric,jaccard_pct
+EFA_EXPERTS_metric,jaccard_pct

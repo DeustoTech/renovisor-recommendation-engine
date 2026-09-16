@@ -1,0 +1,5 @@
+comparison_region,subsample,dataset_source,n_rows,n_eu_applicable,prop_eu_applicable,n_has_binary_vote_outcome,n_predictors_strict_complete,n_predictors_complete_without_income,n_predictors_minimal,n_model_ready_strict,n_model_ready_without_income,n_model_ready_minimal
+EUROPE,DIEGO,diego,1899,1899,1,0,0,0,1874,0,0,0
+EUROPE,RENOVISOR,rv,1229,1229,1,626,0,762,790,0,413,426
+EUROPE,WHY_EUROPE,why,990,990,1,0,0,0,774,0,0,0
+LATAM,WHY_LATAM,why,638,0,0,0,0,0,0,0,0,0

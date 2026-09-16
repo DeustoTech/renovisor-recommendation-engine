@@ -1,0 +1,7 @@
+kmeans_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+KM2,Uninterested,8,6,2,25,33.333333333333336,16.666666666666668,det_07_legal; det_22_peer_pressure
+KM3,Careful,8,12,4,50,33.333333333333336,25,det_02_credit_score; det_06_climate_protection; det_14_environmental_concerns; det_17_adherence
+KM4,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_07_legal; det_09_safety; det_10_cost_efficiency; det_19_wellbeing
+KM5,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_26_novelty; det_29_trends
+KM6,Influencer,8,5,3,37.5,60,30,det_22_peer_pressure; det_24_socialising; det_28_recognition

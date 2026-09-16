@@ -1,0 +1,873 @@
+context,variable,category,n,total_n,prop
+01_all_integrated_rows,dataset_source,diego,1899,4756,0.3992851135407906
+01_all_integrated_rows,dataset_source,why,1628,4756,0.3423044575273339
+01_all_integrated_rows,dataset_source,rv,1229,4756,0.25841042893187555
+01_all_integrated_rows,subsample,DIEGO,1899,4756,0.3992851135407906
+01_all_integrated_rows,subsample,RENOVISOR,1229,4756,0.25841042893187555
+01_all_integrated_rows,subsample,WHY_EUROPE,990,4756,0.20815811606391926
+01_all_integrated_rows,subsample,WHY_LATAM,638,4756,0.13414634146341464
+01_all_integrated_rows,comparison_region,EUROPE,4118,4756,0.8658536585365854
+01_all_integrated_rows,comparison_region,LATAM,638,4756,0.13414634146341464
+01_all_integrated_rows,source_survey,Survey_September2023_cleaned,1899,4756,0.3992851135407906
+01_all_integrated_rows,source_survey,Investment_Arquetypes_2022,1628,4756,0.3423044575273339
+01_all_integrated_rows,source_survey,decision,902,4756,0.1896551724137931
+01_all_integrated_rows,source_survey,energy_crisis,107,4756,0.02249789739276703
+01_all_integrated_rows,source_survey,concerns2,100,4756,0.021026072329688814
+01_all_integrated_rows,source_survey,poverty,38,4756,0.00798990748528175
+01_all_integrated_rows,source_survey,concerns2;decision,16,4756,0.00336417157275021
+01_all_integrated_rows,source_survey,concerns2;energy_crisis;poverty,14,4756,0.002943650126156434
+01_all_integrated_rows,source_survey,concerns2;decision;poverty,12,4756,0.002523128679562658
+01_all_integrated_rows,source_survey,concerns2;decision;energy_crisis;poverty,10,4756,0.0021026072329688814
+01_all_integrated_rows,source_survey,decision;energy_crisis,10,4756,0.0021026072329688814
+01_all_integrated_rows,source_survey,decision;energy_crisis;poverty,7,4756,0.001471825063078217
+01_all_integrated_rows,source_survey,concerns2;energy_crisis,4,4756,8.410428931875525e-4
+01_all_integrated_rows,source_survey,concerns2;poverty,4,4756,8.410428931875525e-4
+01_all_integrated_rows,source_survey,energy_crisis;poverty,4,4756,8.410428931875525e-4
+01_all_integrated_rows,source_survey,decision;poverty,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,country_model,DE,801,4756,0.1684188393608074
+01_all_integrated_rows,country_model,IT,767,4756,0.16126997476871321
+01_all_integrated_rows,country_model,ES,698,4756,0.14676198486122793
+01_all_integrated_rows,country_model,MX,544,4756,0.11438183347350715
+01_all_integrated_rows,country_model,NL,396,4756,0.0832632464255677
+01_all_integrated_rows,country_model,GR,238,4756,0.05004205214465938
+01_all_integrated_rows,country_model,FR,213,4756,0.044785534062237176
+01_all_integrated_rows,country_model,GB,182,4756,0.038267451640033645
+01_all_integrated_rows,country_model,PL,157,4756,0.033010933557611435
+01_all_integrated_rows,country_model,BE,138,4756,0.029015979814970564
+01_all_integrated_rows,country_model,Missing,116,4756,0.024390243902439025
+01_all_integrated_rows,country_model,HU,84,4756,0.017661900756938603
+01_all_integrated_rows,country_model,CL,78,4756,0.016400336417157275
+01_all_integrated_rows,country_model,PT,48,4756,0.010092514718250631
+01_all_integrated_rows,country_model,IE,44,4756,0.009251471825063078
+01_all_integrated_rows,country_model,RO,34,4756,0.007148864592094197
+01_all_integrated_rows,country_model,CZ,32,4756,0.00672834314550042
+01_all_integrated_rows,country_model,AT,28,4756,0.005887300252312868
+01_all_integrated_rows,country_model,SE,24,4756,0.005046257359125316
+01_all_integrated_rows,country_model,FI,23,4756,0.004835996635828428
+01_all_integrated_rows,country_model,LV,18,4756,0.0037846930193439865
+01_all_integrated_rows,country_model,SI,17,4756,0.0035744322960470985
+01_all_integrated_rows,country_model,CO,16,4756,0.00336417157275021
+01_all_integrated_rows,country_model,CH,12,4756,0.002523128679562658
+01_all_integrated_rows,country_model,DK,11,4756,0.0023128679562657694
+01_all_integrated_rows,country_model,SK,10,4756,0.0021026072329688814
+01_all_integrated_rows,country_model,EE,8,4756,0.001682085786375105
+01_all_integrated_rows,country_model,NO,8,4756,0.001682085786375105
+01_all_integrated_rows,country_model,BG,3,4756,6.307821698906644e-4
+01_all_integrated_rows,country_model,IS,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,country_model,LT,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,country_model,OTHER_EU,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,country_model,LU,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,country_model,MT,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,country_model_grouped,DE,801,4756,0.1684188393608074
+01_all_integrated_rows,country_model_grouped,IT,767,4756,0.16126997476871321
+01_all_integrated_rows,country_model_grouped,ES,698,4756,0.14676198486122793
+01_all_integrated_rows,country_model_grouped,MX,544,4756,0.11438183347350715
+01_all_integrated_rows,country_model_grouped,NL,396,4756,0.0832632464255677
+01_all_integrated_rows,country_model_grouped,GR,238,4756,0.05004205214465938
+01_all_integrated_rows,country_model_grouped,FR,213,4756,0.044785534062237176
+01_all_integrated_rows,country_model_grouped,GB,182,4756,0.038267451640033645
+01_all_integrated_rows,country_model_grouped,PL,157,4756,0.033010933557611435
+01_all_integrated_rows,country_model_grouped,BE,138,4756,0.029015979814970564
+01_all_integrated_rows,country_model_grouped,UNKNOWN,116,4756,0.024390243902439025
+01_all_integrated_rows,country_model_grouped,HU,84,4756,0.017661900756938603
+01_all_integrated_rows,country_model_grouped,CL,78,4756,0.016400336417157275
+01_all_integrated_rows,country_model_grouped,PT,48,4756,0.010092514718250631
+01_all_integrated_rows,country_model_grouped,IE,44,4756,0.009251471825063078
+01_all_integrated_rows,country_model_grouped,RO,34,4756,0.007148864592094197
+01_all_integrated_rows,country_model_grouped,CZ,32,4756,0.00672834314550042
+01_all_integrated_rows,country_model_grouped,AT,28,4756,0.005887300252312868
+01_all_integrated_rows,country_model_grouped,OTHER_COUNTRIES,27,4756,0.0056770395290159795
+01_all_integrated_rows,country_model_grouped,SE,24,4756,0.005046257359125316
+01_all_integrated_rows,country_model_grouped,FI,23,4756,0.004835996635828428
+01_all_integrated_rows,country_model_grouped,LV,18,4756,0.0037846930193439865
+01_all_integrated_rows,country_model_grouped,SI,17,4756,0.0035744322960470985
+01_all_integrated_rows,country_model_grouped,CO,16,4756,0.00336417157275021
+01_all_integrated_rows,country_model_grouped,CH,12,4756,0.002523128679562658
+01_all_integrated_rows,country_model_grouped,DK,11,4756,0.0023128679562657694
+01_all_integrated_rows,country_model_grouped,SK,10,4756,0.0021026072329688814
+01_all_integrated_rows,country_region_model,southern_europe,1769,4756,0.3719512195121951
+01_all_integrated_rows,country_region_model,western_europe,1589,4756,0.33410428931875524
+01_all_integrated_rows,country_region_model,latin_america,638,4756,0.13414634146341464
+01_all_integrated_rows,country_region_model,northern_europe,322,4756,0.06770395290159797
+01_all_integrated_rows,country_region_model,eastern_europe,320,4756,0.0672834314550042
+01_all_integrated_rows,country_region_model,unknown,116,4756,0.024390243902439025
+01_all_integrated_rows,country_region_model,other_region,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,age_group_model,25_34,1733,4756,0.36438183347350717
+01_all_integrated_rows,age_group_model,18_24,1207,4756,0.253784693019344
+01_all_integrated_rows,age_group_model,45_54,777,4756,0.1633725820016821
+01_all_integrated_rows,age_group_model,35_44,415,4756,0.08725820016820858
+01_all_integrated_rows,age_group_model,unknown,382,4756,0.08031959629941127
+01_all_integrated_rows,age_group_model,55_64,123,4756,0.02586206896551724
+01_all_integrated_rows,age_group_model,65_plus,119,4756,0.02502102607232969
+01_all_integrated_rows,gender_model,male,2306,4756,0.48486122792262404
+01_all_integrated_rows,gender_model,female,2110,4756,0.44365012615643395
+01_all_integrated_rows,gender_model,unknown,293,4756,0.06160639192598823
+01_all_integrated_rows,gender_model,other,47,4756,0.009882253994953743
+01_all_integrated_rows,education_model,high,1991,4756,0.4186291000841043
+01_all_integrated_rows,education_model,unknown,1760,4756,0.3700588730025231
+01_all_integrated_rows,education_model,medium,912,4756,0.191757779646762
+01_all_integrated_rows,education_model,other,55,4756,0.011564339781328847
+01_all_integrated_rows,education_model,conflict,29,4756,0.006097560975609756
+01_all_integrated_rows,education_model,low,9,4756,0.0018923465096719932
+01_all_integrated_rows,education_tfm_model,university,1991,4756,0.4186291000841043
+01_all_integrated_rows,education_tfm_model,unknown,1760,4756,0.3700588730025231
+01_all_integrated_rows,education_tfm_model,non_university,921,4756,0.19365012615643398
+01_all_integrated_rows,education_tfm_model,other,55,4756,0.011564339781328847
+01_all_integrated_rows,education_tfm_model,conflict,29,4756,0.006097560975609756
+01_all_integrated_rows,employment_model,employed,2839,4756,0.5969301934398654
+01_all_integrated_rows,employment_model,unknown,669,4756,0.14066442388561817
+01_all_integrated_rows,employment_model,student,559,4756,0.11753574432296048
+01_all_integrated_rows,employment_model,unemployed,385,4756,0.08095037846930193
+01_all_integrated_rows,employment_model,other,165,4756,0.034693019343986546
+01_all_integrated_rows,employment_model,retired,89,4756,0.018713204373423043
+01_all_integrated_rows,employment_model,inactive_other,50,4756,0.010513036164844407
+01_all_integrated_rows,city_size_model,unknown,3635,4756,0.7642977291841884
+01_all_integrated_rows,city_size_model,rural_small,1120,4756,0.23549201009251472
+01_all_integrated_rows,city_size_model,conflict,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,tenure_model,unknown,3643,4756,0.7659798149705634
+01_all_integrated_rows,tenure_model,owner_with_mortgage,681,4756,0.14318755256518081
+01_all_integrated_rows,tenure_model,rent,371,4756,0.0780067283431455
+01_all_integrated_rows,tenure_model,other,34,4756,0.007148864592094197
+01_all_integrated_rows,tenure_model,family_home,23,4756,0.004835996635828428
+01_all_integrated_rows,tenure_model,conflict,4,4756,8.410428931875525e-4
+01_all_integrated_rows,tenure_tfm_model,unknown,3643,4756,0.7659798149705634
+01_all_integrated_rows,tenure_tfm_model,Non-homeowner,428,4756,0.08999158957106812
+01_all_integrated_rows,tenure_tfm_model,Homeowner without mortgage,396,4756,0.0832632464255677
+01_all_integrated_rows,tenure_tfm_model,Homeowner with mortgage,285,4756,0.05992430613961312
+01_all_integrated_rows,tenure_tfm_model,conflict,4,4756,8.410428931875525e-4
+01_all_integrated_rows,income_model,unknown,2992,4756,0.6291000841042893
+01_all_integrated_rows,income_model,medium,814,4756,0.17115222876366695
+01_all_integrated_rows,income_model,low,543,4756,0.11417157275021025
+01_all_integrated_rows,income_model,high,407,4756,0.08557611438183348
+01_all_integrated_rows,vote_status_declared,unknown,3649,4756,0.7672413793103449
+01_all_integrated_rows,vote_status_declared,voter,484,4756,0.10176619007569386
+01_all_integrated_rows,vote_status_declared,uncertain,475,4756,0.09987384356602187
+01_all_integrated_rows,vote_status_declared,abstainer,142,4756,0.029857022708158116
+01_all_integrated_rows,vote_status_declared,conflict,6,4756,0.001261564339781329
+01_all_integrated_rows,voted_observed,Missing,4130,4756,0.868376787216148
+01_all_integrated_rows,voted_observed,1,484,4756,0.10176619007569386
+01_all_integrated_rows,voted_observed,0,142,4756,0.029857022708158116
+01_all_integrated_rows,political_left_right_model,Missing,3803,4756,0.7996215306980656
+01_all_integrated_rows,political_left_right_model,50,64,4756,0.01345668629100084
+01_all_integrated_rows,political_left_right_model,0,61,4756,0.012825904121110177
+01_all_integrated_rows,political_left_right_model,20,59,4756,0.0124053826745164
+01_all_integrated_rows,political_left_right_model,25,56,4756,0.011774600504625737
+01_all_integrated_rows,political_left_right_model,10,46,4756,0.009671993271656855
+01_all_integrated_rows,political_left_right_model,30,46,4756,0.009671993271656855
+01_all_integrated_rows,political_left_right_model,60,41,4756,0.008620689655172414
+01_all_integrated_rows,political_left_right_model,15,40,4756,0.008410428931875526
+01_all_integrated_rows,political_left_right_model,40,39,4756,0.008200168208578638
+01_all_integrated_rows,political_left_right_model,45,23,4756,0.004835996635828428
+01_all_integrated_rows,political_left_right_model,35,22,4756,0.004625735912531539
+01_all_integrated_rows,political_left_right_model,55,22,4756,0.004625735912531539
+01_all_integrated_rows,political_left_right_model,65,20,4756,0.004205214465937763
+01_all_integrated_rows,political_left_right_model,75,17,4756,0.0035744322960470985
+01_all_integrated_rows,political_left_right_model,19,16,4756,0.00336417157275021
+01_all_integrated_rows,political_left_right_model,70,16,4756,0.00336417157275021
+01_all_integrated_rows,political_left_right_model,33,15,4756,0.003153910849453322
+01_all_integrated_rows,political_left_right_model,23,14,4756,0.002943650126156434
+01_all_integrated_rows,political_left_right_model,11,10,4756,0.0021026072329688814
+01_all_integrated_rows,political_left_right_model,12,10,4756,0.0021026072329688814
+01_all_integrated_rows,political_left_right_model,7,10,4756,0.0021026072329688814
+01_all_integrated_rows,political_left_right_model,80,10,4756,0.0021026072329688814
+01_all_integrated_rows,political_left_right_model,100,9,4756,0.0018923465096719932
+01_all_integrated_rows,political_left_right_model,16,9,4756,0.0018923465096719932
+01_all_integrated_rows,political_left_right_model,17,9,4756,0.0018923465096719932
+01_all_integrated_rows,political_left_right_model,26,9,4756,0.0018923465096719932
+01_all_integrated_rows,political_left_right_model,37,9,4756,0.0018923465096719932
+01_all_integrated_rows,political_left_right_model,85,9,4756,0.0018923465096719932
+01_all_integrated_rows,political_left_right_model,13,8,4756,0.001682085786375105
+01_all_integrated_rows,political_left_right_model,14,8,4756,0.001682085786375105
+01_all_integrated_rows,political_left_right_model,18,8,4756,0.001682085786375105
+01_all_integrated_rows,political_left_right_model,36,8,4756,0.001682085786375105
+01_all_integrated_rows,political_left_right_model,5,8,4756,0.001682085786375105
+01_all_integrated_rows,political_left_right_model,51,8,4756,0.001682085786375105
+01_all_integrated_rows,political_left_right_model,21,7,4756,0.001471825063078217
+01_all_integrated_rows,political_left_right_model,22,7,4756,0.001471825063078217
+01_all_integrated_rows,political_left_right_model,24,7,4756,0.001471825063078217
+01_all_integrated_rows,political_left_right_model,49,7,4756,0.001471825063078217
+01_all_integrated_rows,political_left_right_model,9,7,4756,0.001471825063078217
+01_all_integrated_rows,political_left_right_model,38,6,4756,0.001261564339781329
+01_all_integrated_rows,political_left_right_model,44,6,4756,0.001261564339781329
+01_all_integrated_rows,political_left_right_model,47,6,4756,0.001261564339781329
+01_all_integrated_rows,political_left_right_model,48,6,4756,0.001261564339781329
+01_all_integrated_rows,political_left_right_model,73,6,4756,0.001261564339781329
+01_all_integrated_rows,political_left_right_model,28,5,4756,0.0010513036164844407
+01_all_integrated_rows,political_left_right_model,29,5,4756,0.0010513036164844407
+01_all_integrated_rows,political_left_right_model,32,5,4756,0.0010513036164844407
+01_all_integrated_rows,political_left_right_model,42,5,4756,0.0010513036164844407
+01_all_integrated_rows,political_left_right_model,52,5,4756,0.0010513036164844407
+01_all_integrated_rows,political_left_right_model,6,5,4756,0.0010513036164844407
+01_all_integrated_rows,political_left_right_model,61,5,4756,0.0010513036164844407
+01_all_integrated_rows,political_left_right_model,1,4,4756,8.410428931875525e-4
+01_all_integrated_rows,political_left_right_model,2,4,4756,8.410428931875525e-4
+01_all_integrated_rows,political_left_right_model,27,4,4756,8.410428931875525e-4
+01_all_integrated_rows,political_left_right_model,4,4,4756,8.410428931875525e-4
+01_all_integrated_rows,political_left_right_model,41,4,4756,8.410428931875525e-4
+01_all_integrated_rows,political_left_right_model,77,4,4756,8.410428931875525e-4
+01_all_integrated_rows,political_left_right_model,8,4,4756,8.410428931875525e-4
+01_all_integrated_rows,political_left_right_model,34,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,43,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,46,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,53,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,57,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,58,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,67,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,68,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,90,3,4756,6.307821698906644e-4
+01_all_integrated_rows,political_left_right_model,3,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,31,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,54,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,56,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,62,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,63,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,66,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,69,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,72,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,74,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,76,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,83,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,84,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,87,2,4756,4.2052144659377626e-4
+01_all_integrated_rows,political_left_right_model,39,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,59,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,64,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,78,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,79,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,81,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,82,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,86,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,89,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,92,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_left_right_model,99,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,political_block_model,unknown,3803,4756,0.7996215306980656
+01_all_integrated_rows,political_block_model,left,290,4756,0.06097560975609756
+01_all_integrated_rows,political_block_model,extreme_left,273,4756,0.05740117746005046
+01_all_integrated_rows,political_block_model,centre,256,4756,0.05382674516400336
+01_all_integrated_rows,political_block_model,right,101,4756,0.021236333052985702
+01_all_integrated_rows,political_block_model,extreme_right,33,4756,0.006938603868797309
+01_all_integrated_rows,self_classification_raw,Missing,3641,4756,0.7655592935239697
+01_all_integrated_rows,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,323,4756,0.06791421362489487
+01_all_integrated_rows,self_classification_raw,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,280,4756,0.05887300252312868
+01_all_integrated_rows,self_classification_raw,I am more likely to invest if it improves my safety or that of my household.,167,4756,0.03511354079058032
+01_all_integrated_rows,self_classification_raw,I am more likely to invest if it helps reduce my environmental impact.,135,4756,0.0283851976450799
+01_all_integrated_rows,self_classification_raw,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",88,4756,0.018502943650126155
+01_all_integrated_rows,self_classification_raw,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",46,4756,0.009671993271656855
+01_all_integrated_rows,self_classification_raw,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",32,4756,0.00672834314550042
+01_all_integrated_rows,self_classification_raw,Νone of the above.,29,4756,0.006097560975609756
+01_all_integrated_rows,self_classification_raw,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",11,4756,0.0023128679562657694
+01_all_integrated_rows,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it helps reduce my environmental impact.,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,self_classification_raw,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,4756,2.1026072329688813e-4
+01_all_integrated_rows,self_classification_raw_clean,Missing,3641,4756,0.7655592935239697
+01_all_integrated_rows,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,323,4756,0.06791421362489487
+01_all_integrated_rows,self_classification_raw_clean,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,280,4756,0.05887300252312868
+01_all_integrated_rows,self_classification_raw_clean,I am more likely to invest if it improves my safety or that of my household.,167,4756,0.03511354079058032
+01_all_integrated_rows,self_classification_raw_clean,I am more likely to invest if it helps reduce my environmental impact.,135,4756,0.0283851976450799
+01_all_integrated_rows,self_classification_raw_clean,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",88,4756,0.018502943650126155
+01_all_integrated_rows,self_classification_raw_clean,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",46,4756,0.009671993271656855
+01_all_integrated_rows,self_classification_raw_clean,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",32,4756,0.00672834314550042
+01_all_integrated_rows,self_classification_raw_clean,Νone of the above.,29,4756,0.006097560975609756
+01_all_integrated_rows,self_classification_raw_clean,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",11,4756,0.0023128679562657694
+01_all_integrated_rows,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it helps reduce my environmental impact.,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,4756,2.1026072329688813e-4
+01_all_integrated_rows,self_classification_raw_clean,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,4756,2.1026072329688813e-4
+01_all_integrated_rows,self_classification_archetype_model,Missing,3641,4756,0.7655592935239697
+01_all_integrated_rows,self_classification_archetype_model,Careful,324,4756,0.06812447434819176
+01_all_integrated_rows,self_classification_archetype_model,Homo economicus,280,4756,0.05887300252312868
+01_all_integrated_rows,self_classification_archetype_model,Fearful,168,4756,0.03532380151387721
+01_all_integrated_rows,self_classification_archetype_model,Activist,136,4756,0.028595458368376788
+01_all_integrated_rows,self_classification_archetype_model,Stubborn,88,4756,0.018502943650126155
+01_all_integrated_rows,self_classification_archetype_model,Influencer,46,4756,0.009671993271656855
+01_all_integrated_rows,self_classification_archetype_model,Uninterested,33,4756,0.006938603868797309
+01_all_integrated_rows,self_classification_archetype_model,None,29,4756,0.006097560975609756
+01_all_integrated_rows,self_classification_archetype_model,Early adopter,11,4756,0.0023128679562657694
+01_all_integrated_rows,row_quality_final,usable_complete,3613,4756,0.7596719932716569
+01_all_integrated_rows,row_quality_final,usable_partial,508,4756,0.10681244743481917
+01_all_integrated_rows,row_quality_final,no_determinants,294,4756,0.06181665264928511
+01_all_integrated_rows,row_quality_final,usable_complete_limited_metadata,164,4756,0.034482758620689655
+01_all_integrated_rows,row_quality_final,usable_partial_limited_metadata,87,4756,0.018292682926829267
+01_all_integrated_rows,row_quality_final,too_many_missing_determinants,75,4756,0.01576955424726661
+01_all_integrated_rows,row_quality_final,suspicious_determinants,15,4756,0.003153910849453322
+01_all_integrated_rows,usable_for_main_analysis,TRUE,4372,4756,0.9192598822539949
+01_all_integrated_rows,usable_for_main_analysis,FALSE,384,4756,0.08074011774600505
+01_all_integrated_rows,usable_for_clustering,TRUE,4372,4756,0.9192598822539949
+01_all_integrated_rows,usable_for_clustering,FALSE,384,4756,0.08074011774600505
+01_all_integrated_rows,political_lr_group,Missing,3803,4756,0.7996215306980656
+01_all_integrated_rows,political_lr_group,20_39_left,290,4756,0.06097560975609756
+01_all_integrated_rows,political_lr_group,00_19_extreme_left,273,4756,0.05740117746005046
+01_all_integrated_rows,political_lr_group,40_59_centre,215,4756,0.04520605550883095
+01_all_integrated_rows,political_lr_group,60_79_right,132,4756,0.027754415475189236
+01_all_integrated_rows,political_lr_group,80_100_extreme_right,43,4756,0.00904121110176619
+02_usable_for_main_analysis,dataset_source,diego,1899,4372,0.43435498627630376
+02_usable_for_main_analysis,dataset_source,why,1579,4372,0.3611619396157365
+02_usable_for_main_analysis,dataset_source,rv,894,4372,0.20448307410795974
+02_usable_for_main_analysis,subsample,DIEGO,1899,4372,0.43435498627630376
+02_usable_for_main_analysis,subsample,WHY_EUROPE,971,4372,0.22209515096065874
+02_usable_for_main_analysis,subsample,RENOVISOR,894,4372,0.20448307410795974
+02_usable_for_main_analysis,subsample,WHY_LATAM,608,4372,0.13906678865507777
+02_usable_for_main_analysis,comparison_region,EUROPE,3764,4372,0.8609332113449222
+02_usable_for_main_analysis,comparison_region,LATAM,608,4372,0.13906678865507777
+02_usable_for_main_analysis,source_survey,Survey_September2023_cleaned,1899,4372,0.43435498627630376
+02_usable_for_main_analysis,source_survey,Investment_Arquetypes_2022,1579,4372,0.3611619396157365
+02_usable_for_main_analysis,source_survey,decision,840,4372,0.19213174748398903
+02_usable_for_main_analysis,source_survey,concerns2;decision,16,4372,0.0036596523330283625
+02_usable_for_main_analysis,source_survey,concerns2;decision;poverty,12,4372,0.0027447392497712718
+02_usable_for_main_analysis,source_survey,concerns2;decision;energy_crisis;poverty,10,4372,0.0022872827081427266
+02_usable_for_main_analysis,source_survey,decision;energy_crisis,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,source_survey,decision;energy_crisis;poverty,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,source_survey,decision;poverty,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,country_model,DE,785,4372,0.17955169258920403
+02_usable_for_main_analysis,country_model,IT,747,4372,0.17086001829826167
+02_usable_for_main_analysis,country_model,ES,596,4372,0.13632204940530648
+02_usable_for_main_analysis,country_model,MX,517,4372,0.11825251601097896
+02_usable_for_main_analysis,country_model,NL,385,4372,0.08806038426349497
+02_usable_for_main_analysis,country_model,GR,235,4372,0.05375114364135407
+02_usable_for_main_analysis,country_model,FR,204,4372,0.04666056724611162
+02_usable_for_main_analysis,country_model,PL,135,4372,0.030878316559926806
+02_usable_for_main_analysis,country_model,BE,133,4372,0.030420860018298263
+02_usable_for_main_analysis,country_model,GB,112,4372,0.025617566331198535
+02_usable_for_main_analysis,country_model,HU,81,4372,0.018526989935956084
+02_usable_for_main_analysis,country_model,CL,78,4372,0.017840805123513267
+02_usable_for_main_analysis,country_model,Missing,58,4372,0.013266239707227814
+02_usable_for_main_analysis,country_model,IE,36,4372,0.008234217749313814
+02_usable_for_main_analysis,country_model,PT,34,4372,0.00777676120768527
+02_usable_for_main_analysis,country_model,RO,32,4372,0.007319304666056725
+02_usable_for_main_analysis,country_model,CZ,31,4372,0.007090576395242452
+02_usable_for_main_analysis,country_model,AT,28,4372,0.006404391582799634
+02_usable_for_main_analysis,country_model,SE,23,4372,0.0052607502287282705
+02_usable_for_main_analysis,country_model,FI,21,4372,0.004803293687099725
+02_usable_for_main_analysis,country_model,LV,18,4372,0.004117108874656907
+02_usable_for_main_analysis,country_model,SI,16,4372,0.0036596523330283625
+02_usable_for_main_analysis,country_model,CO,13,4372,0.0029734675205855443
+02_usable_for_main_analysis,country_model,CH,11,4372,0.002516010978956999
+02_usable_for_main_analysis,country_model,DK,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,country_model,SK,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,country_model,NO,8,4372,0.0018298261665141812
+02_usable_for_main_analysis,country_model,EE,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,country_model,BG,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,country_model,IS,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,country_model,LT,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,country_model,OTHER_EU,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,country_model,MT,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,country_model_grouped,DE,785,4372,0.17955169258920403
+02_usable_for_main_analysis,country_model_grouped,IT,747,4372,0.17086001829826167
+02_usable_for_main_analysis,country_model_grouped,ES,596,4372,0.13632204940530648
+02_usable_for_main_analysis,country_model_grouped,MX,517,4372,0.11825251601097896
+02_usable_for_main_analysis,country_model_grouped,NL,385,4372,0.08806038426349497
+02_usable_for_main_analysis,country_model_grouped,GR,235,4372,0.05375114364135407
+02_usable_for_main_analysis,country_model_grouped,FR,204,4372,0.04666056724611162
+02_usable_for_main_analysis,country_model_grouped,PL,135,4372,0.030878316559926806
+02_usable_for_main_analysis,country_model_grouped,BE,133,4372,0.030420860018298263
+02_usable_for_main_analysis,country_model_grouped,GB,112,4372,0.025617566331198535
+02_usable_for_main_analysis,country_model_grouped,HU,81,4372,0.018526989935956084
+02_usable_for_main_analysis,country_model_grouped,CL,78,4372,0.017840805123513267
+02_usable_for_main_analysis,country_model_grouped,UNKNOWN,58,4372,0.013266239707227814
+02_usable_for_main_analysis,country_model_grouped,IE,36,4372,0.008234217749313814
+02_usable_for_main_analysis,country_model_grouped,PT,34,4372,0.00777676120768527
+02_usable_for_main_analysis,country_model_grouped,RO,32,4372,0.007319304666056725
+02_usable_for_main_analysis,country_model_grouped,CZ,31,4372,0.007090576395242452
+02_usable_for_main_analysis,country_model_grouped,AT,28,4372,0.006404391582799634
+02_usable_for_main_analysis,country_model_grouped,OTHER_COUNTRIES,25,4372,0.0057182067703568165
+02_usable_for_main_analysis,country_model_grouped,SE,23,4372,0.0052607502287282705
+02_usable_for_main_analysis,country_model_grouped,FI,21,4372,0.004803293687099725
+02_usable_for_main_analysis,country_model_grouped,LV,18,4372,0.004117108874656907
+02_usable_for_main_analysis,country_model_grouped,SI,16,4372,0.0036596523330283625
+02_usable_for_main_analysis,country_model_grouped,CO,13,4372,0.0029734675205855443
+02_usable_for_main_analysis,country_model_grouped,CH,11,4372,0.002516010978956999
+02_usable_for_main_analysis,country_model_grouped,DK,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,country_model_grouped,SK,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,country_region_model,southern_europe,1629,4372,0.3725983531564501
+02_usable_for_main_analysis,country_region_model,western_europe,1546,4372,0.3536139066788655
+02_usable_for_main_analysis,country_region_model,latin_america,608,4372,0.13906678865507777
+02_usable_for_main_analysis,country_region_model,eastern_europe,291,4372,0.06655992680695334
+02_usable_for_main_analysis,country_region_model,northern_europe,238,4372,0.05443732845379689
+02_usable_for_main_analysis,country_region_model,unknown,58,4372,0.013266239707227814
+02_usable_for_main_analysis,country_region_model,other_region,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,age_group_model,25_34,1655,4372,0.37854528819762123
+02_usable_for_main_analysis,age_group_model,18_24,1170,4372,0.267612076852699
+02_usable_for_main_analysis,age_group_model,45_54,733,4372,0.16765782250686184
+02_usable_for_main_analysis,age_group_model,35_44,365,4372,0.08348581884720951
+02_usable_for_main_analysis,age_group_model,unknown,258,4372,0.05901189387008234
+02_usable_for_main_analysis,age_group_model,65_plus,97,4372,0.022186642268984445
+02_usable_for_main_analysis,age_group_model,55_64,94,4372,0.021500457456541628
+02_usable_for_main_analysis,gender_model,male,2143,4372,0.4901646843549863
+02_usable_for_main_analysis,gender_model,female,1985,4372,0.4540256175663312
+02_usable_for_main_analysis,gender_model,unknown,202,4372,0.046203110704483075
+02_usable_for_main_analysis,gender_model,other,42,4372,0.00960658737419945
+02_usable_for_main_analysis,education_model,high,1933,4372,0.44213174748398903
+02_usable_for_main_analysis,education_model,unknown,1508,4372,0.34492223238792313
+02_usable_for_main_analysis,education_model,medium,885,4372,0.2024245196706313
+02_usable_for_main_analysis,education_model,other,29,4372,0.006633119853613907
+02_usable_for_main_analysis,education_model,conflict,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,education_model,low,8,4372,0.0018298261665141812
+02_usable_for_main_analysis,education_tfm_model,university,1933,4372,0.44213174748398903
+02_usable_for_main_analysis,education_tfm_model,unknown,1508,4372,0.34492223238792313
+02_usable_for_main_analysis,education_tfm_model,non_university,893,4372,0.20425434583714547
+02_usable_for_main_analysis,education_tfm_model,other,29,4372,0.006633119853613907
+02_usable_for_main_analysis,education_tfm_model,conflict,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,employment_model,employed,2772,4372,0.6340347666971637
+02_usable_for_main_analysis,employment_model,student,555,4372,0.1269441903019213
+02_usable_for_main_analysis,employment_model,unknown,387,4372,0.08851784080512351
+02_usable_for_main_analysis,employment_model,unemployed,380,4372,0.08691674290942361
+02_usable_for_main_analysis,employment_model,other,162,4372,0.03705397987191217
+02_usable_for_main_analysis,employment_model,retired,68,4372,0.01555352241537054
+02_usable_for_main_analysis,employment_model,inactive_other,48,4372,0.010978956999085087
+02_usable_for_main_analysis,city_size_model,unknown,3529,4372,0.8071820677035682
+02_usable_for_main_analysis,city_size_model,rural_small,842,4372,0.19258920402561758
+02_usable_for_main_analysis,city_size_model,conflict,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,tenure_model,unknown,3531,4372,0.8076395242451967
+02_usable_for_main_analysis,tenure_model,owner_with_mortgage,499,4372,0.11413540713632205
+02_usable_for_main_analysis,tenure_model,rent,297,4372,0.06793229643183897
+02_usable_for_main_analysis,tenure_model,other,25,4372,0.0057182067703568165
+02_usable_for_main_analysis,tenure_model,family_home,16,4372,0.0036596523330283625
+02_usable_for_main_analysis,tenure_model,conflict,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,tenure_tfm_model,unknown,3531,4372,0.8076395242451967
+02_usable_for_main_analysis,tenure_tfm_model,Non-homeowner,338,4372,0.07731015553522415
+02_usable_for_main_analysis,tenure_tfm_model,Homeowner without mortgage,290,4372,0.06633119853613907
+02_usable_for_main_analysis,tenure_tfm_model,Homeowner with mortgage,209,4372,0.04780420860018298
+02_usable_for_main_analysis,tenure_tfm_model,conflict,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,income_model,unknown,2608,4372,0.596523330283623
+02_usable_for_main_analysis,income_model,medium,814,4372,0.18618481244281793
+02_usable_for_main_analysis,income_model,low,543,4372,0.12419945105215005
+02_usable_for_main_analysis,income_model,high,407,4372,0.09309240622140896
+02_usable_for_main_analysis,vote_status_declared,unknown,3540,4372,0.8096980786825252
+02_usable_for_main_analysis,vote_status_declared,uncertain,373,4372,0.0853156450137237
+02_usable_for_main_analysis,vote_status_declared,voter,344,4372,0.07868252516010979
+02_usable_for_main_analysis,vote_status_declared,abstainer,110,4372,0.02516010978956999
+02_usable_for_main_analysis,vote_status_declared,conflict,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,voted_observed,Missing,3918,4372,0.8961573650503202
+02_usable_for_main_analysis,voted_observed,1,344,4372,0.07868252516010979
+02_usable_for_main_analysis,voted_observed,0,110,4372,0.02516010978956999
+02_usable_for_main_analysis,political_left_right_model,Missing,3589,4372,0.8209057639524245
+02_usable_for_main_analysis,political_left_right_model,50,54,4372,0.012351326623970723
+02_usable_for_main_analysis,political_left_right_model,20,47,4372,0.010750228728270814
+02_usable_for_main_analysis,political_left_right_model,0,45,4372,0.01029277218664227
+02_usable_for_main_analysis,political_left_right_model,25,42,4372,0.00960658737419945
+02_usable_for_main_analysis,political_left_right_model,60,39,4372,0.008920402561756633
+02_usable_for_main_analysis,political_left_right_model,10,38,4372,0.00869167429094236
+02_usable_for_main_analysis,political_left_right_model,15,35,4372,0.008005489478499543
+02_usable_for_main_analysis,political_left_right_model,30,35,4372,0.008005489478499543
+02_usable_for_main_analysis,political_left_right_model,40,31,4372,0.007090576395242452
+02_usable_for_main_analysis,political_left_right_model,35,21,4372,0.004803293687099725
+02_usable_for_main_analysis,political_left_right_model,65,19,4372,0.00434583714547118
+02_usable_for_main_analysis,political_left_right_model,45,17,4372,0.003888380603842635
+02_usable_for_main_analysis,political_left_right_model,19,15,4372,0.0034309240622140895
+02_usable_for_main_analysis,political_left_right_model,55,15,4372,0.0034309240622140895
+02_usable_for_main_analysis,political_left_right_model,70,14,4372,0.003202195791399817
+02_usable_for_main_analysis,political_left_right_model,75,13,4372,0.0029734675205855443
+02_usable_for_main_analysis,political_left_right_model,23,11,4372,0.002516010978956999
+02_usable_for_main_analysis,political_left_right_model,33,11,4372,0.002516010978956999
+02_usable_for_main_analysis,political_left_right_model,26,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,political_left_right_model,85,9,4372,0.0020585544373284536
+02_usable_for_main_analysis,political_left_right_model,11,8,4372,0.0018298261665141812
+02_usable_for_main_analysis,political_left_right_model,16,8,4372,0.0018298261665141812
+02_usable_for_main_analysis,political_left_right_model,18,8,4372,0.0018298261665141812
+02_usable_for_main_analysis,political_left_right_model,100,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,political_left_right_model,17,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,political_left_right_model,37,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,political_left_right_model,49,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,political_left_right_model,5,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,political_left_right_model,51,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,political_left_right_model,80,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,political_left_right_model,12,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,political_left_right_model,14,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,political_left_right_model,24,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,political_left_right_model,38,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,political_left_right_model,47,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,political_left_right_model,7,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,political_left_right_model,73,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,political_left_right_model,9,6,4372,0.0013723696248856359
+02_usable_for_main_analysis,political_left_right_model,13,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,political_left_right_model,21,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,political_left_right_model,22,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,political_left_right_model,32,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,political_left_right_model,36,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,political_left_right_model,48,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,political_left_right_model,52,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,political_left_right_model,61,5,4372,0.0011436413540713633
+02_usable_for_main_analysis,political_left_right_model,1,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,2,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,28,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,29,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,42,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,44,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,6,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,77,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,8,4,4372,9.149130832570906e-4
+02_usable_for_main_analysis,political_left_right_model,27,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,political_left_right_model,34,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,political_left_right_model,4,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,political_left_right_model,41,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,political_left_right_model,46,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,political_left_right_model,58,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,political_left_right_model,67,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,political_left_right_model,68,3,4372,6.861848124428179e-4
+02_usable_for_main_analysis,political_left_right_model,3,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,31,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,43,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,53,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,54,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,56,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,57,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,63,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,66,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,69,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,74,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,76,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,83,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,87,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,90,2,4372,4.574565416285453e-4
+02_usable_for_main_analysis,political_left_right_model,59,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,62,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,64,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,72,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,78,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,79,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,81,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,84,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,86,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,89,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,92,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_left_right_model,99,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,political_block_model,unknown,3589,4372,0.8209057639524245
+02_usable_for_main_analysis,political_block_model,left,231,4372,0.05283623055809698
+02_usable_for_main_analysis,political_block_model,extreme_left,221,4372,0.05054894784995426
+02_usable_for_main_analysis,political_block_model,centre,214,4372,0.048947849954254344
+02_usable_for_main_analysis,political_block_model,right,89,4372,0.020356816102470265
+02_usable_for_main_analysis,political_block_model,extreme_right,28,4372,0.006404391582799634
+02_usable_for_main_analysis,self_classification_raw,Missing,3533,4372,0.8080969807868252
+02_usable_for_main_analysis,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,249,4372,0.05695333943275389
+02_usable_for_main_analysis,self_classification_raw,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,214,4372,0.048947849954254344
+02_usable_for_main_analysis,self_classification_raw,I am more likely to invest if it improves my safety or that of my household.,128,4372,0.0292772186642269
+02_usable_for_main_analysis,self_classification_raw,I am more likely to invest if it helps reduce my environmental impact.,101,4372,0.023101555352241537
+02_usable_for_main_analysis,self_classification_raw,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",55,4372,0.012580054894784995
+02_usable_for_main_analysis,self_classification_raw,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",38,4372,0.00869167429094236
+02_usable_for_main_analysis,self_classification_raw,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",27,4372,0.006175663311985362
+02_usable_for_main_analysis,self_classification_raw,Νone of the above.,17,4372,0.003888380603842635
+02_usable_for_main_analysis,self_classification_raw,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",7,4372,0.0016010978956999085
+02_usable_for_main_analysis,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,self_classification_raw,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,self_classification_raw_clean,Missing,3533,4372,0.8080969807868252
+02_usable_for_main_analysis,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,249,4372,0.05695333943275389
+02_usable_for_main_analysis,self_classification_raw_clean,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,214,4372,0.048947849954254344
+02_usable_for_main_analysis,self_classification_raw_clean,I am more likely to invest if it improves my safety or that of my household.,128,4372,0.0292772186642269
+02_usable_for_main_analysis,self_classification_raw_clean,I am more likely to invest if it helps reduce my environmental impact.,101,4372,0.023101555352241537
+02_usable_for_main_analysis,self_classification_raw_clean,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",55,4372,0.012580054894784995
+02_usable_for_main_analysis,self_classification_raw_clean,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",38,4372,0.00869167429094236
+02_usable_for_main_analysis,self_classification_raw_clean,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",27,4372,0.006175663311985362
+02_usable_for_main_analysis,self_classification_raw_clean,Νone of the above.,17,4372,0.003888380603842635
+02_usable_for_main_analysis,self_classification_raw_clean,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",7,4372,0.0016010978956999085
+02_usable_for_main_analysis,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,self_classification_raw_clean,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,4372,2.2872827081427266e-4
+02_usable_for_main_analysis,self_classification_archetype_model,Missing,3533,4372,0.8080969807868252
+02_usable_for_main_analysis,self_classification_archetype_model,Careful,250,4372,0.05718206770356816
+02_usable_for_main_analysis,self_classification_archetype_model,Homo economicus,214,4372,0.048947849954254344
+02_usable_for_main_analysis,self_classification_archetype_model,Fearful,129,4372,0.02950594693504117
+02_usable_for_main_analysis,self_classification_archetype_model,Activist,101,4372,0.023101555352241537
+02_usable_for_main_analysis,self_classification_archetype_model,Stubborn,55,4372,0.012580054894784995
+02_usable_for_main_analysis,self_classification_archetype_model,Influencer,38,4372,0.00869167429094236
+02_usable_for_main_analysis,self_classification_archetype_model,Uninterested,28,4372,0.006404391582799634
+02_usable_for_main_analysis,self_classification_archetype_model,None,17,4372,0.003888380603842635
+02_usable_for_main_analysis,self_classification_archetype_model,Early adopter,7,4372,0.0016010978956999085
+02_usable_for_main_analysis,row_quality_final,usable_complete,3613,4372,0.826395242451967
+02_usable_for_main_analysis,row_quality_final,usable_partial,508,4372,0.1161939615736505
+02_usable_for_main_analysis,row_quality_final,usable_complete_limited_metadata,164,4372,0.03751143641354071
+02_usable_for_main_analysis,row_quality_final,usable_partial_limited_metadata,87,4372,0.01989935956084172
+02_usable_for_main_analysis,usable_for_main_analysis,TRUE,4372,4372,1
+02_usable_for_main_analysis,usable_for_clustering,TRUE,4372,4372,1
+02_usable_for_main_analysis,political_lr_group,Missing,3589,4372,0.8209057639524245
+02_usable_for_main_analysis,political_lr_group,20_39_left,231,4372,0.05283623055809698
+02_usable_for_main_analysis,political_lr_group,00_19_extreme_left,221,4372,0.05054894784995426
+02_usable_for_main_analysis,political_lr_group,40_59_centre,175,4372,0.040027447392497716
+02_usable_for_main_analysis,political_lr_group,60_79_right,121,4372,0.02767612076852699
+02_usable_for_main_analysis,political_lr_group,80_100_extreme_right,35,4372,0.008005489478499543
+03_usable_for_clustering,dataset_source,diego,1899,4372,0.43435498627630376
+03_usable_for_clustering,dataset_source,why,1579,4372,0.3611619396157365
+03_usable_for_clustering,dataset_source,rv,894,4372,0.20448307410795974
+03_usable_for_clustering,subsample,DIEGO,1899,4372,0.43435498627630376
+03_usable_for_clustering,subsample,WHY_EUROPE,971,4372,0.22209515096065874
+03_usable_for_clustering,subsample,RENOVISOR,894,4372,0.20448307410795974
+03_usable_for_clustering,subsample,WHY_LATAM,608,4372,0.13906678865507777
+03_usable_for_clustering,comparison_region,EUROPE,3764,4372,0.8609332113449222
+03_usable_for_clustering,comparison_region,LATAM,608,4372,0.13906678865507777
+03_usable_for_clustering,source_survey,Survey_September2023_cleaned,1899,4372,0.43435498627630376
+03_usable_for_clustering,source_survey,Investment_Arquetypes_2022,1579,4372,0.3611619396157365
+03_usable_for_clustering,source_survey,decision,840,4372,0.19213174748398903
+03_usable_for_clustering,source_survey,concerns2;decision,16,4372,0.0036596523330283625
+03_usable_for_clustering,source_survey,concerns2;decision;poverty,12,4372,0.0027447392497712718
+03_usable_for_clustering,source_survey,concerns2;decision;energy_crisis;poverty,10,4372,0.0022872827081427266
+03_usable_for_clustering,source_survey,decision;energy_crisis,9,4372,0.0020585544373284536
+03_usable_for_clustering,source_survey,decision;energy_crisis;poverty,6,4372,0.0013723696248856359
+03_usable_for_clustering,source_survey,decision;poverty,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,country_model,DE,785,4372,0.17955169258920403
+03_usable_for_clustering,country_model,IT,747,4372,0.17086001829826167
+03_usable_for_clustering,country_model,ES,596,4372,0.13632204940530648
+03_usable_for_clustering,country_model,MX,517,4372,0.11825251601097896
+03_usable_for_clustering,country_model,NL,385,4372,0.08806038426349497
+03_usable_for_clustering,country_model,GR,235,4372,0.05375114364135407
+03_usable_for_clustering,country_model,FR,204,4372,0.04666056724611162
+03_usable_for_clustering,country_model,PL,135,4372,0.030878316559926806
+03_usable_for_clustering,country_model,BE,133,4372,0.030420860018298263
+03_usable_for_clustering,country_model,GB,112,4372,0.025617566331198535
+03_usable_for_clustering,country_model,HU,81,4372,0.018526989935956084
+03_usable_for_clustering,country_model,CL,78,4372,0.017840805123513267
+03_usable_for_clustering,country_model,Missing,58,4372,0.013266239707227814
+03_usable_for_clustering,country_model,IE,36,4372,0.008234217749313814
+03_usable_for_clustering,country_model,PT,34,4372,0.00777676120768527
+03_usable_for_clustering,country_model,RO,32,4372,0.007319304666056725
+03_usable_for_clustering,country_model,CZ,31,4372,0.007090576395242452
+03_usable_for_clustering,country_model,AT,28,4372,0.006404391582799634
+03_usable_for_clustering,country_model,SE,23,4372,0.0052607502287282705
+03_usable_for_clustering,country_model,FI,21,4372,0.004803293687099725
+03_usable_for_clustering,country_model,LV,18,4372,0.004117108874656907
+03_usable_for_clustering,country_model,SI,16,4372,0.0036596523330283625
+03_usable_for_clustering,country_model,CO,13,4372,0.0029734675205855443
+03_usable_for_clustering,country_model,CH,11,4372,0.002516010978956999
+03_usable_for_clustering,country_model,DK,9,4372,0.0020585544373284536
+03_usable_for_clustering,country_model,SK,9,4372,0.0020585544373284536
+03_usable_for_clustering,country_model,NO,8,4372,0.0018298261665141812
+03_usable_for_clustering,country_model,EE,7,4372,0.0016010978956999085
+03_usable_for_clustering,country_model,BG,3,4372,6.861848124428179e-4
+03_usable_for_clustering,country_model,IS,2,4372,4.574565416285453e-4
+03_usable_for_clustering,country_model,LT,2,4372,4.574565416285453e-4
+03_usable_for_clustering,country_model,OTHER_EU,2,4372,4.574565416285453e-4
+03_usable_for_clustering,country_model,MT,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,country_model_grouped,DE,785,4372,0.17955169258920403
+03_usable_for_clustering,country_model_grouped,IT,747,4372,0.17086001829826167
+03_usable_for_clustering,country_model_grouped,ES,596,4372,0.13632204940530648
+03_usable_for_clustering,country_model_grouped,MX,517,4372,0.11825251601097896
+03_usable_for_clustering,country_model_grouped,NL,385,4372,0.08806038426349497
+03_usable_for_clustering,country_model_grouped,GR,235,4372,0.05375114364135407
+03_usable_for_clustering,country_model_grouped,FR,204,4372,0.04666056724611162
+03_usable_for_clustering,country_model_grouped,PL,135,4372,0.030878316559926806
+03_usable_for_clustering,country_model_grouped,BE,133,4372,0.030420860018298263
+03_usable_for_clustering,country_model_grouped,GB,112,4372,0.025617566331198535
+03_usable_for_clustering,country_model_grouped,HU,81,4372,0.018526989935956084
+03_usable_for_clustering,country_model_grouped,CL,78,4372,0.017840805123513267
+03_usable_for_clustering,country_model_grouped,UNKNOWN,58,4372,0.013266239707227814
+03_usable_for_clustering,country_model_grouped,IE,36,4372,0.008234217749313814
+03_usable_for_clustering,country_model_grouped,PT,34,4372,0.00777676120768527
+03_usable_for_clustering,country_model_grouped,RO,32,4372,0.007319304666056725
+03_usable_for_clustering,country_model_grouped,CZ,31,4372,0.007090576395242452
+03_usable_for_clustering,country_model_grouped,AT,28,4372,0.006404391582799634
+03_usable_for_clustering,country_model_grouped,OTHER_COUNTRIES,25,4372,0.0057182067703568165
+03_usable_for_clustering,country_model_grouped,SE,23,4372,0.0052607502287282705
+03_usable_for_clustering,country_model_grouped,FI,21,4372,0.004803293687099725
+03_usable_for_clustering,country_model_grouped,LV,18,4372,0.004117108874656907
+03_usable_for_clustering,country_model_grouped,SI,16,4372,0.0036596523330283625
+03_usable_for_clustering,country_model_grouped,CO,13,4372,0.0029734675205855443
+03_usable_for_clustering,country_model_grouped,CH,11,4372,0.002516010978956999
+03_usable_for_clustering,country_model_grouped,DK,9,4372,0.0020585544373284536
+03_usable_for_clustering,country_model_grouped,SK,9,4372,0.0020585544373284536
+03_usable_for_clustering,country_region_model,southern_europe,1629,4372,0.3725983531564501
+03_usable_for_clustering,country_region_model,western_europe,1546,4372,0.3536139066788655
+03_usable_for_clustering,country_region_model,latin_america,608,4372,0.13906678865507777
+03_usable_for_clustering,country_region_model,eastern_europe,291,4372,0.06655992680695334
+03_usable_for_clustering,country_region_model,northern_europe,238,4372,0.05443732845379689
+03_usable_for_clustering,country_region_model,unknown,58,4372,0.013266239707227814
+03_usable_for_clustering,country_region_model,other_region,2,4372,4.574565416285453e-4
+03_usable_for_clustering,age_group_model,25_34,1655,4372,0.37854528819762123
+03_usable_for_clustering,age_group_model,18_24,1170,4372,0.267612076852699
+03_usable_for_clustering,age_group_model,45_54,733,4372,0.16765782250686184
+03_usable_for_clustering,age_group_model,35_44,365,4372,0.08348581884720951
+03_usable_for_clustering,age_group_model,unknown,258,4372,0.05901189387008234
+03_usable_for_clustering,age_group_model,65_plus,97,4372,0.022186642268984445
+03_usable_for_clustering,age_group_model,55_64,94,4372,0.021500457456541628
+03_usable_for_clustering,gender_model,male,2143,4372,0.4901646843549863
+03_usable_for_clustering,gender_model,female,1985,4372,0.4540256175663312
+03_usable_for_clustering,gender_model,unknown,202,4372,0.046203110704483075
+03_usable_for_clustering,gender_model,other,42,4372,0.00960658737419945
+03_usable_for_clustering,education_model,high,1933,4372,0.44213174748398903
+03_usable_for_clustering,education_model,unknown,1508,4372,0.34492223238792313
+03_usable_for_clustering,education_model,medium,885,4372,0.2024245196706313
+03_usable_for_clustering,education_model,other,29,4372,0.006633119853613907
+03_usable_for_clustering,education_model,conflict,9,4372,0.0020585544373284536
+03_usable_for_clustering,education_model,low,8,4372,0.0018298261665141812
+03_usable_for_clustering,education_tfm_model,university,1933,4372,0.44213174748398903
+03_usable_for_clustering,education_tfm_model,unknown,1508,4372,0.34492223238792313
+03_usable_for_clustering,education_tfm_model,non_university,893,4372,0.20425434583714547
+03_usable_for_clustering,education_tfm_model,other,29,4372,0.006633119853613907
+03_usable_for_clustering,education_tfm_model,conflict,9,4372,0.0020585544373284536
+03_usable_for_clustering,employment_model,employed,2772,4372,0.6340347666971637
+03_usable_for_clustering,employment_model,student,555,4372,0.1269441903019213
+03_usable_for_clustering,employment_model,unknown,387,4372,0.08851784080512351
+03_usable_for_clustering,employment_model,unemployed,380,4372,0.08691674290942361
+03_usable_for_clustering,employment_model,other,162,4372,0.03705397987191217
+03_usable_for_clustering,employment_model,retired,68,4372,0.01555352241537054
+03_usable_for_clustering,employment_model,inactive_other,48,4372,0.010978956999085087
+03_usable_for_clustering,city_size_model,unknown,3529,4372,0.8071820677035682
+03_usable_for_clustering,city_size_model,rural_small,842,4372,0.19258920402561758
+03_usable_for_clustering,city_size_model,conflict,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,tenure_model,unknown,3531,4372,0.8076395242451967
+03_usable_for_clustering,tenure_model,owner_with_mortgage,499,4372,0.11413540713632205
+03_usable_for_clustering,tenure_model,rent,297,4372,0.06793229643183897
+03_usable_for_clustering,tenure_model,other,25,4372,0.0057182067703568165
+03_usable_for_clustering,tenure_model,family_home,16,4372,0.0036596523330283625
+03_usable_for_clustering,tenure_model,conflict,4,4372,9.149130832570906e-4
+03_usable_for_clustering,tenure_tfm_model,unknown,3531,4372,0.8076395242451967
+03_usable_for_clustering,tenure_tfm_model,Non-homeowner,338,4372,0.07731015553522415
+03_usable_for_clustering,tenure_tfm_model,Homeowner without mortgage,290,4372,0.06633119853613907
+03_usable_for_clustering,tenure_tfm_model,Homeowner with mortgage,209,4372,0.04780420860018298
+03_usable_for_clustering,tenure_tfm_model,conflict,4,4372,9.149130832570906e-4
+03_usable_for_clustering,income_model,unknown,2608,4372,0.596523330283623
+03_usable_for_clustering,income_model,medium,814,4372,0.18618481244281793
+03_usable_for_clustering,income_model,low,543,4372,0.12419945105215005
+03_usable_for_clustering,income_model,high,407,4372,0.09309240622140896
+03_usable_for_clustering,vote_status_declared,unknown,3540,4372,0.8096980786825252
+03_usable_for_clustering,vote_status_declared,uncertain,373,4372,0.0853156450137237
+03_usable_for_clustering,vote_status_declared,voter,344,4372,0.07868252516010979
+03_usable_for_clustering,vote_status_declared,abstainer,110,4372,0.02516010978956999
+03_usable_for_clustering,vote_status_declared,conflict,5,4372,0.0011436413540713633
+03_usable_for_clustering,voted_observed,Missing,3918,4372,0.8961573650503202
+03_usable_for_clustering,voted_observed,1,344,4372,0.07868252516010979
+03_usable_for_clustering,voted_observed,0,110,4372,0.02516010978956999
+03_usable_for_clustering,political_left_right_model,Missing,3589,4372,0.8209057639524245
+03_usable_for_clustering,political_left_right_model,50,54,4372,0.012351326623970723
+03_usable_for_clustering,political_left_right_model,20,47,4372,0.010750228728270814
+03_usable_for_clustering,political_left_right_model,0,45,4372,0.01029277218664227
+03_usable_for_clustering,political_left_right_model,25,42,4372,0.00960658737419945
+03_usable_for_clustering,political_left_right_model,60,39,4372,0.008920402561756633
+03_usable_for_clustering,political_left_right_model,10,38,4372,0.00869167429094236
+03_usable_for_clustering,political_left_right_model,15,35,4372,0.008005489478499543
+03_usable_for_clustering,political_left_right_model,30,35,4372,0.008005489478499543
+03_usable_for_clustering,political_left_right_model,40,31,4372,0.007090576395242452
+03_usable_for_clustering,political_left_right_model,35,21,4372,0.004803293687099725
+03_usable_for_clustering,political_left_right_model,65,19,4372,0.00434583714547118
+03_usable_for_clustering,political_left_right_model,45,17,4372,0.003888380603842635
+03_usable_for_clustering,political_left_right_model,19,15,4372,0.0034309240622140895
+03_usable_for_clustering,political_left_right_model,55,15,4372,0.0034309240622140895
+03_usable_for_clustering,political_left_right_model,70,14,4372,0.003202195791399817
+03_usable_for_clustering,political_left_right_model,75,13,4372,0.0029734675205855443
+03_usable_for_clustering,political_left_right_model,23,11,4372,0.002516010978956999
+03_usable_for_clustering,political_left_right_model,33,11,4372,0.002516010978956999
+03_usable_for_clustering,political_left_right_model,26,9,4372,0.0020585544373284536
+03_usable_for_clustering,political_left_right_model,85,9,4372,0.0020585544373284536
+03_usable_for_clustering,political_left_right_model,11,8,4372,0.0018298261665141812
+03_usable_for_clustering,political_left_right_model,16,8,4372,0.0018298261665141812
+03_usable_for_clustering,political_left_right_model,18,8,4372,0.0018298261665141812
+03_usable_for_clustering,political_left_right_model,100,7,4372,0.0016010978956999085
+03_usable_for_clustering,political_left_right_model,17,7,4372,0.0016010978956999085
+03_usable_for_clustering,political_left_right_model,37,7,4372,0.0016010978956999085
+03_usable_for_clustering,political_left_right_model,49,7,4372,0.0016010978956999085
+03_usable_for_clustering,political_left_right_model,5,7,4372,0.0016010978956999085
+03_usable_for_clustering,political_left_right_model,51,7,4372,0.0016010978956999085
+03_usable_for_clustering,political_left_right_model,80,7,4372,0.0016010978956999085
+03_usable_for_clustering,political_left_right_model,12,6,4372,0.0013723696248856359
+03_usable_for_clustering,political_left_right_model,14,6,4372,0.0013723696248856359
+03_usable_for_clustering,political_left_right_model,24,6,4372,0.0013723696248856359
+03_usable_for_clustering,political_left_right_model,38,6,4372,0.0013723696248856359
+03_usable_for_clustering,political_left_right_model,47,6,4372,0.0013723696248856359
+03_usable_for_clustering,political_left_right_model,7,6,4372,0.0013723696248856359
+03_usable_for_clustering,political_left_right_model,73,6,4372,0.0013723696248856359
+03_usable_for_clustering,political_left_right_model,9,6,4372,0.0013723696248856359
+03_usable_for_clustering,political_left_right_model,13,5,4372,0.0011436413540713633
+03_usable_for_clustering,political_left_right_model,21,5,4372,0.0011436413540713633
+03_usable_for_clustering,political_left_right_model,22,5,4372,0.0011436413540713633
+03_usable_for_clustering,political_left_right_model,32,5,4372,0.0011436413540713633
+03_usable_for_clustering,political_left_right_model,36,5,4372,0.0011436413540713633
+03_usable_for_clustering,political_left_right_model,48,5,4372,0.0011436413540713633
+03_usable_for_clustering,political_left_right_model,52,5,4372,0.0011436413540713633
+03_usable_for_clustering,political_left_right_model,61,5,4372,0.0011436413540713633
+03_usable_for_clustering,political_left_right_model,1,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,2,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,28,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,29,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,42,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,44,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,6,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,77,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,8,4,4372,9.149130832570906e-4
+03_usable_for_clustering,political_left_right_model,27,3,4372,6.861848124428179e-4
+03_usable_for_clustering,political_left_right_model,34,3,4372,6.861848124428179e-4
+03_usable_for_clustering,political_left_right_model,4,3,4372,6.861848124428179e-4
+03_usable_for_clustering,political_left_right_model,41,3,4372,6.861848124428179e-4
+03_usable_for_clustering,political_left_right_model,46,3,4372,6.861848124428179e-4
+03_usable_for_clustering,political_left_right_model,58,3,4372,6.861848124428179e-4
+03_usable_for_clustering,political_left_right_model,67,3,4372,6.861848124428179e-4
+03_usable_for_clustering,political_left_right_model,68,3,4372,6.861848124428179e-4
+03_usable_for_clustering,political_left_right_model,3,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,31,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,43,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,53,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,54,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,56,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,57,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,63,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,66,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,69,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,74,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,76,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,83,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,87,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,90,2,4372,4.574565416285453e-4
+03_usable_for_clustering,political_left_right_model,59,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,62,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,64,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,72,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,78,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,79,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,81,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,84,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,86,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,89,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,92,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_left_right_model,99,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,political_block_model,unknown,3589,4372,0.8209057639524245
+03_usable_for_clustering,political_block_model,left,231,4372,0.05283623055809698
+03_usable_for_clustering,political_block_model,extreme_left,221,4372,0.05054894784995426
+03_usable_for_clustering,political_block_model,centre,214,4372,0.048947849954254344
+03_usable_for_clustering,political_block_model,right,89,4372,0.020356816102470265
+03_usable_for_clustering,political_block_model,extreme_right,28,4372,0.006404391582799634
+03_usable_for_clustering,self_classification_raw,Missing,3533,4372,0.8080969807868252
+03_usable_for_clustering,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,249,4372,0.05695333943275389
+03_usable_for_clustering,self_classification_raw,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,214,4372,0.048947849954254344
+03_usable_for_clustering,self_classification_raw,I am more likely to invest if it improves my safety or that of my household.,128,4372,0.0292772186642269
+03_usable_for_clustering,self_classification_raw,I am more likely to invest if it helps reduce my environmental impact.,101,4372,0.023101555352241537
+03_usable_for_clustering,self_classification_raw,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",55,4372,0.012580054894784995
+03_usable_for_clustering,self_classification_raw,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",38,4372,0.00869167429094236
+03_usable_for_clustering,self_classification_raw,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",27,4372,0.006175663311985362
+03_usable_for_clustering,self_classification_raw,Νone of the above.,17,4372,0.003888380603842635
+03_usable_for_clustering,self_classification_raw,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",7,4372,0.0016010978956999085
+03_usable_for_clustering,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,self_classification_raw,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,self_classification_raw,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,4372,2.2872827081427266e-4
+03_usable_for_clustering,self_classification_raw_clean,Missing,3533,4372,0.8080969807868252
+03_usable_for_clustering,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household.,249,4372,0.05695333943275389
+03_usable_for_clustering,self_classification_raw_clean,My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,214,4372,0.048947849954254344
+03_usable_for_clustering,self_classification_raw_clean,I am more likely to invest if it improves my safety or that of my household.,128,4372,0.0292772186642269
+03_usable_for_clustering,self_classification_raw_clean,I am more likely to invest if it helps reduce my environmental impact.,101,4372,0.023101555352241537
+03_usable_for_clustering,self_classification_raw_clean,"I would invest out of ethical or social commitment to environmental protection, regardless of direct personal benefits.",55,4372,0.012580054894784995
+03_usable_for_clustering,self_classification_raw_clean,"I am more likely to invest if it improves my social status or aligns with the norms of my colleagues, friends, or family.",38,4372,0.00869167429094236
+03_usable_for_clustering,self_classification_raw_clean,"I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",27,4372,0.006175663311985362
+03_usable_for_clustering,self_classification_raw_clean,Νone of the above.,17,4372,0.003888380603842635
+03_usable_for_clustering,self_classification_raw_clean,"I consider myself an early adopter and enjoy following the latest trends, even if this involves some risks or impacts on the environment.",7,4372,0.0016010978956999085
+03_usable_for_clustering,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | I am more likely to invest if it improves my safety or that of my household.,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,self_classification_raw_clean,I am more likely to invest if it maximizes my comfort or well-being and that of my household. | My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding.,1,4372,2.2872827081427266e-4
+03_usable_for_clustering,self_classification_raw_clean,"My main interest is making the most cost-effective decision; I consider myself well informed and usually calculate costs and benefits before deciding. | I am not very interested in new equipment, technologies, or environmental actions and usually stick to what I am used to.",1,4372,2.2872827081427266e-4
+03_usable_for_clustering,self_classification_archetype_model,Missing,3533,4372,0.8080969807868252
+03_usable_for_clustering,self_classification_archetype_model,Careful,250,4372,0.05718206770356816
+03_usable_for_clustering,self_classification_archetype_model,Homo economicus,214,4372,0.048947849954254344
+03_usable_for_clustering,self_classification_archetype_model,Fearful,129,4372,0.02950594693504117
+03_usable_for_clustering,self_classification_archetype_model,Activist,101,4372,0.023101555352241537
+03_usable_for_clustering,self_classification_archetype_model,Stubborn,55,4372,0.012580054894784995
+03_usable_for_clustering,self_classification_archetype_model,Influencer,38,4372,0.00869167429094236
+03_usable_for_clustering,self_classification_archetype_model,Uninterested,28,4372,0.006404391582799634
+03_usable_for_clustering,self_classification_archetype_model,None,17,4372,0.003888380603842635
+03_usable_for_clustering,self_classification_archetype_model,Early adopter,7,4372,0.0016010978956999085
+03_usable_for_clustering,row_quality_final,usable_complete,3613,4372,0.826395242451967
+03_usable_for_clustering,row_quality_final,usable_partial,508,4372,0.1161939615736505
+03_usable_for_clustering,row_quality_final,usable_complete_limited_metadata,164,4372,0.03751143641354071
+03_usable_for_clustering,row_quality_final,usable_partial_limited_metadata,87,4372,0.01989935956084172
+03_usable_for_clustering,usable_for_main_analysis,TRUE,4372,4372,1
+03_usable_for_clustering,usable_for_clustering,TRUE,4372,4372,1
+03_usable_for_clustering,political_lr_group,Missing,3589,4372,0.8209057639524245
+03_usable_for_clustering,political_lr_group,20_39_left,231,4372,0.05283623055809698
+03_usable_for_clustering,political_lr_group,00_19_extreme_left,221,4372,0.05054894784995426
+03_usable_for_clustering,political_lr_group,40_59_centre,175,4372,0.040027447392497716
+03_usable_for_clustering,political_lr_group,60_79_right,121,4372,0.02767612076852699
+03_usable_for_clustering,political_lr_group,80_100_extreme_right,35,4372,0.008005489478499543

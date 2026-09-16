@@ -1,8 +1,0 @@
-dataset_source,metadata_quality,n,prop
-diego,metadata_complete,1897,0.9989468141126909
-diego,metadata_poor,2,0.00105318588730911
-rv,metadata_complete,603,0.8577524893314367
-rv,metadata_poor,88,0.1251778093883357
-rv,metadata_partial,8,0.011379800853485065
-rv,metadata_country_only,4,0.005689900426742532
-why,metadata_country_only,871,1

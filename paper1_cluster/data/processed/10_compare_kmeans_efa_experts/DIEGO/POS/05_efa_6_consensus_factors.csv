@@ -1,0 +1,7 @@
+consensus_factor,id,determinants,mean_selection_frequency,mean_abs_loading
+1,EFA1,det_01_profits; det_02_credit_score; det_05_frugality; det_07_legal; det_10_cost_efficiency; det_13_technical_fit; det_17_adherence; det_18_autonomy,0.46875,0.18943191875041007
+2,EFA2,det_05_frugality; det_18_autonomy; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,0.64125,0.2795266804681616
+3,EFA3,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_14_environmental_concerns; det_17_adherence; det_26_novelty,0.43125,0.17017879693447469
+4,EFA4,det_09_safety; det_10_cost_efficiency; det_15_self_satisfaction; det_18_autonomy; det_19_wellbeing; det_20_coziness; det_21_rights_and_duties; det_29_trends,0.44875,0.1938664675358599
+5,EFA5,det_04_added_value; det_07_legal; det_08_trust; det_12_own_competence; det_21_rights_and_duties; det_22_peer_pressure; det_23_support; det_25_agreement,0.48125,0.19913736306923915
+6,EFA6,det_04_added_value; det_06_climate_protection; det_08_trust; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_32_own_significance,0.50375,0.20234150073592153

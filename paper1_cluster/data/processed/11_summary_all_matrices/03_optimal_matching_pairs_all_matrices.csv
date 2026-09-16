@@ -1,0 +1,73 @@
+matrix,comparison,metric,left_id,right_id,matching_similarity_pct,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants,greater_than_50,greater_or_equal_50
+RAW,EFA_vs_EXPERTS,jaccard_pct,EFA2,Influencer,44.44444444444444,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval,FALSE,FALSE
+RAW,EFA_vs_EXPERTS,jaccard_pct,EFA5,Fearful,41.666666666666664,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit,FALSE,FALSE
+RAW,EFA_vs_EXPERTS,jaccard_pct,EFA6,Activist,40,8,6,4,50,66.66666666666667,40,det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence,FALSE,FALSE
+RAW,EFA_vs_EXPERTS,jaccard_pct,EFA4,Homo.Economicus,30.76923076923077,8,9,4,50,44.44444444444444,30.76923076923077,det_07_legal; det_08_trust; det_09_safety; det_13_technical_fit,FALSE,FALSE
+RAW,EFA_vs_EXPERTS,jaccard_pct,EFA1,Uninterested,27.272727272727273,8,6,3,37.5,50,27.272727272727273,det_13_technical_fit; det_19_wellbeing; det_20_coziness,FALSE,FALSE
+RAW,EFA_vs_EXPERTS,jaccard_pct,EFA3,Careful,17.647058823529413,8,12,3,37.5,25,17.647058823529413,det_06_climate_protection; det_08_trust; det_14_environmental_concerns,FALSE,FALSE
+RAW,KM_vs_EFA,overlap_left_pct,KM6,EFA2,87.5,8,8,7,87.5,87.5,77.77777777777777,det_22_peer_pressure; det_24_socialising; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,TRUE,TRUE
+RAW,KM_vs_EFA,overlap_left_pct,KM2,EFA6,50,8,8,4,50,50,33.333333333333336,det_11_knowledge; det_15_self_satisfaction; det_16_commitment; det_17_adherence,FALSE,TRUE
+RAW,KM_vs_EFA,overlap_left_pct,KM3,EFA4,50,8,8,4,50,50,33.333333333333336,det_07_legal; det_08_trust; det_09_safety; det_13_technical_fit,FALSE,TRUE
+RAW,KM_vs_EFA,overlap_left_pct,KM5,EFA1,50,8,8,4,50,50,33.333333333333336,det_09_safety; det_15_self_satisfaction; det_19_wellbeing; det_20_coziness,FALSE,TRUE
+RAW,KM_vs_EFA,overlap_left_pct,KM1,EFA5,25,8,8,2,25,25,14.285714285714286,det_10_cost_efficiency; det_11_knowledge,FALSE,FALSE
+RAW,KM_vs_EFA,overlap_left_pct,KM4,EFA3,12.5,8,8,1,12.5,12.5,6.666666666666667,det_08_trust,FALSE,FALSE
+RAW,KM_vs_EXPERTS,jaccard_pct,KM3,Fearful,54.54545454545455,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit,TRUE,TRUE
+RAW,KM_vs_EXPERTS,jaccard_pct,KM2,Careful,53.84615384615385,8,12,7,87.5,58.333333333333336,53.84615384615385,det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_16_commitment; det_17_adherence; det_19_wellbeing,TRUE,TRUE
+RAW,KM_vs_EXPERTS,jaccard_pct,KM1,Influencer,44.44444444444444,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval,FALSE,FALSE
+RAW,KM_vs_EXPERTS,jaccard_pct,KM5,Homo.Economicus,41.666666666666664,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction,FALSE,FALSE
+RAW,KM_vs_EXPERTS,jaccard_pct,KM4,Activist,40,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence,FALSE,FALSE
+RAW,KM_vs_EXPERTS,jaccard_pct,KM6,Early.Adopter,16.666666666666668,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_29_trends,FALSE,FALSE
+POS,EFA_vs_EXPERTS,jaccard_pct,EFA2,Influencer,44.44444444444444,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval,FALSE,FALSE
+POS,EFA_vs_EXPERTS,jaccard_pct,EFA6,Fearful,41.666666666666664,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit,FALSE,FALSE
+POS,EFA_vs_EXPERTS,jaccard_pct,EFA5,Activist,40,8,6,4,50,66.66666666666667,40,det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence,FALSE,FALSE
+POS,EFA_vs_EXPERTS,jaccard_pct,EFA3,Uninterested,27.272727272727273,8,6,3,37.5,50,27.272727272727273,det_13_technical_fit; det_19_wellbeing; det_20_coziness,FALSE,FALSE
+POS,EFA_vs_EXPERTS,jaccard_pct,EFA4,Careful,25,8,12,4,50,33.333333333333336,25,det_06_climate_protection; det_08_trust; det_11_knowledge; det_14_environmental_concerns,FALSE,FALSE
+POS,EFA_vs_EXPERTS,jaccard_pct,EFA1,Homo.Economicus,21.428571428571427,8,9,3,37.5,33.333333333333336,21.428571428571427,det_07_legal; det_08_trust; det_09_safety,FALSE,FALSE
+POS,KM_vs_EFA,overlap_left_pct,KM3,EFA6,75,8,8,6,75,75,60,det_01_profits; det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit,TRUE,TRUE
+POS,KM_vs_EFA,overlap_left_pct,KM1,EFA4,50,8,8,4,50,50,33.333333333333336,det_06_climate_protection; det_08_trust; det_11_knowledge; det_14_environmental_concerns,FALSE,TRUE
+POS,KM_vs_EFA,overlap_left_pct,KM2,EFA5,50,8,8,4,50,50,33.333333333333336,det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence,FALSE,TRUE
+POS,KM_vs_EFA,overlap_left_pct,KM4,EFA1,50,8,8,4,50,50,33.333333333333336,det_07_legal; det_08_trust; det_09_safety; det_21_rights_and_duties,FALSE,TRUE
+POS,KM_vs_EFA,overlap_left_pct,KM5,EFA3,50,8,8,4,50,50,33.333333333333336,det_09_safety; det_15_self_satisfaction; det_19_wellbeing; det_20_coziness,FALSE,TRUE
+POS,KM_vs_EFA,overlap_left_pct,KM6,EFA2,25,8,8,2,25,25,14.285714285714286,det_26_novelty; det_27_fun,FALSE,FALSE
+POS,KM_vs_EXPERTS,jaccard_pct,KM1,Activist,75,8,6,6,75,100,75,det_08_trust; det_13_technical_fit; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence,TRUE,TRUE
+POS,KM_vs_EXPERTS,jaccard_pct,KM2,Homo.Economicus,70,8,9,7,87.5,77.77777777777777,70,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction,TRUE,TRUE
+POS,KM_vs_EXPERTS,jaccard_pct,KM3,Fearful,54.54545454545455,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing,TRUE,TRUE
+POS,KM_vs_EXPERTS,jaccard_pct,KM6,Early.Adopter,40,8,6,4,50,66.66666666666667,40,det_11_knowledge; det_15_self_satisfaction; det_17_adherence; det_26_novelty,FALSE,FALSE
+POS,KM_vs_EXPERTS,jaccard_pct,KM5,Stubborn,37.5,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence,FALSE,FALSE
+POS,KM_vs_EXPERTS,jaccard_pct,KM4,Careful,33.333333333333336,8,12,5,62.5,41.666666666666664,33.333333333333336,det_06_climate_protection; det_08_trust; det_09_safety; det_11_knowledge; det_14_environmental_concerns,FALSE,FALSE
+EXT,EFA_vs_EXPERTS,jaccard_pct,EFA6,Influencer,44.44444444444444,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval,FALSE,FALSE
+EXT,EFA_vs_EXPERTS,jaccard_pct,EFA1,Homo.Economicus,41.666666666666664,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_08_trust; det_09_safety; det_11_knowledge; det_13_technical_fit,FALSE,FALSE
+EXT,EFA_vs_EXPERTS,jaccard_pct,EFA5,Fearful,41.666666666666664,8,9,5,62.5,55.55555555555556,41.666666666666664,det_03_risk_profile; det_07_legal; det_09_safety; det_10_cost_efficiency; det_19_wellbeing,FALSE,FALSE
+EXT,EFA_vs_EXPERTS,jaccard_pct,EFA4,Activist,40,8,6,4,50,66.66666666666667,40,det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence,FALSE,FALSE
+EXT,EFA_vs_EXPERTS,jaccard_pct,EFA2,Careful,11.11111111111111,8,12,2,25,16.666666666666668,11.11111111111111,det_02_credit_score; det_12_own_competence,FALSE,FALSE
+EXT,EFA_vs_EXPERTS,jaccard_pct,EFA3,Uninterested,7.6923076923076925,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_22_peer_pressure,FALSE,FALSE
+EXT,KM_vs_EFA,overlap_left_pct,KM1,EFA6,75,8,8,6,75,75,60,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,TRUE,TRUE
+EXT,KM_vs_EFA,overlap_left_pct,KM2,EFA1,62.5,8,8,5,62.5,62.5,45.45454545454545,det_07_legal; det_08_trust; det_09_safety; det_11_knowledge; det_13_technical_fit,TRUE,TRUE
+EXT,KM_vs_EFA,overlap_left_pct,KM6,EFA2,62.5,8,8,5,62.5,62.5,45.45454545454545,det_01_profits; det_02_credit_score; det_04_added_value; det_23_support; det_27_fun,TRUE,TRUE
+EXT,KM_vs_EFA,overlap_left_pct,KM3,EFA4,50,8,8,4,50,50,33.333333333333336,det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction,FALSE,TRUE
+EXT,KM_vs_EFA,overlap_left_pct,KM4,EFA5,50,8,8,4,50,50,33.333333333333336,det_07_legal; det_10_cost_efficiency; det_17_adherence; det_19_wellbeing,FALSE,TRUE
+EXT,KM_vs_EFA,overlap_left_pct,KM5,EFA3,0,8,8,0,0,0,0,NA,FALSE,FALSE
+EXT,KM_vs_EXPERTS,jaccard_pct,KM2,Homo.Economicus,70,8,9,7,87.5,77.77777777777777,70,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction,TRUE,TRUE
+EXT,KM_vs_EXPERTS,jaccard_pct,KM1,Influencer,62.5,8,5,5,62.5,100,62.5,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval,TRUE,TRUE
+EXT,KM_vs_EXPERTS,jaccard_pct,KM4,Fearful,54.54545454545455,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_19_wellbeing,TRUE,TRUE
+EXT,KM_vs_EXPERTS,jaccard_pct,KM5,Careful,33.333333333333336,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_17_adherence,FALSE,FALSE
+EXT,KM_vs_EXPERTS,jaccard_pct,KM3,Activist,27.272727272727273,8,6,3,37.5,50,27.272727272727273,det_08_trust; det_13_technical_fit; det_15_self_satisfaction,FALSE,FALSE
+EXT,KM_vs_EXPERTS,jaccard_pct,KM6,Early.Adopter,16.666666666666668,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_15_self_satisfaction,FALSE,FALSE
+Z_ABS,EFA_vs_EXPERTS,jaccard_pct,EFA4,Homo.Economicus,54.54545454545455,8,9,6,75,66.66666666666667,54.54545454545455,det_01_profits; det_04_added_value; det_07_legal; det_08_trust; det_09_safety; det_13_technical_fit,TRUE,TRUE
+Z_ABS,EFA_vs_EXPERTS,jaccard_pct,EFA6,Influencer,44.44444444444444,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval,FALSE,FALSE
+Z_ABS,EFA_vs_EXPERTS,jaccard_pct,EFA2,Activist,40,8,6,4,50,66.66666666666667,40,det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence,FALSE,FALSE
+Z_ABS,EFA_vs_EXPERTS,jaccard_pct,EFA5,Fearful,30.76923076923077,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_19_wellbeing,FALSE,FALSE
+Z_ABS,EFA_vs_EXPERTS,jaccard_pct,EFA3,Careful,25,8,12,4,50,33.333333333333336,25,det_06_climate_protection; det_08_trust; det_14_environmental_concerns; det_17_adherence,FALSE,FALSE
+Z_ABS,EFA_vs_EXPERTS,jaccard_pct,EFA1,Early.Adopter,7.6923076923076925,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_26_novelty,FALSE,FALSE
+Z_ABS,KM_vs_EFA,overlap_left_pct,KM1,EFA6,87.5,8,8,7,87.5,87.5,77.77777777777777,det_22_peer_pressure; det_24_socialising; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,TRUE,TRUE
+Z_ABS,KM_vs_EFA,overlap_left_pct,KM3,EFA3,75,8,8,6,75,75,60,det_04_added_value; det_06_climate_protection; det_14_environmental_concerns; det_17_adherence; det_23_support; det_32_own_significance,TRUE,TRUE
+Z_ABS,KM_vs_EFA,overlap_left_pct,KM4,EFA4,62.5,8,8,5,62.5,62.5,45.45454545454545,det_01_profits; det_07_legal; det_09_safety; det_19_wellbeing; det_20_coziness,TRUE,TRUE
+Z_ABS,KM_vs_EFA,overlap_left_pct,KM5,EFA1,62.5,8,8,5,62.5,62.5,45.45454545454545,det_01_profits; det_02_credit_score; det_25_agreement; det_26_novelty; det_27_fun,TRUE,TRUE
+Z_ABS,KM_vs_EFA,overlap_left_pct,KM2,EFA5,25,8,8,2,25,25,14.285714285714286,det_01_profits; det_02_credit_score,FALSE,FALSE
+Z_ABS,KM_vs_EFA,overlap_left_pct,KM6,EFA2,0,8,8,0,0,0,0,NA,FALSE,FALSE
+Z_ABS,KM_vs_EXPERTS,jaccard_pct,KM1,Influencer,44.44444444444444,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval,FALSE,FALSE
+Z_ABS,KM_vs_EXPERTS,jaccard_pct,KM4,Fearful,41.666666666666664,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_07_legal; det_09_safety; det_10_cost_efficiency; det_19_wellbeing,FALSE,FALSE
+Z_ABS,KM_vs_EXPERTS,jaccard_pct,KM3,Careful,25,8,12,4,50,33.333333333333336,25,det_02_credit_score; det_06_climate_protection; det_14_environmental_concerns; det_17_adherence,FALSE,FALSE
+Z_ABS,KM_vs_EXPERTS,jaccard_pct,KM5,Early.Adopter,16.666666666666668,8,6,2,25,33.333333333333336,16.666666666666668,det_26_novelty; det_29_trends,FALSE,FALSE
+Z_ABS,KM_vs_EXPERTS,jaccard_pct,KM6,Uninterested,16.666666666666668,8,6,2,25,33.333333333333336,16.666666666666668,det_22_peer_pressure; det_30_authority,FALSE,FALSE
+Z_ABS,KM_vs_EXPERTS,jaccard_pct,KM2,Homo.Economicus,13.333333333333334,8,9,2,25,22.22222222222222,13.333333333333334,det_01_profits; det_07_legal,FALSE,FALSE

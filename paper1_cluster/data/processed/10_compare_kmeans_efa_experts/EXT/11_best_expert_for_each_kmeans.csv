@@ -1,0 +1,7 @@
+kmeans_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,Influencer,8,5,5,62.5,100,62.5,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+KM2,Homo.Economicus,8,9,7,87.5,77.77777777777777,70,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+KM3,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+KM4,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_19_wellbeing
+KM5,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_17_adherence
+KM6,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_01_profits; det_04_added_value; det_15_self_satisfaction

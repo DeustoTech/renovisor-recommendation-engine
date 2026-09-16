@@ -1,0 +1,9 @@
+kmeans_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM2,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+KM2,Careful,8,12,7,87.5,58.333333333333336,53.84615384615385,det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_16_commitment; det_17_adherence; det_19_wellbeing
+KM6,Early.Adopter,8,6,4,50,66.66666666666667,40,det_11_knowledge; det_15_self_satisfaction; det_17_adherence; det_29_trends
+KM3,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+KM3,Homo.Economicus,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+KM1,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+KM2,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+KM4,Uninterested,8,6,3,37.5,50,27.272727272727273,det_07_legal; det_19_wellbeing; det_20_coziness

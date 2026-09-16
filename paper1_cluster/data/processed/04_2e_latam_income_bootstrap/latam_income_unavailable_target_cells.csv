@@ -1,0 +1,4 @@
+country_code,income_band,n_sample,n_valid_income,sample_prop,country,target_pct,target_prop,target_type,available_band,target_prop_available_raw,available_target_mass,unavailable_target_mass,target_prop_effective,poststrat_ratio,probability_per_person
+CO,30000_50000,0,3,0,Colombia,1.9,0.019,population_income_distribution,FALSE,0,0.97,0.03,0,NA,0
+CO,50000_100000,0,3,0,Colombia,0.8,0.008,population_income_distribution,FALSE,0,0.97,0.03,0,NA,0
+CO,>100000,0,3,0,Colombia,0.3,0.003,population_income_distribution,FALSE,0,0.97,0.03,0,NA,0

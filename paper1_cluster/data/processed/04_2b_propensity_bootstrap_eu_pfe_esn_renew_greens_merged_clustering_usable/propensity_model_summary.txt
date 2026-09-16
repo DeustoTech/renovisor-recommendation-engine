@@ -4,44 +4,45 @@ glm(formula = propensity_formula, family = binomial(), data = train_model_df)
 
 Coefficients:
                                     Estimate Std. Error z value Pr(>|z|)  
-(Intercept)                          1.26402    0.82569   1.531   0.1258  
-f_age_group_model45_54               0.48926    0.35616   1.374   0.1695  
-f_age_group_model55_64               1.09542    0.46423   2.360   0.0183 *
-f_age_group_model35_44               0.63495    0.29671   2.140   0.0324 *
-f_age_group_model65_PLUS             1.02379    1.09881   0.932   0.3515  
-f_age_group_model18_24              -0.26268    0.34979  -0.751   0.4527  
-f_age_group_modelUNKNOWN_MODEL       0.47546    0.50238   0.946   0.3439  
-f_gender_modelMALE                  -0.27391    0.21596  -1.268   0.2047  
-f_gender_modelUNKNOWN_MODEL         -0.33733    0.83157  -0.406   0.6850  
-f_gender_modelOTHER_MODEL           -2.17199    0.98852  -2.197   0.0280 *
-f_country_model_groupedGB           -0.45698    0.84881  -0.538   0.5903  
-f_country_model_groupedPT           -0.66064    1.08689  -0.608   0.5433  
-f_country_model_groupedES            0.31638    0.88490   0.358   0.7207  
-f_country_model_groupedIT           -0.04076    0.89093  -0.046   0.9635  
-f_country_model_groupedFR           -0.78941    0.86063  -0.917   0.3590  
-f_country_model_groupedPL            0.25507    0.93606   0.272   0.7852  
-f_country_model_groupedDE           -0.43252    0.86730  -0.499   0.6180  
-f_country_model_groupedOTHER_MODEL  -0.39552    0.89660  -0.441   0.6591  
-f_country_model_groupedCH            0.05032    1.39528   0.036   0.9712  
-f_country_model_groupedGR            0.14336    1.08813   0.132   0.8952  
-f_country_model_groupedBE           -0.92176    1.04952  -0.878   0.3798  
-f_country_model_groupedIE           -2.22716    1.09953  -2.026   0.0428 *
-f_country_model_groupedNL           -0.01659    1.05454  -0.016   0.9874  
-f_country_model_groupedSE           -0.17289    1.18019  -0.146   0.8835  
-f_country_model_groupedRO           -0.47570    1.01452  -0.469   0.6391  
-f_employment_modelUNKNOWN_MODEL      0.09485    0.27462   0.345   0.7298  
-f_employment_modelUNEMPLOYED        -0.26820    0.38039  -0.705   0.4808  
-f_employment_modelSTUDENT            0.04055    0.38664   0.105   0.9165  
-f_employment_modelOTHER              0.07902    0.85259   0.093   0.9262  
-f_employment_modelRETIRED           15.42307  566.66966   0.027   0.9783  
+(Intercept)                          0.67044    0.86790   0.772   0.4398  
+f_age_group_model45_54               0.64897    0.36429   1.781   0.0748 .
+f_age_group_model55_64               1.15804    0.46869   2.471   0.0135 *
+f_age_group_model35_44               0.70404    0.30078   2.341   0.0192 *
+f_age_group_model65_PLUS             1.11872    1.09945   1.018   0.3089  
+f_age_group_model18_24              -0.30586    0.35191  -0.869   0.3848  
+f_age_group_modelUNKNOWN_MODEL       0.58924    0.50813   1.160   0.2462  
+f_gender_modelMALE                  -0.27542    0.21700  -1.269   0.2044  
+f_gender_modelUNKNOWN_MODEL         -0.35015    0.83338  -0.420   0.6744  
+f_gender_modelOTHER_MODEL           -2.08391    1.01367  -2.056   0.0398 *
+f_country_model_groupedGB           -0.59036    0.86728  -0.681   0.4961  
+f_country_model_groupedPT           -0.84037    1.10299  -0.762   0.4461  
+f_country_model_groupedES            0.10006    0.90566   0.110   0.9120  
+f_country_model_groupedIT           -0.16054    0.90776  -0.177   0.8596  
+f_country_model_groupedFR           -0.79083    0.87618  -0.903   0.3667  
+f_country_model_groupedPL            0.13715    0.95256   0.144   0.8855  
+f_country_model_groupedDE           -0.59106    0.88574  -0.667   0.5046  
+f_country_model_groupedOTHER_MODEL  -0.61311    0.91785  -0.668   0.5041  
+f_country_model_groupedCH            0.03541    1.40682   0.025   0.9799  
+f_country_model_groupedGR            0.14428    1.11493   0.129   0.8970  
+f_country_model_groupedBE           -1.03673    1.06392  -0.974   0.3298  
+f_country_model_groupedIE           -2.42811    1.12021  -2.168   0.0302 *
+f_country_model_groupedNL            0.04181    1.06629   0.039   0.9687  
+f_country_model_groupedSE           -0.23152    1.19247  -0.194   0.8461  
+f_country_model_groupedRO           -0.45602    1.02981  -0.443   0.6579  
+f_employment_modelUNKNOWN_MODEL      0.77393    0.37663   2.055   0.0399 *
+f_employment_modelEMPLOYED           0.86165    0.33530   2.570   0.0102 *
+f_employment_modelUNEMPLOYED         0.38824    0.45572   0.852   0.3943  
+f_employment_modelSTUDENT            0.75702    0.47554   1.592   0.1114  
+f_employment_modelOTHER              0.69132    0.88211   0.784   0.4332  
+f_employment_modelRETIRED           16.10910  566.68250   0.028   0.9773  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
     Null deviance: 670.35  on 625  degrees of freedom
-Residual deviance: 598.79  on 596  degrees of freedom
-AIC: 658.79
+Residual deviance: 592.43  on 595  degrees of freedom
+AIC: 654.43
 
 Number of Fisher Scoring iterations: 16
 

@@ -1,0 +1,7 @@
+id,prototype,determinants,incremental_covered_pct,cumulative_covered_pct
+KM1,1,det_06_climate_protection; det_08_trust; det_11_knowledge; det_13_technical_fit; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence,32.407380952380514,32.407380952380514
+KM2,2,det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_19_wellbeing,40.51404761904706,72.92142857142758
+KM3,3,det_01_profits; det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_19_wellbeing,8.589999999999911,81.51142857142749
+KM4,4,det_07_legal; det_08_trust; det_09_safety; det_11_knowledge; det_13_technical_fit; det_14_environmental_concerns; det_17_adherence; det_21_rights_and_duties,3.6728571428571017,85.1842857142846
+KM5,5,det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_19_wellbeing; det_20_coziness,3.829761904761858,89.01404761904647
+KM6,6,det_08_trust; det_11_knowledge; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_26_novelty; det_27_fun; det_32_own_significance,2.606428571428541,91.620476190475

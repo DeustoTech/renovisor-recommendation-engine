@@ -1,0 +1,7 @@
+efa_factor,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Uninterested,8,6,3,37.5,50,27.272727272727273,det_07_legal; det_20_coziness; det_30_authority
+EFA2,Homo.Economicus,8,9,4,50,44.44444444444444,30.76923076923077,det_04_added_value; det_07_legal; det_08_trust; det_11_knowledge
+EFA3,Careful,8,12,4,50,33.333333333333336,25,det_02_credit_score; det_06_climate_protection; det_08_trust; det_19_wellbeing
+EFA4,Fearful,8,9,3,37.5,33.333333333333336,21.428571428571427,det_03_risk_profile; det_07_legal; det_10_cost_efficiency
+EFA5,Careful,8,12,6,75,50,42.857142857142854,det_02_credit_score; det_06_climate_protection; det_09_safety; det_10_cost_efficiency; det_14_environmental_concerns; det_16_commitment
+EFA6,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_26_novelty; det_29_trends

@@ -1,0 +1,7 @@
+kmeans_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,Influencer,8,5,3,37.5,60,30,det_24_socialising; det_28_recognition; det_31_approval
+KM2,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+KM3,Influencer,8,5,3,37.5,60,30,det_22_peer_pressure; det_28_recognition; det_31_approval
+KM4,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+KM5,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment
+KM6,Influencer,8,5,2,25,40,18.181818181818183,det_28_recognition; det_31_approval

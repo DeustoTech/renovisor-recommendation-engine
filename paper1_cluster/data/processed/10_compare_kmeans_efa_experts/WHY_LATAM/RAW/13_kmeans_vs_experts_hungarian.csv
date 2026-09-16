@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct
+KM1,Homo.Economicus,41.666666666666664
+KM2,Uninterested,16.666666666666668
+KM3,Stubborn,37.5
+KM4,Careful,33.333333333333336
+KM5,Fearful,41.666666666666664
+KM6,Influencer,44.44444444444444

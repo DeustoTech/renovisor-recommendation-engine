@@ -1,0 +1,8 @@
+analysis_sample,parameter,value
+DIEGO,n_rows,1899
+DIEGO,MAX_POS,50
+DIEGO,EXT_THRESHOLD,25
+DIEGO,z_abs_reference,sample_specific_DIEGO
+DIEGO,input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+DIEGO,dimension_mapping_file,paper1_cluster/data/processed/03_2_phase_dimension_scores/dimension_determinant_mapping.csv
+DIEGO,output_dir,paper1_cluster/data/processed/05_clustering_matrices/DIEGO

@@ -1,0 +1,6 @@
+analysis_sample,analysis_region,n_rows,n_rows_with_any_phase_response,prop_rows_with_any_phase_response
+DIEGO,EUROPE,1899,0,0
+POOLED_ALL,ALL,4756,934,0.19638351555929354
+RENOVISOR,EUROPE,1229,934,0.7599674532139952
+WHY_EUROPE,EUROPE,990,0,0
+WHY_LATAM,LATAM,638,0,0

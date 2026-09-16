@@ -11,6 +11,7 @@ student_status_model,Student status harmonised mainly from Prolific student stat
 num_children_model,Number of children harmonised mainly from Diego Q6 where available.
 income_model,Income harmonised mainly from Diego Q7 and any clear income field found.
 country_model,Country of residence harmonised as ISO2 code where possible.
+country_region_model,Broad residence region. European countries are grouped by European subregion and Latin American countries are labelled latin_america.
 country_birth_model,Country of birth harmonised as ISO2 code where possible.
 nationality_model,Nationality harmonised from Prolific when available.
 ethnicity_model,Ethnicity simplified harmonised from Prolific when available.

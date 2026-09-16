@@ -1,0 +1,12 @@
+analysis_sample,matrix_name,intended_use,description,file
+DIEGO,matrix_32_raw_0_100_imputed50,diagnostic_original_scale,Original 0-100 values with missing values imputed to 50.,DIEGO/matrix_32_raw_0_100_imputed50.csv
+DIEGO,matrix_32_raw_0_1,kmeans_efa,Original values divided by 100; missing values become 0.5.,DIEGO/matrix_32_raw_0_1.csv
+DIEGO,matrix_32_pos_0_1,kmeans_efa_positive_values,Values >= 50 retain x/100; lower or missing values become neutral 0.5.,DIEGO/matrix_32_pos_0_1.csv
+DIEGO,matrix_32_ext_0_1,kmeans_efa_extreme_values,Absolute distance from 50; distances >= 25 retain distance/50 and the rest become 0.,DIEGO/matrix_32_ext_0_1.csv
+DIEGO,matrix_32_z_abs,kmeans_efa_relative_deviation,Absolute sample-specific z-score within DIEGO; missing values become 0.,DIEGO/matrix_32_z_abs.csv
+DIEGO,matrix_32_pos_mask_for_greedy,greedy_binarisation,Observed values >= 50 are retained; lower and missing values are NA.,DIEGO/matrix_32_pos_mask_for_greedy.csv
+DIEGO,matrix_32_ext_mask_for_greedy,greedy_binarisation,Observed |x-50| >= 25 are retained; non-extreme and missing values are NA.,DIEGO/matrix_32_ext_mask_for_greedy.csv
+DIEGO,matrix_9dim_raw_0_1,dimension_level_analysis,Mean of RAW determinants within each theoretical dimension.,DIEGO/matrix_9dim_raw_0_1.csv
+DIEGO,matrix_9dim_pos_0_1,dimension_level_analysis,Mean of POS determinants within each theoretical dimension.,DIEGO/matrix_9dim_pos_0_1.csv
+DIEGO,matrix_9dim_ext_0_1,dimension_level_analysis,Mean of EXT determinants within each theoretical dimension.,DIEGO/matrix_9dim_ext_0_1.csv
+DIEGO,matrix_9dim_z_abs,dimension_level_analysis,Mean of sample-specific Z_ABS determinants within each theoretical dimension for DIEGO.,DIEGO/matrix_9dim_z_abs.csv

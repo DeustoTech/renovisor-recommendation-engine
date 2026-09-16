@@ -1,0 +1,7 @@
+parameter,value
+bootstrap_scenario,04_2b_propensity_bootstrap_eu_pfe_esn_renew_greens_merged_clustering_usable
+matrices,"matrix_32_raw_0_1, matrix_32_pos_0_1, matrix_32_ext_0_1, matrix_32_z_abs"
+fa_method,minres
+parallel_iterations,100
+parallel_quantile,0.95
+max_bootstraps,100

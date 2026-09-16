@@ -1,0 +1,8 @@
+analysis_sample,parameter,value
+COMPLETE,n_rows,4372
+COMPLETE,MAX_POS,50
+COMPLETE,EXT_THRESHOLD,25
+COMPLETE,z_abs_reference,sample_specific_COMPLETE
+COMPLETE,input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+COMPLETE,dimension_mapping_file,paper1_cluster/data/processed/03_2_phase_dimension_scores/dimension_determinant_mapping.csv
+COMPLETE,output_dir,paper1_cluster/data/processed/05_clustering_matrices/COMPLETE

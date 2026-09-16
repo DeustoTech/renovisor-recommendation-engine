@@ -1,0 +1,7 @@
+id,prototype,determinants,incremental_covered_pct,cumulative_covered_pct
+KM1,1,det_06_climate_protection; det_10_cost_efficiency; det_23_support; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,18.553333333333015,18.553333333333015
+KM2,2,det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_28_recognition; det_31_approval,25.61214285714241,44.16547619047542
+KM3,3,det_08_trust; det_11_knowledge; det_15_self_satisfaction; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,13.684999999999764,57.850476190475185
+KM4,4,det_02_credit_score; det_03_risk_profile; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction; det_17_adherence; det_19_wellbeing,11.206190476190292,69.05666666666548
+KM5,5,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction; det_16_commitment; det_17_adherence,3.5166666666666004,72.57333333333209
+KM6,6,det_02_credit_score; det_05_frugality; det_06_climate_protection; det_08_trust; det_13_technical_fit; det_19_wellbeing; det_20_coziness; det_24_socialising,0.32571428571427985,72.89904761904636

@@ -1,0 +1,12 @@
+analysis_sample,matrix_name,intended_use,description,file
+POOLED_ALL,matrix_32_raw_0_100_imputed50,diagnostic_old_scale,Original 0-100 values with NA imputed to 50.,POOLED_ALL/matrix_32_raw_0_100_imputed50.csv
+POOLED_ALL,matrix_32_raw_0_1,kmeans_efa_greedy,Original values divided by 100; NA becomes 0.5.,POOLED_ALL/matrix_32_raw_0_1.csv
+POOLED_ALL,matrix_32_pos_0_1,kmeans_efa_greedy_positive_high_values,Only values >= 50 keep value/100; lower values become neutral 0.5.,POOLED_ALL/matrix_32_pos_0_1.csv
+POOLED_ALL,matrix_32_ext_0_1,kmeans_efa_greedy_extreme_values,"Absolute distance from 50, thresholded at 25 and divided by 50; non-extreme values become 0.",POOLED_ALL/matrix_32_ext_0_1.csv
+POOLED_ALL,matrix_32_z_abs,kmeans_efa_greedy_relative_deviation,Absolute z-score calculated within POOLED_ALL; NA becomes 0.,POOLED_ALL/matrix_32_z_abs.csv
+POOLED_ALL,matrix_32_pos_mask_for_greedy,greedy_binarisation_only,Positive mask: values < 50 become NA; intended for later Greedy processing.,POOLED_ALL/matrix_32_pos_mask_for_greedy.csv
+POOLED_ALL,matrix_32_ext_mask_for_greedy,greedy_binarisation_only,Extreme mask: abs(x-50) < 25 becomes NA; intended for later Greedy processing.,POOLED_ALL/matrix_32_ext_mask_for_greedy.csv
+POOLED_ALL,matrix_9dim_raw_0_1,kmeans_efa_dimension_level,Mean of RAW determinants inside each theoretical dimension.,POOLED_ALL/matrix_9dim_raw_0_1.csv
+POOLED_ALL,matrix_9dim_pos_0_1,kmeans_efa_dimension_level_positive,Mean of POS determinants inside each theoretical dimension.,POOLED_ALL/matrix_9dim_pos_0_1.csv
+POOLED_ALL,matrix_9dim_ext_0_1,kmeans_efa_dimension_level_extreme,Mean of EXT determinants inside each theoretical dimension.,POOLED_ALL/matrix_9dim_ext_0_1.csv
+POOLED_ALL,matrix_9dim_z_abs,kmeans_efa_dimension_level_relative_deviation,Mean of sample-specific Z_ABS determinants inside each theoretical dimension for POOLED_ALL.,POOLED_ALL/matrix_9dim_z_abs.csv

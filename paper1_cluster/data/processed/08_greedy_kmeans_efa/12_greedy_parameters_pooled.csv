@@ -1,0 +1,12 @@
+parameter,value
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+matrices,"matrix_32_raw_0_1, matrix_32_pos_0_1, matrix_32_ext_0_1, matrix_32_z_abs"
+kmeans_pool_grid,"4, 5, 6, 7, 8"
+efa_pool_grid,"4, 5, 6, 7, 8"
+d_det_grid,"8, 9, 10, 11, 12, 13, 14, 15"
+d_hamming_grid,"0, 2, 4, 6, 8, 10"
+max_bootstraps,100
+max_greedy_prototypes,12
+coverage_thresholds,"80, 85, 90, 95"
+pool_weightings,"equal_candidate, equal_element"
+primary_weighting,equal_candidate

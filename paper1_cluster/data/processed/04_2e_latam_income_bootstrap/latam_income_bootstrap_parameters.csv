@@ -1,0 +1,8 @@
+parameter,value
+n_boot,1000
+base_seed,123
+countries,"MX, CL, CO"
+income_bands,"<15000, 15000_30000, 30000_50000, 50000_100000, >100000"
+missing_income_policy,exclude_from_weight_pool_restore_country_sample_size
+expected_draws_per_bootstrap,608
+bootstrap_method,country_stratified_income_poststratified_sampling_with_replacement

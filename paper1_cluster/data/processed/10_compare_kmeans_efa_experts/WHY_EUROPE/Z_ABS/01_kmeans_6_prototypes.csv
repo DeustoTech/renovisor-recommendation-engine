@@ -1,0 +1,7 @@
+id,prototype,determinants,incremental_covered_pct,cumulative_covered_pct
+KM1,1,det_03_risk_profile; det_09_safety; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_18_autonomy; det_19_wellbeing,1.230476190476153,1.230476190476153
+KM2,2,det_02_credit_score; det_03_risk_profile; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence,0.79976190476188,2.0302380952380332
+KM3,3,det_03_risk_profile; det_05_frugality; det_09_safety; det_10_cost_efficiency; det_12_own_competence; det_15_self_satisfaction; det_16_commitment; det_17_adherence,0.7047619047618832,2.734999999999916
+KM4,4,det_02_credit_score; det_09_safety; det_13_technical_fit; det_16_commitment; det_17_adherence; det_19_wellbeing; det_20_coziness; det_32_own_significance,0.97499999999997,3.7099999999998863
+KM5,5,det_01_profits; det_03_risk_profile; det_05_frugality; det_10_cost_efficiency; det_13_technical_fit; det_18_autonomy; det_23_support; det_25_agreement,0.8990476190475915,4.609047619047478
+KM6,6,det_06_climate_protection; det_11_knowledge; det_20_coziness; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,1.4442857142856709,6.053333333333149

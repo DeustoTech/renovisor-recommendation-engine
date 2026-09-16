@@ -1,4 +1,0 @@
-dataset_source,n_rows,n_has_binary_vote_outcome,prop_has_binary_vote_outcome,n_has_age,prop_has_age,n_has_gender,prop_has_gender,n_has_country,prop_has_country,n_has_employment,prop_has_employment,n_has_education,prop_has_education,n_has_income,prop_has_income,n_has_city_size,prop_has_city_size,n_model_ready_strict,prop_model_ready_strict,n_model_ready_without_income,prop_model_ready_without_income,n_model_ready_minimal,prop_model_ready_minimal
-diego,1899,0,0,1899,1,1857,0.9778830963665087,1899,1,1874,0.9868351764086362,1883,0.9915745129015271,1764,0.9289099526066351,0,0,0,0,0,0,0,0
-rv,1229,626,0.5093572009764036,1014,0.8250610252237591,1098,0.8934092758340114,1113,0.9056143205858421,885,0.7200976403580146,871,0.708706265256306,0,0,1120,0.9113100081366965,0,0,413,0.3360455655004068,426,0.34662327095199347
-why,990,0,0,988,0.997979797979798,988,0.997979797979798,990,1,774,0.7818181818181819,2,0.00202020202020202,0,0,0,0,0,0,0,0,0,0

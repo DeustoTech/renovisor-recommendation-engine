@@ -1,0 +1,8 @@
+analysis_sample,parameter,value
+WHY_LATAM,n_rows,608
+WHY_LATAM,MAX_POS,50
+WHY_LATAM,EXT_THRESHOLD,25
+WHY_LATAM,z_abs_reference,sample_specific_WHY_LATAM
+WHY_LATAM,input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+WHY_LATAM,dimension_mapping_file,paper1_cluster/data/processed/03_2_phase_dimension_scores/dimension_determinant_mapping.csv
+WHY_LATAM,output_dir,paper1_cluster/data/processed/05_clustering_matrices/WHY_LATAM

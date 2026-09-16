@@ -1,0 +1,8 @@
+analysis_sample,parameter,value
+EUROPE,n_rows,3764
+EUROPE,MAX_POS,50
+EUROPE,EXT_THRESHOLD,25
+EUROPE,z_abs_reference,sample_specific_EUROPE
+EUROPE,input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+EUROPE,dimension_mapping_file,paper1_cluster/data/processed/03_2_phase_dimension_scores/dimension_determinant_mapping.csv
+EUROPE,output_dir,paper1_cluster/data/processed/05_clustering_matrices/EUROPE

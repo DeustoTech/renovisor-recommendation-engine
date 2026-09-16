@@ -1,0 +1,169 @@
+analysis_sample,matrix_name,kmeans_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+COMPLETE,matrix_32_raw_0_1,KM1,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+COMPLETE,matrix_32_raw_0_1,KM2,Influencer,8,5,5,62.5,100,62.5,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+COMPLETE,matrix_32_raw_0_1,KM3,Careful,8,12,7,87.5,58.333333333333336,53.84615384615385,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+COMPLETE,matrix_32_raw_0_1,KM4,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+COMPLETE,matrix_32_raw_0_1,KM5,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_01_profits; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+COMPLETE,matrix_32_raw_0_1,KM6,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_19_wellbeing
+COMPLETE,matrix_32_pos_0_1,KM1,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+COMPLETE,matrix_32_pos_0_1,KM2,Homo.Economicus,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+COMPLETE,matrix_32_pos_0_1,KM3,Activist,8,6,6,75,100,75,det_08_trust; det_13_technical_fit; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+COMPLETE,matrix_32_pos_0_1,KM4,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_03_risk_profile; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+COMPLETE,matrix_32_pos_0_1,KM5,Careful,8,12,7,87.5,58.333333333333336,53.84615384615385,det_02_credit_score; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_16_commitment; det_17_adherence; det_19_wellbeing
+COMPLETE,matrix_32_pos_0_1,KM6,Careful,8,12,6,75,50,42.857142857142854,det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_16_commitment; det_19_wellbeing
+COMPLETE,matrix_32_ext_0_1,KM1,Influencer,8,5,5,62.5,100,62.5,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+COMPLETE,matrix_32_ext_0_1,KM2,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+COMPLETE,matrix_32_ext_0_1,KM3,Careful,8,12,7,87.5,58.333333333333336,53.84615384615385,det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_16_commitment; det_17_adherence; det_19_wellbeing
+COMPLETE,matrix_32_ext_0_1,KM4,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+COMPLETE,matrix_32_ext_0_1,KM5,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+COMPLETE,matrix_32_ext_0_1,KM6,Homo.Economicus,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+COMPLETE,matrix_32_z_abs,KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+COMPLETE,matrix_32_z_abs,KM2,Careful,8,12,3,37.5,25,17.647058823529413,det_02_credit_score; det_06_climate_protection; det_14_environmental_concerns
+COMPLETE,matrix_32_z_abs,KM3,Homo.Economicus,8,9,2,25,22.22222222222222,13.333333333333334,det_01_profits; det_04_added_value
+COMPLETE,matrix_32_z_abs,KM4,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_06_climate_protection; det_08_trust; det_14_environmental_concerns; det_17_adherence
+COMPLETE,matrix_32_z_abs,KM5,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_09_safety; det_16_commitment; det_17_adherence; det_19_wellbeing
+COMPLETE,matrix_32_z_abs,KM6,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_07_legal; det_09_safety; det_10_cost_efficiency; det_19_wellbeing
+EUROPE,matrix_32_raw_0_1,KM1,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+EUROPE,matrix_32_raw_0_1,KM2,Careful,8,12,7,87.5,58.333333333333336,53.84615384615385,det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_16_commitment; det_17_adherence; det_19_wellbeing
+EUROPE,matrix_32_raw_0_1,KM3,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+EUROPE,matrix_32_raw_0_1,KM4,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_19_wellbeing
+EUROPE,matrix_32_raw_0_1,KM5,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_13_technical_fit; det_14_environmental_concerns; det_17_adherence
+EUROPE,matrix_32_raw_0_1,KM6,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+EUROPE,matrix_32_pos_0_1,KM1,Activist,8,6,6,75,100,75,det_08_trust; det_13_technical_fit; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+EUROPE,matrix_32_pos_0_1,KM2,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+EUROPE,matrix_32_pos_0_1,KM3,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+EUROPE,matrix_32_pos_0_1,KM4,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_08_trust; det_09_safety; det_11_knowledge; det_13_technical_fit
+EUROPE,matrix_32_pos_0_1,KM5,Careful,8,12,6,75,50,42.857142857142854,det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_16_commitment; det_17_adherence; det_19_wellbeing
+EUROPE,matrix_32_pos_0_1,KM6,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+EUROPE,matrix_32_ext_0_1,KM1,Influencer,8,5,5,62.5,100,62.5,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+EUROPE,matrix_32_ext_0_1,KM2,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_19_wellbeing
+EUROPE,matrix_32_ext_0_1,KM3,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+EUROPE,matrix_32_ext_0_1,KM4,Early.Adopter,8,6,4,50,66.66666666666667,40,det_11_knowledge; det_15_self_satisfaction; det_17_adherence; det_29_trends
+EUROPE,matrix_32_ext_0_1,KM5,Careful,8,12,6,75,50,42.857142857142854,det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_14_environmental_concerns; det_17_adherence; det_19_wellbeing
+EUROPE,matrix_32_ext_0_1,KM6,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+EUROPE,matrix_32_z_abs,KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+EUROPE,matrix_32_z_abs,KM2,Careful,8,12,2,25,16.666666666666668,11.11111111111111,det_02_credit_score; det_06_climate_protection
+EUROPE,matrix_32_z_abs,KM3,Careful,8,12,4,50,33.333333333333336,25,det_02_credit_score; det_06_climate_protection; det_14_environmental_concerns; det_17_adherence
+EUROPE,matrix_32_z_abs,KM4,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_03_risk_profile; det_07_legal; det_09_safety; det_10_cost_efficiency; det_13_technical_fit; det_19_wellbeing
+EUROPE,matrix_32_z_abs,KM5,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_03_risk_profile; det_07_legal; det_09_safety
+EUROPE,matrix_32_z_abs,KM6,Influencer,8,5,2,25,40,18.181818181818183,det_22_peer_pressure; det_28_recognition
+LATAM,matrix_32_raw_0_1,KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+LATAM,matrix_32_raw_0_1,KM2,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+LATAM,matrix_32_raw_0_1,KM3,Careful,8,12,6,75,50,42.857142857142854,det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+LATAM,matrix_32_raw_0_1,KM4,Influencer,8,5,3,37.5,60,30,det_24_socialising; det_28_recognition; det_31_approval
+LATAM,matrix_32_raw_0_1,KM5,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_13_technical_fit; det_19_wellbeing
+LATAM,matrix_32_raw_0_1,KM6,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+LATAM,matrix_32_pos_0_1,KM1,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+LATAM,matrix_32_pos_0_1,KM2,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_12_own_competence; det_19_wellbeing
+LATAM,matrix_32_pos_0_1,KM3,Careful,8,12,6,75,50,42.857142857142854,det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+LATAM,matrix_32_pos_0_1,KM4,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_10_cost_efficiency; det_12_own_competence; det_16_commitment; det_17_adherence; det_19_wellbeing
+LATAM,matrix_32_pos_0_1,KM5,Careful,8,12,6,75,50,42.857142857142854,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_16_commitment; det_17_adherence; det_19_wellbeing
+LATAM,matrix_32_pos_0_1,KM6,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_16_commitment
+LATAM,matrix_32_ext_0_1,KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+LATAM,matrix_32_ext_0_1,KM2,Careful,8,12,6,75,50,42.857142857142854,det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+LATAM,matrix_32_ext_0_1,KM3,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_01_profits; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+LATAM,matrix_32_ext_0_1,KM4,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+LATAM,matrix_32_ext_0_1,KM5,Careful,8,12,6,75,50,42.857142857142854,det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+LATAM,matrix_32_ext_0_1,KM6,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_19_wellbeing
+LATAM,matrix_32_z_abs,KM1,Careful,8,12,6,75,50,42.857142857142854,det_09_safety; det_11_knowledge; det_12_own_competence; det_16_commitment; det_17_adherence; det_19_wellbeing
+LATAM,matrix_32_z_abs,KM2,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_03_risk_profile; det_07_legal; det_09_safety
+LATAM,matrix_32_z_abs,KM3,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_04_added_value; det_07_legal; det_10_cost_efficiency; det_13_technical_fit; det_15_self_satisfaction
+LATAM,matrix_32_z_abs,KM4,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_29_trends
+LATAM,matrix_32_z_abs,KM5,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_06_climate_protection; det_09_safety; det_14_environmental_concerns; det_16_commitment; det_17_adherence
+LATAM,matrix_32_z_abs,KM6,Homo.Economicus,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+DIEGO,matrix_32_raw_0_1,KM1,Influencer,8,5,3,37.5,60,30,det_24_socialising; det_28_recognition; det_31_approval
+DIEGO,matrix_32_raw_0_1,KM2,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+DIEGO,matrix_32_raw_0_1,KM3,Influencer,8,5,3,37.5,60,30,det_22_peer_pressure; det_28_recognition; det_31_approval
+DIEGO,matrix_32_raw_0_1,KM4,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+DIEGO,matrix_32_raw_0_1,KM5,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment
+DIEGO,matrix_32_raw_0_1,KM6,Influencer,8,5,2,25,40,18.181818181818183,det_28_recognition; det_31_approval
+DIEGO,matrix_32_pos_0_1,KM1,Activist,8,6,6,75,100,75,det_08_trust; det_13_technical_fit; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+DIEGO,matrix_32_pos_0_1,KM2,Careful,8,12,6,75,50,42.857142857142854,det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_16_commitment; det_17_adherence; det_19_wellbeing
+DIEGO,matrix_32_pos_0_1,KM3,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+DIEGO,matrix_32_pos_0_1,KM4,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_13_technical_fit; det_14_environmental_concerns; det_17_adherence
+DIEGO,matrix_32_pos_0_1,KM5,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment
+DIEGO,matrix_32_pos_0_1,KM6,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_06_climate_protection; det_08_trust; det_11_knowledge; det_17_adherence; det_19_wellbeing
+DIEGO,matrix_32_ext_0_1,KM1,Uninterested,8,6,3,37.5,50,27.272727272727273,det_20_coziness; det_22_peer_pressure; det_30_authority
+DIEGO,matrix_32_ext_0_1,KM2,Influencer,8,5,2,25,40,18.181818181818183,det_22_peer_pressure; det_31_approval
+DIEGO,matrix_32_ext_0_1,KM3,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+DIEGO,matrix_32_ext_0_1,KM4,Influencer,8,5,3,37.5,60,30,det_11_knowledge; det_22_peer_pressure; det_28_recognition
+DIEGO,matrix_32_ext_0_1,KM5,Careful,8,12,4,50,33.333333333333336,25,det_08_trust; det_09_safety; det_10_cost_efficiency; det_12_own_competence
+DIEGO,matrix_32_ext_0_1,KM6,Influencer,8,5,3,37.5,60,30,det_22_peer_pressure; det_28_recognition; det_31_approval
+DIEGO,matrix_32_z_abs,KM1,Activist,8,6,3,37.5,50,27.272727272727273,det_08_trust; det_14_environmental_concerns; det_17_adherence
+DIEGO,matrix_32_z_abs,KM2,Influencer,8,5,2,25,40,18.181818181818183,det_22_peer_pressure; det_28_recognition
+DIEGO,matrix_32_z_abs,KM3,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence
+DIEGO,matrix_32_z_abs,KM4,Activist,8,6,3,37.5,50,27.272727272727273,det_14_environmental_concerns; det_15_self_satisfaction; det_17_adherence
+DIEGO,matrix_32_z_abs,KM5,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_01_profits; det_07_legal; det_15_self_satisfaction
+DIEGO,matrix_32_z_abs,KM6,Activist,8,6,5,62.5,83.33333333333333,55.55555555555556,det_13_technical_fit; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+RENOVISOR,matrix_32_raw_0_1,KM1,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+RENOVISOR,matrix_32_raw_0_1,KM2,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+RENOVISOR,matrix_32_raw_0_1,KM3,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+RENOVISOR,matrix_32_raw_0_1,KM4,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+RENOVISOR,matrix_32_raw_0_1,KM5,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_19_wellbeing
+RENOVISOR,matrix_32_raw_0_1,KM6,Influencer,8,5,3,37.5,60,30,det_11_knowledge; det_28_recognition; det_31_approval
+RENOVISOR,matrix_32_pos_0_1,KM1,Activist,8,6,5,62.5,83.33333333333333,55.55555555555556,det_08_trust; det_13_technical_fit; det_14_environmental_concerns; det_16_commitment; det_17_adherence
+RENOVISOR,matrix_32_pos_0_1,KM2,Fearful,8,9,7,87.5,77.77777777777777,70,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+RENOVISOR,matrix_32_pos_0_1,KM3,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+RENOVISOR,matrix_32_pos_0_1,KM4,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+RENOVISOR,matrix_32_pos_0_1,KM5,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_08_trust; det_09_safety; det_11_knowledge; det_13_technical_fit
+RENOVISOR,matrix_32_pos_0_1,KM6,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+RENOVISOR,matrix_32_ext_0_1,KM1,Influencer,8,5,5,62.5,100,62.5,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+RENOVISOR,matrix_32_ext_0_1,KM2,Fearful,8,9,7,87.5,77.77777777777777,70,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+RENOVISOR,matrix_32_ext_0_1,KM3,Careful,8,12,8,100,66.66666666666667,66.66666666666667,det_02_credit_score; det_06_climate_protection; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_14_environmental_concerns; det_19_wellbeing
+RENOVISOR,matrix_32_ext_0_1,KM4,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_07_legal; det_08_trust; det_11_knowledge; det_13_technical_fit
+RENOVISOR,matrix_32_ext_0_1,KM5,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+RENOVISOR,matrix_32_ext_0_1,KM6,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+RENOVISOR,matrix_32_z_abs,KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+RENOVISOR,matrix_32_z_abs,KM2,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_06_climate_protection; det_09_safety; det_14_environmental_concerns; det_17_adherence
+RENOVISOR,matrix_32_z_abs,KM3,Fearful,8,9,3,37.5,33.333333333333336,21.428571428571427,det_03_risk_profile; det_09_safety; det_13_technical_fit
+RENOVISOR,matrix_32_z_abs,KM4,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_03_risk_profile; det_10_cost_efficiency; det_13_technical_fit; det_19_wellbeing
+RENOVISOR,matrix_32_z_abs,KM5,Uninterested,8,6,3,37.5,50,27.272727272727273,det_13_technical_fit; det_20_coziness; det_30_authority
+RENOVISOR,matrix_32_z_abs,KM6,Careful,8,12,4,50,33.333333333333336,25,det_03_risk_profile; det_10_cost_efficiency; det_12_own_competence; det_14_environmental_concerns
+WHY_EUROPE,matrix_32_raw_0_1,KM1,Influencer,8,5,3,37.5,60,30,det_24_socialising; det_28_recognition; det_31_approval
+WHY_EUROPE,matrix_32_raw_0_1,KM2,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+WHY_EUROPE,matrix_32_raw_0_1,KM3,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+WHY_EUROPE,matrix_32_raw_0_1,KM4,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_03_risk_profile; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_19_wellbeing
+WHY_EUROPE,matrix_32_raw_0_1,KM5,Homo.Economicus,8,9,6,75,66.66666666666667,54.54545454545455,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction
+WHY_EUROPE,matrix_32_raw_0_1,KM6,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_08_trust; det_13_technical_fit; det_19_wellbeing
+WHY_EUROPE,matrix_32_pos_0_1,KM1,Activist,8,6,5,62.5,83.33333333333333,55.55555555555556,det_08_trust; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+WHY_EUROPE,matrix_32_pos_0_1,KM2,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction
+WHY_EUROPE,matrix_32_pos_0_1,KM3,Careful,8,12,6,75,50,42.857142857142854,det_02_credit_score; det_06_climate_protection; det_08_trust; det_11_knowledge; det_14_environmental_concerns; det_17_adherence
+WHY_EUROPE,matrix_32_pos_0_1,KM4,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_03_risk_profile; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+WHY_EUROPE,matrix_32_pos_0_1,KM5,Careful,8,12,6,75,50,42.857142857142854,det_03_risk_profile; det_06_climate_protection; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_14_environmental_concerns
+WHY_EUROPE,matrix_32_pos_0_1,KM6,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_19_wellbeing
+WHY_EUROPE,matrix_32_ext_0_1,KM1,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+WHY_EUROPE,matrix_32_ext_0_1,KM2,Activist,8,6,5,62.5,83.33333333333333,55.55555555555556,det_08_trust; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+WHY_EUROPE,matrix_32_ext_0_1,KM3,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+WHY_EUROPE,matrix_32_ext_0_1,KM4,Careful,8,12,6,75,50,42.857142857142854,det_02_credit_score; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_14_environmental_concerns; det_17_adherence
+WHY_EUROPE,matrix_32_ext_0_1,KM5,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+WHY_EUROPE,matrix_32_ext_0_1,KM6,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+WHY_EUROPE,matrix_32_z_abs,KM1,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_03_risk_profile; det_09_safety; det_12_own_competence; det_16_commitment; det_19_wellbeing
+WHY_EUROPE,matrix_32_z_abs,KM2,Fearful,8,9,6,75,66.66666666666667,54.54545454545455,det_02_credit_score; det_03_risk_profile; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+WHY_EUROPE,matrix_32_z_abs,KM3,Careful,8,12,6,75,50,42.857142857142854,det_03_risk_profile; det_09_safety; det_10_cost_efficiency; det_12_own_competence; det_16_commitment; det_17_adherence
+WHY_EUROPE,matrix_32_z_abs,KM4,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_09_safety; det_16_commitment; det_17_adherence; det_19_wellbeing
+WHY_EUROPE,matrix_32_z_abs,KM5,Fearful,8,9,3,37.5,33.333333333333336,21.428571428571427,det_03_risk_profile; det_10_cost_efficiency; det_13_technical_fit
+WHY_EUROPE,matrix_32_z_abs,KM6,Influencer,8,5,3,37.5,60,30,det_11_knowledge; det_28_recognition; det_31_approval
+WHY_LATAM,matrix_32_raw_0_1,KM1,Careful,8,12,6,75,50,42.857142857142854,det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+WHY_LATAM,matrix_32_raw_0_1,KM2,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+WHY_LATAM,matrix_32_raw_0_1,KM3,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+WHY_LATAM,matrix_32_raw_0_1,KM4,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_19_wellbeing
+WHY_LATAM,matrix_32_raw_0_1,KM5,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_13_technical_fit; det_19_wellbeing
+WHY_LATAM,matrix_32_raw_0_1,KM6,Influencer,8,5,4,50,80,44.44444444444444,det_11_knowledge; det_24_socialising; det_28_recognition; det_31_approval
+WHY_LATAM,matrix_32_pos_0_1,KM1,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+WHY_LATAM,matrix_32_pos_0_1,KM2,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_12_own_competence; det_19_wellbeing
+WHY_LATAM,matrix_32_pos_0_1,KM3,Careful,8,12,6,75,50,42.857142857142854,det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+WHY_LATAM,matrix_32_pos_0_1,KM4,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_10_cost_efficiency; det_12_own_competence; det_16_commitment; det_17_adherence; det_19_wellbeing
+WHY_LATAM,matrix_32_pos_0_1,KM5,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+WHY_LATAM,matrix_32_pos_0_1,KM6,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_03_risk_profile; det_07_legal; det_10_cost_efficiency; det_13_technical_fit
+WHY_LATAM,matrix_32_ext_0_1,KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+WHY_LATAM,matrix_32_ext_0_1,KM2,Careful,8,12,6,75,50,42.857142857142854,det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+WHY_LATAM,matrix_32_ext_0_1,KM3,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_01_profits; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+WHY_LATAM,matrix_32_ext_0_1,KM4,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+WHY_LATAM,matrix_32_ext_0_1,KM5,Influencer,8,5,3,37.5,60,30,det_11_knowledge; det_24_socialising; det_31_approval
+WHY_LATAM,matrix_32_ext_0_1,KM6,Careful,8,12,6,75,50,42.857142857142854,det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_16_commitment; det_17_adherence; det_19_wellbeing
+WHY_LATAM,matrix_32_z_abs,KM1,Careful,8,12,6,75,50,42.857142857142854,det_09_safety; det_11_knowledge; det_12_own_competence; det_16_commitment; det_17_adherence; det_19_wellbeing
+WHY_LATAM,matrix_32_z_abs,KM2,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_03_risk_profile; det_07_legal; det_09_safety
+WHY_LATAM,matrix_32_z_abs,KM3,Careful,8,12,3,37.5,25,17.647058823529413,det_06_climate_protection; det_14_environmental_concerns; det_19_wellbeing
+WHY_LATAM,matrix_32_z_abs,KM4,Homo.Economicus,8,9,5,62.5,55.55555555555556,41.666666666666664,det_04_added_value; det_07_legal; det_10_cost_efficiency; det_13_technical_fit; det_15_self_satisfaction
+WHY_LATAM,matrix_32_z_abs,KM5,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+WHY_LATAM,matrix_32_z_abs,KM6,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_29_trends

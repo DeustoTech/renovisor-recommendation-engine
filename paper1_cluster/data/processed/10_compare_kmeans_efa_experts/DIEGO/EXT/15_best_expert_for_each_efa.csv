@@ -1,0 +1,7 @@
+efa_factor,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Careful,8,12,2,25,16.666666666666668,11.11111111111111,det_16_commitment; det_19_wellbeing
+EFA2,Influencer,8,5,3,37.5,60,30,det_22_peer_pressure; det_24_socialising; det_28_recognition
+EFA3,Careful,8,12,3,37.5,25,17.647058823529413,det_02_credit_score; det_12_own_competence; det_14_environmental_concerns
+EFA4,Uninterested,8,6,4,50,66.66666666666667,40,det_07_legal; det_19_wellbeing; det_20_coziness; det_30_authority
+EFA5,Fearful,8,9,3,37.5,33.333333333333336,21.428571428571427,det_02_credit_score; det_03_risk_profile; det_13_technical_fit
+EFA6,Careful,8,12,4,50,33.333333333333336,25,det_02_credit_score; det_06_climate_protection; det_09_safety; det_17_adherence

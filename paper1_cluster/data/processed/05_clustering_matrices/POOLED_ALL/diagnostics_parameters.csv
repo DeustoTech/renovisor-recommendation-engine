@@ -1,0 +1,11 @@
+analysis_sample,parameter,value
+POOLED_ALL,n_rows,4372
+POOLED_ALL,MAX_POS,50
+POOLED_ALL,Q3_EXT,25
+POOLED_ALL,K_DEFAULT,8
+POOLED_ALL,NF_DEFAULT,15
+POOLED_ALL,K_GRID,"4,5,6,7,8"
+POOLED_ALL,D_GRID,"8,9,10,11,12,13,14,15"
+POOLED_ALL,z_abs_reference,sample_specific_POOLED_ALL
+POOLED_ALL,input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+POOLED_ALL,output_dir,paper1_cluster/data/processed/05_clustering_matrices/POOLED_ALL

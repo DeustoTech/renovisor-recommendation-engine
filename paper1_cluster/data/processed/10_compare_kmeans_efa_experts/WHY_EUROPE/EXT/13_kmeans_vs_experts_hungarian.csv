@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct
+KM1,Early.Adopter,27.272727272727273
+KM2,Activist,55.55555555555556
+KM3,Stubborn,22.22222222222222
+KM4,Careful,42.857142857142854
+KM5,Influencer,44.44444444444444
+KM6,Homo.Economicus,41.666666666666664

@@ -1,0 +1,7 @@
+id,prototype,determinants,incremental_covered_pct,cumulative_covered_pct
+KM1,1,det_01_profits; det_02_credit_score; det_05_frugality; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,8.747857142856855,8.747857142856855
+KM2,2,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_28_recognition; det_29_trends; det_31_approval; det_32_own_significance,6.64571428571407,15.393571428570926
+KM3,3,det_01_profits; det_08_trust; det_17_adherence; det_22_peer_pressure; det_26_novelty; det_28_recognition; det_29_trends; det_31_approval,2.1535714285713583,17.547142857142283
+KM4,4,det_17_adherence; det_22_peer_pressure; det_23_support; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,3.760238095237967,21.30738095238025
+KM5,5,det_08_trust; det_09_safety; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_22_peer_pressure; det_23_support; det_32_own_significance,0.6730952380952159,21.980476190475464
+KM6,6,det_01_profits; det_02_credit_score; det_03_risk_profile; det_17_adherence; det_20_coziness; det_28_recognition; det_29_trends; det_31_approval,0.5111904761904593,22.491666666665925

@@ -1,0 +1,4 @@
+country_code,mean_n_unique,min_n_unique,max_n_unique,mean_unique_share
+CL,38.486,29,47,0.49341025641025643
+CO,2.685,2,3,0.20653846153846153
+MX,226.146,208,246,0.43741972920696326

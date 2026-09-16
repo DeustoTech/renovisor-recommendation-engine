@@ -1,0 +1,5 @@
+matrix_name,n_valid,mean_n_factors,median_n_factors,q25_n_factors,q75_n_factors,modal_n_factors,modal_frequency,pct_modal,n_warning,bic_best_n_factors,best_mean_BIC,same_number,matrix
+matrix_32_ext_0_1,100,6.88,7,6,7,7,38,38,0,4,-1779.5157107685409,FALSE,EXT
+matrix_32_pos_0_1,100,6.7,7,6,7,7,55,55,0,5,-1438.5145079223132,FALSE,POS
+matrix_32_raw_0_1,100,6.24,6,6,7,6,67,67,0,6,-1430.1174333842466,TRUE,RAW
+matrix_32_z_abs,100,8.4,8,8,9,8,37,37,0,4,-1795.406654684819,FALSE,Z_ABS

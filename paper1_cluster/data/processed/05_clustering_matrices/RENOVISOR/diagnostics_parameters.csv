@@ -1,0 +1,8 @@
+analysis_sample,parameter,value
+RENOVISOR,n_rows,894
+RENOVISOR,MAX_POS,50
+RENOVISOR,EXT_THRESHOLD,25
+RENOVISOR,z_abs_reference,sample_specific_RENOVISOR
+RENOVISOR,input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+RENOVISOR,dimension_mapping_file,paper1_cluster/data/processed/03_2_phase_dimension_scores/dimension_determinant_mapping.csv
+RENOVISOR,output_dir,paper1_cluster/data/processed/05_clustering_matrices/RENOVISOR

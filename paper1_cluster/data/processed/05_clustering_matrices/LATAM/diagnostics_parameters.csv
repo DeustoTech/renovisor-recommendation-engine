@@ -1,0 +1,8 @@
+analysis_sample,parameter,value
+LATAM,n_rows,608
+LATAM,MAX_POS,50
+LATAM,EXT_THRESHOLD,25
+LATAM,z_abs_reference,sample_specific_LATAM
+LATAM,input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+LATAM,dimension_mapping_file,paper1_cluster/data/processed/03_2_phase_dimension_scores/dimension_determinant_mapping.csv
+LATAM,output_dir,paper1_cluster/data/processed/05_clustering_matrices/LATAM

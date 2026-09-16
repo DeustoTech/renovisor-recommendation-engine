@@ -1,0 +1,9 @@
+parameter,value
+n_boot,1000
+seed_base,123
+countries,"MX, CL, CO"
+income_bands,"<15000, 15000_30000, 30000_50000, 50000_100000, >100000"
+lt_0_1_numeric_value,0.05
+bootstrap_method,country-stratified poststratified bootstrap by income
+country_sizes_preserved,TRUE
+unsupported_target_rule,Set unsupported bands to zero and renormalize target within observed support

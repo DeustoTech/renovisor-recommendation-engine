@@ -1,4 +1,0 @@
-dataset_source,n_rows,n_with_any_det,prop_with_any_det,n_complete_32det,prop_complete_32det,n_usable_for_clustering,prop_usable_for_clustering,mean_n_det_valid,min_n_det_valid,max_n_det_valid,n_rows_out_of_range
-diego,1899,1899,1,1899,1,1899,1,32,32,32,0
-rv,1229,955,0.7770545158665582,599,0.4873881204231082,894,0.7274206672091131,23.589096826688397,0,32,0
-why,990,981,0.990909090909091,808,0.8161616161616162,971,0.9808080808080808,31.235353535353532,0,32,0

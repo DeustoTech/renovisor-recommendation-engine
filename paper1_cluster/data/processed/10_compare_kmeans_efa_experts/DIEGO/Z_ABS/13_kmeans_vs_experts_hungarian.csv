@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct
+KM1,Early.Adopter,27.272727272727273
+KM2,Influencer,18.181818181818183
+KM3,Fearful,30.76923076923077
+KM4,Careful,25
+KM5,Homo.Economicus,21.428571428571427
+KM6,Activist,55.55555555555556

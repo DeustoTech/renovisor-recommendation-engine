@@ -1,4 +1,4 @@
 dataset_source,n_rows,n_usable_for_clustering,prop_usable_for_clustering,n_usable_for_main_analysis,prop_usable_for_main_analysis,n_usable_complete,n_usable_complete_limited_metadata,n_usable_partial,n_usable_partial_limited_metadata,n_no_determinants,n_too_many_missing_determinants,n_suspicious_determinants,n_invalid_determinants,mean_n_det_valid,min_n_det_valid,max_n_det_valid,mean_det_row_sd,n_metadata_complete,n_metadata_partial,n_metadata_poor
 diego,1899,1899,1,1899,1,1857,42,0,0,0,0,0,0,32,32,32,26.245692264226285,1857,42,0
 rv,1229,894,0.7274206672091131,894,0.7274206672091131,546,47,279,22,274,54,7,0,23.589096826688397,0,32,25.763227368693368,988,135,106
-why,990,971,0.9808080808080808,971,0.9808080808080808,806,0,164,1,9,8,2,0,31.235353535353532,0,32,24.724101564381915,988,2,0
+why,1628,1579,0.9699017199017199,1579,0.9699017199017199,1210,75,229,65,20,21,8,0,30.988329238329236,0,32,24.33634047692141,1461,167,0

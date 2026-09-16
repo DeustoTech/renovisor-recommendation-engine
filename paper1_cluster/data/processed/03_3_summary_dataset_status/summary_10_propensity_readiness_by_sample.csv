@@ -1,0 +1,6 @@
+analysis_sample,analysis_region,n_rows,n_eu_applicable,prop_eu_applicable,n_has_binary_vote_outcome,prop_has_binary_vote_outcome,n_has_age,n_has_gender,n_has_country,n_has_employment,n_has_education,n_has_income,n_has_city_size,n_model_ready_strict,n_model_ready_without_income,n_model_ready_minimal,prop_model_ready_strict,prop_model_ready_without_income,prop_model_ready_minimal
+DIEGO,EUROPE,1899,1899,1,0,0,1899,1857,1899,1874,1883,1764,0,0,0,0,0,0,0
+POOLED_ALL,ALL,4756,4118,0.8658536585365854,626,0.13162321278385197,4374,4416,4640,3922,2912,1764,1120,0,413,426,0,0.0868376787216148,0.08957106812447435
+RENOVISOR,EUROPE,1229,1229,1,626,0.5093572009764036,1014,1098,1113,885,871,0,1120,0,413,426,0,0.3360455655004068,0.34662327095199347
+WHY_EUROPE,EUROPE,990,990,1,0,0,988,988,990,774,2,0,0,0,0,0,0,0,0
+WHY_LATAM,LATAM,638,0,0,0,0,473,473,638,389,156,0,0,0,0,0,0,0,0

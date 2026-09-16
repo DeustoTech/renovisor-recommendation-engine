@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA6,75,8,8,6,75,75,60,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM2,EFA1,62.5,8,8,5,62.5,62.5,45.45454545454545,det_07_legal; det_08_trust; det_09_safety; det_11_knowledge; det_13_technical_fit
+KM3,EFA4,50,8,8,4,50,50,33.333333333333336,det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+KM4,EFA5,50,8,8,4,50,50,33.333333333333336,det_07_legal; det_10_cost_efficiency; det_17_adherence; det_19_wellbeing
+KM5,EFA3,0,8,8,0,0,0,0,
+KM6,EFA2,62.5,8,8,5,62.5,62.5,45.45454545454545,det_01_profits; det_02_credit_score; det_04_added_value; det_23_support; det_27_fun

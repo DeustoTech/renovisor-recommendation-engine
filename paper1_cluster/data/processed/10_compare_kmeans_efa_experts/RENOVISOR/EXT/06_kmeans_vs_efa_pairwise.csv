@@ -1,0 +1,37 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA1,8,8,1,12.5,12.5,6.666666666666667,det_10_cost_efficiency
+KM1,EFA2,8,8,0,0,0,0,
+KM1,EFA3,8,8,6,75,75,60,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM1,EFA4,8,8,1,12.5,12.5,6.666666666666667,det_11_knowledge
+KM1,EFA5,8,8,0,0,0,0,
+KM1,EFA6,8,8,1,12.5,12.5,6.666666666666667,det_10_cost_efficiency
+KM2,EFA1,8,8,1,12.5,12.5,6.666666666666667,det_10_cost_efficiency
+KM2,EFA2,8,8,2,25,25,14.285714285714286,det_07_legal; det_13_technical_fit
+KM2,EFA3,8,8,0,0,0,0,
+KM2,EFA4,8,8,2,25,25,14.285714285714286,det_11_knowledge; det_17_adherence
+KM2,EFA5,8,8,1,12.5,12.5,6.666666666666667,det_13_technical_fit
+KM2,EFA6,8,8,5,62.5,62.5,45.45454545454545,det_08_trust; det_09_safety; det_10_cost_efficiency; det_17_adherence; det_19_wellbeing
+KM3,EFA1,8,8,2,25,25,14.285714285714286,det_02_credit_score; det_10_cost_efficiency
+KM3,EFA2,8,8,0,0,0,0,
+KM3,EFA3,8,8,0,0,0,0,
+KM3,EFA4,8,8,1,12.5,12.5,6.666666666666667,det_11_knowledge
+KM3,EFA5,8,8,2,25,25,14.285714285714286,det_06_climate_protection; det_14_environmental_concerns
+KM3,EFA6,8,8,4,50,50,33.333333333333336,det_08_trust; det_09_safety; det_10_cost_efficiency; det_19_wellbeing
+KM4,EFA1,8,8,0,0,0,0,
+KM4,EFA2,8,8,2,25,25,14.285714285714286,det_07_legal; det_13_technical_fit
+KM4,EFA3,8,8,2,25,25,14.285714285714286,det_28_recognition; det_31_approval
+KM4,EFA4,8,8,1,12.5,12.5,6.666666666666667,det_11_knowledge
+KM4,EFA5,8,8,3,37.5,37.5,23.076923076923077,det_06_climate_protection; det_13_technical_fit; det_14_environmental_concerns
+KM4,EFA6,8,8,1,12.5,12.5,6.666666666666667,det_08_trust
+KM5,EFA1,8,8,1,12.5,12.5,6.666666666666667,det_10_cost_efficiency
+KM5,EFA2,8,8,3,37.5,37.5,23.076923076923077,det_13_technical_fit; det_15_self_satisfaction; det_16_commitment
+KM5,EFA3,8,8,1,12.5,12.5,6.666666666666667,det_28_recognition
+KM5,EFA4,8,8,2,25,25,14.285714285714286,det_11_knowledge; det_16_commitment
+KM5,EFA5,8,8,1,12.5,12.5,6.666666666666667,det_13_technical_fit
+KM5,EFA6,8,8,4,50,50,33.333333333333336,det_08_trust; det_10_cost_efficiency; det_15_self_satisfaction; det_19_wellbeing
+KM6,EFA1,8,8,1,12.5,12.5,6.666666666666667,det_10_cost_efficiency
+KM6,EFA2,8,8,2,25,25,14.285714285714286,det_13_technical_fit; det_25_agreement
+KM6,EFA3,8,8,3,37.5,37.5,23.076923076923077,det_28_recognition; det_30_authority; det_31_approval
+KM6,EFA4,8,8,1,12.5,12.5,6.666666666666667,det_11_knowledge
+KM6,EFA5,8,8,2,25,25,14.285714285714286,det_13_technical_fit; det_25_agreement
+KM6,EFA6,8,8,2,25,25,14.285714285714286,det_10_cost_efficiency; det_19_wellbeing

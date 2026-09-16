@@ -1,0 +1,4 @@
+coverage_threshold,n_combinations,n_same,pct_same,mean_abs_difference,max_abs_difference
+80,48,40,83.33333333333334,0.25,1
+85,48,36,75,0.375,1
+90,48,35,72.91666666666666,0.46875,2

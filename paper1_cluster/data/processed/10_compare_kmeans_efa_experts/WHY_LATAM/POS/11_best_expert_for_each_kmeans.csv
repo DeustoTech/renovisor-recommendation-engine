@@ -1,0 +1,7 @@
+kmeans_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+KM2,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_02_credit_score; det_09_safety; det_10_cost_efficiency; det_12_own_competence; det_19_wellbeing
+KM3,Careful,8,12,6,75,50,42.857142857142854,det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+KM4,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_10_cost_efficiency; det_12_own_competence; det_16_commitment; det_17_adherence; det_19_wellbeing
+KM5,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit
+KM6,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_03_risk_profile; det_07_legal; det_10_cost_efficiency; det_13_technical_fit

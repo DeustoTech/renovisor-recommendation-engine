@@ -1,0 +1,49 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,Activist,8,6,0,0,0,0,
+KM1,Careful,8,12,1,12.5,8.333333333333334,5.2631578947368425,det_02_credit_score
+KM1,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_29_trends
+KM1,Fearful,8,9,1,12.5,11.11111111111111,6.25,det_02_credit_score
+KM1,Homo.Economicus,8,9,1,12.5,11.11111111111111,6.25,det_01_profits
+KM1,Influencer,8,5,3,37.5,60,30,det_24_socialising; det_28_recognition; det_31_approval
+KM1,Stubborn,8,3,0,0,0,0,
+KM1,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_30_authority
+KM2,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+KM2,Careful,8,12,3,37.5,25,17.647058823529413,det_08_trust; det_16_commitment; det_17_adherence
+KM2,Early.Adopter,8,6,3,37.5,50,27.272727272727273,det_15_self_satisfaction; det_17_adherence; det_29_trends
+KM2,Fearful,8,9,1,12.5,11.11111111111111,6.25,det_08_trust
+KM2,Homo.Economicus,8,9,2,25,22.22222222222222,13.333333333333334,det_08_trust; det_15_self_satisfaction
+KM2,Influencer,8,5,2,25,40,18.181818181818183,det_28_recognition; det_31_approval
+KM2,Stubborn,8,3,2,25,66.66666666666667,22.22222222222222,det_15_self_satisfaction; det_17_adherence
+KM2,Uninterested,8,6,0,0,0,0,
+KM3,Activist,8,6,2,25,33.333333333333336,16.666666666666668,det_08_trust; det_17_adherence
+KM3,Careful,8,12,2,25,16.666666666666668,11.11111111111111,det_08_trust; det_17_adherence
+KM3,Early.Adopter,8,6,3,37.5,50,27.272727272727273,det_17_adherence; det_26_novelty; det_29_trends
+KM3,Fearful,8,9,1,12.5,11.11111111111111,6.25,det_08_trust
+KM3,Homo.Economicus,8,9,2,25,22.22222222222222,13.333333333333334,det_01_profits; det_08_trust
+KM3,Influencer,8,5,3,37.5,60,30,det_22_peer_pressure; det_28_recognition; det_31_approval
+KM3,Stubborn,8,3,1,12.5,33.333333333333336,10,det_17_adherence
+KM3,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_22_peer_pressure
+KM4,Activist,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_17_adherence
+KM4,Careful,8,12,1,12.5,8.333333333333334,5.2631578947368425,det_17_adherence
+KM4,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_17_adherence; det_29_trends
+KM4,Fearful,8,9,0,0,0,0,
+KM4,Homo.Economicus,8,9,0,0,0,0,
+KM4,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+KM4,Stubborn,8,3,1,12.5,33.333333333333336,10,det_17_adherence
+KM4,Uninterested,8,6,2,25,33.333333333333336,16.666666666666668,det_22_peer_pressure; det_30_authority
+KM5,Activist,8,6,4,50,66.66666666666667,40,det_08_trust; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment
+KM5,Careful,8,12,4,50,33.333333333333336,25,det_08_trust; det_09_safety; det_14_environmental_concerns; det_16_commitment
+KM5,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_15_self_satisfaction
+KM5,Fearful,8,9,2,25,22.22222222222222,13.333333333333334,det_08_trust; det_09_safety
+KM5,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_08_trust; det_09_safety; det_15_self_satisfaction
+KM5,Influencer,8,5,1,12.5,20,8.333333333333334,det_22_peer_pressure
+KM5,Stubborn,8,3,1,12.5,33.333333333333336,10,det_15_self_satisfaction
+KM5,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_22_peer_pressure
+KM6,Activist,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_17_adherence
+KM6,Careful,8,12,3,37.5,25,17.647058823529413,det_02_credit_score; det_03_risk_profile; det_17_adherence
+KM6,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_17_adherence; det_29_trends
+KM6,Fearful,8,9,2,25,22.22222222222222,13.333333333333334,det_02_credit_score; det_03_risk_profile
+KM6,Homo.Economicus,8,9,1,12.5,11.11111111111111,6.25,det_01_profits
+KM6,Influencer,8,5,2,25,40,18.181818181818183,det_28_recognition; det_31_approval
+KM6,Stubborn,8,3,1,12.5,33.333333333333336,10,det_17_adherence
+KM6,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_20_coziness

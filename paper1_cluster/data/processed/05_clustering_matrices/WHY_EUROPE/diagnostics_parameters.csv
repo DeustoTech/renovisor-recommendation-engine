@@ -1,0 +1,8 @@
+analysis_sample,parameter,value
+WHY_EUROPE,n_rows,971
+WHY_EUROPE,MAX_POS,50
+WHY_EUROPE,EXT_THRESHOLD,25
+WHY_EUROPE,z_abs_reference,sample_specific_WHY_EUROPE
+WHY_EUROPE,input_file,paper1_cluster/data/processed/03_component_quality/matrix_32det_for_clustering.csv
+WHY_EUROPE,dimension_mapping_file,paper1_cluster/data/processed/03_2_phase_dimension_scores/dimension_determinant_mapping.csv
+WHY_EUROPE,output_dir,paper1_cluster/data/processed/05_clustering_matrices/WHY_EUROPE
