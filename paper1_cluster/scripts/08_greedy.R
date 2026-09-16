@@ -1,116 +1,110 @@
 
-# Resumir los patrones obtenidos mediante:
+# Objetivo:
+# Construir prototipos representativos a partir de las estructuras
+# obtenidas con K-means y EFA a lo largo de los bootstraps.
 #
-#   A) K-means
-#   B) EFA
+# El análisis se realiza para COMPLETE, EUROPE, LATAM y cada submuestra.
 #
-# sobre los distintos bootstraps.
-
-# Para cada:
+# K-means:
+# - K = 4:8 genera los clusters candidatos.
 #
-#   - método: KMEANS / EFA
-#   - matriz: RAW / POS / EXT / Z_ABS
-#   - K = 4,...,8
-#       * KMEANS -> número de clusters
-#       * EFA    -> número de factores
-#   - D_DET = 8,...,15
+# EFA:
+# - F = 4:8 genera los factores candidatos.
 #
-# hacemos:
+# Cada cluster/factor se transforma en una firma binaria de 32
+# determinantes seleccionando D = 8:15 determinantes.
 #
-#   1. coger cada cluster/factor
-#   2. coger sus D_DET determinantes más importantes
-#   3. poner esos determinantes a 1
-#   4. poner el resto a 0
+# Greedy se ejecuta con radios Hamming pares entre 0 y 10.
 #
-# Así obtenemos un patrón binario de 32 determinantes.
+# Se consideran dos ponderaciones:
+# - equal_candidate: cada K/F aporta el mismo peso total.
+# - equal_element: cada cluster/factor aporta el mismo peso.
 #
-# Después GREEDY:
+# K=2 y K=3 se mantienen como diagnóstico en el bloque 06,
+# pero no forman parte del universo principal Greedy.
 #
-#   para D_HAMMING = 0,...,10
-#
-#   1. buscamos el patrón NO cubierto más frecuente
-#   2. ese patrón se convierte en centro/prototipo
-#   3. creamos una bola de radio D_HAMMING
-#   4. cubrimos todos los patrones dentro de esa bola
-#   5. calculamos qué % hemos cubierto
-#   6. repetimos hasta tener como máximo K prototipos
-#
-# SALIDAS IMPORTANTES
-#
-# 03_greedy_prototype_steps.csv
-#     cobertura incremental y acumulada prototipo a prototipo.
-#
-# 04_greedy_coverage_summary.csv
-#     cobertura final de cada combinación.
-#
-# 05_greedy_ball_determinant_prevalence.csv
-#     % de veces que cada determinante aparece dentro de cada bola.
-#
-# 06_greedy_k_comparison.csv
-#     comparación K=4,...,8 y mejora al aumentar K.
-#
-# 07_hamming_interpretation.csv
-#     interpretación de D_HAMMING en nº/% de determinantes comunes.
-#
-# 10_greedy_matrix_x_method.csv
-#     salida compacta para comparar matriz × método.
+# El número de prototipos Greedy es independiente del K/F utilizado
+# para generar los clusters o factores candidatos.
 
 suppressPackageStartupMessages({
   library(tidyverse)
-  library(readr)
-  library(stringr)
-  library(ggplot2)
 })
 
 set.seed(123)
 
-# RUTAS
-project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
+# Configuración
+project_root <- path.expand(
+  "~/Desktop/MASTER/recommendation-engine/TFM"
+)
 
-processed_root <- file.path(project_root,"paper1_cluster/data/processed")
+processed_root <- file.path(
+  project_root,
+  "paper1_cluster/data/processed"
+)
 
-# K-MEANS
-kmeans_file <- file.path(processed_root, "06_kmeans_bootstrap", "kmeans_centers_long.csv")
+kmeans_dir <- file.path(
+  processed_root,
+  "06_kmeans_bootstrap"
+)
 
-# EFA
-efa_file <- file.path(processed_root, "07_efa_bootstrap", "03_efa_loadings_long.csv")
+efa_file <- file.path(
+  processed_root,
+  "07_efa_bootstrap",
+  "03_efa_loadings_long.csv.gz"
+)
 
-# OUTPUT
-out_dir <- file.path(processed_root, "08_greedy_kmeans_efa")
+out_dir <- file.path(
+  processed_root,
+  "08_greedy_kmeans_efa"
+)
 
-fig_dir <- file.path(out_dir, "figures")
+fig_dir <- file.path(
+  out_dir,
+  "figures"
+)
 
-dir.create(out_dir, recursive = TRUE,showWarnings = FALSE)
+dir.create(
+  out_dir,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 
-dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
+dir.create(
+  fig_dir,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 
-# PARÁMETROS
+ANALYSIS_SAMPLES <- c(
+  "COMPLETE",
+  "EUROPE",
+  "LATAM",
+  "DIEGO",
+  "RENOVISOR",
+  "WHY_EUROPE",
+  "WHY_LATAM"
+)
 
-# D = número de determinantes que definen cada patrón
+MATRICES_TO_RUN <- c(
+  "matrix_32_raw_0_1",
+  "matrix_32_pos_0_1",
+  "matrix_32_ext_0_1",
+  "matrix_32_z_abs"
+)
+
+KMEANS_POOL_GRID <- 4:8
+EFA_POOL_GRID <- 4:8
+
 D_DET_GRID <- 8:15
+D_HAMMING_GRID <- seq(
+  0,
+  10,
+  by = 2
+)
 
-# Distancia Hamming
-D_HAMMING_GRID <- 0:10
+MAX_BOOTSTRAPS <- 100L
+MAX_GREEDY_PROTOTYPES <- 12L
 
-
-# Bootstrap
-MAX_BOOTSTRAPS <- 100
-# MAX_BOOTSTRAPS <- Inf
-
-# Umbrales de cobertura
-# para responder a ¿Cuántos prototipos necesito para alcanzar X% de cobertura?
-# ejemplo
-#P1 → 35%
-#P2 → 57%
-#P3 → 74%
-#P4 → 84%
-#P5 → 91%
-#P6 → 94%
-#Entonces:
-#80% → 4 prototipos
-#85% → 5
-#90% → 5
-#95% → no se alcanza
 COVERAGE_THRESHOLDS <- c(
   80,
   85,
@@ -118,140 +112,226 @@ COVERAGE_THRESHOLDS <- c(
   95
 )
 
-# LEER K-MEANS
-if (!file.exists(kmeans_file)) {
-  
-  stop(
-    "No encuentro el archivo K-means: ",
-    kmeans_file
+POOL_WEIGHTINGS <- c(
+  "equal_candidate",
+  "equal_element"
+)
+
+PRIMARY_WEIGHTING <- "equal_candidate"
+
+
+# Funciones auxiliares
+
+matrix_label <- function(x) {
+  recode(
+    x,
+    "matrix_32_raw_0_1" = "RAW",
+    "matrix_32_pos_0_1" = "POS",
+    "matrix_32_ext_0_1" = "EXT",
+    "matrix_32_z_abs" = "Z_ABS",
+    .default = x
   )
 }
 
-
-kmeans <- read_csv(
-  kmeans_file,
-  show_col_types = FALSE
-) %>%
-  
-  mutate(
-    
-    bootstrap_id =
-      as.integer(bootstrap_id),
-    
-    k =
-      as.integer(k),
-    
-    cluster_rank =
-      as.integer(cluster_rank),
-    
-    determinant =
-      as.character(determinant),
-    
-    center_value =
-      as.numeric(center_value)
+patterns_to_matrix <- function(
+    keys,
+    determinant_names
+) {
+  mat <- do.call(
+    rbind,
+    lapply(
+      strsplit(
+        keys,
+        ""
+      ),
+      as.integer
+    )
   )
-
-
-
-required_kmeans <- c(
   
-  "matrix_name",
-  
-  "bootstrap_id",
-  
-  "k",
-  
-  "cluster_rank",
-  
-  "determinant",
-  
-  "center_value"
-)
+  colnames(mat) <- determinant_names
+  mat
+}
 
-
-missing_kmeans <- setdiff(
-  required_kmeans,
-  names(kmeans)
-)
-
-
-if (length(missing_kmeans) > 0) {
-  
-  stop(
-    "Faltan columnas en kmeans_centers_long.csv: ",
-    paste(
-      missing_kmeans,
-      collapse = ", "
+hamming_distance <- function(
+    center,
+    mat
+) {
+  rowSums(
+    sweep(
+      mat,
+      2,
+      center,
+      FUN = "!="
     )
   )
 }
 
+run_greedy_sequence <- function(
+    patterns,
+    frequencies,
+    max_prototypes,
+    d_hamming
+) {
+  used <- rep(
+    FALSE,
+    nrow(patterns)
+  )
+  
+  steps <- vector(
+    "list",
+    max_prototypes
+  )
+  
+  cumulative_frequency <- 0
+  
+  for (prototype_id in seq_len(max_prototypes)) {
+    if (all(used)) {
+      break
+    }
+    
+    candidates <- which(
+      !used
+    )
+    
+    # El siguiente prototipo se centra en el patrón todavía no cubierto
+    # con mayor peso/frecuencia.
+    center_idx <- candidates[
+      which.max(
+        frequencies[candidates]
+      )
+    ]
+    
+    center <- patterns[
+      center_idx,
+      ,
+      drop = TRUE
+    ]
+    
+    free_idx <- which(
+      !used
+    )
+    
+    free_patterns <- patterns[
+      free_idx,
+      ,
+      drop = FALSE
+    ]
+    
+    free_distances <- hamming_distance(
+      center,
+      free_patterns
+    )
+    
+    # La bola del prototipo incluye los patrones no cubiertos cuya
+    # distancia Hamming sea menor o igual al radio actual.
+    selected_local <- which(
+      free_distances <=
+        d_hamming
+    )
+    
+    selected <- free_idx[
+      selected_local
+    ]
+    
+    selected_distances <- free_distances[
+      selected_local
+    ]
+    
+    incremental_frequency <- sum(
+      frequencies[selected],
+      na.rm = TRUE
+    )
+    
+    cumulative_frequency <-
+      cumulative_frequency +
+      incremental_frequency
+    
+    used[selected] <- TRUE
+    
+    member_matrix <- patterns[
+      selected,
+      ,
+      drop = FALSE
+    ]
+    
+    member_weights <- frequencies[
+      selected
+    ]
+    
+    weighted_member_matrix <- sweep(
+      member_matrix,
+      1,
+      member_weights,
+      FUN = "*"
+    )
+    
+    # Prevalencia ponderada de cada determinante dentro de la bola
+    # cubierta por el prototipo.
+    determinant_prevalence <- colSums(
+      weighted_member_matrix,
+      na.rm = TRUE
+    ) /
+      sum(
+        member_weights,
+        na.rm = TRUE
+      )
+    
+    weighted_mean_hamming <- weighted.mean(
+      selected_distances,
+      w = member_weights
+    )
+    
+    steps[[prototype_id]] <- list(
+      prototype = prototype_id,
+      center_index = center_idx,
+      center = center,
+      members = selected,
+      center_frequency = frequencies[center_idx],
+      incremental_frequency = incremental_frequency,
+      cumulative_frequency = cumulative_frequency,
+      determinant_prevalence = determinant_prevalence,
+      n_unique_patterns_in_ball = length(selected),
+      weighted_mean_hamming = weighted_mean_hamming,
+      max_hamming_in_ball = max(selected_distances)
+    )
+  }
+  
+  steps
+}
 
 
-# ============================================================
-# 4. LEER EFA
-# ============================================================
+# Leer EFA
 
 if (!file.exists(efa_file)) {
-  
   stop(
     "No encuentro el archivo EFA: ",
     efa_file
   )
 }
 
-
-efa <- read_csv(
+efa_all <- read_csv(
   efa_file,
   show_col_types = FALSE
-) %>%
-  
-  mutate(
-    
-    bootstrap_id =
-      as.integer(bootstrap_id),
-    
-    n_factors =
-      as.integer(n_factors),
-    
-    determinant =
-      as.character(determinant),
-    
-    factor =
-      as.character(factor),
-    
-    loading =
-      as.numeric(loading)
-  )
-
-
+)
 
 required_efa <- c(
-  
+  "analysis_sample",
   "matrix_name",
-  
   "bootstrap_id",
-  
   "n_factors",
-  
   "determinant",
-  
   "factor",
-  
   "loading"
 )
 
-
 missing_efa <- setdiff(
   required_efa,
-  names(efa)
+  names(efa_all)
 )
 
-
-if (length(missing_efa) > 0) {
-  
+if (length(missing_efa)) {
   stop(
-    "Faltan columnas en 03_efa_loadings_long.csv: ",
+    "Faltan columnas en EFA: ",
     paste(
       missing_efa,
       collapse = ", "
@@ -259,801 +339,73 @@ if (length(missing_efa) > 0) {
   )
 }
 
-
-
-# ============================================================
-# 5. BOOTSTRAPS COMUNES
-# ============================================================
-
-all_boot_ids <- sort(
-  
-  intersect(
-    
-    unique(
-      kmeans$bootstrap_id
+efa_all <- efa_all %>%
+  mutate(
+    bootstrap_id = as.integer(
+      bootstrap_id
     ),
     
-    unique(
-      efa$bootstrap_id
+    n_factors = as.integer(
+      n_factors
+    ),
+    
+    determinant = as.character(
+      determinant
+    ),
+    
+    factor = as.character(
+      factor
+    ),
+    
+    loading = as.numeric(
+      loading
     )
-  )
-)
-
-
-
-if (length(all_boot_ids) == 0) {
-  
-  stop(
-    "K-means y EFA no tienen bootstrap_id en común."
-  )
-}
-
-
-
-if (is.finite(MAX_BOOTSTRAPS)) {
-  
-  boot_ids <- head(
-    all_boot_ids,
-    MAX_BOOTSTRAPS
-  )
-  
-} else {
-  
-  boot_ids <- all_boot_ids
-}
-
-
-
-kmeans <- kmeans %>%
-  
+  ) %>%
   filter(
-    bootstrap_id %in%
-      boot_ids
+    analysis_sample %in%
+      ANALYSIS_SAMPLES,
+    
+    matrix_name %in%
+      MATRICES_TO_RUN,
+    
+    n_factors %in%
+      EFA_POOL_GRID,
+    
+    bootstrap_id <=
+      MAX_BOOTSTRAPS
   )
 
-
-
-efa <- efa %>%
-  
-  filter(
-    bootstrap_id %in%
-      boot_ids
-  )
-
-
-
-cat(
-  "\nBootstraps usados: ",
-  length(boot_ids),
-  "\n",
-  sep = ""
+boot_ids <- seq_len(
+  MAX_BOOTSTRAPS
 )
-
-
-
-# ============================================================
-# 6. UNIVERSO DE 32 DETERMINANTES
-# ============================================================
 
 determinants <- sort(
-  
-  union(
-    
-    unique(
-      kmeans$determinant
-    ),
-    
-    unique(
-      efa$determinant
-    )
+  unique(
+    efa_all$determinant
   )
 )
 
-
-
 if (length(determinants) != 32) {
-  
   stop(
-    "Esperaba 32 determinantes y encuentro ",
+    "Esperaba 32 determinantes en EFA y encuentro ",
     length(determinants),
     "."
   )
 }
 
 
-
-# ============================================================
-# 7. CREAR UNA ESTRUCTURA COMÚN
-# ============================================================
-#
-# Queremos acabar con:
-#
-# method
-# matrix_name
-# bootstrap_id
-# k_candidate
-# element_id
-# determinant
-# score
-#
-#
-# KMEANS
-# ------
-#
-# element_id = cluster
-# score      = abs(valor centroide)
-#
-#
-# EFA
-# ---
-#
-# element_id = factor
-# score      = abs(loading)
-#
-#
-# Esto sigue la nota:
-#
-#          MAX(abs(x))
-#
-# y después coger los D valores más altos.
-# ============================================================
-
-
-
-# ------------------------------------------------------------
-# K-MEANS
-# ------------------------------------------------------------
-
-# ------------------------------------------------------------
-# K-MEANS
-# ------------------------------------------------------------
-#
-# La importancia de un determinante depende del significado
-# de cada transformación.
-#
-# RAW:
-#   baseline neutral = 0.5
-#   son importantes tanto valores bajos como altos:
-#
-#       score = |centro - 0.5|
-#
-#   Ejemplo:
-#       centro = 0.2 -> score = 0.3
-#       centro = 0.8 -> score = 0.3
-#
-#
-# POS:
-#   los valores originales < 0.5 ya fueron llevados a 0.5.
-#   Nos interesa cuánto sobresale por encima del baseline:
-#
-#       score = max(centro - 0.5, 0)
-#
-#
-# EXT:
-#   la propia matriz ya representa distancia respecto al
-#   punto neutral.
-#
-#       score = centro
-#
-#
-# Z_ABS:
-#   la propia matriz ya representa |z|.
-#
-#       score = centro
-#
-# ------------------------------------------------------------
-
-kmeans_scores <- kmeans %>%
-  
-  mutate(
-    
-    score = case_when(
-      
-      # RAW:
-      # importancia = alejamiento del valor neutral 0.5
-      matrix_name ==
-        "matrix_32_raw_0_1" ~
-        
-        abs(
-          center_value - 0.5
-        ),
-      
-      
-      # POS:
-      # importancia = cuánto sobresale por encima de 0.5
-      matrix_name ==
-        "matrix_32_pos_0_1" ~
-        
-        pmax(
-          center_value - 0.5,
-          0
-        ),
-      
-      
-      # EXT:
-      # ya representa extremidad respecto al centro
-      matrix_name ==
-        "matrix_32_ext_0_1" ~
-        
-        center_value,
-      
-      
-      # Z_ABS:
-      # ya representa desviación absoluta estandarizada
-      matrix_name ==
-        "matrix_32_z_abs" ~
-        
-        center_value,
-      
-      
-      # Seguridad por si apareciese alguna matriz inesperada
-      TRUE ~
-        NA_real_
-    )
-  ) %>%
-  
-  transmute(
-    
-    method =
-      "KMEANS",
-    
-    matrix_name,
-    
-    bootstrap_id,
-    
-    k_candidate =
-      k,
-    
-    element_id =
-      paste0(
-        "cluster_",
-        cluster_rank
-      ),
-    
-    determinant,
-    
-    score
-  )
-
-
-
-# ------------------------------------------------------------
-# EFA
-# ------------------------------------------------------------
-
-efa_scores <- efa %>%
-  
-  transmute(
-    
-    method =
-      "EFA",
-    
-    matrix_name,
-    
-    bootstrap_id,
-    
-    k_candidate =
-      n_factors,
-    
-    element_id =
-      factor,
-    
-    determinant,
-    
-    score =
-      abs(loading)
-  )
-
-
-
-# ------------------------------------------------------------
-# UNIR
-# ------------------------------------------------------------
-
-scores <- bind_rows(
-  
-  kmeans_scores,
-  
-  efa_scores
-)
-
-
-
-# ============================================================
-# 8. COMPLETAR LOS 32 DETERMINANTES
-# ============================================================
-#
-# Si algún EFA hubiese eliminado una variable constante,
-# la reintroducimos con score = 0.
-#
-# Así todos los patrones tienen siempre 32 posiciones.
-# ============================================================
-
-elements <- scores %>%
-  
-  distinct(
-    
-    method,
-    
-    matrix_name,
-    
-    bootstrap_id,
-    
-    k_candidate,
-    
-    element_id
-  )
-
-
-
-scores_complete <- elements %>%
-  
-  crossing(
-    determinant = determinants
-  ) %>%
-  
-  left_join(
-    
-    scores,
-    
-    by = c(
-      
-      "method",
-      
-      "matrix_name",
-      
-      "bootstrap_id",
-      
-      "k_candidate",
-      
-      "element_id",
-      
-      "determinant"
-    )
-  ) %>%
-  
-  mutate(
-    
-    score =
-      replace_na(
-        score,
-        0
-      )
-  )
-
-# ============================================================
-# DIAGNÓSTICO PARA ELEGIR D_DET
-# ============================================================
-#
-# Para cada cluster/factor:
-#
-#   1. ordenamos los 32 determinantes de mayor a menor score
-#   2. asignamos un rank:
-#
-#        rank 1  = determinante más importante
-#        rank 2  = segundo
-#        ...
-#        rank 32 = menos importante
-#
-# Después resumimos estos scores entre todos los bootstraps
-# y clusters/factores.
-#
-# Esto nos permitirá ver si aparece una caída clara, por ejemplo:
-#
-# rank 7 -> 0.55
-# rank 8 -> 0.52
-# rank 9 -> 0.30
-#
-# En ese caso D_DET = 8 tendría una justificación clara.
-#
-# Si la caída es gradual y no existe un corte evidente,
-# elegiremos D combinando estabilidad + parsimonia +
-# sensibilidad de los resultados.
-# ============================================================
-
-score_ranks <- scores_complete %>%
-  
-  group_by(
-    method,
-    matrix_name,
-    bootstrap_id,
-    k_candidate,
-    element_id
-  ) %>%
-  
-  arrange(
-    desc(score),
-    determinant,
-    .by_group = TRUE
-  ) %>%
-  
-  mutate(
-    score_rank = row_number()
-  ) %>%
-  
-  ungroup()
-
-# ============================================================
-# RESUMEN DEL SCORE POR RANK
-# ============================================================
-
-score_rank_summary <- score_ranks %>%
-  
-  group_by(
-    method,
-    matrix_name,
-    k_candidate,
-    score_rank
-  ) %>%
-  
-  summarise(
-    
-    mean_score =
-      mean(
-        score,
-        na.rm = TRUE
-      ),
-    
-    median_score =
-      median(
-        score,
-        na.rm = TRUE
-      ),
-    
-    q25_score =
-      quantile(
-        score,
-        0.25,
-        na.rm = TRUE
-      ),
-    
-    q75_score =
-      quantile(
-        score,
-        0.75,
-        na.rm = TRUE
-      ),
-    
-    .groups = "drop"
-  ) %>%
-  
-  group_by(
-    method,
-    matrix_name,
-    k_candidate
-  ) %>%
-  
-  arrange(
-    score_rank,
-    .by_group = TRUE
-  ) %>%
-  
-  mutate(
-    
-    # Cuánto cae el score al pasar del determinante
-    # anterior al actual.
-    drop_from_previous_rank =
-      lag(mean_score) -
-      mean_score
-  ) %>%
-  
-  ungroup()
-
-# ============================================================
-# 9. CREAR PATRONES BINARIOS
-# ============================================================
-#
-# Para cada:
-#
-#   método
-#   matriz
-#   bootstrap
-#   K
-#   cluster/factor
-#   D_DET
-#
-# cogemos los D_DET scores más altos.
-#
-#
-# Ejemplo D_DET = 8:
-#
-#  1 0 1 0 0 1 ... 0
-#
-# exactamente 8 posiciones quedan a 1.
-#
-#
-# En caso de empate:
-#
-#   1. score más alto
-#   2. nombre del determinante
-#
-# para que sea reproducible.
-# ============================================================
-
-binary_patterns <- map_dfr(
-  
-  D_DET_GRID,
-  
-  function(d_det_current) {
-    
-    
-    scores_complete %>%
-      
-      group_by(
-        
-        method,
-        
-        matrix_name,
-        
-        bootstrap_id,
-        
-        k_candidate,
-        
-        element_id
-      ) %>%
-      
-      arrange(
-        
-        desc(score),
-        
-        determinant,
-        
-        .by_group = TRUE
-      ) %>%
-      
-      slice_head(
-        n =
-          d_det_current
-      ) %>%
-      
-      summarise(
-        
-        d_det =
-          d_det_current,
-        
-        
-        active_determinants =
-          paste(
-            
-            sort(
-              determinant
-            ),
-            
-            collapse = "; "
-          ),
-        
-        
-        pattern_key =
-          paste0(
-            
-            as.integer(
-              
-              determinants %in%
-                determinant
-            ),
-            
-            collapse = ""
-          ),
-        
-        
-        mean_selected_score =
-          mean(
-            score,
-            na.rm = TRUE
-          ),
-        
-        
-        min_selected_score =
-          min(
-            score,
-            na.rm = TRUE
-          ),
-        
-        
-        max_selected_score =
-          max(
-            score,
-            na.rm = TRUE
-          ),
-        
-        
-        .groups =
-          "drop"
-      )
-  }
-)
-
-
-
-# ============================================================
-# 10. FRECUENCIA DE CADA PATRÓN
-# ============================================================
-#
-# Ejemplo:
-#
-# K = 4
-# 100 bootstraps
-#
-# -> tenemos 400 clusters/factores.
-#
-# Si un patrón aparece 30 veces:
-#
-# N = 30
-#
-# ============================================================
-
-pattern_frequency <- binary_patterns %>%
-  
-  count(
-    
-    method,
-    
-    matrix_name,
-    
-    k_candidate,
-    
-    d_det,
-    
-    pattern_key,
-    
-    active_determinants,
-    
-    name = "N"
-  ) %>%
-  
-  group_by(
-    
-    method,
-    
-    matrix_name,
-    
-    k_candidate,
-    
-    d_det
-  ) %>%
-  
-  mutate(
-    
-    total_pattern_occurrences =
-      sum(N),
-    
-    
-    frequency_pct =
-      100 *
-      N /
-      total_pattern_occurrences
-  ) %>%
-  
-  ungroup() %>%
-  
-  arrange(
-    
-    method,
-    
-    matrix_name,
-    
-    k_candidate,
-    
-    d_det,
-    
-    desc(N)
-  )
-
-
-
-# ============================================================
-# 11. CONVERTIR pattern_key A MATRIZ 0/1
-# ============================================================
-
-patterns_to_matrix <- function(keys) {
-  
-  
-  mat <- do.call(
-    
-    rbind,
-    
-    lapply(
-      
-      strsplit(
-        keys,
-        ""
-      ),
-      
-      as.integer
-    )
-  )
-  
-  
-  colnames(mat) <-
-    determinants
-  
-  
-  mat
-}
-
-
-
-# ============================================================
-# 12. DISTANCIA HAMMING
-# ============================================================
-
-hamming_distance <- function(
-    center,
-    mat
-) {
-  
-  
-  rowSums(
-    
-    sweep(
-      
-      mat,
-      
-      2,
-      
-      center,
-      
-      FUN = "!="
-    )
-  )
-}
-
-
-
-# ============================================================
-# 13. INTERPRETACIÓN DE HAMMING
-# ============================================================
-#
-# Como todos los patrones de un mismo D_DET
-# tienen EXACTAMENTE D_DET unos:
-#
-#
-# Hamming =
-#
-#   2 × (D_DET - nº determinantes comunes)
-#
-#
-# Ejemplo D_DET = 8:
-#
-# Hamming 0 -> 8 comunes -> 100%
-#
-# Hamming 2 -> 7 comunes -> 87.5%
-#
-# Hamming 4 -> 6 comunes -> 75%
-#
-# Hamming 6 -> 5 comunes -> 62.5%
-#
-# Hamming 8 -> 4 comunes -> 50%
-#
-# Hamming 10 -> 3 comunes -> 37.5%
-#
-#
-# IMPORTANTE:
-#
-# Las distancias reales son siempre pares.
-#
-# Por tanto:
-#
-# D=0 y D=1 producen lo mismo.
-# D=2 y D=3 producen lo mismo.
-# etc.
-#
-# Conservamos 0:10 porque así está definido
-# en el checklist.
-# ============================================================
+# Interpretación de los radios Hamming.
+#
+# Cada patrón tiene exactamente D determinantes activos.
+# Por ello, la distancia máxima posible entre dos firmas depende de D.
+# Se calcula también el número mínimo de determinantes comunes que
+# implica cada combinación D × Hamming.
 
 hamming_interpretation <- crossing(
-  
-  d_det =
-    D_DET_GRID,
-  
-  d_hamming =
-    D_HAMMING_GRID
-  
+  d_det = D_DET_GRID,
+  d_hamming = D_HAMMING_GRID
 ) %>%
-  
   mutate(
-    
     max_possible_hamming =
       2 *
       pmin(
@@ -1061,35 +413,21 @@ hamming_interpretation <- crossing(
         32 - d_det
       ),
     
-    
     effective_hamming_radius =
       pmin(
-        
-        2 *
-          floor(
-            d_hamming /
-              2
-          ),
-        
+        d_hamming,
         max_possible_hamming
       ),
-    
     
     min_common_determinants =
       d_det -
       effective_hamming_radius /
       2,
     
-    
     min_common_pct =
       100 *
       min_common_determinants /
       d_det,
-    
-    
-    odd_radius_redundant =
-      d_hamming %% 2 == 1,
-    
     
     radius_can_cover_any_pattern =
       d_hamming >=
@@ -1097,1892 +435,1422 @@ hamming_interpretation <- crossing(
   )
 
 
+# Contenedores de resultados
 
-# ============================================================
-# 14. GREEDY SECUENCIAL
-# ============================================================
-#
-# Para una combinación:
-#
-#   método
-#   matriz
-#   K
-#   D_DET
-#   D_HAMMING
-#
-#
-# hacemos:
-#
-# Prototipo 1
-# ------------
-#
-# escoger patrón libre más frecuente
-#          ↓
-# crear bola Hamming
-#          ↓
-# cubrir patrones
-#          ↓
-# calcular cobertura
-#
-#
-# Prototipo 2
-# ------------
-#
-# coger el patrón más frecuente
-# ENTRE LOS QUE QUEDAN
-#
-# etc.
-#
-#
-# Paramos:
-#
-#   - si todo está cubierto
-#   - o al llegar a K prototipos
-#
-# ============================================================
-
-run_greedy_sequence <- function(
-    
-  patterns,
-  
-  frequencies,
-  
-  n_prototypes,
-  
-  d_hamming
-) {
-  
-  
-  used <- rep(
-    FALSE,
-    nrow(patterns)
-  )
-  
-  
-  steps <- vector(
-    "list",
-    n_prototypes
-  )
-  
-  
-  cumulative_frequency <- 0
-  
-  
-  
-  for (
-    prototype_id in
-    seq_len(
-      n_prototypes
-    )
-  ) {
-    
-    
-    # --------------------------------------------------------
-    # Si ya hemos cubierto todo
-    # --------------------------------------------------------
-    
-    if (all(used)) {
-      
-      break
-    }
-    
-    
-    
-    # --------------------------------------------------------
-    # Patrón libre más frecuente
-    # --------------------------------------------------------
-    
-    candidates <- which(
-      !used
-    )
-    
-    
-    center_idx <- candidates[
-      
-      which.max(
-        
-        frequencies[
-          candidates
-        ]
-      )
-    ]
-    
-    
-    
-    center <- patterns[
-      
-      center_idx,
-      
-      ,
-      
-      drop = TRUE
-    ]
-    
-    
-    
-    # --------------------------------------------------------
-    # Patrones que todavía están libres
-    # --------------------------------------------------------
-    
-    free_idx <- which(
-      !used
-    )
-    
-    
-    free_patterns <- patterns[
-      
-      free_idx,
-      
-      ,
-      
-      drop = FALSE
-    ]
-    
-    
-    
-    # --------------------------------------------------------
-    # Distancia Hamming al centro
-    # --------------------------------------------------------
-    
-    free_distances <- hamming_distance(
-      
-      center,
-      
-      free_patterns
-    )
-    
-    
-    
-    # --------------------------------------------------------
-    # Bola de radio D_HAMMING
-    # --------------------------------------------------------
-    
-    selected_local <- which(
-      
-      free_distances <=
-        d_hamming
-    )
-    
-    
-    selected <- free_idx[
-      selected_local
-    ]
-    
-    
-    selected_distances <-
-      free_distances[
-        selected_local
-      ]
-    
-    
-    
-    # --------------------------------------------------------
-    # Cobertura incremental
-    # --------------------------------------------------------
-    
-    incremental_frequency <- sum(
-      
-      frequencies[
-        selected
-      ],
-      
-      na.rm = TRUE
-    )
-    
-    
-    
-    cumulative_frequency <-
-      
-      cumulative_frequency +
-      incremental_frequency
-    
-    
-    
-    # --------------------------------------------------------
-    # Marcar patrones cubiertos
-    # --------------------------------------------------------
-    
-    used[
-      selected
-    ] <- TRUE
-    
-    
-    
-    # ========================================================
-    # % DE APARICIÓN DE CADA DETERMINANTE DENTRO DE LA BOLA
-    # ========================================================
-    #
-    # IMPORTANTE:
-    #
-    # Ponderamos por frecuencia.
-    #
-    # Un patrón que aparece 20 veces pesa 20.
-    #
-    # Un patrón que aparece 1 vez pesa 1.
-    #
-    # ========================================================
-    
-    member_matrix <- patterns[
-      
-      selected,
-      
-      ,
-      
-      drop = FALSE
-    ]
-    
-    
-    member_weights <-
-      frequencies[
-        selected
-      ]
-    
-    
-    
-    weighted_member_matrix <- sweep(
-      
-      member_matrix,
-      
-      1,
-      
-      member_weights,
-      
-      FUN = "*"
-    )
-    
-    
-    
-    determinant_prevalence <-
-      
-      colSums(
-        
-        weighted_member_matrix,
-        
-        na.rm = TRUE
-        
-      ) /
-      
-      sum(
-        
-        member_weights,
-        
-        na.rm = TRUE
-      )
-    
-    
-    
-    # --------------------------------------------------------
-    # Distancia media de los patrones dentro de la bola
-    # --------------------------------------------------------
-    
-    weighted_mean_hamming <- if (
-      
-      length(
-        selected_distances
-      ) > 0
-      
-    ) {
-      
-      
-      weighted.mean(
-        
-        selected_distances,
-        
-        w =
-          member_weights
-      )
-      
-      
-    } else {
-      
-      
-      NA_real_
-    }
-    
-    
-    
-    # --------------------------------------------------------
-    # Guardar paso
-    # --------------------------------------------------------
-    
-    steps[[prototype_id]] <- list(
-      
-      prototype =
-        prototype_id,
-      
-      
-      center_index =
-        center_idx,
-      
-      
-      center =
-        center,
-      
-      
-      members =
-        selected,
-      
-      
-      center_frequency =
-        frequencies[
-          center_idx
-        ],
-      
-      
-      incremental_frequency =
-        incremental_frequency,
-      
-      
-      cumulative_frequency =
-        cumulative_frequency,
-      
-      
-      determinant_prevalence =
-        determinant_prevalence,
-      
-      
-      n_unique_patterns_in_ball =
-        length(
-          selected
-        ),
-      
-      
-      weighted_mean_hamming =
-        weighted_mean_hamming,
-      
-      
-      max_hamming_in_ball =
-        if (
-          length(
-            selected_distances
-          ) > 0
-        ) {
-          
-          max(
-            selected_distances
-          )
-          
-        } else {
-          
-          NA_real_
-        }
-    )
-  }
-  
-  
-  
-  list(
-    
-    steps =
-      steps,
-    
-    used =
-      used
-  )
-}
-
-
-
-# ============================================================
-# 15. EJECUTAR GREEDY
-# ============================================================
-
+binary_patterns_list <- list()
+pattern_frequency_list <- list()
 prototype_steps_list <- list()
-
 ball_prevalence_list <- list()
-
 coverage_summary_list <- list()
+score_rank_summary_list <- list()
+candidate_contribution_list <- list()
+
+sample_counter <- 0L
+greedy_counter <- 0L
 
 
-run_counter <- 0L
+# Procesar cada muestra de análisis
 
-
-
-# ------------------------------------------------------------
-# Una combinación por:
-#
-# método × matriz × K × D_DET
-# ------------------------------------------------------------
-
-groups <- pattern_frequency %>%
+for (sample_name in ANALYSIS_SAMPLES) {
+  sample_counter <-
+    sample_counter + 1L
   
-  distinct(
-    
-    method,
-    
-    matrix_name,
-    
-    k_candidate,
-    
-    d_det
-  ) %>%
-  
-  arrange(
-    
-    method,
-    
-    matrix_name,
-    
-    k_candidate,
-    
-    d_det
-  )
-
-
-
-for (
-  g in seq_len(
-    nrow(groups)
-  )
-) {
-  
-  
-  group_current <-
-    groups[
-      g,
-    ]
-  
-  
-  
-  pattern_df <- pattern_frequency %>%
-    
-    filter(
-      
-      method ==
-        group_current$method,
-      
-      
-      matrix_name ==
-        group_current$matrix_name,
-      
-      
-      k_candidate ==
-        group_current$k_candidate,
-      
-      
-      d_det ==
-        group_current$d_det
-    ) %>%
-    
-    arrange(
-      
-      desc(N),
-      
-      pattern_key
-    )
-  
-  
-  
-  pattern_matrix <- patterns_to_matrix(
-    
-    pattern_df$
-      pattern_key
+  cat(
+    "\nMUESTRA: ",
+    sample_name,
+    "\n",
+    sep = ""
   )
   
+  kmeans_file <- file.path(
+    kmeans_dir,
+    sample_name,
+    "kmeans_centers_long.csv.gz"
+  )
   
-  
-  frequencies <-
-    pattern_df$N
-  
-  
-  
-  total_frequency <-
-    sum(
-      frequencies
+  if (!file.exists(kmeans_file)) {
+    stop(
+      "No encuentro K-means para ",
+      sample_name,
+      ": ",
+      kmeans_file
     )
-  
-  
-  
-  n_unique_patterns <-
-    nrow(
-      pattern_df
-    )
-  
-  
-  
-  # ==========================================================
-  # Nº máximo de prototipos = K que estamos evaluando
-  # ==========================================================
-  
-  n_prototypes_current <-
-    
-    as.integer(
-      group_current$
-        k_candidate
-    )
-  
-  
-  
-  # ==========================================================
-  # DISTANCIA HAMMING
-  # ==========================================================
-  
-  for (
-    d_hamming_current in
-    D_HAMMING_GRID
-  ) {
-    
-    
-    run_counter <-
-      run_counter +
-      1L
-    
-    
-    
-    result <- run_greedy_sequence(
-      
-      patterns =
-        pattern_matrix,
-      
-      
-      frequencies =
-        frequencies,
-      
-      
-      n_prototypes =
-        n_prototypes_current,
-      
-      
-      d_hamming =
-        d_hamming_current
-    )
-    
-    
-    
-    # ========================================================
-    # 15A. COBERTURA PASO A PASO
-    # ========================================================
-    
-    steps_df <- map_dfr(
-      
-      result$steps,
-      
-      function(step) {
-        
-        
-        if (is.null(step)) {
-          
-          return(NULL)
-        }
-        
-        
-        
-        active_center <- determinants[
-          
-          step$center ==
-            1
-        ]
-        
-        
-        
-        tibble(
-          
-          method =
-            group_current$method,
-          
-          
-          matrix_name =
-            group_current$matrix_name,
-          
-          
-          k_candidate =
-            group_current$k_candidate,
-          
-          
-          d_det =
-            group_current$d_det,
-          
-          
-          d_hamming =
-            d_hamming_current,
-          
-          
-          prototype =
-            step$prototype,
-          
-          
-          center_pattern_key =
-            paste0(
-              
-              step$center,
-              
-              collapse = ""
-            ),
-          
-          
-          center_active_determinants =
-            paste(
-              
-              active_center,
-              
-              collapse = "; "
-            ),
-          
-          
-          center_frequency =
-            step$
-            center_frequency,
-          
-          
-          center_frequency_pct =
-            100 *
-            step$
-            center_frequency /
-            total_frequency,
-          
-          
-          n_unique_patterns_in_ball =
-            step$
-            n_unique_patterns_in_ball,
-          
-          
-          incremental_covered_frequency =
-            step$
-            incremental_frequency,
-          
-          
-          incremental_covered_pct =
-            100 *
-            step$
-            incremental_frequency /
-            total_frequency,
-          
-          
-          cumulative_covered_frequency =
-            step$
-            cumulative_frequency,
-          
-          
-          cumulative_covered_pct =
-            100 *
-            step$
-            cumulative_frequency /
-            total_frequency,
-          
-          
-          weighted_mean_hamming =
-            step$
-            weighted_mean_hamming,
-          
-          
-          max_hamming_in_ball =
-            step$
-            max_hamming_in_ball,
-          
-          
-          total_pattern_occurrences =
-            total_frequency,
-          
-          
-          n_unique_patterns =
-            n_unique_patterns,
-          
-          
-          n_bootstraps =
-            length(
-              boot_ids
-            )
-        )
-      }
-    )
-    
-    
-    
-    prototype_steps_list[[
-      run_counter
-    ]] <- steps_df
-    
-    
-    
-    # ========================================================
-    # 15B. % DETERMINANTES DENTRO DE CADA BOLA
-    # ========================================================
-    
-    ball_df <- map_dfr(
-      
-      result$steps,
-      
-      function(step) {
-        
-        
-        if (is.null(step)) {
-          
-          return(NULL)
-        }
-        
-        
-        
-        tibble(
-          
-          method =
-            group_current$method,
-          
-          
-          matrix_name =
-            group_current$matrix_name,
-          
-          
-          k_candidate =
-            group_current$k_candidate,
-          
-          
-          d_det =
-            group_current$d_det,
-          
-          
-          d_hamming =
-            d_hamming_current,
-          
-          
-          prototype =
-            step$prototype,
-          
-          
-          determinant =
-            determinants,
-          
-          
-          # ¿Está el determinante en el centro?
-          center_selected =
-            as.integer(
-              step$center
-            ),
-          
-          
-          # Proporción dentro de la bola
-          prop_active_in_ball =
-            as.numeric(
-              step$
-                determinant_prevalence
-            ),
-          
-          
-          pct_active_in_ball =
-            100 *
-            prop_active_in_ball,
-          
-          
-          covered_frequency =
-            step$
-            incremental_frequency,
-          
-          
-          n_unique_patterns_in_ball =
-            step$
-            n_unique_patterns_in_ball
-        )
-      }
-    )
-    
-    
-    
-    ball_prevalence_list[[
-      run_counter
-    ]] <- ball_df
-    
-    
-    
-    # ========================================================
-    # 15C. COBERTURA FINAL DE ESTE K
-    # ========================================================
-    
-    if (nrow(steps_df) > 0) {
-      
-      
-      last_step <- steps_df %>%
-        
-        slice_tail(
-          n = 1
-        )
-      
-      
-      
-      coverage_summary_list[[
-        run_counter
-      ]] <- tibble(
-        
-        method =
-          group_current$method,
-        
-        
-        matrix_name =
-          group_current$matrix_name,
-        
-        
-        k_candidate =
-          group_current$k_candidate,
-        
-        
-        d_det =
-          group_current$d_det,
-        
-        
-        d_hamming =
-          d_hamming_current,
-        
-        
-        n_prototypes_used =
-          max(
-            steps_df$
-              prototype
-          ),
-        
-        
-        n_bootstraps =
-          length(
-            boot_ids
-          ),
-        
-        
-        n_unique_patterns =
-          n_unique_patterns,
-        
-        
-        total_pattern_occurrences =
-          total_frequency,
-        
-        
-        final_covered_frequency =
-          last_step$
-          cumulative_covered_frequency,
-        
-        
-        final_covered_pct =
-          last_step$
-          cumulative_covered_pct,
-        
-        
-        final_uncovered_frequency =
-          total_frequency -
-          last_step$
-          cumulative_covered_frequency,
-        
-        
-        final_uncovered_pct =
-          100 -
-          last_step$
-          cumulative_covered_pct,
-        
-        
-        first_prototype_covered_pct =
-          steps_df$
-          incremental_covered_pct[
-            steps_df$prototype == 1
-          ][1],
-        
-        
-        last_prototype_increment_pct =
-          last_step$
-          incremental_covered_pct
-      )
-      
-      
-    } else {
-      
-      
-      coverage_summary_list[[
-        run_counter
-      ]] <- tibble(
-        
-        method =
-          group_current$method,
-        
-        
-        matrix_name =
-          group_current$matrix_name,
-        
-        
-        k_candidate =
-          group_current$k_candidate,
-        
-        
-        d_det =
-          group_current$d_det,
-        
-        
-        d_hamming =
-          d_hamming_current,
-        
-        
-        n_prototypes_used =
-          0L,
-        
-        
-        n_bootstraps =
-          length(
-            boot_ids
-          ),
-        
-        
-        n_unique_patterns =
-          n_unique_patterns,
-        
-        
-        total_pattern_occurrences =
-          total_frequency,
-        
-        
-        final_covered_frequency =
-          0,
-        
-        
-        final_covered_pct =
-          0,
-        
-        
-        final_uncovered_frequency =
-          total_frequency,
-        
-        
-        final_uncovered_pct =
-          100,
-        
-        
-        first_prototype_covered_pct =
-          NA_real_,
-        
-        
-        last_prototype_increment_pct =
-          NA_real_
-      )
-    }
   }
-}
-
-
-
-# ============================================================
-# 16. UNIR RESULTADOS
-# ============================================================
-
-greedy_prototype_steps <- bind_rows(
   
-  prototype_steps_list
-)
-
-
-
-greedy_ball_determinant_prevalence <- bind_rows(
-  
-  ball_prevalence_list
-)
-
-
-
-greedy_coverage_summary <- bind_rows(
-  
-  coverage_summary_list
-)
-
-
-
-# ============================================================
-# 17. AÑADIR INTERPRETACIÓN DE HAMMING
-# ============================================================
-
-greedy_prototype_steps <- greedy_prototype_steps %>%
-  
-  left_join(
-    
-    hamming_interpretation,
-    
-    by = c(
-      
-      "d_det",
-      
-      "d_hamming"
-    )
+  kmeans_sample <- read_csv(
+    kmeans_file,
+    show_col_types = FALSE
   )
-
-
-
-greedy_ball_determinant_prevalence <-
   
-  greedy_ball_determinant_prevalence %>%
-  
-  left_join(
-    
-    hamming_interpretation,
-    
-    by = c(
-      
-      "d_det",
-      
-      "d_hamming"
-    )
+  required_kmeans <- c(
+    "matrix_name",
+    "bootstrap_id",
+    "k",
+    "cluster_rank",
+    "determinant",
+    "center_value"
   )
-
-
-
-greedy_coverage_summary <-
   
-  greedy_coverage_summary %>%
-  
-  left_join(
-    
-    hamming_interpretation,
-    
-    by = c(
-      
-      "d_det",
-      
-      "d_hamming"
-    )
+  missing_kmeans <- setdiff(
+    required_kmeans,
+    names(kmeans_sample)
   )
-
-
-
-# ============================================================
-# 18. COMPARACIÓN DE K = 4,...,8
-# ============================================================
-#
-# Para cada:
-#
-# método
-# matriz
-# D_DET
-# D_HAMMING
-#
-# calculamos cuánto cambia la cobertura al pasar:
-#
-# K4 -> K5
-# K5 -> K6
-# K6 -> K7
-# K7 -> K8
-#
-#
-# Esto permite buscar rendimientos decrecientes.
-#
-# NO seleccionamos K automáticamente.
-# ============================================================
-
-greedy_k_comparison <- greedy_coverage_summary %>%
   
-  group_by(
-    
-    method,
-    
-    matrix_name,
-    
-    d_det,
-    
-    d_hamming
-  ) %>%
-  
-  arrange(
-    
-    k_candidate,
-    
-    .by_group = TRUE
-  ) %>%
-  
-  mutate(
-    
-    delta_coverage_vs_previous_k =
-      
-      final_covered_pct -
-      
-      lag(
-        final_covered_pct
-      ),
-    
-    
-    delta_unique_patterns_vs_previous_k =
-      
-      n_unique_patterns -
-      
-      lag(
-        n_unique_patterns
+  if (length(missing_kmeans)) {
+    stop(
+      "Faltan columnas K-means en ",
+      sample_name,
+      ": ",
+      paste(
+        missing_kmeans,
+        collapse = ", "
       )
-  ) %>%
+    )
+  }
   
-  ungroup()
-
-
-
-# ============================================================
-# 19. DIAGNÓSTICO DE UMBRALES DE COBERTURA
-# ============================================================
-#
-# Pregunta:
-#
-# ¿con cuántos prototipos llegamos por primera vez a
-# 80%, 85%, 90% o 95%?
-#
-#
-# Esto NO decide automáticamente el mejor K.
-# ============================================================
-
-coverage_threshold_table <-
-  
-  greedy_prototype_steps %>%
-  
-  select(
-    
-    method,
-    
-    matrix_name,
-    
-    k_candidate,
-    
-    d_det,
-    
-    d_hamming,
-    
-    prototype,
-    
-    cumulative_covered_pct
-  ) %>%
-  
-  crossing(
-    
-    coverage_threshold =
-      COVERAGE_THRESHOLDS
-  ) %>%
-  
-  group_by(
-    
-    method,
-    
-    matrix_name,
-    
-    k_candidate,
-    
-    d_det,
-    
-    d_hamming,
-    
-    coverage_threshold
-  ) %>%
-  
-  summarise(
-    
-    first_prototype_reaching_threshold =
+  kmeans_sample <- kmeans_sample %>%
+    mutate(
+      analysis_sample =
+        sample_name,
       
-      if (
-        
-        any(
-          
-          cumulative_covered_pct >=
-          coverage_threshold,
-          
-          na.rm = TRUE
-        )
-        
-      ) {
-        
-        
-        min(
-          
-          prototype[
-            
-            cumulative_covered_pct >=
-              coverage_threshold
-          ]
-        )
-        
-        
-      } else {
-        
-        
-        NA_integer_
-      },
-    
-    
-    max_coverage_available =
-      
-      max(
-        
-        cumulative_covered_pct,
-        
-        na.rm = TRUE
+      bootstrap_id = as.integer(
+        bootstrap_id
       ),
-    
-    
-    .groups =
-      "drop"
+      
+      k = as.integer(
+        k
+      ),
+      
+      cluster_rank = as.integer(
+        cluster_rank
+      ),
+      
+      determinant = as.character(
+        determinant
+      ),
+      
+      center_value = as.numeric(
+        center_value
+      )
+    ) %>%
+    filter(
+      matrix_name %in%
+        MATRICES_TO_RUN,
+      
+      k %in%
+        KMEANS_POOL_GRID,
+      
+      bootstrap_id %in%
+        boot_ids
+    )
+  
+  efa_sample <- efa_all %>%
+    filter(
+      analysis_sample ==
+        sample_name,
+      
+      bootstrap_id %in%
+        boot_ids
+    )
+  
+  if (!nrow(kmeans_sample)) {
+    stop(
+      "No quedan resultados K-means para ",
+      sample_name,
+      "."
+    )
+  }
+  
+  if (!nrow(efa_sample)) {
+    stop(
+      "No quedan resultados EFA para ",
+      sample_name,
+      "."
+    )
+  }
+  
+  
+  # Comprobar disponibilidad de los bootstraps.
+  
+  kmeans_boots <- sort(
+    unique(
+      kmeans_sample$bootstrap_id
+    )
   )
-
-
-
-# ============================================================
-# 20. SALIDA COMPACTA MATRIZ × MÉTODO
-# ============================================================
-#
-# Esto genera una tabla tipo:
-#
-# K | D_DET | HAMMING | EFA_RAW | KMEANS_RAW | ...
-#
-# útil para la comparación posterior.
-# ============================================================
-
-greedy_matrix_x_method <-
   
-  greedy_coverage_summary %>%
+  efa_boots <- sort(
+    unique(
+      efa_sample$bootstrap_id
+    )
+  )
   
-  mutate(
-    
-    matrix_short =
-      case_when(
-        
+  if (
+    length(
+      setdiff(
+        boot_ids,
+        kmeans_boots
+      )
+    )
+  ) {
+    stop(
+      "Faltan bootstraps K-means en ",
+      sample_name,
+      "."
+    )
+  }
+  
+  if (
+    length(
+      setdiff(
+        boot_ids,
+        efa_boots
+      )
+    )
+  ) {
+    warning(
+      "Hay bootstraps sin cargas EFA en ",
+      sample_name,
+      ". Se trabajará con los ajustes EFA disponibles."
+    )
+  }
+  
+  
+  # Scores de los determinantes para K-means.
+  #
+  # RAW:
+  # distancia absoluta respecto al punto neutral 0.5.
+  #
+  # POS:
+  # solo se considera la desviación positiva respecto a 0.5.
+  #
+  # EXT y Z_ABS:
+  # el propio centro ya representa intensidad/extremidad.
+  
+  kmeans_scores <- kmeans_sample %>%
+    mutate(
+      score = case_when(
         matrix_name ==
           "matrix_32_raw_0_1" ~
-          "RAW",
+          abs(
+            center_value - 0.5
+          ),
         
         matrix_name ==
           "matrix_32_pos_0_1" ~
-          "POS",
+          pmax(
+            center_value - 0.5,
+            0
+          ),
         
         matrix_name ==
           "matrix_32_ext_0_1" ~
-          "EXT",
+          center_value,
         
         matrix_name ==
           "matrix_32_z_abs" ~
-          "Z_ABS",
+          center_value,
         
         TRUE ~
-          matrix_name
-      ),
-    
-    
-    method_matrix =
-      paste0(
-        method,
-        "_",
-        matrix_short
+          NA_real_
       )
-  ) %>%
+    ) %>%
+    transmute(
+      analysis_sample,
+      method = "KMEANS",
+      matrix_name,
+      bootstrap_id,
+      source_candidate = k,
+      
+      element_id = paste0(
+        "K",
+        k,
+        "_cluster_",
+        cluster_rank
+      ),
+      
+      determinant,
+      score
+    )
   
-  select(
+  
+  # En EFA se utiliza el valor absoluto de la carga factorial.
+  
+  efa_scores <- efa_sample %>%
+    transmute(
+      analysis_sample,
+      method = "EFA",
+      matrix_name,
+      bootstrap_id,
+      source_candidate = n_factors,
+      
+      element_id = paste0(
+        "F",
+        n_factors,
+        "_",
+        factor
+      ),
+      
+      determinant,
+      score = abs(
+        loading
+      )
+    )
+  
+  scores <- bind_rows(
+    kmeans_scores,
+    efa_scores
+  )
+  
+  key_cols <- c(
+    "analysis_sample",
+    "method",
+    "matrix_name",
+    "bootstrap_id",
+    "source_candidate",
+    "element_id"
+  )
+  
+  
+  # Algunos ajustes EFA pueden no devolver los 32 determinantes.
+  # Los determinantes ausentes se completan con score = 0 para poder
+  # construir firmas binarias comparables.
+  
+  element_counts <- scores %>%
+    count(
+      across(
+        all_of(
+          key_cols
+        )
+      ),
+      name = "n_determinants"
+    )
+  
+  deficient_elements <- element_counts %>%
+    filter(
+      n_determinants < 32
+    ) %>%
+    select(
+      all_of(
+        key_cols
+      )
+    )
+  
+  if (nrow(deficient_elements)) {
+    missing_scores <- deficient_elements %>%
+      crossing(
+        determinant =
+          determinants
+      ) %>%
+      anti_join(
+        scores %>%
+          select(
+            all_of(
+              key_cols
+            ),
+            determinant
+          ),
+        by = c(
+          key_cols,
+          "determinant"
+        )
+      ) %>%
+      mutate(
+        score = 0
+      )
     
-    k_candidate,
+    scores <- bind_rows(
+      scores,
+      missing_scores
+    )
+  }
+  
+  check_counts <- scores %>%
+    count(
+      across(
+        all_of(
+          key_cols
+        )
+      ),
+      name = "n_determinants"
+    )
+  
+  if (
+    any(
+      check_counts$n_determinants <
+      max(D_DET_GRID)
+    )
+  ) {
+    stop(
+      "Hay elementos con menos determinantes de los necesarios en ",
+      sample_name,
+      "."
+    )
+  }
+  
+  
+  # Diagnóstico del score según posición en el ranking de determinantes.
+  
+  score_rank_summary <- scores %>%
+    group_by(
+      across(
+        all_of(
+          key_cols
+        )
+      )
+    ) %>%
+    arrange(
+      desc(score),
+      determinant,
+      .by_group = TRUE
+    ) %>%
+    mutate(
+      score_rank =
+        row_number()
+    ) %>%
+    ungroup() %>%
+    group_by(
+      analysis_sample,
+      method,
+      matrix_name,
+      score_rank
+    ) %>%
+    summarise(
+      mean_score = mean(
+        score,
+        na.rm = TRUE
+      ),
+      
+      median_score = median(
+        score,
+        na.rm = TRUE
+      ),
+      
+      q25_score = quantile(
+        score,
+        0.25,
+        na.rm = TRUE
+      ),
+      
+      q75_score = quantile(
+        score,
+        0.75,
+        na.rm = TRUE
+      ),
+      
+      .groups = "drop"
+    )
+  
+  score_rank_summary_list[
+    [sample_counter]
+  ] <- score_rank_summary
+  
+  
+  # Construir firmas binarias.
+  #
+  # Para cada cluster/factor y cada D se seleccionan los D determinantes
+  # con mayor score. La firma binaria contiene:
+  # 1 = determinante seleccionado
+  # 0 = determinante no seleccionado.
+  
+  binary_patterns <- map_dfr(
+    D_DET_GRID,
+    function(d_det_current) {
+      scores %>%
+        group_by(
+          across(
+            all_of(
+              key_cols
+            )
+          )
+        ) %>%
+        arrange(
+          desc(score),
+          determinant,
+          .by_group = TRUE
+        ) %>%
+        slice_head(
+          n = d_det_current
+        ) %>%
+        summarise(
+          d_det =
+            d_det_current,
+          
+          active_determinants = paste(
+            sort(
+              determinant
+            ),
+            collapse = "; "
+          ),
+          
+          pattern_key = paste0(
+            as.integer(
+              determinants %in%
+                determinant
+            ),
+            collapse = ""
+          ),
+          
+          mean_selected_score = mean(
+            score,
+            na.rm = TRUE
+          ),
+          
+          min_selected_score = min(
+            score,
+            na.rm = TRUE
+          ),
+          
+          max_selected_score = max(
+            score,
+            na.rm = TRUE
+          ),
+          
+          .groups = "drop"
+        )
+    }
+  )
+  
+  binary_patterns_list[
+    [sample_counter]
+  ] <- binary_patterns
+  
+  
+  # Ejecutar las dos formas de ponderación del pool.
+  
+  for (weighting_current in POOL_WEIGHTINGS) {
+    binary_weighted <- binary_patterns %>%
+      mutate(
+        weighting =
+          weighting_current,
+        
+        # equal_element:
+        # cada cluster/factor tiene peso 1.
+        #
+        # equal_candidate:
+        # un candidato K/F contiene K/F elementos, por lo que cada uno
+        # recibe peso 1/K o 1/F y el candidato completo suma peso 1.
+        pattern_weight = case_when(
+          weighting_current ==
+            "equal_element" ~
+            1,
+          
+          weighting_current ==
+            "equal_candidate" ~
+            1 /
+            source_candidate,
+          
+          TRUE ~
+            NA_real_
+        )
+      )
     
+    
+    # Frecuencia/peso de cada firma binaria dentro de cada combinación.
+    
+    pattern_frequency <- binary_weighted %>%
+      group_by(
+        analysis_sample,
+        method,
+        matrix_name,
+        d_det,
+        weighting,
+        pattern_key,
+        active_determinants
+      ) %>%
+      summarise(
+        n_occurrences = n(),
+        
+        weight = sum(
+          pattern_weight,
+          na.rm = TRUE
+        ),
+        
+        .groups = "drop"
+      ) %>%
+      group_by(
+        analysis_sample,
+        method,
+        matrix_name,
+        d_det,
+        weighting
+      ) %>%
+      mutate(
+        total_pattern_occurrences = sum(
+          n_occurrences
+        ),
+        
+        total_weight = sum(
+          weight
+        ),
+        
+        frequency_pct =
+          100 *
+          weight /
+          total_weight
+      ) %>%
+      ungroup()
+    
+    pattern_frequency_list[
+      [length(pattern_frequency_list) + 1L]
+    ] <- pattern_frequency
+    
+    
+    # Diagnóstico de cuánto aporta cada K/F al pool bajo cada ponderación.
+    
+    candidate_contribution <- binary_weighted %>%
+      group_by(
+        analysis_sample,
+        method,
+        matrix_name,
+        d_det,
+        weighting,
+        source_candidate
+      ) %>%
+      summarise(
+        n_elements = n(),
+        
+        total_weight = sum(
+          pattern_weight,
+          na.rm = TRUE
+        ),
+        
+        .groups = "drop"
+      ) %>%
+      group_by(
+        analysis_sample,
+        method,
+        matrix_name,
+        d_det,
+        weighting
+      ) %>%
+      mutate(
+        weight_pct =
+          100 *
+          total_weight /
+          sum(total_weight)
+      ) %>%
+      ungroup()
+    
+    candidate_contribution_list[
+      [length(candidate_contribution_list) + 1L]
+    ] <- candidate_contribution
+    
+    
+    # Cada combinación método × matriz × D × weighting constituye
+    # un pool independiente para Greedy.
+    
+    groups <- pattern_frequency %>%
+      distinct(
+        analysis_sample,
+        method,
+        matrix_name,
+        d_det,
+        weighting
+      )
+    
+    for (g in seq_len(nrow(groups))) {
+      group_current <- groups[
+        g,
+      ]
+      
+      pattern_df <- pattern_frequency %>%
+        filter(
+          analysis_sample ==
+            group_current$analysis_sample,
+          
+          method ==
+            group_current$method,
+          
+          matrix_name ==
+            group_current$matrix_name,
+          
+          d_det ==
+            group_current$d_det,
+          
+          weighting ==
+            group_current$weighting
+        ) %>%
+        arrange(
+          desc(weight),
+          pattern_key
+        )
+      
+      pattern_matrix <- patterns_to_matrix(
+        pattern_df$pattern_key,
+        determinants
+      )
+      
+      frequencies <-
+        pattern_df$weight
+      
+      total_frequency <- sum(
+        frequencies
+      )
+      
+      n_unique_patterns <- nrow(
+        pattern_df
+      )
+      
+      
+      # Ejecutar Greedy para cada radio Hamming.
+      
+      for (d_hamming_current in D_HAMMING_GRID) {
+        greedy_counter <-
+          greedy_counter + 1L
+        
+        result_steps <- run_greedy_sequence(
+          patterns =
+            pattern_matrix,
+          
+          frequencies =
+            frequencies,
+          
+          max_prototypes =
+            MAX_GREEDY_PROTOTYPES,
+          
+          d_hamming =
+            d_hamming_current
+        )
+        
+        
+        # Evolución de cobertura prototipo a prototipo.
+        
+        steps_df <- map_dfr(
+          result_steps,
+          function(step) {
+            if (is.null(step)) {
+              return(NULL)
+            }
+            
+            active_center <- determinants[
+              step$center == 1
+            ]
+            
+            tibble(
+              analysis_sample =
+                group_current$analysis_sample,
+              
+              weighting =
+                group_current$weighting,
+              
+              method =
+                group_current$method,
+              
+              matrix_name =
+                group_current$matrix_name,
+              
+              d_det =
+                group_current$d_det,
+              
+              d_hamming =
+                d_hamming_current,
+              
+              prototype =
+                step$prototype,
+              
+              center_pattern_key = paste0(
+                step$center,
+                collapse = ""
+              ),
+              
+              center_active_determinants = paste(
+                active_center,
+                collapse = "; "
+              ),
+              
+              center_weight =
+                step$center_frequency,
+              
+              center_weight_pct =
+                100 *
+                step$center_frequency /
+                total_frequency,
+              
+              n_unique_patterns_in_ball =
+                step$n_unique_patterns_in_ball,
+              
+              incremental_covered_weight =
+                step$incremental_frequency,
+              
+              incremental_covered_pct =
+                100 *
+                step$incremental_frequency /
+                total_frequency,
+              
+              cumulative_covered_weight =
+                step$cumulative_frequency,
+              
+              cumulative_covered_pct =
+                100 *
+                step$cumulative_frequency /
+                total_frequency,
+              
+              weighted_mean_hamming =
+                step$weighted_mean_hamming,
+              
+              max_hamming_in_ball =
+                step$max_hamming_in_ball,
+              
+              total_weight =
+                total_frequency,
+              
+              n_unique_patterns =
+                n_unique_patterns,
+              
+              n_bootstraps =
+                length(boot_ids)
+            )
+          }
+        )
+        
+        prototype_steps_list[
+          [greedy_counter]
+        ] <- steps_df
+        
+        
+        # Prevalencia de cada determinante dentro de la bola cubierta
+        # por cada prototipo.
+        
+        ball_df <- map_dfr(
+          result_steps,
+          function(step) {
+            if (is.null(step)) {
+              return(NULL)
+            }
+            
+            tibble(
+              analysis_sample =
+                group_current$analysis_sample,
+              
+              weighting =
+                group_current$weighting,
+              
+              method =
+                group_current$method,
+              
+              matrix_name =
+                group_current$matrix_name,
+              
+              d_det =
+                group_current$d_det,
+              
+              d_hamming =
+                d_hamming_current,
+              
+              prototype =
+                step$prototype,
+              
+              determinant =
+                determinants,
+              
+              center_selected =
+                as.integer(
+                  step$center
+                ),
+              
+              prop_active_in_ball =
+                as.numeric(
+                  step$determinant_prevalence
+                ),
+              
+              pct_active_in_ball =
+                100 *
+                prop_active_in_ball,
+              
+              covered_weight =
+                step$incremental_frequency,
+              
+              n_unique_patterns_in_ball =
+                step$n_unique_patterns_in_ball
+            )
+          }
+        )
+        
+        ball_prevalence_list[
+          [greedy_counter]
+        ] <- ball_df
+        
+        
+        # Resumen final de cobertura para esta combinación.
+        
+        if (nrow(steps_df)) {
+          last_step <- steps_df %>%
+            slice_tail(
+              n = 1
+            )
+          
+          coverage_summary_list[
+            [greedy_counter]
+          ] <- tibble(
+            analysis_sample =
+              group_current$analysis_sample,
+            
+            weighting =
+              group_current$weighting,
+            
+            method =
+              group_current$method,
+            
+            matrix_name =
+              group_current$matrix_name,
+            
+            d_det =
+              group_current$d_det,
+            
+            d_hamming =
+              d_hamming_current,
+            
+            n_prototypes_used = max(
+              steps_df$prototype
+            ),
+            
+            n_bootstraps =
+              length(boot_ids),
+            
+            n_unique_patterns =
+              n_unique_patterns,
+            
+            final_covered_pct =
+              last_step$cumulative_covered_pct,
+            
+            first_prototype_covered_pct =
+              steps_df$incremental_covered_pct[1],
+            
+            last_prototype_increment_pct =
+              last_step$incremental_covered_pct
+          )
+        }
+      }
+    }
+  }
+  
+  rm(
+    kmeans_sample,
+    efa_sample,
+    kmeans_scores,
+    efa_scores,
+    scores,
+    binary_patterns
+  )
+  
+  invisible(
+    gc()
+  )
+}
+
+
+# Consolidar resultados de todas las muestras.
+
+binary_patterns_all <- bind_rows(
+  binary_patterns_list
+)
+
+pattern_frequency_all <- bind_rows(
+  pattern_frequency_list
+)
+
+greedy_prototype_steps <- bind_rows(
+  prototype_steps_list
+)
+
+greedy_ball_determinant_prevalence <- bind_rows(
+  ball_prevalence_list
+)
+
+greedy_coverage_summary <- bind_rows(
+  coverage_summary_list
+)
+
+score_rank_summary <- bind_rows(
+  score_rank_summary_list
+)
+
+source_candidate_contribution <- bind_rows(
+  candidate_contribution_list
+)
+
+
+# Añadir interpretación del radio Hamming a los resultados principales.
+
+greedy_prototype_steps <- greedy_prototype_steps %>%
+  left_join(
+    hamming_interpretation,
+    by = c(
+      "d_det",
+      "d_hamming"
+    )
+  )
+
+greedy_ball_determinant_prevalence <-
+  greedy_ball_determinant_prevalence %>%
+  left_join(
+    hamming_interpretation,
+    by = c(
+      "d_det",
+      "d_hamming"
+    )
+  )
+
+greedy_coverage_summary <- greedy_coverage_summary %>%
+  left_join(
+    hamming_interpretation,
+    by = c(
+      "d_det",
+      "d_hamming"
+    )
+  )
+
+
+# Curva prototipo-cobertura.
+# La mejora marginal de cada prototipo coincide con su cobertura incremental.
+
+greedy_prototype_curve <- greedy_prototype_steps %>%
+  mutate(
+    marginal_gain_pct =
+      incremental_covered_pct
+  ) %>%
+  arrange(
+    analysis_sample,
+    weighting,
+    method,
+    matrix_name,
     d_det,
-    
     d_hamming,
-    
-    method_matrix,
-    
-    final_covered_pct
+    prototype
+  )
+
+
+# Número mínimo de prototipos necesarios para alcanzar cada
+# umbral de cobertura.
+
+coverage_threshold_table <- greedy_prototype_steps %>%
+  select(
+    analysis_sample,
+    weighting,
+    method,
+    matrix_name,
+    d_det,
+    d_hamming,
+    prototype,
+    cumulative_covered_pct
   ) %>%
-  
-  pivot_wider(
+  crossing(
+    coverage_threshold =
+      COVERAGE_THRESHOLDS
+  ) %>%
+  group_by(
+    analysis_sample,
+    weighting,
+    method,
+    matrix_name,
+    d_det,
+    d_hamming,
+    coverage_threshold
+  ) %>%
+  summarise(
+    first_prototype_reaching_threshold = if (
+      any(
+        cumulative_covered_pct >=
+        coverage_threshold,
+        na.rm = TRUE
+      )
+    ) {
+      min(
+        prototype[
+          cumulative_covered_pct >=
+            coverage_threshold
+        ]
+      )
+    } else {
+      NA_integer_
+    },
     
+    max_coverage_available = max(
+      cumulative_covered_pct,
+      na.rm = TRUE
+    ),
+    
+    .groups = "drop"
+  ) %>%
+  left_join(
+    hamming_interpretation,
+    by = c(
+      "d_det",
+      "d_hamming"
+    )
+  )
+
+
+# Tabla ancha para comparar directamente matrices y métodos.
+
+greedy_matrix_x_method <- greedy_prototype_steps %>%
+  mutate(
+    matrix_short = matrix_label(
+      matrix_name
+    ),
+    
+    method_matrix = paste0(
+      method,
+      "_",
+      matrix_short
+    )
+  ) %>%
+  select(
+    analysis_sample,
+    weighting,
+    d_det,
+    d_hamming,
+    prototype,
+    method_matrix,
+    cumulative_covered_pct
+  ) %>%
+  pivot_wider(
     names_from =
       method_matrix,
     
     values_from =
-      final_covered_pct
+      cumulative_covered_pct
   ) %>%
-  
   arrange(
-    
+    analysis_sample,
+    weighting,
     d_det,
-    
     d_hamming,
-    
-    k_candidate
+    prototype
   )
 
 
-
-# ============================================================
-# 21. GUARDAR RESULTADOS
-# ============================================================
-
-
-# ------------------------------------------------------------
-# Patrones individuales
-# ------------------------------------------------------------
-
-write_csv(
-  
-  binary_patterns,
-  
-  file.path(
-    
-    out_dir,
-    
-    "01_binary_patterns.csv"
-  )
-)
-
-
-
-# ------------------------------------------------------------
-# Frecuencia de patrones
-# ------------------------------------------------------------
-
-write_csv(
-  
-  pattern_frequency,
-  
-  file.path(
-    
-    out_dir,
-    
-    "02_pattern_frequency.csv"
-  )
-)
-
-
-
-# ------------------------------------------------------------
-# Cobertura paso a paso de cada prototipo
-# ------------------------------------------------------------
-
-write_csv(
-  
-  greedy_prototype_steps,
-  
-  file.path(
-    
-    out_dir,
-    
-    "03_greedy_prototype_steps.csv"
-  )
-)
-
-
-
-# ------------------------------------------------------------
-# Cobertura final por combinación
-# ------------------------------------------------------------
-
-write_csv(
-  
-  greedy_coverage_summary,
-  
-  file.path(
-    
-    out_dir,
-    
-    "04_greedy_coverage_summary.csv"
-  )
-)
-
-
-
-# ------------------------------------------------------------
-# % de determinantes dentro de cada bola
-# ------------------------------------------------------------
-
-write_csv(
-  
-  greedy_ball_determinant_prevalence,
-  
-  file.path(
-    
-    out_dir,
-    
-    "05_greedy_ball_determinant_prevalence.csv"
-  )
-)
-
-
-
-# ------------------------------------------------------------
-# Comparación K = 4,...,8
-# ------------------------------------------------------------
-
-write_csv(
-  
-  greedy_k_comparison,
-  
-  file.path(
-    
-    out_dir,
-    
-    "06_greedy_k_comparison.csv"
-  )
-)
-
-
-
-# Interpretación de Hamming
-write_csv(
-  
-  hamming_interpretation,
-  
-  file.path(
-    
-    out_dir,
-    
-    "07_hamming_interpretation.csv"
-  )
-)
-
-# Diagnóstico de cobertura
-write_csv(
-  
-  coverage_threshold_table,
-  
-  file.path(
-    
-    out_dir,
-    
-    "08_coverage_threshold_diagnostic.csv"
-  )
-)
-
-write_csv(
-  
-  score_rank_summary,
-  
-  file.path(
-    out_dir,
-    "11_score_by_determinant_rank.csv"
-  )
-)
-
-# ============================================================
-# 22. PARÁMETROS
-# ============================================================
+# Parámetros utilizados.
 
 parameters <- tibble(
-  
   parameter = c(
-    
-    "D_DET_GRID",
-    
-    "D_HAMMING_GRID",
-    
-    "MAX_BOOTSTRAPS",
-    
-    "COVERAGE_THRESHOLDS",
-    
-    "KMEANS_SCORE",
-    
-    "EFA_SCORE"
+    "analysis_samples",
+    "matrices",
+    "kmeans_pool_grid",
+    "efa_pool_grid",
+    "d_det_grid",
+    "d_hamming_grid",
+    "max_bootstraps",
+    "max_greedy_prototypes",
+    "coverage_thresholds",
+    "pool_weightings",
+    "primary_weighting"
   ),
   
-  
   value = c(
+    paste(
+      ANALYSIS_SAMPLES,
+      collapse = ", "
+    ),
+    
+    paste(
+      MATRICES_TO_RUN,
+      collapse = ", "
+    ),
+    
+    paste(
+      KMEANS_POOL_GRID,
+      collapse = ", "
+    ),
+    
+    paste(
+      EFA_POOL_GRID,
+      collapse = ", "
+    ),
     
     paste(
       D_DET_GRID,
-      collapse = ","
+      collapse = ", "
     ),
     
     paste(
       D_HAMMING_GRID,
-      collapse = ","
+      collapse = ", "
     ),
     
     as.character(
       MAX_BOOTSTRAPS
     ),
     
-    paste(
-      COVERAGE_THRESHOLDS,
-      collapse = ","
+    as.character(
+      MAX_GREEDY_PROTOTYPES
     ),
     
-    "RAW=abs(center-0.5); POS=max(center-0.5,0); EXT=center; Z_ABS=center",
+    paste(
+      COVERAGE_THRESHOLDS,
+      collapse = ", "
+    ),
     
-    "abs(loading)"
+    paste(
+      POOL_WEIGHTINGS,
+      collapse = ", "
+    ),
+    
+    PRIMARY_WEIGHTING
   )
 )
 
 
+# Guardar resultados.
 
-write_csv(
+outputs <- list(
+  "01_binary_patterns_pooled.csv.gz" =
+    binary_patterns_all,
   
-  parameters,
+  "02_pattern_frequency_pooled.csv.gz" =
+    pattern_frequency_all,
   
-  file.path(
-    
-    out_dir,
-    
-    "09_greedy_parameters.csv"
+  "03_greedy_prototype_steps_pooled.csv" =
+    greedy_prototype_steps,
+  
+  "04_greedy_coverage_summary_pooled.csv" =
+    greedy_coverage_summary,
+  
+  "05_greedy_ball_determinant_prevalence_pooled.csv.gz" =
+    greedy_ball_determinant_prevalence,
+  
+  "06_greedy_prototype_curve_pooled.csv" =
+    greedy_prototype_curve,
+  
+  "07_hamming_interpretation_pooled.csv" =
+    hamming_interpretation,
+  
+  "08_coverage_threshold_diagnostic_pooled.csv" =
+    coverage_threshold_table,
+  
+  "09_greedy_matrix_x_method_pooled.csv" =
+    greedy_matrix_x_method,
+  
+  "10_score_by_determinant_rank_pooled.csv" =
+    score_rank_summary,
+  
+  "11_source_candidate_contribution.csv" =
+    source_candidate_contribution,
+  
+  "12_greedy_parameters_pooled.csv" =
+    parameters
+)
+
+iwalk(
+  outputs,
+  ~ write_csv(
+    .x,
+    file.path(
+      out_dir,
+      .y
+    )
   )
 )
 
 
+# Figuras de diagnóstico para COMPLETE con la ponderación principal.
 
-# ------------------------------------------------------------
-# Matriz × método
-# ------------------------------------------------------------
-
-write_csv(
-  
-  greedy_matrix_x_method,
-  
-  file.path(
+plot_data <- greedy_prototype_steps %>%
+  filter(
+    analysis_sample ==
+      "COMPLETE",
     
-    out_dir,
+    weighting ==
+      PRIMARY_WEIGHTING,
     
-    "10_greedy_matrix_x_method.csv"
-  )
-)
-
-
-
-# ============================================================
-# 23. FIGURAS
-# ============================================================
-#
-# Una figura por:
-#
-# método × matriz
-#
-# Eje X:
-#   distancia Hamming
-#
-# Eje Y:
-#   cobertura final
-#
-# Líneas:
-#   K = 4,...,8
-#
-# Paneles:
-#   D_DET
-#
-# ============================================================
-
-for (
-  
-  method_current in
-  unique(
-    greedy_coverage_summary$
-    method
-  )
-  
-) {
-  
-  
-  for (
-    
-    matrix_current in
-    unique(
-      greedy_coverage_summary$
+    d_hamming %in%
+      c(
+        0,
+        2,
+        4,
+        6
+      )
+  ) %>%
+  mutate(
+    matrix = matrix_label(
       matrix_name
     )
-    
-  ) {
-    
-    
-    plot_data <- greedy_coverage_summary %>%
-      
-      filter(
-        
-        method ==
-          method_current,
-        
-        matrix_name ==
-          matrix_current
-      )
-    
-    
-    
-    if (nrow(plot_data) == 0) {
-      
-      next
-    }
-    
-    
-    
-    p <- ggplot(
-      
-      plot_data,
-      
+  )
+
+for (
+  method_current in
+  unique(plot_data$method)
+) {
+  p <- plot_data %>%
+    filter(
+      method ==
+        method_current
+    ) %>%
+    ggplot(
       aes(
-        
-        x =
-          d_hamming,
-        
-        y =
-          final_covered_pct,
-        
-        group =
-          factor(
-            k_candidate
-          ),
-        
-        color =
-          factor(
-            k_candidate
-          )
+        x = prototype,
+        y = cumulative_covered_pct,
+        color = factor(d_hamming),
+        group = factor(d_hamming)
       )
-      
     ) +
-      
-      geom_line() +
-      
-      geom_point(
-        size = 1.3
-      ) +
-      
-      facet_wrap(
-        
-        ~ d_det,
-        
-        ncol = 4
-      ) +
-      
-      theme_minimal(
-        base_size = 10
-      ) +
-      
-      labs(
-        
-        title =
-          paste0(
-            
-            "Greedy coverage | ",
-            
-            method_current,
-            
-            " | ",
-            
-            matrix_current
-          ),
-        
-        
-        subtitle =
-          paste0(
-            
-            length(boot_ids),
-            
-            " bootstrap samples"
-          ),
-        
-        
-        x =
-          "Hamming radius",
-        
-        
-        y =
-          "Final coverage (%)",
-        
-        
-        color =
-          "K"
+    geom_line() +
+    geom_point(
+      size = 1.3
+    ) +
+    facet_grid(
+      d_det ~ matrix
+    ) +
+    scale_y_continuous(
+      limits = c(
+        0,
+        100
       )
-    
-    
-    
-    ggsave(
-      
-      filename = file.path(
-        
-        fig_dir,
-        
-        paste0(
-          
-          "coverage_",
-          
-          tolower(
-            method_current
-          ),
-          
-          "_",
-          
-          matrix_current,
-          
-          ".png"
-        )
+    ) +
+    labs(
+      title = paste0(
+        "Greedy coverage - COMPLETE - ",
+        method_current
       ),
       
+      subtitle = paste0(
+        "Weighting = ",
+        PRIMARY_WEIGHTING
+      ),
       
-      plot =
-        p,
+      x =
+        "Number of Greedy prototypes",
       
+      y =
+        "Cumulative coverage (%)",
       
-      width =
-        12,
+      color =
+        "Hamming"
+    ) +
+    theme_minimal(
+      base_size = 9
+    ) +
+    theme(
+      panel.grid.minor =
+        element_blank(),
       
-      
-      height =
-        8,
-      
-      
-      dpi =
-        300
+      strip.text =
+        element_text(
+          face = "bold"
+        )
     )
-  }
+  
+  ggsave(
+    filename = file.path(
+      fig_dir,
+      paste0(
+        "greedy_COMPLETE_",
+        tolower(
+          method_current
+        ),
+        ".png"
+      )
+    ),
+    plot = p,
+    width = 15,
+    height = 18,
+    dpi = 300
+  )
 }
 
 
+# Resumen en consola.
 
-# ============================================================
-# 24. RESUMEN EN CONSOLA
-# ============================================================
+cat("\n08. GREEDY COMPLETADO\n")
 
-cat(
-  "\n============================================================\n"
+cat("\nMuestras:\n")
+
+print(
+  ANALYSIS_SAMPLES
 )
 
 cat(
-  "08. GREEDY K-MEANS + EFA COMPLETADO\n"
-)
-
-cat(
-  "============================================================\n"
-)
-
-
-
-cat(
-  "\nBootstraps usados: ",
-  length(boot_ids),
+  "\nK-means generadores: ",
+  paste(
+    KMEANS_POOL_GRID,
+    collapse = ", "
+  ),
   "\n",
   sep = ""
 )
 
-
+cat(
+  "EFA generadores: ",
+  paste(
+    EFA_POOL_GRID,
+    collapse = ", "
+  ),
+  "\n",
+  sep = ""
+)
 
 cat(
-  "\nD determinantes:\n"
+  "Ponderaciones: ",
+  paste(
+    POOL_WEIGHTINGS,
+    collapse = ", "
+  ),
+  "\n",
+  sep = ""
+)
+
+cat(
+  "\nCOMPLETE | K-MEANS | RAW | D=8 | H=4 | equal_candidate\n\n"
 )
 
 print(
-  D_DET_GRID
-)
-
-
-
-cat(
-  "\nD Hamming:\n"
-)
-
-print(
-  D_HAMMING_GRID
-)
-
-
-
-cat(
-  "\nInterpretación de Hamming para D_DET = 8:\n"
-)
-
-print(
-  
-  hamming_interpretation %>%
-    
+  greedy_prototype_steps %>%
     filter(
-      d_det == 8
+      analysis_sample ==
+        "COMPLETE",
+      
+      weighting ==
+        "equal_candidate",
+      
+      method ==
+        "KMEANS",
+      
+      matrix_name ==
+        "matrix_32_raw_0_1",
+      
+      d_det == 8,
+      d_hamming == 4
+    ) %>%
+    select(
+      prototype,
+      incremental_covered_pct,
+      cumulative_covered_pct,
+      center_active_determinants
     ),
-  
   n = Inf,
-  
   width = Inf
 )
 
-
-
-cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "COBERTURA FINAL - PRIMERAS FILAS\n"
-)
-
-cat(
-  "============================================================\n"
-)
-
-
+cat("\nUmbrales de cobertura:\n\n")
 
 print(
-  
-  greedy_coverage_summary %>%
-    
-    arrange(
-      
-      method,
-      
-      matrix_name,
-      
-      d_det,
-      
-      d_hamming,
-      
-      k_candidate
-    ) %>%
-    
-    head(
-      40
-    ),
-  
-  n = 40,
-  
-  width = Inf
-)
-
-
-
-cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "COMPARACIÓN K - EJEMPLO D_DET = 8\n"
-)
-
-cat(
-  "============================================================\n"
-)
-
-
-
-print(
-  
-  greedy_k_comparison %>%
-    
+  coverage_threshold_table %>%
     filter(
-      d_det == 8
+      analysis_sample ==
+        "COMPLETE",
+      
+      weighting ==
+        "equal_candidate",
+      
+      method ==
+        "KMEANS",
+      
+      matrix_name ==
+        "matrix_32_raw_0_1",
+      
+      d_det == 8,
+      d_hamming == 4
     ) %>%
-    
-    arrange(
-      
-      method,
-      
-      matrix_name,
-      
-      d_hamming,
-      
-      k_candidate
-    ) %>%
-    
-    head(
-      80
+    select(
+      coverage_threshold,
+      first_prototype_reaching_threshold,
+      max_coverage_available
     ),
-  
-  n = 80,
-  
+  n = Inf,
   width = Inf
 )
-
-
-
-cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "OUTPUTS\n"
-)
-
-cat(
-  "============================================================\n"
-)
-
-
-
-cat(
-  "\nResultados guardados en:\n"
-)
-
-cat(
-  out_dir,
-  "\n"
-)
-
-
 
 message(
-  "\nListo."
+  "\nResultados guardados en: ",
+  out_dir
 )

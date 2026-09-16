@@ -1,5 +1,5 @@
 
-
+# nooooo
 # script para responder a
 
 # Sin imponer 4, 5, 6, 7 u 8, ¿cuántos factores recomiendan los datos?

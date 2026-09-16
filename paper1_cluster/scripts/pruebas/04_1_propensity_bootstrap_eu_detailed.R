@@ -1,4 +1,5 @@
 
+# no
 # Objetivo:
 # 1. Coger el dataset final integrado y enriquecido.
 # 2. Entrenar un modelo de propensión al voto/abstención usando RV.

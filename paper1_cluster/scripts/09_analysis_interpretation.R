@@ -1,48 +1,32 @@
 
-# Visualizar conjuntamente los resultados obtenidos en:
+# Resumir y visualizar conjuntamente los resultados de:
+# - 06 K-means
+# - 07 EFA
+# - 08 Greedy
 #
-#   06_kmeans.R  07_efa.R  08_greedy.R
+# Este script:
+# - compara COMPLETE, EUROPE, LATAM y cada submuestra;
+# - resume K-means para K = 2:8;
+# - resume EFA para F = 2:8;
+# - analiza Greedy para las cuatro matrices y ambas ponderaciones;
+# - estudia sensibilidad a D y Hamming;
+# - compara cobertura entre muestras;
+# - compara K-means y EFA como generadores de patrones.
 #
-# K-MEANS
-# A) ¿Dónde aparece el "codo" al aumentar K?
-# B) ¿Qué mejora marginal aporta cada K adicional?
-# C) ¿Aparecen clusters demasiado pequeños?
-# D) ¿Los centroides empiezan a estar demasiado cerca?
+# IMPORTANTE:
+# Este bloque todavía no fija K, número de factores, D, Hamming
+# ni número final de prototipos.
 #
-# EFA
-# E) ¿Qué nº de factores tiene mejor compromiso de ajuste?
-# F) ¿Cómo evolucionan BIC, TLI, RMSEA y RMSR?
-#
-# GREEDY
-# G) ¿Qué cobertura conseguimos manteniendo una similitud razonable entre patrones?
-# H) ¿Cuánto aporta cada prototipo?
-# I) ¿Qué D_DET / K generan patrones más reproducibles?
-# J) ¿Qué determinantes aparecen consistentemente dentro de cada prototipo?
+# COMPLETE + RAW + D=8 + H=4 se utiliza únicamente como referencia
+# visual para facilitar la interpretación de algunos resultados.
 
-# IMPORTANTE
-# Para Greedy usamos como referencia:
-#
-#       mínimo 75% de determinantes comunes
-#
-# NO significa que 75% sea ya el criterio definitivo.
-#
-# Es una referencia interpretable para poder comparar
-# D_DET distintos en igualdad de condiciones.
 
 suppressPackageStartupMessages({
   library(tidyverse)
-  library(readr)
-  library(stringr)
-  library(ggplot2)
   library(scales)
 })
 
-
-
-# ============================================================
-# 1. RUTAS
-# ============================================================
-
+# Configuración
 project_root <- path.expand(
   "~/Desktop/MASTER/recommendation-engine/TFM"
 )
@@ -52,262 +36,143 @@ processed_root <- file.path(
   "paper1_cluster/data/processed"
 )
 
-
-
-# ------------------------------------------------------------
-# K-MEANS
-# ------------------------------------------------------------
-
 kmeans_dir <- file.path(
   processed_root,
   "06_kmeans_bootstrap"
 )
-
-
-
-# ------------------------------------------------------------
-# EFA
-# ------------------------------------------------------------
 
 efa_dir <- file.path(
   processed_root,
   "07_efa_bootstrap"
 )
 
-
-
-# ------------------------------------------------------------
-# GREEDY
-# ------------------------------------------------------------
-
 greedy_dir <- file.path(
   processed_root,
   "08_greedy_kmeans_efa"
 )
-
-
-
-# ------------------------------------------------------------
-# OUTPUT 09
-# ------------------------------------------------------------
 
 out_dir <- file.path(
   processed_root,
   "09_analysis_plots"
 )
 
-
 fig_dir <- file.path(
   out_dir,
   "figures"
 )
-
 
 fig_kmeans_dir <- file.path(
   fig_dir,
   "kmeans"
 )
 
-
 fig_efa_dir <- file.path(
   fig_dir,
   "efa"
 )
-
 
 fig_greedy_dir <- file.path(
   fig_dir,
   "greedy"
 )
 
-
 fig_profiles_dir <- file.path(
   fig_dir,
   "profiles"
 )
 
-
-
-dir.create(
-  out_dir,
-  recursive = TRUE,
-  showWarnings = FALSE
+walk(
+  c(
+    out_dir,
+    fig_dir,
+    fig_kmeans_dir,
+    fig_efa_dir,
+    fig_greedy_dir,
+    fig_profiles_dir
+  ),
+  ~ dir.create(
+    .x,
+    recursive = TRUE,
+    showWarnings = FALSE
+  )
 )
 
-dir.create(
-  fig_dir,
-  recursive = TRUE,
-  showWarnings = FALSE
+ANALYSIS_SAMPLES <- c(
+  "COMPLETE",
+  "EUROPE",
+  "LATAM",
+  "DIEGO",
+  "RENOVISOR",
+  "WHY_EUROPE",
+  "WHY_LATAM"
 )
 
-dir.create(
-  fig_kmeans_dir,
-  recursive = TRUE,
-  showWarnings = FALSE
+MATRICES_TO_RUN <- c(
+  "matrix_32_raw_0_1",
+  "matrix_32_pos_0_1",
+  "matrix_32_ext_0_1",
+  "matrix_32_z_abs"
 )
 
-dir.create(
-  fig_efa_dir,
-  recursive = TRUE,
-  showWarnings = FALSE
-)
-
-dir.create(
-  fig_greedy_dir,
-  recursive = TRUE,
-  showWarnings = FALSE
-)
-
-dir.create(
-  fig_profiles_dir,
-  recursive = TRUE,
-  showWarnings = FALSE
-)
-
-
-
-# ============================================================
-# 2. PARÁMETROS VISUALES
-# ============================================================
-
-
-# ------------------------------------------------------------
-# Similitud mínima que usaremos como referencia para Greedy
-# ------------------------------------------------------------
-
-MIN_COMMON_PCT <- 75
-
-
-
-# ------------------------------------------------------------
-# Configuración de referencia para heatmaps de perfiles
-#
-# SOLO PARA VISUALIZACIÓN.
-#
-# NO significa que hayamos decidido todavía:
-# K = 6
-# D = 8
-#
-# Se puede cambiar después fácilmente.
-# ------------------------------------------------------------
-
-REFERENCE_K <- 6
-
+# Configuración de referencia utilizada solo para algunos diagnósticos
+# y figuras de interpretación.
+REFERENCE_SAMPLE <- "COMPLETE"
+REFERENCE_MATRIX <- "matrix_32_raw_0_1"
+REFERENCE_WEIGHTING <- "equal_candidate"
+REFERENCE_METHOD <- "KMEANS"
 REFERENCE_D_DET <- 8
-
 REFERENCE_D_HAMMING <- 4
 
+D_DET_GRID <- 8:15
 
-
-# ------------------------------------------------------------
-# Colores de las matrices
-# ------------------------------------------------------------
-
-MATRIX_COLORS <- c(
-  
-  "RAW" =
-    "#4C78A8",
-  
-  "POS" =
-    "#59A14F",
-  
-  "EXT" =
-    "#F28E2B",
-  
-  "Z_ABS" =
-    "#B279A2"
+HAMMING_GRID_PLOT <- seq(
+  0,
+  10,
+  by = 2
 )
 
-
-
-# ------------------------------------------------------------
-# Colores K
-# ------------------------------------------------------------
-
-K_COLORS <- c(
-  
-  "4" =
-    "#4E79A7",
-  
-  "5" =
-    "#59A14F",
-  
-  "6" =
-    "#F28E2B",
-  
-  "7" =
-    "#E15759",
-  
-  "8" =
-    "#B07AA1"
+COVERAGE_THRESHOLDS_PLOT <- c(
+  80,
+  85,
+  90
 )
 
-
-
-# ------------------------------------------------------------
-# Colores método
-# ------------------------------------------------------------
-
-METHOD_COLORS <- c(
-  
-  "KMEANS" =
-    "#4C78A8",
-  
-  "EFA" =
-    "#E15759"
+PROTOTYPES_OF_INTEREST <- c(
+  6,
+  7,
+  8
 )
 
+REFERENCE_COMMON_PCT <- 75
+
+SIMILARITY_MIN <- 75
+SIMILARITY_MAX <- 85
 
 
-# ============================================================
-# 3. FUNCIONES AUXILIARES
-# ============================================================
-
+# Funciones auxiliares
 
 matrix_label <- function(x) {
-  
-  case_when(
-    
-    x ==
-      "matrix_32_raw_0_1" ~
-      "RAW",
-    
-    x ==
-      "matrix_32_pos_0_1" ~
-      "POS",
-    
-    x ==
-      "matrix_32_ext_0_1" ~
-      "EXT",
-    
-    x ==
-      "matrix_32_z_abs" ~
-      "Z_ABS",
-    
-    TRUE ~
-      x
+  recode(
+    x,
+    "matrix_32_raw_0_1" = "RAW",
+    "matrix_32_pos_0_1" = "POS",
+    "matrix_32_ext_0_1" = "EXT",
+    "matrix_32_z_abs" = "Z_ABS",
+    .default = x
   )
 }
 
-
-
 clean_determinant_label <- function(x) {
-  
   x %>%
-    
     str_remove(
       "^det_\\d+_"
     ) %>%
-    
     str_replace_all(
       "_",
       " "
     ) %>%
-    
     str_to_sentence()
 }
-
-
 
 save_plot <- function(
     plot,
@@ -315,2268 +180,1663 @@ save_plot <- function(
     width = 10,
     height = 7
 ) {
-  
   ggsave(
-    
-    filename =
-      filename,
-    
-    plot =
-      plot,
-    
-    width =
-      width,
-    
-    height =
-      height,
-    
-    dpi =
-      300,
-    
-    bg =
-      "white"
+    filename = filename,
+    plot = plot,
+    width = width,
+    height = height,
+    dpi = 300,
+    bg = "white"
   )
 }
 
-
+write_output <- function(
+    data,
+    filename
+) {
+  write_csv(
+    data,
+    file.path(
+      out_dir,
+      filename
+    )
+  )
+}
 
 theme_paper <- function(
     base_size = 12
 ) {
-  
   theme_minimal(
-    base_size =
-      base_size
+    base_size = base_size
   ) +
-    
     theme(
+      panel.grid.minor = element_blank(),
+      legend.position = "bottom",
       
-      plot.title =
-        element_text(
-          face = "bold",
-          size = base_size + 2
-        ),
+      strip.text = element_text(
+        face = "bold"
+      ),
       
-      plot.subtitle =
-        element_text(
-          size = base_size - 1
-        ),
-      
-      panel.grid.minor =
-        element_blank(),
-      
-      legend.position =
-        "bottom",
-      
-      strip.text =
-        element_text(
-          face = "bold"
-        ),
-      
-      axis.title =
-        element_text(
-          face = "bold"
-        )
+      plot.title = element_text(
+        face = "bold"
+      )
     )
 }
 
 
+# Inputs
 
-# ============================================================
-# 4. LEER RESULTADOS K-MEANS
-# ============================================================
-
-kmeans_metrics_by_run <- read_csv(
-  
-  file.path(
-    kmeans_dir,
-    "kmeans_metrics_by_run.csv"
-  ),
-  
-  show_col_types = FALSE
+kmeans_metrics_file <- file.path(
+  kmeans_dir,
+  "kmeans_metrics_summary_all_samples.csv"
 )
 
-
-
-kmeans_cluster_sizes <- read_csv(
-  
-  file.path(
-    kmeans_dir,
-    "kmeans_cluster_sizes_by_run.csv"
-  ),
-  
-  show_col_types = FALSE
+kmeans_sizes_file <- file.path(
+  kmeans_dir,
+  "kmeans_cluster_size_summary_all_samples.csv"
 )
 
-
-
-kmeans_distances <- read_csv(
-  
-  file.path(
-    kmeans_dir,
-    "kmeans_cluster_distances_by_run.csv"
-  ),
-  
-  show_col_types = FALSE
+efa_summary_file <- file.path(
+  efa_dir,
+  "02_efa_metrics_summary.csv"
 )
 
+greedy_steps_file <- file.path(
+  greedy_dir,
+  "03_greedy_prototype_steps_pooled.csv"
+)
+
+greedy_prevalence_file <- file.path(
+  greedy_dir,
+  "05_greedy_ball_determinant_prevalence_pooled.csv.gz"
+)
+
+greedy_hamming_file <- file.path(
+  greedy_dir,
+  "07_hamming_interpretation_pooled.csv"
+)
+
+greedy_thresholds_file <- file.path(
+  greedy_dir,
+  "08_coverage_threshold_diagnostic_pooled.csv"
+)
+
+required_files <- c(
+  kmeans_metrics_file,
+  kmeans_sizes_file,
+  efa_summary_file,
+  greedy_steps_file,
+  greedy_prevalence_file,
+  greedy_hamming_file,
+  greedy_thresholds_file
+)
+
+missing_files <- required_files[
+  !file.exists(required_files)
+]
+
+if (length(missing_files)) {
+  stop(
+    "Faltan archivos necesarios:\n",
+    paste(
+      missing_files,
+      collapse = "\n"
+    )
+  )
+}
 
 
-# ============================================================
-# 5. REGENERAR RESUMEN K-MEANS
-# ============================================================
-#
-# Esto evita el problema de:
-#
-# sd_cluster_distance = NA
-#
-# del script 06.
-#
-# NO vuelve a calcular K-means.
-# Solo vuelve a resumir las métricas ya existentes.
-# ============================================================
+# K-means
 
-kmeans_summary <- kmeans_metrics_by_run %>%
-  
+kmeans_summary <- read_csv(
+  kmeans_metrics_file,
+  show_col_types = FALSE
+) %>%
   filter(
-    status == "ok"
+    analysis_sample %in% ANALYSIS_SAMPLES,
+    matrix_name %in% MATRICES_TO_RUN
   ) %>%
-  
-  group_by(
-    matrix_name,
-    k
-  ) %>%
-  
-  summarise(
-    
-    mean_between_over_total =
-      mean(
-        between_over_total,
-        na.rm = TRUE
-      ),
-    
-    sd_between_over_total =
-      sd(
-        between_over_total,
-        na.rm = TRUE
-      ),
-    
-    mean_tot_withinss =
-      mean(
-        tot_withinss,
-        na.rm = TRUE
-      ),
-    
-    mean_cluster_distance_boot =
-      mean(
-        mean_cluster_distance,
-        na.rm = TRUE
-      ),
-    
-    sd_cluster_distance_boot =
-      sd(
-        mean_cluster_distance,
-        na.rm = TRUE
-      ),
-    
-    mean_min_cluster_distance =
-      mean(
-        min_cluster_distance,
-        na.rm = TRUE
-      ),
-    
-    mean_max_cluster_distance =
-      mean(
-        max_cluster_distance,
-        na.rm = TRUE
-      ),
-    
-    .groups =
-      "drop"
-  ) %>%
-  
   mutate(
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
     
-    matrix =
-      matrix_label(
-        matrix_name
-      )
+    matrix = matrix_label(
+      matrix_name
+    )
   )
 
+required_kmeans_cols <- c(
+  "analysis_sample",
+  "matrix_name",
+  "k",
+  "n_runs",
+  "n_ok",
+  "n_error",
+  "mean_tot_withinss",
+  "mean_between_over_total",
+  "mean_calinski_harabasz",
+  "mean_silhouette",
+  "mean_min_cluster_distance"
+)
+
+missing_kmeans_cols <- setdiff(
+  required_kmeans_cols,
+  names(kmeans_summary)
+)
+
+if (length(missing_kmeans_cols)) {
+  stop(
+    "Faltan columnas K-means: ",
+    paste(
+      missing_kmeans_cols,
+      collapse = ", "
+    )
+  )
+}
 
 
-# ============================================================
-# 6. MEJORA MARGINAL DE K-MEANS
-# ============================================================
+# Ganancia marginal al aumentar K.
 
 kmeans_delta <- kmeans_summary %>%
-  
   group_by(
+    analysis_sample,
     matrix_name
   ) %>%
-  
   arrange(
     k,
     .by_group = TRUE
   ) %>%
-  
   mutate(
-    
     delta_between_over_total =
       mean_between_over_total -
       lag(
         mean_between_over_total
+      ),
+    
+    withinss_reduction_pct =
+      100 *
+      (
+        lag(
+          mean_tot_withinss
+        ) -
+          mean_tot_withinss
+      ) /
+      lag(
+        mean_tot_withinss
       )
   ) %>%
-  
   ungroup()
 
 
+# Diagnóstico del tamaño de los clusters.
 
-write_csv(
-  
-  kmeans_summary,
-  
-  file.path(
-    out_dir,
-    "01_kmeans_summary_corrected.csv"
-  )
-)
-
-
-
-write_csv(
-  
-  kmeans_delta,
-  
-  file.path(
-    out_dir,
-    "02_kmeans_marginal_gain.csv"
-  )
-)
-
-
-
-# ============================================================
-# 7. K-MEANS:
-#    VARIANZA EXPLICADA
-# ============================================================
-
-p_kmeans_between <- ggplot(
-  
-  kmeans_summary,
-  
-  aes(
-    
-    x =
-      k,
-    
-    y =
-      mean_between_over_total,
-    
-    color =
-      matrix,
-    
-    group =
-      matrix
-  )
-  
-) +
-  
-  geom_line(
-    linewidth = 1.1
-  ) +
-  
-  geom_point(
-    size = 3
-  ) +
-  
-  geom_text(
-    
-    aes(
-      label =
-        sprintf(
-          "%.3f",
-          mean_between_over_total
-        )
+cluster_size_summary <- read_csv(
+  kmeans_sizes_file,
+  show_col_types = FALSE
+) %>%
+  mutate(
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
     ),
     
-    vjust =
-      -0.8,
-    
-    size =
-      3.1,
-    
-    show.legend =
-      FALSE
-  ) +
-  
-  scale_color_manual(
-    values =
-      MATRIX_COLORS
-  ) +
-  
-  scale_x_continuous(
-    breaks =
-      4:8
-  ) +
-  
-  labs(
-    
-    title =
-      "K-means: explained between-cluster variance",
-    
-    subtitle =
-      "Higher values indicate greater separation, but improvement should diminish as K increases",
-    
-    x =
-      "Number of clusters (K)",
-    
-    y =
-      "Between SS / Total SS",
-    
-    color =
-      "Matrix"
-  ) +
-  
-  theme_paper()
-
-
-
-save_plot(
-  
-  p_kmeans_between,
-  
-  file.path(
-    fig_kmeans_dir,
-    "01_kmeans_between_over_total.png"
-  ),
-  
-  width = 10,
-  height = 6.5
-)
-
-
-
-# ============================================================
-# 8. K-MEANS:
-#    MEJORA MARGINAL
-# ============================================================
-
-p_kmeans_delta <- kmeans_delta %>%
-  
-  filter(
-    !is.na(
-      delta_between_over_total
+    matrix = matrix_label(
+      matrix_name
     )
-  ) %>%
-  
-  ggplot(
-    
-    aes(
-      
-      x =
-        factor(k),
-      
-      y =
-        delta_between_over_total,
-      
-      fill =
-        matrix
-    )
-  ) +
-  
-  geom_col(
-    position =
-      position_dodge(
-        width = 0.8
-      ),
-    width =
-      0.7
-  ) +
-  
-  geom_text(
-    
-    aes(
-      label =
-        sprintf(
-          "%.3f",
-          delta_between_over_total
-        )
-    ),
-    
-    position =
-      position_dodge(
-        width = 0.8
-      ),
-    
-    vjust =
-      -0.4,
-    
-    size =
-      3
-  ) +
-  
-  scale_fill_manual(
-    values =
-      MATRIX_COLORS
-  ) +
-  
-  labs(
-    
-    title =
-      "K-means: marginal gain when adding one cluster",
-    
-    subtitle =
-      "Useful for identifying the elbow: smaller gains suggest diminishing returns",
-    
-    x =
-      "New K",
-    
-    y =
-      "Increase in Between SS / Total SS",
-    
-    fill =
-      "Matrix"
-  ) +
-  
-  theme_paper()
-
-
-
-save_plot(
-  
-  p_kmeans_delta,
-  
-  file.path(
-    fig_kmeans_dir,
-    "02_kmeans_marginal_gain.png"
-  ),
-  
-  width = 10,
-  height = 6.5
-)
-
-
-
-# ============================================================
-# 9. K-MEANS:
-#    DISTANCIA MÍNIMA ENTRE CLUSTERS
-# ============================================================
-#
-# IMPORTANTE:
-#
-# No comparamos el valor absoluto entre matrices,
-# porque cada transformación tiene una escala diferente.
-#
-# Miramos la evolución con K DENTRO de cada matriz.
-# ============================================================
-
-p_kmeans_distance <- ggplot(
-  
-  kmeans_summary,
-  
-  aes(
-    
-    x =
-      k,
-    
-    y =
-      mean_min_cluster_distance,
-    
-    group =
-      1
   )
-  
-) +
-  
-  geom_line(
-    linewidth = 1,
-    color = "#4C78A8"
-  ) +
-  
-  geom_point(
-    size = 3,
-    color = "#4C78A8"
-  ) +
-  
-  geom_text(
-    
-    aes(
-      label =
-        sprintf(
-          "%.2f",
-          mean_min_cluster_distance
-        )
-    ),
-    
-    vjust =
-      -0.7,
-    
-    size =
-      3
-  ) +
-  
-  facet_wrap(
-    
-    ~ matrix,
-    
-    scales =
-      "free_y"
-  ) +
-  
-  scale_x_continuous(
-    breaks =
-      4:8
-  ) +
-  
-  labs(
-    
-    title =
-      "K-means: minimum separation between cluster centroids",
-    
-    subtitle =
-      "A decreasing minimum distance may indicate over-fragmentation as K increases",
-    
-    x =
-      "Number of clusters (K)",
-    
-    y =
-      "Mean minimum Euclidean distance"
-  ) +
-  
-  theme_paper()
 
-
-
-save_plot(
-  
-  p_kmeans_distance,
-  
-  file.path(
-    fig_kmeans_dir,
-    "03_kmeans_minimum_cluster_distance.png"
-  ),
-  
-  width = 11,
-  height = 7
-)
-
-
-
-# ============================================================
-# 10. K-MEANS:
-#     CLUSTER MÁS PEQUEÑO EN CADA BOOTSTRAP
-# ============================================================
-#
-# Esto evita depender del cluster_rank.
-#
-# Para cada:
-#
-# bootstrap × matriz × K
-#
-# buscamos el cluster más pequeño.
-#
-# Si K es excesivo empezaremos a ver valores muy bajos.
-# ============================================================
-
-minimum_cluster_share <- kmeans_cluster_sizes %>%
-  
+cluster_size_diagnostic <- cluster_size_summary %>%
   group_by(
+    analysis_sample,
     matrix_name,
-    bootstrap_id,
+    matrix,
     k
   ) %>%
-  
   summarise(
-    
-    min_cluster_prop =
-      min(
-        prop_cluster,
-        na.rm = TRUE
-      ),
-    
-    .groups =
-      "drop"
-  ) %>%
-  
-  mutate(
-    
-    matrix =
-      matrix_label(
-        matrix_name
-      ),
-    
-    k =
-      factor(
-        k
-      )
-  )
-
-
-
-write_csv(
-  
-  minimum_cluster_share,
-  
-  file.path(
-    out_dir,
-    "03_minimum_cluster_share_by_bootstrap.csv"
-  )
-)
-
-
-
-p_min_cluster <- ggplot(
-  
-  minimum_cluster_share,
-  
-  aes(
-    
-    x =
-      k,
-    
-    y =
-      min_cluster_prop,
-    
-    fill =
-      k
-  )
-  
-) +
-  
-  geom_boxplot(
-    
-    alpha =
-      0.8,
-    
-    outlier.alpha =
-      0.25
-  ) +
-  
-  geom_hline(
-    
-    yintercept =
-      0.05,
-    
-    linetype =
-      "dashed",
-    
-    linewidth =
-      0.6,
-    
-    color =
-      "#C44E52"
-  ) +
-  
-  facet_wrap(
-    
-    ~ matrix,
-    
-    ncol =
-      2
-  ) +
-  
-  scale_fill_manual(
-    values =
-      K_COLORS
-  ) +
-  
-  scale_y_continuous(
-    
-    labels =
-      percent_format(
-        accuracy = 1
-      )
-  ) +
-  
-  labs(
-    
-    title =
-      "K-means: size of the smallest cluster in each bootstrap",
-    
-    subtitle =
-      "Dashed line = 5% of the bootstrap sample; very small clusters may indicate over-segmentation",
-    
-    x =
-      "Number of clusters (K)",
-    
-    y =
-      "Smallest cluster share",
-    
-    fill =
-      "K"
-  ) +
-  
-  theme_paper()
-
-
-
-save_plot(
-  
-  p_min_cluster,
-  
-  file.path(
-    fig_kmeans_dir,
-    "04_kmeans_smallest_cluster_share.png"
-  ),
-  
-  width = 10,
-  height = 8
-)
-
-
-
-# ============================================================
-# 11. LEER EFA
-# ============================================================
-
-efa_summary <- read_csv(
-  
-  file.path(
-    efa_dir,
-    "02_efa_metrics_summary.csv"
-  ),
-  
-  show_col_types =
-    FALSE
-  
-) %>%
-  
-  mutate(
-    
-    matrix =
-      matrix_label(
-        matrix_name
-      )
-  )
-
-
-
-# ============================================================
-# 12. EFA:
-#     BIC
-# ============================================================
-#
-# Más negativo = mejor dentro de la MISMA matriz.
-#
-# NO usamos BIC para comparar directamente
-# una transformación frente a otra.
-# ============================================================
-
-p_efa_bic <- ggplot(
-  
-  efa_summary,
-  
-  aes(
-    
-    x =
-      n_factors,
-    
-    y =
-      mean_BIC,
-    
-    group =
-      1
-  )
-  
-) +
-  
-  geom_line(
-    
-    linewidth =
-      1,
-    
-    color =
-      "#4C78A8"
-  ) +
-  
-  geom_point(
-    
-    size =
-      3,
-    
-    color =
-      "#4C78A8"
-  ) +
-  
-  geom_text(
-    
-    aes(
-      label =
-        round(
-          mean_BIC
-        )
+    mean_smallest_cluster_share = min(
+      mean_prop_cluster,
+      na.rm = TRUE
     ),
     
-    vjust =
-      -0.7,
+    min_observed_cluster_n = min(
+      min_n_cluster,
+      na.rm = TRUE
+    ),
     
-    size =
-      3
-  ) +
-  
-  facet_wrap(
-    
-    ~ matrix,
-    
-    scales =
-      "free_y"
-  ) +
-  
-  scale_x_continuous(
-    breaks =
-      4:8
-  ) +
-  
-  labs(
-    
-    title =
-      "EFA: Bayesian Information Criterion by number of factors",
-    
-    subtitle =
-      "More negative BIC indicates a better complexity-adjusted solution within each matrix",
-    
-    x =
-      "Number of factors",
-    
-    y =
-      "Mean BIC"
-  ) +
-  
-  theme_paper()
+    .groups = "drop"
+  )
 
+write_output(
+  kmeans_summary,
+  "01_kmeans_summary.csv"
+)
 
+write_output(
+  kmeans_delta,
+  "02_kmeans_marginal_gain.csv"
+)
 
-save_plot(
-  
-  p_efa_bic,
-  
-  file.path(
-    fig_efa_dir,
-    "05_efa_bic.png"
-  ),
-  
-  width = 11,
-  height = 7
+write_output(
+  cluster_size_diagnostic,
+  "03_kmeans_cluster_size_diagnostic.csv"
 )
 
 
+# Figuras K-means para COMPLETE.
 
-# ============================================================
-# 13. EFA:
-#     TLI / RMSEA / RMSR
-# ============================================================
-
-efa_fit_long <- efa_summary %>%
-  
-  select(
-    
-    matrix,
-    
-    n_factors,
-    
-    mean_RMSR,
-    
-    mean_TLI,
-    
-    mean_RMSEA
-  ) %>%
-  
-  pivot_longer(
-    
-    cols =
-      c(
-        mean_RMSR,
-        mean_TLI,
-        mean_RMSEA
-      ),
-    
-    names_to =
-      "metric",
-    
-    values_to =
-      "value"
-  ) %>%
-  
-  mutate(
-    
-    metric =
-      recode(
-        
-        metric,
-        
-        mean_RMSR =
-          "RMSR",
-        
-        mean_TLI =
-          "TLI",
-        
-        mean_RMSEA =
-          "RMSEA"
-      )
+complete_kmeans <- kmeans_summary %>%
+  filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE
   )
 
-
-
-p_efa_fit <- ggplot(
-  
-  efa_fit_long,
-  
+p_kmeans_between <- ggplot(
+  complete_kmeans,
   aes(
-    
-    x =
-      n_factors,
-    
-    y =
-      value,
-    
-    color =
-      matrix,
-    
-    group =
-      matrix
+    x = k,
+    y = mean_between_over_total
   )
-  
 ) +
-  
-  geom_line(
-    linewidth = 1
-  ) +
-  
+  geom_line() +
   geom_point(
     size = 2.5
   ) +
-  
   facet_wrap(
-    
-    ~ metric,
-    
-    scales =
-      "free_y",
-    
-    ncol =
-      1
+    ~ matrix,
+    scales = "free_y"
   ) +
-  
-  scale_color_manual(
-    values =
-      MATRIX_COLORS
-  ) +
-  
   scale_x_continuous(
-    breaks =
-      4:8
+    breaks = 2:8
   ) +
-  
   labs(
+    title = "K-means - COMPLETE - Between / Total",
     
-    title =
-      "EFA: model fit as the number of factors increases",
+    subtitle = paste(
+      "Diagnostic only; increasing K normally increases",
+      "explained between-cluster variation"
+    ),
     
-    subtitle =
-      "TLI should increase, while RMSEA and RMSR should decrease; complexity must still be considered",
-    
-    x =
-      "Number of factors",
-    
-    y =
-      "Metric value",
-    
-    color =
-      "Matrix"
+    x = "Number of clusters (K)",
+    y = "Between SS / Total SS"
   ) +
-  
   theme_paper()
 
+save_plot(
+  p_kmeans_between,
+  file.path(
+    fig_kmeans_dir,
+    "01_kmeans_between_over_total_COMPLETE.png"
+  ),
+  width = 11,
+  height = 7
+)
 
+p_kmeans_ch <- ggplot(
+  complete_kmeans,
+  aes(
+    x = k,
+    y = mean_calinski_harabasz
+  )
+) +
+  geom_line() +
+  geom_point(
+    size = 2.5
+  ) +
+  facet_wrap(
+    ~ matrix,
+    scales = "free_y"
+  ) +
+  scale_x_continuous(
+    breaks = 2:8
+  ) +
+  labs(
+    title = "K-means - COMPLETE - Calinski-Harabasz",
+    x = "Number of clusters (K)",
+    y = "Calinski-Harabasz"
+  ) +
+  theme_paper()
 
 save_plot(
-  
-  p_efa_fit,
-  
+  p_kmeans_ch,
+  file.path(
+    fig_kmeans_dir,
+    "02_kmeans_calinski_harabasz_COMPLETE.png"
+  ),
+  width = 11,
+  height = 7
+)
+
+p_kmeans_silhouette <- ggplot(
+  complete_kmeans,
+  aes(
+    x = k,
+    y = mean_silhouette
+  )
+) +
+  geom_line() +
+  geom_point(
+    size = 2.5
+  ) +
+  facet_wrap(
+    ~ matrix
+  ) +
+  scale_x_continuous(
+    breaks = 2:8
+  ) +
+  labs(
+    title = "K-means - COMPLETE - Silhouette",
+    
+    subtitle =
+      "Higher values indicate clearer separation between clusters",
+    
+    x = "Number of clusters (K)",
+    y = "Mean silhouette"
+  ) +
+  theme_paper()
+
+save_plot(
+  p_kmeans_silhouette,
+  file.path(
+    fig_kmeans_dir,
+    "03_kmeans_silhouette_COMPLETE.png"
+  ),
+  width = 11,
+  height = 7
+)
+
+
+# Comparación de silhouette entre muestras y matrices.
+
+p_kmeans_samples <- ggplot(
+  kmeans_summary,
+  aes(
+    x = k,
+    y = mean_silhouette
+  )
+) +
+  geom_line() +
+  geom_point(
+    size = 1.3
+  ) +
+  facet_grid(
+    analysis_sample ~ matrix,
+    scales = "free_y"
+  ) +
+  scale_x_continuous(
+    breaks = 2:8
+  ) +
+  labs(
+    title = "K-means silhouette by sample and matrix",
+    x = "K",
+    y = "Mean silhouette"
+  ) +
+  theme_paper(
+    base_size = 9
+  )
+
+save_plot(
+  p_kmeans_samples,
+  file.path(
+    fig_kmeans_dir,
+    "04_kmeans_silhouette_all_samples.png"
+  ),
+  width = 15,
+  height = 18
+)
+
+
+# EFA
+
+efa_summary <- read_csv(
+  efa_summary_file,
+  show_col_types = FALSE
+) %>%
+  filter(
+    analysis_sample %in% ANALYSIS_SAMPLES,
+    matrix_name %in% MATRICES_TO_RUN
+  ) %>%
+  mutate(
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    
+    matrix = matrix_label(
+      matrix_name
+    )
+  )
+
+write_output(
+  efa_summary,
+  "04_efa_summary.csv"
+)
+
+complete_efa <- efa_summary %>%
+  filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE
+  )
+
+
+# BIC por número de factores.
+
+p_efa_bic <- ggplot(
+  complete_efa,
+  aes(
+    x = n_factors,
+    y = mean_BIC
+  )
+) +
+  geom_line() +
+  geom_point(
+    size = 2.5
+  ) +
+  facet_wrap(
+    ~ matrix,
+    scales = "free_y"
+  ) +
+  scale_x_continuous(
+    breaks = 2:8
+  ) +
+  labs(
+    title = "EFA - COMPLETE - BIC",
+    
+    subtitle =
+      "Lower BIC is preferred within the same matrix transformation",
+    
+    x = "Number of factors",
+    y = "Mean BIC"
+  ) +
+  theme_paper()
+
+save_plot(
+  p_efa_bic,
   file.path(
     fig_efa_dir,
-    "06_efa_fit_metrics.png"
+    "05_efa_bic_COMPLETE.png"
   ),
-  
+  width = 11,
+  height = 7
+)
+
+
+# Métricas de ajuste EFA.
+
+efa_fit_long <- complete_efa %>%
+  select(
+    matrix,
+    n_factors,
+    mean_RMSR,
+    mean_TLI,
+    mean_RMSEA
+  ) %>%
+  pivot_longer(
+    cols = c(
+      mean_RMSR,
+      mean_TLI,
+      mean_RMSEA
+    ),
+    names_to = "metric",
+    values_to = "value"
+  ) %>%
+  mutate(
+    metric = recode(
+      metric,
+      "mean_RMSR" = "RMSR",
+      "mean_TLI" = "TLI",
+      "mean_RMSEA" = "RMSEA"
+    )
+  )
+
+p_efa_fit <- ggplot(
+  efa_fit_long,
+  aes(
+    x = n_factors,
+    y = value,
+    color = matrix,
+    group = matrix
+  )
+) +
+  geom_line() +
+  geom_point(
+    size = 2.2
+  ) +
+  facet_wrap(
+    ~ metric,
+    scales = "free_y",
+    ncol = 1
+  ) +
+  scale_x_continuous(
+    breaks = 2:8
+  ) +
+  labs(
+    title = "EFA - COMPLETE - Fit metrics",
+    x = "Number of factors",
+    y = "Metric",
+    color = "Matrix"
+  ) +
+  theme_paper()
+
+save_plot(
+  p_efa_fit,
+  file.path(
+    fig_efa_dir,
+    "06_efa_fit_COMPLETE.png"
+  ),
   width = 10,
   height = 10
 )
 
 
+# Comparación del BIC entre muestras.
 
-# ============================================================
-# 14. EFA:
-#     CORRELACIÓN ENTRE FACTORES
-# ============================================================
-
-p_efa_cor <- ggplot(
-  
+p_efa_samples <- ggplot(
   efa_summary,
-  
   aes(
-    
-    x =
-      n_factors,
-    
-    y =
-      mean_abs_factor_correlation,
-    
-    color =
-      matrix,
-    
-    group =
-      matrix
+    x = n_factors,
+    y = mean_BIC
   )
-  
 ) +
-  
-  geom_line(
-    linewidth = 1
-  ) +
-  
+  geom_line() +
   geom_point(
-    size = 2.8
+    size = 1.3
   ) +
-  
-  scale_color_manual(
-    values =
-      MATRIX_COLORS
+  facet_grid(
+    analysis_sample ~ matrix,
+    scales = "free_y"
   ) +
-  
   scale_x_continuous(
-    breaks =
-      4:8
+    breaks = 2:8
   ) +
-  
   labs(
-    
-    title =
-      "EFA: mean absolute correlation between factors",
-    
-    subtitle =
-      "Higher correlations imply greater overlap between latent factors",
-    
-    x =
-      "Number of factors",
-    
-    y =
-      "Mean |factor correlation|",
-    
-    color =
-      "Matrix"
+    title = "EFA BIC by sample and matrix",
+    x = "Number of factors",
+    y = "Mean BIC"
   ) +
-  
-  theme_paper()
-
-
+  theme_paper(
+    base_size = 9
+  )
 
 save_plot(
-  
-  p_efa_cor,
-  
+  p_efa_samples,
   file.path(
     fig_efa_dir,
-    "07_efa_factor_correlations.png"
+    "07_efa_bic_all_samples.png"
   ),
-  
-  width = 10,
-  height = 6.5
+  width = 15,
+  height = 18
 )
 
 
-
-# ============================================================
-# 15. LEER GREEDY
-# ============================================================
+# Greedy
 
 greedy_steps <- read_csv(
-  
-  file.path(
-    greedy_dir,
-    "03_greedy_prototype_steps.csv"
-  ),
-  
-  show_col_types =
-    FALSE
-)
-
-
-
-greedy_coverage <- read_csv(
-  
-  file.path(
-    greedy_dir,
-    "04_greedy_coverage_summary.csv"
-  ),
-  
-  show_col_types =
-    FALSE
-)
-
-
+  greedy_steps_file,
+  show_col_types = FALSE
+) %>%
+  mutate(
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    
+    matrix = matrix_label(
+      matrix_name
+    )
+  )
 
 greedy_prevalence <- read_csv(
-  
-  file.path(
-    greedy_dir,
-    "05_greedy_ball_determinant_prevalence.csv"
-  ),
-  
-  show_col_types =
-    FALSE
+  greedy_prevalence_file,
+  show_col_types = FALSE
+) %>%
+  mutate(
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    
+    matrix = matrix_label(
+      matrix_name
+    )
+  )
+
+hamming_interpretation <- read_csv(
+  greedy_hamming_file,
+  show_col_types = FALSE
+)
+
+greedy_thresholds <- read_csv(
+  greedy_thresholds_file,
+  show_col_types = FALSE
+) %>%
+  mutate(
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    
+    matrix = matrix_label(
+      matrix_name
+    )
+  )
+
+
+# Referencia provisional para estudiar sensibilidad D × Hamming.
+# No representa una selección definitiva de parámetros.
+
+greedy_reference_steps <- greedy_steps %>%
+  filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE,
+    
+    weighting ==
+      REFERENCE_WEIGHTING,
+    
+    method ==
+      REFERENCE_METHOD,
+    
+    matrix_name ==
+      REFERENCE_MATRIX,
+    
+    d_det %in%
+      D_DET_GRID,
+    
+    d_hamming %in%
+      HAMMING_GRID_PLOT
+  )
+
+greedy_reference_thresholds <- greedy_thresholds %>%
+  filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE,
+    
+    weighting ==
+      REFERENCE_WEIGHTING,
+    
+    method ==
+      REFERENCE_METHOD,
+    
+    matrix_name ==
+      REFERENCE_MATRIX,
+    
+    coverage_threshold %in%
+      COVERAGE_THRESHOLDS_PLOT,
+    
+    d_det %in%
+      D_DET_GRID,
+    
+    d_hamming %in%
+      HAMMING_GRID_PLOT
+  )
+
+
+# Sensibilidad D × Hamming:
+# número de prototipos necesarios para alcanzar cada nivel de cobertura.
+
+threshold_wide <- greedy_reference_thresholds %>%
+  select(
+    d_det,
+    d_hamming,
+    min_common_determinants,
+    min_common_pct,
+    coverage_threshold,
+    first_prototype_reaching_threshold
+  ) %>%
+  pivot_wider(
+    names_from =
+      coverage_threshold,
+    
+    values_from =
+      first_prototype_reaching_threshold,
+    
+    names_prefix =
+      "prototypes_for_"
+  )
+
+
+# Cobertura obtenida con 6, 7 y 8 prototipos.
+
+coverage_fixed <- greedy_reference_steps %>%
+  filter(
+    prototype %in%
+      PROTOTYPES_OF_INTEREST
+  ) %>%
+  select(
+    d_det,
+    d_hamming,
+    prototype,
+    cumulative_covered_pct
+  ) %>%
+  pivot_wider(
+    names_from =
+      prototype,
+    
+    values_from =
+      cumulative_covered_pct,
+    
+    names_prefix =
+      "coverage_with_"
+  )
+
+greedy_sensitivity_table <- threshold_wide %>%
+  left_join(
+    coverage_fixed,
+    by = c(
+      "d_det",
+      "d_hamming"
+    )
+  ) %>%
+  arrange(
+    d_det,
+    d_hamming
+  )
+
+write_output(
+  greedy_sensitivity_table,
+  "05_GREEDY_COMPLETE_sensitivity_D_H.csv"
 )
 
 
+# Heatmap: número de prototipos necesarios para cada cobertura.
 
-# ============================================================
-# 16. GREEDY:
-#     RADIO EQUIVALENTE A >=75% DE DETERMINANTES COMUNES
-# ============================================================
-#
-# Para cada D_DET cogemos el radio Hamming MÁS GRANDE
-# que todavía garantice:
-#
-#       min_common_pct >= 75
-#
-# Además quitamos radios impares porque son redundantes.
-# ============================================================
+max_prototypes_available <- max(
+  greedy_reference_steps$prototype,
+  na.rm = TRUE
+)
 
-greedy_75 <- greedy_coverage %>%
-  
-  filter(
+threshold_heatmap_data <- greedy_reference_thresholds %>%
+  mutate(
+    threshold_label = paste0(
+      coverage_threshold,
+      "% coverage"
+    ),
     
-    odd_radius_redundant ==
-      FALSE,
+    prototype_label = if_else(
+      is.na(
+        first_prototype_reaching_threshold
+      ),
+      
+      paste0(
+        ">",
+        max_prototypes_available
+      ),
+      
+      as.character(
+        first_prototype_reaching_threshold
+      )
+    )
+  )
+
+p_threshold_heatmap <- ggplot(
+  threshold_heatmap_data,
+  aes(
+    x = factor(
+      d_hamming
+    ),
+    
+    y = factor(
+      d_det
+    ),
+    
+    fill =
+      first_prototype_reaching_threshold
+  )
+) +
+  geom_tile(
+    color = "white",
+    linewidth = 0.5
+  ) +
+  geom_text(
+    aes(
+      label = prototype_label
+    ),
+    size = 3.2
+  ) +
+  facet_wrap(
+    ~ threshold_label,
+    nrow = 1
+  ) +
+  labs(
+    title =
+      "Greedy - COMPLETE - prototypes needed",
+    
+    subtitle = paste0(
+      "K-means RAW | weighting = ",
+      REFERENCE_WEIGHTING
+    ),
+    
+    x = "Hamming radius",
+    y = "Selected determinants (D)",
+    fill = "Prototypes"
+  ) +
+  theme_paper(
+    base_size = 11
+  )
+
+save_plot(
+  p_threshold_heatmap,
+  file.path(
+    fig_greedy_dir,
+    "08_greedy_COMPLETE_prototypes_needed_D_H.png"
+  ),
+  width = 15,
+  height = 6
+)
+
+
+# Heatmap de cobertura con 6, 7 y 8 prototipos.
+
+fixed_profiles_plot_data <- greedy_reference_steps %>%
+  filter(
+    prototype %in%
+      PROTOTYPES_OF_INTEREST
+  ) %>%
+  mutate(
+    prototype_label = paste0(
+      prototype,
+      " prototypes"
+    )
+  )
+
+p_fixed_profiles <- ggplot(
+  fixed_profiles_plot_data,
+  aes(
+    x = factor(
+      d_hamming
+    ),
+    
+    y = factor(
+      d_det
+    ),
+    
+    fill =
+      cumulative_covered_pct
+  )
+) +
+  geom_tile(
+    color = "white",
+    linewidth = 0.5
+  ) +
+  geom_text(
+    aes(
+      label = paste0(
+        round(
+          cumulative_covered_pct,
+          1
+        ),
+        "%"
+      )
+    ),
+    size = 3
+  ) +
+  facet_wrap(
+    ~ prototype_label,
+    nrow = 1
+  ) +
+  labs(
+    title =
+      "Greedy - COMPLETE - coverage with 6, 7 and 8 prototypes",
+    
+    subtitle = paste0(
+      "K-means RAW | weighting = ",
+      REFERENCE_WEIGHTING
+    ),
+    
+    x = "Hamming radius",
+    y = "Selected determinants (D)",
+    fill = "Coverage (%)"
+  ) +
+  theme_paper(
+    base_size = 11
+  )
+
+save_plot(
+  p_fixed_profiles,
+  file.path(
+    fig_greedy_dir,
+    "09_greedy_COMPLETE_coverage_6_7_8.png"
+  ),
+  width = 15,
+  height = 6
+)
+
+
+# Comparación entre muestras con la referencia provisional D=8, H=4.
+
+sample_comparison <- greedy_thresholds %>%
+  filter(
+    weighting ==
+      REFERENCE_WEIGHTING,
+    
+    method ==
+      REFERENCE_METHOD,
+    
+    matrix_name ==
+      REFERENCE_MATRIX,
+    
+    d_det ==
+      REFERENCE_D_DET,
+    
+    d_hamming ==
+      REFERENCE_D_HAMMING,
+    
+    coverage_threshold %in%
+      COVERAGE_THRESHOLDS_PLOT
+  ) %>%
+  select(
+    analysis_sample,
+    coverage_threshold,
+    first_prototype_reaching_threshold,
+    max_coverage_available
+  )
+
+write_output(
+  sample_comparison,
+  "06_GREEDY_sample_comparison_D8_H4.csv"
+)
+
+p_sample_comparison <- ggplot(
+  sample_comparison,
+  aes(
+    x = analysis_sample,
+    
+    y =
+      first_prototype_reaching_threshold,
+    
+    group = factor(
+      coverage_threshold
+    ),
+    
+    color = factor(
+      coverage_threshold
+    )
+  )
+) +
+  geom_line() +
+  geom_point(
+    size = 2.5
+  ) +
+  labs(
+    title =
+      "Greedy comparison across samples",
+    
+    subtitle =
+      "K-means RAW | D=8 | Hamming=4 | equal_candidate",
+    
+    x = "Analysis sample",
+    y = "Prototypes required",
+    color = "Coverage target"
+  ) +
+  theme_paper() +
+  theme(
+    axis.text.x = element_text(
+      angle = 35,
+      hjust = 1
+    )
+  )
+
+save_plot(
+  p_sample_comparison,
+  file.path(
+    fig_greedy_dir,
+    "10_greedy_sample_comparison_D8_H4.png"
+  ),
+  width = 11,
+  height = 7
+)
+
+
+# Comparación entre K-means y EFA como generadores de patrones.
+
+method_comparison <- greedy_thresholds %>%
+  filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE,
+    
+    weighting ==
+      REFERENCE_WEIGHTING,
+    
+    d_det ==
+      REFERENCE_D_DET,
+    
+    d_hamming ==
+      REFERENCE_D_HAMMING,
+    
+    coverage_threshold %in%
+      COVERAGE_THRESHOLDS_PLOT
+  ) %>%
+  select(
+    method,
+    matrix,
+    coverage_threshold,
+    first_prototype_reaching_threshold
+  )
+
+write_output(
+  method_comparison,
+  "07_GREEDY_KMEANS_vs_EFA_COMPLETE_D8_H4.csv"
+)
+
+p_method_comparison <- ggplot(
+  method_comparison,
+  aes(
+    x = factor(
+      coverage_threshold
+    ),
+    
+    y =
+      first_prototype_reaching_threshold,
+    
+    group = method,
+    color = method
+  )
+) +
+  geom_line() +
+  geom_point(
+    size = 2.5
+  ) +
+  facet_wrap(
+    ~ matrix
+  ) +
+  labs(
+    title =
+      "Greedy - K-means vs EFA",
+    
+    subtitle =
+      "COMPLETE | D=8 | Hamming=4 | equal_candidate",
+    
+    x = "Coverage target (%)",
+    y = "Prototypes required",
+    color = "Generator"
+  ) +
+  theme_paper()
+
+save_plot(
+  p_method_comparison,
+  file.path(
+    fig_greedy_dir,
+    "11_greedy_KMEANS_vs_EFA_COMPLETE.png"
+  ),
+  width = 11,
+  height = 7
+)
+
+
+# Sensibilidad a la forma de ponderar el pool Greedy.
+
+weighting_comparison <- greedy_thresholds %>%
+  filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE,
+    
+    method ==
+      REFERENCE_METHOD,
+    
+    matrix_name ==
+      REFERENCE_MATRIX,
+    
+    d_det %in%
+      D_DET_GRID,
+    
+    d_hamming %in%
+      HAMMING_GRID_PLOT,
+    
+    coverage_threshold %in%
+      COVERAGE_THRESHOLDS_PLOT
+  ) %>%
+  select(
+    weighting,
+    d_det,
+    d_hamming,
+    coverage_threshold,
+    first_prototype_reaching_threshold
+  ) %>%
+  pivot_wider(
+    names_from =
+      weighting,
+    
+    values_from =
+      first_prototype_reaching_threshold
+  ) %>%
+  mutate(
+    both_not_reached =
+      is.na(
+        equal_element
+      ) &
+      is.na(
+        equal_candidate
+      ),
+    
+    same_result = case_when(
+      both_not_reached ~
+        TRUE,
+      
+      !is.na(
+        equal_element
+      ) &
+        !is.na(
+          equal_candidate
+        ) ~
+        equal_element ==
+        equal_candidate,
+      
+      TRUE ~
+        FALSE
+    ),
+    
+    difference_candidate_minus_element =
+      equal_candidate -
+      equal_element,
+    
+    abs_difference = abs(
+      difference_candidate_minus_element
+    )
+  )
+
+write_output(
+  weighting_comparison,
+  "08_GREEDY_weighting_comparison.csv"
+)
+
+weighting_robustness_summary <- weighting_comparison %>%
+  group_by(
+    coverage_threshold
+  ) %>%
+  summarise(
+    n_combinations = n(),
+    
+    n_same = sum(
+      same_result,
+      na.rm = TRUE
+    ),
+    
+    pct_same =
+      100 *
+      mean(
+        same_result,
+        na.rm = TRUE
+      ),
+    
+    mean_abs_difference = mean(
+      abs_difference,
+      na.rm = TRUE
+    ),
+    
+    max_abs_difference = max(
+      abs_difference,
+      na.rm = TRUE
+    ),
+    
+    .groups = "drop"
+  )
+
+write_output(
+  weighting_robustness_summary,
+  "09_GREEDY_weighting_robustness_summary.csv"
+)
+
+
+# Figura de comparación entre ponderaciones para D=8 y H=4.
+
+weighting_reference_plot_data <- greedy_thresholds %>%
+  filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE,
+    
+    method ==
+      REFERENCE_METHOD,
+    
+    matrix_name ==
+      REFERENCE_MATRIX,
+    
+    d_det ==
+      REFERENCE_D_DET,
+    
+    d_hamming ==
+      REFERENCE_D_HAMMING,
+    
+    coverage_threshold %in%
+      COVERAGE_THRESHOLDS_PLOT
+  )
+
+p_weighting <- ggplot(
+  weighting_reference_plot_data,
+  aes(
+    x = factor(
+      coverage_threshold
+    ),
+    
+    y =
+      first_prototype_reaching_threshold,
+    
+    fill = weighting
+  )
+) +
+  geom_col(
+    position = position_dodge(
+      width = 0.8
+    ),
+    width = 0.7
+  ) +
+  labs(
+    title =
+      "Greedy sensitivity to pool weighting",
+    
+    subtitle =
+      "COMPLETE | K-means RAW | D=8 | Hamming=4",
+    
+    x = "Coverage target (%)",
+    y = "Prototypes required",
+    fill = "Weighting"
+  ) +
+  theme_paper()
+
+save_plot(
+  p_weighting,
+  file.path(
+    fig_greedy_dir,
+    "12_greedy_weighting_comparison.png"
+  ),
+  width = 9,
+  height = 6
+)
+
+
+# Para cada D, seleccionar el mayor radio Hamming que todavía garantiza
+# al menos un 75% de determinantes comunes entre patrón y prototipo.
+
+hamming_reference <- hamming_interpretation %>%
+  filter(
+    d_det %in%
+      D_DET_GRID,
+    
+    d_hamming %in%
+      HAMMING_GRID_PLOT,
     
     min_common_pct >=
-      MIN_COMMON_PCT
+      REFERENCE_COMMON_PCT
   ) %>%
-  
   group_by(
-    
-    method,
-    
-    matrix_name,
-    
-    k_candidate,
-    
     d_det
   ) %>%
-  
   slice_max(
-    
     order_by =
       d_hamming,
     
-    n =
-      1,
-    
-    with_ties =
-      FALSE
+    n = 1,
+    with_ties = FALSE
   ) %>%
-  
   ungroup() %>%
-  
-  mutate(
-    
-    matrix =
-      matrix_label(
-        matrix_name
-      )
-  )
-
-
-
-write_csv(
-  
-  greedy_75,
-  
-  file.path(
-    out_dir,
-    "04_greedy_reference_75pct.csv"
-  )
-)
-
-
-
-# ============================================================
-# 17. TABLA DE RADIOS USADOS
-# ============================================================
-
-hamming_reference <- greedy_75 %>%
-  
-  distinct(
-    
+  select(
     d_det,
-    
     d_hamming,
-    
     min_common_determinants,
-    
     min_common_pct
   ) %>%
-  
   arrange(
     d_det
   )
 
-
-
-write_csv(
-  
+write_output(
   hamming_reference,
-  
-  file.path(
-    out_dir,
-    "05_hamming_reference_75pct.csv"
-  )
+  "10_GREEDY_hamming_reference_75pct.csv"
 )
 
 
+# Cobertura obtenida utilizando la referencia de >=75% de
+# determinantes comunes para cada D.
 
-# ============================================================
-# 18. GREEDY:
-#     HEATMAP DE COBERTURA
-# ============================================================
-#
-# Cada celda:
-#
-# K × D_DET
-#
-# y usamos para cada D_DET el Hamming equivalente
-# a >=75% de determinantes comunes.
-#
-# Esta es probablemente una de las figuras
-# más importantes para seleccionar candidatos.
-# ============================================================
-
-p_greedy_heatmap <- ggplot(
-  
-  greedy_75,
-  
-  aes(
-    
-    x =
-      factor(
-        k_candidate
-      ),
-    
-    y =
-      factor(
-        d_det
-      ),
-    
-    fill =
-      final_covered_pct
-  )
-  
-) +
-  
-  geom_tile(
-    
-    color =
-      "white",
-    
-    linewidth =
-      0.5
-  ) +
-  
-  geom_text(
-    
-    aes(
-      label =
-        paste0(
-          round(
-            final_covered_pct,
-            1
-          ),
-          "%"
-        )
-    ),
-    
-    size =
-      3.2
-  ) +
-  
-  facet_grid(
-    
-    method ~ matrix
-  ) +
-  
-  scale_fill_gradientn(
-    
-    colours =
-      c(
-        "#F7FBFF",
-        "#C6DBEF",
-        "#6BAED6",
-        "#2171B5",
-        "#08306B"
-      ),
-    
-    limits =
-      c(
-        0,
-        100
-      ),
-    
-    name =
-      "Coverage"
-  ) +
-  
-  labs(
-    
-    title =
-      paste0(
-        "Greedy stability: coverage with at least ",
-        MIN_COMMON_PCT,
-        "% common determinants"
-      ),
-    
-    subtitle =
-      "Each cell reports the percentage of bootstrap-derived patterns covered by up to K representative prototypes",
-    
-    x =
-      "K candidate",
-    
-    y =
-      "Number of selected determinants (D)"
-  ) +
-  
-  theme_paper(
-    base_size = 11
-  ) +
-  
-  theme(
-    
-    axis.text.x =
-      element_text(
-        face = "bold"
-      )
-  )
-
-
-
-save_plot(
-  
-  p_greedy_heatmap,
-  
-  file.path(
-    fig_greedy_dir,
-    "08_greedy_coverage_heatmap_75pct.png"
-  ),
-  
-  width = 14,
-  height = 8
-)
-
-
-
-# ============================================================
-# 19. GREEDY:
-#     COBERTURA MEDIA POR K
-# ============================================================
-#
-# Promediamos D_DET=8:15,
-# siempre bajo el criterio >=75% común.
-#
-# Esto NO selecciona automáticamente K.
-#
-# Sirve para ver estabilidad general.
-# ============================================================
-
-greedy_k_summary <- greedy_75 %>%
-  
-  group_by(
-    
-    method,
-    
-    matrix,
-    
-    k_candidate
-  ) %>%
-  
-  summarise(
-    
-    mean_coverage =
-      mean(
-        final_covered_pct,
-        na.rm = TRUE
-      ),
-    
-    sd_coverage =
-      sd(
-        final_covered_pct,
-        na.rm = TRUE
-      ),
-    
-    mean_last_increment =
-      mean(
-        last_prototype_increment_pct,
-        na.rm = TRUE
-      ),
-    
-    .groups =
-      "drop"
-  )
-
-
-
-write_csv(
-  
-  greedy_k_summary,
-  
-  file.path(
-    out_dir,
-    "06_greedy_k_summary_75pct.csv"
-  )
-)
-
-
-
-p_greedy_k <- ggplot(
-  
-  greedy_k_summary,
-  
-  aes(
-    
-    x =
-      k_candidate,
-    
-    y =
-      mean_coverage,
-    
-    color =
-      method,
-    
-    group =
-      method
-  )
-  
-) +
-  
-  geom_line(
-    linewidth = 1
-  ) +
-  
-  geom_point(
-    size = 3
-  ) +
-  
-  geom_text(
-    
-    aes(
-      label =
-        paste0(
-          round(
-            mean_coverage,
-            1
-          ),
-          "%"
-        )
-    ),
-    
-    vjust =
-      -0.8,
-    
-    size =
-      3
-  ) +
-  
-  facet_wrap(
-    
-    ~ matrix,
-    
-    ncol =
-      2
-  ) +
-  
-  scale_color_manual(
-    values =
-      METHOD_COLORS
-  ) +
-  
-  scale_x_continuous(
-    breaks =
-      4:8
-  ) +
-  
-  scale_y_continuous(
-    
-    limits =
-      c(
-        0,
-        100
-      )
-  ) +
-  
-  labs(
-    
-    title =
-      "Greedy: mean pattern coverage by K",
-    
-    subtitle =
-      paste0(
-        "Average across D = 8–15 using Hamming radii that guarantee at least ",
-        MIN_COMMON_PCT,
-        "% common determinants"
-      ),
-    
-    x =
-      "K candidate",
-    
-    y =
-      "Mean coverage (%)",
-    
-    color =
-      "Method"
-  ) +
-  
-  theme_paper()
-
-
-
-save_plot(
-  
-  p_greedy_k,
-  
-  file.path(
-    fig_greedy_dir,
-    "09_greedy_mean_coverage_by_k.png"
-  ),
-  
-  width = 11,
-  height = 8
-)
-
-
-
-# ============================================================
-# 20. GREEDY:
-#     APORTE DEL ÚLTIMO PROTOTIPO
-# ============================================================
-#
-# Si el último prototipo añade muy poco,
-# puede indicar que aumentar K aporta poca información.
-# ============================================================
-
-p_last_increment <- ggplot(
-  
-  greedy_k_summary,
-  
-  aes(
-    
-    x =
-      k_candidate,
-    
-    y =
-      mean_last_increment,
-    
-    color =
-      method,
-    
-    group =
-      method
-  )
-  
-) +
-  
-  geom_line(
-    linewidth = 1
-  ) +
-  
-  geom_point(
-    size = 3
-  ) +
-  
-  facet_wrap(
-    
-    ~ matrix,
-    
-    ncol =
-      2
-  ) +
-  
-  scale_color_manual(
-    values =
-      METHOD_COLORS
-  ) +
-  
-  scale_x_continuous(
-    breaks =
-      4:8
-  ) +
-  
-  labs(
-    
-    title =
-      "Greedy: contribution of the last selected prototype",
-    
-    subtitle =
-      "Small increments suggest diminishing returns when adding additional profiles",
-    
-    x =
-      "K candidate",
-    
-    y =
-      "Coverage added by last prototype (%)",
-    
-    color =
-      "Method"
-  ) +
-  
-  theme_paper()
-
-
-
-save_plot(
-  
-  p_last_increment,
-  
-  file.path(
-    fig_greedy_dir,
-    "10_greedy_last_prototype_increment.png"
-  ),
-  
-  width = 11,
-  height = 8
-)
-
-
-
-# ============================================================
-# 21. GREEDY:
-#     COBERTURA ACUMULADA PROTOTIPO A PROTOTIPO
-# ============================================================
-#
-# Usamos:
-#
-# D_DET = 8
-# D_HAMMING = 4
-#
-# porque:
-#
-# 6/8 determinantes comunes = 75%
-#
-# Este gráfico permite visualizar:
-#
-# P1 -> x%
-# P2 -> x%
-# P3 -> x%
-# ...
-#
-# y ver dónde aparece el rendimiento decreciente.
-# ============================================================
-
-greedy_steps_reference <- greedy_steps %>%
-  
+reference_thresholds <- greedy_thresholds %>%
   filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE,
     
-    d_det ==
-      REFERENCE_D_DET,
+    weighting ==
+      REFERENCE_WEIGHTING,
     
-    d_hamming ==
-      REFERENCE_D_HAMMING
+    method ==
+      REFERENCE_METHOD,
+    
+    matrix_name ==
+      REFERENCE_MATRIX,
+    
+    coverage_threshold %in%
+      COVERAGE_THRESHOLDS_PLOT
   ) %>%
-  
-  mutate(
+  inner_join(
+    hamming_reference,
+    by = c(
+      "d_det",
+      "d_hamming"
+    ),
+    suffix = c(
+      "",
+      "_reference"
+    )
+  ) %>%
+  select(
+    d_det,
+    d_hamming,
     
-    matrix =
-      matrix_label(
-        matrix_name
-      ),
+    min_common_pct =
+      min_common_pct_reference,
     
-    k_candidate =
-      factor(
-        k_candidate
-      )
+    coverage_threshold,
+    first_prototype_reaching_threshold,
+    max_coverage_available
+  ) %>%
+  pivot_wider(
+    names_from =
+      coverage_threshold,
+    
+    values_from =
+      first_prototype_reaching_threshold,
+    
+    names_prefix =
+      "prototypes_for_"
+  ) %>%
+  arrange(
+    d_det
   )
 
+write_output(
+  reference_thresholds,
+  "11_GREEDY_reference75_thresholds_by_D.csv"
+)
 
 
-p_cumulative <- ggplot(
-  
-  greedy_steps_reference,
-  
-  aes(
+# Zona candidata con similitud entre 75% y 85%.
+#
+# Se conserva únicamente como diagnóstico para facilitar la comparación
+# entre combinaciones D × Hamming; todavía no selecciona una solución final.
+
+candidate_thresholds <- greedy_reference_thresholds %>%
+  filter(
+    min_common_pct >=
+      SIMILARITY_MIN,
     
-    x =
+    min_common_pct <=
+      SIMILARITY_MAX
+  ) %>%
+  select(
+    d_det,
+    d_hamming,
+    min_common_pct,
+    coverage_threshold,
+    first_prototype_reaching_threshold
+  ) %>%
+  pivot_wider(
+    names_from =
+      coverage_threshold,
+    
+    values_from =
+      first_prototype_reaching_threshold,
+    
+    names_prefix =
+      "prototypes_for_"
+  )
+
+candidate_fixed_profiles <- greedy_reference_steps %>%
+  filter(
+    min_common_pct >=
+      SIMILARITY_MIN,
+    
+    min_common_pct <=
+      SIMILARITY_MAX,
+    
+    prototype %in%
+      PROTOTYPES_OF_INTEREST
+  ) %>%
+  select(
+    d_det,
+    d_hamming,
+    min_common_pct,
+    prototype,
+    cumulative_covered_pct
+  ) %>%
+  pivot_wider(
+    names_from =
       prototype,
     
-    y =
+    values_from =
       cumulative_covered_pct,
     
-    color =
-      k_candidate,
-    
-    group =
-      k_candidate
-  )
-  
-) +
-  
-  geom_line(
-    linewidth = 1
-  ) +
-  
-  geom_point(
-    size = 2.5
-  ) +
-  
-  facet_grid(
-    
-    method ~ matrix
-  ) +
-  
-  scale_color_manual(
-    values =
-      K_COLORS
-  ) +
-  
-  scale_x_continuous(
-    
-    breaks =
-      1:8
-  ) +
-  
-  scale_y_continuous(
-    
-    limits =
-      c(
-        0,
-        100
-      )
-  ) +
-  
-  labs(
-    
-    title =
-      "Greedy: cumulative coverage as representative prototypes are added",
-    
-    subtitle =
-      paste0(
-        "Reference setting: D = ",
-        REFERENCE_D_DET,
-        ", Hamming = ",
-        REFERENCE_D_HAMMING,
-        " (minimum 75% common determinants)"
-      ),
-    
-    x =
-      "Number of selected prototypes",
-    
-    y =
-      "Cumulative coverage (%)",
-    
-    color =
-      "K"
-  ) +
-  
-  theme_paper(
-    base_size = 10
+    names_prefix =
+      "coverage_with_"
   )
 
+greedy_candidate_zone <- candidate_thresholds %>%
+  left_join(
+    candidate_fixed_profiles,
+    by = c(
+      "d_det",
+      "d_hamming",
+      "min_common_pct"
+    )
+  ) %>%
+  arrange(
+    min_common_pct,
+    d_det
+  )
 
-
-save_plot(
-  
-  p_cumulative,
-  
-  file.path(
-    fig_greedy_dir,
-    "11_greedy_cumulative_coverage.png"
-  ),
-  
-  width = 14,
-  height = 8
+write_output(
+  greedy_candidate_zone,
+  "12_GREEDY_candidate_similarity_75_85.csv"
 )
 
 
-
-# ============================================================
-# 22. HEATMAPS DE ESTABILIDAD DE LOS DETERMINANTES
-# ============================================================
-#
-# Para poder interpretar los perfiles.
-#
-# CONFIGURACIÓN DE REFERENCIA:
-#
-# K = 6
-# D_DET = 8
-# D_HAMMING = 4
-#
-# Se genera UN gráfico por:
-#
-# método × matriz
-#
-#
-# IMPORTANTE:
-#
-# Esto es un diagnóstico visual.
-#
-# Cuando seleccionemos definitivamente:
-#
-# K
-# D_DET
-# D_HAMMING
-#
-# cambiaremos los parámetros de arriba
-# y volveremos a generar estos gráficos.
-# ============================================================
+# Estabilidad de los determinantes dentro de los prototipos provisionales
+# de la configuración de referencia.
 
 profile_reference <- greedy_prevalence %>%
-  
   filter(
+    analysis_sample ==
+      REFERENCE_SAMPLE,
     
-    k_candidate ==
-      REFERENCE_K,
+    weighting ==
+      REFERENCE_WEIGHTING,
+    
+    method ==
+      REFERENCE_METHOD,
+    
+    matrix_name ==
+      REFERENCE_MATRIX,
     
     d_det ==
       REFERENCE_D_DET,
     
     d_hamming ==
-      REFERENCE_D_HAMMING
+      REFERENCE_D_HAMMING,
+    
+    prototype <= 8
   ) %>%
-  
   mutate(
-    
-    matrix =
-      matrix_label(
-        matrix_name
-      ),
-    
     determinant_label =
       clean_determinant_label(
         determinant
       )
   )
 
-
-
-for (
-  
-  method_current in
-  unique(
-    profile_reference$method
-  )
-  
-) {
-  
-  
-  for (
-    
-    matrix_current in
-    unique(
-      profile_reference$matrix
-    )
-    
-  ) {
-    
-    
-    plot_data <- profile_reference %>%
-      
-      filter(
-        
-        method ==
-          method_current,
-        
-        matrix ==
-          matrix_current
-      )
-    
-    
-    
-    if (nrow(plot_data) == 0) {
-      
-      next
-    }
-    
-    
-    
-    determinant_order <- plot_data %>%
-      
-      group_by(
-        determinant_label
-      ) %>%
-      
-      summarise(
-        
-        max_prevalence =
-          max(
-            pct_active_in_ball,
-            na.rm = TRUE
-          ),
-        
-        .groups =
-          "drop"
-      ) %>%
-      
-      arrange(
-        max_prevalence
-      ) %>%
-      
-      pull(
-        determinant_label
-      )
-    
-    
-    
-    plot_data <- plot_data %>%
-      
-      mutate(
-        
-        determinant_label =
-          factor(
-            
-            determinant_label,
-            
-            levels =
-              determinant_order
-          )
-      )
-    
-    
-    
-    p_profile <- ggplot(
-      
-      plot_data,
-      
-      aes(
-        
-        x =
-          factor(
-            prototype
-          ),
-        
-        y =
-          determinant_label,
-        
-        fill =
-          pct_active_in_ball
-      )
-      
-    ) +
-      
-      geom_tile(
-        
-        color =
-          "white",
-        
-        linewidth =
-          0.35
-      ) +
-      
-      geom_text(
-        
-        aes(
-          label =
-            if_else(
-              
-              pct_active_in_ball >=
-                50,
-              
-              paste0(
-                round(
-                  pct_active_in_ball
-                ),
-                "%"
-              ),
-              
-              ""
-            )
-        ),
-        
-        size =
-          2.6
-      ) +
-      
-      scale_fill_gradientn(
-        
-        colours =
-          c(
-            
-            "#FFFFFF",
-            
-            "#DEEBF7",
-            
-            "#9ECAE1",
-            
-            "#4292C6",
-            
-            "#08519C"
-          ),
-        
-        limits =
-          c(
-            0,
-            100
-          ),
-        
-        name =
-          "% present"
-      ) +
-      
-      labs(
-        
-        title =
-          paste0(
-            method_current,
-            " – ",
-            matrix_current,
-            ": determinant stability"
-          ),
-        
-        subtitle =
-          paste0(
-            "Reference: K=",
-            REFERENCE_K,
-            ", D=",
-            REFERENCE_D_DET,
-            ", Hamming=",
-            REFERENCE_D_HAMMING
-          ),
-        
-        x =
-          "Representative prototype",
-        
-        y =
-          "Determinant"
-      ) +
-      
-      theme_paper(
-        base_size = 10
-      )
-    
-    
-    
-    save_plot(
-      
-      p_profile,
-      
-      file.path(
-        
-        fig_profiles_dir,
-        
-        paste0(
-          
-          "profile_stability_",
-          
-          tolower(
-            method_current
-          ),
-          
-          "_",
-          
-          tolower(
-            matrix_current
-          ),
-          
-          ".png"
-        )
+if (nrow(profile_reference)) {
+  determinant_order <- profile_reference %>%
+    group_by(
+      determinant_label
+    ) %>%
+    summarise(
+      max_prevalence = max(
+        pct_active_in_ball,
+        na.rm = TRUE
       ),
       
-      width =
-        10,
-      
-      height =
-        11
+      .groups = "drop"
+    ) %>%
+    arrange(
+      max_prevalence
+    ) %>%
+    pull(
+      determinant_label
     )
-  }
+  
+  profile_reference <- profile_reference %>%
+    mutate(
+      determinant_label = factor(
+        determinant_label,
+        levels = determinant_order
+      )
+    )
+  
+  p_profile <- ggplot(
+    profile_reference,
+    aes(
+      x = factor(
+        prototype
+      ),
+      
+      y =
+        determinant_label,
+      
+      fill =
+        pct_active_in_ball
+    )
+  ) +
+    geom_tile(
+      color = "white",
+      linewidth = 0.3
+    ) +
+    geom_text(
+      aes(
+        label = if_else(
+          pct_active_in_ball >= 50,
+          
+          paste0(
+            round(
+              pct_active_in_ball
+            ),
+            "%"
+          ),
+          
+          ""
+        )
+      ),
+      size = 2.5
+    ) +
+    labs(
+      title =
+        "Determinant stability within provisional Greedy prototypes",
+      
+      subtitle =
+        "COMPLETE | K-means RAW | D=8 | Hamming=4 | equal_candidate",
+      
+      x = "Greedy prototype",
+      y = "Determinant",
+      fill = "% present"
+    ) +
+    theme_paper(
+      base_size = 10
+    )
+  
+  save_plot(
+    p_profile,
+    file.path(
+      fig_profiles_dir,
+      "13_profile_stability_COMPLETE_RAW_provisional.png"
+    ),
+    width = 11,
+    height = 11
+  )
 }
 
 
+# Resumen en consola
 
-# ============================================================
-# 23. RESUMEN GENERAL PARA CONSOLA
-# ============================================================
+cat("\n09. ANÁLISIS Y GRÁFICOS COMPLETADO\n")
 
-
-cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "ANÁLISIS Y GRÁFICOS COMPLETADO\n"
-)
-
-cat(
-  "============================================================\n"
-)
-
-
-
-cat(
-  "\nReferencia de similitud Greedy:\n"
-)
-
-cat(
-  MIN_COMMON_PCT,
-  "% de determinantes comunes\n"
-)
-
-
-
-cat(
-  "\nRadio Hamming utilizado para cada D:\n"
-)
-
-
+cat("\nK-MEANS - COMPLETE - RAW\n\n")
 
 print(
-  
-  hamming_reference,
-  
-  n =
-    Inf,
-  
-  width =
-    Inf
-)
-
-
-
-cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "K-MEANS: MEJORA MARGINAL\n"
-)
-
-cat(
-  "============================================================\n"
-)
-
-
-
-print(
-  
-  kmeans_delta %>%
-    
+  kmeans_summary %>%
+    filter(
+      analysis_sample ==
+        REFERENCE_SAMPLE,
+      
+      matrix_name ==
+        REFERENCE_MATRIX
+    ) %>%
     select(
-      
-      matrix,
-      
       k,
-      
+      mean_tot_withinss,
       mean_between_over_total,
-      
-      delta_between_over_total,
-      
+      mean_calinski_harabasz,
+      mean_silhouette,
       mean_min_cluster_distance
     ),
-  
-  n =
-    Inf,
-  
-  width =
-    Inf
+  n = Inf,
+  width = Inf
 )
 
-
-
-cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "EFA: RESUMEN\n"
-)
-
-cat(
-  "============================================================\n"
-)
-
-
+cat("\nEFA - COMPLETE - RAW\n\n")
 
 print(
-  
   efa_summary %>%
-    
+    filter(
+      analysis_sample ==
+        REFERENCE_SAMPLE,
+      
+      matrix_name ==
+        REFERENCE_MATRIX
+    ) %>%
     select(
-      
-      matrix,
-      
       n_factors,
-      
+      n_ok,
+      n_error,
       mean_RMSR,
-      
       mean_TLI,
-      
       mean_RMSEA,
-      
       mean_BIC,
-      
       mean_abs_factor_correlation
     ),
-  
-  n =
-    Inf,
-  
-  width =
-    Inf
-)
-
-
-
-cat(
-  "\n============================================================\n"
+  n = Inf,
+  width = Inf
 )
 
 cat(
-  "GREEDY: COBERTURA MEDIA POR K\n"
+  "\nGREEDY - COMPARACIÓN ENTRE MUESTRAS - D=8 / H=4\n\n"
 )
-
-cat(
-  "============================================================\n"
-)
-
-
 
 print(
-  
-  greedy_k_summary %>%
-    
-    arrange(
-      
-      method,
-      
-      matrix,
-      
-      k_candidate
-    ),
-  
-  n =
-    Inf,
-  
-  width =
-    Inf
+  sample_comparison,
+  n = Inf,
+  width = Inf
 )
 
+cat("\nGREEDY - ROBUSTEZ A PONDERACIÓN\n\n")
 
-
-cat(
-  "\n============================================================\n"
+print(
+  weighting_robustness_summary,
+  n = Inf,
+  width = Inf
 )
 
 cat(
-  "FIGURAS GUARDADAS EN\n"
+  "\nGREEDY - REFERENCIA >=75% DE DETERMINANTES COMUNES\n\n"
+)
+
+print(
+  reference_thresholds,
+  n = Inf,
+  width = Inf
 )
 
 cat(
-  "============================================================\n"
+  "\nFiguras guardadas en:\n",
+  fig_dir,
+  "\n",
+  sep = ""
 )
 
-cat(fig_dir,"\n")
-
-message( "\nListo. Análisis visual generado.")
-
-
-
-
-
-
-
-
+message(
+  "\nResultados guardados en: ",
+  out_dir
+)

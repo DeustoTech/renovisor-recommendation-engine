@@ -1,22 +1,22 @@
 
 
-# mirar all_sources_integrated.csv
-#
 # Objetivo:
 # 1. Leer y unir las 4 encuestas RV completas.
-# 2. Leer WHY y filtrar solo participantes europeos.
+# 2. Leer WHY completo y separar Europa y Latinoamérica.
 # 3. Leer datos de Diego y transformar escala a 0-100.
-# 4. Juntar RV + WHY + Diego en una base integrada.
+# 4. Construir la base integrada completa:
+#       RENOVISOR + WHY_EUROPE + WHY_LATAM + DIEGO
+# 5. Añadir la etiqueta "subsample":
+#       - DIEGO
+#       - RENOVISOR
+#       - WHY_EUROPE
+#       - WHY_LATAM
 #
-# Importante:
-# Este script NO construye todavía la matriz de 32 determinantes.
-# Eso irá en el script 02_build_32det_matrix.R.
+# POOLED_ALL se utiliza únicamente como resumen descriptivo.
 
 suppressPackageStartupMessages({
   library(tidyverse)
   library(readxl)
-  library(readr)
-  library(stringr)
   library(janitor)
 })
 
@@ -26,28 +26,19 @@ set.seed(123)
 paths <- list(
   rv_decision = "paper1_cluster/data/raw/Content_Export_RV-Decision_956.xlsx",
   rv_concerns = "paper1_cluster/data/raw/Content_Export_RV-Concerns_2__166.xlsx",
-  rv_energy   = "paper1_cluster/data/raw/Content_Export_RV-Energy_Crisis_157.xlsx",
-  rv_poverty  = "paper1_cluster/data/raw/Content_Export_RV-Poverty__96.xlsx",
-  
+  rv_energy = "paper1_cluster/data/raw/Content_Export_RV-Energy_Crisis_157.xlsx",
+  rv_poverty = "paper1_cluster/data/raw/Content_Export_RV-Poverty__96.xlsx",
   why = "paper1_cluster/data/raw/Content_Export_Investment_Arquetypes_2022_full-latin-final.csv",
-  
   diego = "paper1_cluster/data/raw/Survey_September2023_cleaned.xlsx",
-  
   prolific_dir = "paper1_cluster/data/raw/prolific"
 )
 
 out_dir <- "paper1_cluster/data/processed/01_mergeData"
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
-# Cambiar a "1_5" si Diego está realmente en escala 1-5.
-# Si está en escala 0-5, dejar "0_5".
 DIEGO_SCALE <- "1_5"
-
-# Ruido opcional
-# Para este primer merge, lo dejo en FALSE porque esto es transformación, no aumento.
 ADD_DIEGO_NOISE <- TRUE
 DIEGO_NOISE_SD <- 1
-
 USE_DIEGO_NOISY_INTEGRATED <- TRUE
 
 
@@ -58,8 +49,7 @@ quiet_unique_names <- function(x) {
 }
 
 normalise_id <- function(x) {
-  x <- as.character(x)
-  x <- str_trim(str_to_lower(x))
+  x <- str_trim(str_to_lower(as.character(x)))
   x <- na_if(x, "")
   x <- na_if(x, "na")
   x <- na_if(x, "nan")
@@ -68,30 +58,29 @@ normalise_id <- function(x) {
 }
 
 parse_num <- function(x) {
-  readr::parse_number(as.character(x), locale = locale(decimal_mark = "."))
+  suppressWarnings(
+    parse_number(as.character(x), locale = locale(decimal_mark = "."))
+  )
 }
 
 first_non_missing <- function(x) {
   x <- x[!is.na(x) & x != "" & x != "NA" & x != "NaN"]
-  if (length(x) == 0) return(NA_character_)
+  if (!length(x)) return(NA_character_)
   as.character(x[[1]])
 }
 
 collapse_unique_non_missing <- function(x) {
-  x <- as.character(x)
-  x <- str_squish(x)
+  x <- unique(str_squish(as.character(x)))
   x <- x[!is.na(x) & x != "" & x != "NA" & x != "NaN"]
-  x <- unique(x)
   
-  if (length(x) == 0) return(NA_character_)
+  if (!length(x)) return(NA_character_)
   if (length(x) == 1) return(x)
   
   paste(x, collapse = " | ")
 }
 
 get_first_matching_col <- function(df, pattern) {
-  nm <- names(df)
-  out <- nm[str_detect(nm, regex(pattern, ignore_case = TRUE))][1]
+  out <- names(df)[str_detect(names(df), regex(pattern, ignore_case = TRUE))][1]
   ifelse(is.na(out), NA_character_, out)
 }
 
@@ -111,9 +100,8 @@ as_prefixed_character_df <- function(df, prefix) {
 }
 
 
-# Países y filtro Europa
+# Países
 country_name_to_iso2 <- c(
-  # Europa
   "spain" = "ES", "espana" = "ES", "españa" = "ES",
   "germany" = "DE", "alemania" = "DE",
   "italy" = "IT", "italia" = "IT",
@@ -150,19 +138,29 @@ country_name_to_iso2 <- c(
   "albania" = "AL",
   "moldova" = "MD",
   
-  # Latinoamérica / no Europa
-  "mexico" = "MX",
+  "argentina" = "AR",
+  "bolivia" = "BO",
+  "bolivia, plurinational state of" = "BO",
+  "brazil" = "BR", "brasil" = "BR",
   "chile" = "CL",
   "colombia" = "CO",
-  "argentina" = "AR",
-  "peru" = "PE",
-  "venezuela, bolivarian republic of" = "VE",
-  "brazil" = "BR",
-  "bolivia" = "BO",
-  "panama" = "PA",
+  "costa rica" = "CR",
   "cuba" = "CU",
+  "dominican republic" = "DO",
+  "república dominicana" = "DO",
+  "ecuador" = "EC",
+  "el salvador" = "SV",
+  "guatemala" = "GT",
+  "honduras" = "HN",
+  "mexico" = "MX", "méxico" = "MX",
+  "nicaragua" = "NI",
+  "panama" = "PA", "panamá" = "PA",
+  "paraguay" = "PY",
+  "peru" = "PE", "perú" = "PE",
+  "uruguay" = "UY",
+  "venezuela" = "VE",
+  "venezuela, bolivarian republic of" = "VE",
   
-  # Otros no Europa
   "united states" = "US",
   "canada" = "CA",
   "india" = "IN",
@@ -195,7 +193,6 @@ country_name_to_iso2 <- c(
   "tanzania" = "TZ",
   "tunisia" = "TN",
   
-  # Valores no válidos
   "consent_revoked" = NA_character_,
   "data_expired" = NA_character_
 )
@@ -208,9 +205,14 @@ europe_iso2 <- c(
   "CH", "UA", "GB", "UK", "VA"
 )
 
+latam_iso2 <- c(
+  "AR", "BO", "BR", "CL", "CO", "CR", "CU", "DO",
+  "EC", "SV", "GT", "HN", "MX", "NI", "PA", "PY",
+  "PE", "UY", "VE"
+)
+
 extract_country_code <- function(x) {
-  x_chr <- as.character(x)
-  x_chr <- str_squish(x_chr)
+  x_chr <- str_squish(as.character(x))
   x_low <- str_to_lower(x_chr)
   
   code_exact <- ifelse(
@@ -223,8 +225,9 @@ extract_country_code <- function(x) {
   code_prefix <- str_match(x_chr, "^\\s*([A-Za-z]{2})\\s*[-–]")[, 2]
   code_name <- unname(country_name_to_iso2[x_low])
   
-  code <- coalesce(code_exact, code_parentheses, code_prefix, code_name)
-  str_to_upper(code)
+  str_to_upper(
+    coalesce(code_exact, code_parentheses, code_prefix, code_name)
+  )
 }
 
 is_europe_country <- function(country_code) {
@@ -235,29 +238,22 @@ is_europe_country <- function(country_code) {
   )
 }
 
-# Lectura de Excel tipo EUSurvey
 read_excel_content <- function(path, skip = 3) {
-  sheets <- readxl::excel_sheets(path)
+  sheets <- excel_sheets(path)
   
-  sheet_to_read <- if ("Content" %in% sheets) {
-    "Content"
-  } else {
-    sheets[1]
-  }
-  
-  readxl::read_excel(
+  read_excel(
     path,
-    sheet = sheet_to_read,
+    sheet = if ("Content" %in% sheets) "Content" else sheets[1],
     skip = skip,
     .name_repair = quiet_unique_names
   ) %>%
     as_tibble()
 }
 
-# Leer y unir las 4 encuestas RV completas
+
+# RENOVISOR
 read_rv_survey_full <- function(path, survey_name) {
-  raw <- read_excel_content(path, skip = 3)
-  
+  raw <- read_excel_content(path)
   raw_payload <- as_prefixed_character_df(raw, paste0("rv_", survey_name))
   
   meta <- tibble(
@@ -265,21 +261,13 @@ read_rv_survey_full <- function(path, survey_name) {
     source_survey = survey_name,
     source_file = basename(path),
     source_row = seq_len(nrow(raw)),
-    
-    # En los exports RV, estas posiciones suelen corresponder a:
-    # columna 2 = Prolific ID
-    # columna 4 = identification code
     prolific_id = normalise_id(raw[[2]]),
     identification_code = normalise_id(raw[[4]]),
-    
     participant_key = coalesce(
       prolific_id,
       identification_code,
       paste0("rv_noid_", survey_name, "_", seq_len(nrow(raw)))
     ),
-    
-    # Metadatos aproximados por posición.
-    # Si alguna encuesta tiene estructura distinta, queda igualmente guardada en raw_payload.
     year_birth_raw = as.character(raw[[5]]),
     gender_raw = as.character(raw[[6]]),
     country_raw = as.character(raw[[7]]),
@@ -306,7 +294,6 @@ rv_by_participant <- rv_all_rows %>%
     n_distinct_surveys = n_distinct(source_survey),
     source_survey = paste(sort(unique(source_survey)), collapse = ";"),
     source_file = paste(sort(unique(source_file)), collapse = ";"),
-    
     prolific_id = first_non_missing(prolific_id),
     identification_code = first_non_missing(identification_code),
     year_birth_raw = first_non_missing(year_birth_raw),
@@ -315,7 +302,7 @@ rv_by_participant <- rv_all_rows %>%
     country_code = first_non_missing(country_code),
     
     across(
-      .cols = -any_of(c(
+      -any_of(c(
         "dataset_source",
         "source_survey",
         "source_file",
@@ -327,98 +314,100 @@ rv_by_participant <- rv_all_rows %>%
         "country_raw",
         "country_code"
       )),
-      .fns = collapse_unique_non_missing
+      collapse_unique_non_missing
     ),
     
     .groups = "drop"
   ) %>%
   mutate(
-    global_participant_key = paste(dataset_source, participant_key, sep = "__")
+    global_participant_key = paste(
+      dataset_source,
+      participant_key,
+      sep = "__"
+    )
   ) %>%
   relocate(global_participant_key, .before = 1)
 
 
-# Leer exports de Prolific
-# Leer exports de Prolific
+# Prolific
+
 read_prolific_file <- function(path) {
   raw <- read_csv(
     path,
     show_col_types = FALSE,
-    name_repair = quiet_unique_names
+    name_repair = quiet_unique_names,
+    col_types = cols(.default = col_character())
   ) %>%
     clean_names()
   
   participant_col <- get_first_matching_col(raw, "^participant_id$|prolific")
   status_col <- get_first_matching_col(raw, "^status$")
-  
   age_col <- get_first_matching_col(raw, "^age$")
   sex_col <- get_first_matching_col(raw, "^sex$|gender")
-  
   country_residence_col <- get_first_matching_col(
     raw,
     "^country_of_residence$|country_residence|residence"
   )
-  
   country_birth_col <- get_first_matching_col(
     raw,
     "^country_of_birth$|country_birth|birth_country"
   )
-  
-  nationality_col <- get_first_matching_col(
-    raw,
-    "^nationality$"
-  )
-  
+  nationality_col <- get_first_matching_col(raw, "^nationality$")
   ethnicity_col <- get_first_matching_col(
     raw,
     "^ethnicity_simplified$|ethnicity"
   )
-  
-  language_col <- get_first_matching_col(
-    raw,
-    "^language$"
-  )
-  
+  language_col <- get_first_matching_col(raw, "^language$")
   student_status_col <- get_first_matching_col(
     raw,
     "^student_status$|student"
   )
-  
   employment_status_col <- get_first_matching_col(
     raw,
     "^employment_status$|employment"
   )
   
-  country_residence_raw <- as.character(safe_pull(raw, country_residence_col))
-  country_birth_raw <- as.character(safe_pull(raw, country_birth_col))
+  country_residence_raw <- as.character(
+    safe_pull(raw, country_residence_col)
+  )
+  
+  country_birth_raw <- as.character(
+    safe_pull(raw, country_birth_col)
+  )
   
   tibble(
     prolific_id = normalise_id(safe_pull(raw, participant_col)),
-    
     prolific_status = as.character(safe_pull(raw, status_col)),
-    
     prolific_country_raw = country_residence_raw,
     prolific_country_code = extract_country_code(country_residence_raw),
-    
     prolific_country_of_birth = country_birth_raw,
     prolific_country_of_birth_code = extract_country_code(country_birth_raw),
-    
-    prolific_age = suppressWarnings(as.integer(parse_num(safe_pull(raw, age_col)))),
+    prolific_age = suppressWarnings(
+      as.integer(parse_num(safe_pull(raw, age_col)))
+    ),
     prolific_sex = as.character(safe_pull(raw, sex_col)),
-    
-    prolific_ethnicity_simplified = as.character(safe_pull(raw, ethnicity_col)),
-    prolific_nationality = as.character(safe_pull(raw, nationality_col)),
-    prolific_language = as.character(safe_pull(raw, language_col)),
-    prolific_student_status = as.character(safe_pull(raw, student_status_col)),
-    prolific_employment_status = as.character(safe_pull(raw, employment_status_col)),
-    
+    prolific_ethnicity_simplified = as.character(
+      safe_pull(raw, ethnicity_col)
+    ),
+    prolific_nationality = as.character(
+      safe_pull(raw, nationality_col)
+    ),
+    prolific_language = as.character(
+      safe_pull(raw, language_col)
+    ),
+    prolific_student_status = as.character(
+      safe_pull(raw, student_status_col)
+    ),
+    prolific_employment_status = as.character(
+      safe_pull(raw, employment_status_col)
+    ),
     prolific_file = basename(path)
   )
 }
 
 prolific_files <- if (dir.exists(paths$prolific_dir)) {
   list.files(
-    path = paths$prolific_dir,
+    paths$prolific_dir,
     pattern = "^prolific_export_.*\\.csv$",
     full.names = TRUE
   )
@@ -426,78 +415,87 @@ prolific_files <- if (dir.exists(paths$prolific_dir)) {
   character(0)
 }
 
-prolific_pool <- if (length(prolific_files) > 0) {
+prolific_pool <- if (length(prolific_files)) {
   map_dfr(prolific_files, read_prolific_file) %>%
     filter(!is.na(prolific_id)) %>%
     group_by(prolific_id) %>%
     summarise(
       prolific_status = first_non_missing(prolific_status),
-      
       prolific_country_raw = first_non_missing(prolific_country_raw),
       prolific_country_code = first_non_missing(prolific_country_code),
-      
-      prolific_country_of_birth = first_non_missing(prolific_country_of_birth),
-      prolific_country_of_birth_code = first_non_missing(prolific_country_of_birth_code),
-      
+      prolific_country_of_birth = first_non_missing(
+        prolific_country_of_birth
+      ),
+      prolific_country_of_birth_code = first_non_missing(
+        prolific_country_of_birth_code
+      ),
       prolific_age = first_non_missing(prolific_age),
       prolific_sex = first_non_missing(prolific_sex),
-      
-      prolific_ethnicity_simplified = first_non_missing(prolific_ethnicity_simplified),
+      prolific_ethnicity_simplified = first_non_missing(
+        prolific_ethnicity_simplified
+      ),
       prolific_nationality = first_non_missing(prolific_nationality),
       prolific_language = first_non_missing(prolific_language),
-      prolific_student_status = first_non_missing(prolific_student_status),
-      prolific_employment_status = first_non_missing(prolific_employment_status),
-      
-      prolific_files = paste(sort(unique(prolific_file)), collapse = ";"),
+      prolific_student_status = first_non_missing(
+        prolific_student_status
+      ),
+      prolific_employment_status = first_non_missing(
+        prolific_employment_status
+      ),
+      prolific_files = paste(
+        sort(unique(prolific_file)),
+        collapse = ";"
+      ),
       .groups = "drop"
     )
 } else {
   tibble(
     prolific_id = character(),
     prolific_status = character(),
-    
     prolific_country_raw = character(),
     prolific_country_code = character(),
-    
     prolific_country_of_birth = character(),
     prolific_country_of_birth_code = character(),
-    
     prolific_age = character(),
     prolific_sex = character(),
-    
     prolific_ethnicity_simplified = character(),
     prolific_nationality = character(),
     prolific_language = character(),
     prolific_student_status = character(),
     prolific_employment_status = character(),
-    
     prolific_files = character()
   )
 }
-# Leer WHY y filtrar Europa
+
+
+# WHY
 read_why_full <- function(path, prolific_pool) {
-  raw <- read_csv(
+  raw_clean <- read_csv(
     path,
     skip = 2,
     show_col_types = FALSE,
-    name_repair = quiet_unique_names
+    name_repair = quiet_unique_names,
+    col_types = cols(.default = col_character())
   ) %>%
-    as_tibble()
-  
-  raw_clean <- raw %>%
+    as_tibble() %>%
     clean_names()
   
-  # Columnas específicas de WHY
   prolific_col <- "please_provide_your_prolific_id_id131"
-  country_col  <- "i_which_country_do_you_reside_id300"
+  country_col <- "i_which_country_do_you_reside_id300"
   language_col <- "languages"
   
   if (!prolific_col %in% names(raw_clean)) {
-    stop("No encuentro la columna de Prolific ID en WHY: ", prolific_col)
+    stop(
+      "No encuentro la columna de Prolific ID en WHY: ",
+      prolific_col
+    )
   }
   
   if (!country_col %in% names(raw_clean)) {
-    warning("No encuentro la columna de país en WHY: ", country_col)
+    warning(
+      "No encuentro la columna de país en WHY: ",
+      country_col
+    )
   }
   
   raw_payload <- raw_clean %>%
@@ -509,22 +507,17 @@ read_why_full <- function(path, prolific_pool) {
     source_survey = "Investment_Arquetypes_2022",
     source_file = basename(path),
     source_row = seq_len(nrow(raw_clean)),
-    
     prolific_id = normalise_id(raw_clean[[prolific_col]]),
-    
     participant_key = coalesce(
       prolific_id,
       paste0("why_noid_", seq_len(nrow(raw_clean)))
     ),
-    
     country_raw_survey = if (country_col %in% names(raw_clean)) {
       as.character(raw_clean[[country_col]])
     } else {
       NA_character_
     },
-    
     country_code_survey = extract_country_code(country_raw_survey),
-    
     language_raw = if (language_col %in% names(raw_clean)) {
       as.character(raw_clean[[language_col]])
     } else {
@@ -535,16 +528,20 @@ read_why_full <- function(path, prolific_pool) {
   bind_cols(meta, raw_payload) %>%
     left_join(prolific_pool, by = "prolific_id") %>%
     mutate(
-      # Prioridad: país de Prolific. Si no existe, país declarado en WHY.
-      country_raw = coalesce(prolific_country_raw, country_raw_survey),
-      country_code = coalesce(prolific_country_code, country_code_survey),
-      
+      # Se prioriza el país de residencia de Prolific.
+      country_raw = coalesce(
+        prolific_country_raw,
+        country_raw_survey
+      ),
+      country_code = coalesce(
+        prolific_country_code,
+        country_code_survey
+      ),
       country_source = case_when(
         !is.na(prolific_country_code) ~ "prolific",
-        is.na(prolific_country_code) & !is.na(country_code_survey) ~ "survey",
+        !is.na(country_code_survey) ~ "survey",
         TRUE ~ NA_character_
       ),
-      
       is_europe = is_europe_country(country_code)
     )
 }
@@ -554,55 +551,83 @@ why_all_rows <- read_why_full(paths$why, prolific_pool)
 why_europe_rows <- why_all_rows %>%
   filter(is_europe == TRUE)
 
-why_europe_by_participant <- why_europe_rows %>%
-  group_by(participant_key) %>%
-  summarise(
-    dataset_source = "why",
-    n_source_rows = n(),
-    n_distinct_surveys = n_distinct(source_survey),
-    source_survey = paste(sort(unique(source_survey)), collapse = ";"),
-    source_file = paste(sort(unique(source_file)), collapse = ";"),
-    
-    prolific_id = first_non_missing(prolific_id),
-    country_raw = first_non_missing(country_raw),
-    country_code = first_non_missing(country_code),
-    country_source = first_non_missing(country_source),
-    language_raw = first_non_missing(language_raw),
-    
-    across(
-      .cols = -any_of(c(
-        "dataset_source",
-        "source_survey",
-        "source_file",
-        "source_row",
-        "prolific_id",
-        "country_raw",
-        "country_code_survey",
-        "country_code",
-        "country_source",
-        "language_raw",
-        "is_europe"
-      )),
-      .fns = collapse_unique_non_missing
-    ),
-    
-    .groups = "drop"
-  ) %>%
-  mutate(
-    global_participant_key = paste(dataset_source, participant_key, sep = "__")
-  ) %>%
-  relocate(global_participant_key, .before = 1)
+why_latam_rows <- why_all_rows %>%
+  filter(country_code %in% latam_iso2)
+
+collapse_why_participants <- function(data) {
+  data %>%
+    group_by(participant_key) %>%
+    summarise(
+      dataset_source = "why",
+      n_source_rows = n(),
+      n_distinct_surveys = n_distinct(source_survey),
+      source_survey = paste(
+        sort(unique(source_survey)),
+        collapse = ";"
+      ),
+      source_file = paste(
+        sort(unique(source_file)),
+        collapse = ";"
+      ),
+      prolific_id = first_non_missing(prolific_id),
+      country_raw = first_non_missing(country_raw),
+      country_code = first_non_missing(country_code),
+      country_source = first_non_missing(country_source),
+      language_raw = first_non_missing(language_raw),
+      
+      across(
+        -any_of(c(
+          "dataset_source",
+          "source_survey",
+          "source_file",
+          "source_row",
+          "prolific_id",
+          "country_raw",
+          "country_code_survey",
+          "country_code",
+          "country_source",
+          "language_raw",
+          "is_europe"
+        )),
+        collapse_unique_non_missing
+      ),
+      
+      .groups = "drop"
+    ) %>%
+    mutate(
+      global_participant_key = paste(
+        dataset_source,
+        participant_key,
+        sep = "__"
+      )
+    ) %>%
+    relocate(global_participant_key, .before = 1)
+}
+
+why_europe_by_participant <- collapse_why_participants(
+  why_europe_rows
+)
+
+why_latam_by_participant <- collapse_why_participants(
+  why_latam_rows
+)
 
 
-# Leer Diego y transformar escala a 0-100
+# Diego
 get_diego_det_cols <- function(df_clean) {
-  expected <- unlist(map(21:24, ~ paste0("q", .x, "_", 1:8)))
+  expected <- unlist(
+    map(21:24, ~ paste0("q", .x, "_", 1:8))
+  )
+  
   found <- expected[expected %in% names(df_clean)]
   
   if (length(found) != 32) {
     warning(
-      "No se han encontrado exactamente los 32 determinantes de Diego Q21_1:Q24_8. ",
-      "Encontrados: ", length(found)
+      paste0(
+        "No se han encontrado exactamente los 32 determinantes ",
+        "de Diego Q21_1:Q24_8. Encontrados: ",
+        length(found)
+      )
     )
   }
   
@@ -619,17 +644,28 @@ add_truncated_gaussian_noise <- function(
   x <- as.numeric(x)
   noise <- rnorm(length(x), mean = 0, sd = sd)
   
-  bad <- !is.na(x) & ((x + noise) < min_value | (x + noise) > max_value)
+  bad <- !is.na(x) &
+    ((x + noise) < min_value | (x + noise) > max_value)
+  
   iter <- 1
   
   while (any(bad) && iter <= max_iter) {
-    noise[bad] <- rnorm(sum(bad), mean = 0, sd = sd)
-    bad <- !is.na(x) & ((x + noise) < min_value | (x + noise) > max_value)
+    noise[bad] <- rnorm(
+      sum(bad),
+      mean = 0,
+      sd = sd
+    )
+    
+    bad <- !is.na(x) &
+      ((x + noise) < min_value | (x + noise) > max_value)
+    
     iter <- iter + 1
   }
   
-  x_noisy <- x + noise
-  pmin(max_value, pmax(min_value, x_noisy))
+  pmin(
+    max_value,
+    pmax(min_value, x + noise)
+  )
 }
 
 transform_to_0_100 <- function(x, scale_type = "1_5") {
@@ -640,10 +676,15 @@ transform_to_0_100 <- function(x, scale_type = "1_5") {
   } else if (scale_type == "1_5") {
     out <- ((x - 1) / 4) * 100
   } else {
-    stop("Escala de Diego no reconocida. Usa '0_5' o '1_5'.")
+    stop(
+      "Escala de Diego no reconocida. Usa '0_5' o '1_5'."
+    )
   }
   
-  pmin(100, pmax(0, out))
+  pmin(
+    100,
+    pmax(0, out)
+  )
 }
 
 read_diego_transformed <- function(
@@ -652,13 +693,11 @@ read_diego_transformed <- function(
     add_noise = FALSE,
     noise_sd = 1
 ) {
-  raw <- readxl::read_excel(
+  raw_clean <- read_excel(
     path,
     .name_repair = quiet_unique_names
   ) %>%
-    as_tibble()
-  
-  raw_clean <- raw %>%
+    as_tibble() %>%
     clean_names()
   
   det_cols <- get_diego_det_cols(raw_clean)
@@ -667,35 +706,59 @@ read_diego_transformed <- function(
     mutate(across(everything(), as.character)) %>%
     rename_with(~ paste0("diego__", .x))
   
-  country_col <- get_first_matching_col(raw_clean, "^q3$|country")
-  gender_col <- get_first_matching_col(raw_clean, "^q2$|gender")
-  age_col <- get_first_matching_col(raw_clean, "^q1$|age")
+  country_col <- get_first_matching_col(
+    raw_clean,
+    "^q3$|country"
+  )
+  
+  gender_col <- get_first_matching_col(
+    raw_clean,
+    "^q2$|gender"
+  )
+  
+  age_col <- get_first_matching_col(
+    raw_clean,
+    "^q1$|age"
+  )
   
   meta <- tibble(
     dataset_source = "diego",
     source_survey = "Survey_September2023_cleaned",
     source_file = basename(path),
     source_row = seq_len(nrow(raw_clean)),
-    
-    participant_key = paste0("diego_", seq_len(nrow(raw_clean))),
-    
-    age_raw = as.character(safe_pull(raw_clean, age_col)),
-    gender_raw = as.character(safe_pull(raw_clean, gender_col)),
-    country_raw = as.character(safe_pull(raw_clean, country_col)),
+    participant_key = paste0(
+      "diego_",
+      seq_len(nrow(raw_clean))
+    ),
+    age_raw = as.character(
+      safe_pull(raw_clean, age_col)
+    ),
+    gender_raw = as.character(
+      safe_pull(raw_clean, gender_col)
+    ),
+    country_raw = as.character(
+      safe_pull(raw_clean, country_col)
+    ),
     country_code = extract_country_code(country_raw),
-    
     diego_scale_assumption = diego_scale,
     diego_noise_added = add_noise,
-    diego_noise_sd = ifelse(add_noise, noise_sd, NA_real_)
+    diego_noise_sd = ifelse(
+      add_noise,
+      noise_sd,
+      NA_real_
+    )
   )
   
   det_original <- raw_clean %>%
     select(any_of(det_cols)) %>%
     mutate(across(everything(), parse_num))
   
-  if (length(det_cols) > 0) {
-    min_original <- ifelse(diego_scale == "1_5", 1, 0)
-    max_original <- 5
+  if (length(det_cols)) {
+    min_original <- ifelse(
+      diego_scale == "1_5",
+      1,
+      0
+    )
     
     det_0_100 <- det_original %>%
       mutate(
@@ -709,72 +772,189 @@ read_diego_transformed <- function(
                 x,
                 sd = noise_sd,
                 min_value = min_original,
-                max_value = max_original
+                max_value = 5
               )
             }
             
-            transform_to_0_100(x, scale_type = diego_scale)
+            transform_to_0_100(
+              x,
+              scale_type = diego_scale
+            )
           }
         )
       )
     
-    names(det_0_100) <- paste0("diego_det_", sprintf("%02d", seq_along(det_cols)), "_0_100")
+    names(det_0_100) <- paste0(
+      "diego_det_",
+      sprintf("%02d", seq_along(det_cols)),
+      "_0_100"
+    )
   } else {
     det_0_100 <- tibble()
   }
   
-  bind_cols(meta, raw_payload, det_0_100) %>%
+  bind_cols(
+    meta,
+    raw_payload,
+    det_0_100
+  ) %>%
     mutate(
-      global_participant_key = paste(dataset_source, participant_key, sep = "__")
+      global_participant_key = paste(
+        dataset_source,
+        participant_key,
+        sep = "__"
+      )
     ) %>%
     relocate(global_participant_key, .before = 1)
 }
 
 diego_transformed <- read_diego_transformed(
-  path = paths$diego,
+  paths$diego,
   diego_scale = DIEGO_SCALE,
   add_noise = FALSE,
   noise_sd = DIEGO_NOISE_SD
 )
 
 diego_transformed_noisy <- read_diego_transformed(
-  path = paths$diego,
+  paths$diego,
   diego_scale = DIEGO_SCALE,
   add_noise = ADD_DIEGO_NOISE,
   noise_sd = DIEGO_NOISE_SD
 )
 
-# Integración final de todas las fuentes
+
+# Integración
 diego_for_integrated <- if (USE_DIEGO_NOISY_INTEGRATED) {
   diego_transformed_noisy
 } else {
   diego_transformed
 }
 
+rv_for_integrated <- rv_by_participant %>%
+  mutate(
+    subsample = "RENOVISOR",
+    comparison_region = "EUROPE"
+  )
+
+why_europe_for_integrated <- why_europe_by_participant %>%
+  mutate(
+    subsample = "WHY_EUROPE",
+    comparison_region = "EUROPE"
+  )
+
+why_latam_for_integrated <- why_latam_by_participant %>%
+  mutate(
+    subsample = "WHY_LATAM",
+    comparison_region = "LATAM"
+  )
+
+diego_for_integrated <- diego_for_integrated %>%
+  mutate(
+    subsample = "DIEGO",
+    comparison_region = "EUROPE"
+  )
+
 all_sources_integrated <- bind_rows(
-  rv_by_participant,
-  why_europe_by_participant,
+  rv_for_integrated,
+  why_europe_for_integrated,
+  why_latam_for_integrated,
   diego_for_integrated
 ) %>%
   mutate(
     integrated_row_id = row_number()
   ) %>%
-  relocate(integrated_row_id, .before = 1)
+  group_by(subsample) %>%
+  mutate(
+    subsample_row_id = row_number()
+  ) %>%
+  ungroup() %>%
+  relocate(
+    integrated_row_id,
+    subsample,
+    comparison_region,
+    subsample_row_id,
+    .before = 1
+  )
+
+duplicate_global_keys <- all_sources_integrated %>%
+  count(
+    global_participant_key,
+    name = "n"
+  ) %>%
+  filter(n > 1)
+
+if (nrow(duplicate_global_keys)) {
+  warning(
+    "Hay ",
+    nrow(duplicate_global_keys),
+    " global_participant_key duplicadas en la base integrada."
+  )
+}
+
 
 # Diagnósticos
 summary_sources <- all_sources_integrated %>%
-  count(dataset_source, name = "n_rows") %>%
+  count(
+    dataset_source,
+    name = "n_rows"
+  ) %>%
   bind_rows(
-    tibble(dataset_source = "TOTAL", n_rows = nrow(all_sources_integrated))
+    tibble(
+      dataset_source = "TOTAL",
+      n_rows = nrow(all_sources_integrated)
+    )
+  )
+
+summary_subsamples <- all_sources_integrated %>%
+  count(
+    comparison_region,
+    subsample,
+    name = "n_participants"
+  ) %>%
+  arrange(
+    comparison_region,
+    subsample
+  ) %>%
+  bind_rows(
+    tibble(
+      comparison_region = "ALL",
+      subsample = "POOLED_ALL",
+      n_participants = nrow(all_sources_integrated)
+    )
   )
 
 rv_diagnostics <- rv_all_rows %>%
-  count(source_survey, name = "n_rows") %>%
+  count(
+    source_survey,
+    name = "n_rows"
+  ) %>%
   arrange(source_survey)
 
 why_country_diagnostics <- why_all_rows %>%
-  count(country_code, is_europe, country_source, name = "n_rows") %>%
+  count(
+    country_code,
+    is_europe,
+    country_source,
+    name = "n_rows"
+  ) %>%
   arrange(desc(n_rows))
+
+why_region_diagnostics <- bind_rows(
+  why_europe_by_participant %>%
+    mutate(region = "WHY_EUROPE"),
+  
+  why_latam_by_participant %>%
+    mutate(region = "WHY_LATAM")
+) %>%
+  count(
+    region,
+    country_code,
+    name = "n"
+  ) %>%
+  arrange(
+    region,
+    desc(n)
+  )
 
 diego_diagnostics <- tibble(
   diego_scale_assumption = DIEGO_SCALE,
@@ -783,36 +963,86 @@ diego_diagnostics <- tibble(
   diego_noisy_used_in_integrated = USE_DIEGO_NOISY_INTEGRATED,
   n_rows_clean = nrow(diego_transformed),
   n_rows_noisy = nrow(diego_transformed_noisy),
-  n_diego_det_cols_clean_0_100 = sum(str_detect(names(diego_transformed), "^diego_det_\\d{2}_0_100$")),
-  n_diego_det_cols_noisy_0_100 = sum(str_detect(names(diego_transformed_noisy), "^diego_det_\\d{2}_0_100$"))
+  n_diego_det_cols_clean_0_100 = sum(
+    str_detect(
+      names(diego_transformed),
+      "^diego_det_\\d{2}_0_100$"
+    )
+  ),
+  n_diego_det_cols_noisy_0_100 = sum(
+    str_detect(
+      names(diego_transformed_noisy),
+      "^diego_det_\\d{2}_0_100$"
+    )
+  )
 )
 
 
 # Guardado
-write_csv(rv_all_rows, file.path(out_dir, "rv_all_rows.csv"))
-write_csv(rv_by_participant, file.path(out_dir, "rv_by_participant.csv"))
+outputs <- list(
+  "rv_all_rows.csv" = rv_all_rows,
+  "rv_by_participant.csv" = rv_by_participant,
+  "prolific_pool_clean.csv" = prolific_pool,
+  "why_all_rows.csv" = why_all_rows,
+  "why_europe_rows.csv" = why_europe_rows,
+  "why_europe_by_participant.csv" = why_europe_by_participant,
+  "why_latam_rows.csv" = why_latam_rows,
+  "why_latam_by_participant.csv" = why_latam_by_participant,
+  "diego_transformed.csv" = diego_transformed,
+  "diego_transformed_noisy.csv" = diego_transformed_noisy,
+  "all_sources_integrated.csv" = all_sources_integrated,
+  "summary_merge_all_sources.csv" = summary_sources,
+  "summary_merge_subsamples.csv" = summary_subsamples,
+  "diagnostics_rv_rows.csv" = rv_diagnostics,
+  "diagnostics_why_countries.csv" = why_country_diagnostics,
+  "diagnostics_why_europe_latam.csv" = why_region_diagnostics,
+  "diagnostics_diego.csv" = diego_diagnostics
+)
 
-write_csv(prolific_pool, file.path(out_dir, "prolific_pool_clean.csv"))
+iwalk(
+  outputs,
+  ~ write_csv(.x, file.path(out_dir, .y))
+)
 
-write_csv(why_all_rows, file.path(out_dir, "why_all_rows.csv"))
-write_csv(why_europe_rows, file.path(out_dir, "why_europe_rows.csv"))
-write_csv(why_europe_by_participant, file.path(out_dir, "why_europe_by_participant.csv"))
+# Resumen
+cat(
+  "\nWHY EUROPE PARTICIPANTS:",
+  nrow(why_europe_by_participant),
+  "\n"
+)
 
-write_csv(diego_transformed, file.path(out_dir, "diego_transformed.csv"))
+cat(
+  "WHY LATAM PARTICIPANTS:",
+  nrow(why_latam_by_participant),
+  "\n\n"
+)
 
-write_csv( diego_transformed_noisy,file.path(out_dir, "diego_transformed_noisy.csv"))
+print(
+  why_region_diagnostics,
+  n = Inf
+)
 
-write_csv(all_sources_integrated, file.path(out_dir, "all_sources_integrated.csv"))
+cat("\nRESUMEN INTEGRACIÓN COMPLETA\n")
 
-write_csv(summary_sources, file.path(out_dir, "summary_merge_all_sources.csv"))
-write_csv(rv_diagnostics, file.path(out_dir, "diagnostics_rv_rows.csv"))
-write_csv(why_country_diagnostics, file.path(out_dir, "diagnostics_why_countries.csv"))
-write_csv(diego_diagnostics, file.path(out_dir, "diagnostics_diego.csv"))
+print(
+  summary_sources,
+  n = Inf
+)
 
-print(summary_sources)
+cat("\nRESUMEN POR SUBMUESTRA\n")
 
-message("Listo.")
-message("Base integrada creada en: ", file.path(out_dir, "all_sources_integrated.csv"))
-message("RV por participante: ", file.path(out_dir, "rv_by_participant.csv"))
-message("WHY Europa: ", file.path(out_dir, "why_europe_by_participant.csv"))
-message("Diego transformado: ", file.path(out_dir, "diego_transformed.csv"))
+print(
+  summary_subsamples,
+  n = Inf
+)
+
+cat(
+  "\nGlobal participant keys duplicadas:",
+  nrow(duplicate_global_keys),
+  "\n"
+)
+
+message(
+  "Listo. Base integrada: ",
+  file.path(out_dir, "all_sources_integrated.csv")
+)
