@@ -1,45 +1,22 @@
-# 07_efa.R
-#
-# OBJETIVO
+# 
+# Objetivo
 # Explorar la estructura factorial de los 32 determinantes mediante
 # Exploratory Factor Analysis (EFA) sobre las muestras bootstrap.
 #
-# QUÉ HACE ESTE SCRIPT
-# - Usa el bootstrap combinado generado en 04_2f.
-# - Analiza 7 muestras:
-#   COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE y WHY_LATAM.
-# - Usa las 4 matrices generadas en 05:
-#   RAW, POS, EXT y Z_ABS.
-# - Prueba soluciones EFA con 2 a 8 factores.
-# - Ejecuta el análisis sobre 100 bootstraps en esta fase exploratoria.
-# - Utiliza minres como método de extracción y oblimin como rotación.
-# - Guarda las cargas factoriales de cada determinante.
-# - Calcula la importancia de cada determinante como max(abs(loading)).
-# - Resume qué determinantes aparecen de forma estable entre los más importantes.
-# - Calcula correlaciones entre factores.
-# - Guarda métricas de ajuste: RMSR, TLI, RMSEA y BIC.
-# - Registra warnings y errores de cada ajuste.
-# - Genera resultados globales y resultados separados para cada muestra.
+# El análisis:
+# - utiliza el bootstrap combinado de 04_2f;
+# - analiza COMPLETE, EUROPE, LATAM y las cuatro submuestras;
+# - utiliza las matrices RAW, POS, EXT y Z_ABS generadas en 05;
+# - prueba soluciones de 2 a 8 factores;
+# - utiliza minres como método de extracción y oblimin como rotación;
+# - calcula cargas factoriales, importancia de determinantes,
+#   correlaciones entre factores y métricas RMSR, TLI, RMSEA y BIC;
+# - estudia la estabilidad de los determinantes Top-D entre bootstraps;
+# - registra warnings y errores de cada ajuste.
 #
-# INTERPRETACIÓN
 # Este script no fija todavía el número final de factores.
-# Las soluciones se compararán posteriormente usando:
-# - métricas de ajuste,
-# - estabilidad entre bootstraps,
-# - Parallel Analysis (07b, opcional),
-# - interpretabilidad,
-# - comparación posterior con K-means y estructura experta.
-#
-# IMPORTANTE
-# El número de factores EFA no tiene por qué coincidir con el número
-# de clusters K del K-means.
-#
-# CONFIGURACIÓN ACTUAL
-# - Factores: 2:8
-# - Bootstraps: 100
-# - Método: minres
-# - Rotación: oblimin
-
+# El número de factores EFA tampoco tiene por qué coincidir con K
+# en K-means.
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -48,6 +25,7 @@ suppressPackageStartupMessages({
 
 set.seed(123)
 
+# Configuración
 project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
 processed_root <- file.path(project_root, "paper1_cluster/data/processed")
 
@@ -67,7 +45,11 @@ out_dir <- file.path(
   "07_efa_bootstrap"
 )
 
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+dir.create(
+  out_dir,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 
 ANALYSIS_SAMPLES <- c(
   "COMPLETE",
@@ -96,6 +78,8 @@ EXPECTED_N_BOOT <- 1000L
 MAX_BOOTSTRAPS <- 100L
 
 
+# Funciones auxiliares
+
 mean_or_na <- function(x) {
   x <- x[is.finite(x)]
   
@@ -105,7 +89,6 @@ mean_or_na <- function(x) {
   
   mean(x)
 }
-
 
 sd_or_na <- function(x) {
   x <- x[is.finite(x)]
@@ -117,27 +100,30 @@ sd_or_na <- function(x) {
   sd(x)
 }
 
-
-get_bootstrap_sample <- function(bootstrap_index, analysis_sample) {
-  
+get_bootstrap_sample <- function(
+    bootstrap_index,
+    analysis_sample
+) {
   if (analysis_sample == "COMPLETE") {
-    
     out <- bootstrap_index
     
   } else if (analysis_sample == "EUROPE") {
-    
     out <- bootstrap_index %>%
-      filter(comparison_region == "EUROPE")
+      filter(
+        comparison_region == "EUROPE"
+      )
     
   } else if (analysis_sample == "LATAM") {
-    
     out <- bootstrap_index %>%
-      filter(comparison_region == "LATAM")
+      filter(
+        comparison_region == "LATAM"
+      )
     
   } else {
-    
     out <- bootstrap_index %>%
-      filter(subsample == analysis_sample)
+      filter(
+        subsample == analysis_sample
+      )
   }
   
   if (nrow(out) == 0) {
@@ -151,13 +137,17 @@ get_bootstrap_sample <- function(bootstrap_index, analysis_sample) {
   out
 }
 
-
-read_matrix_file <- function(analysis_sample, matrix_name) {
-  
+read_matrix_file <- function(
+    analysis_sample,
+    matrix_name
+) {
   file <- file.path(
     matrix_dir,
     analysis_sample,
-    paste0(matrix_name, ".csv")
+    paste0(
+      matrix_name,
+      ".csv"
+    )
   )
   
   if (!file.exists(file)) {
@@ -172,7 +162,9 @@ read_matrix_file <- function(analysis_sample, matrix_name) {
     show_col_types = FALSE
   ) %>%
     mutate(
-      integrated_row_id = as.character(integrated_row_id)
+      integrated_row_id = as.character(
+        integrated_row_id
+      )
     )
   
   if (anyDuplicated(mat_df$integrated_row_id)) {
@@ -224,7 +216,10 @@ read_matrix_file <- function(analysis_sample, matrix_name) {
   
   storage.mode(matrix_values) <- "double"
   
-  row_lookup <- seq_len(nrow(mat_df))
+  row_lookup <- seq_len(
+    nrow(mat_df)
+  )
+  
   names(row_lookup) <- mat_df$integrated_row_id
   
   list(
@@ -235,9 +230,10 @@ read_matrix_file <- function(analysis_sample, matrix_name) {
   )
 }
 
-
-prepare_bootstrap_matrix <- function(boot_b, matrix_obj) {
-  
+prepare_bootstrap_matrix <- function(
+    boot_b,
+    matrix_obj
+) {
   row_idx <- unname(
     matrix_obj$row_lookup[
       boot_b$integrated_row_id
@@ -289,7 +285,6 @@ prepare_bootstrap_matrix <- function(boot_b, matrix_obj) {
   )
   
   if (length(variable_features) > 0) {
-    
     x_variable <- x[
       ,
       variable_features,
@@ -301,7 +296,6 @@ prepare_bootstrap_matrix <- function(boot_b, matrix_obj) {
     )
     
   } else {
-    
     x_variable <- matrix(
       numeric(),
       nrow = n_rows_used,
@@ -327,13 +321,11 @@ prepare_bootstrap_matrix <- function(boot_b, matrix_obj) {
   )
 }
 
-
 safe_efa <- function(
     correlation_matrix,
     n_obs,
     n_factors
 ) {
-  
   warning_messages <- character()
   
   fit <- withCallingHandlers(
@@ -349,22 +341,24 @@ safe_efa <- function(
       error = function(e) e
     ),
     warning = function(w) {
-      
       warning_messages <<- c(
         warning_messages,
         conditionMessage(w)
       )
       
-      invokeRestart("muffleWarning")
+      invokeRestart(
+        "muffleWarning"
+      )
     }
   )
   
   list(
     fit = fit,
-    warnings = unique(warning_messages)
+    warnings = unique(
+      warning_messages
+    )
   )
 }
-
 
 extract_factor_correlations <- function(
     phi,
@@ -373,15 +367,18 @@ extract_factor_correlations <- function(
     bootstrap_id,
     n_factors
 ) {
-  
   if (is.null(phi)) {
-    return(tibble())
+    return(
+      tibble()
+    )
   }
   
   phi <- as.matrix(phi)
   
   if (nrow(phi) < 2) {
-    return(tibble())
+    return(
+      tibble()
+    )
   }
   
   idx <- which(
@@ -396,14 +393,18 @@ extract_factor_correlations <- function(
     n_factors = n_factors,
     factor_a = rownames(phi)[idx[, "row"]],
     factor_b = colnames(phi)[idx[, "col"]],
-    correlation = as.numeric(phi[idx])
+    correlation = as.numeric(
+      phi[idx]
+    )
   ) %>%
     mutate(
-      abs_correlation = abs(correlation),
-      correlation_distance = 1 - abs_correlation
+      abs_correlation = abs(
+        correlation
+      ),
+      correlation_distance = 1 -
+        abs_correlation
     )
 }
-
 
 failed_result <- function(
     analysis_sample,
@@ -414,7 +415,6 @@ failed_result <- function(
     prepared,
     error_message
 ) {
-  
   list(
     metrics = tibble(
       analysis_sample = analysis_sample,
@@ -426,8 +426,12 @@ failed_result <- function(
       n_rows_used = prepared$n_rows_used,
       n_rows_dropped = prepared$n_rows_dropped,
       n_unique_participants = prepared$n_unique_participants,
-      n_variable_features = length(prepared$variable_features),
-      n_constant_features = length(prepared$constant_features),
+      n_variable_features = length(
+        prepared$variable_features
+      ),
+      n_constant_features = length(
+        prepared$constant_features
+      ),
       RMSR = NA_real_,
       TLI = NA_real_,
       RMSEA = NA_real_,
@@ -447,7 +451,6 @@ failed_result <- function(
   )
 }
 
-
 run_one_efa <- function(
     analysis_sample_current,
     analysis_sample_index,
@@ -457,7 +460,6 @@ run_one_efa <- function(
     n_factors_current,
     prepared
 ) {
-  
   if (
     prepared$n_rows_used <=
     n_factors_current + 1
@@ -476,7 +478,9 @@ run_one_efa <- function(
   }
   
   if (
-    length(prepared$variable_features) <=
+    length(
+      prepared$variable_features
+    ) <=
     n_factors_current + 1
   ) {
     return(
@@ -543,7 +547,6 @@ run_one_efa <- function(
   }
   
   if (inherits(fit, "error")) {
-    
     result <- failed_result(
       analysis_sample = analysis_sample_current,
       matrix_name = matrix_name_current,
@@ -557,7 +560,9 @@ run_one_efa <- function(
     result$metrics$warning_flag <- warning_flag
     result$metrics$warning_message <- warning_message
     
-    return(result)
+    return(
+      result
+    )
   }
   
   loading_matrix <- as.matrix(
@@ -580,7 +585,9 @@ run_one_efa <- function(
       matrix_name = matrix_name_current,
       bootstrap_id = bootstrap_id_current,
       n_factors = n_factors_current,
-      abs_loading = abs(loading)
+      abs_loading = abs(
+        loading
+      )
     ) %>%
     relocate(
       analysis_sample,
@@ -609,7 +616,9 @@ run_one_efa <- function(
         na.rm = TRUE
       ),
       strongest_factor = factor[
-        which.max(abs_loading)
+        which.max(
+          abs_loading
+        )
       ][1],
       .groups = "drop"
     )
@@ -643,7 +652,6 @@ run_one_efa <- function(
   top_d <- map_dfr(
     D_DET_GRID,
     function(d_det_current) {
-      
       determinant_importance %>%
         slice_head(
           n = d_det_current
@@ -670,7 +678,6 @@ run_one_efa <- function(
   )
   
   if (nrow(factor_correlations) > 0) {
-    
     mean_abs_cor <- mean_or_na(
       factor_correlations$abs_correlation
     )
@@ -690,15 +697,20 @@ run_one_efa <- function(
     )
     
   } else {
-    
     mean_abs_cor <- NA_real_
     var_abs_cor <- NA_real_
     mean_distance <- NA_real_
     var_distance <- NA_real_
   }
   
-  rmsea_value <- if (!is.null(fit$RMSEA)) {
-    as.numeric(fit$RMSEA[1])
+  rmsea_value <- if (
+    !is.null(
+      fit$RMSEA
+    )
+  ) {
+    as.numeric(
+      fit$RMSEA[1]
+    )
   } else {
     NA_real_
   }
@@ -708,37 +720,64 @@ run_one_efa <- function(
     matrix_name = matrix_name_current,
     bootstrap_id = bootstrap_id_current,
     n_factors = n_factors_current,
+    
     status = if_else(
       warning_flag,
       "ok_with_warning",
       "ok"
     ),
+    
     n_bootstrap_draws = prepared$n_bootstrap_draws,
     n_rows_used = prepared$n_rows_used,
     n_rows_dropped = prepared$n_rows_dropped,
     n_unique_participants = prepared$n_unique_participants,
+    
     n_variable_features = length(
       prepared$variable_features
     ),
+    
     n_constant_features = length(
       prepared$constant_features
     ),
-    RMSR = if (!is.null(fit$rms)) {
-      as.numeric(fit$rms)
+    
+    RMSR = if (
+      !is.null(
+        fit$rms
+      )
+    ) {
+      as.numeric(
+        fit$rms
+      )
     } else {
       NA_real_
     },
-    TLI = if (!is.null(fit$TLI)) {
-      as.numeric(fit$TLI)
+    
+    TLI = if (
+      !is.null(
+        fit$TLI
+      )
+    ) {
+      as.numeric(
+        fit$TLI
+      )
     } else {
       NA_real_
     },
+    
     RMSEA = rmsea_value,
-    BIC = if (!is.null(fit$BIC)) {
-      as.numeric(fit$BIC)
+    
+    BIC = if (
+      !is.null(
+        fit$BIC
+      )
+    ) {
+      as.numeric(
+        fit$BIC
+      )
     } else {
       NA_real_
     },
+    
     mean_abs_factor_correlation = mean_abs_cor,
     var_abs_factor_correlation = var_abs_cor,
     mean_factor_distance = mean_distance,
@@ -758,6 +797,7 @@ run_one_efa <- function(
 }
 
 
+# Leer bootstrap final
 if (!file.exists(bootstrap_file)) {
   stop(
     "No encuentro el bootstrap:\n",
@@ -805,12 +845,24 @@ bootstrap_index <- read_csv(
   show_col_types = FALSE
 ) %>%
   mutate(
-    bootstrap_id = as.integer(bootstrap_id),
-    draw_id = as.integer(draw_id),
-    integrated_row_id = as.character(integrated_row_id),
-    comparison_region = as.character(comparison_region),
-    subsample = as.character(subsample),
-    dataset_source = as.character(dataset_source)
+    bootstrap_id = as.integer(
+      bootstrap_id
+    ),
+    draw_id = as.integer(
+      draw_id
+    ),
+    integrated_row_id = as.character(
+      integrated_row_id
+    ),
+    comparison_region = as.character(
+      comparison_region
+    ),
+    subsample = as.character(
+      subsample
+    ),
+    dataset_source = as.character(
+      dataset_source
+    )
   )
 
 all_boot_ids <- sort(
@@ -819,7 +871,10 @@ all_boot_ids <- sort(
   )
 )
 
-if (length(all_boot_ids) != EXPECTED_N_BOOT) {
+if (
+  length(all_boot_ids) !=
+  EXPECTED_N_BOOT
+) {
   stop(
     "Se esperaban ",
     EXPECTED_N_BOOT,
@@ -832,7 +887,9 @@ if (length(all_boot_ids) != EXPECTED_N_BOOT) {
 if (
   !identical(
     all_boot_ids,
-    seq_len(EXPECTED_N_BOOT)
+    seq_len(
+      EXPECTED_N_BOOT
+    )
   )
 ) {
   stop(
@@ -844,11 +901,16 @@ if (
 
 boot_ids <- all_boot_ids
 
-if (is.finite(MAX_BOOTSTRAPS)) {
-  
+if (
+  is.finite(
+    MAX_BOOTSTRAPS
+  )
+) {
   boot_ids <- head(
     boot_ids,
-    as.integer(MAX_BOOTSTRAPS)
+    as.integer(
+      MAX_BOOTSTRAPS
+    )
   )
   
   bootstrap_index <- bootstrap_index %>%
@@ -859,10 +921,10 @@ if (is.finite(MAX_BOOTSTRAPS)) {
 }
 
 
+# Comprobar estructura del bootstrap
 bootstrap_sizes <- map_dfr(
   ANALYSIS_SAMPLES,
   function(sample_name) {
-    
     get_bootstrap_sample(
       bootstrap_index,
       sample_name
@@ -894,7 +956,11 @@ missing_bootstrap_samples <- crossing(
     )
   )
 
-if (nrow(missing_bootstrap_samples) > 0) {
+if (
+  nrow(
+    missing_bootstrap_samples
+  ) > 0
+) {
   stop(
     "Alguna muestra no aparece en todos los bootstraps."
   )
@@ -908,14 +974,15 @@ fixed_expected_sizes <- c(
 )
 
 for (
-  sample_name in names(
+  sample_name in
+  names(
     fixed_expected_sizes
   )
 ) {
-  
   current_sizes <- bootstrap_sizes %>%
     filter(
-      analysis_sample == sample_name
+      analysis_sample ==
+        sample_name
     ) %>%
     pull(
       n_draws
@@ -942,15 +1009,26 @@ bootstrap_size_summary <- bootstrap_sizes %>%
     analysis_sample
   ) %>%
   summarise(
-    mean_n = mean(n_draws),
-    sd_n = sd(n_draws),
-    min_n = min(n_draws),
-    max_n = max(n_draws),
-    n_bootstraps = n_distinct(bootstrap_id),
+    mean_n = mean(
+      n_draws
+    ),
+    sd_n = sd(
+      n_draws
+    ),
+    min_n = min(
+      n_draws
+    ),
+    max_n = max(
+      n_draws
+    ),
+    n_bootstraps = n_distinct(
+      bootstrap_id
+    ),
     .groups = "drop"
   )
 
 
+# Ejecutar EFA
 metrics_list <- list()
 loadings_list <- list()
 importance_list <- list()
@@ -959,13 +1037,12 @@ top_d_list <- list()
 
 run_counter <- 0L
 
-
 for (
-  sample_index in seq_along(
+  sample_index in
+  seq_along(
     ANALYSIS_SAMPLES
   )
 ) {
-  
   analysis_sample <- ANALYSIS_SAMPLES[
     sample_index
   ]
@@ -988,11 +1065,11 @@ for (
   )
   
   for (
-    matrix_index in seq_along(
+    matrix_index in
+    seq_along(
       MATRICES_TO_RUN
     )
   ) {
-    
     matrix_name <- MATRICES_TO_RUN[
       matrix_index
     ]
@@ -1010,11 +1087,11 @@ for (
     )
     
     for (
-      b_index in seq_along(
+      b_index in
+      seq_along(
         boot_ids
       )
     ) {
-      
       bootstrap_id <- boot_ids[
         b_index
       ]
@@ -1022,13 +1099,17 @@ for (
       if (
         b_index == 1 ||
         b_index %% 20 == 0 ||
-        b_index == length(boot_ids)
+        b_index == length(
+          boot_ids
+        )
       ) {
         cat(
           "  Bootstrap ",
           b_index,
           " / ",
-          length(boot_ids),
+          length(
+            boot_ids
+          ),
           "\n",
           sep = ""
         )
@@ -1046,26 +1127,20 @@ for (
       )
       
       for (
-        n_factors in N_FACTORS_GRID
+        n_factors in
+        N_FACTORS_GRID
       ) {
-        
-        run_counter <- run_counter + 1L
+        run_counter <- run_counter +
+          1L
         
         res <- run_one_efa(
-          analysis_sample_current =
-            analysis_sample,
-          analysis_sample_index =
-            sample_index,
-          matrix_name_current =
-            matrix_name,
-          matrix_index_current =
-            matrix_index,
-          bootstrap_id_current =
-            bootstrap_id,
-          n_factors_current =
-            n_factors,
-          prepared =
-            prepared
+          analysis_sample_current = analysis_sample,
+          analysis_sample_index = sample_index,
+          matrix_name_current = matrix_name,
+          matrix_index_current = matrix_index,
+          bootstrap_id_current = bootstrap_id,
+          n_factors_current = n_factors,
+          prepared = prepared
         )
         
         metrics_list[[run_counter]] <-
@@ -1085,12 +1160,18 @@ for (
       }
     }
     
-    rm(matrix_obj)
-    invisible(gc())
+    rm(
+      matrix_obj
+    )
+    
+    invisible(
+      gc()
+    )
   }
 }
 
 
+# Consolidar resultados
 efa_metrics_by_run <- bind_rows(
   metrics_list
 )
@@ -1112,6 +1193,7 @@ efa_top_d_by_run <- bind_rows(
 )
 
 
+# Resumen de métricas EFA
 efa_metrics_summary <- efa_metrics_by_run %>%
   group_by(
     analysis_sample,
@@ -1122,10 +1204,11 @@ efa_metrics_summary <- efa_metrics_by_run %>%
     n_runs = n(),
     
     n_ok = sum(
-      status %in% c(
-        "ok",
-        "ok_with_warning"
-      )
+      status %in%
+        c(
+          "ok",
+          "ok_with_warning"
+        )
     ),
     
     n_warning = sum(
@@ -1134,41 +1217,62 @@ efa_metrics_summary <- efa_metrics_by_run %>%
     ),
     
     n_error = sum(
-      !status %in% c(
-        "ok",
-        "ok_with_warning"
-      )
+      !status %in%
+        c(
+          "ok",
+          "ok_with_warning"
+        )
     ),
     
     mean_n_rows_used =
-      mean_or_na(n_rows_used),
+      mean_or_na(
+        n_rows_used
+      ),
     
     mean_n_unique_participants =
-      mean_or_na(n_unique_participants),
+      mean_or_na(
+        n_unique_participants
+      ),
     
     mean_RMSR =
-      mean_or_na(RMSR),
+      mean_or_na(
+        RMSR
+      ),
     
     sd_RMSR =
-      sd_or_na(RMSR),
+      sd_or_na(
+        RMSR
+      ),
     
     mean_TLI =
-      mean_or_na(TLI),
+      mean_or_na(
+        TLI
+      ),
     
     sd_TLI =
-      sd_or_na(TLI),
+      sd_or_na(
+        TLI
+      ),
     
     mean_RMSEA =
-      mean_or_na(RMSEA),
+      mean_or_na(
+        RMSEA
+      ),
     
     sd_RMSEA =
-      sd_or_na(RMSEA),
+      sd_or_na(
+        RMSEA
+      ),
     
     mean_BIC =
-      mean_or_na(BIC),
+      mean_or_na(
+        BIC
+      ),
     
     sd_BIC =
-      sd_or_na(BIC),
+      sd_or_na(
+        BIC
+      ),
     
     mean_abs_factor_correlation =
       mean_or_na(
@@ -1199,10 +1303,12 @@ efa_metrics_summary <- efa_metrics_by_run %>%
   )
 
 
+# Warnings y errores
 efa_warnings <- efa_metrics_by_run %>%
   filter(
     warning_flag %in% TRUE |
-      !status %in% c(
+      !status %in%
+      c(
         "ok",
         "ok_with_warning"
       )
@@ -1219,6 +1325,7 @@ efa_warnings <- efa_metrics_by_run %>%
   )
 
 
+# Importancia de los determinantes
 efa_determinant_importance_summary <-
   efa_determinant_importance_by_run %>%
   group_by(
@@ -1238,34 +1345,30 @@ efa_determinant_importance_summary <-
         importance
       ),
     
-    median_importance =
-      median(
-        importance,
-        na.rm = TRUE
-      ),
+    median_importance = median(
+      importance,
+      na.rm = TRUE
+    ),
     
     mean_rank =
       mean_or_na(
         importance_rank
       ),
     
-    prop_above_0_20 =
-      mean(
-        importance >= 0.20,
-        na.rm = TRUE
-      ),
+    prop_above_0_20 = mean(
+      importance >= 0.20,
+      na.rm = TRUE
+    ),
     
-    prop_above_0_30 =
-      mean(
-        importance >= 0.30,
-        na.rm = TRUE
-      ),
+    prop_above_0_30 = mean(
+      importance >= 0.30,
+      na.rm = TRUE
+    ),
     
-    prop_above_0_40 =
-      mean(
-        importance >= 0.40,
-        na.rm = TRUE
-      ),
+    prop_above_0_40 = mean(
+      importance >= 0.40,
+      na.rm = TRUE
+    ),
     
     .groups = "drop"
   ) %>%
@@ -1273,18 +1376,21 @@ efa_determinant_importance_summary <-
     analysis_sample,
     matrix_name,
     n_factors,
-    desc(mean_importance)
+    desc(
+      mean_importance
+    )
   )
 
 
-# Número real de EFA válidos para cada muestra × matriz × nº factores.
-# Se utiliza como denominador al calcular la estabilidad de los Top-D.
+# Número real de EFA válidos para cada muestra × matriz × número de factores.
+# Se utiliza como denominador para calcular la estabilidad de los Top-D.
 valid_efa_runs <- efa_metrics_by_run %>%
   filter(
-    status %in% c(
-      "ok",
-      "ok_with_warning"
-    )
+    status %in%
+      c(
+        "ok",
+        "ok_with_warning"
+      )
   ) %>%
   count(
     analysis_sample,
@@ -1292,7 +1398,6 @@ valid_efa_runs <- efa_metrics_by_run %>%
     n_factors,
     name = "n_valid_bootstraps"
   )
-
 
 efa_top_d_frequency <- efa_top_d_by_run %>%
   count(
@@ -1326,7 +1431,6 @@ efa_top_d_frequency <- efa_top_d_by_run %>%
     )
   )
 
-
 efa_run_status_summary <- efa_metrics_by_run %>%
   count(
     analysis_sample,
@@ -1343,95 +1447,7 @@ efa_run_status_summary <- efa_metrics_by_run %>%
   )
 
 
-write_csv(
-  efa_metrics_by_run,
-  file.path(
-    out_dir,
-    "01_efa_metrics_by_run.csv"
-  )
-)
-
-write_csv(
-  efa_metrics_summary,
-  file.path(
-    out_dir,
-    "02_efa_metrics_summary.csv"
-  )
-)
-
-write_csv(
-  efa_loadings_long,
-  file.path(
-    out_dir,
-    "03_efa_loadings_long.csv.gz"
-  )
-)
-
-write_csv(
-  efa_determinant_importance_by_run,
-  file.path(
-    out_dir,
-    "04_efa_determinant_importance_by_run.csv.gz"
-  )
-)
-
-write_csv(
-  efa_determinant_importance_summary,
-  file.path(
-    out_dir,
-    "05_efa_determinant_importance_summary.csv"
-  )
-)
-
-write_csv(
-  efa_factor_correlations_by_run,
-  file.path(
-    out_dir,
-    "06_efa_factor_correlations_by_run.csv.gz"
-  )
-)
-
-write_csv(
-  efa_top_d_by_run,
-  file.path(
-    out_dir,
-    "07_efa_top_d_by_run.csv.gz"
-  )
-)
-
-write_csv(
-  efa_top_d_frequency,
-  file.path(
-    out_dir,
-    "08_efa_top_d_frequency.csv"
-  )
-)
-
-write_csv(
-  efa_warnings,
-  file.path(
-    out_dir,
-    "09_efa_warnings.csv"
-  )
-)
-
-write_csv(
-  efa_run_status_summary,
-  file.path(
-    out_dir,
-    "10_efa_run_status_summary.csv"
-  )
-)
-
-write_csv(
-  bootstrap_size_summary,
-  file.path(
-    out_dir,
-    "11_bootstrap_sample_sizes_summary.csv"
-  )
-)
-
-
+# Parámetros
 parameters <- tibble(
   parameter = c(
     "bootstrap_file",
@@ -1486,19 +1502,63 @@ parameters <- tibble(
   )
 )
 
-write_csv(
-  parameters,
-  file.path(
-    out_dir,
-    "12_efa_parameters.csv"
+
+# Guardar resultados globales
+global_outputs <- list(
+  "01_efa_metrics_by_run.csv" =
+    efa_metrics_by_run,
+  
+  "02_efa_metrics_summary.csv" =
+    efa_metrics_summary,
+  
+  "03_efa_loadings_long.csv.gz" =
+    efa_loadings_long,
+  
+  "04_efa_determinant_importance_by_run.csv.gz" =
+    efa_determinant_importance_by_run,
+  
+  "05_efa_determinant_importance_summary.csv" =
+    efa_determinant_importance_summary,
+  
+  "06_efa_factor_correlations_by_run.csv.gz" =
+    efa_factor_correlations_by_run,
+  
+  "07_efa_top_d_by_run.csv.gz" =
+    efa_top_d_by_run,
+  
+  "08_efa_top_d_frequency.csv" =
+    efa_top_d_frequency,
+  
+  "09_efa_warnings.csv" =
+    efa_warnings,
+  
+  "10_efa_run_status_summary.csv" =
+    efa_run_status_summary,
+  
+  "11_bootstrap_sample_sizes_summary.csv" =
+    bootstrap_size_summary,
+  
+  "12_efa_parameters.csv" =
+    parameters
+)
+
+iwalk(
+  global_outputs,
+  ~ write_csv(
+    .x,
+    file.path(
+      out_dir,
+      .y
+    )
   )
 )
 
 
+# Guardar resúmenes por muestra
 for (
-  sample_name in ANALYSIS_SAMPLES
+  sample_name in
+  ANALYSIS_SAMPLES
 ) {
-  
   sample_dir <- file.path(
     out_dir,
     sample_name
@@ -1510,66 +1570,52 @@ for (
     showWarnings = FALSE
   )
   
-  write_csv(
-    efa_metrics_summary %>%
+  sample_outputs <- list(
+    "efa_metrics_summary.csv" =
+      efa_metrics_summary %>%
       filter(
         analysis_sample ==
           sample_name
       ),
-    file.path(
-      sample_dir,
-      "efa_metrics_summary.csv"
-    )
+    
+    "efa_determinant_importance_summary.csv" =
+      efa_determinant_importance_summary %>%
+      filter(
+        analysis_sample ==
+          sample_name
+      ),
+    
+    "efa_top_d_frequency.csv" =
+      efa_top_d_frequency %>%
+      filter(
+        analysis_sample ==
+          sample_name
+      ),
+    
+    "efa_run_status_summary.csv" =
+      efa_run_status_summary %>%
+      filter(
+        analysis_sample ==
+          sample_name
+      )
   )
   
-  write_csv(
-    efa_determinant_importance_summary %>%
-      filter(
-        analysis_sample ==
-          sample_name
-      ),
-    file.path(
-      sample_dir,
-      "efa_determinant_importance_summary.csv"
-    )
-  )
-  
-  write_csv(
-    efa_top_d_frequency %>%
-      filter(
-        analysis_sample ==
-          sample_name
-      ),
-    file.path(
-      sample_dir,
-      "efa_top_d_frequency.csv"
-    )
-  )
-  
-  write_csv(
-    efa_run_status_summary %>%
-      filter(
-        analysis_sample ==
-          sample_name
-      ),
-    file.path(
-      sample_dir,
-      "efa_run_status_summary.csv"
+  iwalk(
+    sample_outputs,
+    ~ write_csv(
+      .x,
+      file.path(
+        sample_dir,
+        .y
+      )
     )
   )
 }
 
 
+# Resumen en consola
 cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "07. EFA SOBRE BOOTSTRAPS COMPLETADO\n"
-)
-
-cat(
-  "============================================================\n"
+  "\n07. EFA SOBRE BOOTSTRAPS COMPLETADO\n"
 )
 
 cat(
@@ -1581,7 +1627,9 @@ cat(
 
 cat(
   "\nNúmero de bootstraps utilizados: ",
-  length(boot_ids),
+  length(
+    boot_ids
+  ),
   "\n",
   sep = ""
 )

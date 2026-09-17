@@ -1,29 +1,27 @@
-
-# Ejecuta K-means sobre las muestras bootstrap definitivas.
+# 
+# Objetivo
+# Ejecutar K-means sobre las muestras bootstrap definitivas utilizando
+# las matrices de 32 determinantes generadas en 05.
 #
-# Para cada:
-#   - muestra de análisis
-#   - matriz de 32 determinantes
-#   - bootstrap
-#   - K = 4,...,8
-#
-# se recuperan los draws de 04_2f, se buscan sus determinantes
-# en las matrices del 05 y se ejecuta K-means.
+# Para cada muestra, matriz, bootstrap y K = 2:8:
+# - recupera los draws del bootstrap combinado de 04_2f;
+# - busca sus determinantes en las matrices del 05;
+# - ejecuta K-means y calcula métricas de calidad;
+# - guarda centroides, tamaños y distancias entre clusters;
+# - genera heatmaps medios cuando SAVE_HEATMAPS = TRUE.
 #
 # Muestras:
-#   COMPLETE
-#   EUROPE
-#   LATAM
-#   DIEGO
-#   RENOVISOR
-#   WHY_EUROPE
-#   WHY_LATAM
+# - COMPLETE
+# - EUROPE
+# - LATAM
+# - DIEGO
+# - RENOVISOR
+# - WHY_EUROPE
+# - WHY_LATAM
 #
 # COMPLETE = EUROPE + LATAM.
-# Las fuentes heredan los draws del bootstrap regional.
-#
-# Este script NO vuelve a hacer bootstrap.
-
+# Las submuestras heredan los draws de su bootstrap regional.
+# Este script no vuelve a hacer bootstrap.
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -34,16 +32,9 @@ suppressPackageStartupMessages({
 
 set.seed(123)
 
-
 # Configuración
-project_root <- path.expand(
-  "~/Desktop/MASTER/recommendation-engine/TFM"
-)
-
-processed_root <- file.path(
-  project_root,
-  "paper1_cluster/data/processed"
-)
+project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
+processed_root <- file.path(project_root, "paper1_cluster/data/processed")
 
 bootstrap_file <- file.path(
   processed_root,
@@ -77,7 +68,6 @@ dir.create(
   recursive = TRUE,
   showWarnings = FALSE
 )
-
 
 ANALYSIS_SAMPLES <- c(
   "COMPLETE",
@@ -113,16 +103,13 @@ SAVE_ASSIGNMENTS <- FALSE
 SAVE_COMPOSITION <- FALSE
 SAVE_HEATMAPS <- TRUE
 
-
 # Silhouette:
 # "full"    -> silhouette exacto usando todas las filas.
 # "sampled" -> aproximación usando como máximo SILHOUETTE_MAX_ROWS.
 # "off"     -> no calcular silhouette.
 #
-# Dejamos "full" para mantener el análisis completo.
-# Si la ejecución resulta demasiado lenta, puede cambiarse a "sampled"
-# sin modificar el resto de resultados de K-means.
-
+# Se utiliza "sampled" para reducir el coste computacional, usando como máximo
+# SILHOUETTE_MAX_ROWS filas por ejecución. El resto del K-means no cambia.
 SILHOUETTE_MODE <- "sampled"
 SILHOUETTE_MAX_ROWS <- 500L
 
@@ -139,9 +126,8 @@ if (
   )
 }
 
-
-# Variables que se usarán para describir la composición
-# interna de los clusters cuando estén disponibles.
+# Variables utilizadas para describir la composición interna
+# de los clusters cuando estén disponibles.
 COMPOSITION_VARS <- c(
   "comparison_region",
   "subsample",
@@ -155,10 +141,8 @@ COMPOSITION_VARS <- c(
   "income_band"
 )
 
-
 # Funciones auxiliares
 clean_category <- function(x) {
-  
   x <- str_squish(
     as.character(x)
   )
@@ -171,53 +155,33 @@ clean_category <- function(x) {
   x
 }
 
-
 get_bootstrap_sample <- function(
     bootstrap_index,
     analysis_sample
 ) {
-  
-  if (
-    analysis_sample ==
-    "COMPLETE"
-  ) {
-    
+  if (analysis_sample == "COMPLETE") {
     out <- bootstrap_index
     
-  } else if (
-    analysis_sample ==
-    "EUROPE"
-  ) {
-    
+  } else if (analysis_sample == "EUROPE") {
     out <- bootstrap_index %>%
       filter(
-        comparison_region ==
-          "EUROPE"
+        comparison_region == "EUROPE"
       )
     
-  } else if (
-    analysis_sample ==
-    "LATAM"
-  ) {
-    
+  } else if (analysis_sample == "LATAM") {
     out <- bootstrap_index %>%
       filter(
-        comparison_region ==
-          "LATAM"
+        comparison_region == "LATAM"
       )
     
   } else {
-    
     out <- bootstrap_index %>%
       filter(
-        subsample ==
-          analysis_sample
+        subsample == analysis_sample
       )
   }
   
-  if (
-    nrow(out) == 0
-  ) {
+  if (nrow(out) == 0) {
     stop(
       "La muestra ",
       analysis_sample,
@@ -228,12 +192,10 @@ get_bootstrap_sample <- function(
   out
 }
 
-
 read_matrix_file <- function(
     analysis_sample,
     matrix_name
 ) {
-  
   file <- file.path(
     matrix_dir,
     analysis_sample,
@@ -243,9 +205,7 @@ read_matrix_file <- function(
     )
   )
   
-  if (
-    !file.exists(file)
-  ) {
+  if (!file.exists(file)) {
     stop(
       "No encuentro la matriz:\n",
       file
@@ -257,17 +217,12 @@ read_matrix_file <- function(
     show_col_types = FALSE
   ) %>%
     mutate(
-      integrated_row_id =
-        as.character(
-          integrated_row_id
-        )
+      integrated_row_id = as.character(
+        integrated_row_id
+      )
     )
   
-  if (
-    anyDuplicated(
-      mat_df$integrated_row_id
-    )
-  ) {
+  if (anyDuplicated(mat_df$integrated_row_id)) {
     stop(
       "La matriz ",
       analysis_sample,
@@ -277,18 +232,14 @@ read_matrix_file <- function(
     )
   }
   
-  feature_cols <- names(
-    mat_df
-  )[
+  feature_cols <- names(mat_df)[
     str_detect(
       names(mat_df),
       "^det_\\d{2}_"
     )
   ]
   
-  if (
-    length(feature_cols) != 32
-  ) {
+  if (length(feature_cols) != 32) {
     stop(
       "La matriz ",
       analysis_sample,
@@ -303,24 +254,18 @@ read_matrix_file <- function(
   mat_df <- mat_df %>%
     select(
       integrated_row_id,
-      all_of(
-        feature_cols
-      )
+      all_of(feature_cols)
     ) %>%
     mutate(
       across(
-        all_of(
-          feature_cols
-        ),
+        all_of(feature_cols),
         as.numeric
       )
     )
   
   matrix_values <- mat_df %>%
     select(
-      all_of(
-        feature_cols
-      )
+      all_of(feature_cols)
     ) %>%
     as.matrix()
   
@@ -329,9 +274,7 @@ read_matrix_file <- function(
   ) <- "double"
   
   row_lookup <- seq_len(
-    nrow(
-      mat_df
-    )
+    nrow(mat_df)
   )
   
   names(
@@ -339,26 +282,17 @@ read_matrix_file <- function(
   ) <- mat_df$integrated_row_id
   
   list(
-    data =
-      mat_df,
-    
-    matrix =
-      matrix_values,
-    
-    row_lookup =
-      row_lookup,
-    
-    feature_cols =
-      feature_cols
+    data = mat_df,
+    matrix = matrix_values,
+    row_lookup = row_lookup,
+    feature_cols = feature_cols
   )
 }
-
 
 safe_kmeans <- function(
     x,
     k
 ) {
-  
   tryCatch(
     kmeans(
       x = x,
@@ -366,22 +300,16 @@ safe_kmeans <- function(
       nstart = NSTART,
       iter.max = ITER_MAX
     ),
-    error =
-      function(e) e
+    error = function(e) e
   )
 }
-
 
 calculate_silhouette <- function(
     x,
     clusters,
     seed
 ) {
-  
-  if (
-    SILHOUETTE_MODE ==
-    "off"
-  ) {
+  if (SILHOUETTE_MODE == "off") {
     return(
       list(
         value = NA_real_,
@@ -395,9 +323,7 @@ calculate_silhouette <- function(
   
   if (
     n < 2 ||
-    n_distinct(
-      clusters
-    ) < 2
+    n_distinct(clusters) < 2
   ) {
     return(
       list(
@@ -412,15 +338,10 @@ calculate_silhouette <- function(
   subsampled <- FALSE
   
   if (
-    SILHOUETTE_MODE ==
-    "sampled" &&
-    is.finite(
-      SILHOUETTE_MAX_ROWS
-    ) &&
-    n >
-    SILHOUETTE_MAX_ROWS
+    SILHOUETTE_MODE == "sampled" &&
+    is.finite(SILHOUETTE_MAX_ROWS) &&
+    n > SILHOUETTE_MAX_ROWS
   ) {
-    
     set.seed(seed)
     
     by_cluster <- split(
@@ -447,14 +368,10 @@ calculate_silhouette <- function(
     n_extra <- min(
       length(remaining),
       SILHOUETTE_MAX_ROWS -
-        length(
-          mandatory_idx
-        )
+        length(mandatory_idx)
     )
     
-    extra_idx <- if (
-      n_extra > 0
-    ) {
+    extra_idx <- if (n_extra > 0) {
       sample(
         remaining,
         n_extra
@@ -483,8 +400,7 @@ calculate_silhouette <- function(
             ,
             drop = FALSE
           ],
-          method =
-            "euclidean"
+          method = "euclidean"
         )
       )
       
@@ -496,22 +412,15 @@ calculate_silhouette <- function(
         na.rm = TRUE
       )
     },
-    error =
-      function(e) NA_real_
+    error = function(e) NA_real_
   )
   
   list(
-    value =
-      silhouette_value,
-    
-    n_used =
-      length(idx),
-    
-    subsampled =
-      subsampled
+    value = silhouette_value,
+    n_used = length(idx),
+    subsampled = subsampled
   )
 }
-
 
 make_distance_long <- function(
     centers_ordered,
@@ -521,99 +430,73 @@ make_distance_long <- function(
     bootstrap_id,
     k
 ) {
-  
   center_matrix <- centers_ordered %>%
     arrange(
       cluster_rank
     ) %>%
     select(
-      all_of(
-        feature_cols
-      )
+      all_of(feature_cols)
     ) %>%
     as.matrix()
   
   dmat <- as.matrix(
     dist(
       center_matrix,
-      method =
-        "euclidean"
+      method = "euclidean"
     )
   )
   
   idx <- which(
-    upper.tri(
-      dmat
-    ),
+    upper.tri(dmat),
     arr.ind = TRUE
   )
   
   tibble(
-    analysis_sample =
-      analysis_sample,
-    
-    matrix_name =
-      matrix_name,
-    
-    bootstrap_id =
-      bootstrap_id,
-    
-    k =
-      k,
-    
-    cluster_a =
-      as.integer(
-        idx[
-          ,
-          "row"
-        ]
-      ),
-    
-    cluster_b =
-      as.integer(
-        idx[
-          ,
-          "col"
-        ]
-      ),
-    
-    euclidean_distance =
-      as.numeric(
-        dmat[idx]
-      )
+    analysis_sample = analysis_sample,
+    matrix_name = matrix_name,
+    bootstrap_id = bootstrap_id,
+    k = k,
+    cluster_a = as.integer(
+      idx[
+        ,
+        "row"
+      ]
+    ),
+    cluster_b = as.integer(
+      idx[
+        ,
+        "col"
+      ]
+    ),
+    euclidean_distance = as.numeric(
+      dmat[idx]
+    )
   )
 }
-
 
 make_composition_long <- function(
     assignments,
     composition_levels,
     k_current
 ) {
-  
-  if (
-    length(
-      composition_levels
-    ) == 0
-  ) {
+  if (length(composition_levels) == 0) {
     return(
       tibble()
     )
   }
   
   map_dfr(
-    names(
-      composition_levels
-    ),
+    names(composition_levels),
     function(var) {
-      
       categories <- composition_levels[[var]]
       
       current <- assignments %>%
         transmute(
           cluster_rank,
-          
-          composition_category = clean_category(.data[[var]])) %>%
+          composition_category = clean_category(
+            .data[[var]]
+          )
+        ) %>%
         count(
           cluster_rank,
           composition_category,
@@ -621,67 +504,52 @@ make_composition_long <- function(
         )
       
       crossing(
-        cluster_rank =
-          seq_len(
-            k_current
-          ),
-        
-        composition_category =
-          categories
+        cluster_rank = seq_len(
+          k_current
+        ),
+        composition_category = categories
       ) %>%
         left_join(
           current,
-          by =
-            c(
-              "cluster_rank",
-              "composition_category"
-            )
+          by = c(
+            "cluster_rank",
+            "composition_category"
+          )
         ) %>%
         mutate(
-          n =
-            replace_na(
-              n,
-              0L
-            )
+          n = replace_na(
+            n,
+            0L
+          )
         ) %>%
         group_by(
           cluster_rank
         ) %>%
         mutate(
-          prop_within_cluster =
-            if (sum(n) > 0) {
-              n / sum(n)
-            } else {
-              rep(
-                NA_real_,
-                n()
-              )
-            }
+          prop_within_cluster = if (sum(n) > 0) {
+            n / sum(n)
+          } else {
+            rep(
+              NA_real_,
+              n()
+            )
+          }
         ) %>%
         ungroup() %>%
         mutate(
-          analysis_sample =
-            unique(
-              assignments$analysis_sample
-            ),
-          
-          matrix_name =
-            unique(
-              assignments$matrix_name
-            ),
-          
-          bootstrap_id =
-            unique(
-              assignments$bootstrap_id
-            ),
-          
-          k =
-            unique(
-              assignments$k
-            ),
-          
-          composition_variable =
-            var
+          analysis_sample = unique(
+            assignments$analysis_sample
+          ),
+          matrix_name = unique(
+            assignments$matrix_name
+          ),
+          bootstrap_id = unique(
+            assignments$bootstrap_id
+          ),
+          k = unique(
+            assignments$k
+          ),
+          composition_variable = var
         ) %>%
         select(
           analysis_sample,
@@ -698,7 +566,6 @@ make_composition_long <- function(
   )
 }
 
-
 failed_result <- function(
     analysis_sample,
     matrix_name,
@@ -709,14 +576,11 @@ failed_result <- function(
     n_rows_used,
     error_message
 ) {
-  
   n_rows_dropped <-
     n_bootstrap_draws -
     n_rows_used
   
-  prop_rows_used <- if (
-    n_bootstrap_draws > 0
-  ) {
+  prop_rows_used <- if (n_bootstrap_draws > 0) {
     n_rows_used /
       n_bootstrap_draws
   } else {
@@ -724,95 +588,38 @@ failed_result <- function(
   }
   
   list(
-    metrics =
-      tibble(
-        analysis_sample =
-          analysis_sample,
-        
-        matrix_name =
-          matrix_name,
-        
-        bootstrap_id =
-          bootstrap_id,
-        
-        k =
-          k,
-        
-        status =
-          status,
-        
-        n_bootstrap_draws =
-          n_bootstrap_draws,
-        
-        n_rows_used =
-          n_rows_used,
-        
-        n_rows_dropped =
-          n_rows_dropped,
-        
-        prop_rows_used =
-          prop_rows_used,
-        
-        totss =
-          NA_real_,
-        
-        tot_withinss =
-          NA_real_,
-        
-        betweenss =
-          NA_real_,
-        
-        between_over_total =
-          NA_real_,
-        
-        calinski_harabasz =
-          NA_real_,
-        
-        mean_silhouette =
-          NA_real_,
-        
-        silhouette_n_used =
-          NA_integer_,
-        
-        silhouette_subsampled =
-          NA,
-        
-        mean_cluster_distance =
-          NA_real_,
-        
-        min_cluster_distance =
-          NA_real_,
-        
-        max_cluster_distance =
-          NA_real_,
-        
-        iter =
-          NA_integer_,
-        
-        ifault =
-          NA_integer_,
-        
-        error_message =
-          error_message
-      ),
-    
-    centers_long =
-      tibble(),
-    
-    cluster_sizes =
-      tibble(),
-    
-    assignments =
-      tibble(),
-    
-    distances =
-      tibble(),
-    
-    composition =
-      tibble()
+    metrics = tibble(
+      analysis_sample = analysis_sample,
+      matrix_name = matrix_name,
+      bootstrap_id = bootstrap_id,
+      k = k,
+      status = status,
+      n_bootstrap_draws = n_bootstrap_draws,
+      n_rows_used = n_rows_used,
+      n_rows_dropped = n_rows_dropped,
+      prop_rows_used = prop_rows_used,
+      totss = NA_real_,
+      tot_withinss = NA_real_,
+      betweenss = NA_real_,
+      between_over_total = NA_real_,
+      calinski_harabasz = NA_real_,
+      mean_silhouette = NA_real_,
+      silhouette_n_used = NA_integer_,
+      silhouette_subsampled = NA,
+      mean_cluster_distance = NA_real_,
+      min_cluster_distance = NA_real_,
+      max_cluster_distance = NA_real_,
+      iter = NA_integer_,
+      ifault = NA_integer_,
+      error_message = error_message
+    ),
+    centers_long = tibble(),
+    cluster_sizes = tibble(),
+    assignments = tibble(),
+    distances = tibble(),
+    composition = tibble()
   )
 }
-
 
 run_one_kmeans <- function(
     analysis_sample_current,
@@ -825,7 +632,6 @@ run_one_kmeans <- function(
     k_current,
     composition_levels
 ) {
-  
   row_idx <- unname(
     matrix_obj$row_lookup[
       boot_b$integrated_row_id
@@ -834,9 +640,7 @@ run_one_kmeans <- function(
   
   if (
     any(
-      is.na(
-        row_idx
-      )
+      is.na(row_idx)
     )
   ) {
     stop(
@@ -878,35 +682,17 @@ run_one_kmeans <- function(
     x
   )
   
-  if (
-    n_rows_used <
-    k_current
-  ) {
+  if (n_rows_used < k_current) {
     return(
       failed_result(
-        analysis_sample =
-          analysis_sample_current,
-        
-        matrix_name =
-          matrix_name_current,
-        
-        bootstrap_id =
-          bootstrap_id_current,
-        
-        k =
-          k_current,
-        
-        status =
-          "skipped_too_few_rows",
-        
-        n_bootstrap_draws =
-          n_bootstrap_draws,
-        
-        n_rows_used =
-          n_rows_used,
-        
-        error_message =
-          "Too few rows for K"
+        analysis_sample = analysis_sample_current,
+        matrix_name = matrix_name_current,
+        bootstrap_id = bootstrap_id_current,
+        k = k_current,
+        status = "skipped_too_few_rows",
+        n_bootstrap_draws = n_bootstrap_draws,
+        n_rows_used = n_rows_used,
+        error_message = "Too few rows for K"
       )
     )
   }
@@ -925,10 +711,8 @@ run_one_kmeans <- function(
   )
   
   km <- safe_kmeans(
-    x =
-      x,
-    k =
-      k_current
+    x = x,
+    k = k_current
   )
   
   if (
@@ -939,29 +723,14 @@ run_one_kmeans <- function(
   ) {
     return(
       failed_result(
-        analysis_sample =
-          analysis_sample_current,
-        
-        matrix_name =
-          matrix_name_current,
-        
-        bootstrap_id =
-          bootstrap_id_current,
-        
-        k =
-          k_current,
-        
-        status =
-          "error",
-        
-        n_bootstrap_draws =
-          n_bootstrap_draws,
-        
-        n_rows_used =
-          n_rows_used,
-        
-        error_message =
-          km$message
+        analysis_sample = analysis_sample_current,
+        matrix_name = matrix_name_current,
+        bootstrap_id = bootstrap_id_current,
+        k = k_current,
+        status = "error",
+        n_bootstrap_draws = n_bootstrap_draws,
+        n_rows_used = n_rows_used,
+        error_message = km$message
       )
     )
   }
@@ -970,8 +739,7 @@ run_one_kmeans <- function(
     km$centers
   ) %>%
     mutate(
-      cluster_original =
-        row_number(),
+      cluster_original = row_number(),
       .before = 1
     )
   
@@ -980,28 +748,24 @@ run_one_kmeans <- function(
   # Es una alineación simple, no un matching completo de centroides.
   center_order <- centers_df %>%
     mutate(
-      center_mean =
-        rowMeans(
-          as.matrix(
-            select(
-              .,
-              all_of(
-                matrix_obj$feature_cols
-              )
+      center_mean = rowMeans(
+        as.matrix(
+          select(
+            .,
+            all_of(
+              matrix_obj$feature_cols
             )
-          ),
-          na.rm = TRUE
-        )
+          )
+        ),
+        na.rm = TRUE
+      )
     ) %>%
     arrange(
-      desc(
-        center_mean
-      ),
+      desc(center_mean),
       cluster_original
     ) %>%
     mutate(
-      cluster_rank =
-        row_number()
+      cluster_rank = row_number()
     ) %>%
     select(
       cluster_original,
@@ -1019,31 +783,20 @@ run_one_kmeans <- function(
   
   assignments <- sample_use %>%
     mutate(
-      analysis_sample =
-        analysis_sample_current,
-      
-      matrix_name =
-        matrix_name_current,
-      
-      bootstrap_id =
-        bootstrap_id_current,
-      
-      k =
-        k_current,
-      
-      cluster_original =
-        as.integer(
-          km$cluster
-        ),
-      
-      cluster_rank =
-        as.integer(
-          rank_lookup[
-            as.character(
-              cluster_original
-            )
-          ]
-        )
+      analysis_sample = analysis_sample_current,
+      matrix_name = matrix_name_current,
+      bootstrap_id = bootstrap_id_current,
+      k = k_current,
+      cluster_original = as.integer(
+        km$cluster
+      ),
+      cluster_rank = as.integer(
+        rank_lookup[
+          as.character(
+            cluster_original
+          )
+        ]
+      )
     )
   
   cluster_sizes <- assignments %>%
@@ -1052,33 +805,20 @@ run_one_kmeans <- function(
       name = "n_cluster"
     ) %>%
     complete(
-      cluster_rank =
-        seq_len(
-          k_current
-        ),
-      fill =
-        list(
-          n_cluster = 0L
-        )
+      cluster_rank = seq_len(
+        k_current
+      ),
+      fill = list(
+        n_cluster = 0L
+      )
     ) %>%
     mutate(
-      analysis_sample =
-        analysis_sample_current,
-      
-      matrix_name =
-        matrix_name_current,
-      
-      bootstrap_id =
-        bootstrap_id_current,
-      
-      k =
-        k_current,
-      
-      prop_cluster =
-        n_cluster /
-        sum(
-          n_cluster
-        )
+      analysis_sample = analysis_sample_current,
+      matrix_name = matrix_name_current,
+      bootstrap_id = bootstrap_id_current,
+      k = k_current,
+      prop_cluster = n_cluster /
+        sum(n_cluster)
     ) %>%
     select(
       analysis_sample,
@@ -1093,21 +833,13 @@ run_one_kmeans <- function(
   centers_ordered <- centers_df %>%
     left_join(
       center_order,
-      by =
-        "cluster_original"
+      by = "cluster_original"
     ) %>%
     mutate(
-      analysis_sample =
-        analysis_sample_current,
-      
-      matrix_name =
-        matrix_name_current,
-      
-      bootstrap_id =
-        bootstrap_id_current,
-      
-      k =
-        k_current
+      analysis_sample = analysis_sample_current,
+      matrix_name = matrix_name_current,
+      bootstrap_id = bootstrap_id_current,
+      k = k_current
     ) %>%
     select(
       analysis_sample,
@@ -1124,52 +856,31 @@ run_one_kmeans <- function(
   
   centers_long <- centers_ordered %>%
     pivot_longer(
-      cols =
-        all_of(
-          matrix_obj$feature_cols
-        ),
-      names_to =
-        "determinant",
-      values_to =
-        "center_value"
+      cols = all_of(
+        matrix_obj$feature_cols
+      ),
+      names_to = "determinant",
+      values_to = "center_value"
     )
   
   distances <- make_distance_long(
-    centers_ordered =
-      centers_ordered,
-    
-    feature_cols =
-      matrix_obj$feature_cols,
-    
-    analysis_sample =
-      analysis_sample_current,
-    
-    matrix_name =
-      matrix_name_current,
-    
-    bootstrap_id =
-      bootstrap_id_current,
-    
-    k =
-      k_current
+    centers_ordered = centers_ordered,
+    feature_cols = matrix_obj$feature_cols,
+    analysis_sample = analysis_sample_current,
+    matrix_name = matrix_name_current,
+    bootstrap_id = bootstrap_id_current,
+    k = k_current
   )
   
   silhouette_result <- calculate_silhouette(
-    x =
-      x,
-    
-    clusters =
-      km$cluster,
-    
-    seed =
-      run_seed +
+    x = x,
+    clusters = km$cluster,
+    seed = run_seed +
       500000000
   )
   
   mean_cluster_distance <- if (
-    nrow(
-      distances
-    ) > 0
+    nrow(distances) > 0
   ) {
     mean(
       distances$euclidean_distance,
@@ -1180,9 +891,7 @@ run_one_kmeans <- function(
   }
   
   min_cluster_distance <- if (
-    nrow(
-      distances
-    ) > 0
+    nrow(distances) > 0
   ) {
     min(
       distances$euclidean_distance,
@@ -1193,9 +902,7 @@ run_one_kmeans <- function(
   }
   
   max_cluster_distance <- if (
-    nrow(
-      distances
-    ) > 0
+    nrow(distances) > 0
   ) {
     max(
       distances$euclidean_distance,
@@ -1206,13 +913,11 @@ run_one_kmeans <- function(
   }
   
   calinski_harabasz <- if (
-    n_rows_used >
-    k_current &&
+    n_rows_used > k_current &&
     is.finite(
       km$tot.withinss
     ) &&
-    km$tot.withinss >
-    0
+    km$tot.withinss > 0
   ) {
     (
       km$betweenss /
@@ -1233,107 +938,57 @@ run_one_kmeans <- function(
   }
   
   metrics <- tibble(
-    analysis_sample =
-      analysis_sample_current,
-    
-    matrix_name =
-      matrix_name_current,
-    
-    bootstrap_id =
-      bootstrap_id_current,
-    
-    k =
-      k_current,
-    
-    status =
-      "ok",
-    
-    n_bootstrap_draws =
-      n_bootstrap_draws,
-    
-    n_rows_used =
+    analysis_sample = analysis_sample_current,
+    matrix_name = matrix_name_current,
+    bootstrap_id = bootstrap_id_current,
+    k = k_current,
+    status = "ok",
+    n_bootstrap_draws = n_bootstrap_draws,
+    n_rows_used = n_rows_used,
+    n_rows_dropped = n_bootstrap_draws -
       n_rows_used,
-    
-    n_rows_dropped =
-      n_bootstrap_draws -
-      n_rows_used,
-    
-    prop_rows_used =
-      n_rows_used /
+    prop_rows_used = n_rows_used /
       n_bootstrap_draws,
-    
-    totss =
-      km$totss,
-    
-    tot_withinss =
-      km$tot.withinss,
-    
-    betweenss =
-      km$betweenss,
-    
-    between_over_total =
-      if_else(
-        km$totss > 0,
-        km$betweenss /
-          km$totss,
-        NA_real_
-      ),
-    
-    calinski_harabasz =
-      calinski_harabasz,
-    
-    mean_silhouette =
-      silhouette_result$value,
-    
-    silhouette_n_used =
+    totss = km$totss,
+    tot_withinss = km$tot.withinss,
+    betweenss = km$betweenss,
+    between_over_total = if_else(
+      km$totss > 0,
+      km$betweenss /
+        km$totss,
+      NA_real_
+    ),
+    calinski_harabasz = calinski_harabasz,
+    mean_silhouette = silhouette_result$value,
+    silhouette_n_used = as.integer(
+      silhouette_result$n_used
+    ),
+    silhouette_subsampled = silhouette_result$subsampled,
+    mean_cluster_distance = mean_cluster_distance,
+    min_cluster_distance = min_cluster_distance,
+    max_cluster_distance = max_cluster_distance,
+    iter = km$iter,
+    ifault = if (
+      is.null(
+        km$ifault
+      )
+    ) {
+      NA_integer_
+    } else {
       as.integer(
-        silhouette_result$n_used
-      ),
-    
-    silhouette_subsampled =
-      silhouette_result$subsampled,
-    
-    mean_cluster_distance =
-      mean_cluster_distance,
-    
-    min_cluster_distance =
-      min_cluster_distance,
-    
-    max_cluster_distance =
-      max_cluster_distance,
-    
-    iter =
-      km$iter,
-    
-    ifault =
-      if (
-        is.null(
-          km$ifault
-        )
-      ) {
-        NA_integer_
-      } else {
-        as.integer(
-          km$ifault
-        )
-      },
-    
-    error_message =
-      NA_character_
+        km$ifault
+      )
+    },
+    error_message = NA_character_
   )
   
   composition <- if (
     SAVE_COMPOSITION
   ) {
     make_composition_long(
-      assignments =
-        assignments,
-      
-      composition_levels =
-        composition_levels,
-      
-      k_current =
-        k_current
+      assignments = assignments,
+      composition_levels = composition_levels,
+      k_current = k_current
     )
   } else {
     tibble()
@@ -1342,7 +997,6 @@ run_one_kmeans <- function(
   assignments_output <- if (
     SAVE_ASSIGNMENTS
   ) {
-    
     assignments %>%
       select(
         analysis_sample,
@@ -1357,33 +1011,19 @@ run_one_kmeans <- function(
         cluster_rank,
         cluster_original
       )
-    
   } else {
-    
     tibble()
   }
   
   list(
-    metrics =
-      metrics,
-    
-    centers_long =
-      centers_long,
-    
-    cluster_sizes =
-      cluster_sizes,
-    
-    assignments =
-      assignments_output,
-    
-    distances =
-      distances,
-    
-    composition =
-      composition
+    metrics = metrics,
+    centers_long = centers_long,
+    cluster_sizes = cluster_sizes,
+    assignments = assignments_output,
+    distances = distances,
+    composition = composition
   )
 }
-
 
 # Leer bootstrap final
 if (
@@ -1419,11 +1059,7 @@ missing_boot_cols <- setdiff(
   bootstrap_colnames
 )
 
-if (
-  length(
-    missing_boot_cols
-  ) > 0
-) {
+if (length(missing_boot_cols) > 0) {
   stop(
     "Faltan columnas necesarias en 04_2f: ",
     paste(
@@ -1441,50 +1077,37 @@ bootstrap_cols_to_read <- unique(
   )
 )
 
-bootstrap_cols_to_read <-
-  bootstrap_cols_to_read[
-    bootstrap_cols_to_read %in%
-      bootstrap_colnames
-  ]
+bootstrap_cols_to_read <- bootstrap_cols_to_read[
+  bootstrap_cols_to_read %in%
+    bootstrap_colnames
+]
 
 bootstrap_index <- read_csv(
   bootstrap_file,
-  col_select =
-    all_of(
-      bootstrap_cols_to_read
-    ),
+  col_select = all_of(
+    bootstrap_cols_to_read
+  ),
   show_col_types = FALSE
 ) %>%
   mutate(
-    bootstrap_id =
-      as.integer(
-        bootstrap_id
-      ),
-    
-    draw_id =
-      as.integer(
-        draw_id
-      ),
-    
-    integrated_row_id =
-      as.character(
-        integrated_row_id
-      ),
-    
-    comparison_region =
-      as.character(
-        comparison_region
-      ),
-    
-    subsample =
-      as.character(
-        subsample
-      ),
-    
-    dataset_source =
-      as.character(
-        dataset_source
-      )
+    bootstrap_id = as.integer(
+      bootstrap_id
+    ),
+    draw_id = as.integer(
+      draw_id
+    ),
+    integrated_row_id = as.character(
+      integrated_row_id
+    ),
+    comparison_region = as.character(
+      comparison_region
+    ),
+    subsample = as.character(
+      subsample
+    ),
+    dataset_source = as.character(
+      dataset_source
+    )
   )
 
 all_boot_ids <- sort(
@@ -1494,18 +1117,14 @@ all_boot_ids <- sort(
 )
 
 if (
-  length(
-    all_boot_ids
-  ) !=
+  length(all_boot_ids) !=
   EXPECTED_N_BOOT
 ) {
   stop(
     "Se esperaban ",
     EXPECTED_N_BOOT,
     " bootstraps y se han encontrado ",
-    length(
-      all_boot_ids
-    ),
+    length(all_boot_ids),
     "."
   )
 }
@@ -1532,7 +1151,6 @@ if (
     MAX_BOOTSTRAPS
   )
 ) {
-  
   boot_ids <- head(
     boot_ids,
     as.integer(
@@ -1547,37 +1165,28 @@ if (
     )
 }
 
-
 # Comprobar estructura del bootstrap
 bootstrap_sizes <- map_dfr(
   ANALYSIS_SAMPLES,
   function(sample_name) {
-    
     get_bootstrap_sample(
-      bootstrap_index =
-        bootstrap_index,
-      
-      analysis_sample =
-        sample_name
+      bootstrap_index = bootstrap_index,
+      analysis_sample = sample_name
     ) %>%
       count(
         bootstrap_id,
         name = "n_draws"
       ) %>%
       mutate(
-        analysis_sample =
-          sample_name,
+        analysis_sample = sample_name,
         .before = 1
       )
   }
 )
 
 missing_bootstrap_samples <- crossing(
-  analysis_sample =
-    ANALYSIS_SAMPLES,
-  
-  bootstrap_id =
-    boot_ids
+  analysis_sample = ANALYSIS_SAMPLES,
+  bootstrap_id = boot_ids
 ) %>%
   anti_join(
     bootstrap_sizes %>%
@@ -1585,11 +1194,10 @@ missing_bootstrap_samples <- crossing(
         analysis_sample,
         bootstrap_id
       ),
-    by =
-      c(
-        "analysis_sample",
-        "bootstrap_id"
-      )
+    by = c(
+      "analysis_sample",
+      "bootstrap_id"
+    )
   )
 
 if (
@@ -1615,11 +1223,9 @@ for (
     fixed_expected_sizes
   )
 ) {
-  
   current_sizes <- bootstrap_sizes %>%
     filter(
-      analysis_sample ==
-        sample_name
+      analysis_sample == sample_name
     ) %>%
     pull(
       n_draws
@@ -1628,7 +1234,9 @@ for (
   if (
     any(
       current_sizes !=
-      fixed_expected_sizes[[sample_name]])) {
+      fixed_expected_sizes[[sample_name]]
+    )
+  ) {
     stop(
       "Tamaño inesperado en ",
       sample_name,
@@ -1644,33 +1252,22 @@ bootstrap_size_summary <- bootstrap_sizes %>%
     analysis_sample
   ) %>%
   summarise(
-    mean_n =
-      mean(
-        n_draws
-      ),
-    
-    sd_n =
-      sd(
-        n_draws
-      ),
-    
-    min_n =
-      min(
-        n_draws
-      ),
-    
-    max_n =
-      max(
-        n_draws
-      ),
-    
-    n_bootstraps =
-      n_distinct(
-        bootstrap_id
-      ),
-    
-    .groups =
-      "drop"
+    mean_n = mean(
+      n_draws
+    ),
+    sd_n = sd(
+      n_draws
+    ),
+    min_n = min(
+      n_draws
+    ),
+    max_n = max(
+      n_draws
+    ),
+    n_bootstraps = n_distinct(
+      bootstrap_id
+    ),
+    .groups = "drop"
   )
 
 write_csv(
@@ -1689,13 +1286,11 @@ write_csv(
   )
 )
 
-
 # Ejecutar una muestra de análisis completa
 run_analysis_sample <- function(
     analysis_sample_current,
     analysis_sample_index
 ) {
-  
   cat(
     "MUESTRA: ",
     analysis_sample_current,
@@ -1726,11 +1321,8 @@ run_analysis_sample <- function(
   )
   
   bootstrap_sample <- get_bootstrap_sample(
-    bootstrap_index =
-      bootstrap_index,
-    
-    analysis_sample =
-      analysis_sample_current
+    bootstrap_index = bootstrap_index,
+    analysis_sample = analysis_sample_current
   )
   
   boot_split <- split(
@@ -1820,11 +1412,9 @@ run_analysis_sample <- function(
       MATRICES_TO_RUN
     )
   ) {
-    
-    matrix_name <-
-      MATRICES_TO_RUN[
-        matrix_index
-      ]
+    matrix_name <- MATRICES_TO_RUN[
+      matrix_index
+    ]
     
     cat(
       "\nMatriz: ",
@@ -1834,11 +1424,8 @@ run_analysis_sample <- function(
     )
     
     matrix_obj <- read_matrix_file(
-      analysis_sample =
-        analysis_sample_current,
-      
-      matrix_name =
-        matrix_name
+      analysis_sample = analysis_sample_current,
+      matrix_name = matrix_name
     )
     
     missing_matrix_ids <- bootstrap_sample %>%
@@ -1874,7 +1461,6 @@ run_analysis_sample <- function(
       k_current in
       K_GRID
     ) {
-      
       cat(
         "  K = ",
         k_current,
@@ -1886,7 +1472,6 @@ run_analysis_sample <- function(
         bootstrap_id_current in
         boot_ids
       ) {
-        
         run_counter <-
           run_counter +
           1L
@@ -1894,40 +1479,20 @@ run_analysis_sample <- function(
         boot_b <- boot_split[[as.character(bootstrap_id_current)]]
         
         res <- run_one_kmeans(
-          analysis_sample_current =
-            analysis_sample_current,
-          
-          analysis_sample_index =
-            analysis_sample_index,
-          
-          bootstrap_id_current =
-            bootstrap_id_current,
-          
-          boot_b =
-            boot_b,
-          
-          matrix_name_current =
-            matrix_name,
-          
-          matrix_index_current =
-            matrix_index,
-          
-          matrix_obj =
-            matrix_obj,
-          
-          k_current =
-            k_current,
-          
-          composition_levels =
-            composition_levels
+          analysis_sample_current = analysis_sample_current,
+          analysis_sample_index = analysis_sample_index,
+          bootstrap_id_current = bootstrap_id_current,
+          boot_b = boot_b,
+          matrix_name_current = matrix_name,
+          matrix_index_current = matrix_index,
+          matrix_obj = matrix_obj,
+          k_current = k_current,
+          composition_levels = composition_levels
         )
         
         metrics_list[[run_counter]] <- res$metrics
-        
         centers_list[[run_counter]] <- res$centers_long
-        
         sizes_list[[run_counter]] <- res$cluster_sizes
-        
         distances_list[[run_counter]] <- res$distances
         
         if (
@@ -1989,7 +1554,6 @@ run_analysis_sample <- function(
     tibble()
   }
   
-  
   # Resúmenes
   kmeans_metrics_summary <- kmeans_metrics %>%
     group_by(
@@ -1998,125 +1562,102 @@ run_analysis_sample <- function(
       k
     ) %>%
     summarise(
-      n_runs =
-        n(),
+      n_runs = n(),
       
-      n_ok =
-        sum(
-          status ==
-            "ok"
-        ),
+      n_ok = sum(
+        status == "ok"
+      ),
       
-      n_error =
-        sum(
-          status !=
-            "ok"
-        ),
+      n_error = sum(
+        status != "ok"
+      ),
       
-      mean_n_rows_used =
-        mean(
-          n_rows_used,
-          na.rm = TRUE
-        ),
+      mean_n_rows_used = mean(
+        n_rows_used,
+        na.rm = TRUE
+      ),
       
-      mean_n_rows_dropped =
-        mean(
-          n_rows_dropped,
-          na.rm = TRUE
-        ),
+      mean_n_rows_dropped = mean(
+        n_rows_dropped,
+        na.rm = TRUE
+      ),
       
-      mean_prop_rows_used =
-        mean(
-          prop_rows_used,
-          na.rm = TRUE
-        ),
+      mean_prop_rows_used = mean(
+        prop_rows_used,
+        na.rm = TRUE
+      ),
       
-      mean_totss =
-        mean(
-          totss,
-          na.rm = TRUE
-        ),
+      mean_totss = mean(
+        totss,
+        na.rm = TRUE
+      ),
       
-      mean_tot_withinss =
-        mean(
-          tot_withinss,
-          na.rm = TRUE
-        ),
+      mean_tot_withinss = mean(
+        tot_withinss,
+        na.rm = TRUE
+      ),
       
-      sd_tot_withinss =
-        sd(
-          tot_withinss,
-          na.rm = TRUE
-        ),
+      sd_tot_withinss = sd(
+        tot_withinss,
+        na.rm = TRUE
+      ),
       
-      mean_betweenss =
-        mean(
-          betweenss,
-          na.rm = TRUE
-        ),
+      mean_betweenss = mean(
+        betweenss,
+        na.rm = TRUE
+      ),
       
-      mean_between_over_total =
-        mean(
-          between_over_total,
-          na.rm = TRUE
-        ),
+      mean_between_over_total = mean(
+        between_over_total,
+        na.rm = TRUE
+      ),
       
-      sd_between_over_total =
-        sd(
-          between_over_total,
-          na.rm = TRUE
-        ),
+      sd_between_over_total = sd(
+        between_over_total,
+        na.rm = TRUE
+      ),
       
-      mean_calinski_harabasz =
-        mean(
-          calinski_harabasz,
-          na.rm = TRUE
-        ),
+      mean_calinski_harabasz = mean(
+        calinski_harabasz,
+        na.rm = TRUE
+      ),
       
-      sd_calinski_harabasz =
-        sd(
-          calinski_harabasz,
-          na.rm = TRUE
-        ),
+      sd_calinski_harabasz = sd(
+        calinski_harabasz,
+        na.rm = TRUE
+      ),
       
-      mean_silhouette =
-        mean(
-          mean_silhouette,
-          na.rm = TRUE
-        ),
+      mean_silhouette = mean(
+        mean_silhouette,
+        na.rm = TRUE
+      ),
       
-      sd_silhouette =
-        sd(
-          mean_silhouette,
-          na.rm = TRUE
-        ),
+      sd_silhouette = sd(
+        mean_silhouette,
+        na.rm = TRUE
+      ),
       
-      mean_cluster_distance =
-        mean(
-          mean_cluster_distance,
-          na.rm = TRUE
-        ),
+      mean_cluster_distance = mean(
+        mean_cluster_distance,
+        na.rm = TRUE
+      ),
       
-      sd_cluster_distance =
-        sd(
-          mean_cluster_distance,
-          na.rm = TRUE
-        ),
+      sd_cluster_distance = sd(
+        mean_cluster_distance,
+        na.rm = TRUE
+      ),
       
-      mean_min_cluster_distance =
-        mean(
-          min_cluster_distance,
-          na.rm = TRUE
-        ),
+      mean_min_cluster_distance = mean(
+        min_cluster_distance,
+        na.rm = TRUE
+      ),
       
-      mean_max_cluster_distance =
-        mean(
-          max_cluster_distance,
-          na.rm = TRUE
-        ),
+      mean_max_cluster_distance = mean(
+        max_cluster_distance,
+        na.rm = TRUE
+      ),
       
-      .groups =
-        "drop"
+      .groups = "drop"
     ) %>%
     arrange(
       matrix_name,
@@ -2131,44 +1672,37 @@ run_analysis_sample <- function(
       cluster_rank
     ) %>%
     summarise(
-      mean_n_cluster =
-        mean(
-          n_cluster,
-          na.rm = TRUE
-        ),
+      mean_n_cluster = mean(
+        n_cluster,
+        na.rm = TRUE
+      ),
       
-      sd_n_cluster =
-        sd(
-          n_cluster,
-          na.rm = TRUE
-        ),
+      sd_n_cluster = sd(
+        n_cluster,
+        na.rm = TRUE
+      ),
       
-      min_n_cluster =
-        min(
-          n_cluster,
-          na.rm = TRUE
-        ),
+      min_n_cluster = min(
+        n_cluster,
+        na.rm = TRUE
+      ),
       
-      max_n_cluster =
-        max(
-          n_cluster,
-          na.rm = TRUE
-        ),
+      max_n_cluster = max(
+        n_cluster,
+        na.rm = TRUE
+      ),
       
-      mean_prop_cluster =
-        mean(
-          prop_cluster,
-          na.rm = TRUE
-        ),
+      mean_prop_cluster = mean(
+        prop_cluster,
+        na.rm = TRUE
+      ),
       
-      sd_prop_cluster =
-        sd(
-          prop_cluster,
-          na.rm = TRUE
-        ),
+      sd_prop_cluster = sd(
+        prop_cluster,
+        na.rm = TRUE
+      ),
       
-      .groups =
-        "drop"
+      .groups = "drop"
     ) %>%
     arrange(
       matrix_name,
@@ -2185,20 +1719,17 @@ run_analysis_sample <- function(
       determinant
     ) %>%
     summarise(
-      mean_center_value =
-        mean(
-          center_value,
-          na.rm = TRUE
-        ),
+      mean_center_value = mean(
+        center_value,
+        na.rm = TRUE
+      ),
       
-      sd_center_value =
-        sd(
-          center_value,
-          na.rm = TRUE
-        ),
+      sd_center_value = sd(
+        center_value,
+        na.rm = TRUE
+      ),
       
-      .groups =
-        "drop"
+      .groups = "drop"
     ) %>%
     arrange(
       matrix_name,
@@ -2214,59 +1745,50 @@ run_analysis_sample <- function(
       k
     ) %>%
     summarise(
-      n_distances =
-        n(),
+      n_distances = n(),
       
-      mean_distance =
-        mean(
+      mean_distance = mean(
+        euclidean_distance,
+        na.rm = TRUE
+      ),
+      
+      sd_distance = sd(
+        euclidean_distance,
+        na.rm = TRUE
+      ),
+      
+      min_distance = min(
+        euclidean_distance,
+        na.rm = TRUE
+      ),
+      
+      q25_distance = as.numeric(
+        quantile(
           euclidean_distance,
+          0.25,
           na.rm = TRUE
-        ),
+        )
+      ),
       
-      sd_distance =
-        sd(
+      median_distance = median(
+        euclidean_distance,
+        na.rm = TRUE
+      ),
+      
+      q75_distance = as.numeric(
+        quantile(
           euclidean_distance,
+          0.75,
           na.rm = TRUE
-        ),
+        )
+      ),
       
-      min_distance =
-        min(
-          euclidean_distance,
-          na.rm = TRUE
-        ),
+      max_distance = max(
+        euclidean_distance,
+        na.rm = TRUE
+      ),
       
-      q25_distance =
-        as.numeric(
-          quantile(
-            euclidean_distance,
-            0.25,
-            na.rm = TRUE
-          )
-        ),
-      
-      median_distance =
-        median(
-          euclidean_distance,
-          na.rm = TRUE
-        ),
-      
-      q75_distance =
-        as.numeric(
-          quantile(
-            euclidean_distance,
-            0.75,
-            na.rm = TRUE
-          )
-        ),
-      
-      max_distance =
-        max(
-          euclidean_distance,
-          na.rm = TRUE
-        ),
-      
-      .groups =
-        "drop"
+      .groups = "drop"
     ) %>%
     arrange(
       matrix_name,
@@ -2279,7 +1801,6 @@ run_analysis_sample <- function(
       kmeans_cluster_composition
     ) > 0
   ) {
-    
     kmeans_cluster_composition %>%
       group_by(
         analysis_sample,
@@ -2290,32 +1811,27 @@ run_analysis_sample <- function(
         composition_category
       ) %>%
       summarise(
-        mean_n =
-          mean(
-            n,
-            na.rm = TRUE
-          ),
+        mean_n = mean(
+          n,
+          na.rm = TRUE
+        ),
         
-        sd_n =
-          sd(
-            n,
-            na.rm = TRUE
-          ),
+        sd_n = sd(
+          n,
+          na.rm = TRUE
+        ),
         
-        mean_prop_within_cluster =
-          mean(
-            prop_within_cluster,
-            na.rm = TRUE
-          ),
+        mean_prop_within_cluster = mean(
+          prop_within_cluster,
+          na.rm = TRUE
+        ),
         
-        sd_prop_within_cluster =
-          sd(
-            prop_within_cluster,
-            na.rm = TRUE
-          ),
+        sd_prop_within_cluster = sd(
+          prop_within_cluster,
+          na.rm = TRUE
+        ),
         
-        .groups =
-          "drop"
+        .groups = "drop"
       ) %>%
       arrange(
         matrix_name,
@@ -2328,7 +1844,6 @@ run_analysis_sample <- function(
       )
     
   } else {
-    
     tibble()
   }
   
@@ -2346,8 +1861,7 @@ run_analysis_sample <- function(
       status
     )
   
-  
-  # Guardar resultados de esta muestras
+  # Guardar resultados de esta muestra
   write_csv(
     kmeans_metrics,
     file.path(
@@ -2423,7 +1937,6 @@ run_analysis_sample <- function(
   if (
     SAVE_COMPOSITION
   ) {
-    
     write_csv(
       kmeans_cluster_composition,
       file.path(
@@ -2453,7 +1966,6 @@ run_analysis_sample <- function(
     )
   }
   
-  
   # Heatmaps medios
   if (
     SAVE_HEATMAPS &&
@@ -2461,22 +1973,18 @@ run_analysis_sample <- function(
       kmeans_centers_mean
     ) > 0
   ) {
-    
     for (
       matrix_name_current in
       MATRICES_TO_RUN
     ) {
-      
       for (
         k_current in
         K_GRID
       ) {
-        
         plot_data <- kmeans_centers_mean %>%
           filter(
             matrix_name ==
               matrix_name_current,
-            
             k ==
               k_current
           )
@@ -2491,36 +1999,28 @@ run_analysis_sample <- function(
         
         plot_data <- plot_data %>%
           mutate(
-            cluster_rank =
-              factor(
-                cluster_rank
-              ),
+            cluster_rank = factor(
+              cluster_rank
+            ),
             
-            determinant =
-              factor(
-                determinant,
-                levels =
-                  rev(
-                    sort(
-                      unique(
-                        determinant
-                      )
-                    )
+            determinant = factor(
+              determinant,
+              levels = rev(
+                sort(
+                  unique(
+                    determinant
                   )
+                )
               )
+            )
           )
         
         p <- ggplot(
           plot_data,
           aes(
-            x =
-              cluster_rank,
-            
-            y =
-              determinant,
-            
-            fill =
-              mean_center_value
+            x = cluster_rank,
+            y = determinant,
+            fill = mean_center_value
           )
         ) +
           geom_tile() +
@@ -2528,58 +2028,42 @@ run_analysis_sample <- function(
             base_size = 10
           ) +
           labs(
-            title =
-              paste0(
-                analysis_sample_current,
-                " | ",
-                matrix_name_current,
-                " | K = ",
-                k_current
+            title = paste0(
+              analysis_sample_current,
+              " | ",
+              matrix_name_current,
+              " | K = ",
+              k_current
+            ),
+            
+            subtitle = paste0(
+              "Mean centroids across ",
+              length(
+                boot_ids
               ),
+              " bootstrap replicates"
+            ),
             
-            subtitle =
-              paste0(
-                "Mean centroids across ",
-                length(
-                  boot_ids
-                ),
-                " bootstrap replicates"
-              ),
-            
-            x =
-              "Cluster rank",
-            
-            y =
-              "Determinant",
-            
-            fill =
-              "Mean center"
+            x = "Cluster rank",
+            y = "Determinant",
+            fill = "Mean center"
           )
         
         ggsave(
-          filename =
-            file.path(
-              sample_fig_dir,
-              paste0(
-                "heatmap_",
-                matrix_name_current,
-                "_K",
-                k_current,
-                ".png"
-              )
-            ),
-          
-          plot =
-            p,
-          
-          width =
-            9,
-          
-          height =
-            8,
-          
-          dpi =
-            300
+          filename = file.path(
+            sample_fig_dir,
+            paste0(
+              "heatmap_",
+              matrix_name_current,
+              "_K",
+              k_current,
+              ".png"
+            )
+          ),
+          plot = p,
+          width = 9,
+          height = 8,
+          dpi = 300
         )
       }
     }
@@ -2618,26 +2102,14 @@ run_analysis_sample <- function(
   )
   
   list(
-    metrics_summary =
-      kmeans_metrics_summary,
-    
-    cluster_size_summary =
-      cluster_size_summary,
-    
-    centers_mean =
-      kmeans_centers_mean,
-    
-    distance_summary =
-      cluster_distance_summary,
-    
-    composition_summary =
-      cluster_composition_summary,
-    
-    run_status_summary =
-      run_status_summary
+    metrics_summary = kmeans_metrics_summary,
+    cluster_size_summary = cluster_size_summary,
+    centers_mean = kmeans_centers_mean,
+    distance_summary = cluster_distance_summary,
+    composition_summary = cluster_composition_summary,
+    run_status_summary = run_status_summary
   )
 }
-
 
 # Ejecutar las siete muestras
 result_summaries <- vector(
@@ -2657,21 +2129,15 @@ for (
     ANALYSIS_SAMPLES
   )
 ) {
-  
-  sample_name <-
-    ANALYSIS_SAMPLES[
-      sample_index
-    ]
+  sample_name <- ANALYSIS_SAMPLES[
+    sample_index
+  ]
   
   result_summaries[[sample_name]] <- run_analysis_sample(
-    analysis_sample_current =
-      sample_name,
-    
-    analysis_sample_index =
-      sample_index
+    analysis_sample_current = sample_name,
+    analysis_sample_index = sample_index
   )
 }
-
 
 # Resúmenes globales para comparar muestras
 kmeans_metrics_summary_all <- bind_rows(
@@ -2715,7 +2181,6 @@ run_status_summary_all <- bind_rows(
     "run_status_summary"
   )
 )
-
 
 write_csv(
   kmeans_metrics_summary_all,
@@ -2769,9 +2234,7 @@ write_csv(
   )
 )
 
-
 # Parámetros
-
 parameters <- tibble(
   parameter = c(
     "bootstrap_file",
@@ -2843,19 +2306,9 @@ write_csv(
   )
 )
 
-
 # Resumen en consola
-
 cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "06. K-MEANS SOBRE BOOTSTRAPS COMPLETADO\n"
-)
-
-cat(
-  "============================================================\n"
+  "\n06. K-MEANS SOBRE BOOTSTRAPS COMPLETADO\n"
 )
 
 cat(

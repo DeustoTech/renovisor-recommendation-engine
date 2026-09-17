@@ -1,0 +1,12 @@
+parameter,value
+input_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/03_2_phase_dimension_scores/all_sources_integrated_component_quality_phase_scores.csv
+bootstrap_index_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/04_2f_combine_eu_latam_bootstrap/bootstrap_samples_index.csv.gz
+output_dir,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/04_2g_sociodemographic_distribution
+figures_dir,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/04_2g_sociodemographic_distribution/figures
+n_rows_all,4756
+n_rows_main,4372
+n_rows_clustering,4372
+n_bootstraps,1000
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+variables_prebootstrap,"dataset_source, subsample, comparison_region, source_survey, country_model, country_model_grouped, country_region_model, age_group_model, gender_model, education_model, education_tfm_model, employment_model, city_size_model, tenure_model, tenure_tfm_model, income_model, vote_status_declared, voted_observed, political_left_right_model, political_block_model, self_classification_raw, self_classification_raw_clean, self_classification_archetype_model, row_quality_final, usable_for_main_analysis, usable_for_clustering, political_lr_group"
+variables_postbootstrap,"dataset_source, subsample, comparison_region, source_survey, country_model, country_model_grouped, country_region_model, age_group_model, gender_model, education_model, education_tfm_model, employment_model, city_size_model, tenure_model, tenure_tfm_model, income_model, vote_status_declared, voted_observed, political_left_right_model, political_block_model, self_classification_raw, self_classification_raw_clean, self_classification_archetype_model, row_quality_final, usable_for_main_analysis, usable_for_clustering, political_lr_group, bootstrap_source, target_sample_type, target_electoral_group, country_code, country, income_band"

@@ -1,4 +1,5 @@
-#
+
+# Objetivo
 # Evalúa la calidad del dataset integrado y armonizado y define
 # las personas utilizables para los análisis posteriores.
 #
@@ -20,9 +21,6 @@
 #
 # El propensity político se considera exclusivamente aplicable a EUROPE.
 #
-# Ejecutar después de:
-#   01_mergeData.R
-#   02_harmonize_common_variables.R
 #
 # Outputs principales:
 #   03_component_quality/all_sources_integrated_component_quality.csv
@@ -36,7 +34,6 @@ suppressPackageStartupMessages({
 
 
 # Configuración
-
 processed_root <- "paper1_cluster/data/processed"
 
 in_file <- file.path(
@@ -69,7 +66,6 @@ df <- read_csv(
 
 
 # Comprobaciones
-
 required_structure_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -124,7 +120,6 @@ print(
 
 
 # Funciones auxiliares
-
 clean_text <- function(x) {
   x <- str_squish(as.character(x))
   
@@ -1006,7 +1001,6 @@ attention_quality_cols <- attention_check_specs$column
 
 
 # Componentes
-
 component_columns <- list(
   determinants_32 = det_cols,
   sociodemographics_model = sociodemographic_model_cols,
@@ -1245,7 +1239,6 @@ det_quality_df <- tibble(
 
 
 # Calidad sociodemográfica y metadata
-
 has_age_info <-
   is_valid_model_value(
     safe_chr_col(
@@ -1381,8 +1374,7 @@ sociodemographic_quality_df <- tibble(
 #
 # Estas variables sirven como diagnóstico de disponibilidad.
 # El bootstrap político final se construye posteriormente en 04_2b
-# y nunca incluye WHY_LATAM.
-
+# y nunca incluye WHY_LATAM
 propensity_eu_applicable <-
   safe_chr_col(
     df,
@@ -1603,7 +1595,6 @@ propensity_quality_df <- tibble(
 
 
 # Calidad voto y política
-
 has_vote_status <-
   is_valid_model_value(
     safe_chr_col(
@@ -1671,7 +1662,6 @@ vote_politics_quality_df <- tibble(
 
 
 # Calidad genérica por componentes
-
 technology_quality_df <- component_stats(
   df,
   "technology_adoption",
@@ -1716,7 +1706,6 @@ attention_quality_df <- component_stats(
 
 
 # Attention checks explícitos
-
 normalise_attention_response <- function(x) {
   clean_text(x) %>%
     str_to_lower() %>%
@@ -2066,7 +2055,6 @@ attention_check_df <- attention_check_long %>%
 
 
 # Dataset final de calidad
-
 df_quality <- bind_cols(
   df,
   det_quality_df,
@@ -2144,7 +2132,6 @@ df_quality <- bind_cols(
 
 
 # Matrices para clustering
-
 id_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -2219,7 +2206,6 @@ matrix_32det_for_clustering <- matrix_32det_with_quality %>%
 
 
 # Diagnósticos de missing
-
 diagnostics_missing_by_determinant <- missing_by_determinant(
   df_quality,
   "dataset_source",
@@ -2330,7 +2316,6 @@ diagnostics_metadata_quality_counts_by_subsample <- df_quality %>%
 
 
 # Propensity readiness
-
 diagnostics_propensity_score_readiness <- df_quality %>%
   group_by(
     dataset_source
@@ -2525,7 +2510,6 @@ diagnostics_propensity_score_readiness_by_subsample <- df_quality %>%
 
 
 # Calidad de filas
-
 diagnostics_row_quality_by_source <- row_quality_summary(
   df_quality,
   "dataset_source"
@@ -2580,7 +2564,6 @@ diagnostics_clustering_sample_sizes <-
 
 
 # Calidad y cobertura por componente
-
 component_quality_cols <- names(df_quality)[
   str_detect(
     names(df_quality),
@@ -2654,7 +2637,6 @@ diagnostics_component_coverage_by_subsample <- component_coverage(
 
 
 # Guardado
-
 outputs <- list(
   "all_sources_integrated_component_quality.csv" =
     df_quality,
@@ -2727,7 +2709,6 @@ iwalk(
 
 
 # Resumen
-
 cat("\nCALIDAD PARA CLUSTERING POR SUBMUESTRA\n")
 
 print(

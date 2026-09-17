@@ -1,0 +1,12 @@
+parameter,value
+input_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/03_2_phase_dimension_scores/all_sources_integrated_component_quality_phase_scores.csv
+bootstrap_index_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/04_2f_combine_eu_latam_bootstrap/bootstrap_samples_index.csv.gz
+output_dir,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/04_2h_bootstrap_boxplots
+figures_dir,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/04_2h_bootstrap_boxplots/figures
+expected_n_bootstraps,1000
+max_bootstraps,Inf
+n_bootstraps_used,1000
+n_bootstrap_rows_used,1608000
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+self_classification_col,self_classification_raw_clean
+boxplot_vars,"dataset_source, subsample, comparison_region, source_survey, country_model, country_model_grouped, country_region_model, age_group_model, gender_model, education_model, education_tfm_model, employment_model, city_size_model, tenure_model, tenure_tfm_model, income_model, vote_status_declared, voted_observed, political_left_right_model, political_block_model, row_quality_final, usable_for_main_analysis, usable_for_clustering, bootstrap_source, target_sample_type, target_electoral_group, country_code, country, income_band, political_lr_group, self_classification_archetype_model"

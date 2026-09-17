@@ -1,0 +1,7 @@
+check,passed
+COMPLETE_equals_EUROPE_plus_LATAM,TRUE
+EUROPE_equals_DIEGO_plus_RENOVISOR_plus_WHY_EUROPE,TRUE
+LATAM_equals_WHY_LATAM,TRUE
+EUROPE_size_constant,TRUE
+LATAM_size_constant,TRUE
+COMPLETE_size_constant,TRUE

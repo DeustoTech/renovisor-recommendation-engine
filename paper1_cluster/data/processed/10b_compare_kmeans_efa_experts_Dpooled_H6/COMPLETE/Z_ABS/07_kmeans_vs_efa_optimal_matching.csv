@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA1,100,8,8,8,100,100,100,det_22_peer_pressure; det_24_socialising; det_25_agreement; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM2,EFA2,25,8,8,2,25,25,14.285714285714286,det_02_credit_score; det_05_frugality
+KM3,EFA5,40,15,8,6,40,75,35.294117647058826,det_02_credit_score; det_07_legal; det_21_rights_and_duties; det_25_agreement; det_26_novelty; det_27_fun
+KM4,EFA6,13.333333333333334,15,8,2,13.333333333333334,25,9.523809523809524,det_07_legal; det_32_own_significance
+KM5,EFA3,87.5,8,8,7,87.5,87.5,77.77777777777777,det_01_profits; det_04_added_value; det_06_climate_protection; det_14_environmental_concerns; det_23_support; det_27_fun; det_32_own_significance
+KM6,EFA4,53.333333333333336,15,8,8,53.333333333333336,100,53.333333333333336,det_08_trust; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_18_autonomy

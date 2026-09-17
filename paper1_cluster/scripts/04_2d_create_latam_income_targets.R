@@ -1,25 +1,19 @@
 
-# OBJETIVO
+# Objetivo
 
 # Crear la distribución poblacional objetivo de ingreso anual
-# para WHY_LATAM, que será utilizada posteriormente en:
+# para WHY_LATAM, que será utilizada posteriormente en 04_2e_latam_income_bootstrap.R
 #
-#   04_2e_latam_income_bootstrap.R
+# Países: México, Chile, Colombia
 #
-# Países:
-#   - México
-#   - Chile
-#   - Colombia
-#
-# Tramos de ingreso WHY:
-#   < 15.000
+# Tramos de ingreso WHY: 
+#  < 15.000
 #   15.000 - 30.000
 #   30.000 - 50.000
 #   50.000 - 100.000
 #   > 100.000
 #
-# Los porcentajes representan la distribución poblacional
-# objetivo dentro de cada país.
+# Los porcentajes representan la distribución poblacional objetivo dentro de cada país.
 
 suppressPackageStartupMessages({
   library(tidyverse)

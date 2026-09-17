@@ -1,32 +1,27 @@
-
-### genera:
-#'kmeans_elbow_plot_COMPLETE.png' → el importante para decidir K, con un panel para RAW, POS, EXT y Z_ABS.
-#'kmeans_elbow_plot_all_samples.png' → los mismos codos para COMPLETE + Europa + LATAM + cada fuente.
-# 06_1_kmeans_elbow_plots.R
-#
-# OBJETIVO
+# 
+# Objetivo
 # Generar los gráficos del codo a partir de los resultados bootstrap
-# de K-means sin volver a ejecutar el clustering.
+# de K-means producidos en 06, sin volver a ejecutar el clustering.
 #
 # Se utiliza mean_tot_withinss como criterio del codo.
 #
-# GENERA
-# - kmeans_elbow_plot_COMPLETE.png:
-#   análisis principal de COMPLETE para RAW, POS, EXT y Z_ABS.
-# - kmeans_elbow_plot_all_samples.png:
-#   comparación de COMPLETE, regiones y fuentes.
+# Configuración esperada:
+# - 7 muestras: COMPLETE, EUROPE, LATAM y las 4 submuestras.
+# - 4 matrices: RAW, POS, EXT y Z_ABS.
+# - K = 2:8.
+# - 100 ejecuciones bootstrap por combinación.
 #
-# CONFIGURACIÓN ESPERADA
-# - 7 muestras
-# - 4 matrices
-# - K = 2:8
-# - 100 bootstraps por combinación
-
+# Outputs:
+# - kmeans_elbow_plot_COMPLETE.png:
+#   gráfico principal para comparar K en COMPLETE.
+# - kmeans_elbow_plot_all_samples.png:
+#   comparación de los codos entre todas las muestras y matrices.
 
 suppressPackageStartupMessages({
   library(tidyverse)
 })
 
+# Configuración
 project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
 
 kmeans_dir <- file.path(
@@ -50,6 +45,28 @@ dir.create(
   showWarnings = FALSE
 )
 
+sample_order <- c(
+  "COMPLETE",
+  "EUROPE",
+  "LATAM",
+  "DIEGO",
+  "RENOVISOR",
+  "WHY_EUROPE",
+  "WHY_LATAM"
+)
+
+matrix_labels <- c(
+  "matrix_32_raw_0_1" = "RAW",
+  "matrix_32_pos_0_1" = "POS",
+  "matrix_32_ext_0_1" = "EXT",
+  "matrix_32_z_abs" = "Z_ABS"
+)
+
+expected_k <- 2:8
+expected_runs <- 100L
+
+
+# Lectura y comprobaciones
 if (!file.exists(input_file)) {
   stop(
     "No se encuentra el archivo: ",
@@ -77,7 +94,7 @@ missing_cols <- setdiff(
   names(df)
 )
 
-if (length(missing_cols) > 0) {
+if (length(missing_cols)) {
   stop(
     "Faltan columnas necesarias: ",
     paste(
@@ -87,26 +104,8 @@ if (length(missing_cols) > 0) {
   )
 }
 
-sample_order <- c(
-  "COMPLETE",
-  "EUROPE",
-  "LATAM",
-  "DIEGO",
-  "RENOVISOR",
-  "WHY_EUROPE",
-  "WHY_LATAM"
-)
 
-matrix_labels <- c(
-  "matrix_32_raw_0_1" = "RAW",
-  "matrix_32_pos_0_1" = "POS",
-  "matrix_32_ext_0_1" = "EXT",
-  "matrix_32_z_abs" = "Z_ABS"
-)
-
-expected_k <- 2:8
-expected_runs <- 100L
-
+# Comprobar que 06 contiene todas las combinaciones esperadas
 expected_grid <- crossing(
   analysis_sample = sample_order,
   matrix_name = names(matrix_labels),
@@ -159,6 +158,8 @@ if (
   )
 }
 
+
+# Preparar datos para los gráficos
 plot_df <- df %>%
   filter(
     analysis_sample %in% sample_order,
@@ -190,6 +191,8 @@ plot_df <- df %>%
     k
   )
 
+
+# Gráfico principal de COMPLETE
 complete_df <- plot_df %>%
   filter(
     analysis_sample == "COMPLETE"
@@ -246,6 +249,8 @@ ggsave(
   dpi = 300
 )
 
+
+# Comparación de todas las muestras y matrices.
 p_all <- ggplot(
   plot_df,
   aes(
@@ -300,6 +305,8 @@ ggsave(
   dpi = 300
 )
 
+
+# Resumen
 message(
   "\nGráficos generados correctamente:"
 )

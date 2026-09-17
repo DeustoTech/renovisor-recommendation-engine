@@ -1,51 +1,18 @@
-
-
-# Objetivo:
-# Integrar y resumir los resultados obtenidos en:
-# - 08 Greedy
-# - 10 comparación K-means / EFA / expertos
+# 
+# Objetivo
+# Integrar y resumir los resultados de 08 Greedy y 10 comparación
+# K-means / EFA / expertos para las 7 muestras y las 4 matrices.
 #
-# Se analizan:
-# - 7 muestras:
-#   COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR,
-#   WHY_EUROPE y WHY_LATAM
-# - 4 matrices:
-#   RAW, POS, EXT y Z_ABS
+# El script:
+# - resume la sensibilidad Greedy para D = 8:15 y un Hamming de referencia
+#   que mantiene aproximadamente >=75% de determinantes comunes;
+# - calcula cobertura P1-P8 y prototipos necesarios para 80%, 85% y 90%;
+# - compara Greedy K-means ↔ EFA, Greedy K-means ↔ expertos y EFA ↔ expertos.
 #
-# PARTE 1
-# Sensibilidad Greedy:
-# - D = 8,...,15
-# - Hamming de referencia que mantiene aproximadamente
-#   >=75% de determinantes comunes
-# - cobertura P1-P8
-# - nº de prototipos para alcanzar 80%, 85% y 90%
-#
-# PARTE 2
-# Comparación triangular para la solución candidata:
-# - Greedy K-means ↔ EFA
-# - Greedy K-means ↔ Expertos
-# - EFA ↔ Expertos
-#
-# Configuración comparativa provisional:
-# - D = 8
-# - Hamming = 4
-# - weighting = equal_candidate
-# - 6 prototipos Greedy-Kmeans
-# - 6 factores EFA
-#
-# IMPORTANTE:
-# Este script NO selecciona automáticamente una matriz final,
-# un K final, un F final, D final ni H final.
-#
-# Tampoco mezcla las tres métricas de comparación en un único
-# score artificial:
-#
-# - KM ↔ EFA usa overlap_left_pct
-# - KM ↔ Expertos usa Jaccard
-# - EFA ↔ Expertos usa Jaccard
-#
-# Las métricas se presentan juntas para comparar robustez,
-# pero se mantienen separadas metodológicamente.
+# La configuración comparativa D=8, H=4, equal_candidate, 6 prototipos y
+# 6 factores EFA es provisional. El script no selecciona automáticamente
+# una matriz, K, F, D o H finales y mantiene separadas las métricas:
+# KM ↔ EFA usa overlap_left_pct; las comparaciones con expertos usan Jaccard.
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -61,16 +28,9 @@ if (!requireNamespace("clue", quietly = TRUE)) {
   )
 }
 
-
 # Configuración
-project_root <- path.expand(
-  "~/Desktop/MASTER/recommendation-engine/TFM"
-)
-
-processed_root <- file.path(
-  project_root,
-  "paper1_cluster/data/processed"
-)
+project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
+processed_root <- file.path(project_root, "paper1_cluster/data/processed")
 
 greedy_dir <- file.path(
   processed_root,
@@ -114,7 +74,6 @@ dir.create(
   showWarnings = FALSE
 )
 
-
 ANALYSIS_SAMPLES <- c(
   "COMPLETE",
   "EUROPE",
@@ -151,7 +110,6 @@ HAMMING_GRID <- c(
 )
 
 REFERENCE_COMMON_PCT <- 75
-
 REFERENCE_WEIGHTING <- "equal_candidate"
 
 REFERENCE_D <- 8L
@@ -160,7 +118,6 @@ REFERENCE_N_PROTOTYPES <- 6L
 REFERENCE_N_EFA_FACTORS <- 6L
 
 MATCH_THRESHOLD <- 50
-
 
 # Funciones auxiliares
 check_file <- function(path) {
@@ -173,7 +130,6 @@ check_file <- function(path) {
   }
 }
 
-
 read_csv_safe <- function(path) {
   read_csv(
     path,
@@ -181,7 +137,6 @@ read_csv_safe <- function(path) {
     progress = FALSE
   )
 }
-
 
 matrix_short_from_name <- function(x) {
   recode(
@@ -193,7 +148,6 @@ matrix_short_from_name <- function(x) {
     .default = x
   )
 }
-
 
 coverage_at_n <- function(
     prototype,
@@ -213,7 +167,6 @@ coverage_at_n <- function(
   value[1]
 }
 
-
 first_prototype_reaching <- function(
     prototype,
     cumulative_covered_pct,
@@ -223,8 +176,7 @@ first_prototype_reaching <- function(
     !is.na(
       cumulative_covered_pct
     ) &
-    cumulative_covered_pct >=
-    threshold
+    cumulative_covered_pct >= threshold
   
   if (!any(valid)) {
     return(
@@ -238,7 +190,6 @@ first_prototype_reaching <- function(
     ]
   )
 }
-
 
 optimal_matching <- function(
     pairwise,
@@ -266,47 +217,30 @@ optimal_matching <- function(
   
   similarity_matrix <- matrix(
     0,
-    nrow =
-      length(
-        left_ids
-      ),
-    ncol =
-      length(
-        right_ids
-      ),
-    dimnames =
-      list(
-        left_ids,
-        right_ids
-      )
+    nrow = length(left_ids),
+    ncol = length(right_ids),
+    dimnames = list(
+      left_ids,
+      right_ids
+    )
   )
   
   for (i in seq_along(left_ids)) {
     for (j in seq_along(right_ids)) {
       value <- pairwise %>%
         filter(
-          left_id ==
-            left_ids[i],
-          right_id ==
-            right_ids[j]
+          left_id == left_ids[i],
+          right_id == right_ids[j]
         ) %>%
         pull(
-          all_of(
-            metric_col
-          )
+          all_of(metric_col)
         )
       
       if (
         length(value) > 0 &&
-        is.finite(
-          value[1]
-        )
+        is.finite(value[1])
       ) {
-        similarity_matrix[
-          i,
-          j
-        ] <-
-          value[1]
+        similarity_matrix[i, j] <- value[1]
       }
     }
   }
@@ -321,35 +255,20 @@ optimal_matching <- function(
   )
   
   matching_base <- tibble(
-    analysis_sample =
-      analysis_sample_current,
-    
-    matrix =
-      matrix_current,
-    
-    comparison =
-      comparison_name,
-    
-    metric =
-      metric_col,
-    
-    left_id =
-      left_ids,
-    
-    right_id =
-      right_ids[
+    analysis_sample = analysis_sample_current,
+    matrix = matrix_current,
+    comparison = comparison_name,
+    metric = metric_col,
+    left_id = left_ids,
+    right_id = right_ids[
+      assignment_int
+    ],
+    matching_similarity_pct = similarity_matrix[
+      cbind(
+        seq_along(left_ids),
         assignment_int
-      ],
-    
-    matching_similarity_pct =
-      similarity_matrix[
-        cbind(
-          seq_along(
-            left_ids
-          ),
-          assignment_int
-        )
-      ]
+      )
+    ]
   )
   
   matching_base %>%
@@ -387,7 +306,6 @@ optimal_matching <- function(
     )
 }
 
-
 save_plot <- function(
     p,
     filename,
@@ -395,21 +313,14 @@ save_plot <- function(
     height = 7
 ) {
   ggsave(
-    filename =
-      filename,
-    plot =
-      p,
-    width =
-      width,
-    height =
-      height,
-    dpi =
-      300,
-    bg =
-      "white"
+    filename = filename,
+    plot = p,
+    width = width,
+    height = height,
+    dpi = 300,
+    bg = "white"
   )
 }
-
 
 # Comprobar inputs
 check_file(
@@ -419,7 +330,6 @@ check_file(
 check_file(
   comparison_summary_file
 )
-
 
 # Leer Greedy
 greedy_steps <- read_csv_safe(
@@ -439,9 +349,7 @@ required_greedy_columns <- c(
 
 missing_greedy_columns <- setdiff(
   required_greedy_columns,
-  names(
-    greedy_steps
-  )
+  names(greedy_steps)
 )
 
 if (
@@ -458,33 +366,23 @@ if (
   )
 }
 
-
 greedy_steps <- greedy_steps %>%
   mutate(
-    d_det =
-      as.integer(
-        d_det
-      ),
-    
-    d_hamming =
-      as.integer(
-        d_hamming
-      ),
-    
-    prototype =
-      as.integer(
-        prototype
-      )
+    d_det = as.integer(
+      d_det
+    ),
+    d_hamming = as.integer(
+      d_hamming
+    ),
+    prototype = as.integer(
+      prototype
+    )
   )
-
 
 # Hamming de referencia para cada D
 hamming_reference_grid <- crossing(
-  d_det =
-    D_DET_GRID,
-  
-  d_hamming =
-    HAMMING_GRID
+  d_det = D_DET_GRID,
+  d_hamming = HAMMING_GRID
 ) %>%
   mutate(
     min_common_determinants =
@@ -500,7 +398,6 @@ hamming_reference_grid <- crossing(
     min_common_pct >=
       REFERENCE_COMMON_PCT
   )
-
 
 reference_hamming_by_d <- hamming_reference_grid %>%
   group_by(
@@ -520,7 +417,6 @@ reference_hamming_by_d <- hamming_reference_grid %>%
     d_det
   )
 
-
 write_csv(
   reference_hamming_by_d,
   file.path(
@@ -529,24 +425,14 @@ write_csv(
   )
 )
 
-
 # Sensibilidad Greedy por muestra × matriz × D
 greedy_kmeans_reference <- greedy_steps %>%
   filter(
-    analysis_sample %in%
-      ANALYSIS_SAMPLES,
-    
-    weighting ==
-      REFERENCE_WEIGHTING,
-    
-    method ==
-      "KMEANS",
-    
-    matrix_name %in%
-      MATRIX_NAMES,
-    
-    d_det %in%
-      D_DET_GRID
+    analysis_sample %in% ANALYSIS_SAMPLES,
+    weighting == REFERENCE_WEIGHTING,
+    method == "KMEANS",
+    matrix_name %in% MATRIX_NAMES,
+    d_det %in% D_DET_GRID
   ) %>%
   select(
     -any_of(
@@ -570,16 +456,13 @@ greedy_kmeans_reference <- greedy_steps %>%
     )
   ) %>%
   mutate(
-    matrix =
-      matrix_short_from_name(
-        matrix_name
-      )
+    matrix = matrix_short_from_name(
+      matrix_name
+    )
   ) %>%
   filter(
-    matrix %in%
-      MATRICES
+    matrix %in% MATRICES
   )
-
 
 greedy_D_summary <- greedy_kmeans_reference %>%
   group_by(
@@ -592,106 +475,76 @@ greedy_D_summary <- greedy_kmeans_reference %>%
     min_common_pct
   ) %>%
   summarise(
-    coverage_P1 =
-      coverage_at_n(
-        prototype,
-        cumulative_covered_pct,
-        1
-      ),
-    
-    coverage_P2 =
-      coverage_at_n(
-        prototype,
-        cumulative_covered_pct,
-        2
-      ),
-    
-    coverage_P3 =
-      coverage_at_n(
-        prototype,
-        cumulative_covered_pct,
-        3
-      ),
-    
-    coverage_P4 =
-      coverage_at_n(
-        prototype,
-        cumulative_covered_pct,
-        4
-      ),
-    
-    coverage_P5 =
-      coverage_at_n(
-        prototype,
-        cumulative_covered_pct,
-        5
-      ),
-    
-    coverage_P6 =
-      coverage_at_n(
-        prototype,
-        cumulative_covered_pct,
-        6
-      ),
-    
-    coverage_P7 =
-      coverage_at_n(
-        prototype,
-        cumulative_covered_pct,
-        7
-      ),
-    
-    coverage_P8 =
-      coverage_at_n(
-        prototype,
-        cumulative_covered_pct,
-        8
-      ),
-    
-    prototypes_for_80 =
-      first_prototype_reaching(
-        prototype,
-        cumulative_covered_pct,
-        80
-      ),
-    
-    prototypes_for_85 =
-      first_prototype_reaching(
-        prototype,
-        cumulative_covered_pct,
-        85
-      ),
-    
-    prototypes_for_90 =
-      first_prototype_reaching(
-        prototype,
-        cumulative_covered_pct,
-        90
-      ),
-    
-    max_coverage_available =
-      max(
-        cumulative_covered_pct,
-        na.rm = TRUE
-      ),
-    
-    .groups =
-      "drop"
+    coverage_P1 = coverage_at_n(
+      prototype,
+      cumulative_covered_pct,
+      1
+    ),
+    coverage_P2 = coverage_at_n(
+      prototype,
+      cumulative_covered_pct,
+      2
+    ),
+    coverage_P3 = coverage_at_n(
+      prototype,
+      cumulative_covered_pct,
+      3
+    ),
+    coverage_P4 = coverage_at_n(
+      prototype,
+      cumulative_covered_pct,
+      4
+    ),
+    coverage_P5 = coverage_at_n(
+      prototype,
+      cumulative_covered_pct,
+      5
+    ),
+    coverage_P6 = coverage_at_n(
+      prototype,
+      cumulative_covered_pct,
+      6
+    ),
+    coverage_P7 = coverage_at_n(
+      prototype,
+      cumulative_covered_pct,
+      7
+    ),
+    coverage_P8 = coverage_at_n(
+      prototype,
+      cumulative_covered_pct,
+      8
+    ),
+    prototypes_for_80 = first_prototype_reaching(
+      prototype,
+      cumulative_covered_pct,
+      80
+    ),
+    prototypes_for_85 = first_prototype_reaching(
+      prototype,
+      cumulative_covered_pct,
+      85
+    ),
+    prototypes_for_90 = first_prototype_reaching(
+      prototype,
+      cumulative_covered_pct,
+      90
+    ),
+    max_coverage_available = max(
+      cumulative_covered_pct,
+      na.rm = TRUE
+    ),
+    .groups = "drop"
   ) %>%
   mutate(
-    analysis_sample =
-      factor(
-        analysis_sample,
-        levels =
-          ANALYSIS_SAMPLES
-      ),
-    
-    matrix =
-      factor(
-        matrix,
-        levels =
-          MATRICES
-      )
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    matrix = factor(
+      matrix,
+      levels = MATRICES
+    )
   ) %>%
   arrange(
     analysis_sample,
@@ -699,17 +552,13 @@ greedy_D_summary <- greedy_kmeans_reference %>%
     d_det
   ) %>%
   mutate(
-    analysis_sample =
-      as.character(
-        analysis_sample
-      ),
-    
-    matrix =
-      as.character(
-        matrix
-      )
+    analysis_sample = as.character(
+      analysis_sample
+    ),
+    matrix = as.character(
+      matrix
+    )
   )
-
 
 write_csv(
   greedy_D_summary,
@@ -719,11 +568,9 @@ write_csv(
   )
 )
 
-
 greedy_curve_P1_P8 <- greedy_kmeans_reference %>%
   filter(
-    prototype %in%
-      1:8
+    prototype %in% 1:8
   ) %>%
   select(
     analysis_sample,
@@ -736,27 +583,23 @@ greedy_curve_P1_P8 <- greedy_kmeans_reference %>%
     cumulative_covered_pct
   ) %>%
   mutate(
-    prototype_label =
-      paste0(
-        "P",
-        prototype
-      )
+    prototype_label = paste0(
+      "P",
+      prototype
+    )
   ) %>%
   arrange(
     factor(
       analysis_sample,
-      levels =
-        ANALYSIS_SAMPLES
+      levels = ANALYSIS_SAMPLES
     ),
     factor(
       matrix,
-      levels =
-        MATRICES
+      levels = MATRICES
     ),
     d_det,
     prototype
   )
-
 
 write_csv(
   greedy_curve_P1_P8,
@@ -765,7 +608,6 @@ write_csv(
     "03_greedy_curve_P1_P8_all_samples.csv"
   )
 )
-
 
 # Leer resumen generado por 10
 comparison_summary_10 <- read_csv_safe(
@@ -784,9 +626,7 @@ required_summary_columns <- c(
 
 missing_summary_columns <- setdiff(
   required_summary_columns,
-  names(
-    comparison_summary_10
-  )
+  names(comparison_summary_10)
 )
 
 if (
@@ -803,13 +643,9 @@ if (
   )
 }
 
-
 expected_grid <- crossing(
-  analysis_sample =
-    ANALYSIS_SAMPLES,
-  
-  matrix =
-    MATRICES
+  analysis_sample = ANALYSIS_SAMPLES,
+  matrix = MATRICES
 )
 
 summary_grid <- comparison_summary_10 %>%
@@ -842,22 +678,12 @@ if (
   )
 }
 
-
 # Comparaciones triangulares
 all_matchings_list <- list()
 matching_counter <- 0L
 
-
-for (
-  sample_current in
-  ANALYSIS_SAMPLES
-) {
-  
-  for (
-    matrix_current in
-    MATRICES
-  ) {
-    
+for (sample_current in ANALYSIS_SAMPLES) {
+  for (matrix_current in MATRICES) {
     cat(
       "\nMUESTRA: ",
       sample_current,
@@ -900,7 +726,6 @@ for (
       efa_expert_file
     )
     
-    
     km_efa_pairwise <- read_csv_safe(
       km_efa_file
     )
@@ -913,105 +738,61 @@ for (
       efa_expert_file
     )
     
-    
     km_efa_matching <- optimal_matching(
-      pairwise =
-        km_efa_pairwise,
-      
-      left_ids =
-        sort(
-          unique(
-            km_efa_pairwise$left_id
-          )
-        ),
-      
-      right_ids =
-        sort(
-          unique(
-            km_efa_pairwise$right_id
-          )
-        ),
-      
-      metric_col =
-        "overlap_left_pct",
-      
-      analysis_sample_current =
-        sample_current,
-      
-      matrix_current =
-        matrix_current,
-      
-      comparison_name =
-        "KM_vs_EFA"
+      pairwise = km_efa_pairwise,
+      left_ids = sort(
+        unique(
+          km_efa_pairwise$left_id
+        )
+      ),
+      right_ids = sort(
+        unique(
+          km_efa_pairwise$right_id
+        )
+      ),
+      metric_col = "overlap_left_pct",
+      analysis_sample_current = sample_current,
+      matrix_current = matrix_current,
+      comparison_name = "KM_vs_EFA"
     )
-    
     
     km_expert_matching <- optimal_matching(
-      pairwise =
-        km_expert_pairwise,
-      
-      left_ids =
-        sort(
-          unique(
-            km_expert_pairwise$left_id
-          )
-        ),
-      
-      right_ids =
-        sort(
-          unique(
-            km_expert_pairwise$right_id
-          )
-        ),
-      
-      metric_col =
-        "jaccard_pct",
-      
-      analysis_sample_current =
-        sample_current,
-      
-      matrix_current =
-        matrix_current,
-      
-      comparison_name =
-        "KM_vs_EXPERTS"
+      pairwise = km_expert_pairwise,
+      left_ids = sort(
+        unique(
+          km_expert_pairwise$left_id
+        )
+      ),
+      right_ids = sort(
+        unique(
+          km_expert_pairwise$right_id
+        )
+      ),
+      metric_col = "jaccard_pct",
+      analysis_sample_current = sample_current,
+      matrix_current = matrix_current,
+      comparison_name = "KM_vs_EXPERTS"
     )
-    
     
     efa_expert_matching <- optimal_matching(
-      pairwise =
-        efa_expert_pairwise,
-      
-      left_ids =
-        sort(
-          unique(
-            efa_expert_pairwise$left_id
-          )
-        ),
-      
-      right_ids =
-        sort(
-          unique(
-            efa_expert_pairwise$right_id
-          )
-        ),
-      
-      metric_col =
-        "jaccard_pct",
-      
-      analysis_sample_current =
-        sample_current,
-      
-      matrix_current =
-        matrix_current,
-      
-      comparison_name =
-        "EFA_vs_EXPERTS"
+      pairwise = efa_expert_pairwise,
+      left_ids = sort(
+        unique(
+          efa_expert_pairwise$left_id
+        )
+      ),
+      right_ids = sort(
+        unique(
+          efa_expert_pairwise$right_id
+        )
+      ),
+      metric_col = "jaccard_pct",
+      analysis_sample_current = sample_current,
+      matrix_current = matrix_current,
+      comparison_name = "EFA_vs_EXPERTS"
     )
     
-    
-    matching_counter <-
-      matching_counter + 1L
+    matching_counter <- matching_counter + 1L
     
     all_matchings_list[[matching_counter]] <- bind_rows(
       km_efa_matching,
@@ -1021,34 +802,26 @@ for (
   }
 }
 
-
 all_optimal_matches <- bind_rows(
   all_matchings_list
 ) %>%
   mutate(
-    analysis_sample =
-      factor(
-        analysis_sample,
-        levels =
-          ANALYSIS_SAMPLES
-      ),
-    
-    matrix =
-      factor(
-        matrix,
-        levels =
-          MATRICES
-      ),
-    
-    comparison =
-      factor(
-        comparison,
-        levels = c(
-          "KM_vs_EFA",
-          "KM_vs_EXPERTS",
-          "EFA_vs_EXPERTS"
-        )
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    matrix = factor(
+      matrix,
+      levels = MATRICES
+    ),
+    comparison = factor(
+      comparison,
+      levels = c(
+        "KM_vs_EFA",
+        "KM_vs_EXPERTS",
+        "EFA_vs_EXPERTS"
       )
+    )
   ) %>%
   arrange(
     analysis_sample,
@@ -1059,22 +832,16 @@ all_optimal_matches <- bind_rows(
     )
   ) %>%
   mutate(
-    analysis_sample =
-      as.character(
-        analysis_sample
-      ),
-    
-    matrix =
-      as.character(
-        matrix
-      ),
-    
-    comparison =
-      as.character(
-        comparison
-      )
+    analysis_sample = as.character(
+      analysis_sample
+    ),
+    matrix = as.character(
+      matrix
+    ),
+    comparison = as.character(
+      comparison
+    )
   )
-
 
 write_csv(
   all_optimal_matches,
@@ -1083,7 +850,6 @@ write_csv(
     "04_optimal_matching_pairs_all_samples_matrices.csv"
   )
 )
-
 
 # Resumen matching por muestra × matriz × comparación
 matching_summary <- all_optimal_matches %>%
@@ -1094,75 +860,63 @@ matching_summary <- all_optimal_matches %>%
     metric
   ) %>%
   summarise(
-    n_pairs =
-      n(),
+    n_pairs = n(),
     
-    sum_similarity =
-      sum(
-        matching_similarity_pct,
-        na.rm = TRUE
-      ),
+    sum_similarity = sum(
+      matching_similarity_pct,
+      na.rm = TRUE
+    ),
     
-    mean_similarity =
-      mean(
-        matching_similarity_pct,
-        na.rm = TRUE
-      ),
+    mean_similarity = mean(
+      matching_similarity_pct,
+      na.rm = TRUE
+    ),
     
-    median_similarity =
-      median(
-        matching_similarity_pct,
-        na.rm = TRUE
-      ),
+    median_similarity = median(
+      matching_similarity_pct,
+      na.rm = TRUE
+    ),
     
-    min_similarity =
-      min(
-        matching_similarity_pct,
-        na.rm = TRUE
-      ),
+    min_similarity = min(
+      matching_similarity_pct,
+      na.rm = TRUE
+    ),
     
-    max_similarity =
-      max(
-        matching_similarity_pct,
-        na.rm = TRUE
-      ),
+    max_similarity = max(
+      matching_similarity_pct,
+      na.rm = TRUE
+    ),
     
-    n_gt50 =
-      sum(
-        matching_similarity_pct >
-          MATCH_THRESHOLD,
-        na.rm = TRUE
-      ),
+    n_gt50 = sum(
+      matching_similarity_pct >
+        MATCH_THRESHOLD,
+      na.rm = TRUE
+    ),
     
-    n_ge50 =
-      sum(
-        matching_similarity_pct >=
-          MATCH_THRESHOLD,
-        na.rm = TRUE
-      ),
+    n_ge50 = sum(
+      matching_similarity_pct >=
+        MATCH_THRESHOLD,
+      na.rm = TRUE
+    ),
     
     pct_pairs_gt50 =
       100 *
       n_gt50 /
       n_pairs,
     
-    .groups =
-      "drop"
+    .groups = "drop"
   ) %>%
   arrange(
     factor(
       analysis_sample,
-      levels =
-        ANALYSIS_SAMPLES
+      levels = ANALYSIS_SAMPLES
     ),
     factor(
       matrix,
-      levels =
-        MATRICES
+      levels = MATRICES
     ),
     comparison
   )
-
 
 write_csv(
   matching_summary,
@@ -1171,7 +925,6 @@ write_csv(
     "05_matching_summary_by_sample_matrix_comparison.csv"
   )
 )
-
 
 # Pasar las tres comparaciones a columnas
 matching_wide <- matching_summary %>%
@@ -1185,20 +938,15 @@ matching_wide <- matching_summary %>%
     n_ge50
   ) %>%
   pivot_wider(
-    names_from =
-      comparison,
-    
+    names_from = comparison,
     values_from = c(
       mean_similarity,
       median_similarity,
       n_gt50,
       n_ge50
     ),
-    
-    names_glue =
-      "{.value}__{comparison}"
+    names_glue = "{.value}__{comparison}"
   )
-
 
 # Resumen integrado muestra × matriz
 sample_matrix_summary <- comparison_summary_10 %>%
@@ -1222,16 +970,13 @@ sample_matrix_summary <- comparison_summary_10 %>%
   arrange(
     factor(
       analysis_sample,
-      levels =
-        ANALYSIS_SAMPLES
+      levels = ANALYSIS_SAMPLES
     ),
     factor(
       matrix,
-      levels =
-        MATRICES
+      levels = MATRICES
     )
   )
-
 
 write_csv(
   sample_matrix_summary,
@@ -1241,21 +986,17 @@ write_csv(
   )
 )
 
-
 # COMPLETE: resumen de las cuatro matrices
 complete_matrix_summary <- sample_matrix_summary %>%
   filter(
-    analysis_sample ==
-      "COMPLETE"
+    analysis_sample == "COMPLETE"
   ) %>%
   arrange(
     factor(
       matrix,
-      levels =
-        MATRICES
+      levels = MATRICES
     )
   )
-
 
 write_csv(
   complete_matrix_summary,
@@ -1265,75 +1006,62 @@ write_csv(
   )
 )
 
-
 # Resumen de cada matriz a través de las siete muestras
 matrix_summary_across_samples <- sample_matrix_summary %>%
   group_by(
     matrix
   ) %>%
   summarise(
-    n_samples =
-      n(),
+    n_samples = n(),
     
-    mean_coverage_P6 =
-      mean(
-        coverage_after_6_prototypes,
-        na.rm = TRUE
-      ),
+    mean_coverage_P6 = mean(
+      coverage_after_6_prototypes,
+      na.rm = TRUE
+    ),
     
-    median_coverage_P6 =
-      median(
-        coverage_after_6_prototypes,
-        na.rm = TRUE
-      ),
+    median_coverage_P6 = median(
+      coverage_after_6_prototypes,
+      na.rm = TRUE
+    ),
     
-    min_coverage_P6 =
-      min(
-        coverage_after_6_prototypes,
-        na.rm = TRUE
-      ),
+    min_coverage_P6 = min(
+      coverage_after_6_prototypes,
+      na.rm = TRUE
+    ),
     
-    max_coverage_P6 =
-      max(
-        coverage_after_6_prototypes,
-        na.rm = TRUE
-      ),
+    max_coverage_P6 = max(
+      coverage_after_6_prototypes,
+      na.rm = TRUE
+    ),
     
-    mean_efa_alignment =
-      mean(
-        mean_efa_alignment_similarity,
-        na.rm = TRUE
-      ),
+    mean_efa_alignment = mean(
+      mean_efa_alignment_similarity,
+      na.rm = TRUE
+    ),
     
-    mean_KM_EFA =
-      mean(
-        mean_similarity__KM_vs_EFA,
-        na.rm = TRUE
-      ),
+    mean_KM_EFA = mean(
+      mean_similarity__KM_vs_EFA,
+      na.rm = TRUE
+    ),
     
-    mean_KM_EXPERTS =
-      mean(
-        mean_similarity__KM_vs_EXPERTS,
-        na.rm = TRUE
-      ),
+    mean_KM_EXPERTS = mean(
+      mean_similarity__KM_vs_EXPERTS,
+      na.rm = TRUE
+    ),
     
-    mean_EFA_EXPERTS =
-      mean(
-        mean_similarity__EFA_vs_EXPERTS,
-        na.rm = TRUE
-      ),
+    mean_EFA_EXPERTS = mean(
+      mean_similarity__EFA_vs_EXPERTS,
+      na.rm = TRUE
+    ),
     
-    .groups =
-      "drop"
+    .groups = "drop"
   ) %>%
   arrange(
     factor(
       matrix,
-      levels =
-        MATRICES
+      levels = MATRICES
     )
   )
-
 
 write_csv(
   matrix_summary_across_samples,
@@ -1343,57 +1071,47 @@ write_csv(
   )
 )
 
-
 # Resumen de cada muestra a través de las cuatro matrices
 sample_summary_across_matrices <- sample_matrix_summary %>%
   group_by(
     analysis_sample
   ) %>%
   summarise(
-    n_matrices =
-      n(),
+    n_matrices = n(),
     
-    mean_coverage_P6 =
-      mean(
-        coverage_after_6_prototypes,
-        na.rm = TRUE
-      ),
+    mean_coverage_P6 = mean(
+      coverage_after_6_prototypes,
+      na.rm = TRUE
+    ),
     
-    mean_efa_alignment =
-      mean(
-        mean_efa_alignment_similarity,
-        na.rm = TRUE
-      ),
+    mean_efa_alignment = mean(
+      mean_efa_alignment_similarity,
+      na.rm = TRUE
+    ),
     
-    mean_KM_EFA =
-      mean(
-        mean_similarity__KM_vs_EFA,
-        na.rm = TRUE
-      ),
+    mean_KM_EFA = mean(
+      mean_similarity__KM_vs_EFA,
+      na.rm = TRUE
+    ),
     
-    mean_KM_EXPERTS =
-      mean(
-        mean_similarity__KM_vs_EXPERTS,
-        na.rm = TRUE
-      ),
+    mean_KM_EXPERTS = mean(
+      mean_similarity__KM_vs_EXPERTS,
+      na.rm = TRUE
+    ),
     
-    mean_EFA_EXPERTS =
-      mean(
-        mean_similarity__EFA_vs_EXPERTS,
-        na.rm = TRUE
-      ),
+    mean_EFA_EXPERTS = mean(
+      mean_similarity__EFA_vs_EXPERTS,
+      na.rm = TRUE
+    ),
     
-    .groups =
-      "drop"
+    .groups = "drop"
   ) %>%
   arrange(
     factor(
       analysis_sample,
-      levels =
-        ANALYSIS_SAMPLES
+      levels = ANALYSIS_SAMPLES
     )
   )
-
 
 write_csv(
   sample_summary_across_matrices,
@@ -1403,42 +1121,25 @@ write_csv(
   )
 )
 
-
-# Figura 1:
-# Greedy COMPLETE, sensibilidad D y cobertura P1-P8
+# Figura 1: Greedy COMPLETE, sensibilidad D y cobertura P1-P8
 complete_curve <- greedy_curve_P1_P8 %>%
   filter(
-    analysis_sample ==
-      "COMPLETE"
+    analysis_sample == "COMPLETE"
   ) %>%
   mutate(
-    matrix =
-      factor(
-        matrix,
-        levels =
-          MATRICES
-      )
+    matrix = factor(
+      matrix,
+      levels = MATRICES
+    )
   )
-
 
 p_complete_curve <- ggplot(
   complete_curve,
   aes(
-    x =
-      prototype,
-    
-    y =
-      cumulative_covered_pct,
-    
-    color =
-      factor(
-        d_det
-      ),
-    
-    group =
-      factor(
-        d_det
-      )
+    x = prototype,
+    y = cumulative_covered_pct,
+    color = factor(d_det),
+    group = factor(d_det)
   )
 ) +
   geom_line(
@@ -1452,13 +1153,11 @@ p_complete_curve <- ggplot(
     ncol = 2
   ) +
   scale_x_continuous(
-    breaks =
-      1:8,
-    labels =
-      paste0(
-        "P",
-        1:8
-      )
+    breaks = 1:8,
+    labels = paste0(
+      "P",
+      1:8
+    )
   ) +
   coord_cartesian(
     ylim = c(
@@ -1467,25 +1166,15 @@ p_complete_curve <- ggplot(
     )
   ) +
   labs(
-    title =
-      "Greedy K-means - COMPLETE - cobertura P1-P8",
-    
-    subtitle =
-      "D=8:15; H elegido para mantener aproximadamente >=75% de determinantes comunes",
-    
-    x =
-      "Número de prototipos",
-    
-    y =
-      "Cobertura acumulada (%)",
-    
-    color =
-      "D"
+    title = "Greedy K-means - COMPLETE - cobertura P1-P8",
+    subtitle = "D=8:15; H elegido para mantener aproximadamente >=75% de determinantes comunes",
+    x = "Número de prototipos",
+    y = "Cobertura acumulada (%)",
+    color = "D"
   ) +
   theme_minimal(
     base_size = 11
   )
-
 
 save_plot(
   p_complete_curve,
@@ -1497,38 +1186,25 @@ save_plot(
   height = 8
 )
 
-
-# Figura 2:
-# Cobertura de seis prototipos en todas las muestras y matrices
+# Figura 2: Cobertura de seis prototipos en todas las muestras y matrices
 coverage_plot_data <- sample_matrix_summary %>%
   mutate(
-    analysis_sample =
-      factor(
-        analysis_sample,
-        levels =
-          ANALYSIS_SAMPLES
-      ),
-    
-    matrix =
-      factor(
-        matrix,
-        levels =
-          MATRICES
-      )
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    matrix = factor(
+      matrix,
+      levels = MATRICES
+    )
   )
-
 
 p_coverage <- ggplot(
   coverage_plot_data,
   aes(
-    x =
-      matrix,
-    
-    y =
-      analysis_sample,
-    
-    fill =
-      coverage_after_6_prototypes
+    x = matrix,
+    y = analysis_sample,
+    fill = coverage_after_6_prototypes
   )
 ) +
   geom_tile(
@@ -1536,14 +1212,13 @@ p_coverage <- ggplot(
   ) +
   geom_text(
     aes(
-      label =
-        paste0(
-          round(
-            coverage_after_6_prototypes,
-            1
-          ),
-          "%"
-        )
+      label = paste0(
+        round(
+          coverage_after_6_prototypes,
+          1
+        ),
+        "%"
+      )
     ),
     size = 3.3
   ) +
@@ -1552,30 +1227,20 @@ p_coverage <- ggplot(
       0,
       100
     ),
-    name =
-      "Coverage %"
+    name = "Coverage %"
   ) +
   labs(
-    title =
-      "Greedy coverage with 6 candidate prototypes",
-    
-    subtitle =
-      "D=8 | Hamming=4 | equal_candidate",
-    
-    x =
-      "Matrix",
-    
-    y =
-      "Analysis sample"
+    title = "Greedy coverage with 6 candidate prototypes",
+    subtitle = "D=8 | Hamming=4 | equal_candidate",
+    x = "Matrix",
+    y = "Analysis sample"
   ) +
   theme_minimal(
     base_size = 11
   ) +
   theme(
-    panel.grid =
-      element_blank()
+    panel.grid = element_blank()
   )
-
 
 save_plot(
   p_coverage,
@@ -1587,48 +1252,33 @@ save_plot(
   height = 7
 )
 
-
-# Figura 3:
-# Similitud de las tres comparaciones para todas las muestras
+# Figura 3: Similitud de las tres comparaciones para todas las muestras
 similarity_plot_data <- matching_summary %>%
   mutate(
-    analysis_sample =
-      factor(
-        analysis_sample,
-        levels =
-          ANALYSIS_SAMPLES
-      ),
-    
-    matrix =
-      factor(
-        matrix,
-        levels =
-          MATRICES
-      ),
-    
-    comparison =
-      factor(
-        comparison,
-        levels = c(
-          "KM_vs_EFA",
-          "KM_vs_EXPERTS",
-          "EFA_vs_EXPERTS"
-        )
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    matrix = factor(
+      matrix,
+      levels = MATRICES
+    ),
+    comparison = factor(
+      comparison,
+      levels = c(
+        "KM_vs_EFA",
+        "KM_vs_EXPERTS",
+        "EFA_vs_EXPERTS"
       )
+    )
   )
-
 
 p_similarity_all <- ggplot(
   similarity_plot_data,
   aes(
-    x =
-      matrix,
-    
-    y =
-      analysis_sample,
-    
-    fill =
-      mean_similarity
+    x = matrix,
+    y = analysis_sample,
+    fill = mean_similarity
   )
 ) +
   geom_tile(
@@ -1636,14 +1286,13 @@ p_similarity_all <- ggplot(
   ) +
   geom_text(
     aes(
-      label =
-        paste0(
-          round(
-            mean_similarity,
-            1
-          ),
-          "%"
-        )
+      label = paste0(
+        round(
+          mean_similarity,
+          1
+        ),
+        "%"
+      )
     ),
     size = 2.8
   ) +
@@ -1656,30 +1305,20 @@ p_similarity_all <- ggplot(
       0,
       100
     ),
-    name =
-      "Mean %"
+    name = "Mean %"
   ) +
   labs(
-    title =
-      "Optimal matching similarity by sample and matrix",
-    
-    subtitle =
-      "KM-EFA uses overlap; comparisons with experts use Jaccard",
-    
-    x =
-      "Matrix",
-    
-    y =
-      "Analysis sample"
+    title = "Optimal matching similarity by sample and matrix",
+    subtitle = "KM-EFA uses overlap; comparisons with experts use Jaccard",
+    x = "Matrix",
+    y = "Analysis sample"
   ) +
   theme_minimal(
     base_size = 10
   ) +
   theme(
-    panel.grid =
-      element_blank()
+    panel.grid = element_blank()
   )
-
 
 save_plot(
   p_similarity_all,
@@ -1691,45 +1330,32 @@ save_plot(
   height = 7
 )
 
-
-# Figura 4:
-# COMPLETE, comparación triangular por matriz
+# Figura 4: COMPLETE, comparación triangular por matriz
 complete_matching_plot <- matching_summary %>%
   filter(
-    analysis_sample ==
-      "COMPLETE"
+    analysis_sample == "COMPLETE"
   ) %>%
   mutate(
-    matrix =
-      factor(
-        matrix,
-        levels =
-          MATRICES
-      ),
-    
-    comparison =
-      factor(
-        comparison,
-        levels = c(
-          "KM_vs_EFA",
-          "KM_vs_EXPERTS",
-          "EFA_vs_EXPERTS"
-        )
+    matrix = factor(
+      matrix,
+      levels = MATRICES
+    ),
+    comparison = factor(
+      comparison,
+      levels = c(
+        "KM_vs_EFA",
+        "KM_vs_EXPERTS",
+        "EFA_vs_EXPERTS"
       )
+    )
   )
-
 
 p_complete_matching <- ggplot(
   complete_matching_plot,
   aes(
-    x =
-      matrix,
-    
-    y =
-      comparison,
-    
-    fill =
-      mean_similarity
+    x = matrix,
+    y = comparison,
+    fill = mean_similarity
   )
 ) +
   geom_tile(
@@ -1737,14 +1363,13 @@ p_complete_matching <- ggplot(
   ) +
   geom_text(
     aes(
-      label =
-        paste0(
-          round(
-            mean_similarity,
-            1
-          ),
-          "%"
-        )
+      label = paste0(
+        round(
+          mean_similarity,
+          1
+        ),
+        "%"
+      )
     ),
     size = 4
   ) +
@@ -1753,30 +1378,20 @@ p_complete_matching <- ggplot(
       0,
       100
     ),
-    name =
-      "Mean %"
+    name = "Mean %"
   ) +
   labs(
-    title =
-      "COMPLETE - triangular comparison",
-    
-    subtitle =
-      "KM-EFA uses overlap; expert comparisons use Jaccard",
-    
-    x =
-      "Matrix",
-    
-    y =
-      NULL
+    title = "COMPLETE - triangular comparison",
+    subtitle = "KM-EFA uses overlap; expert comparisons use Jaccard",
+    x = "Matrix",
+    y = NULL
   ) +
   theme_minimal(
     base_size = 11
   ) +
   theme(
-    panel.grid =
-      element_blank()
+    panel.grid = element_blank()
   )
-
 
 save_plot(
   p_complete_matching,
@@ -1788,38 +1403,25 @@ save_plot(
   height = 5.5
 )
 
-
-# Figura 5:
-# Estabilidad EFA por muestra y matriz
+# Figura 5: Estabilidad EFA por muestra y matriz
 efa_stability_plot <- sample_matrix_summary %>%
   mutate(
-    analysis_sample =
-      factor(
-        analysis_sample,
-        levels =
-          ANALYSIS_SAMPLES
-      ),
-    
-    matrix =
-      factor(
-        matrix,
-        levels =
-          MATRICES
-      )
+    analysis_sample = factor(
+      analysis_sample,
+      levels = ANALYSIS_SAMPLES
+    ),
+    matrix = factor(
+      matrix,
+      levels = MATRICES
+    )
   )
-
 
 p_efa_stability <- ggplot(
   efa_stability_plot,
   aes(
-    x =
-      matrix,
-    
-    y =
-      analysis_sample,
-    
-    fill =
-      mean_efa_alignment_similarity
+    x = matrix,
+    y = analysis_sample,
+    fill = mean_efa_alignment_similarity
   )
 ) +
   geom_tile(
@@ -1827,14 +1429,13 @@ p_efa_stability <- ggplot(
   ) +
   geom_text(
     aes(
-      label =
-        paste0(
-          round(
-            mean_efa_alignment_similarity,
-            1
-          ),
-          "%"
-        )
+      label = paste0(
+        round(
+          mean_efa_alignment_similarity,
+          1
+        ),
+        "%"
+      )
     ),
     size = 3.3
   ) +
@@ -1843,30 +1444,20 @@ p_efa_stability <- ggplot(
       0,
       100
     ),
-    name =
-      "Alignment %"
+    name = "Alignment %"
   ) +
   labs(
-    title =
-      "EFA factor-alignment stability",
-    
-    subtitle =
-      "Mean alignment similarity across bootstrap solutions",
-    
-    x =
-      "Matrix",
-    
-    y =
-      "Analysis sample"
+    title = "EFA factor-alignment stability",
+    subtitle = "Mean alignment similarity across bootstrap solutions",
+    x = "Matrix",
+    y = "Analysis sample"
   ) +
   theme_minimal(
     base_size = 11
   ) +
   theme(
-    panel.grid =
-      element_blank()
+    panel.grid = element_blank()
   )
-
 
 save_plot(
   p_efa_stability,
@@ -1878,9 +1469,8 @@ save_plot(
   height = 7
 )
 
+# Figura 6: Resumen descriptivo de matrices a través de muestras
 
-# Figura 6:
-# Resumen descriptivo de matrices a través de muestras
 matrix_summary_long <- matrix_summary_across_samples %>%
   select(
     matrix,
@@ -1891,64 +1481,42 @@ matrix_summary_long <- matrix_summary_across_samples %>%
     mean_EFA_EXPERTS
   ) %>%
   pivot_longer(
-    cols =
-      -matrix,
-    
-    names_to =
-      "metric",
-    
-    values_to =
-      "value"
+    cols = -matrix,
+    names_to = "metric",
+    values_to = "value"
   ) %>%
   mutate(
-    matrix =
-      factor(
-        matrix,
-        levels =
-          MATRICES
-      ),
-    
-    metric =
-      recode(
-        metric,
-        "mean_coverage_P6" =
-          "Greedy coverage P6",
-        "mean_efa_alignment" =
-          "EFA alignment",
-        "mean_KM_EFA" =
-          "KM-EFA",
-        "mean_KM_EXPERTS" =
-          "KM-Experts",
-        "mean_EFA_EXPERTS" =
-          "EFA-Experts"
-      )
+    matrix = factor(
+      matrix,
+      levels = MATRICES
+    ),
+    metric = recode(
+      metric,
+      "mean_coverage_P6" = "Greedy coverage P6",
+      "mean_efa_alignment" = "EFA alignment",
+      "mean_KM_EFA" = "KM-EFA",
+      "mean_KM_EXPERTS" = "KM-Experts",
+      "mean_EFA_EXPERTS" = "EFA-Experts"
+    )
   )
-
 
 p_matrix_summary <- ggplot(
   matrix_summary_long,
   aes(
-    x =
-      matrix,
-    
-    y =
-      value,
-    
-    group =
-      metric
+    x = matrix,
+    y = value,
+    group = metric
   )
 ) +
   geom_line(
     aes(
-      linetype =
-        metric
+      linetype = metric
     ),
     linewidth = 0.8
   ) +
   geom_point(
     aes(
-      shape =
-        metric
+      shape = metric
     ),
     size = 2.5
   ) +
@@ -1959,28 +1527,16 @@ p_matrix_summary <- ggplot(
     )
   ) +
   labs(
-    title =
-      "Matrix diagnostics averaged across samples",
-    
-    subtitle =
-      "Metrics remain separate; no composite score is calculated",
-    
-    x =
-      "Matrix",
-    
-    y =
-      "Percentage",
-    
-    linetype =
-      "Metric",
-    
-    shape =
-      "Metric"
+    title = "Matrix diagnostics averaged across samples",
+    subtitle = "Metrics remain separate; no composite score is calculated",
+    x = "Matrix",
+    y = "Percentage",
+    linetype = "Metric",
+    shape = "Metric"
   ) +
   theme_minimal(
     base_size = 11
   )
-
 
 save_plot(
   p_matrix_summary,
@@ -1992,8 +1548,8 @@ save_plot(
   height = 7
 )
 
-
 # Parámetros
+
 parameters <- tibble(
   parameter = c(
     "analysis_samples",
@@ -2017,55 +1573,43 @@ parameters <- tibble(
       ANALYSIS_SAMPLES,
       collapse = ", "
     ),
-    
     paste(
       MATRICES,
       collapse = ", "
     ),
-    
     paste(
       D_DET_GRID,
       collapse = ", "
     ),
-    
     paste(
       HAMMING_GRID,
       collapse = ", "
     ),
-    
     as.character(
       REFERENCE_COMMON_PCT
     ),
-    
     REFERENCE_WEIGHTING,
-    
     as.character(
       REFERENCE_D
     ),
-    
     as.character(
       REFERENCE_H
     ),
-    
     as.character(
       REFERENCE_N_PROTOTYPES
     ),
-    
     as.character(
       REFERENCE_N_EFA_FACTORS
     ),
-    
     paste0(
       ">",
       MATCH_THRESHOLD
     ),
-    
     "overlap_left_pct",
     "jaccard_pct",
     "jaccard_pct"
   )
 )
-
 
 write_csv(
   parameters,
@@ -2075,58 +1619,39 @@ write_csv(
   )
 )
 
-
 # Comprobaciones finales
 expected_n_matching_groups <-
-  length(
-    ANALYSIS_SAMPLES
-  ) *
-  length(
-    MATRICES
-  ) *
+  length(ANALYSIS_SAMPLES) *
+  length(MATRICES) *
   3L
 
 if (
-  nrow(
-    matching_summary
-  ) !=
+  nrow(matching_summary) !=
   expected_n_matching_groups
 ) {
   stop(
     "Esperaba ",
     expected_n_matching_groups,
     " combinaciones muestra × matriz × comparación y encuentro ",
-    nrow(
-      matching_summary
-    ),
+    nrow(matching_summary),
     "."
   )
 }
 
-
 if (
-  nrow(
-    sample_matrix_summary
-  ) !=
-  length(
-    ANALYSIS_SAMPLES
-  ) *
-  length(
-    MATRICES
-  )
+  nrow(sample_matrix_summary) !=
+  length(ANALYSIS_SAMPLES) *
+  length(MATRICES)
 ) {
   stop(
     "El resumen muestra × matriz no contiene las 28 combinaciones esperadas."
   )
 }
 
-
 # Resultados en consola
 cat(
   "RESUMEN GLOBAL COMPLETADO\n"
 )
-
-
 
 cat(
   "\nH DE REFERENCIA PARA D=8,...,15\n\n"
@@ -2138,7 +1663,6 @@ print(
   width = Inf
 )
 
-
 cat(
   "\nCOMPLETE - GREEDY D=8,...,15\n\n"
 )
@@ -2146,13 +1670,11 @@ cat(
 print(
   greedy_D_summary %>%
     filter(
-      analysis_sample ==
-        "COMPLETE"
+      analysis_sample == "COMPLETE"
     ),
   n = Inf,
   width = Inf
 )
-
 
 cat(
   "\nCOMPLETE - RESUMEN DE LAS CUATRO MATRICES\n\n"
@@ -2164,7 +1686,6 @@ print(
   width = Inf
 )
 
-
 cat(
   "\nRESUMEN DE MATRICES A TRAVÉS DE TODAS LAS MUESTRAS\n\n"
 )
@@ -2174,7 +1695,6 @@ print(
   n = Inf,
   width = Inf
 )
-
 
 cat(
   "\nRESUMEN DE MUESTRAS A TRAVÉS DE LAS CUATRO MATRICES\n\n"
@@ -2186,7 +1706,6 @@ print(
   width = Inf
 )
 
-
 cat(
   "\nMATCHING - COMPLETE\n\n"
 )
@@ -2194,8 +1713,7 @@ cat(
 print(
   matching_summary %>%
     filter(
-      analysis_sample ==
-        "COMPLETE"
+      analysis_sample == "COMPLETE"
     ) %>%
     select(
       matrix,
@@ -2212,14 +1730,12 @@ print(
   width = Inf
 )
 
-
 cat(
   "\nResultados guardados en:\n",
   out_dir,
   "\n",
   sep = ""
 )
-
 
 cat(
   "\nFICHEROS PRINCIPALES:\n",
@@ -2236,7 +1752,6 @@ cat(
   sep = ""
 )
 
-
 cat(
   "\nFIGURAS PRINCIPALES:\n",
   "01_COMPLETE_greedy_coverage_P1_P8.png\n",
@@ -2247,7 +1762,6 @@ cat(
   "06_matrix_diagnostics_across_samples.png\n",
   sep = ""
 )
-
 
 message(
   "\nListo."

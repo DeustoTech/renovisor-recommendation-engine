@@ -1,5 +1,6 @@
 
-# Objetivo:
+# Objetivo -- Análisis de sensibilidad de D
+#
 # Construir prototipos representativos a partir de las estructuras
 # obtenidas con K-means y EFA a lo largo de los bootstraps.
 #
@@ -121,7 +122,6 @@ PRIMARY_WEIGHTING <- "equal_candidate"
 
 
 # Funciones auxiliares
-
 matrix_label <- function(x) {
   recode(
     x,
@@ -301,7 +301,6 @@ run_greedy_sequence <- function(
 
 
 # Leer EFA
-
 if (!file.exists(efa_file)) {
   stop(
     "No encuentro el archivo EFA: ",
@@ -400,7 +399,6 @@ if (length(determinants) != 32) {
 # Por ello, la distancia máxima posible entre dos firmas depende de D.
 # Se calcula también el número mínimo de determinantes comunes que
 # implica cada combinación D × Hamming.
-
 hamming_interpretation <- crossing(
   d_det = D_DET_GRID,
   d_hamming = D_HAMMING_GRID
@@ -450,7 +448,6 @@ greedy_counter <- 0L
 
 
 # Procesar cada muestra de análisis
-
 for (sample_name in ANALYSIS_SAMPLES) {
   sample_counter <-
     sample_counter + 1L
@@ -570,8 +567,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
   }
   
   
-  # Comprobar disponibilidad de los bootstraps.
-  
+  # Comprobar disponibilidad de los bootstraps
   kmeans_boots <- sort(
     unique(
       kmeans_sample$bootstrap_id
@@ -624,8 +620,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
   # solo se considera la desviación positiva respecto a 0.5.
   #
   # EXT y Z_ABS:
-  # el propio centro ya representa intensidad/extremidad.
-  
+  # el propio centro ya representa intensidad/extremidad
   kmeans_scores <- kmeans_sample %>%
     mutate(
       score = case_when(
@@ -673,8 +668,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
     )
   
   
-  # En EFA se utiliza el valor absoluto de la carga factorial.
-  
+  # En EFA se utiliza el valor absoluto de la carga factorial
   efa_scores <- efa_sample %>%
     transmute(
       analysis_sample,
@@ -713,8 +707,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
   
   # Algunos ajustes EFA pueden no devolver los 32 determinantes.
   # Los determinantes ausentes se completan con score = 0 para poder
-  # construir firmas binarias comparables.
-  
+  # construir firmas binarias comparables
   element_counts <- scores %>%
     count(
       across(
@@ -788,8 +781,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
   }
   
   
-  # Diagnóstico del score según posición en el ranking de determinantes.
-  
+  # Diagnóstico del score según posición en el ranking de determinantes
   score_rank_summary <- scores %>%
     group_by(
       across(
@@ -840,9 +832,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
       .groups = "drop"
     )
   
-  score_rank_summary_list[
-    [sample_counter]
-  ] <- score_rank_summary
+  score_rank_summary_list[[sample_counter]] <- score_rank_summary
   
   
   # Construir firmas binarias.
@@ -850,8 +840,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
   # Para cada cluster/factor y cada D se seleccionan los D determinantes
   # con mayor score. La firma binaria contiene:
   # 1 = determinante seleccionado
-  # 0 = determinante no seleccionado.
-  
+  # 0 = determinante no seleccionado
   binary_patterns <- map_dfr(
     D_DET_GRID,
     function(d_det_current) {
@@ -910,13 +899,10 @@ for (sample_name in ANALYSIS_SAMPLES) {
     }
   )
   
-  binary_patterns_list[
-    [sample_counter]
-  ] <- binary_patterns
+  binary_patterns_list[[sample_counter]] <- binary_patterns
   
   
-  # Ejecutar las dos formas de ponderación del pool.
-  
+  # Ejecutar las dos formas de ponderación del pool
   for (weighting_current in POOL_WEIGHTINGS) {
     binary_weighted <- binary_patterns %>%
       mutate(
@@ -945,8 +931,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
       )
     
     
-    # Frecuencia/peso de cada firma binaria dentro de cada combinación.
-    
+    # Frecuencia/peso de cada firma binaria dentro de cada combinación
     pattern_frequency <- binary_weighted %>%
       group_by(
         analysis_sample,
@@ -990,13 +975,9 @@ for (sample_name in ANALYSIS_SAMPLES) {
       ) %>%
       ungroup()
     
-    pattern_frequency_list[
-      [length(pattern_frequency_list) + 1L]
-    ] <- pattern_frequency
-    
+    pattern_frequency_list[[length(pattern_frequency_list) + 1L]] <- pattern_frequency
     
     # Diagnóstico de cuánto aporta cada K/F al pool bajo cada ponderación.
-    
     candidate_contribution <- binary_weighted %>%
       group_by(
         analysis_sample,
@@ -1031,14 +1012,11 @@ for (sample_name in ANALYSIS_SAMPLES) {
       ) %>%
       ungroup()
     
-    candidate_contribution_list[
-      [length(candidate_contribution_list) + 1L]
-    ] <- candidate_contribution
+    candidate_contribution_list[[length(candidate_contribution_list) + 1L]] <- candidate_contribution
     
     
     # Cada combinación método × matriz × D × weighting constituye
-    # un pool independiente para Greedy.
-    
+    # un pool independiente para Greedy
     groups <- pattern_frequency %>%
       distinct(
         analysis_sample,
@@ -1092,8 +1070,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
       )
       
       
-      # Ejecutar Greedy para cada radio Hamming.
-      
+      # Ejecutar Greedy para cada radio Hamming
       for (d_hamming_current in D_HAMMING_GRID) {
         greedy_counter <-
           greedy_counter + 1L
@@ -1113,8 +1090,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
         )
         
         
-        # Evolución de cobertura prototipo a prototipo.
-        
+        # Evolución de cobertura prototipo a prototipo
         steps_df <- map_dfr(
           result_steps,
           function(step) {
@@ -1203,14 +1179,11 @@ for (sample_name in ANALYSIS_SAMPLES) {
           }
         )
         
-        prototype_steps_list[
-          [greedy_counter]
-        ] <- steps_df
+        prototype_steps_list[[greedy_counter]] <- steps_df
         
         
         # Prevalencia de cada determinante dentro de la bola cubierta
-        # por cada prototipo.
-        
+        # por cada prototipo
         ball_df <- map_dfr(
           result_steps,
           function(step) {
@@ -1266,22 +1239,17 @@ for (sample_name in ANALYSIS_SAMPLES) {
           }
         )
         
-        ball_prevalence_list[
-          [greedy_counter]
-        ] <- ball_df
+        ball_prevalence_list[[greedy_counter]] <- ball_df
         
         
         # Resumen final de cobertura para esta combinación.
-        
         if (nrow(steps_df)) {
           last_step <- steps_df %>%
             slice_tail(
               n = 1
             )
           
-          coverage_summary_list[
-            [greedy_counter]
-          ] <- tibble(
+          coverage_summary_list[[greedy_counter]] <- tibble(
             analysis_sample =
               group_current$analysis_sample,
             
@@ -1339,8 +1307,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
 }
 
 
-# Consolidar resultados de todas las muestras.
-
+# Consolidar resultados de todas las muestras
 binary_patterns_all <- bind_rows(
   binary_patterns_list
 )
@@ -1370,8 +1337,7 @@ source_candidate_contribution <- bind_rows(
 )
 
 
-# Añadir interpretación del radio Hamming a los resultados principales.
-
+# Añadir interpretación del radio Hamming a los resultados principales
 greedy_prototype_steps <- greedy_prototype_steps %>%
   left_join(
     hamming_interpretation,
@@ -1402,8 +1368,7 @@ greedy_coverage_summary <- greedy_coverage_summary %>%
 
 
 # Curva prototipo-cobertura.
-# La mejora marginal de cada prototipo coincide con su cobertura incremental.
-
+# La mejora marginal de cada prototipo coincide con su cobertura incremental
 greedy_prototype_curve <- greedy_prototype_steps %>%
   mutate(
     marginal_gain_pct =
@@ -1421,8 +1386,7 @@ greedy_prototype_curve <- greedy_prototype_steps %>%
 
 
 # Número mínimo de prototipos necesarios para alcanzar cada
-# umbral de cobertura.
-
+# umbral de cobertura
 coverage_threshold_table <- greedy_prototype_steps %>%
   select(
     analysis_sample,
@@ -1481,8 +1445,7 @@ coverage_threshold_table <- greedy_prototype_steps %>%
   )
 
 
-# Tabla ancha para comparar directamente matrices y métodos.
-
+# Tabla ancha para comparar directamente matrices y métodos
 greedy_matrix_x_method <- greedy_prototype_steps %>%
   mutate(
     matrix_short = matrix_label(
@@ -1520,8 +1483,7 @@ greedy_matrix_x_method <- greedy_prototype_steps %>%
   )
 
 
-# Parámetros utilizados.
-
+# Parámetros utilizados
 parameters <- tibble(
   parameter = c(
     "analysis_samples",
@@ -1591,8 +1553,7 @@ parameters <- tibble(
 )
 
 
-# Guardar resultados.
-
+# Guardar resultados
 outputs <- list(
   "01_binary_patterns_pooled.csv.gz" =
     binary_patterns_all,
@@ -1643,8 +1604,7 @@ iwalk(
 )
 
 
-# Figuras de diagnóstico para COMPLETE con la ponderación principal.
-
+# Figuras de diagnóstico para COMPLETE con la ponderación principal
 plot_data <- greedy_prototype_steps %>%
   filter(
     analysis_sample ==
@@ -1749,8 +1709,7 @@ for (
 }
 
 
-# Resumen en consola.
-
+# Resumen en consola
 cat("\n08. GREEDY COMPLETADO\n")
 
 cat("\nMuestras:\n")

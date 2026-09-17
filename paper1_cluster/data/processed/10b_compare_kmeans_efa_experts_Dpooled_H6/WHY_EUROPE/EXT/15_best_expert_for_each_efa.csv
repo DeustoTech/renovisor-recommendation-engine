@@ -1,0 +1,7 @@
+efa_factor,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Careful,8,12,2,25,16.666666666666668,11.11111111111111,det_06_climate_protection; det_12_own_competence
+EFA2,Activist,8,6,3,37.5,50,27.272727272727273,det_15_self_satisfaction; det_16_commitment; det_17_adherence
+EFA3,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+EFA4,Activist,8,6,5,62.5,83.33333333333333,55.55555555555556,det_08_trust; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+EFA5,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_01_profits; det_04_added_value; det_10_cost_efficiency
+EFA6,Careful,8,12,3,37.5,25,17.647058823529413,det_06_climate_protection; det_09_safety; det_14_environmental_concerns

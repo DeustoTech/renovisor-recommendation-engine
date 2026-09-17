@@ -64,7 +64,7 @@ MIN_LEVEL_N_MODEL <- 8
 P_MIN <- 0.01
 P_MAX <- 0.99
 
-# Target electoral externo del Excel de Cruz.
+# Target electoral externo del Excel de Cruz!!!
 TARGET_ABSTENTION_SHARE <- 0.5065
 TARGET_VOTER_SHARE <- 1 - TARGET_ABSTENTION_SHARE
 
@@ -448,7 +448,6 @@ df <- bind_cols(
 
 
 # Entrenamiento del modelo de propensión
-
 training_base <- df %>%
   filter(
     dataset_source == "rv",

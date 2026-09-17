@@ -1,5 +1,6 @@
 
-# Objetivo:
+# Objetivo
+#
 # Generar bootstraps de WHY_LATAM corrigiendo, dentro de cada país,
 # la distribución observada de ingreso hacia los targets poblacionales
 # definidos en 04_2d.

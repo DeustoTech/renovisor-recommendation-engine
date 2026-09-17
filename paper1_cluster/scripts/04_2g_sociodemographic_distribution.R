@@ -1,44 +1,36 @@
-#
+# 
+# Objetivo:
 # Compara las distribuciones descriptivas antes y después del bootstrap.
 #
 # Pre-bootstrap:
-#   - muestra integrada
-#   - usable para análisis principal
-#   - usable para clustering
+# - muestra integrada
+# - usable para análisis principal
+# - usable para clustering
 #
 # Post-bootstrap:
-#   COMPLETE
-#   EUROPE
-#   LATAM
-#   DIEGO
-#   RENOVISOR
-#   WHY_EUROPE
-#   WHY_LATAM
+# - COMPLETE
+# - EUROPE
+# - LATAM
+# - DIEGO
+# - RENOVISOR
+# - WHY_EUROPE
+# - WHY_LATAM
 #
 # El bootstrap final procede de 04_2f:
-#   EUROPE   -> bootstrap político/electoral
-#   LATAM    -> bootstrap económico por ingreso
-#   COMPLETE -> EUROPE + LATAM
+# EUROPE   -> bootstrap político/electoral
+# LATAM    -> bootstrap económico por ingreso
+# COMPLETE -> EUROPE + LATAM
 #
 # Este script no modifica ni vuelve a remuestrear los datos.
-
 
 suppressPackageStartupMessages({
   library(tidyverse)
   library(scales)
 })
 
-
 # Configuración
-
-project_root <- path.expand(
-  "~/Desktop/MASTER/recommendation-engine/TFM"
-)
-
-processed_root <- file.path(
-  project_root,
-  "paper1_cluster/data/processed"
-)
+project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
+processed_root <- file.path(project_root, "paper1_cluster/data/processed")
 
 input_file <- file.path(
   processed_root,
@@ -52,24 +44,10 @@ bootstrap_index_file <- file.path(
   "bootstrap_samples_index.csv.gz"
 )
 
-out_dir <- file.path(
-  processed_root,
-  "04_2g_sociodemographic_distribution"
-)
+out_dir <- file.path(processed_root, "04_2g_sociodemographic_distribution")
+fig_dir <- file.path(out_dir, "figures")
 
-fig_dir <- file.path(
-  out_dir,
-  "figures"
-)
-
-walk(
-  c(out_dir, fig_dir),
-  ~ dir.create(
-    .x,
-    recursive = TRUE,
-    showWarnings = FALSE
-  )
-)
+walk(c(out_dir, fig_dir), ~ dir.create(.x, recursive = TRUE, showWarnings = FALSE))
 
 EXPECTED_N_BOOT <- 1000L
 
@@ -114,71 +92,33 @@ candidate_vars <- c(
   "usable_for_clustering"
 )
 
-
 # Funciones auxiliares
-
 clean_category <- function(x) {
   x <- str_squish(as.character(x))
   x[is.na(x) | x == ""] <- "Missing"
   x
 }
 
-
 as_logical_flag <- function(x) {
-  x <- str_to_lower(
-    str_squish(
-      as.character(x)
-    )
-  )
+  x <- str_to_lower(str_squish(as.character(x)))
   
   case_when(
-    x %in% c(
-      "true",
-      "1",
-      "yes",
-      "sí",
-      "si"
-    ) ~ TRUE,
-    
-    x %in% c(
-      "false",
-      "0",
-      "no"
-    ) ~ FALSE,
-    
+    x %in% c("true", "1", "yes", "sí", "si") ~ TRUE,
+    x %in% c("false", "0", "no") ~ FALSE,
     TRUE ~ NA
   )
 }
 
-
 safe_filename <- function(x) {
   x %>%
-    str_replace_all(
-      "[^A-Za-z0-9_]+",
-      "_"
-    ) %>%
-    str_replace_all(
-      "_+",
-      "_"
-    ) %>%
-    str_remove_all(
-      "^_|_$"
-    )
+    str_replace_all("[^A-Za-z0-9_]+", "_") %>%
+    str_replace_all("_+", "_") %>%
+    str_remove_all("^_|_$")
 }
-
 
 make_label_n_pct <- function(n, prop) {
-  paste0(
-    n,
-    " (",
-    percent(
-      prop,
-      accuracy = 1
-    ),
-    ")"
-  )
+  paste0(n, " (", percent(prop, accuracy = 1), ")")
 }
-
 
 main_palette <- c(
   "#0072B2",
@@ -199,25 +139,15 @@ main_palette <- c(
   "#AA4499"
 )
 
-
 category_palette <- function(categories) {
-  categories <- unique(
-    as.character(categories)
-  )
+  categories <- unique(as.character(categories))
+  categories <- categories[!is.na(categories)]
   
-  categories <- categories[
-    !is.na(categories)
-  ]
-  
-  palette <- rep(
-    main_palette,
-    length.out = length(categories)
-  )
-  
+  palette <- rep(main_palette, length.out = length(categories))
   names(palette) <- categories
+  
   palette
 }
-
 
 find_self_classification_col <- function(data_names) {
   priority_cols <- c(
@@ -230,9 +160,7 @@ find_self_classification_col <- function(data_names) {
   ]
   
   if (length(available_priority)) {
-    return(
-      available_priority[1]
-    )
+    return(available_priority[1])
   }
   
   candidates <- data_names[
@@ -266,18 +194,10 @@ find_self_classification_col <- function(data_names) {
   }
 }
 
-
-summarise_one_var <- function(
-    data,
-    var,
-    context_name
-) {
+summarise_one_var <- function(data, var, context_name) {
   data %>%
     transmute(
-      category =
-        clean_category(
-          .data[[var]]
-        )
+      category = clean_category(.data[[var]])
     ) %>%
     count(
       category,
@@ -303,39 +223,22 @@ summarise_one_var <- function(
     )
 }
 
-
-summarise_one_var_by_group <- function(
-    data,
-    var,
-    group_var,
-    context_name
-) {
+summarise_one_var_by_group <- function(data, var, group_var, context_name) {
   if (!group_var %in% names(data)) {
-    return(
-      tibble()
-    )
+    return(tibble())
   }
   
   data %>%
     transmute(
-      group =
-        clean_category(
-          .data[[group_var]]
-        ),
-      
-      category =
-        clean_category(
-          .data[[var]]
-        )
+      group = clean_category(.data[[group_var]]),
+      category = clean_category(.data[[var]])
     ) %>%
     count(
       group,
       category,
       name = "n"
     ) %>%
-    group_by(
-      group
-    ) %>%
+    group_by(group) %>%
     mutate(
       context = context_name,
       variable = var,
@@ -359,38 +262,22 @@ summarise_one_var_by_group <- function(
     )
 }
 
-
-plot_overall <- function(
-    summary_df,
-    var,
-    context_name
-) {
+plot_overall <- function(summary_df, var, context_name) {
   p_data <- summary_df %>%
     filter(
       variable == var,
       context == context_name
     ) %>%
     mutate(
-      category = fct_reorder(
-        category,
-        prop
-      ),
-      
-      label = make_label_n_pct(
-        n,
-        prop
-      )
+      category = fct_reorder(category, prop),
+      label = make_label_n_pct(n, prop)
     )
   
   if (!nrow(p_data)) {
-    return(
-      invisible(NULL)
-    )
+    return(invisible(NULL))
   }
   
-  n_current <- unique(
-    p_data$total_n
-  )[1]
+  n_current <- unique(p_data$total_n)[1]
   
   p <- ggplot(
     p_data,
@@ -400,46 +287,24 @@ plot_overall <- function(
       fill = category
     )
   ) +
-    geom_col(
-      show.legend = FALSE
-    ) +
+    geom_col(show.legend = FALSE) +
     geom_text(
-      aes(
-        label = label
-      ),
+      aes(label = label),
       hjust = -0.05,
       size = 3
     ) +
     scale_fill_manual(
-      values = category_palette(
-        p_data$category
-      ),
+      values = category_palette(p_data$category),
       guide = "none"
     ) +
     scale_y_continuous(
-      labels = percent_format(
-        accuracy = 1
-      ),
-      expand = expansion(
-        mult = c(
-          0,
-          0.25
-        )
-      )
+      labels = percent_format(accuracy = 1),
+      expand = expansion(mult = c(0, 0.25))
     ) +
-    coord_flip(
-      clip = "off"
-    ) +
-    theme_minimal(
-      base_size = 12
-    ) +
+    coord_flip(clip = "off") +
+    theme_minimal(base_size = 12) +
     theme(
-      plot.margin = margin(
-        10,
-        60,
-        10,
-        10
-      )
+      plot.margin = margin(10, 60, 10, 10)
     ) +
     labs(
       title = paste0(
@@ -460,13 +325,9 @@ plot_overall <- function(
       fig_dir,
       paste0(
         "prebootstrap_overall_",
-        safe_filename(
-          context_name
-        ),
+        safe_filename(context_name),
         "_",
-        safe_filename(
-          var
-        ),
+        safe_filename(var),
         ".png"
       )
     ),
@@ -476,7 +337,6 @@ plot_overall <- function(
     dpi = 300
   )
 }
-
 
 plot_by_group <- function(
     summary_df,
@@ -496,12 +356,10 @@ plot_by_group <- function(
         "\nn = ",
         total_n
       ),
-      
       category = fct_reorder(
         category,
         prop
       ),
-      
       label = make_label_n_pct(
         n,
         prop
@@ -509,9 +367,7 @@ plot_by_group <- function(
     )
   
   if (!nrow(p_data)) {
-    return(
-      invisible(NULL)
-    )
+    return(invisible(NULL))
   }
   
   p <- ggplot(
@@ -522,50 +378,28 @@ plot_by_group <- function(
       fill = category
     )
   ) +
-    geom_col(
-      show.legend = FALSE
-    ) +
+    geom_col(show.legend = FALSE) +
     geom_text(
-      aes(
-        label = label
-      ),
+      aes(label = label),
       hjust = -0.05,
       size = 2.7
     ) +
     scale_fill_manual(
-      values = category_palette(
-        p_data$category
-      ),
+      values = category_palette(p_data$category),
       guide = "none"
     ) +
     scale_y_continuous(
-      labels = percent_format(
-        accuracy = 1
-      ),
-      expand = expansion(
-        mult = c(
-          0,
-          0.25
-        )
-      )
+      labels = percent_format(accuracy = 1),
+      expand = expansion(mult = c(0, 0.25))
     ) +
-    coord_flip(
-      clip = "off"
-    ) +
+    coord_flip(clip = "off") +
     facet_wrap(
       ~ panel,
       scales = "free_y"
     ) +
-    theme_minimal(
-      base_size = 11
-    ) +
+    theme_minimal(base_size = 11) +
     theme(
-      plot.margin = margin(
-        10,
-        60,
-        10,
-        10
-      )
+      plot.margin = margin(10, 60, 10, 10)
     ) +
     labs(
       title = paste0(
@@ -585,13 +419,9 @@ plot_by_group <- function(
       paste0(
         filename_prefix,
         "_",
-        safe_filename(
-          context_name
-        ),
+        safe_filename(context_name),
         "_",
-        safe_filename(
-          var
-        ),
+        safe_filename(var),
         ".png"
       )
     ),
@@ -602,21 +432,13 @@ plot_by_group <- function(
   )
 }
 
-
-compute_bootstrap_distribution <- function(
-    data,
-    var,
-    boot_ids
-) {
+compute_bootstrap_distribution <- function(data, var, boot_ids) {
   base <- data %>%
     transmute(
       bootstrap_id,
       comparison_region,
       subsample,
-      category =
-        clean_category(
-          .data[[var]]
-        )
+      category = clean_category(.data[[var]])
     )
   
   counts_complete <- base %>%
@@ -638,8 +460,7 @@ compute_bootstrap_distribution <- function(
     ) %>%
     transmute(
       bootstrap_id,
-      analysis_sample =
-        comparison_region,
+      analysis_sample = comparison_region,
       category,
       n
     )
@@ -653,8 +474,7 @@ compute_bootstrap_distribution <- function(
     ) %>%
     transmute(
       bootstrap_id,
-      analysis_sample =
-        subsample,
+      analysis_sample = subsample,
       category,
       n
     )
@@ -665,8 +485,7 @@ compute_bootstrap_distribution <- function(
     counts_subsample
   ) %>%
     filter(
-      analysis_sample %in%
-        ANALYSIS_SAMPLES
+      analysis_sample %in% ANALYSIS_SAMPLES
     ) %>%
     group_by(
       analysis_sample
@@ -674,18 +493,14 @@ compute_bootstrap_distribution <- function(
     group_modify(
       ~ {
         categories_current <- sort(
-          unique(
-            .x$category
-          )
+          unique(.x$category)
         )
         
         complete(
           .x,
           bootstrap_id = boot_ids,
           category = categories_current,
-          fill = list(
-            n = 0L
-          )
+          fill = list(n = 0L)
         )
       }
     ) %>%
@@ -696,7 +511,6 @@ compute_bootstrap_distribution <- function(
     ) %>%
     mutate(
       total_n = sum(n),
-      
       prop = if_else(
         total_n > 0,
         n / total_n,
@@ -706,7 +520,6 @@ compute_bootstrap_distribution <- function(
     ungroup() %>%
     mutate(
       variable = var,
-      
       analysis_sample = factor(
         analysis_sample,
         levels = ANALYSIS_SAMPLES
@@ -789,16 +602,13 @@ needed_cols <- intersect(
 
 df <- read_csv(
   input_file,
-  col_select = all_of(
-    needed_cols
-  ),
+  col_select = all_of(needed_cols),
   show_col_types = FALSE
 ) %>%
   mutate(
-    integrated_row_id =
-      as.character(
-        integrated_row_id
-      )
+    integrated_row_id = as.character(
+      integrated_row_id
+    )
   )
 
 if (anyDuplicated(df$integrated_row_id)) {
@@ -809,7 +619,6 @@ if (anyDuplicated(df$integrated_row_id)) {
 
 
 # Autoclasificación RV
-
 self_classification_col <- find_self_classification_col(
   names(df)
 )
@@ -818,9 +627,7 @@ if (!is.na(self_classification_col)) {
   df <- df %>%
     mutate(
       self_classification_raw =
-        .data[
-          [self_classification_col]
-        ],
+        .data[[self_classification_col]],
       
       self_classification_raw_clean =
         str_squish(
@@ -902,14 +709,11 @@ if (!is.na(self_classification_col)) {
           )
         ) ~ "None",
         
-        is.na(
-          self_classification_raw_clean
-        ) |
+        is.na(self_classification_raw_clean) |
           self_classification_raw_clean == "" ~
           NA_character_,
         
-        TRUE ~
-          "Other_unclassified"
+        TRUE ~ "Other_unclassified"
       )
     )
 } else {
@@ -960,10 +764,8 @@ write_lines(
 
 
 # Variables descriptivas disponibles
-
 vars_to_summarise <- candidate_vars[
-  candidate_vars %in%
-    names(df)
+  candidate_vars %in% names(df)
 ]
 
 vars_to_summarise <- unique(
@@ -974,14 +776,10 @@ vars_to_summarise <- unique(
 )
 
 vars_to_summarise <- vars_to_summarise[
-  vars_to_summarise %in%
-    names(df)
+  vars_to_summarise %in% names(df)
 ]
 
-if (
-  "political_left_right_model" %in%
-  names(df)
-) {
+if ("political_left_right_model" %in% names(df)) {
   df <- df %>%
     mutate(
       political_left_right_num =
@@ -992,9 +790,8 @@ if (
         ),
       
       political_lr_group = case_when(
-        is.na(
-          political_left_right_num
-        ) ~ NA_character_,
+        is.na(political_left_right_num) ~
+          NA_character_,
         
         political_left_right_num < 20 ~
           "00_19_extreme_left",
@@ -1026,11 +823,7 @@ if (
 
 
 # Muestras pre-bootstrap
-
-if (
-  "usable_for_main_analysis" %in%
-  names(df)
-) {
+if ("usable_for_main_analysis" %in% names(df)) {
   df <- df %>%
     mutate(
       usable_for_main_analysis_flag =
@@ -1042,10 +835,7 @@ if (
   df$usable_for_main_analysis_flag <- TRUE
 }
 
-if (
-  "usable_for_clustering" %in%
-  names(df)
-) {
+if ("usable_for_clustering" %in% names(df)) {
   df <- df %>%
     mutate(
       usable_for_clustering_flag =
@@ -1059,57 +849,42 @@ if (
 
 df_all <- df %>%
   mutate(
-    sample_context =
-      "01_all_integrated_rows"
+    sample_context = "01_all_integrated_rows"
   )
 
 df_main <- df %>%
   filter(
-    usable_for_main_analysis_flag ==
-      TRUE
+    usable_for_main_analysis_flag == TRUE
   ) %>%
   mutate(
-    sample_context =
-      "02_usable_for_main_analysis"
+    sample_context = "02_usable_for_main_analysis"
   )
 
 df_cluster <- df %>%
   filter(
-    usable_for_clustering_flag ==
-      TRUE
+    usable_for_clustering_flag == TRUE
   ) %>%
   mutate(
-    sample_context =
-      "03_usable_for_clustering"
+    sample_context = "03_usable_for_clustering"
   )
 
 context_list <- list(
-  "01_all_integrated_rows" =
-    df_all,
-  
-  "02_usable_for_main_analysis" =
-    df_main,
-  
-  "03_usable_for_clustering" =
-    df_cluster
+  "01_all_integrated_rows" = df_all,
+  "02_usable_for_main_analysis" = df_main,
+  "03_usable_for_clustering" = df_cluster
 )
 
 
 # Descriptivos pre-bootstrap
-
 overall_distribution <- map_dfr(
   names(context_list),
   function(context_name) {
     map_dfr(
       vars_to_summarise,
       ~ summarise_one_var(
-        data =
-          context_list[
-            [context_name]
-          ],
+        data = context_list[[context_name]],
         var = .x,
-        context_name =
-          context_name
+        context_name = context_name
       )
     )
   }
@@ -1121,15 +896,10 @@ by_source_distribution <- map_dfr(
     map_dfr(
       vars_to_summarise,
       ~ summarise_one_var_by_group(
-        data =
-          context_list[
-            [context_name]
-          ],
+        data = context_list[[context_name]],
         var = .x,
-        group_var =
-          "dataset_source",
-        context_name =
-          context_name
+        group_var = "dataset_source",
+        context_name = context_name
       )
     )
   }
@@ -1141,15 +911,10 @@ by_subsample_distribution <- map_dfr(
     map_dfr(
       vars_to_summarise,
       ~ summarise_one_var_by_group(
-        data =
-          context_list[
-            [context_name]
-          ],
+        data = context_list[[context_name]],
         var = .x,
-        group_var =
-          "subsample",
-        context_name =
-          context_name
+        group_var = "subsample",
+        context_name = context_name
       )
     )
   }
@@ -1179,32 +944,27 @@ write_csv(
   )
 )
 
-
 sample_flow <- bind_rows(
   df_all,
   df_main,
   df_cluster
 ) %>%
   mutate(
-    comparison_region =
-      clean_category(
-        comparison_region
-      ),
+    comparison_region = clean_category(
+      comparison_region
+    ),
     
-    subsample =
-      clean_category(
-        subsample
-      ),
+    subsample = clean_category(
+      subsample
+    ),
     
-    dataset_source =
-      clean_category(
-        dataset_source
-      ),
+    dataset_source = clean_category(
+      dataset_source
+    ),
     
-    row_quality_final =
-      clean_category(
-        row_quality_final
-      )
+    row_quality_final = clean_category(
+      row_quality_final
+    )
   ) %>%
   count(
     sample_context,
@@ -1236,7 +996,6 @@ write_csv(
 
 
 # Autoclasificación RV
-
 self_classification_rv_distribution <- df %>%
   filter(
     dataset_source == "rv"
@@ -1252,15 +1011,13 @@ self_classification_rv_distribution <- df %>%
     name = "n"
   ) %>%
   mutate(
-    variable =
-      "self_classification_archetype_model",
+    variable = "self_classification_archetype_model",
     total_n = sum(n),
     prop = n / total_n
   ) %>%
   transmute(
     variable,
-    category =
-      self_classification_archetype_model,
+    category = self_classification_archetype_model,
     n,
     total_n,
     prop
@@ -1279,15 +1036,8 @@ write_csv(
 
 
 # Figuras pre-bootstrap
-
-for (
-  context_name in
-  names(context_list)
-) {
-  for (
-    var in
-    vars_to_summarise
-  ) {
+for (context_name in names(context_list)) {
+  for (var in vars_to_summarise) {
     plot_overall(
       overall_distribution,
       var,
@@ -1314,7 +1064,6 @@ for (
 
 
 # Bootstrap final 04_2f
-
 bootstrap_colnames <- names(
   read_csv(
     bootstrap_index_file,
@@ -1407,10 +1156,7 @@ boot_ids <- sort(
   )
 )
 
-if (
-  length(boot_ids) !=
-  EXPECTED_N_BOOT
-) {
+if (length(boot_ids) != EXPECTED_N_BOOT) {
   stop(
     "Se esperaban ",
     EXPECTED_N_BOOT,
@@ -1420,14 +1166,10 @@ if (
   )
 }
 
-if (
-  !identical(
-    boot_ids,
-    seq_len(
-      EXPECTED_N_BOOT
-    )
-  )
-) {
+if (!identical(
+  boot_ids,
+  seq_len(EXPECTED_N_BOOT)
+)) {
   stop(
     "Los bootstrap_id no son exactamente 1:",
     EXPECTED_N_BOOT,
@@ -1487,7 +1229,6 @@ if (length(wrong_subsamples)) {
 # df_boot_base es individual y tiene una fila por persona.
 # boot_index NO se deduplica porque las repeticiones forman parte
 # del muestreo bootstrap con reemplazo.
-
 df_boot_base <- df %>%
   distinct(
     integrated_row_id,
@@ -1524,16 +1265,13 @@ boot_df <- boot_index %>%
     df_boot_base %>%
       select(
         integrated_row_id,
-        all_of(
-          extra_df_cols
-        )
+        all_of(extra_df_cols)
       ),
     by = "integrated_row_id"
   )
 
 
 # Tamaños bootstrap
-
 bootstrap_sample_sizes <- bind_rows(
   boot_df %>%
     count(
@@ -1541,8 +1279,7 @@ bootstrap_sample_sizes <- bind_rows(
       name = "n_draws"
     ) %>%
     mutate(
-      analysis_sample =
-        "COMPLETE"
+      analysis_sample = "COMPLETE"
     ),
   
   boot_df %>%
@@ -1553,8 +1290,7 @@ bootstrap_sample_sizes <- bind_rows(
     ) %>%
     transmute(
       bootstrap_id,
-      analysis_sample =
-        comparison_region,
+      analysis_sample = comparison_region,
       n_draws
     ),
   
@@ -1566,8 +1302,7 @@ bootstrap_sample_sizes <- bind_rows(
     ) %>%
     transmute(
       bootstrap_id,
-      analysis_sample =
-        subsample,
+      analysis_sample = subsample,
       n_draws
     )
 ) %>%
@@ -1591,16 +1326,13 @@ bootstrap_sample_sizes <- bind_rows(
 
 bootstrap_sample_sizes_wide <- bootstrap_sample_sizes %>%
   mutate(
-    analysis_sample =
-      as.character(
-        analysis_sample
-      )
+    analysis_sample = as.character(
+      analysis_sample
+    )
   ) %>%
   pivot_wider(
-    names_from =
-      analysis_sample,
-    values_from =
-      n_draws,
+    names_from = analysis_sample,
+    values_from = n_draws,
     values_fill = 0
   )
 
@@ -1647,11 +1379,7 @@ bootstrap_structure_checks <- tibble(
   )
 )
 
-if (
-  any(
-    !bootstrap_structure_checks$passed
-  )
-) {
+if (any(!bootstrap_structure_checks$passed)) {
   print(
     bootstrap_structure_checks,
     n = Inf
@@ -1667,18 +1395,10 @@ bootstrap_sample_sizes_summary <- bootstrap_sample_sizes %>%
     analysis_sample
   ) %>%
   summarise(
-    mean_n = mean(
-      n_draws
-    ),
-    sd_n = sd(
-      n_draws
-    ),
-    min_n = min(
-      n_draws
-    ),
-    max_n = max(
-      n_draws
-    ),
+    mean_n = mean(n_draws),
+    sd_n = sd(n_draws),
+    min_n = min(n_draws),
+    max_n = max(n_draws),
     n_bootstraps = n_distinct(
       bootstrap_id
     ),
@@ -1711,7 +1431,6 @@ write_csv(
 
 
 # Distribuciones post-bootstrap
-
 bootstrap_specific_vars <- c(
   "bootstrap_source",
   "target_sample_type",
@@ -1788,9 +1507,7 @@ bootstrap_distribution_summary <- bootstrap_distribution %>%
   arrange(
     variable,
     analysis_sample,
-    desc(
-      mean_prop
-    ),
+    desc(mean_prop),
     category
   )
 
@@ -1812,11 +1529,7 @@ write_csv(
 
 
 # Figuras post-bootstrap
-
-for (
-  var in
-  boot_vars
-) {
+for (var in boot_vars) {
   p_data <- bootstrap_distribution_summary %>%
     filter(
       variable == var
@@ -1850,9 +1563,7 @@ for (
     8,
     min(
       16,
-      5 +
-        0.35 *
-        n_categories
+      5 + 0.35 * n_categories
     )
   )
   
@@ -1870,14 +1581,12 @@ for (
     geom_errorbar(
       aes(
         ymin = pmax(
-          mean_prop -
-            sd_prop,
+          mean_prop - sd_prop,
           0
         ),
         
         ymax = pmin(
-          mean_prop +
-            sd_prop,
+          mean_prop + sd_prop,
           1
         )
       ),
@@ -1947,9 +1656,7 @@ for (
       fig_dir,
       paste0(
         "postbootstrap_",
-        safe_filename(
-          var
-        ),
+        safe_filename(var),
         ".png"
       )
     ),
@@ -1962,7 +1669,6 @@ for (
 
 
 # Parámetros
-
 parameters <- tibble(
   parameter = c(
     "input_file",
@@ -2020,8 +1726,9 @@ write_csv(
 
 
 # Resumen
-
-cat("\n04_2g. DISTRIBUCIÓN SOCIODEMOGRÁFICA COMPLETADA\n")
+cat(
+  "\n04_2g. DISTRIBUCIÓN SOCIODEMOGRÁFICA COMPLETADA\n"
+)
 
 cat(
   "\nPRE-BOOTSTRAP",
@@ -2049,7 +1756,9 @@ print(
   width = Inf
 )
 
-cat("\nCHECKS DE ESTRUCTURA\n\n")
+cat(
+  "\nCHECKS DE ESTRUCTURA\n\n"
+)
 
 print(
   bootstrap_structure_checks,

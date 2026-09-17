@@ -1,0 +1,7 @@
+consensus_factor,id,determinants,mean_selection_frequency,mean_abs_loading
+1,EFA1,det_09_safety; det_11_knowledge; det_12_own_competence; det_15_self_satisfaction; det_18_autonomy; det_19_wellbeing; det_20_coziness; det_32_own_significance,0.68375,0.31052529384721994
+2,EFA2,det_22_peer_pressure; det_24_socialising; det_25_agreement; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,0.9,0.4634495476596996
+3,EFA3,det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_18_autonomy,0.67,0.27367655218460024
+4,EFA4,det_01_profits; det_03_risk_profile; det_05_frugality; det_09_safety; det_12_own_competence; det_15_self_satisfaction; det_16_commitment; det_17_adherence,0.585,0.2673784418724399
+5,EFA5,det_04_added_value; det_05_frugality; det_06_climate_protection; det_14_environmental_concerns; det_20_coziness; det_23_support; det_26_novelty; det_32_own_significance,0.80375,0.36860766822656543
+6,EFA6,det_02_credit_score; det_03_risk_profile; det_12_own_competence; det_18_autonomy; det_21_rights_and_duties; det_23_support; det_25_agreement; det_29_trends,0.57875,0.24479515442665914

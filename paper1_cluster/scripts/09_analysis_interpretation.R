@@ -1,25 +1,18 @@
-
-# Resumir y visualizar conjuntamente los resultados de:
-# - 06 K-means
-# - 07 EFA
-# - 08 Greedy
+# 
+# Objetivo
 #
-# Este script:
-# - compara COMPLETE, EUROPE, LATAM y cada submuestra;
-# - resume K-means para K = 2:8;
-# - resume EFA para F = 2:8;
+# Resumir y visualizar conjuntamente los resultados de 06 K-means,
+# 07 EFA y 08 Greedy para COMPLETE, EUROPE, LATAM y las cuatro submuestras.
+#
+# El script:
+# - resume K-means para K = 2:8 y EFA para F = 2:8;
 # - analiza Greedy para las cuatro matrices y ambas ponderaciones;
-# - estudia sensibilidad a D y Hamming;
-# - compara cobertura entre muestras;
-# - compara K-means y EFA como generadores de patrones.
+# - estudia la sensibilidad a D y al radio Hamming;
+# - compara cobertura entre muestras y K-means frente a EFA como generadores.
 #
-# IMPORTANTE:
-# Este bloque todavía no fija K, número de factores, D, Hamming
-# ni número final de prototipos.
-#
-# COMPLETE + RAW + D=8 + H=4 se utiliza únicamente como referencia
-# visual para facilitar la interpretación de algunos resultados.
-
+# COMPLETE + RAW + D=8 + H=4 se utiliza solo como referencia visual.
+# Este script todavía no fija K, número de factores, D, Hamming
+# ni el número final de prototipos.
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -27,59 +20,19 @@ suppressPackageStartupMessages({
 })
 
 # Configuración
-project_root <- path.expand(
-  "~/Desktop/MASTER/recommendation-engine/TFM"
-)
+project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
+processed_root <- file.path(project_root, "paper1_cluster/data/processed")
 
-processed_root <- file.path(
-  project_root,
-  "paper1_cluster/data/processed"
-)
+kmeans_dir <- file.path(processed_root, "06_kmeans_bootstrap")
+efa_dir <- file.path(processed_root, "07_efa_bootstrap")
+greedy_dir <- file.path(processed_root, "08_greedy_kmeans_efa")
 
-kmeans_dir <- file.path(
-  processed_root,
-  "06_kmeans_bootstrap"
-)
-
-efa_dir <- file.path(
-  processed_root,
-  "07_efa_bootstrap"
-)
-
-greedy_dir <- file.path(
-  processed_root,
-  "08_greedy_kmeans_efa"
-)
-
-out_dir <- file.path(
-  processed_root,
-  "09_analysis_plots"
-)
-
-fig_dir <- file.path(
-  out_dir,
-  "figures"
-)
-
-fig_kmeans_dir <- file.path(
-  fig_dir,
-  "kmeans"
-)
-
-fig_efa_dir <- file.path(
-  fig_dir,
-  "efa"
-)
-
-fig_greedy_dir <- file.path(
-  fig_dir,
-  "greedy"
-)
-
-fig_profiles_dir <- file.path(
-  fig_dir,
-  "profiles"
-)
+out_dir <- file.path(processed_root, "09_analysis_plots")
+fig_dir <- file.path(out_dir, "figures")
+fig_kmeans_dir <- file.path(fig_dir, "kmeans")
+fig_efa_dir <- file.path(fig_dir, "efa")
+fig_greedy_dir <- file.path(fig_dir, "greedy")
+fig_profiles_dir <- file.path(fig_dir, "profiles")
 
 walk(
   c(
@@ -124,12 +77,7 @@ REFERENCE_D_DET <- 8
 REFERENCE_D_HAMMING <- 4
 
 D_DET_GRID <- 8:15
-
-HAMMING_GRID_PLOT <- seq(
-  0,
-  10,
-  by = 2
-)
+HAMMING_GRID_PLOT <- seq(0, 10, by = 2)
 
 COVERAGE_THRESHOLDS_PLOT <- c(
   80,
@@ -150,7 +98,6 @@ SIMILARITY_MAX <- 85
 
 
 # Funciones auxiliares
-
 matrix_label <- function(x) {
   recode(
     x,
@@ -164,13 +111,8 @@ matrix_label <- function(x) {
 
 clean_determinant_label <- function(x) {
   x %>%
-    str_remove(
-      "^det_\\d+_"
-    ) %>%
-    str_replace_all(
-      "_",
-      " "
-    ) %>%
+    str_remove("^det_\\d+_") %>%
+    str_replace_all("_", " ") %>%
     str_to_sentence()
 }
 
@@ -212,11 +154,9 @@ theme_paper <- function(
     theme(
       panel.grid.minor = element_blank(),
       legend.position = "bottom",
-      
       strip.text = element_text(
         face = "bold"
       ),
-      
       plot.title = element_text(
         face = "bold"
       )
@@ -225,7 +165,6 @@ theme_paper <- function(
 
 
 # Inputs
-
 kmeans_metrics_file <- file.path(
   kmeans_dir,
   "kmeans_metrics_summary_all_samples.csv"
@@ -287,7 +226,6 @@ if (length(missing_files)) {
 
 
 # K-means
-
 kmeans_summary <- read_csv(
   kmeans_metrics_file,
   show_col_types = FALSE
@@ -301,7 +239,6 @@ kmeans_summary <- read_csv(
       analysis_sample,
       levels = ANALYSIS_SAMPLES
     ),
-    
     matrix = matrix_label(
       matrix_name
     )
@@ -337,8 +274,7 @@ if (length(missing_kmeans_cols)) {
 }
 
 
-# Ganancia marginal al aumentar K.
-
+# Ganancia marginal al aumentar K
 kmeans_delta <- kmeans_summary %>%
   group_by(
     analysis_sample,
@@ -370,8 +306,7 @@ kmeans_delta <- kmeans_summary %>%
   ungroup()
 
 
-# Diagnóstico del tamaño de los clusters.
-
+# Diagnóstico del tamaño de los clusters
 cluster_size_summary <- read_csv(
   kmeans_sizes_file,
   show_col_types = FALSE
@@ -381,7 +316,6 @@ cluster_size_summary <- read_csv(
       analysis_sample,
       levels = ANALYSIS_SAMPLES
     ),
-    
     matrix = matrix_label(
       matrix_name
     )
@@ -399,12 +333,10 @@ cluster_size_diagnostic <- cluster_size_summary %>%
       mean_prop_cluster,
       na.rm = TRUE
     ),
-    
     min_observed_cluster_n = min(
       min_n_cluster,
       na.rm = TRUE
     ),
-    
     .groups = "drop"
   )
 
@@ -424,12 +356,10 @@ write_output(
 )
 
 
-# Figuras K-means para COMPLETE.
-
+# Figuras K-means para COMPLETE
 complete_kmeans <- kmeans_summary %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE
+    analysis_sample == REFERENCE_SAMPLE
   )
 
 p_kmeans_between <- ggplot(
@@ -452,12 +382,10 @@ p_kmeans_between <- ggplot(
   ) +
   labs(
     title = "K-means - COMPLETE - Between / Total",
-    
     subtitle = paste(
       "Diagnostic only; increasing K normally increases",
       "explained between-cluster variation"
     ),
-    
     x = "Number of clusters (K)",
     y = "Between SS / Total SS"
   ) +
@@ -527,10 +455,7 @@ p_kmeans_silhouette <- ggplot(
   ) +
   labs(
     title = "K-means - COMPLETE - Silhouette",
-    
-    subtitle =
-      "Higher values indicate clearer separation between clusters",
-    
+    subtitle = "Higher values indicate clearer separation between clusters",
     x = "Number of clusters (K)",
     y = "Mean silhouette"
   ) +
@@ -547,8 +472,7 @@ save_plot(
 )
 
 
-# Comparación de silhouette entre muestras y matrices.
-
+# Comparación de silhouette entre muestras y matrices
 p_kmeans_samples <- ggplot(
   kmeans_summary,
   aes(
@@ -588,7 +512,6 @@ save_plot(
 
 
 # EFA
-
 efa_summary <- read_csv(
   efa_summary_file,
   show_col_types = FALSE
@@ -602,7 +525,6 @@ efa_summary <- read_csv(
       analysis_sample,
       levels = ANALYSIS_SAMPLES
     ),
-    
     matrix = matrix_label(
       matrix_name
     )
@@ -615,13 +537,11 @@ write_output(
 
 complete_efa <- efa_summary %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE
+    analysis_sample == REFERENCE_SAMPLE
   )
 
 
-# BIC por número de factores.
-
+# BIC por número de factores
 p_efa_bic <- ggplot(
   complete_efa,
   aes(
@@ -642,10 +562,7 @@ p_efa_bic <- ggplot(
   ) +
   labs(
     title = "EFA - COMPLETE - BIC",
-    
-    subtitle =
-      "Lower BIC is preferred within the same matrix transformation",
-    
+    subtitle = "Lower BIC is preferred within the same matrix transformation",
     x = "Number of factors",
     y = "Mean BIC"
   ) +
@@ -662,8 +579,7 @@ save_plot(
 )
 
 
-# Métricas de ajuste EFA.
-
+# Métricas de ajuste EFA
 efa_fit_long <- complete_efa %>%
   select(
     matrix,
@@ -730,8 +646,7 @@ save_plot(
 )
 
 
-# Comparación del BIC entre muestras.
-
+# Comparación del BIC entre muestras
 p_efa_samples <- ggplot(
   efa_summary,
   aes(
@@ -771,7 +686,6 @@ save_plot(
 
 
 # Greedy
-
 greedy_steps <- read_csv(
   greedy_steps_file,
   show_col_types = FALSE
@@ -781,7 +695,6 @@ greedy_steps <- read_csv(
       analysis_sample,
       levels = ANALYSIS_SAMPLES
     ),
-    
     matrix = matrix_label(
       matrix_name
     )
@@ -796,7 +709,6 @@ greedy_prevalence <- read_csv(
       analysis_sample,
       levels = ANALYSIS_SAMPLES
     ),
-    
     matrix = matrix_label(
       matrix_name
     )
@@ -816,7 +728,6 @@ greedy_thresholds <- read_csv(
       analysis_sample,
       levels = ANALYSIS_SAMPLES
     ),
-    
     matrix = matrix_label(
       matrix_name
     )
@@ -825,56 +736,30 @@ greedy_thresholds <- read_csv(
 
 # Referencia provisional para estudiar sensibilidad D × Hamming.
 # No representa una selección definitiva de parámetros.
-
 greedy_reference_steps <- greedy_steps %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE,
-    
-    weighting ==
-      REFERENCE_WEIGHTING,
-    
-    method ==
-      REFERENCE_METHOD,
-    
-    matrix_name ==
-      REFERENCE_MATRIX,
-    
-    d_det %in%
-      D_DET_GRID,
-    
-    d_hamming %in%
-      HAMMING_GRID_PLOT
+    analysis_sample == REFERENCE_SAMPLE,
+    weighting == REFERENCE_WEIGHTING,
+    method == REFERENCE_METHOD,
+    matrix_name == REFERENCE_MATRIX,
+    d_det %in% D_DET_GRID,
+    d_hamming %in% HAMMING_GRID_PLOT
   )
 
 greedy_reference_thresholds <- greedy_thresholds %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE,
-    
-    weighting ==
-      REFERENCE_WEIGHTING,
-    
-    method ==
-      REFERENCE_METHOD,
-    
-    matrix_name ==
-      REFERENCE_MATRIX,
-    
-    coverage_threshold %in%
-      COVERAGE_THRESHOLDS_PLOT,
-    
-    d_det %in%
-      D_DET_GRID,
-    
-    d_hamming %in%
-      HAMMING_GRID_PLOT
+    analysis_sample == REFERENCE_SAMPLE,
+    weighting == REFERENCE_WEIGHTING,
+    method == REFERENCE_METHOD,
+    matrix_name == REFERENCE_MATRIX,
+    coverage_threshold %in% COVERAGE_THRESHOLDS_PLOT,
+    d_det %in% D_DET_GRID,
+    d_hamming %in% HAMMING_GRID_PLOT
   )
 
 
 # Sensibilidad D × Hamming:
 # número de prototipos necesarios para alcanzar cada nivel de cobertura.
-
 threshold_wide <- greedy_reference_thresholds %>%
   select(
     d_det,
@@ -885,23 +770,17 @@ threshold_wide <- greedy_reference_thresholds %>%
     first_prototype_reaching_threshold
   ) %>%
   pivot_wider(
-    names_from =
-      coverage_threshold,
-    
-    values_from =
-      first_prototype_reaching_threshold,
-    
-    names_prefix =
-      "prototypes_for_"
+    names_from = coverage_threshold,
+    values_from = first_prototype_reaching_threshold,
+    names_prefix = "prototypes_for_"
   )
 
 
-# Cobertura obtenida con 6, 7 y 8 prototipos.
+# Cobertura obtenida con 6, 7 y 8 prototipos
 
 coverage_fixed <- greedy_reference_steps %>%
   filter(
-    prototype %in%
-      PROTOTYPES_OF_INTEREST
+    prototype %in% PROTOTYPES_OF_INTEREST
   ) %>%
   select(
     d_det,
@@ -910,14 +789,9 @@ coverage_fixed <- greedy_reference_steps %>%
     cumulative_covered_pct
   ) %>%
   pivot_wider(
-    names_from =
-      prototype,
-    
-    values_from =
-      cumulative_covered_pct,
-    
-    names_prefix =
-      "coverage_with_"
+    names_from = prototype,
+    values_from = cumulative_covered_pct,
+    names_prefix = "coverage_with_"
   )
 
 greedy_sensitivity_table <- threshold_wide %>%
@@ -939,8 +813,7 @@ write_output(
 )
 
 
-# Heatmap: número de prototipos necesarios para cada cobertura.
-
+# Heatmap: número de prototipos necesarios para cada cobertura
 max_prototypes_available <- max(
   greedy_reference_steps$prototype,
   na.rm = TRUE
@@ -957,12 +830,10 @@ threshold_heatmap_data <- greedy_reference_thresholds %>%
       is.na(
         first_prototype_reaching_threshold
       ),
-      
       paste0(
         ">",
         max_prototypes_available
       ),
-      
       as.character(
         first_prototype_reaching_threshold
       )
@@ -975,13 +846,10 @@ p_threshold_heatmap <- ggplot(
     x = factor(
       d_hamming
     ),
-    
     y = factor(
       d_det
     ),
-    
-    fill =
-      first_prototype_reaching_threshold
+    fill = first_prototype_reaching_threshold
   )
 ) +
   geom_tile(
@@ -999,14 +867,11 @@ p_threshold_heatmap <- ggplot(
     nrow = 1
   ) +
   labs(
-    title =
-      "Greedy - COMPLETE - prototypes needed",
-    
+    title = "Greedy - COMPLETE - prototypes needed",
     subtitle = paste0(
       "K-means RAW | weighting = ",
       REFERENCE_WEIGHTING
     ),
-    
     x = "Hamming radius",
     y = "Selected determinants (D)",
     fill = "Prototypes"
@@ -1026,12 +891,10 @@ save_plot(
 )
 
 
-# Heatmap de cobertura con 6, 7 y 8 prototipos.
-
+# Heatmap de cobertura con 6, 7 y 8 prototipos
 fixed_profiles_plot_data <- greedy_reference_steps %>%
   filter(
-    prototype %in%
-      PROTOTYPES_OF_INTEREST
+    prototype %in% PROTOTYPES_OF_INTEREST
   ) %>%
   mutate(
     prototype_label = paste0(
@@ -1046,13 +909,10 @@ p_fixed_profiles <- ggplot(
     x = factor(
       d_hamming
     ),
-    
     y = factor(
       d_det
     ),
-    
-    fill =
-      cumulative_covered_pct
+    fill = cumulative_covered_pct
   )
 ) +
   geom_tile(
@@ -1076,14 +936,11 @@ p_fixed_profiles <- ggplot(
     nrow = 1
   ) +
   labs(
-    title =
-      "Greedy - COMPLETE - coverage with 6, 7 and 8 prototypes",
-    
+    title = "Greedy - COMPLETE - coverage with 6, 7 and 8 prototypes",
     subtitle = paste0(
       "K-means RAW | weighting = ",
       REFERENCE_WEIGHTING
     ),
-    
     x = "Hamming radius",
     y = "Selected determinants (D)",
     fill = "Coverage (%)"
@@ -1103,27 +960,15 @@ save_plot(
 )
 
 
-# Comparación entre muestras con la referencia provisional D=8, H=4.
-
+# Comparación entre muestras con la referencia provisional D=8, H=4
 sample_comparison <- greedy_thresholds %>%
   filter(
-    weighting ==
-      REFERENCE_WEIGHTING,
-    
-    method ==
-      REFERENCE_METHOD,
-    
-    matrix_name ==
-      REFERENCE_MATRIX,
-    
-    d_det ==
-      REFERENCE_D_DET,
-    
-    d_hamming ==
-      REFERENCE_D_HAMMING,
-    
-    coverage_threshold %in%
-      COVERAGE_THRESHOLDS_PLOT
+    weighting == REFERENCE_WEIGHTING,
+    method == REFERENCE_METHOD,
+    matrix_name == REFERENCE_MATRIX,
+    d_det == REFERENCE_D_DET,
+    d_hamming == REFERENCE_D_HAMMING,
+    coverage_threshold %in% COVERAGE_THRESHOLDS_PLOT
   ) %>%
   select(
     analysis_sample,
@@ -1141,14 +986,10 @@ p_sample_comparison <- ggplot(
   sample_comparison,
   aes(
     x = analysis_sample,
-    
-    y =
-      first_prototype_reaching_threshold,
-    
+    y = first_prototype_reaching_threshold,
     group = factor(
       coverage_threshold
     ),
-    
     color = factor(
       coverage_threshold
     )
@@ -1159,12 +1000,8 @@ p_sample_comparison <- ggplot(
     size = 2.5
   ) +
   labs(
-    title =
-      "Greedy comparison across samples",
-    
-    subtitle =
-      "K-means RAW | D=8 | Hamming=4 | equal_candidate",
-    
+    title = "Greedy comparison across samples",
+    subtitle = "K-means RAW | D=8 | Hamming=4 | equal_candidate",
     x = "Analysis sample",
     y = "Prototypes required",
     color = "Coverage target"
@@ -1188,24 +1025,14 @@ save_plot(
 )
 
 
-# Comparación entre K-means y EFA como generadores de patrones.
-
+# Comparación entre K-means y EFA como generadores de patrones
 method_comparison <- greedy_thresholds %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE,
-    
-    weighting ==
-      REFERENCE_WEIGHTING,
-    
-    d_det ==
-      REFERENCE_D_DET,
-    
-    d_hamming ==
-      REFERENCE_D_HAMMING,
-    
-    coverage_threshold %in%
-      COVERAGE_THRESHOLDS_PLOT
+    analysis_sample == REFERENCE_SAMPLE,
+    weighting == REFERENCE_WEIGHTING,
+    d_det == REFERENCE_D_DET,
+    d_hamming == REFERENCE_D_HAMMING,
+    coverage_threshold %in% COVERAGE_THRESHOLDS_PLOT
   ) %>%
   select(
     method,
@@ -1225,10 +1052,7 @@ p_method_comparison <- ggplot(
     x = factor(
       coverage_threshold
     ),
-    
-    y =
-      first_prototype_reaching_threshold,
-    
+    y = first_prototype_reaching_threshold,
     group = method,
     color = method
   )
@@ -1241,12 +1065,8 @@ p_method_comparison <- ggplot(
     ~ matrix
   ) +
   labs(
-    title =
-      "Greedy - K-means vs EFA",
-    
-    subtitle =
-      "COMPLETE | D=8 | Hamming=4 | equal_candidate",
-    
+    title = "Greedy - K-means vs EFA",
+    subtitle = "COMPLETE | D=8 | Hamming=4 | equal_candidate",
     x = "Coverage target (%)",
     y = "Prototypes required",
     color = "Generator"
@@ -1264,27 +1084,15 @@ save_plot(
 )
 
 
-# Sensibilidad a la forma de ponderar el pool Greedy.
-
+# Sensibilidad a la forma de ponderar el pool Greedy
 weighting_comparison <- greedy_thresholds %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE,
-    
-    method ==
-      REFERENCE_METHOD,
-    
-    matrix_name ==
-      REFERENCE_MATRIX,
-    
-    d_det %in%
-      D_DET_GRID,
-    
-    d_hamming %in%
-      HAMMING_GRID_PLOT,
-    
-    coverage_threshold %in%
-      COVERAGE_THRESHOLDS_PLOT
+    analysis_sample == REFERENCE_SAMPLE,
+    method == REFERENCE_METHOD,
+    matrix_name == REFERENCE_MATRIX,
+    d_det %in% D_DET_GRID,
+    d_hamming %in% HAMMING_GRID_PLOT,
+    coverage_threshold %in% COVERAGE_THRESHOLDS_PLOT
   ) %>%
   select(
     weighting,
@@ -1294,11 +1102,8 @@ weighting_comparison <- greedy_thresholds %>%
     first_prototype_reaching_threshold
   ) %>%
   pivot_wider(
-    names_from =
-      weighting,
-    
-    values_from =
-      first_prototype_reaching_threshold
+    names_from = weighting,
+    values_from = first_prototype_reaching_threshold
   ) %>%
   mutate(
     both_not_reached =
@@ -1310,8 +1115,7 @@ weighting_comparison <- greedy_thresholds %>%
       ),
     
     same_result = case_when(
-      both_not_reached ~
-        TRUE,
+      both_not_reached ~ TRUE,
       
       !is.na(
         equal_element
@@ -1322,8 +1126,7 @@ weighting_comparison <- greedy_thresholds %>%
         equal_element ==
         equal_candidate,
       
-      TRUE ~
-        FALSE
+      TRUE ~ FALSE
     ),
     
     difference_candidate_minus_element =
@@ -1378,27 +1181,15 @@ write_output(
 )
 
 
-# Figura de comparación entre ponderaciones para D=8 y H=4.
-
+# Figura de comparación entre ponderaciones para D=8 y H=4
 weighting_reference_plot_data <- greedy_thresholds %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE,
-    
-    method ==
-      REFERENCE_METHOD,
-    
-    matrix_name ==
-      REFERENCE_MATRIX,
-    
-    d_det ==
-      REFERENCE_D_DET,
-    
-    d_hamming ==
-      REFERENCE_D_HAMMING,
-    
-    coverage_threshold %in%
-      COVERAGE_THRESHOLDS_PLOT
+    analysis_sample == REFERENCE_SAMPLE,
+    method == REFERENCE_METHOD,
+    matrix_name == REFERENCE_MATRIX,
+    d_det == REFERENCE_D_DET,
+    d_hamming == REFERENCE_D_HAMMING,
+    coverage_threshold %in% COVERAGE_THRESHOLDS_PLOT
   )
 
 p_weighting <- ggplot(
@@ -1407,10 +1198,7 @@ p_weighting <- ggplot(
     x = factor(
       coverage_threshold
     ),
-    
-    y =
-      first_prototype_reaching_threshold,
-    
+    y = first_prototype_reaching_threshold,
     fill = weighting
   )
 ) +
@@ -1421,12 +1209,8 @@ p_weighting <- ggplot(
     width = 0.7
   ) +
   labs(
-    title =
-      "Greedy sensitivity to pool weighting",
-    
-    subtitle =
-      "COMPLETE | K-means RAW | D=8 | Hamming=4",
-    
+    title = "Greedy sensitivity to pool weighting",
+    subtitle = "COMPLETE | K-means RAW | D=8 | Hamming=4",
     x = "Coverage target (%)",
     y = "Prototypes required",
     fill = "Weighting"
@@ -1446,25 +1230,17 @@ save_plot(
 
 # Para cada D, seleccionar el mayor radio Hamming que todavía garantiza
 # al menos un 75% de determinantes comunes entre patrón y prototipo.
-
 hamming_reference <- hamming_interpretation %>%
   filter(
-    d_det %in%
-      D_DET_GRID,
-    
-    d_hamming %in%
-      HAMMING_GRID_PLOT,
-    
-    min_common_pct >=
-      REFERENCE_COMMON_PCT
+    d_det %in% D_DET_GRID,
+    d_hamming %in% HAMMING_GRID_PLOT,
+    min_common_pct >= REFERENCE_COMMON_PCT
   ) %>%
   group_by(
     d_det
   ) %>%
   slice_max(
-    order_by =
-      d_hamming,
-    
+    order_by = d_hamming,
     n = 1,
     with_ties = FALSE
   ) %>%
@@ -1485,25 +1261,15 @@ write_output(
 )
 
 
-# Cobertura obtenida utilizando la referencia de >=75% de
-# determinantes comunes para cada D.
-
+# Cobertura obtenida utilizando la referencia de >=75%
+# de determinantes comunes para cada D.
 reference_thresholds <- greedy_thresholds %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE,
-    
-    weighting ==
-      REFERENCE_WEIGHTING,
-    
-    method ==
-      REFERENCE_METHOD,
-    
-    matrix_name ==
-      REFERENCE_MATRIX,
-    
-    coverage_threshold %in%
-      COVERAGE_THRESHOLDS_PLOT
+    analysis_sample == REFERENCE_SAMPLE,
+    weighting == REFERENCE_WEIGHTING,
+    method == REFERENCE_METHOD,
+    matrix_name == REFERENCE_MATRIX,
+    coverage_threshold %in% COVERAGE_THRESHOLDS_PLOT
   ) %>%
   inner_join(
     hamming_reference,
@@ -1519,23 +1285,15 @@ reference_thresholds <- greedy_thresholds %>%
   select(
     d_det,
     d_hamming,
-    
-    min_common_pct =
-      min_common_pct_reference,
-    
+    min_common_pct = min_common_pct_reference,
     coverage_threshold,
     first_prototype_reaching_threshold,
     max_coverage_available
   ) %>%
   pivot_wider(
-    names_from =
-      coverage_threshold,
-    
-    values_from =
-      first_prototype_reaching_threshold,
-    
-    names_prefix =
-      "prototypes_for_"
+    names_from = coverage_threshold,
+    values_from = first_prototype_reaching_threshold,
+    names_prefix = "prototypes_for_"
   ) %>%
   arrange(
     d_det
@@ -1548,17 +1306,11 @@ write_output(
 
 
 # Zona candidata con similitud entre 75% y 85%.
-#
-# Se conserva únicamente como diagnóstico para facilitar la comparación
-# entre combinaciones D × Hamming; todavía no selecciona una solución final.
-
+# Se conserva solo como diagnóstico y no selecciona una solución final.
 candidate_thresholds <- greedy_reference_thresholds %>%
   filter(
-    min_common_pct >=
-      SIMILARITY_MIN,
-    
-    min_common_pct <=
-      SIMILARITY_MAX
+    min_common_pct >= SIMILARITY_MIN,
+    min_common_pct <= SIMILARITY_MAX
   ) %>%
   select(
     d_det,
@@ -1568,26 +1320,16 @@ candidate_thresholds <- greedy_reference_thresholds %>%
     first_prototype_reaching_threshold
   ) %>%
   pivot_wider(
-    names_from =
-      coverage_threshold,
-    
-    values_from =
-      first_prototype_reaching_threshold,
-    
-    names_prefix =
-      "prototypes_for_"
+    names_from = coverage_threshold,
+    values_from = first_prototype_reaching_threshold,
+    names_prefix = "prototypes_for_"
   )
 
 candidate_fixed_profiles <- greedy_reference_steps %>%
   filter(
-    min_common_pct >=
-      SIMILARITY_MIN,
-    
-    min_common_pct <=
-      SIMILARITY_MAX,
-    
-    prototype %in%
-      PROTOTYPES_OF_INTEREST
+    min_common_pct >= SIMILARITY_MIN,
+    min_common_pct <= SIMILARITY_MAX,
+    prototype %in% PROTOTYPES_OF_INTEREST
   ) %>%
   select(
     d_det,
@@ -1597,14 +1339,9 @@ candidate_fixed_profiles <- greedy_reference_steps %>%
     cumulative_covered_pct
   ) %>%
   pivot_wider(
-    names_from =
-      prototype,
-    
-    values_from =
-      cumulative_covered_pct,
-    
-    names_prefix =
-      "coverage_with_"
+    names_from = prototype,
+    values_from = cumulative_covered_pct,
+    names_prefix = "coverage_with_"
   )
 
 greedy_candidate_zone <- candidate_thresholds %>%
@@ -1629,34 +1366,20 @@ write_output(
 
 # Estabilidad de los determinantes dentro de los prototipos provisionales
 # de la configuración de referencia.
-
 profile_reference <- greedy_prevalence %>%
   filter(
-    analysis_sample ==
-      REFERENCE_SAMPLE,
-    
-    weighting ==
-      REFERENCE_WEIGHTING,
-    
-    method ==
-      REFERENCE_METHOD,
-    
-    matrix_name ==
-      REFERENCE_MATRIX,
-    
-    d_det ==
-      REFERENCE_D_DET,
-    
-    d_hamming ==
-      REFERENCE_D_HAMMING,
-    
+    analysis_sample == REFERENCE_SAMPLE,
+    weighting == REFERENCE_WEIGHTING,
+    method == REFERENCE_METHOD,
+    matrix_name == REFERENCE_MATRIX,
+    d_det == REFERENCE_D_DET,
+    d_hamming == REFERENCE_D_HAMMING,
     prototype <= 8
   ) %>%
   mutate(
-    determinant_label =
-      clean_determinant_label(
-        determinant
-      )
+    determinant_label = clean_determinant_label(
+      determinant
+    )
   )
 
 if (nrow(profile_reference)) {
@@ -1669,7 +1392,6 @@ if (nrow(profile_reference)) {
         pct_active_in_ball,
         na.rm = TRUE
       ),
-      
       .groups = "drop"
     ) %>%
     arrange(
@@ -1693,12 +1415,8 @@ if (nrow(profile_reference)) {
       x = factor(
         prototype
       ),
-      
-      y =
-        determinant_label,
-      
-      fill =
-        pct_active_in_ball
+      y = determinant_label,
+      fill = pct_active_in_ball
     )
   ) +
     geom_tile(
@@ -1709,26 +1427,20 @@ if (nrow(profile_reference)) {
       aes(
         label = if_else(
           pct_active_in_ball >= 50,
-          
           paste0(
             round(
               pct_active_in_ball
             ),
             "%"
           ),
-          
           ""
         )
       ),
       size = 2.5
     ) +
     labs(
-      title =
-        "Determinant stability within provisional Greedy prototypes",
-      
-      subtitle =
-        "COMPLETE | K-means RAW | D=8 | Hamming=4 | equal_candidate",
-      
+      title = "Determinant stability within provisional Greedy prototypes",
+      subtitle = "COMPLETE | K-means RAW | D=8 | Hamming=4 | equal_candidate",
       x = "Greedy prototype",
       y = "Determinant",
       fill = "% present"
@@ -1750,19 +1462,19 @@ if (nrow(profile_reference)) {
 
 
 # Resumen en consola
+cat(
+  "\n09. ANÁLISIS Y GRÁFICOS COMPLETADO\n"
+)
 
-cat("\n09. ANÁLISIS Y GRÁFICOS COMPLETADO\n")
-
-cat("\nK-MEANS - COMPLETE - RAW\n\n")
+cat(
+  "\nK-MEANS - COMPLETE - RAW\n\n"
+)
 
 print(
   kmeans_summary %>%
     filter(
-      analysis_sample ==
-        REFERENCE_SAMPLE,
-      
-      matrix_name ==
-        REFERENCE_MATRIX
+      analysis_sample == REFERENCE_SAMPLE,
+      matrix_name == REFERENCE_MATRIX
     ) %>%
     select(
       k,
@@ -1776,16 +1488,15 @@ print(
   width = Inf
 )
 
-cat("\nEFA - COMPLETE - RAW\n\n")
+cat(
+  "\nEFA - COMPLETE - RAW\n\n"
+)
 
 print(
   efa_summary %>%
     filter(
-      analysis_sample ==
-        REFERENCE_SAMPLE,
-      
-      matrix_name ==
-        REFERENCE_MATRIX
+      analysis_sample == REFERENCE_SAMPLE,
+      matrix_name == REFERENCE_MATRIX
     ) %>%
     select(
       n_factors,
@@ -1811,7 +1522,9 @@ print(
   width = Inf
 )
 
-cat("\nGREEDY - ROBUSTEZ A PONDERACIÓN\n\n")
+cat(
+  "\nGREEDY - ROBUSTEZ A PONDERACIÓN\n\n"
+)
 
 print(
   weighting_robustness_summary,

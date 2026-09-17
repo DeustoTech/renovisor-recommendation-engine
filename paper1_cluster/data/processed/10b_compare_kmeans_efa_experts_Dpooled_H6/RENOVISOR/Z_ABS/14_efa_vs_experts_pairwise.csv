@@ -1,0 +1,49 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Activist,8,6,4,50,66.66666666666667,40,det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+EFA1,Careful,8,12,4,50,33.333333333333336,25,det_11_knowledge; det_12_own_competence; det_16_commitment; det_17_adherence
+EFA1,Early.Adopter,8,6,3,37.5,50,27.272727272727273,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+EFA1,Fearful,8,9,2,25,22.22222222222222,13.333333333333334,det_11_knowledge; det_13_technical_fit
+EFA1,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+EFA1,Influencer,8,5,1,12.5,20,8.333333333333334,det_11_knowledge
+EFA1,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+EFA1,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_13_technical_fit
+EFA2,Activist,8,6,3,37.5,50,27.272727272727273,det_08_trust; det_13_technical_fit; det_17_adherence
+EFA2,Careful,8,12,4,50,33.333333333333336,25,det_02_credit_score; det_08_trust; det_09_safety; det_17_adherence
+EFA2,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_17_adherence
+EFA2,Fearful,8,9,5,62.5,55.55555555555556,41.666666666666664,det_02_credit_score; det_07_legal; det_08_trust; det_09_safety; det_13_technical_fit
+EFA2,Homo.Economicus,8,9,4,50,44.44444444444444,30.76923076923077,det_07_legal; det_08_trust; det_09_safety; det_13_technical_fit
+EFA2,Influencer,8,5,0,0,0,0,
+EFA2,Stubborn,8,3,1,12.5,33.333333333333336,10,det_17_adherence
+EFA2,Uninterested,8,6,3,37.5,50,27.272727272727273,det_07_legal; det_13_technical_fit; det_20_coziness
+EFA3,Activist,8,6,0,0,0,0,
+EFA3,Careful,8,12,2,25,16.666666666666668,11.11111111111111,det_02_credit_score; det_19_wellbeing
+EFA3,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_26_novelty
+EFA3,Fearful,8,9,2,25,22.22222222222222,13.333333333333334,det_02_credit_score; det_19_wellbeing
+EFA3,Homo.Economicus,8,9,0,0,0,0,
+EFA3,Influencer,8,5,0,0,0,0,
+EFA3,Stubborn,8,3,0,0,0,0,
+EFA3,Uninterested,8,6,2,25,33.333333333333336,16.666666666666668,det_19_wellbeing; det_20_coziness
+EFA4,Activist,8,6,0,0,0,0,
+EFA4,Careful,8,12,0,0,0,0,
+EFA4,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_29_trends
+EFA4,Fearful,8,9,0,0,0,0,
+EFA4,Homo.Economicus,8,9,0,0,0,0,
+EFA4,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+EFA4,Stubborn,8,3,0,0,0,0,
+EFA4,Uninterested,8,6,2,25,33.333333333333336,16.666666666666668,det_22_peer_pressure; det_30_authority
+EFA5,Activist,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_17_adherence
+EFA5,Careful,8,12,4,50,33.333333333333336,25,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_17_adherence
+EFA5,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_17_adherence
+EFA5,Fearful,8,9,3,37.5,33.333333333333336,21.428571428571427,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency
+EFA5,Homo.Economicus,8,9,2,25,22.22222222222222,13.333333333333334,det_01_profits; det_10_cost_efficiency
+EFA5,Influencer,8,5,0,0,0,0,
+EFA5,Stubborn,8,3,1,12.5,33.333333333333336,10,det_17_adherence
+EFA5,Uninterested,8,6,0,0,0,0,
+EFA6,Activist,8,6,3,37.5,50,27.272727272727273,det_08_trust; det_14_environmental_concerns; det_17_adherence
+EFA6,Careful,8,12,4,50,33.333333333333336,25,det_06_climate_protection; det_08_trust; det_14_environmental_concerns; det_17_adherence
+EFA6,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_17_adherence
+EFA6,Fearful,8,9,2,25,22.22222222222222,13.333333333333334,det_07_legal; det_08_trust
+EFA6,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_04_added_value; det_07_legal; det_08_trust
+EFA6,Influencer,8,5,0,0,0,0,
+EFA6,Stubborn,8,3,1,12.5,33.333333333333336,10,det_17_adherence
+EFA6,Uninterested,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_07_legal

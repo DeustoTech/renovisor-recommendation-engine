@@ -1,0 +1,9 @@
+kmeans_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM4,Activist,12,6,5,41.666666666666664,83.33333333333333,38.46153846153846,det_08_trust; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+KM4,Careful,12,12,8,66.66666666666667,66.66666666666667,50,det_02_credit_score; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_16_commitment; det_17_adherence; det_19_wellbeing
+KM3,Early.Adopter,15,6,4,26.666666666666668,66.66666666666667,23.529411764705884,det_11_knowledge; det_15_self_satisfaction; det_17_adherence; det_29_trends
+KM4,Fearful,12,9,6,50,66.66666666666667,40,det_02_credit_score; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+KM4,Homo.Economicus,12,9,6,50,66.66666666666667,40,det_01_profits; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+KM1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+KM4,Stubborn,12,3,3,25,100,25,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+KM5,Uninterested,13,6,4,30.76923076923077,66.66666666666667,26.666666666666668,det_13_technical_fit; det_19_wellbeing; det_20_coziness; det_30_authority

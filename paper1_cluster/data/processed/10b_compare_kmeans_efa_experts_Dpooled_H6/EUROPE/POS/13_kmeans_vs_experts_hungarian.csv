@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct
+KM1,Careful,50
+KM2,Activist,75
+KM3,Homo.Economicus,50
+KM4,Fearful,70
+KM5,Stubborn,22.22222222222222
+KM6,Early.Adopter,23.529411764705884

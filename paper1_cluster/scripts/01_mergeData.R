@@ -330,7 +330,6 @@ rv_by_participant <- rv_all_rows %>%
 
 
 # Prolific
-
 read_prolific_file <- function(path) {
   raw <- read_csv(
     path,

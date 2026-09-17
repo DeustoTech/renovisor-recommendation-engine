@@ -1,7 +1,9 @@
+# 
+# Objetivo
 # Scores de dimensiones por fase
 #
 # Añade al dataset de calidad variables derivadas de los bloques de
-# decisión de RV Decision y de los 32 determinantes armonizados.
+# decisión de RV Decision y de los 32 determinantes armonizados
 #
 # Fases utilizadas:
 #   phase_implemented_reasons -> Implementada
@@ -19,9 +21,6 @@
 # principalmente en RENOVISOR. DIEGO, WHY_EUROPE y WHY_LATAM se
 # mantienen en el dataset aunque no tengan respuestas de fase.
 #
-# Este script es pre-bootstrap y no modifica el número ni el orden
-# de los participantes.
-
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -29,7 +28,6 @@ suppressPackageStartupMessages({
 
 
 # Configuración
-
 processed_root <- "paper1_cluster/data/processed"
 
 in_file <- file.path(
@@ -62,7 +60,6 @@ df <- read_csv(
 
 
 # Comprobaciones
-
 required_traceability_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -111,7 +108,6 @@ input_traceability <- df %>%
 
 
 # Funciones auxiliares
-
 clean_text <- function(x) {
   x <- str_squish(as.character(x))
   
@@ -168,7 +164,6 @@ make_quality_label <- function(
 
 
 # Fases
-
 phase_specs <- tribble(
   ~phase_prefix, ~phase_label, ~source_column,
   
@@ -199,7 +194,6 @@ if (length(missing_phase_cols)) {
 
 
 # Dimensiones y determinantes
-
 dimension_determinants <- list(
   FINANCIAL = c(
     "det_01_profits",
@@ -313,7 +307,6 @@ det_dimensions <- dimension_determinant_map$dimension[
 
 
 # Features de fase
-
 add_phase_features <- function(
     data,
     phase_prefix,
@@ -620,7 +613,6 @@ add_phase_features <- function(
 
 
 # Crear features
-
 phase_features_df <- pmap(
   phase_specs,
   function(
@@ -717,7 +709,6 @@ df_enriched <- df_enriched %>%
 
 
 # Trazabilidad
-
 if (nrow(df_enriched) != nrow(df)) {
   stop(
     "El número de filas ha cambiado. Input = ",
@@ -768,7 +759,6 @@ if (
 
 
 # Diagnósticos
-
 diagnostics_dataset_integrity <- tibble(
   metric = c(
     "n_input_rows",
@@ -956,8 +946,7 @@ diagnostics_phase_columns_by_source <- phase_coverage(
 )
 
 
-# POOLED_ALL se utiliza aquí únicamente como resumen pre-bootstrap.
-
+# POOLED_ALL se utiliza aquí únicamente como resumen pre-bootstrap
 df_phase_analysis <- bind_rows(
   df_enriched %>%
     mutate(
@@ -1332,7 +1321,6 @@ diagnostics_phase_scores_summary_by_source <- summarise_score_table(
 
 
 # Guardado
-
 outputs <- list(
   "all_sources_integrated_component_quality_phase_scores.csv" =
     df_enriched,
@@ -1396,7 +1384,6 @@ iwalk(
 
 
 # Resumen
-
 cat("\nINTEGRIDAD DEL DATASET\n")
 
 print(

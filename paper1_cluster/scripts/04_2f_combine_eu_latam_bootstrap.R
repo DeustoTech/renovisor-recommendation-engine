@@ -1,4 +1,6 @@
-# Objetivo:
+#
+# Objetivo
+#
 # Combinar el bootstrap político/electoral de EUROPE (04_2b)
 # con el bootstrap económico de LATAM (04_2e).
 #
@@ -13,10 +15,6 @@
 # - EUROPE mantiene su corrección política.
 # - LATAM mantiene su corrección económica.
 # - COMPLETE se obtiene apilando ambos bootstraps.
-#
-# Esto NO supone una ponderación poblacional entre EUROPE y LATAM.
-# Simplemente se conservan los tamaños generados previamente.
-
 
 suppressPackageStartupMessages({
   library(tidyverse)

@@ -1,4 +1,4 @@
-# 03_4. Figuras descriptivas pre-bootstrap
+# Objetivo
 #
 # Genera figuras del estado del dataset antes de los bootstraps finales.
 #
@@ -17,13 +17,6 @@
 #   COMPLETE -> EUROPE + LATAM (04_2f)
 #
 # Este script es exclusivamente descriptivo y no remuestrea datos.
-#
-# Ejecutar después de:
-#   01_mergeData.R
-#   02_harmonize_common_variables.R
-#   03_1_component_quality.R
-#   03_2_add_phase_dimension_scores.R
-#   03_3_summary_dataset_status.R
 
 
 suppressPackageStartupMessages({
@@ -32,7 +25,6 @@ suppressPackageStartupMessages({
 
 
 # Configuración
-
 processed_root <- "paper1_cluster/data/processed"
 
 summary_dir <- file.path(
@@ -68,7 +60,6 @@ SUBSAMPLE_LEVELS <- c(
 
 
 # Funciones auxiliares
-
 save_plot <- function(
     p,
     filename,
@@ -199,7 +190,6 @@ summary_18 <- read_required(
 
 
 # Comprobaciones
-
 missing_analysis_samples <- setdiff(
   ANALYSIS_SAMPLE_LEVELS,
   unique(
@@ -237,8 +227,7 @@ if (!length(pooled_usable_n)) {
 }
 
 
-# 01. Columnas por paso del pipeline
-
+# Columnas por paso del pipeline
 p01 <- summary_00 %>%
   mutate(
     step = factor(
@@ -282,8 +271,7 @@ save_plot(
 )
 
 
-# 02. Filas originales por submuestra
-
+# Filas originales por submuestra
 p02 <- summary_01_subsamples %>%
   mutate(
     subsample = subsample_factor(
@@ -327,8 +315,7 @@ save_plot(
 )
 
 
-# 03. Composición del dataset original
-
+# Composición del dataset original
 p03 <- summary_01_subsamples %>%
   mutate(
     subsample = subsample_factor(
@@ -371,8 +358,7 @@ save_plot(
 )
 
 
-# 04. Total vs usable para clustering
-
+# Total vs usable para clustering
 p04_data <- summary_02 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -440,8 +426,7 @@ save_plot(
 )
 
 
-# 05. Porcentaje usable para clustering
-
+# Porcentaje usable para clustering
 p05 <- summary_02 %>%
   mutate(
     analysis_sample = sample_factor(
@@ -487,8 +472,7 @@ save_plot(
 )
 
 
-# 06. Categorías de calidad final
-
+# Categorías de calidad final
 p06 <- summary_03 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -531,8 +515,7 @@ save_plot(
 )
 
 
-# 07. Calidad de metadata
-
+# Calidad de metadata
 p07 <- summary_04 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -575,8 +558,7 @@ save_plot(
 )
 
 
-# 08. Cobertura de los 32 determinantes
-
+# Cobertura de los 32 determinantes
 p08_data <- summary_05 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -636,8 +618,7 @@ save_plot(
 )
 
 
-# 09. Perfiles completos de 32 determinantes
-
+# Perfiles completos de 32 determinantes
 p09 <- summary_05 %>%
   mutate(
     analysis_sample = sample_factor(
@@ -683,8 +664,7 @@ save_plot(
 )
 
 
-# 10. Missing por determinante
-
+# Missing por determinante
 p10_data <- summary_06 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -734,8 +714,7 @@ save_plot(
 )
 
 
-# 11. Cobertura sociodemográfica
-
+# Cobertura sociodemográfica
 p11_data <- summary_07 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -783,8 +762,7 @@ save_plot(
 )
 
 
-# 12. Cobertura de variables candidatas para propensity
-
+# Cobertura de variables candidatas para propensity
 p12_data <- summary_09 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -833,8 +811,7 @@ save_plot(
 )
 
 
-# 13. Aplicabilidad del propensity europeo
-
+# Aplicabilidad del propensity europeo
 p13_data <- summary_10 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -903,8 +880,7 @@ save_plot(
 )
 
 
-# 14. Readiness del propensity europeo
-
+# Readiness del propensity europeo
 p14_data <- summary_10 %>%
   filter(
     analysis_sample %in%
@@ -984,8 +960,7 @@ save_plot(
 )
 
 
-# 15. Respuestas a bloques de fase
-
+# Respuestas a bloques de fase
 p15 <- summary_11_phase %>%
   mutate(
     analysis_sample = sample_factor(
@@ -1032,8 +1007,7 @@ save_plot(
 )
 
 
-# 16. Dimensiones seleccionadas en RENOVISOR
-
+# Dimensiones seleccionadas en RENOVISOR
 p16_data <- summary_13 %>%
   filter(
     analysis_sample == "RENOVISOR"
@@ -1094,8 +1068,7 @@ save_plot(
 )
 
 
-# 17. Scores de dimensiones seleccionadas
-
+# Scores de dimensiones seleccionadas
 phase_score_plot_data <- summary_14 %>%
   filter(
     analysis_sample == "RENOVISOR",
@@ -1164,8 +1137,7 @@ if (nrow(phase_score_plot_data)) {
 }
 
 
-# 18. Mapeo dimensiones-determinantes
-
+# Mapeo dimensiones-determinante
 p18 <- summary_15 %>%
   mutate(
     dimension = factor(
@@ -1207,8 +1179,7 @@ save_plot(
 )
 
 
-# 19. Tamaños finales disponibles para clustering
-
+# Tamaños finales disponibles para clustering
 p19 <- summary_18 %>%
   mutate(
     analysis_sample = sample_factor(
@@ -1246,8 +1217,7 @@ save_plot(
 )
 
 
-# 20. Composición del POOLED_ALL usable
-
+# Composición del POOLED_ALL usable
 pooled_clustering_composition <- summary_18 %>%
   filter(
     analysis_sample != "POOLED_ALL"
@@ -1311,8 +1281,7 @@ save_plot(
 )
 
 
-# 21. Total original vs usable final
-
+# Total original vs usable final
 p21_data <- summary_02 %>%
   select(
     analysis_sample,
@@ -1367,7 +1336,6 @@ save_plot(
 
 
 # Índice de figuras
-
 figure_index <- tribble(
   ~figure, ~description,
   
@@ -1445,7 +1413,6 @@ write_csv(
 
 
 # Resumen
-
 cat("\nSUBMUESTRAS ORIGINALES\n\n")
 
 print(

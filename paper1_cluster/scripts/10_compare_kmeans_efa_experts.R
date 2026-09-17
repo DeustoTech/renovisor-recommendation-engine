@@ -1,41 +1,26 @@
-
-
-# Objetivo:
-# Comparar una solución candidata de perfiles obtenidos mediante:
-# - Greedy sobre K-means
-# - EFA
-# - arquetipos expertos
 #
-# Se analizan las 7 muestras y las 4 matrices.
+# Objetivo
+# Comparar una solución candidata de perfiles obtenidos mediante Greedy sobre
+# K-means, EFA y arquetipos expertos en las 7 muestras y las 4 matrices.
 #
 # Configuración comparativa provisional:
-# - D = 8
-# - Hamming = 4
-# - weighting = equal_candidate
-# - 6 prototipos Greedy-Kmeans
-# - 6 factores EFA
+# - D = 8, Hamming = 4 y weighting = equal_candidate.
+# - 6 prototipos Greedy-Kmeans y 6 factores EFA.
+# - El consenso EFA se construye entre bootstraps y los factores se alinean
+#   mediante matching húngaro.
 #
-# El consenso EFA se construye a partir de los bootstraps y los factores
-# se alinean mediante matching húngaro.
+# Modo resume:
+# - Las combinaciones muestra × matriz completas se reutilizan.
+# - Las combinaciones incompletas se recalculan enteras.
+# - Al final se reconstruyen los resultados globales de las 28 combinaciones.
 #
-# MODO RESUME:
-# - Si una combinación muestra × matriz ya tiene todos sus resultados,
-#   no se vuelve a calcular.
-# - Si una combinación está incompleta, se recalcula entera.
-# - Al final se reconstruyen los resultados globales con las 28
-#   combinaciones, tanto las reutilizadas como las nuevas.
-#
-# IMPORTANTE:
-# Esta comparación NO fija K=6, F=6, RAW, D=8 ni H=4 como solución final.
-# Son parámetros provisionales para comparar K-means, EFA y expertos.
+# Esta comparación no fija K=6, F=6, RAW, D=8 ni H=4 como solución final.
 
 suppressPackageStartupMessages({
   library(tidyverse)
 })
 
-
 # Dependencias
-
 if (!requireNamespace("clue", quietly = TRUE)) {
   stop(
     "\nNecesitas instalar el paquete 'clue'.\n\n",
@@ -45,17 +30,9 @@ if (!requireNamespace("clue", quietly = TRUE)) {
   )
 }
 
-
 # Configuración
-
-project_root <- path.expand(
-  "~/Desktop/MASTER/recommendation-engine/TFM"
-)
-
-processed_root <- file.path(
-  project_root,
-  "paper1_cluster/data/processed"
-)
+project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
+processed_root <- file.path(project_root, "paper1_cluster/data/processed")
 
 greedy_file <- file.path(
   processed_root,
@@ -117,9 +94,7 @@ MAX_BOOTSTRAPS <- 100L
 
 GOOD_SIMILARITY_THRESHOLD <- 75
 
-
 # Funciones auxiliares
-
 matrix_label <- function(x) {
   recode(
     x,
@@ -130,7 +105,6 @@ matrix_label <- function(x) {
     .default = x
   )
 }
-
 
 normalize_determinant_key <- function(x) {
   x %>%
@@ -143,7 +117,6 @@ normalize_determinant_key <- function(x) {
     str_remove("_+$")
 }
 
-
 parse_determinants <- function(x) {
   if (
     length(x) == 0 ||
@@ -153,15 +126,11 @@ parse_determinants <- function(x) {
     return(character(0))
   }
   
-  str_split(
-    x,
-    ";\\s*"
-  )[[1]] %>%
+  str_split(x, ";\\s*")[[1]] %>%
     str_trim() %>%
     unique() %>%
     sort()
 }
-
 
 collapse_determinants <- function(x) {
   paste(
@@ -171,7 +140,6 @@ collapse_determinants <- function(x) {
     collapse = "; "
   )
 }
-
 
 coerce_binary_numeric <- function(x) {
   if (is.logical(x)) {
@@ -213,7 +181,6 @@ coerce_binary_numeric <- function(x) {
   
   out
 }
-
 
 compare_sets <- function(
     left_set,
@@ -284,7 +251,6 @@ compare_sets <- function(
   )
 }
 
-
 make_pairwise_comparison <- function(
     left,
     right
@@ -314,7 +280,6 @@ make_pairwise_comparison <- function(
     ) %>%
     ungroup()
 }
-
 
 hungarian_matching <- function(
     pairwise,
@@ -356,8 +321,7 @@ hungarian_matching <- function(
         length(value) > 0 &&
         is.finite(value[1])
       ) {
-        similarity_matrix[i, j] <-
-          value[1]
+        similarity_matrix[i, j] <- value[1]
       }
     }
   }
@@ -389,7 +353,6 @@ hungarian_matching <- function(
   )
 }
 
-
 save_plot <- function(
     p,
     filename,
@@ -406,7 +369,6 @@ save_plot <- function(
   )
 }
 
-
 write_output <- function(
     data,
     directory,
@@ -421,7 +383,6 @@ write_output <- function(
   )
 }
 
-
 add_context <- function(
     df,
     sample_value,
@@ -429,16 +390,11 @@ add_context <- function(
 ) {
   df %>%
     mutate(
-      analysis_sample =
-        sample_value,
-      
-      matrix_name =
-        matrix_value,
-      
+      analysis_sample = sample_value,
+      matrix_name = matrix_value,
       .before = 1
     )
 }
-
 
 files_complete <- function(paths) {
   if (!all(file.exists(paths))) {
@@ -452,7 +408,6 @@ files_complete <- function(paths) {
       info$size > 0
   )
 }
-
 
 combination_complete <- function(
     current_out_dir,
@@ -498,7 +453,6 @@ combination_complete <- function(
   )
 }
 
-
 read_csv_safe <- function(path) {
   read_csv(
     path,
@@ -507,9 +461,7 @@ read_csv_safe <- function(path) {
   )
 }
 
-
 # Comprobar inputs
-
 required_files <- c(
   greedy_file,
   efa_file,
@@ -530,9 +482,7 @@ if (length(missing_files)) {
   )
 }
 
-
 # Leer Greedy
-
 greedy_steps <- read_csv_safe(
   greedy_file
 )
@@ -567,51 +517,23 @@ if (length(missing_greedy)) {
 
 greedy_steps <- greedy_steps %>%
   mutate(
-    prototype = as.integer(
-      prototype
-    ),
-    
-    d_det = as.integer(
-      d_det
-    ),
-    
-    d_hamming = as.integer(
-      d_hamming
-    )
+    prototype = as.integer(prototype),
+    d_det = as.integer(d_det),
+    d_hamming = as.integer(d_hamming)
   )
 
-
 # Leer EFA
-
 efa_all <- read_csv_safe(
   efa_file
 ) %>%
   mutate(
-    bootstrap_id = as.integer(
-      bootstrap_id
-    ),
-    
-    n_factors = as.integer(
-      n_factors
-    ),
-    
-    determinant = as.character(
-      determinant
-    ),
-    
-    factor = as.character(
-      factor
-    ),
-    
-    loading = as.numeric(
-      loading
-    ),
-    
-    abs_loading = abs(
-      loading
-    )
+    bootstrap_id = as.integer(bootstrap_id),
+    n_factors = as.integer(n_factors),
+    determinant = as.character(determinant),
+    factor = as.character(factor),
+    loading = as.numeric(loading),
+    abs_loading = abs(loading)
   )
-
 
 required_efa <- c(
   "analysis_sample",
@@ -638,7 +560,6 @@ if (length(missing_efa)) {
   )
 }
 
-
 canonical_determinants <- sort(
   unique(
     efa_all$determinant
@@ -654,18 +575,13 @@ if (length(canonical_determinants) != 32) {
 }
 
 canonical_dictionary <- tibble(
-  determinant =
-    canonical_determinants,
-  
-  determinant_key =
-    normalize_determinant_key(
-      canonical_determinants
-    )
+  determinant = canonical_determinants,
+  determinant_key = normalize_determinant_key(
+    canonical_determinants
+  )
 )
 
-
 # Preparar arquetipos expertos
-
 expert_raw <- read_csv_safe(
   EXPERT_FILE
 )
@@ -688,8 +604,7 @@ profile_matches <- intersect(
 )
 
 if (length(profile_matches)) {
-  expert_profile_col <-
-    profile_matches[1]
+  expert_profile_col <- profile_matches[1]
   
 } else {
   character_columns <- names(expert_raw)[
@@ -701,18 +616,15 @@ if (length(profile_matches)) {
   ]
   
   if (length(character_columns)) {
-    expert_profile_col <-
-      character_columns[1]
+    expert_profile_col <- character_columns[1]
   } else {
-    expert_profile_col <-
-      names(expert_raw)[1]
+    expert_profile_col <- names(expert_raw)[1]
   }
 }
 
-
 expert_alias_dictionary <- tribble(
   ~expert_key, ~canonical_key,
-  "autarky",   "autonomy"
+  "autarky", "autonomy"
 )
 
 expert_candidate_cols <- setdiff(
@@ -721,26 +633,20 @@ expert_candidate_cols <- setdiff(
 )
 
 expert_column_dictionary <- tibble(
-  input_col =
-    expert_candidate_cols,
-  
-  determinant_key_original =
-    normalize_determinant_key(
-      expert_candidate_cols
-    )
+  input_col = expert_candidate_cols,
+  determinant_key_original = normalize_determinant_key(
+    expert_candidate_cols
+  )
 ) %>%
   left_join(
     expert_alias_dictionary,
     by = c(
-      "determinant_key_original" =
-        "expert_key"
+      "determinant_key_original" = "expert_key"
     )
   ) %>%
   mutate(
     determinant_key = if_else(
-      !is.na(
-        canonical_key
-      ),
+      !is.na(canonical_key),
       canonical_key,
       determinant_key_original
     )
@@ -783,10 +689,9 @@ if (
 
 expert_long <- expert_raw %>%
   mutate(
-    expert_profile =
-      as.character(
-        .data[[expert_profile_col]]
-      )
+    expert_profile = as.character(
+      .data[[expert_profile_col]]
+    )
   ) %>%
   select(
     expert_profile,
@@ -795,14 +700,9 @@ expert_long <- expert_raw %>%
     )
   ) %>%
   pivot_longer(
-    cols =
-      -expert_profile,
-    
-    names_to =
-      "input_col",
-    
-    values_to =
-      "value_raw"
+    cols = -expert_profile,
+    names_to = "input_col",
+    values_to = "value_raw"
   ) %>%
   left_join(
     expert_column_mapping %>%
@@ -813,11 +713,9 @@ expert_long <- expert_raw %>%
     by = "input_col"
   ) %>%
   mutate(
-    value =
-      coerce_binary_numeric(
-        value_raw
-      ),
-    
+    value = coerce_binary_numeric(
+      value_raw
+    ),
     active =
       !is.na(value) &
       value > 0.5
@@ -831,27 +729,20 @@ expert_profiles <- expert_long %>%
     expert_profile
   ) %>%
   summarise(
-    id =
-      first(
-        expert_profile
-      ),
-    
+    id = first(
+      expert_profile
+    ),
     signature = list(
       sort(
         determinant
       )
     ),
-    
-    n_active =
-      n_distinct(
-        determinant
-      ),
-    
-    determinants =
-      collapse_determinants(
-        determinant
-      ),
-    
+    n_active = n_distinct(
+      determinant
+    ),
+    determinants = collapse_determinants(
+      determinant
+    ),
     .groups = "drop"
   )
 
@@ -872,7 +763,6 @@ write_output(
   "00_expert_profiles_bin32.csv"
 )
 
-
 # Construir consenso EFA
 
 build_efa_consensus <- function(
@@ -882,14 +772,9 @@ build_efa_consensus <- function(
 ) {
   efa <- efa_all %>%
     filter(
-      analysis_sample ==
-        analysis_sample_current,
-      
-      matrix_name ==
-        matrix_name_current,
-      
-      n_factors ==
-        N_EFA_FACTORS
+      analysis_sample == analysis_sample_current,
+      matrix_name == matrix_name_current,
+      n_factors == N_EFA_FACTORS
     )
   
   if (!nrow(efa)) {
@@ -917,10 +802,8 @@ build_efa_consensus <- function(
   
   efa <- efa %>%
     filter(
-      bootstrap_id %in%
-        boot_ids
+      bootstrap_id %in% boot_ids
     )
-  
   
   efa_top_d <- efa %>%
     group_by(
@@ -928,9 +811,7 @@ build_efa_consensus <- function(
       factor
     ) %>%
     arrange(
-      desc(
-        abs_loading
-      ),
+      desc(abs_loading),
       determinant,
       .by_group = TRUE
     ) %>%
@@ -939,28 +820,20 @@ build_efa_consensus <- function(
     ) %>%
     ungroup()
   
-  
   valid_boot_ids <- efa_top_d %>%
     group_by(
       bootstrap_id
     ) %>%
     summarise(
-      n_factors_observed =
-        n_distinct(
-          factor
-        ),
-      
+      n_factors_observed = n_distinct(
+        factor
+      ),
       n_rows = n(),
-      
       .groups = "drop"
     ) %>%
     filter(
-      n_factors_observed ==
-        N_EFA_FACTORS,
-      
-      n_rows ==
-        N_EFA_FACTORS *
-        D_DET
+      n_factors_observed == N_EFA_FACTORS,
+      n_rows == N_EFA_FACTORS * D_DET
     ) %>%
     pull(
       bootstrap_id
@@ -979,16 +852,13 @@ build_efa_consensus <- function(
   
   efa <- efa %>%
     filter(
-      bootstrap_id %in%
-        valid_boot_ids
+      bootstrap_id %in% valid_boot_ids
     )
   
   efa_top_d <- efa_top_d %>%
     filter(
-      bootstrap_id %in%
-        valid_boot_ids
+      bootstrap_id %in% valid_boot_ids
     )
-  
   
   factor_sets <- efa_top_d %>%
     group_by(
@@ -1001,7 +871,6 @@ build_efa_consensus <- function(
           determinant
         )
       ),
-      
       .groups = "drop"
     ) %>%
     arrange(
@@ -1022,7 +891,6 @@ build_efa_consensus <- function(
         factor
       )
   }
-  
   
   solution_similarity <- function(
     boot_a,
@@ -1072,7 +940,6 @@ build_efa_consensus <- function(
     )
   }
   
-  
   boot_pairs <- combn(
     valid_boot_ids,
     2,
@@ -1083,36 +950,26 @@ build_efa_consensus <- function(
     boot_pairs,
     function(pair_current) {
       tibble(
-        boot_a =
+        boot_a = pair_current[1],
+        boot_b = pair_current[2],
+        similarity_pct = solution_similarity(
           pair_current[1],
-        
-        boot_b =
-          pair_current[2],
-        
-        similarity_pct =
-          solution_similarity(
-            pair_current[1],
-            pair_current[2]
-          )
+          pair_current[2]
+        )
       )
     }
   )
   
-  
   reference_scores <- bind_rows(
     pair_similarity %>%
       transmute(
-        bootstrap_id =
-          boot_a,
-        
+        bootstrap_id = boot_a,
         similarity_pct
       ),
     
     pair_similarity %>%
       transmute(
-        bootstrap_id =
-          boot_b,
-        
+        bootstrap_id = boot_b,
         similarity_pct
       )
   ) %>%
@@ -1120,12 +977,10 @@ build_efa_consensus <- function(
       bootstrap_id
     ) %>%
     summarise(
-      mean_similarity_to_others =
-        mean(
-          similarity_pct,
-          na.rm = TRUE
-        ),
-      
+      mean_similarity_to_others = mean(
+        similarity_pct,
+        na.rm = TRUE
+      ),
       .groups = "drop"
     ) %>%
     arrange(
@@ -1135,13 +990,11 @@ build_efa_consensus <- function(
       bootstrap_id
     )
   
-  reference_bootstrap <-
-    reference_scores$bootstrap_id[1]
+  reference_bootstrap <- reference_scores$bootstrap_id[1]
   
   reference_factors <- get_factor_sets(
     reference_bootstrap
   )
-  
   
   alignment <- map_dfr(
     valid_boot_ids,
@@ -1162,11 +1015,8 @@ build_efa_consensus <- function(
             100 *
             length(
               intersect(
-                reference_factors$
-                  signature[[i]],
-                
-                current_factors$
-                  signature[[j]]
+                reference_factors$signature[[i]],
+                current_factors$signature[[j]]
               )
             ) /
             D_DET
@@ -1183,35 +1033,23 @@ build_efa_consensus <- function(
       )
       
       tibble(
-        bootstrap_id =
-          boot_current,
-        
-        consensus_factor =
-          seq_len(
-            N_EFA_FACTORS
-          ),
-        
-        reference_factor =
-          reference_factors$factor,
-        
-        original_factor =
-          current_factors$factor[
+        bootstrap_id = boot_current,
+        consensus_factor = seq_len(
+          N_EFA_FACTORS
+        ),
+        reference_factor = reference_factors$factor,
+        original_factor = current_factors$factor[
+          assignment_int
+        ],
+        alignment_similarity_pct = sim_matrix[
+          cbind(
+            seq_len(N_EFA_FACTORS),
             assignment_int
-          ],
-        
-        alignment_similarity_pct =
-          sim_matrix[
-            cbind(
-              seq_len(
-                N_EFA_FACTORS
-              ),
-              assignment_int
-            )
-          ]
+          )
+        ]
       )
     }
   )
-  
   
   efa_aligned <- efa %>%
     left_join(
@@ -1223,8 +1061,7 @@ build_efa_consensus <- function(
         ),
       by = c(
         "bootstrap_id",
-        "factor" =
-          "original_factor"
+        "factor" = "original_factor"
       )
     )
   
@@ -1238,8 +1075,7 @@ build_efa_consensus <- function(
         ),
       by = c(
         "bootstrap_id",
-        "factor" =
-          "original_factor"
+        "factor" = "original_factor"
       )
     )
   
@@ -1259,22 +1095,17 @@ build_efa_consensus <- function(
     )
   }
   
-  
   selection_frequency <- efa_top_aligned %>%
     count(
       consensus_factor,
       determinant,
-      name =
-        "n_bootstraps_selected"
+      name = "n_bootstraps_selected"
     ) %>%
     mutate(
       selection_frequency =
         n_bootstraps_selected /
-        length(
-          valid_boot_ids
-        )
+        length(valid_boot_ids)
     )
-  
   
   mean_loading <- efa_aligned %>%
     group_by(
@@ -1286,7 +1117,6 @@ build_efa_consensus <- function(
         abs_loading,
         na.rm = TRUE
       ),
-      
       .groups = "drop"
     )
   
@@ -1303,13 +1133,11 @@ build_efa_consensus <- function(
         n_bootstraps_selected,
         0L
       ),
-      
       selection_frequency = replace_na(
         selection_frequency,
         0
       )
     )
-  
   
   consensus_top_d <- consensus_long %>%
     group_by(
@@ -1341,28 +1169,22 @@ build_efa_consensus <- function(
           consensus_factor
         )
       ),
-      
       signature = list(
         sort(
           determinant
         )
       ),
-      
-      determinants =
-        collapse_determinants(
-          determinant
-        ),
-      
+      determinants = collapse_determinants(
+        determinant
+      ),
       mean_selection_frequency = mean(
         selection_frequency,
         na.rm = TRUE
       ),
-      
       mean_abs_loading = mean(
         mean_abs_loading,
         na.rm = TRUE
       ),
-      
       .groups = "drop"
     ) %>%
     arrange(
@@ -1375,17 +1197,14 @@ build_efa_consensus <- function(
         alignment_similarity_pct,
         na.rm = TRUE
       ),
-      
       median_alignment_similarity = median(
         alignment_similarity_pct,
         na.rm = TRUE
       ),
-      
       min_alignment_similarity = min(
         alignment_similarity_pct,
         na.rm = TRUE
       ),
-      
       max_alignment_similarity = max(
         alignment_similarity_pct,
         na.rm = TRUE
@@ -1393,51 +1212,25 @@ build_efa_consensus <- function(
     )
   
   list(
-    valid_boot_ids =
-      valid_boot_ids,
-    
-    reference_bootstrap =
-      reference_bootstrap,
-    
-    reference_scores =
-      reference_scores,
-    
-    alignment =
-      alignment,
-    
-    consensus_top_d =
-      consensus_top_d,
-    
-    profiles =
-      profiles,
-    
-    alignment_summary =
-      alignment_summary
+    valid_boot_ids = valid_boot_ids,
+    reference_bootstrap = reference_bootstrap,
+    reference_scores = reference_scores,
+    alignment = alignment,
+    consensus_top_d = consensus_top_d,
+    profiles = profiles,
+    alignment_summary = alignment_summary
   )
 }
 
-
 # Comprobar disponibilidad Greedy
-
 availability_greedy <- greedy_steps %>%
   filter(
-    analysis_sample %in%
-      ANALYSIS_SAMPLES,
-    
-    weighting ==
-      REFERENCE_WEIGHTING,
-    
-    method ==
-      "KMEANS",
-    
-    matrix_name %in%
-      MATRICES_TO_RUN,
-    
-    d_det ==
-      D_DET,
-    
-    d_hamming ==
-      D_HAMMING
+    analysis_sample %in% ANALYSIS_SAMPLES,
+    weighting == REFERENCE_WEIGHTING,
+    method == "KMEANS",
+    matrix_name %in% MATRICES_TO_RUN,
+    d_det == D_DET,
+    d_hamming == D_HAMMING
   ) %>%
   group_by(
     analysis_sample,
@@ -1448,16 +1241,12 @@ availability_greedy <- greedy_steps %>%
       prototype,
       na.rm = TRUE
     ),
-    
     .groups = "drop"
   )
 
 expected_grid <- crossing(
-  analysis_sample =
-    ANALYSIS_SAMPLES,
-  
-  matrix_name =
-    MATRICES_TO_RUN
+  analysis_sample = ANALYSIS_SAMPLES,
+  matrix_name = MATRICES_TO_RUN
 )
 
 availability_check <- expected_grid %>%
@@ -1491,9 +1280,7 @@ if (
   )
 }
 
-
 # Contenedores globales
-
 run_summary_list <- list()
 final_comparison_list <- list()
 km_efa_matching_list <- list()
@@ -1505,13 +1292,10 @@ run_counter <- 0L
 n_reused <- 0L
 n_computed <- 0L
 
-
-# Ejecutar cada muestra × matriz
-
+# Ejecutar cada muestra × matri
 for (sample_name in ANALYSIS_SAMPLES) {
   for (matrix_name_current in MATRICES_TO_RUN) {
-    run_counter <-
-      run_counter + 1L
+    run_counter <- run_counter + 1L
     
     matrix_short <- matrix_label(
       matrix_name_current
@@ -1562,9 +1346,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
       "============================================================\n"
     )
     
-    
     if (already_complete) {
-      
       n_reused <- n_reused + 1L
       
       cat(
@@ -1572,38 +1354,22 @@ for (sample_name in ANALYSIS_SAMPLES) {
       )
       
     } else {
-      
       n_computed <- n_computed + 1L
       
       cat(
         "  INCOMPLETO -> calculando esta combinación.\n"
       )
       
-      
       # Obtener los seis prototipos Greedy-Kmeans
-      
       kmeans_profiles <- greedy_steps %>%
         filter(
-          analysis_sample ==
-            sample_name,
-          
-          weighting ==
-            REFERENCE_WEIGHTING,
-          
-          method ==
-            "KMEANS",
-          
-          matrix_name ==
-            matrix_name_current,
-          
-          d_det ==
-            D_DET,
-          
-          d_hamming ==
-            D_HAMMING,
-          
-          prototype <=
-            N_KMEANS_PROTOTYPES
+          analysis_sample == sample_name,
+          weighting == REFERENCE_WEIGHTING,
+          method == "KMEANS",
+          matrix_name == matrix_name_current,
+          d_det == D_DET,
+          d_hamming == D_HAMMING,
+          prototype <= N_KMEANS_PROTOTYPES
         ) %>%
         arrange(
           prototype
@@ -1617,17 +1383,12 @@ for (sample_name in ANALYSIS_SAMPLES) {
             "KM",
             prototype
           ),
-          
           prototype,
-          
           signature = map(
             center_active_determinants,
             parse_determinants
           ),
-          
-          determinants =
-            center_active_determinants,
-          
+          determinants = center_active_determinants,
           incremental_covered_pct,
           cumulative_covered_pct
         )
@@ -1654,8 +1415,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
       
       if (
         any(
-          km_signature_sizes !=
-          D_DET
+          km_signature_sizes != D_DET
         )
       ) {
         stop(
@@ -1678,26 +1438,18 @@ for (sample_name in ANALYSIS_SAMPLES) {
         "01_kmeans_6_prototypes.csv"
       )
       
-      
       # Construir solución consenso EFA
-      
       cat(
         "  Construyendo consenso EFA...\n"
       )
       
       efa_result <- build_efa_consensus(
-        efa_all =
-          efa_all,
-        
-        analysis_sample_current =
-          sample_name,
-        
-        matrix_name_current =
-          matrix_name_current
+        efa_all = efa_all,
+        analysis_sample_current = sample_name,
+        matrix_name_current = matrix_name_current
       )
       
-      efa_profiles <-
-        efa_result$profiles
+      efa_profiles <- efa_result$profiles
       
       if (
         nrow(efa_profiles) !=
@@ -1740,19 +1492,15 @@ for (sample_name in ANALYSIS_SAMPLES) {
         )
       )
       
-      
       # K-means vs EFA
       
       km_efa_pairwise <- make_pairwise_comparison(
-        left =
-          kmeans_profiles %>%
+        left = kmeans_profiles %>%
           select(
             id,
             signature
           ),
-        
-        right =
-          efa_profiles %>%
+        right = efa_profiles %>%
           select(
             id,
             signature
@@ -1766,17 +1514,10 @@ for (sample_name in ANALYSIS_SAMPLES) {
       )
       
       km_efa_matching <- hungarian_matching(
-        pairwise =
-          km_efa_pairwise,
-        
-        left_ids =
-          kmeans_profiles$id,
-        
-        right_ids =
-          efa_profiles$id,
-        
-        metric_col =
-          "overlap_left_pct"
+        pairwise = km_efa_pairwise,
+        left_ids = kmeans_profiles$id,
+        right_ids = efa_profiles$id,
+        metric_col = "overlap_left_pct"
       ) %>%
         left_join(
           km_efa_pairwise,
@@ -1801,22 +1542,18 @@ for (sample_name in ANALYSIS_SAMPLES) {
             overlap_left_pct,
             na.rm = TRUE
           ),
-          
           median_similarity_pct = median(
             overlap_left_pct,
             na.rm = TRUE
           ),
-          
           min_similarity_pct = min(
             overlap_left_pct,
             na.rm = TRUE
           ),
-          
           max_similarity_pct = max(
             overlap_left_pct,
             na.rm = TRUE
           ),
-          
           n_matches_ge_75 = sum(
             overlap_left_pct >=
               GOOD_SIMILARITY_THRESHOLD,
@@ -1830,9 +1567,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
         "08_kmeans_vs_efa_summary.csv"
       )
       
-      
       # Expertos
-      
       write_output(
         expert_profiles %>%
           select(
@@ -1842,19 +1577,14 @@ for (sample_name in ANALYSIS_SAMPLES) {
         "09_expert_profiles_bin32.csv"
       )
       
-      
       # K-means vs expertos
-      
       km_expert_pairwise <- make_pairwise_comparison(
-        left =
-          kmeans_profiles %>%
+        left = kmeans_profiles %>%
           select(
             id,
             signature
           ),
-        
-        right =
-          expert_profiles %>%
+        right = expert_profiles %>%
           select(
             id,
             signature
@@ -1872,15 +1602,9 @@ for (sample_name in ANALYSIS_SAMPLES) {
           left_id
         ) %>%
         arrange(
-          desc(
-            jaccard_pct
-          ),
-          desc(
-            overlap_left_pct
-          ),
-          desc(
-            n_common
-          ),
+          desc(jaccard_pct),
+          desc(overlap_left_pct),
+          desc(n_common),
           right_id,
           .by_group = TRUE
         ) %>%
@@ -1889,11 +1613,8 @@ for (sample_name in ANALYSIS_SAMPLES) {
         ) %>%
         ungroup() %>%
         rename(
-          kmeans_prototype =
-            left_id,
-          
-          expert_profile =
-            right_id
+          kmeans_prototype = left_id,
+          expert_profile = right_id
         )
       
       write_output(
@@ -1902,21 +1623,14 @@ for (sample_name in ANALYSIS_SAMPLES) {
         "11_best_expert_for_each_kmeans.csv"
       )
       
-      
       best_km_for_expert <- km_expert_pairwise %>%
         group_by(
           right_id
         ) %>%
         arrange(
-          desc(
-            jaccard_pct
-          ),
-          desc(
-            overlap_right_pct
-          ),
-          desc(
-            n_common
-          ),
+          desc(jaccard_pct),
+          desc(overlap_right_pct),
+          desc(n_common),
           left_id,
           .by_group = TRUE
         ) %>%
@@ -1925,11 +1639,8 @@ for (sample_name in ANALYSIS_SAMPLES) {
         ) %>%
         ungroup() %>%
         rename(
-          expert_profile =
-            right_id,
-          
-          kmeans_prototype =
-            left_id
+          expert_profile = right_id,
+          kmeans_prototype = left_id
         )
       
       write_output(
@@ -1938,19 +1649,11 @@ for (sample_name in ANALYSIS_SAMPLES) {
         "12_best_kmeans_for_each_expert.csv"
       )
       
-      
       km_expert_hungarian <- hungarian_matching(
-        pairwise =
-          km_expert_pairwise,
-        
-        left_ids =
-          kmeans_profiles$id,
-        
-        right_ids =
-          expert_profiles$id,
-        
-        metric_col =
-          "jaccard_pct"
+        pairwise = km_expert_pairwise,
+        left_ids = kmeans_profiles$id,
+        right_ids = expert_profiles$id,
+        metric_col = "jaccard_pct"
       )
       
       write_output(
@@ -1959,19 +1662,14 @@ for (sample_name in ANALYSIS_SAMPLES) {
         "13_kmeans_vs_experts_hungarian.csv"
       )
       
-      
       # EFA vs expertos
-      
       efa_expert_pairwise <- make_pairwise_comparison(
-        left =
-          efa_profiles %>%
+        left = efa_profiles %>%
           select(
             id,
             signature
           ),
-        
-        right =
-          expert_profiles %>%
+        right = expert_profiles %>%
           select(
             id,
             signature
@@ -1989,15 +1687,9 @@ for (sample_name in ANALYSIS_SAMPLES) {
           left_id
         ) %>%
         arrange(
-          desc(
-            jaccard_pct
-          ),
-          desc(
-            overlap_left_pct
-          ),
-          desc(
-            n_common
-          ),
+          desc(jaccard_pct),
+          desc(overlap_left_pct),
+          desc(n_common),
           right_id,
           .by_group = TRUE
         ) %>%
@@ -2006,11 +1698,8 @@ for (sample_name in ANALYSIS_SAMPLES) {
         ) %>%
         ungroup() %>%
         rename(
-          efa_factor =
-            left_id,
-          
-          expert_profile =
-            right_id
+          efa_factor = left_id,
+          expert_profile = right_id
         )
       
       write_output(
@@ -2019,96 +1708,55 @@ for (sample_name in ANALYSIS_SAMPLES) {
         "15_best_expert_for_each_efa.csv"
       )
       
-      
       # Tabla final
-      
       final_comparison <- kmeans_profiles %>%
         select(
-          kmeans_prototype =
-            id,
-          
-          kmeans_determinants =
-            determinants,
-          
+          kmeans_prototype = id,
+          kmeans_determinants = determinants,
           incremental_covered_pct,
           cumulative_covered_pct
         ) %>%
         left_join(
           km_efa_matching %>%
             transmute(
-              kmeans_prototype =
-                left_id,
-              
-              efa_match =
-                right_id,
-              
-              common_km_efa =
-                n_common,
-              
-              similarity_km_efa_pct =
-                overlap_left_pct,
-              
-              jaccard_km_efa_pct =
-                jaccard_pct,
-              
-              common_determinants_km_efa =
-                common_determinants
+              kmeans_prototype = left_id,
+              efa_match = right_id,
+              common_km_efa = n_common,
+              similarity_km_efa_pct = overlap_left_pct,
+              jaccard_km_efa_pct = jaccard_pct,
+              common_determinants_km_efa = common_determinants
             ),
-          by =
-            "kmeans_prototype"
+          by = "kmeans_prototype"
         ) %>%
         left_join(
           efa_profiles %>%
             transmute(
-              efa_match =
-                id,
-              
-              efa_determinants =
-                determinants
+              efa_match = id,
+              efa_determinants = determinants
             ),
-          by =
-            "efa_match"
+          by = "efa_match"
         ) %>%
         left_join(
           best_expert_for_km %>%
             transmute(
               kmeans_prototype,
-              
-              expert_match =
-                expert_profile,
-              
-              expert_n_active =
-                n_right,
-              
-              common_km_expert =
-                n_common,
-              
-              km_determinants_found_in_expert_pct =
-                overlap_left_pct,
-              
-              expert_determinants_found_in_km_pct =
-                overlap_right_pct,
-              
-              jaccard_km_expert_pct =
-                jaccard_pct,
-              
-              common_determinants_km_expert =
-                common_determinants
+              expert_match = expert_profile,
+              expert_n_active = n_right,
+              common_km_expert = n_common,
+              km_determinants_found_in_expert_pct = overlap_left_pct,
+              expert_determinants_found_in_km_pct = overlap_right_pct,
+              jaccard_km_expert_pct = jaccard_pct,
+              common_determinants_km_expert = common_determinants
             ),
-          by =
-            "kmeans_prototype"
+          by = "kmeans_prototype"
         ) %>%
         left_join(
           expert_profiles %>%
             transmute(
-              expert_match =
-                id,
-              
-              expert_determinants =
-                determinants
+              expert_match = id,
+              expert_determinants = determinants
             ),
-          by =
-            "expert_match"
+          by = "expert_match"
         )
       
       write_output(
@@ -2122,7 +1770,6 @@ for (sample_name in ANALYSIS_SAMPLES) {
         current_out_dir,
         "17_efa_alignment_summary.csv"
       )
-      
       
       # Figuras
       
@@ -2163,14 +1810,12 @@ for (sample_name in ANALYSIS_SAMPLES) {
             matrix_short,
             " | Greedy K-means vs EFA"
           ),
-          
           subtitle = paste0(
             "6 candidate profiles | D=",
             D_DET,
             " | H=",
             D_HAMMING
           ),
-          
           x = "EFA consensus factor",
           y = "Greedy K-means prototype"
         ) +
@@ -2178,13 +1823,10 @@ for (sample_name in ANALYSIS_SAMPLES) {
           base_size = 11
         ) +
         theme(
-          panel.grid =
-            element_blank(),
-          
-          plot.title =
-            element_text(
-              face = "bold"
-            )
+          panel.grid = element_blank(),
+          plot.title = element_text(
+            face = "bold"
+          )
         )
       
       save_plot(
@@ -2196,7 +1838,6 @@ for (sample_name in ANALYSIS_SAMPLES) {
         width = 8,
         height = 7
       )
-      
       
       p_km_experts <- ggplot(
         km_expert_pairwise,
@@ -2235,10 +1876,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
             matrix_short,
             " | K-means vs experts"
           ),
-          
-          subtitle =
-            "6 empirical candidate prototypes",
-          
+          subtitle = "6 empirical candidate prototypes",
           x = "Expert archetype",
           y = "Greedy K-means prototype"
         ) +
@@ -2246,19 +1884,14 @@ for (sample_name in ANALYSIS_SAMPLES) {
           base_size = 10
         ) +
         theme(
-          panel.grid =
-            element_blank(),
-          
-          axis.text.x =
-            element_text(
-              angle = 45,
-              hjust = 1
-            ),
-          
-          plot.title =
-            element_text(
-              face = "bold"
-            )
+          panel.grid = element_blank(),
+          axis.text.x = element_text(
+            angle = 45,
+            hjust = 1
+          ),
+          plot.title = element_text(
+            face = "bold"
+          )
         )
       
       save_plot(
@@ -2270,7 +1903,6 @@ for (sample_name in ANALYSIS_SAMPLES) {
         width = 12,
         height = 7
       )
-      
       
       p_efa_experts <- ggplot(
         efa_expert_pairwise,
@@ -2309,10 +1941,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
             matrix_short,
             " | EFA vs experts"
           ),
-          
-          subtitle =
-            "6-factor EFA candidate solution",
-          
+          subtitle = "6-factor EFA candidate solution",
           x = "Expert archetype",
           y = "EFA consensus factor"
         ) +
@@ -2320,19 +1949,14 @@ for (sample_name in ANALYSIS_SAMPLES) {
           base_size = 10
         ) +
         theme(
-          panel.grid =
-            element_blank(),
-          
-          axis.text.x =
-            element_text(
-              angle = 45,
-              hjust = 1
-            ),
-          
-          plot.title =
-            element_text(
-              face = "bold"
-            )
+          panel.grid = element_blank(),
+          axis.text.x = element_text(
+            angle = 45,
+            hjust = 1
+          ),
+          plot.title = element_text(
+            face = "bold"
+          )
         )
       
       save_plot(
@@ -2346,10 +1970,8 @@ for (sample_name in ANALYSIS_SAMPLES) {
       )
     }
     
-    
-    # Leer resultados de disco.
-    # Esto se hace tanto para combinaciones reutilizadas como recién calculadas.
-    
+    # Leer resultados de disco tanto para combinaciones reutilizadas
+    # como para las recién calculadas
     reference_scores_disk <- read_csv_safe(
       file.path(
         current_out_dir,
@@ -2406,9 +2028,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
       )
     )
     
-    
-    # Validaciones de los resultados recuperados
-    
+    # Validaciones de resultados recuperados
     if (
       nrow(km_efa_matching_disk) !=
       N_KMEANS_PROTOTYPES
@@ -2461,7 +2081,6 @@ for (sample_name in ANALYSIS_SAMPLES) {
       )
     }
     
-    
     reference_bootstrap_disk <- reference_scores_disk %>%
       arrange(
         desc(
@@ -2476,15 +2095,11 @@ for (sample_name in ANALYSIS_SAMPLES) {
         bootstrap_id
       )
     
-    
-    n_valid_bootstraps_disk <-
-      n_distinct(
-        alignment_disk$bootstrap_id
-      )
-    
+    n_valid_bootstraps_disk <- n_distinct(
+      alignment_disk$bootstrap_id
+    )
     
     # Añadir contexto para outputs globales
-    
     km_efa_matching_list[[run_counter]] <- add_context(
       km_efa_matching_disk,
       sample_name,
@@ -2515,104 +2130,53 @@ for (sample_name in ANALYSIS_SAMPLES) {
       matrix_name_current
     )
     
-    
     # Resumen de la combinación
-    
     run_summary_list[[run_counter]] <- tibble(
-      analysis_sample =
-        sample_name,
-      
-      matrix_name =
-        matrix_name_current,
-      
-      matrix =
-        matrix_short,
-      
-      d_det =
-        D_DET,
-      
-      d_hamming =
-        D_HAMMING,
-      
-      weighting =
-        REFERENCE_WEIGHTING,
-      
-      n_kmeans_prototypes =
-        N_KMEANS_PROTOTYPES,
-      
-      n_efa_factors =
-        N_EFA_FACTORS,
-      
-      n_valid_efa_bootstraps =
-        n_valid_bootstraps_disk,
-      
-      efa_reference_bootstrap =
-        reference_bootstrap_disk,
-      
+      analysis_sample = sample_name,
+      matrix_name = matrix_name_current,
+      matrix = matrix_short,
+      d_det = D_DET,
+      d_hamming = D_HAMMING,
+      weighting = REFERENCE_WEIGHTING,
+      n_kmeans_prototypes = N_KMEANS_PROTOTYPES,
+      n_efa_factors = N_EFA_FACTORS,
+      n_valid_efa_bootstraps = n_valid_bootstraps_disk,
+      efa_reference_bootstrap = reference_bootstrap_disk,
       mean_efa_alignment_similarity =
-        alignment_summary_disk$
-        mean_alignment_similarity[1],
-      
+        alignment_summary_disk$mean_alignment_similarity[1],
       median_efa_alignment_similarity =
-        alignment_summary_disk$
-        median_alignment_similarity[1],
-      
+        alignment_summary_disk$median_alignment_similarity[1],
       mean_kmeans_efa_similarity =
-        km_efa_summary_disk$
-        mean_similarity_pct[1],
-      
+        km_efa_summary_disk$mean_similarity_pct[1],
       median_kmeans_efa_similarity =
-        km_efa_summary_disk$
-        median_similarity_pct[1],
-      
+        km_efa_summary_disk$median_similarity_pct[1],
       min_kmeans_efa_similarity =
-        km_efa_summary_disk$
-        min_similarity_pct[1],
-      
+        km_efa_summary_disk$min_similarity_pct[1],
       max_kmeans_efa_similarity =
-        km_efa_summary_disk$
-        max_similarity_pct[1],
-      
+        km_efa_summary_disk$max_similarity_pct[1],
       n_kmeans_efa_matches_ge_75 =
-        km_efa_summary_disk$
-        n_matches_ge_75[1],
-      
-      mean_best_kmeans_expert_jaccard =
-        mean(
-          best_expert_km_disk$
-            jaccard_pct,
-          na.rm = TRUE
-        ),
-      
-      max_best_kmeans_expert_jaccard =
-        max(
-          best_expert_km_disk$
-            jaccard_pct,
-          na.rm = TRUE
-        ),
-      
-      mean_best_efa_expert_jaccard =
-        mean(
-          best_expert_efa_disk$
-            jaccard_pct,
-          na.rm = TRUE
-        ),
-      
-      max_best_efa_expert_jaccard =
-        max(
-          best_expert_efa_disk$
-            jaccard_pct,
-          na.rm = TRUE
-        ),
-      
-      coverage_after_6_prototypes =
-        max(
-          final_comparison_disk$
-            cumulative_covered_pct,
-          na.rm = TRUE
-        )
+        km_efa_summary_disk$n_matches_ge_75[1],
+      mean_best_kmeans_expert_jaccard = mean(
+        best_expert_km_disk$jaccard_pct,
+        na.rm = TRUE
+      ),
+      max_best_kmeans_expert_jaccard = max(
+        best_expert_km_disk$jaccard_pct,
+        na.rm = TRUE
+      ),
+      mean_best_efa_expert_jaccard = mean(
+        best_expert_efa_disk$jaccard_pct,
+        na.rm = TRUE
+      ),
+      max_best_efa_expert_jaccard = max(
+        best_expert_efa_disk$jaccard_pct,
+        na.rm = TRUE
+      ),
+      coverage_after_6_prototypes = max(
+        final_comparison_disk$cumulative_covered_pct,
+        na.rm = TRUE
+      )
     )
-    
     
     cat(
       "  EFA bootstraps válidos: ",
@@ -2624,8 +2188,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
     cat(
       "  Similitud media KM-EFA: ",
       round(
-        km_efa_summary_disk$
-          mean_similarity_pct[1],
+        km_efa_summary_disk$mean_similarity_pct[1],
         1
       ),
       "%\n",
@@ -2636,8 +2199,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
       "  Cobertura Greedy con 6 prototipos: ",
       round(
         max(
-          final_comparison_disk$
-            cumulative_covered_pct,
+          final_comparison_disk$cumulative_covered_pct,
           na.rm = TRUE
         ),
         1
@@ -2652,9 +2214,7 @@ for (sample_name in ANALYSIS_SAMPLES) {
   }
 }
 
-
 # Consolidar resultados globales
-
 run_summary_all <- bind_rows(
   run_summary_list
 )
@@ -2679,9 +2239,7 @@ efa_alignment_all <- bind_rows(
   efa_alignment_list
 )
 
-
 # Comprobaciones finales
-
 if (
   nrow(run_summary_all) !=
   length(ANALYSIS_SAMPLES) *
@@ -2693,11 +2251,8 @@ if (
 }
 
 expected_global_grid <- crossing(
-  analysis_sample =
-    ANALYSIS_SAMPLES,
-  
-  matrix_name =
-    MATRICES_TO_RUN
+  analysis_sample = ANALYSIS_SAMPLES,
+  matrix_name = MATRICES_TO_RUN
 )
 
 missing_global_grid <- expected_global_grid %>%
@@ -2724,9 +2279,7 @@ if (nrow(missing_global_grid) > 0) {
   )
 }
 
-
 # Parámetros utilizados
-
 parameters <- tibble(
   parameter = c(
     "analysis_samples",
@@ -2748,12 +2301,10 @@ parameters <- tibble(
       ANALYSIS_SAMPLES,
       collapse = ", "
     ),
-    
     paste(
       MATRICES_TO_RUN,
       collapse = ", "
     ),
-    
     REFERENCE_WEIGHTING,
     as.character(D_DET),
     as.character(D_HAMMING),
@@ -2761,16 +2312,13 @@ parameters <- tibble(
     as.character(N_EFA_FACTORS),
     as.character(MAX_BOOTSTRAPS),
     as.character(GOOD_SIMILARITY_THRESHOLD),
-    
     greedy_file,
     efa_file,
     EXPERT_FILE
   )
 )
 
-
 # Guardar outputs globales
-
 global_outputs <- list(
   "00_comparison_summary_all_samples_matrices.csv" =
     run_summary_all,
@@ -2803,25 +2351,14 @@ iwalk(
   )
 )
 
-
 # Resumen final
 cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "10. COMPARACIÓN COMPLETADA\n"
-)
-
-cat(
-  "============================================================\n"
+  "\n10. COMPARACIÓN COMPLETADA\n"
 )
 
 cat(
   "\nConfiguraciones totales: ",
-  nrow(
-    run_summary_all
-  ),
+  nrow(run_summary_all),
   "\n",
   sep = ""
 )

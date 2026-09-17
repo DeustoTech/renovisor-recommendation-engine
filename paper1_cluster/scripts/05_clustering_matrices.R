@@ -1,5 +1,5 @@
-# 05. Matrices para clustering y análisis factorial
 #
+# Objetivo
 # Construye las transformaciones de los 32 determinantes que utilizarán
 # posteriormente K-means, EFA y Greedy.
 #
@@ -20,9 +20,6 @@
 #   LATAM     -> comparación regional
 #   WHY_LATAM -> comparación por submuestra
 #
-# Este script NO hace bootstrap.
-# Los índices bootstrap se generan en 04 y se aplican a estas matrices en 06.
-
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -30,7 +27,6 @@ suppressPackageStartupMessages({
 
 
 # Configuración
-
 processed_root <- "paper1_cluster/data/processed"
 
 in_file <- file.path(
@@ -98,7 +94,6 @@ dir.create(
 
 
 # Lectura
-
 df_all <- read_csv(
   in_file,
   show_col_types = FALSE,
@@ -114,7 +109,6 @@ dimension_determinant_map <- read_csv(
 
 
 # Comprobaciones
-
 required_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -194,7 +188,6 @@ if (length(unexpected_regions)) {
 
 
 # Determinantes
-
 det_cols <- names(df_all)[
   str_detect(
     names(df_all),
@@ -283,7 +276,6 @@ dimension_determinants <- split(
 
 
 # Metadata que acompañará a las matrices
-
 id_cols <- c(
   "analysis_sample",
   "integrated_row_id",
@@ -311,7 +303,6 @@ id_cols <- c(
 
 
 # Funciones auxiliares
-
 as_num <- function(x) {
   suppressWarnings(
     parse_number(
@@ -526,7 +517,6 @@ save_plot <- function(
 
 
 # Construcción de matrices
-
 build_sample_matrices <- function(sample_name) {
   
   cat(
@@ -565,7 +555,6 @@ build_sample_matrices <- function(sample_name) {
   
   
   # Valores originales válidos 0-100
-  
   det_0_100_clean <- sample_df %>%
     select(
       all_of(
@@ -593,7 +582,6 @@ build_sample_matrices <- function(sample_name) {
   
   
   # Imputación neutral para las matrices de análisis
-  
   det_0_100_imputed50 <- det_0_100_clean %>%
     mutate(
       across(
@@ -626,7 +614,6 @@ build_sample_matrices <- function(sample_name) {
   # Valores < 50 y missing se representan como 0.5 en la matriz analítica.
   #
   # La máscara Greedy conserva los missing originales como NA.
-  
   pos_mask_for_greedy <- det_0_100_clean %>%
     mutate(
       across(
@@ -668,7 +655,6 @@ build_sample_matrices <- function(sample_name) {
   #
   # Missing y valores no extremos -> 0 en la matriz analítica.
   # La máscara Greedy conserva missing/no extremos como NA.
-  
   ext_distance_imputed <-
     abs(
       det_0_100_imputed50 -
@@ -721,7 +707,6 @@ build_sample_matrices <- function(sample_name) {
   #
   # Media y SD se calculan separadamente dentro de cada muestra
   # de referencia. Missing -> 0 después de la transformación.
-  
   det_means <- map_dbl(
     det_0_100_clean,
     ~ mean(
@@ -772,7 +757,6 @@ build_sample_matrices <- function(sample_name) {
   
   
   # Matrices agregadas a 9 dimensiones
-  
   matrix_dim9_raw_0_1 <-
     aggregate_to_dimensions(
       matrix_raw_0_1
@@ -795,7 +779,6 @@ build_sample_matrices <- function(sample_name) {
   
   
   # Registro de matrices
-  
   matrices <- list(
     matrix_32_raw_0_100_imputed50 =
       det_0_100_imputed50,
@@ -843,7 +826,6 @@ build_sample_matrices <- function(sample_name) {
   
   
   # Diagnósticos
-  
   diagnostics_parameters <- tibble(
     analysis_sample = sample_name,
     
@@ -1025,7 +1007,6 @@ build_sample_matrices <- function(sample_name) {
   
   # Los recuentos de umbral se calculan sobre valores observados.
   # Los missing no se convierten artificialmente en positivos.
-  
   diagnostics_threshold_counts <- tibble(
     analysis_sample =
       sample_name,
@@ -1258,7 +1239,6 @@ build_sample_matrices <- function(sample_name) {
   
   
   # Figuras diagnósticas
-  
   plot_matrix_summary <- diagnostics_matrix_summary %>%
     mutate(
       matrix_name = factor(
@@ -1506,7 +1486,6 @@ build_sample_matrices <- function(sample_name) {
 
 
 # Ejecutar las siete muestras
-
 results <- map(
   ANALYSIS_SAMPLES,
   build_sample_matrices
@@ -1517,7 +1496,6 @@ results <- map(
 
 
 # Resúmenes globales
-
 diagnostics_analysis_samples <- bind_rows(
   map(
     results,
@@ -1570,7 +1548,6 @@ diagnostics_sample_size_check <- diagnostics_analysis_samples %>%
 
 
 # Checks de arquitectura
-
 analysis_ids <- map(
   ANALYSIS_SAMPLES,
   ~ get_analysis_sample(
@@ -1650,7 +1627,6 @@ if (
 
 
 # Guardado global
-
 global_outputs <- list(
   "diagnostics_analysis_samples.csv" =
     diagnostics_analysis_samples,
@@ -1690,7 +1666,6 @@ iwalk(
 
 
 # Figura global
-
 plot_sample_sizes <- diagnostics_analysis_samples %>%
   ggplot(
     aes(
@@ -1729,7 +1704,6 @@ save_plot(
 
 
 # Resumen
-
 cat(
   "\n05. MATRICES PARA CLUSTERING COMPLETADAS\n"
 )

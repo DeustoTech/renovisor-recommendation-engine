@@ -1,5 +1,7 @@
 
 #
+# Objetivo
+#
 # Resume el estado del dataset después de la integración, armonización,
 # control de calidad y creación de scores de fase.
 #
@@ -11,16 +13,10 @@
 #   WHY_LATAM
 #
 # POOLED_ALL se construye únicamente como agregado de las cuatro
-# submuestras. No existe como categoría fila a fila.
-#
-# Este script es PRE-BOOTSTRAP:
-#   EUROPE   -> se construirá en 04_2b
-#   LATAM    -> se construirá en 04_2e
-#   COMPLETE -> EUROPE + LATAM en 04_2f
+# submuestras.
 #
 # Aquí se generan únicamente tablas resumen. Las figuras descriptivas
 # se generan posteriormente en 03_4_figures.R.
-
 
 suppressPackageStartupMessages({
   library(tidyverse)
@@ -28,7 +24,6 @@ suppressPackageStartupMessages({
 
 
 # Configuración
-
 processed_root <- "paper1_cluster/data/processed"
 
 file_integrated <- file.path(
@@ -103,7 +98,6 @@ if (length(missing_files)) {
 
 
 # Lectura
-
 read_chr_csv <- function(path) {
   read_csv(
     path,
@@ -302,7 +296,6 @@ coverage_summary <- function(
 
 
 # Comprobaciones
-
 required_quality_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -431,8 +424,7 @@ phase_analysis <- add_analysis_samples(
 )
 
 
-# 00. Dimensiones de archivos
-
+# Dimensiones de archivos
 summary_00_files_dimensions <- tibble(
   step = c(
     "01_integrated",
@@ -467,9 +459,7 @@ summary_00_files_dimensions <- tibble(
   )
 )
 
-
-# 01. Tamaños de muestra
-
+# Tamaños de muestra
 summary_01_subsamples <- df %>%
   count(
     comparison_region,
@@ -573,8 +563,7 @@ summary_01_subsamples_surveys <- df %>%
   )
 
 
-# 02. Calidad final
-
+# Calidad final
 usable_main_bool <- safe_true_col(
   df_analysis,
   "usable_for_main_analysis"
@@ -702,8 +691,7 @@ summary_02_quality_by_sample <- df_analysis %>%
   )
 
 
-# 03. Categorías de calidad
-
+# Categorías de calidad
 summary_03_quality_counts <- df_analysis %>%
   count(
     analysis_sample,
@@ -750,8 +738,7 @@ summary_04_metadata_quality <- df_analysis %>%
   )
 
 
-# 05. Cobertura de determinantes
-
+# Cobertura de determinantes
 det_cols <- names(df)[
   str_detect(
     names(df),
@@ -840,8 +827,7 @@ summary_05_determinants_by_sample <- df_analysis %>%
   )
 
 
-# 06. Missing por determinante
-
+# Missing por determinante
 summary_06_missing_by_determinant <- df_analysis %>%
   select(
     analysis_sample,
@@ -907,8 +893,7 @@ summary_06_missing_by_determinant <- df_analysis %>%
   )
 
 
-# 07. Cobertura sociodemográfica
-
+# Cobertura sociodemográfica
 sociodemographic_vars <- c(
   "age_model",
   "age_group_model",
@@ -945,8 +930,7 @@ summary_07_sociodemographic_coverage <- coverage_summary(
 )
 
 
-# 08. Distribuciones sociodemográficas
-
+# Distribuciones sociodemográficas
 summary_08_sociodemographic_counts <- df_analysis %>%
   select(
     analysis_sample,
@@ -986,8 +970,7 @@ summary_08_sociodemographic_counts <- df_analysis %>%
   )
 
 
-# 09. Cobertura de variables de propensity europeo
-
+# Cobertura de variables de propensity europeo
 propensity_vars <- c(
   "voted_observed",
   "vote_status_declared",
@@ -1013,8 +996,7 @@ summary_09_propensity_variable_coverage <- coverage_summary(
 )
 
 
-# 10. Readiness del propensity europeo
-
+# Readiness del propensity europeo
 df_analysis_propensity <- df_analysis
 
 df_analysis_propensity$.eu_applicable <- if (
@@ -1177,8 +1159,7 @@ summary_10_propensity_readiness <- df_analysis_propensity %>%
   )
 
 
-# 11. Fases y dimensiones
-
+# Fases y dimensiones
 phase_prefixes <- c(
   "phase_implemented_reasons",
   "phase_more_likely_1",
@@ -1269,8 +1250,7 @@ summary_11_phase_block_by_sample <- phase_analysis %>%
   )
 
 
-# 12. Calidad de fases
-
+# Calidad de fases
 if (
   length(
     phase_quality_cols
@@ -1330,8 +1310,7 @@ if (
 }
 
 
-# 13. Frecuencia de dimensiones por fase
-
+# Frecuencia de dimensiones por fase
 selected_dim_cols <- names(
   phase_analysis
 )[
@@ -1412,8 +1391,7 @@ if (length(selected_dim_cols)) {
 }
 
 
-# 14. Scores por fase
-
+# Scores por fase
 if (length(phase_score_cols)) {
   summary_14_phase_scores <- phase_analysis %>%
     select(
@@ -1531,8 +1509,7 @@ summary_15_dimension_mapping_counts <- dimension_mapping %>%
   )
 
 
-# 16. Calidad de componentes
-
+# Calidad de componentes
 quality_cols <- names(
   df_analysis
 )[
@@ -1587,8 +1564,7 @@ if (length(quality_cols)) {
 }
 
 
-# 17. Cobertura de componentes
-
+# Cobertura de componentes
 component_n_cols <- names(
   df_analysis
 )[
@@ -1696,8 +1672,7 @@ if (length(component_n_cols)) {
 }
 
 
-# 18. Tamaños pre-bootstrap disponibles para clustering
-
+# Tamaños pre-bootstrap disponibles para clustering
 summary_18_clustering_sample_sizes <- bind_rows(
   cluster_matrix %>%
     summarise(
@@ -1793,8 +1768,7 @@ if (
 }
 
 
-# 99. Resumen ejecutivo
-
+# Resumen ejecutivo
 summary_99_final_overview <- tibble(
   metric = c(
     "total_rows_final_dataset",
@@ -2003,7 +1977,6 @@ summary_99_final_overview <- tibble(
 
 
 # Guardado
-
 outputs <- list(
   "summary_99_final_overview.csv" =
     summary_99_final_overview,
@@ -2094,7 +2067,6 @@ iwalk(
 
 
 # Resumen
-
 cat("\nRESUMEN EJECUTIVO\n")
 
 print(

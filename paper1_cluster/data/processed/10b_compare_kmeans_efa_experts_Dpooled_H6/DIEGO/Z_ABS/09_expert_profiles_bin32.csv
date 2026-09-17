@@ -1,0 +1,9 @@
+expert_profile,id,n_active,determinants
+Activist,Activist,6,det_08_trust; det_13_technical_fit; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+Careful,Careful,12,det_02_credit_score; det_03_risk_profile; det_06_climate_protection; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_14_environmental_concerns; det_16_commitment; det_17_adherence; det_19_wellbeing
+Early.Adopter,Early.Adopter,6,det_11_knowledge; det_14_environmental_concerns; det_15_self_satisfaction; det_17_adherence; det_26_novelty; det_29_trends
+Fearful,Fearful,9,det_02_credit_score; det_03_risk_profile; det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_19_wellbeing
+Homo.Economicus,Homo.Economicus,9,det_01_profits; det_04_added_value; det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+Influencer,Influencer,5,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+Stubborn,Stubborn,3,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+Uninterested,Uninterested,6,det_07_legal; det_13_technical_fit; det_19_wellbeing; det_20_coziness; det_22_peer_pressure; det_30_authority

@@ -1,0 +1,12 @@
+parameter,value
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+matrices,"matrix_32_raw_0_1, matrix_32_pos_0_1, matrix_32_ext_0_1, matrix_32_z_abs"
+methods,"KMEANS, EFA"
+D_strategy,D=8:15 pooled in one Greedy pool
+H_grid,"0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+prototypes_summarised,"1, 2, 3, 4, 5, 6, 7, 8"
+coverage_thresholds,"80, 85, 90, 95"
+primary_weighting,equal_candidate
+greedy_steps_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/08b_greedy_kmeans_efa_Dpooled/07_greedy_prototype_steps_Dpooled.csv
+greedy_thresholds_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/08b_greedy_kmeans_efa_Dpooled/06_coverage_threshold_by_H_Dpooled.csv
+random_seed,NONE

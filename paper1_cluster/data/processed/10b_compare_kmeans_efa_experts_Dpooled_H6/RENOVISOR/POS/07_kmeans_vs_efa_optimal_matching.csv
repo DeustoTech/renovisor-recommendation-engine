@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA3,44.44444444444444,9,8,4,44.44444444444444,50,30.76923076923077,det_07_legal; det_08_trust; det_09_safety; det_13_technical_fit
+KM2,EFA6,50,8,8,4,50,50,33.333333333333336,det_11_knowledge; det_13_technical_fit; det_16_commitment; det_17_adherence
+KM3,EFA4,40,15,8,6,40,75,35.294117647058826,det_04_added_value; det_06_climate_protection; det_08_trust; det_14_environmental_concerns; det_21_rights_and_duties; det_32_own_significance
+KM4,EFA5,75,8,8,6,75,75,60,det_01_profits; det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction
+KM5,EFA1,46.666666666666664,15,8,7,46.666666666666664,87.5,43.75,det_09_safety; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_18_autonomy; det_19_wellbeing; det_20_coziness
+KM6,EFA2,0,12,8,0,0,0,0,

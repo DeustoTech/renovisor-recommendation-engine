@@ -59,3 +59,8 @@ paper1_cluster/data/processed/04_3_propensity_bootstrap_tfg_blocks/bootstrap_sam
 paper1_cluster/data/processed/**/bootstrap_samples_index.csv
 .DS_Store
 paper1_cluster/data/processed/06_kmeans_bootstrap/
+
+paper1_cluster/data/processed/08_greedy_kmeans_efa/01_binary_patterns_pooled.csv
+paper1_cluster/data/processed/08_greedy_kmeans_efa/02_pattern_frequency_pooled.csv
+paper1_cluster/data/processed/04_2h_bootstrap_boxplots/bootstrap_boxplot_distribution_by_run_all_variables.csv
+paper1_cluster/data/processed/04_2g_sociodemographic_distribution/sociodemographic_distribution_bootstrap_by_run.csv

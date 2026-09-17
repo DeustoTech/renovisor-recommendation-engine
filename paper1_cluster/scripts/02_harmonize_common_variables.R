@@ -1,6 +1,6 @@
 
 # Objetivo:
-# Crear una versión limpia de all_sources_integrated.csv.
+# Crear una versión limpia de all_sources_integrated.csv
 #
 # El input procede del 01 y contiene la muestra completa:
 #   - DIEGO
@@ -52,21 +52,7 @@
 # paper1_cluster/data/processed/01_1_harmonize_sociodemographics/all_sources_integrated_clean_traceability.csv
 #   -> dataset completo para trazabilidad, con columnas originales + columnas limpias.
 #
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/sociodemographics_clean.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/determinants_harmonized.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/sociodemographic_source_columns.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/determinant_dictionary_32.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_sociodemographics_coverage.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_sociodemographics_counts.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_sociodemographics_conflicts.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_32det_by_source.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_32det_ranges.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_sociodemographics_coverage_by_subsample.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_sociodemographics_counts_by_subsample.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_sociodemographics_conflicts_by_subsample.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_32det_by_subsample.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/diagnostics_32det_ranges_by_subsample.csv
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/sociodemographic_dictionary.csv
+# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/...
 
 suppressPackageStartupMessages({
   library(tidyverse)

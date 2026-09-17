@@ -1,0 +1,14 @@
+parameter,value
+input_binary_patterns,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/08_greedy_kmeans_efa/01_binary_patterns_pooled.csv.gz
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+methods,"KMEANS, EFA"
+matrices,"matrix_32_raw_0_1, matrix_32_pos_0_1, matrix_32_ext_0_1, matrix_32_z_abs"
+D_values_pooled,"8, 9, 10, 11, 12, 13, 14, 15"
+n_D_values,8
+H_grid,"0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+max_greedy_prototypes,12
+plot_prototypes,"1, 2, 3, 4, 5, 6, 7, 8"
+coverage_thresholds,"80, 85, 90, 95"
+pool_weightings,"equal_candidate, equal_element"
+primary_weighting,equal_candidate
+random_seed,NONE - no random operation is performed in 08b

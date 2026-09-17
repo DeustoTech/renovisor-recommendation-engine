@@ -1,0 +1,15 @@
+parameter,value
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+matrices,"matrix_32_raw_0_1, matrix_32_pos_0_1, matrix_32_ext_0_1, matrix_32_z_abs"
+weighting,equal_candidate
+greedy_d_strategy,D=8:15 pooled
+greedy_h,6
+n_kmeans_prototypes,6
+n_efa_factors,6
+efa_top_n_determinants,8
+max_bootstraps,100
+good_similarity_threshold,75
+greedy_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/08b_greedy_kmeans_efa_Dpooled/07_greedy_prototype_steps_Dpooled.csv
+efa_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/07_efa_bootstrap/03_efa_loadings_long.csv.gz
+expert_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/initial_descriptive_analysis/data/archetypes/archetypeExperts_bin_32.csv
+random_seed,NONE
