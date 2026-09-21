@@ -1,0 +1,14 @@
+parameter,value
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+matrices,"matrix_32_raw_0_1, matrix_32_pos_0_1, matrix_32_ext_0_1, matrix_32_z_abs"
+D_strategy,D=8:15 pooled for KMEANS and EFA
+H_grid,"2, 3, 4, 5, 6, 7, 8"
+P_grid,"4, 5, 6, 7, 8"
+weighting,equal_candidate
+KM_EFA_overlap_metric,overlap_left_pct
+KM_EFA_symmetric_metric,jaccard_pct
+KM_EXPERTS_metric,jaccard_pct
+EFA_EXPERTS_metric,jaccard_pct
+greedy_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/08b_greedy_kmeans_efa_Dpooled/07_greedy_prototype_steps_Dpooled.csv
+expert_file,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/initial_descriptive_analysis/data/archetypes/archetypeExperts_bin_32.csv
+random_seed,NONE

@@ -1,0 +1,37 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA1,9,9,0,0,0,0,
+KM1,EFA2,9,8,1,11.11111111111111,12.5,6.25,det_10_cost_efficiency
+KM1,EFA3,9,8,4,44.44444444444444,50,30.76923076923077,det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+KM1,EFA4,9,10,5,55.55555555555556,50,35.714285714285715,det_08_trust; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence
+KM1,EFA5,9,8,3,33.333333333333336,37.5,21.428571428571427,det_07_legal; det_08_trust; det_09_safety
+KM1,EFA6,9,15,6,66.66666666666667,40,33.333333333333336,det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence
+KM2,EFA1,8,9,0,0,0,0,
+KM2,EFA2,8,8,3,37.5,37.5,23.076923076923077,det_06_climate_protection; det_14_environmental_concerns; det_16_commitment
+KM2,EFA3,8,8,2,25,25,14.285714285714286,det_11_knowledge; det_17_adherence
+KM2,EFA4,8,10,5,62.5,50,38.46153846153846,det_08_trust; det_11_knowledge; det_13_technical_fit; det_16_commitment; det_17_adherence
+KM2,EFA5,8,8,1,12.5,12.5,6.666666666666667,det_08_trust
+KM2,EFA6,8,15,5,62.5,33.333333333333336,27.77777777777778,det_08_trust; det_11_knowledge; det_13_technical_fit; det_16_commitment; det_17_adherence
+KM3,EFA1,15,9,0,0,0,0,
+KM3,EFA2,15,8,5,33.333333333333336,62.5,27.77777777777778,det_04_added_value; det_06_climate_protection; det_14_environmental_concerns; det_16_commitment; det_32_own_significance
+KM3,EFA3,15,8,3,20,37.5,15,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+KM3,EFA4,15,10,8,53.333333333333336,80,47.05882352941177,det_08_trust; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_18_autonomy; det_32_own_significance
+KM3,EFA5,15,8,4,26.666666666666668,50,21.05263157894737,det_07_legal; det_08_trust; det_09_safety; det_21_rights_and_duties
+KM3,EFA6,15,15,7,46.666666666666664,46.666666666666664,30.434782608695652,det_08_trust; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_18_autonomy
+KM4,EFA1,8,9,0,0,0,0,
+KM4,EFA2,8,8,2,25,25,14.285714285714286,det_01_profits; det_10_cost_efficiency
+KM4,EFA3,8,8,6,75,75,60,det_01_profits; det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction
+KM4,EFA4,8,10,4,50,40,28.571428571428573,det_03_risk_profile; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+KM4,EFA5,8,8,0,0,0,0,
+KM4,EFA6,8,15,7,87.5,46.666666666666664,43.75,det_01_profits; det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction
+KM5,EFA1,15,9,0,0,0,0,
+KM5,EFA2,15,8,2,13.333333333333334,25,9.523809523809524,det_01_profits; det_10_cost_efficiency
+KM5,EFA3,15,8,8,53.333333333333336,100,53.333333333333336,det_01_profits; det_02_credit_score; det_03_risk_profile; det_05_frugality; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+KM5,EFA4,15,10,8,53.333333333333336,80,47.05882352941177,det_03_risk_profile; det_08_trust; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_18_autonomy
+KM5,EFA5,15,8,2,13.333333333333334,25,9.523809523809524,det_08_trust; det_09_safety
+KM5,EFA6,15,15,12,80,80,66.66666666666667,det_01_profits; det_02_credit_score; det_03_risk_profile; det_05_frugality; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_18_autonomy
+KM6,EFA1,12,9,0,0,0,0,
+KM6,EFA2,12,8,3,25,37.5,17.647058823529413,det_01_profits; det_10_cost_efficiency; det_16_commitment
+KM6,EFA3,12,8,5,41.666666666666664,62.5,33.333333333333336,det_01_profits; det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_15_self_satisfaction
+KM6,EFA4,12,10,7,58.333333333333336,70,46.666666666666664,det_08_trust; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_18_autonomy
+KM6,EFA5,12,8,2,16.666666666666668,25,11.11111111111111,det_07_legal; det_08_trust
+KM6,EFA6,12,15,10,83.33333333333333,66.66666666666667,58.8235294117647,det_01_profits; det_02_credit_score; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_18_autonomy

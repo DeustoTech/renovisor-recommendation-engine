@@ -1,0 +1,37 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA1,8,8,0,0,0,0,
+KM1,EFA2,8,11,7,87.5,63.63636363636363,58.333333333333336,det_01_profits; det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction
+KM1,EFA3,8,14,3,37.5,21.428571428571427,15.789473684210526,det_01_profits; det_11_knowledge; det_13_technical_fit
+KM1,EFA4,8,8,2,25,25,14.285714285714286,det_15_self_satisfaction; det_19_wellbeing
+KM1,EFA5,8,15,3,37.5,20,15,det_01_profits; det_11_knowledge; det_13_technical_fit
+KM1,EFA6,8,11,3,37.5,27.272727272727273,18.75,det_11_knowledge; det_12_own_competence; det_13_technical_fit
+KM2,EFA1,11,8,0,0,0,0,
+KM2,EFA2,11,11,5,45.45454545454545,45.45454545454545,29.41176470588235,det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence
+KM2,EFA3,11,14,9,81.81818181818181,64.28571428571429,56.25,det_06_climate_protection; det_07_legal; det_08_trust; det_11_knowledge; det_13_technical_fit; det_14_environmental_concerns; det_16_commitment; det_17_adherence; det_21_rights_and_duties
+KM2,EFA4,11,8,2,18.181818181818183,25,11.764705882352942,det_15_self_satisfaction; det_16_commitment
+KM2,EFA5,11,15,2,18.181818181818183,13.333333333333334,8.333333333333334,det_11_knowledge; det_13_technical_fit
+KM2,EFA6,11,11,7,63.63636363636363,63.63636363636363,46.666666666666664,det_07_legal; det_08_trust; det_11_knowledge; det_13_technical_fit; det_16_commitment; det_17_adherence; det_21_rights_and_duties
+KM3,EFA1,15,8,0,0,0,0,
+KM3,EFA2,15,11,11,73.33333333333333,100,73.33333333333333,det_01_profits; det_02_credit_score; det_03_risk_profile; det_05_frugality; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_18_autonomy
+KM3,EFA3,15,14,5,33.333333333333336,35.714285714285715,20.833333333333332,det_01_profits; det_11_knowledge; det_13_technical_fit; det_16_commitment; det_17_adherence
+KM3,EFA4,15,8,6,40,75,35.294117647058826,det_09_safety; det_15_self_satisfaction; det_16_commitment; det_18_autonomy; det_19_wellbeing; det_20_coziness
+KM3,EFA5,15,15,3,20,20,11.11111111111111,det_01_profits; det_11_knowledge; det_13_technical_fit
+KM3,EFA6,15,11,7,46.666666666666664,63.63636363636363,36.8421052631579,det_03_risk_profile; det_09_safety; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_16_commitment; det_17_adherence
+KM4,EFA1,14,8,0,0,0,0,
+KM4,EFA2,14,11,8,57.142857142857146,72.72727272727273,47.05882352941177,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence
+KM4,EFA3,14,14,7,50,50,33.333333333333336,det_07_legal; det_08_trust; det_11_knowledge; det_13_technical_fit; det_16_commitment; det_17_adherence; det_21_rights_and_duties
+KM4,EFA4,14,8,4,28.571428571428573,50,22.22222222222222,det_09_safety; det_15_self_satisfaction; det_16_commitment; det_19_wellbeing
+KM4,EFA5,14,15,2,14.285714285714286,13.333333333333334,7.407407407407407,det_11_knowledge; det_13_technical_fit
+KM4,EFA6,14,11,10,71.42857142857143,90.9090909090909,66.66666666666667,det_03_risk_profile; det_07_legal; det_08_trust; det_09_safety; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_16_commitment; det_17_adherence; det_21_rights_and_duties
+KM5,EFA1,15,8,0,0,0,0,
+KM5,EFA2,15,11,8,53.333333333333336,72.72727272727273,44.44444444444444,det_02_credit_score; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_18_autonomy
+KM5,EFA3,15,14,8,53.333333333333336,57.142857142857146,38.095238095238095,det_06_climate_protection; det_08_trust; det_11_knowledge; det_13_technical_fit; det_14_environmental_concerns; det_16_commitment; det_17_adherence; det_32_own_significance
+KM5,EFA4,15,8,6,40,75,35.294117647058826,det_09_safety; det_15_self_satisfaction; det_16_commitment; det_18_autonomy; det_19_wellbeing; det_32_own_significance
+KM5,EFA5,15,15,3,20,20,11.11111111111111,det_11_knowledge; det_13_technical_fit; det_32_own_significance
+KM5,EFA6,15,11,7,46.666666666666664,63.63636363636363,36.8421052631579,det_08_trust; det_09_safety; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_16_commitment; det_17_adherence
+KM6,EFA1,8,8,0,0,0,0,
+KM6,EFA2,8,11,3,37.5,27.272727272727273,18.75,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+KM6,EFA3,8,14,6,75,42.857142857142854,37.5,det_06_climate_protection; det_11_knowledge; det_14_environmental_concerns; det_16_commitment; det_17_adherence; det_32_own_significance
+KM6,EFA4,8,8,4,50,50,33.333333333333336,det_15_self_satisfaction; det_16_commitment; det_19_wellbeing; det_32_own_significance
+KM6,EFA5,8,15,2,25,13.333333333333334,9.523809523809524,det_11_knowledge; det_32_own_significance
+KM6,EFA6,8,11,3,37.5,27.272727272727273,18.75,det_11_knowledge; det_16_commitment; det_17_adherence

@@ -1,0 +1,7 @@
+efa_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Careful,14,12,5,35.714285714285715,41.666666666666664,23.80952380952381,det_02_credit_score; det_03_risk_profile; det_06_climate_protection; det_09_safety; det_16_commitment
+EFA2,Influencer,8,5,2,25,40,18.181818181818183,det_11_knowledge; det_28_recognition
+EFA3,Homo.Economicus,10,9,3,30,33.333333333333336,18.75,det_04_added_value; det_09_safety; det_10_cost_efficiency
+EFA4,Careful,13,12,7,53.84615384615385,58.333333333333336,38.888888888888886,det_03_risk_profile; det_06_climate_protection; det_11_knowledge; det_12_own_competence; det_14_environmental_concerns; det_17_adherence; det_19_wellbeing
+EFA5,Uninterested,9,6,3,33.333333333333336,50,25,det_19_wellbeing; det_20_coziness; det_30_authority
+EFA6,Careful,11,12,6,54.54545454545455,50,35.294117647058826,det_02_credit_score; det_03_risk_profile; det_06_climate_protection; det_11_knowledge; det_14_environmental_concerns; det_16_commitment

@@ -1,0 +1,7 @@
+id,prototype,determinants,signature_size,incremental_covered_pct,cumulative_covered_pct
+KM1,1,det_01_profits; det_03_risk_profile; det_04_added_value; det_05_frugality; det_09_safety; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_18_autonomy; det_19_wellbeing; det_20_coziness; det_25_agreement; det_32_own_significance,14,1.6515476190475138,1.6515476190475138
+KM2,2,det_02_credit_score; det_03_risk_profile; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence,8,0.9169940476189896,2.5685416666665035
+KM3,3,det_02_credit_score; det_03_risk_profile; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_14_environmental_concerns; det_15_self_satisfaction; det_17_adherence; det_18_autonomy; det_22_peer_pressure; det_28_recognition; det_31_approval,15,0.06491071428571007,2.6334523809522135
+KM4,4,det_03_risk_profile; det_05_frugality; det_09_safety; det_10_cost_efficiency; det_12_own_competence; det_15_self_satisfaction; det_16_commitment; det_17_adherence,8,1.013392857142793,3.6468452380950063
+KM5,5,det_02_credit_score; det_09_safety; det_13_technical_fit; det_16_commitment; det_17_adherence; det_19_wellbeing; det_20_coziness; det_32_own_significance,8,1.114047619047547,4.760892857142554
+KM6,6,det_01_profits; det_03_risk_profile; det_05_frugality; det_10_cost_efficiency; det_13_technical_fit; det_18_autonomy; det_23_support; det_25_agreement,8,1.0604464285713604,5.821339285713914

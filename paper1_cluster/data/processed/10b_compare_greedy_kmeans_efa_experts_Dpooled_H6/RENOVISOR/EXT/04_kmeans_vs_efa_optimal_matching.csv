@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA1,75,8,8,6,75,75,60,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM2,EFA2,76.92307692307692,13,11,10,76.92307692307692,90.9090909090909,71.42857142857143,det_03_risk_profile; det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_19_wellbeing; det_20_coziness
+KM3,EFA5,73.33333333333333,15,15,11,73.33333333333333,73.33333333333333,57.89473684210526,det_02_credit_score; det_11_knowledge; det_13_technical_fit; det_22_peer_pressure; det_24_socialising; det_25_agreement; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM4,EFA6,62.5,8,8,5,62.5,62.5,45.45454545454545,det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_17_adherence
+KM5,EFA4,16.666666666666668,12,8,2,16.666666666666668,25,11.11111111111111,det_10_cost_efficiency; det_30_authority
+KM6,EFA3,25,8,8,2,25,25,14.285714285714286,det_06_climate_protection; det_14_environmental_concerns

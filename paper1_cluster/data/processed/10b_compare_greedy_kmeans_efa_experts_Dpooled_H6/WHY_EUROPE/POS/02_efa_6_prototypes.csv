@@ -1,0 +1,7 @@
+id,prototype,determinants,signature_size,incremental_covered_pct,cumulative_covered_pct
+EFA1,1,det_22_peer_pressure; det_24_socialising; det_26_novelty; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval,8,10.00077380952337,10.00077380952337
+EFA2,2,det_01_profits; det_02_credit_score; det_03_risk_profile; det_05_frugality; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_18_autonomy,13,7.8527976190471565,17.85357142857053
+EFA3,3,det_04_added_value; det_06_climate_protection; det_11_knowledge; det_14_environmental_concerns; det_16_commitment; det_17_adherence; det_23_support; det_32_own_significance,8,6.948660714285172,24.802232142855697
+EFA4,4,det_01_profits; det_03_risk_profile; det_05_frugality; det_07_legal; det_10_cost_efficiency; det_13_technical_fit; det_16_commitment; det_17_adherence; det_18_autonomy; det_21_rights_and_duties,10,2.154464285714156,26.956696428569852
+EFA5,5,det_03_risk_profile; det_07_legal; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_14_environmental_concerns; det_17_adherence; det_21_rights_and_duties,10,3.927916666666434,30.884613095236286
+EFA6,6,det_01_profits; det_02_credit_score; det_03_risk_profile; det_05_frugality; det_09_safety; det_10_cost_efficiency; det_13_technical_fit; det_15_self_satisfaction; det_18_autonomy; det_19_wellbeing; det_20_coziness,11,2.419702380952236,33.30431547618853

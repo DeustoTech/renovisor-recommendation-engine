@@ -1,0 +1,37 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA1,9,9,2,22.22222222222222,22.22222222222222,12.5,det_22_peer_pressure; det_30_authority
+KM1,EFA2,9,10,3,33.333333333333336,30,18.75,det_11_knowledge; det_16_commitment; det_25_agreement
+KM1,EFA3,9,8,3,33.333333333333336,37.5,21.428571428571427,det_24_socialising; det_30_authority; det_31_approval
+KM1,EFA4,9,9,2,22.22222222222222,22.22222222222222,12.5,det_11_knowledge; det_25_agreement
+KM1,EFA5,9,12,5,55.55555555555556,41.666666666666664,31.25,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_30_authority
+KM1,EFA6,9,14,4,44.44444444444444,28.571428571428573,21.05263157894737,det_10_cost_efficiency; det_22_peer_pressure; det_25_agreement; det_30_authority
+KM2,EFA1,11,9,2,18.181818181818183,22.22222222222222,11.11111111111111,det_13_technical_fit; det_22_peer_pressure
+KM2,EFA2,11,10,5,45.45454545454545,50,31.25,det_11_knowledge; det_13_technical_fit; det_16_commitment; det_25_agreement; det_29_trends
+KM2,EFA3,11,8,3,27.272727272727273,37.5,18.75,det_13_technical_fit; det_24_socialising; det_31_approval
+KM2,EFA4,11,9,4,36.36363636363637,44.44444444444444,25,det_11_knowledge; det_17_adherence; det_25_agreement; det_32_own_significance
+KM2,EFA5,11,12,5,45.45454545454545,41.666666666666664,27.77777777777778,det_06_climate_protection; det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_29_trends
+KM2,EFA6,11,14,4,36.36363636363637,28.571428571428573,19.047619047619047,det_22_peer_pressure; det_25_agreement; det_29_trends; det_32_own_significance
+KM3,EFA1,13,9,1,7.6923076923076925,11.11111111111111,4.761904761904762,det_30_authority
+KM3,EFA2,13,10,3,23.076923076923077,30,15,det_15_self_satisfaction; det_18_autonomy; det_25_agreement
+KM3,EFA3,13,8,5,38.46153846153846,62.5,31.25,det_09_safety; det_15_self_satisfaction; det_23_support; det_24_socialising; det_30_authority
+KM3,EFA4,13,9,5,38.46153846153846,55.55555555555556,29.41176470588235,det_09_safety; det_15_self_satisfaction; det_17_adherence; det_23_support; det_25_agreement
+KM3,EFA5,13,12,5,38.46153846153846,41.666666666666664,25,det_02_credit_score; det_09_safety; det_24_socialising; det_28_recognition; det_30_authority
+KM3,EFA6,13,14,7,53.84615384615385,50,35,det_10_cost_efficiency; det_14_environmental_concerns; det_15_self_satisfaction; det_18_autonomy; det_23_support; det_25_agreement; det_30_authority
+KM4,EFA1,15,9,4,26.666666666666668,44.44444444444444,20,det_08_trust; det_13_technical_fit; det_19_wellbeing; det_22_peer_pressure
+KM4,EFA2,15,10,5,33.333333333333336,50,25,det_11_knowledge; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_19_wellbeing
+KM4,EFA3,15,8,7,46.666666666666664,87.5,43.75,det_09_safety; det_13_technical_fit; det_15_self_satisfaction; det_19_wellbeing; det_23_support; det_24_socialising; det_31_approval
+KM4,EFA4,15,9,4,26.666666666666668,44.44444444444444,20,det_09_safety; det_11_knowledge; det_15_self_satisfaction; det_23_support
+KM4,EFA5,15,12,8,53.333333333333336,66.66666666666667,42.10526315789474,det_02_credit_score; det_08_trust; det_09_safety; det_11_knowledge; det_19_wellbeing; det_22_peer_pressure; det_24_socialising; det_28_recognition
+KM4,EFA6,15,14,5,33.333333333333336,35.714285714285715,20.833333333333332,det_14_environmental_concerns; det_15_self_satisfaction; det_19_wellbeing; det_22_peer_pressure; det_23_support
+KM5,EFA1,8,9,2,25,22.22222222222222,13.333333333333334,det_22_peer_pressure; det_30_authority
+KM5,EFA2,8,10,2,25,20,12.5,det_15_self_satisfaction; det_20_coziness
+KM5,EFA3,8,8,2,25,25,14.285714285714286,det_15_self_satisfaction; det_30_authority
+KM5,EFA4,8,9,3,37.5,33.333333333333336,21.428571428571427,det_15_self_satisfaction; det_17_adherence; det_32_own_significance
+KM5,EFA5,8,12,4,50,33.333333333333336,25,det_02_credit_score; det_06_climate_protection; det_22_peer_pressure; det_30_authority
+KM5,EFA6,8,14,4,50,28.571428571428573,22.22222222222222,det_15_self_satisfaction; det_22_peer_pressure; det_30_authority; det_32_own_significance
+KM6,EFA1,12,9,2,16.666666666666668,22.22222222222222,10.526315789473685,det_05_frugality; det_19_wellbeing
+KM6,EFA2,12,10,6,50,60,37.5,det_11_knowledge; det_15_self_satisfaction; det_16_commitment; det_19_wellbeing; det_25_agreement; det_29_trends
+KM6,EFA3,12,8,5,41.666666666666664,62.5,33.333333333333336,det_09_safety; det_15_self_satisfaction; det_19_wellbeing; det_23_support; det_24_socialising
+KM6,EFA4,12,9,7,58.333333333333336,77.77777777777777,50,det_09_safety; det_11_knowledge; det_15_self_satisfaction; det_17_adherence; det_23_support; det_25_agreement; det_32_own_significance
+KM6,EFA5,12,12,5,41.666666666666664,41.666666666666664,26.31578947368421,det_09_safety; det_11_knowledge; det_19_wellbeing; det_24_socialising; det_29_trends
+KM6,EFA6,12,14,6,50,42.857142857142854,30,det_15_self_satisfaction; det_19_wellbeing; det_23_support; det_25_agreement; det_29_trends; det_32_own_significance

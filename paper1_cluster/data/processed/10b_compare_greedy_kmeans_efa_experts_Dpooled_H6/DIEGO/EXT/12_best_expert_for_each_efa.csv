@@ -1,0 +1,7 @@
+efa_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Uninterested,9,6,5,55.55555555555556,83.33333333333333,50,det_07_legal; det_13_technical_fit; det_19_wellbeing; det_22_peer_pressure; det_30_authority
+EFA2,Activist,10,6,3,30,50,23.076923076923077,det_13_technical_fit; det_15_self_satisfaction; det_16_commitment
+EFA3,Uninterested,8,6,3,37.5,50,27.272727272727273,det_13_technical_fit; det_19_wellbeing; det_30_authority
+EFA4,Stubborn,9,3,3,33.333333333333336,100,33.333333333333336,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+EFA5,Fearful,12,9,6,50,66.66666666666667,40,det_02_credit_score; det_07_legal; det_08_trust; det_09_safety; det_11_knowledge; det_19_wellbeing
+EFA6,Early.Adopter,14,6,4,28.571428571428573,66.66666666666667,25,det_14_environmental_concerns; det_15_self_satisfaction; det_26_novelty; det_29_trends

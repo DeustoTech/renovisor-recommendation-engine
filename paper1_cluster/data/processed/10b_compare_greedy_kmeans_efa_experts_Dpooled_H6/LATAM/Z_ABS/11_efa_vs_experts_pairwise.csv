@@ -1,0 +1,49 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Activist,8,6,0,0,0,0,
+EFA1,Careful,8,12,0,0,0,0,
+EFA1,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_29_trends
+EFA1,Fearful,8,9,0,0,0,0,
+EFA1,Homo.Economicus,8,9,0,0,0,0,
+EFA1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+EFA1,Stubborn,8,3,0,0,0,0,
+EFA1,Uninterested,8,6,2,25,33.333333333333336,16.666666666666668,det_22_peer_pressure; det_30_authority
+EFA2,Activist,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_14_environmental_concerns
+EFA2,Careful,8,12,2,25,16.666666666666668,11.11111111111111,det_06_climate_protection; det_14_environmental_concerns
+EFA2,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_14_environmental_concerns; det_26_novelty
+EFA2,Fearful,8,9,0,0,0,0,
+EFA2,Homo.Economicus,8,9,2,25,22.22222222222222,13.333333333333334,det_01_profits; det_04_added_value
+EFA2,Influencer,8,5,0,0,0,0,
+EFA2,Stubborn,8,3,0,0,0,0,
+EFA2,Uninterested,8,6,0,0,0,0,
+EFA3,Activist,8,6,2,25,33.333333333333336,16.666666666666668,det_15_self_satisfaction; det_17_adherence
+EFA3,Careful,8,12,5,62.5,41.666666666666664,33.333333333333336,det_09_safety; det_11_knowledge; det_12_own_competence; det_17_adherence; det_19_wellbeing
+EFA3,Early.Adopter,8,6,3,37.5,50,27.272727272727273,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+EFA3,Fearful,8,9,3,37.5,33.333333333333336,21.428571428571427,det_09_safety; det_11_knowledge; det_19_wellbeing
+EFA3,Homo.Economicus,8,9,3,37.5,33.333333333333336,21.428571428571427,det_09_safety; det_11_knowledge; det_15_self_satisfaction
+EFA3,Influencer,8,5,1,12.5,20,8.333333333333334,det_11_knowledge
+EFA3,Stubborn,8,3,3,37.5,100,37.5,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+EFA3,Uninterested,8,6,2,25,33.333333333333336,16.666666666666668,det_19_wellbeing; det_20_coziness
+EFA4,Activist,15,6,1,6.666666666666667,16.666666666666668,5,det_08_trust
+EFA4,Careful,15,12,1,6.666666666666667,8.333333333333334,3.8461538461538463,det_08_trust
+EFA4,Early.Adopter,15,6,2,13.333333333333334,33.333333333333336,10.526315789473685,det_26_novelty; det_29_trends
+EFA4,Fearful,15,9,2,13.333333333333334,22.22222222222222,9.090909090909092,det_07_legal; det_08_trust
+EFA4,Homo.Economicus,15,9,3,20,33.333333333333336,14.285714285714286,det_01_profits; det_07_legal; det_08_trust
+EFA4,Influencer,15,5,4,26.666666666666668,80,25,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+EFA4,Stubborn,15,3,0,0,0,0,
+EFA4,Uninterested,15,6,3,20,50,16.666666666666668,det_07_legal; det_22_peer_pressure; det_30_authority
+EFA5,Activist,8,6,2,25,33.333333333333336,16.666666666666668,det_16_commitment; det_17_adherence
+EFA5,Careful,8,12,7,87.5,58.333333333333336,53.84615384615385,det_02_credit_score; det_03_risk_profile; det_09_safety; det_11_knowledge; det_12_own_competence; det_16_commitment; det_17_adherence
+EFA5,Early.Adopter,8,6,2,25,33.333333333333336,16.666666666666668,det_11_knowledge; det_17_adherence
+EFA5,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_03_risk_profile; det_09_safety; det_11_knowledge
+EFA5,Homo.Economicus,8,9,2,25,22.22222222222222,13.333333333333334,det_09_safety; det_11_knowledge
+EFA5,Influencer,8,5,1,12.5,20,8.333333333333334,det_11_knowledge
+EFA5,Stubborn,8,3,2,25,66.66666666666667,22.22222222222222,det_11_knowledge; det_17_adherence
+EFA5,Uninterested,8,6,0,0,0,0,
+EFA6,Activist,15,6,3,20,50,16.666666666666668,det_15_self_satisfaction; det_16_commitment; det_17_adherence
+EFA6,Careful,15,12,8,53.333333333333336,66.66666666666667,42.10526315789474,det_02_credit_score; det_03_risk_profile; det_09_safety; det_11_knowledge; det_12_own_competence; det_16_commitment; det_17_adherence; det_19_wellbeing
+EFA6,Early.Adopter,15,6,3,20,50,16.666666666666668,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+EFA6,Fearful,15,9,6,40,66.66666666666667,33.333333333333336,det_02_credit_score; det_03_risk_profile; det_07_legal; det_09_safety; det_11_knowledge; det_19_wellbeing
+EFA6,Homo.Economicus,15,9,4,26.666666666666668,44.44444444444444,20,det_07_legal; det_09_safety; det_11_knowledge; det_15_self_satisfaction
+EFA6,Influencer,15,5,1,6.666666666666667,20,5.2631578947368425,det_11_knowledge
+EFA6,Stubborn,15,3,3,20,100,20,det_11_knowledge; det_15_self_satisfaction; det_17_adherence
+EFA6,Uninterested,15,6,3,20,50,16.666666666666668,det_07_legal; det_19_wellbeing; det_20_coziness

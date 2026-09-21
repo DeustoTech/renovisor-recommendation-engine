@@ -1,0 +1,7 @@
+efa_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+EFA2,Homo.Economicus,9,9,3,33.333333333333336,33.333333333333336,20,det_04_added_value; det_07_legal; det_08_trust
+EFA3,Fearful,8,9,4,50,44.44444444444444,30.76923076923077,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency; det_13_technical_fit
+EFA4,Uninterested,8,6,3,37.5,50,27.272727272727273,det_13_technical_fit; det_20_coziness; det_30_authority
+EFA5,Fearful,10,9,4,40,44.44444444444444,26.666666666666668,det_03_risk_profile; det_07_legal; det_11_knowledge; det_13_technical_fit
+EFA6,Influencer,15,5,5,33.333333333333336,100,33.333333333333336,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval

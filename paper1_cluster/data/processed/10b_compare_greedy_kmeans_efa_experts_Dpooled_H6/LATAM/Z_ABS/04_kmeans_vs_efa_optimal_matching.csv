@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA3,66.66666666666667,12,8,8,66.66666666666667,100,66.66666666666667,det_09_safety; det_11_knowledge; det_12_own_competence; det_15_self_satisfaction; det_17_adherence; det_18_autonomy; det_19_wellbeing; det_20_coziness
+KM2,EFA6,100,8,15,8,100,53.333333333333336,53.333333333333336,det_02_credit_score; det_03_risk_profile; det_05_frugality; det_07_legal; det_09_safety; det_17_adherence; det_21_rights_and_duties; det_23_support
+KM3,EFA2,37.5,8,8,3,37.5,37.5,23.076923076923077,det_04_added_value; det_14_environmental_concerns; det_32_own_significance
+KM4,EFA1,33.333333333333336,9,8,3,33.333333333333336,37.5,21.428571428571427,det_22_peer_pressure; det_25_agreement; det_29_trends
+KM5,EFA5,50,8,8,4,50,50,33.333333333333336,det_05_frugality; det_09_safety; det_16_commitment; det_17_adherence
+KM6,EFA4,53.333333333333336,15,15,8,53.333333333333336,53.333333333333336,36.36363636363637,det_07_legal; det_18_autonomy; det_23_support; det_24_socialising; det_25_agreement; det_26_novelty; det_29_trends; det_30_authority

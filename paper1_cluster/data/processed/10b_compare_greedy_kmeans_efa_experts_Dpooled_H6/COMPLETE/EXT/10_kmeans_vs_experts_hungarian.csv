@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct
+KM1,Influencer,50
+KM2,Fearful,60
+KM3,Activist,40
+KM4,Homo.Economicus,40
+KM5,Stubborn,20
+KM6,Careful,50

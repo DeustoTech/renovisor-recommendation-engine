@@ -1,0 +1,7 @@
+efa_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Influencer,8,5,3,37.5,60,30,det_24_socialising; det_28_recognition; det_31_approval
+EFA2,Uninterested,9,6,3,33.333333333333336,50,25,det_19_wellbeing; det_20_coziness; det_30_authority
+EFA3,Activist,8,6,4,50,66.66666666666667,40,det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+EFA4,Activist,9,6,3,33.333333333333336,50,25,det_13_technical_fit; det_16_commitment; det_17_adherence
+EFA5,Uninterested,10,6,3,30,50,23.076923076923077,det_07_legal; det_13_technical_fit; det_22_peer_pressure
+EFA6,Careful,8,12,4,50,33.333333333333336,25,det_03_risk_profile; det_09_safety; det_12_own_competence; det_19_wellbeing

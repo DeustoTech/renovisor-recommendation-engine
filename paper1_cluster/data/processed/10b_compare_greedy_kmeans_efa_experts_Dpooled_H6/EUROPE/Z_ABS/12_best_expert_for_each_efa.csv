@@ -1,0 +1,7 @@
+efa_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+EFA1,Influencer,8,5,4,50,80,44.44444444444444,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+EFA2,Fearful,9,9,6,66.66666666666667,66.66666666666667,50,det_03_risk_profile; det_08_trust; det_09_safety; det_10_cost_efficiency; det_13_technical_fit; det_19_wellbeing
+EFA3,Careful,12,12,7,58.333333333333336,58.333333333333336,41.1764705882353,det_03_risk_profile; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_16_commitment; det_17_adherence
+EFA4,Activist,9,6,3,33.333333333333336,50,25,det_08_trust; det_14_environmental_concerns; det_17_adherence
+EFA5,Careful,9,12,4,44.44444444444444,33.333333333333336,23.529411764705884,det_02_credit_score; det_06_climate_protection; det_09_safety; det_14_environmental_concerns
+EFA6,Early.Adopter,8,6,1,12.5,16.666666666666668,7.6923076923076925,det_26_novelty

@@ -1,0 +1,7 @@
+left_id,right_id,matching_similarity_pct,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA6,93.33333333333333,15,15,14,93.33333333333333,93.33333333333333,87.5,det_01_profits; det_02_credit_score; det_03_risk_profile; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_13_technical_fit; det_15_self_satisfaction; det_16_commitment; det_17_adherence; det_18_autonomy; det_19_wellbeing; det_20_coziness
+KM2,EFA1,53.84615384615385,13,8,7,53.84615384615385,87.5,50,det_22_peer_pressure; det_24_socialising; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM3,EFA5,12.5,8,8,1,12.5,12.5,6.666666666666667,det_13_technical_fit
+KM4,EFA4,44.44444444444444,9,8,4,44.44444444444444,50,30.76923076923077,det_01_profits; det_02_credit_score; det_10_cost_efficiency; det_15_self_satisfaction
+KM5,EFA3,46.666666666666664,15,10,7,46.666666666666664,70,38.888888888888886,det_03_risk_profile; det_07_legal; det_09_safety; det_11_knowledge; det_12_own_competence; det_17_adherence; det_21_rights_and_duties
+KM6,EFA2,50,8,8,4,50,50,33.333333333333336,det_09_safety; det_12_own_competence; det_15_self_satisfaction; det_19_wellbeing

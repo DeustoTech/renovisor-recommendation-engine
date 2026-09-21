@@ -1,0 +1,18 @@
+parameter,value
+analysis_samples,"COMPLETE, EUROPE, LATAM, DIEGO, RENOVISOR, WHY_EUROPE, WHY_LATAM"
+matrices,"RAW, POS, EXT, Z_ABS"
+methods,"KMEANS, EFA"
+D_strategy,D=8:15 pooled for KMEANS and EFA
+H_grid,"0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+prototype_grid,"1, 2, 3, 4, 5, 6, 7, 8"
+coverage_thresholds,"80, 85, 90, 95"
+greedy_weighting,equal_candidate
+reference_H,6
+reference_n_prototypes,6
+matching_threshold,>50
+KM_EFA_metric,overlap_left_pct
+KM_EXPERTS_metric,jaccard_pct
+EFA_EXPERTS_metric,jaccard_pct
+09b_input,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/09b_analysis_Dpooled/05_GREEDY_H_P_summary_all_samples.csv
+10b_input,/Users/mariaperales/Desktop/MASTER/recommendation-engine/TFM/paper1_cluster/data/processed/10b_compare_greedy_kmeans_efa_experts_Dpooled_H6/00_comparison_summary_all_samples_matrices.csv
+random_seed,NONE

@@ -1,0 +1,37 @@
+left_id,right_id,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,EFA1,8,8,6,75,75,60,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM1,EFA2,8,11,1,12.5,9.090909090909092,5.555555555555555,det_10_cost_efficiency
+KM1,EFA3,8,8,0,0,0,0,
+KM1,EFA4,8,8,2,25,25,14.285714285714286,det_10_cost_efficiency; det_30_authority
+KM1,EFA5,8,15,7,87.5,46.666666666666664,43.75,det_11_knowledge; det_22_peer_pressure; det_24_socialising; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM1,EFA6,8,8,2,25,25,14.285714285714286,det_10_cost_efficiency; det_11_knowledge
+KM2,EFA1,13,8,0,0,0,0,
+KM2,EFA2,13,11,10,76.92307692307692,90.9090909090909,71.42857142857143,det_03_risk_profile; det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_13_technical_fit; det_15_self_satisfaction; det_17_adherence; det_19_wellbeing; det_20_coziness
+KM2,EFA3,13,8,1,7.6923076923076925,12.5,5,det_21_rights_and_duties
+KM2,EFA4,13,8,3,23.076923076923077,37.5,16.666666666666668,det_02_credit_score; det_03_risk_profile; det_10_cost_efficiency
+KM2,EFA5,13,15,3,23.076923076923077,20,12,det_02_credit_score; det_11_knowledge; det_13_technical_fit
+KM2,EFA6,13,8,6,46.15384615384615,75,40,det_03_risk_profile; det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_17_adherence
+KM3,EFA1,15,8,7,46.666666666666664,87.5,43.75,det_22_peer_pressure; det_24_socialising; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM3,EFA2,15,11,5,33.333333333333336,45.45454545454545,23.80952380952381,det_07_legal; det_08_trust; det_10_cost_efficiency; det_13_technical_fit; det_19_wellbeing
+KM3,EFA3,15,8,1,6.666666666666667,12.5,4.545454545454546,det_25_agreement
+KM3,EFA4,15,8,4,26.666666666666668,50,21.05263157894737,det_02_credit_score; det_10_cost_efficiency; det_27_fun; det_30_authority
+KM3,EFA5,15,15,11,73.33333333333333,73.33333333333333,57.89473684210526,det_02_credit_score; det_11_knowledge; det_13_technical_fit; det_22_peer_pressure; det_24_socialising; det_25_agreement; det_27_fun; det_28_recognition; det_29_trends; det_30_authority; det_31_approval
+KM3,EFA6,15,8,3,20,37.5,15,det_08_trust; det_10_cost_efficiency; det_11_knowledge
+KM4,EFA1,8,8,0,0,0,0,
+KM4,EFA2,8,11,6,75,54.54545454545455,46.15384615384615,det_07_legal; det_08_trust; det_09_safety; det_10_cost_efficiency; det_17_adherence; det_19_wellbeing
+KM4,EFA3,8,8,1,12.5,12.5,6.666666666666667,det_14_environmental_concerns
+KM4,EFA4,8,8,1,12.5,12.5,6.666666666666667,det_10_cost_efficiency
+KM4,EFA5,8,15,1,12.5,6.666666666666667,4.545454545454546,det_11_knowledge
+KM4,EFA6,8,8,5,62.5,62.5,45.45454545454545,det_08_trust; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_17_adherence
+KM5,EFA1,12,8,4,33.333333333333336,50,25,det_24_socialising; det_28_recognition; det_30_authority; det_31_approval
+KM5,EFA2,12,11,5,41.666666666666664,45.45454545454545,27.77777777777778,det_08_trust; det_10_cost_efficiency; det_13_technical_fit; det_15_self_satisfaction; det_19_wellbeing
+KM5,EFA3,12,8,1,8.333333333333334,12.5,5.2631578947368425,det_25_agreement
+KM5,EFA4,12,8,2,16.666666666666668,25,11.11111111111111,det_10_cost_efficiency; det_30_authority
+KM5,EFA5,12,15,7,58.333333333333336,46.666666666666664,35,det_11_knowledge; det_13_technical_fit; det_24_socialising; det_25_agreement; det_28_recognition; det_30_authority; det_31_approval
+KM5,EFA6,12,8,3,25,37.5,17.647058823529413,det_08_trust; det_10_cost_efficiency; det_11_knowledge
+KM6,EFA1,8,8,2,25,25,14.285714285714286,det_28_recognition; det_31_approval
+KM6,EFA2,8,11,3,37.5,27.272727272727273,18.75,det_07_legal; det_08_trust; det_13_technical_fit
+KM6,EFA3,8,8,2,25,25,14.285714285714286,det_06_climate_protection; det_14_environmental_concerns
+KM6,EFA4,8,8,0,0,0,0,
+KM6,EFA5,8,15,4,50,26.666666666666668,21.05263157894737,det_11_knowledge; det_13_technical_fit; det_28_recognition; det_31_approval
+KM6,EFA6,8,8,2,25,25,14.285714285714286,det_08_trust; det_11_knowledge

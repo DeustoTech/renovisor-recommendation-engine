@@ -1,0 +1,7 @@
+kmeans_prototype,expert_profile,n_left,n_right,n_common,overlap_left_pct,overlap_right_pct,jaccard_pct,common_determinants
+KM1,Influencer,9,5,4,44.44444444444444,80,40,det_22_peer_pressure; det_24_socialising; det_28_recognition; det_31_approval
+KM2,Activist,10,6,5,50,83.33333333333333,45.45454545454545,det_08_trust; det_14_environmental_concerns; det_15_self_satisfaction; det_16_commitment; det_17_adherence
+KM3,Influencer,8,5,3,37.5,60,30,det_22_peer_pressure; det_28_recognition; det_31_approval
+KM4,Careful,13,12,8,61.53846153846154,66.66666666666667,47.05882352941177,det_02_credit_score; det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_14_environmental_concerns; det_16_commitment; det_17_adherence; det_19_wellbeing
+KM5,Careful,15,12,8,53.333333333333336,66.66666666666667,42.10526315789474,det_06_climate_protection; det_09_safety; det_10_cost_efficiency; det_11_knowledge; det_14_environmental_concerns; det_16_commitment; det_17_adherence; det_19_wellbeing
+KM6,Careful,15,12,8,53.333333333333336,66.66666666666667,42.10526315789474,det_08_trust; det_10_cost_efficiency; det_11_knowledge; det_12_own_competence; det_14_environmental_concerns; det_16_commitment; det_17_adherence; det_19_wellbeing
