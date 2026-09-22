@@ -30,8 +30,7 @@ suppressPackageStartupMessages({
 set.seed(123)
 
 # RUTAS
-project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
-processed_root <- file.path( project_root,"paper1_cluster/data/processed")
+processed_root <- file.path("paper1_cluster/data/processed")
 
 # Bootstrap utilizado
 BOOTSTRAP_SCENARIO <-
