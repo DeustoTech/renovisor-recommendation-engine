@@ -46,7 +46,6 @@ efa_file <- file.path(
 )
 
 EXPERT_FILE <- file.path(
-  project_root,
   "initial_descriptive_analysis",
   "data",
   "archetypes",
