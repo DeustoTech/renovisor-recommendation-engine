@@ -46,7 +46,7 @@ efa_file <- file.path(
 )
 
 EXPERT_FILE <- file.path(
-  "initial_descriptive_analysis",
+  "paper1_cluster",
   "data",
   "archetypes",
   "archetypeExperts_bin_32.csv"

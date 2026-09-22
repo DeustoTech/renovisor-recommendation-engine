@@ -46,8 +46,7 @@ greedy_patterns_file <- file.path(
 )
 
 expert_file <- file.path(
-  project_root,
-  "initial_descriptive_analysis",
+  "paper1_cluster",
   "data",
   "archetypes",
   "archetypeExperts_bin_32.csv"
