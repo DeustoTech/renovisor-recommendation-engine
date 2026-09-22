@@ -17,8 +17,7 @@ suppressPackageStartupMessages({
 set.seed(123)
 
 # Configuración
-project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
-processed_root <- file.path(project_root, "paper1_cluster/data/processed")
+processed_root <- file.path("paper1_cluster/data/processed")
 
 in_file <- file.path(
   processed_root,
