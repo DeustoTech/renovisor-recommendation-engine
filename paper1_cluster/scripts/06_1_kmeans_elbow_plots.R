@@ -22,12 +22,7 @@ suppressPackageStartupMessages({
 })
 
 # Configuración
-project_root <- path.expand("~/Desktop/MASTER/recommendation-engine/TFM")
-
-kmeans_dir <- file.path(
-  project_root,
-  "paper1_cluster/data/processed/06_kmeans_bootstrap"
-)
+kmeans_dir <- file.path("paper1_cluster/data/processed/06_kmeans_bootstrap")
 
 input_file <- file.path(
   kmeans_dir,
