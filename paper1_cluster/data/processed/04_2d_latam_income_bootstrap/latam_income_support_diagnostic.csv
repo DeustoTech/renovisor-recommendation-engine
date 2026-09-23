@@ -1,4 +1,0 @@
-country_code,country,n_valid_income,n_supported_bands,n_unsupported_bands,target_mass_unsupported,pct_target_mass_unsupported
-CL,Chile,66,5,0,-2.220446049250313e-16,-2.220446049250313e-14
-CO,Colombia,3,2,3,0.13743128435782115,13.743128435782115
-MX,Mexico,347,5,0,-2.220446049250313e-16,-2.220446049250313e-14
