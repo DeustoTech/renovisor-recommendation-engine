@@ -1,8 +1,4 @@
-library(future.apply)
-library(data.table)
-library(bigstatsr)
-library(R.utils)
-library(stringr)
+source("00_common.R")
 
 # Configurar R para usar todos los núcleos disponibles (excepto 1 para no congelar el PC)
 plan(multisession, workers = availableCores() - 2)
@@ -254,8 +250,27 @@ run_pattern_optimizer_parallel <- function(df, k_values, H_values,
   return(do.call(rbind, results_list))
 }
 
-df                  <- fread("./paper1_cluster/data/processed/08b_greedy_kmeans_efa_Dpooled/02_pattern_frequency_Dpooled.csv.gz")
-patrones_prefijados <- fread("./paper1_cluster/data/archetypes/archetypeExperts_bin_32.csv")
+in_file <- file.path(
+  processed_root,
+  "08b_greedy_kmeans_efa_Dpooled",
+  "02_pattern_frequency_Dpooled.csv.gz"
+)
+
+in_pat <- file.path(
+  data_root,
+  "archetypes",
+  "archetypeExperts_bin_32.csv"
+)
+
+out_dir <- file.path(
+  processed_root,
+  "08c_evolutionary"
+)
+
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+
+df                  <- fread(in_file)
+patrones_prefijados <- fread(in_pat)
 
 matriz_str <- str_split_fixed(df$pattern_key, pattern = "", n = 32)
 matriz_num <- matrix(as.integer(matriz_str), ncol = 32)
@@ -274,5 +289,6 @@ resultados <- run_pattern_optimizer_parallel(
   generations = 50
 )
 
+write.csv(file=paste0(out_dir,"results.csv"))
 # Mostrar resultados
 print(resultados[, 1:5])
