@@ -1,70 +1,237 @@
-
-# Objetivo:
-# Crear una versión limpia de all_sources_integrated.csv
+# 01_1_harmonize_sociodemographics.R
 #
-# El input procede del 01 y contiene la muestra completa:
-#   - DIEGO
-#   - RENOVISOR
-#   - WHY_EUROPE
-#   - WHY_LATAM
+# OBJETIVO
+# Armonizar las variables sociodemográficas, de contexto, participación
+# electoral y los 32 determinantes de RENOVISOR, WHY y DIEGO.
 #
-# Mantiene TODAS las columnas originales en una versión de trazabilidad
-# y crea otra versión limpia solo con identificadores + columnas unificadas.
+# El script genera una versión limpia para los análisis y otra versión
+# completa que conserva las columnas originales para trazabilidad.
 #
-# Añade:
-# 1. Variables sociodemográficas armonizadas.
-# 2. Variables políticas/voto armonizadas.
-# 3. Variables de contexto armonizadas.
-# 4. 32 determinantes armonizados entre RV Decision, WHY y Diego.
-# 5. Diagnósticos técnicos de cobertura, conflictos y mapeo.
-# 6. Diagnósticos por submuestra, sin mezclar WHY_EUROPE y WHY_LATAM.
-#
-# IMPORTANTE:
-# La lógica de armonización de los 32 determinantes NO cambia.
-# WHY_EUROPE y WHY_LATAM siguen siendo dataset_source == "why" y, por tanto,
-# usan exactamente el mismo mapeo de columnas WHY. La columna `subsample`
-# solo permite separar posteriormente los análisis.
-#
-# Información específica por fuente:
-#
-# Diego:
-# Q1 = grupo de edad
-# Q2 = género
-# Q3 = país
-# Q4 = educación
-# Q5 = estado laboral
-# Q6 = número de hijos
-# Q7 = income
-#
-# WHY: WHY ya viene unido con Prolific desde 01_mergeData.R.
-# Se usan columnas Prolific disponibles en all_sources_integrated.csv:
-# Age, Sex, Ethnicity simplified, Country of birth,
-# Country of residence, Nationality, Language,
-# Student status, Employment status.
-#
-# Input:
+# ENTRADA
 # paper1_cluster/data/processed/01_mergeData/all_sources_integrated.csv
 #
-# Outputs:
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/all_sources_integrated_clean.csv
-#   -> dataset limpio para análisis, sin columnas originales repetidas.
+# Contiene las cuatro submuestras:
+# - DIEGO
+# - RENOVISOR
+# - WHY_EUROPE
+# - WHY_LATAM
 #
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/all_sources_integrated_clean_traceability.csv
-#   -> dataset completo para trazabilidad, con columnas originales + columnas limpias.
+# PROCESAMIENTO
+# 1. Identificar las columnas equivalentes de las distintas encuestas.
+# 2. Consolidar las respuestas correspondientes a una misma variable.
+# 3. Armonizar las variables sociodemográficas y de contexto.
+# 4. Armonizar las variables de participación electoral y autoubicación
+#    política declaradas en las encuestas.
+# 5. Transformar los determinantes de RV, WHY y DIEGO en 32 columnas
+#    comunes, conservando sus valores en la escala 0-100.
+# 6. Calcular la cobertura, los conflictos y los rangos de los valores.
+# 7. Crear los archivos de análisis y los diagnósticos por fuente y
+#    por submuestra.
 #
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/...
+# IMPORTANTE
+# WHY_EUROPE y WHY_LATAM utilizan el mismo mapeo de determinantes porque
+# ambas proceden de WHY. La columna subsample permite analizarlas
+# posteriormente por separado.
+#
+# En este script NO se imputan los determinantes ausentes.
+# La imputación de NA a 50 se realiza posteriormente en 03_1.
+#
+# SALIDAS
+# Directorio:
+# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/
+#
+# - all_sources_integrated_clean.csv:
+#   Base integrada con identificadores y variables armonizadas.
+#
+# - all_sources_integrated_clean_traceability.csv:
+#   Base integrada completa, con las columnas originales y las nuevas
+#   variables armonizadas.
+#
+# - sociodemographics_clean.csv:
+#   Identificadores y variables sociodemográficas, políticas y de contexto.
+#
+# - determinants_harmonized.csv:
+#   Identificadores, 32 determinantes y medidas de cobertura.
+#
+# - sociodemographic_source_columns.csv:
+#   Columnas originales consideradas para construir cada variable común.
+#
+# - determinant_dictionary_32.csv:
+#   Correspondencia de los 32 determinantes entre RV, WHY y DIEGO.
+#
+# - diagnostics_sociodemographics_coverage.csv:
+#   Disponibilidad de las variables armonizadas por fuente y total.
+#
+# - diagnostics_sociodemographics_counts.csv:
+#   Frecuencias y proporciones de las categorías por fuente.
+#
+# - diagnostics_sociodemographics_coverage_by_subsample.csv:
+#   Disponibilidad de las variables armonizadas por submuestra.
+#
+# - diagnostics_sociodemographics_counts_by_subsample.csv:
+#   Frecuencias y proporciones de las categorías por submuestra.
+#
+# - diagnostics_sociodemographics_conflicts.csv:
+#   Número total de conflictos detectados por variable.
+#
+# - diagnostics_sociodemographics_conflicts_by_subsample.csv:
+#   Número de conflictos por variable y submuestra.
+#
+# - diagnostics_32det_by_source.csv:
+#   Cobertura de los 32 determinantes por fuente de datos.
+#
+# - diagnostics_32det_by_subsample.csv:
+#   Cobertura de los 32 determinantes por submuestra.
+#
+# - diagnostics_32det_ranges.csv:
+#   Valores mínimos, máximos y fuera de rango por determinante y fuente.
+#
+# - diagnostics_32det_ranges_by_subsample.csv:
+#   Valores mínimos, máximos y fuera de rango por determinante y submuestra.
+#
+# - sociodemographic_dictionary.csv:
+#   Diccionario descriptivo de las principales variables armonizadas.
+#
+# COLUMNAS PRINCIPALES GENERADAS
+#
+# *_raw_clean:
+#   Respuestas de origen consolidadas, antes de aplicar su recodificación.
+#
+# reference_year_model:
+#   Año de referencia utilizado para calcular la edad a partir del año
+#   de nacimiento: RENOVISOR = 2026, WHY = 2022 y DIEGO = 2023.
+#
+# year_birth_model:
+#   Año de nacimiento armonizado.
+#
+# age_model:
+#   Edad numérica declarada directamente o calculada a partir del año
+#   de nacimiento y del año de referencia de la encuesta.
+#   Cuando únicamente se conoce un intervalo de edad, se conserva NA.
+#
+# age_model_is_approximate:
+#   TRUE cuando age_model se calcula a partir del año de nacimiento
+#   y del año de referencia de la encuesta.
+#   FALSE cuando se dispone de una edad numérica directa o age_model es NA.
+#
+# age_group_model:
+#   Grupo de edad armonizado: 18_39, 40_59, 60_plus o unknown.
+#   Los intervalos originales de DIEGO se agrupan sin atribuir
+#   una edad numérica individual a los participantes.
+#
+# gender_model, education_model, employment_model, income_model, etc.:
+#   Versiones armonizadas de las variables sociodemográficas.
+#
+# country_model:
+#   País de residencia armonizado mediante su código de dos letras.
+#
+# country_model_grouped:
+#   Agrupación de países; los países con menos de MIN_COUNTRY_N registros
+#   se agrupan en OTHER_COUNTRIES.
+#
+# country_region_model:
+#   Región geográfica amplia del país de residencia.
+#
+# vote_status_declared:
+#   Participación electoral declarada: voter, abstainer, uncertain,
+#   unknown o conflict.
+#
+# voted_observed:
+#   Indicador binario derivado de la participación declarada:
+#   1 = voter, 0 = abstainer y NA para las demás respuestas.
+#
+# political_left_right_model:
+#   Autoubicación política declarada, expresada numéricamente.
+#
+# political_block_model:
+#   Categoría obtenida a partir de la autoubicación declarada.
+#
+# self_classification_model:
+#   Autoclasificación declarada en relación con decisiones de inversión.
+#
+# *_conflict:
+#   TRUE cuando se han encontrado respuestas distintas para una variable
+#   y se han conservado juntas mediante el separador " | ".
+#
+# det_01_profits ... det_32_own_significance:
+#   Los 32 determinantes armonizados entre las tres fuentes originales.
+#
+# n_det_non_missing:
+#   Número de determinantes no ausentes antes de la imputación.
+#
+# prop_det_non_missing:
+#   Proporción de determinantes no ausentes sobre los 32 disponibles.
+#
+# DEPENDENCIAS
+# - 00_common.R: librerías, rutas y funciones comunes del proyecto.
+# - 01_mergeData.R: crea el archivo de entrada.
+# - 03_1_component_quality.R: utiliza posteriormente los datos armonizados.
 
-suppressPackageStartupMessages({
-  library(tidyverse)
-})
+################################################################################
 
-# Configuración
-REFERENCE_YEAR_DEFAULT <- 2026
-MIN_COUNTRY_N <- 10
+# CARGA DE 00_common.R
+# Buscar el archivo común junto a este script o desde el directorio
+# de trabajo, sin utilizar rutas absolutas específicas de un ordenador.
 
-processed_root <- "paper1_cluster/data/processed"
-in_file_new <- file.path(processed_root, "01_mergeData", "all_sources_integrated.csv")
-in_file_old <- file.path(processed_root, "all_sources_integrated.csv")
+script_sources <- vapply(
+  sys.frames(),
+  function(frame) {
+    if (!is.null(frame$ofile)) {
+      as.character(frame$ofile)[1]
+    } else {
+      NA_character_
+    }
+  },
+  character(1)
+)
+
+script_sources <- script_sources[!is.na(script_sources)]
+
+common_candidates <- c(
+  file.path(dirname(script_sources), "00_common.R"),
+  file.path("paper1_cluster", "scripts", "00_common.R"),
+  file.path("scripts", "00_common.R"),
+  "00_common.R"
+)
+
+common_path <- common_candidates[
+  file.exists(common_candidates)
+][1]
+
+if (is.na(common_path)) {
+  stop("No se encuentra 00_common.R.")
+}
+
+source(common_path)
+
+# library(tidyverse)  # Se carga desde 00_common.R.
+
+
+# CONFIGURACIÓN
+
+# Año utilizado cuando no se reconoce la fuente de datos.
+REFERENCE_YEAR_DEFAULT <- 2026L
+
+# Mínimo de registros exigido para mantener un país como categoría
+# independiente en country_model_grouped.
+MIN_COUNTRY_N <- 10L
+
+# processed_root se define en 00_common.R.
+# processed_root <- "paper1_cluster/data/processed"
+
+# Se prioriza la salida actual de 01_mergeData.R.
+# Se conserva la ruta antigua como alternativa para compatibilidad.
+
+in_file_new <- file.path(
+  processed_root,
+  "01_mergeData",
+  "all_sources_integrated.csv"
+)
+
+in_file_old <- file.path(
+  processed_root,
+  "all_sources_integrated.csv"
+)
 
 in_file <- if (file.exists(in_file_new)) {
   in_file_new
@@ -73,12 +240,24 @@ in_file <- if (file.exists(in_file_new)) {
 } else {
   stop(
     "No encuentro all_sources_integrated.csv ni en:\n",
-    in_file_new, "\nni en:\n", in_file_old
+    in_file_new,
+    "\nni en:\n",
+    in_file_old
   )
 }
 
-out_dir <- file.path(processed_root, "01_1_harmonize_sociodemographics")
+out_dir <- file.path(
+  processed_root,
+  "01_1_harmonize_sociodemographics"
+)
+
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+
+
+# LECTURA Y COMPROBACIÓN DEL ARCHIVO DE ENTRADA
+
+# Todas las columnas se leen inicialmente como caracteres para evitar
+# que diferentes formatos de las encuestas alteren la importación.
 
 all_sources_integrated <- read_csv(
   in_file,
@@ -88,12 +267,20 @@ all_sources_integrated <- read_csv(
 
 df <- all_sources_integrated
 
+# Comprobar que se conservan los identificadores creados en 01.
+
 required_id_cols <- c(
-  "integrated_row_id", "subsample", "comparison_region",
-  "subsample_row_id", "dataset_source"
+  "integrated_row_id",
+  "subsample",
+  "comparison_region",
+  "subsample_row_id",
+  "dataset_source"
 )
 
-missing_required_id_cols <- setdiff(required_id_cols, names(df))
+missing_required_id_cols <- setdiff(
+  required_id_cols,
+  names(df)
+)
 
 if (length(missing_required_id_cols)) {
   stop(
@@ -102,8 +289,19 @@ if (length(missing_required_id_cols)) {
   )
 }
 
-expected_subsamples <- c("DIEGO", "RENOVISOR", "WHY_EUROPE", "WHY_LATAM")
-missing_subsamples <- setdiff(expected_subsamples, unique(df$subsample))
+# Comprobar que se han recibido las cuatro submuestras esperadas.
+
+expected_subsamples <- c(
+  "DIEGO",
+  "RENOVISOR",
+  "WHY_EUROPE",
+  "WHY_LATAM"
+)
+
+missing_subsamples <- setdiff(
+  expected_subsamples,
+  unique(df$subsample)
+)
 
 if (length(missing_subsamples)) {
   stop(
@@ -121,6 +319,12 @@ print(
     count(comparison_region, subsample, name = "n")
 )
 
+
+# AÑO DE REFERENCIA POR FUENTE
+
+# Se utiliza el año correspondiente a cada encuesta para calcular
+# la edad cuando únicamente se conoce el año de nacimiento.
+
 reference_year_model_vec <- case_when(
   df$dataset_source == "rv" ~ 2026L,
   df$dataset_source == "why" ~ 2022L,
@@ -129,20 +333,38 @@ reference_year_model_vec <- case_when(
 )
 
 
-# Funciones auxiliares
+# FUNCIONES AUXILIARES
+
+# Limpia espacios y convierte respuestas vacías o códigos de ausencia en NA.
+# x: vector de respuestas originales.
+# Devuelve: vector de caracteres depurado.
 clean_text <- function(x) {
   x <- str_squish(as.character(x))
   
   invalid <- c(
-    "", "NA", "NaN", "NULL", "null", "None", "none",
-    "DATA_EXPIRED", "data_expired",
-    "Prefer not to say", "Prefer not to answer"
+    "",
+    "NA",
+    "NaN",
+    "NULL",
+    "null",
+    "None",
+    "none",
+    "DATA_EXPIRED",
+    "data_expired",
+    "Prefer not to say",
+    "Prefer not to answer"
   )
   
   x[x %in% invalid] <- NA_character_
   x
 }
 
+
+# Normaliza respuestas de texto para comparar categorías procedentes
+# de encuestas e idiomas diferentes.
+# Convierte a minúsculas, elimina tildes y puntuación y ajusta espacios.
+# x: vector de respuestas originales.
+# Devuelve: vector de caracteres normalizados.
 normalise_text <- function(x) {
   x <- str_to_lower(clean_text(x))
   x <- iconv(x, from = "", to = "ASCII//TRANSLIT")
@@ -150,40 +372,79 @@ normalise_text <- function(x) {
   str_squish(x)
 }
 
+
+# Extrae números de las respuestas después de limpiar sus valores ausentes.
+# Utiliza el punto como separador decimal y la coma como separador de millares.
+# x: vector de respuestas.
+# Devuelve: vector numérico, con NA cuando no puede extraerse un número.
+# Limpia las respuestas originales y extrae sus valores numéricos.
+# Utiliza parse_num(), definida en 00_common.R.
+#
+# x: vector de respuestas originales.
+# Devuelve: vector numérico o NA_real_ si no puede extraerse un número.
+
 parse_num_clean <- function(x) {
-  suppressWarnings(
-    parse_number(
-      clean_text(x),
-      locale = locale(decimal_mark = ".", grouping_mark = ",")
-    )
-  )
+  parse_num(clean_text(x))
 }
 
+
+# Identifica respuestas distintas que se han conservado juntas mediante
+# el separador " | " durante la integración de las encuestas.
+# x: vector de respuestas.
+# Devuelve: vector lógico; TRUE indica un conflicto entre respuestas.
 flag_conflict <- function(x) {
   x <- clean_text(x)
   !is.na(x) & str_detect(x, "\\s\\|\\s")
 }
 
+
+# Convierte respuestas a números, pero asigna NA_real_ cuando detecta
+# varias respuestas diferentes para una misma variable.
+# x: vector de respuestas originales.
+# Devuelve: vector numérico sin valores procedentes de conflictos.
 parse_num_no_conflict <- function(x) {
   out <- parse_num_clean(x)
   out[flag_conflict(x)] <- NA_real_
   out
 }
 
-find_cols <- function(df, pattern, exclude = NULL) {
-  out <- names(df)[
-    str_detect(names(df), regex(pattern, ignore_case = TRUE))
-  ]
-  
-  if (!is.null(exclude)) {
-    out <- out[
-      !str_detect(out, regex(exclude, ignore_case = TRUE))
-    ]
-  }
-  
-  unique(out)
-}
 
+# # find_cols() está definida en 00_common.R.
+# Busca las columnas cuyos nombres coincidan con una expresión regular.
+# Admite excluir columnas que coincidan con un segundo patrón.
+# df: tabla de entrada.
+# pattern: expresión regular de búsqueda.
+# exclude: expresión regular opcional para excluir nombres.
+# Devuelve: vector de nombres de columnas únicos.
+# find_cols <- function(df, pattern, exclude = NULL) {
+#   out <- names(df)[
+#     str_detect(
+#       names(df),
+#       regex(pattern, ignore_case = TRUE)
+#     )
+#   ]
+#   
+#   if (!is.null(exclude)) {
+#     out <- out[
+#       !str_detect(
+#         out,
+#         regex(exclude, ignore_case = TRUE)
+#       )
+#     ]
+#   }
+#   
+#   unique(out)
+# }
+
+
+# Consolida, fila por fila, las columnas que representan una misma variable.
+# Primero limpia las respuestas originales y después utiliza la función
+# compartida collapse_unique_non_missing() definida en 00_common.R.
+#
+# df: tabla con las columnas originales.
+# cols: nombres de las columnas que deben consolidarse.
+# Devuelve: vector de caracteres; utiliza " | " cuando existen
+# respuestas distintas y NA cuando no se dispone de ninguna respuesta.
 collapse_many_unique <- function(df, cols) {
   cols <- unique(cols[cols %in% names(df)])
   
@@ -194,22 +455,16 @@ collapse_many_unique <- function(df, cols) {
   tmp <- df[, cols, drop = FALSE] %>%
     mutate(across(everything(), clean_text))
   
-  apply(tmp, 1, function(row_values) {
-    values <- unique(as.character(row_values))
-    values <- values[
-      !is.na(values) &
-        values != "" &
-        values != "NA" &
-        values != "NaN"
-    ]
-    
-    if (!length(values)) return(NA_character_)
-    if (length(values) == 1) return(values[[1]])
-    
-    paste(values, collapse = " | ")
-  })
+  # collapse_unique_non_missing() está definida en 00_common.R.
+  apply(tmp, 1, collapse_unique_non_missing)
 }
 
+
+# Comprueba si una respuesta armonizada puede considerarse informada.
+# Para valores numéricos exige que no sean NA.
+# Para caracteres excluye NA, vacío y categorías de ausencia o conflicto.
+# x: vector de valores armonizados.
+# Devuelve: vector lógico que identifica los valores disponibles.
 is_valid_model_value <- function(x) {
   if (is.numeric(x) || is.integer(x)) {
     return(!is.na(x))
@@ -218,28 +473,45 @@ is_valid_model_value <- function(x) {
   !is.na(x) &
     x != "" &
     !x %in% c(
-      "unknown", "UNKNOWN",
-      "conflict", "other", "OTHER"
+      "unknown",
+      "UNKNOWN",
+      "conflict",
+      "other",
+      "OTHER"
     )
 }
 
-parse_det <- function(x) {
-  suppressWarnings(
-    parse_number(
-      as.character(x),
-      locale = locale(decimal_mark = ".", grouping_mark = ",")
-    )
-  )
-}
 
+# La conversión numérica utilizada para los determinantes era parse_det().
+# Su lógica está centralizada en parse_num(), definida en 00_common.R.
+
+# parse_det <- function(x) {
+#   suppressWarnings(
+#     parse_number(
+#       as.character(x),
+#       locale = locale(decimal_mark = ".", grouping_mark = ",")
+#     )
+#   )
+# }
+
+
+# Recupera una columna numérica sin producir un error cuando falta.
+# Utiliza safe_pull() y parse_num(), ambas definidas en 00_common.R.
+# df: tabla de datos.
+# col: nombre de la columna o NA si no se encontró.
+# Devuelve: vector numérico, con NA_real_ cuando falta la columna.
 safe_numeric_col <- function(df, col) {
-  if (is.na(col) || !col %in% names(df)) {
-    rep(NA_real_, nrow(df))
-  } else {
-    parse_det(df[[col]])
-  }
+  parse_num(safe_pull(df, col))
 }
 
+
+# Localiza la columna de un determinante a partir de su prefijo.
+# Excluye columnas de país, idioma e identificador que podrían coincidir
+# accidentalmente con el prefijo.
+# df: tabla de datos.
+# prefix: prefijo esperado.
+# Devuelve: nombre de la columna, NA si falta o un error si existen
+# varias coincidencias y no es posible identificar una columna única.
 resolve_unique_prefix <- function(df, prefix) {
   matches <- names(df)[str_starts(names(df), prefix)]
   
@@ -256,7 +528,9 @@ resolve_unique_prefix <- function(df, prefix) {
   
   if (length(matches) > 1) {
     stop(
-      "Prefijo ambiguo: ", prefix, "\nCoincidencias:\n",
+      "Prefijo ambiguo: ",
+      prefix,
+      "\nCoincidencias:\n",
       paste(matches, collapse = "\n")
     )
   }
@@ -264,6 +538,12 @@ resolve_unique_prefix <- function(df, prefix) {
   matches
 }
 
+
+# Normaliza una respuesta de texto y registra si está ausente
+# o si contiene varias respuestas distintas.
+# x: vector de respuestas.
+# Devuelve: texto normalizado, "unknown" para ausencias
+# o "conflict" cuando se detectan respuestas incompatibles.
 normalised_or_status <- function(x) {
   case_when(
     is.na(x) ~ "unknown",
@@ -273,159 +553,151 @@ normalised_or_status <- function(x) {
 }
 
 
-# Países
-country_name_to_iso2 <- c(
-  "spain" = "ES", "espana" = "ES",
-  "germany" = "DE", "alemania" = "DE",
-  "italy" = "IT", "italia" = "IT",
-  "greece" = "GR", "grecia" = "GR",
-  "the netherlands" = "NL",
-  "netherlands" = "NL",
-  "nederland" = "NL",
-  "belgium" = "BE",
-  "belgica" = "BE",
-  "france" = "FR",
-  "portugal" = "PT",
-  "bulgaria" = "BG",
-  "lithuania" = "LT",
-  "czechia" = "CZ",
-  "czech republic" = "CZ",
-  "denmark" = "DK",
-  "sweden" = "SE",
-  "finland" = "FI",
-  "poland" = "PL",
-  "romania" = "RO",
-  "rumania" = "RO",
-  "hungary" = "HU",
-  "ireland" = "IE",
-  "austria" = "AT",
-  "croatia" = "HR",
-  "slovenia" = "SI",
-  "slovakia" = "SK",
-  "estonia" = "EE",
-  "latvia" = "LV",
-  "luxembourg" = "LU",
-  "malta" = "MT",
-  "cyprus" = "CY",
-  "united kingdom" = "GB",
-  "uk" = "GB",
-  "great britain" = "GB",
-  "ukraine" = "UA",
-  "switzerland" = "CH",
-  "serbia" = "RS",
-  "albania" = "AL",
-  "moldova" = "MD",
-  "moldavia" = "MD",
-  "norway" = "NO",
-  "noruega" = "NO",
-  "iceland" = "IS",
-  "islandia" = "IS",
-  "liechtenstein" = "LI",
-  "monaco" = "MC",
-  "andorra" = "AD",
-  "bosnia and herzegovina" = "BA",
-  "bosnia y herzegovina" = "BA",
-  "bosnia" = "BA",
-  "montenegro" = "ME",
-  "north macedonia" = "MK",
-  "macedonia del norte" = "MK",
-  "san marino" = "SM",
-  "belarus" = "BY",
-  "bielorrusia" = "BY",
-  "republica checa" = "CZ",
-  "other eu country" = "OTHER_EU",
-  "other eu countries" = "OTHER_EU",
-  "other european country" = "OTHER_EU",
-  "other european countries" = "OTHER_EU",
-  
-  "argentina" = "AR",
-  "bolivia" = "BO",
-  "bolivia plurinational state of" = "BO",
-  "brazil" = "BR",
-  "brasil" = "BR",
-  "chile" = "CL",
-  "colombia" = "CO",
-  "costa rica" = "CR",
-  "cuba" = "CU",
-  "dominican republic" = "DO",
-  "republica dominicana" = "DO",
-  "ecuador" = "EC",
-  "el salvador" = "SV",
-  "guatemala" = "GT",
-  "honduras" = "HN",
-  "mexico" = "MX",
-  "nicaragua" = "NI",
-  "panama" = "PA",
-  "paraguay" = "PY",
-  "peru" = "PE",
-  "uruguay" = "UY",
-  "venezuela" = "VE",
-  "venezuela bolivarian republic of" = "VE",
-  
-  "united states" = "US",
-  "united states of america" = "US",
-  "canada" = "CA",
-  "india" = "IN",
-  "turkey" = "TR",
-  "russian federation" = "RU",
-  "russia" = "RU",
-  "nigeria" = "NG",
-  "china" = "CN",
-  "indonesia" = "ID",
-  "south africa" = "ZA",
-  "australia" = "AU",
-  "bangladesh" = "BD",
-  "ghana" = "GH",
-  "iran" = "IR",
-  "kazakhstan" = "KZ",
-  "lebanon" = "LB",
-  "malaysia" = "MY",
-  "morocco" = "MA",
-  "pakistan" = "PK",
-  "armenia" = "AM",
-  "cameroon" = "CM",
-  "egypt" = "EG",
-  "haiti" = "HT",
-  "hong kong" = "HK",
-  "kyrgyzstan" = "KG",
-  "philippines" = "PH",
-  "saudi arabia" = "SA",
-  "tanzania" = "TZ",
-  "tunisia" = "TN"
-)
+# IDENTIFICACIÓN DE PAÍSES
 
+# El diccionario unificado se define en 00_common.R.
+# Se conserva aquí la definición original de este script, comentada,
+# para documentar qué equivalencias utilizaba antes de centralizarlo
+# country_name_to_iso2 <- c(
+#   "spain" = "ES", "espana" = "ES",
+#   "germany" = "DE", "alemania" = "DE",
+#   "italy" = "IT", "italia" = "IT",
+#   "greece" = "GR", "grecia" = "GR",
+#   "the netherlands" = "NL",
+#   "netherlands" = "NL",
+#   "nederland" = "NL",
+#   "belgium" = "BE",
+#   "belgica" = "BE",
+#   "france" = "FR",
+#   "portugal" = "PT",
+#   "bulgaria" = "BG",
+#   "lithuania" = "LT",
+#   "czechia" = "CZ",
+#   "czech republic" = "CZ",
+#   "denmark" = "DK",
+#   "sweden" = "SE",
+#   "finland" = "FI",
+#   "poland" = "PL",
+#   "romania" = "RO",
+#   "rumania" = "RO",
+#   "hungary" = "HU",
+#   "ireland" = "IE",
+#   "austria" = "AT",
+#   "croatia" = "HR",
+#   "slovenia" = "SI",
+#   "slovakia" = "SK",
+#   "estonia" = "EE",
+#   "latvia" = "LV",
+#   "luxembourg" = "LU",
+#   "malta" = "MT",
+#   "cyprus" = "CY",
+#   "united kingdom" = "GB",
+#   "uk" = "GB",
+#   "great britain" = "GB",
+#   "ukraine" = "UA",
+#   "switzerland" = "CH",
+#   "serbia" = "RS",
+#   "albania" = "AL",
+#   "moldova" = "MD",
+#   "moldavia" = "MD",
+#   "norway" = "NO",
+#   "noruega" = "NO",
+#   "iceland" = "IS",
+#   "islandia" = "IS",
+#   "liechtenstein" = "LI",
+#   "monaco" = "MC",
+#   "andorra" = "AD",
+#   "bosnia and herzegovina" = "BA",
+#   "bosnia y herzegovina" = "BA",
+#   "bosnia" = "BA",
+#   "montenegro" = "ME",
+#   "north macedonia" = "MK",
+#   "macedonia del norte" = "MK",
+#   "san marino" = "SM",
+#   "belarus" = "BY",
+#   "bielorrusia" = "BY",
+#   "republica checa" = "CZ",
+#   "other eu country" = "OTHER_EU",
+#   "other eu countries" = "OTHER_EU",
+#   "other european country" = "OTHER_EU",
+#   "other european countries" = "OTHER_EU",
+#
+#   "argentina" = "AR",
+#   "bolivia" = "BO",
+#   "bolivia plurinational state of" = "BO",
+#   "brazil" = "BR",
+#   "brasil" = "BR",
+#   "chile" = "CL",
+#   "colombia" = "CO",
+#   "costa rica" = "CR",
+#   "cuba" = "CU",
+#   "dominican republic" = "DO",
+#   "republica dominicana" = "DO",
+#   "ecuador" = "EC",
+#   "el salvador" = "SV",
+#   "guatemala" = "GT",
+#   "honduras" = "HN",
+#   "mexico" = "MX",
+#   "nicaragua" = "NI",
+#   "panama" = "PA",
+#   "paraguay" = "PY",
+#   "peru" = "PE",
+#   "uruguay" = "UY",
+#   "venezuela" = "VE",
+#   "venezuela bolivarian republic of" = "VE",
+#
+#   "united states" = "US",
+#   "united states of america" = "US",
+#   "canada" = "CA",
+#   "india" = "IN",
+#   "turkey" = "TR",
+#   "russian federation" = "RU",
+#   "russia" = "RU",
+#   "nigeria" = "NG",
+#   "china" = "CN",
+#   "indonesia" = "ID",
+#   "south africa" = "ZA",
+#   "australia" = "AU",
+#   "bangladesh" = "BD",
+#   "ghana" = "GH",
+#   "iran" = "IR",
+#   "kazakhstan" = "KZ",
+#   "lebanon" = "LB",
+#   "malaysia" = "MY",
+#   "morocco" = "MA",
+#   "pakistan" = "PK",
+#   "armenia" = "AM",
+#   "cameroon" = "CM",
+#   "egypt" = "EG",
+#   "haiti" = "HT",
+#   "hong kong" = "HK",
+#   "kyrgyzstan" = "KG",
+#   "philippines" = "PH",
+#   "saudi arabia" = "SA",
+#   "tanzania" = "TZ",
+#   "tunisia" = "TN"
+# )
+
+
+# Convierte una respuesta individual de país en su código.
+# Aplica la limpieza específica de la armonización y utiliza
+# extract_country_code_base() de 00_common.R.
+#
+# x: vector de respuestas originales de país.
+# Devuelve: vector de códigos de país o NA_character_.
 extract_country_code_one <- function(x) {
   x_chr <- clean_text(x)
   x_low <- normalise_text(x_chr)
   
-  code_exact <- ifelse(
-    str_detect(x_chr, "^[A-Za-z]{2}$"),
-    str_to_upper(x_chr),
-    NA_character_
-  )
-  
-  code_parentheses <- str_match(
-    x_chr,
-    "\\(([A-Za-z]{2})\\)"
-  )[, 2]
-  
-  code_prefix <- str_match(
-    x_chr,
-    "^\\s*([A-Za-z]{2})\\s*[-–]"
-  )[, 2]
-  
-  code_name <- unname(country_name_to_iso2[x_low])
-  
-  str_to_upper(
-    coalesce(
-      code_exact,
-      code_parentheses,
-      code_prefix,
-      code_name
-    )
-  )
+  extract_country_code_base(x_chr, x_low)
 }
 
+
+# Resuelve respuestas de país que pueden contener varios valores
+# separados por " | ".
+# Convierte cada respuesta a un código y conserva los códigos diferentes.
+# x: vector de respuestas de país.
+# Devuelve: un código, varios códigos separados por " | " o NA.
 extract_country_code_multi <- function(x) {
   map_chr(clean_text(x), function(value) {
     if (is.na(value)) {
@@ -458,14 +730,19 @@ extract_country_code_multi <- function(x) {
   })
 }
 
-latam_iso2 <- c(
-  "AR", "BO", "BR", "CL", "CO", "CR", "CU", "DO",
-  "EC", "SV", "GT", "HN", "MX", "NI", "PA", "PY",
-  "PE", "UY", "VE"
-)
+
+# El conjunto de países latinoamericanos está definido en 00_common.R.
+# Se conserva comentada la definición original de este script.
+# latam_iso2 <- c(
+#   "AR", "BO", "BR", "CL", "CO", "CR", "CU", "DO",
+#   "EC", "SV", "GT", "HN", "MX", "NI", "PA", "PY",
+#   "PE", "UY", "VE"
+# )
 
 
-# Identificadores y columnas fuente
+# IDENTIFICADORES Y COLUMNAS FUENTE
+
+# Identificadores y metadatos que se conservarán en las salidas limpias.
 id_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -482,6 +759,11 @@ id_cols <- c(
   "identification_code"
 )
 
+
+# Especificar qué columnas de las diferentes encuestas pueden representar
+# una misma variable armonizada.
+# find_cols() permite identificar las columnas aunque sus nombres varíen.
+# Las columnas se consolidarán posteriormente con collapse_many_unique().
 source_cols <- list(
   year_birth = unique(c(
     "year_birth_raw",
@@ -704,23 +986,39 @@ source_cols <- list(
   )
 )
 
+
+# Registrar qué columnas originales se han seleccionado para cada variable.
+# El archivo resultante permite revisar el mapeo de forma independiente.
 sociodemographic_source_columns <- tibble(
   harmonised_variable = names(source_cols),
+  
   source_columns = map_chr(
     source_cols,
     ~ paste(.x, collapse = " | ")
   ),
+  
   n_source_columns = map_int(
     source_cols,
     length
   )
 )
 
+
+# CONSOLIDACIÓN DE LAS VARIABLES ORIGINALES
+
+# Cada variable de source_cols se procesa de forma independiente.
+# Si esta operación supone un coste elevado, sus iteraciones pueden
+# estudiarse para ejecutarlas en paralelo.
+
+## PARALIZE
 raw_clean <- map(
   source_cols,
   ~ collapse_many_unique(df, .x)
 )
 
+
+# Nombres que recibirán las variables originales una vez consolidadas.
+# El sufijo raw_clean indica que todavía no se han recodificado.
 raw_output_names <- c(
   year_birth = "year_birth_raw_clean",
   age = "age_raw_clean",
@@ -763,148 +1061,130 @@ raw_df <- as_tibble(
 )
 
 
-# Recodificación
+# FUNCIONES DE RECODIFICACIÓN
+
+# Armoniza la edad en tres grupos compatibles con los intervalos originales
+# de DIEGO y con las edades numéricas de las otras encuestas.
+#
+# x: respuesta original de edad, que puede ser un intervalo o una edad exacta.
+# numeric_age: edad numérica armonizada, cuando está disponible.
+#
+# Devuelve: "18_39", "40_59", "60_plus" o "unknown".
+# Las respuestas con varios valores incompatibles no se clasifican.
 recode_age_group_from_raw <- function(x, numeric_age = NULL) {
   x_low <- normalise_text(x)
   
+  n <- if (is.null(numeric_age)) {
+    rep(NA_real_, length(x_low))
+  } else {
+    as.numeric(numeric_age)
+  }
+  
   case_when(
-    is.na(x_low) &
-      is.null(numeric_age) ~
-      "unknown",
-    
-    is.na(x_low) &
-      !is.null(numeric_age) &
-      is.na(numeric_age) ~
-      "unknown",
+    flag_conflict(x) ~ "unknown",
     
     str_detect(
       x_low,
-      "18\\s*25|18 25|18-25"
-    ) ~
-      "18_24",
+      "^(18\\s+25|26\\s+39)$"
+    ) ~ "18_39",
     
     str_detect(
       x_low,
-      "26\\s*39|26 39|26-39"
-    ) ~
-      "25_34",
+      "^40\\s+59$"
+    ) ~ "40_59",
     
     str_detect(
       x_low,
-      "40\\s*59|40 59|40-59"
-    ) ~
-      "45_54",
+      "^60\\s+or\\s+older$"
+    ) |
+      str_detect(
+        clean_text(x),
+        "^60\\s*\\+$"
+      ) ~ "60_plus",
     
-    str_detect(
-      x_low,
-      "60 or older|60\\+|60 and older|older than 60"
-    ) ~
-      "65_plus",
+    !is.na(n) &
+      n >= 18 &
+      n < 40 ~ "18_39",
     
-    !is.null(numeric_age) &
-      !is.na(numeric_age) &
-      numeric_age < 25 ~
-      "18_24",
+    !is.na(n) &
+      n >= 40 &
+      n < 60 ~ "40_59",
     
-    !is.null(numeric_age) &
-      !is.na(numeric_age) &
-      numeric_age < 35 ~
-      "25_34",
-    
-    !is.null(numeric_age) &
-      !is.na(numeric_age) &
-      numeric_age < 45 ~
-      "35_44",
-    
-    !is.null(numeric_age) &
-      !is.na(numeric_age) &
-      numeric_age < 55 ~
-      "45_54",
-    
-    !is.null(numeric_age) &
-      !is.na(numeric_age) &
-      numeric_age < 65 ~
-      "55_64",
-    
-    !is.null(numeric_age) &
-      !is.na(numeric_age) &
-      numeric_age >= 65 ~
-      "65_plus",
+    !is.na(n) &
+      n >= 60 ~ "60_plus",
     
     TRUE ~ "unknown"
   )
 }
 
-age_midpoint_from_raw <- function(x) {
+
+# Identifica las respuestas de edad expresadas mediante los intervalos
+# originales de DIEGO, sin atribuirles una edad numérica.
+#
+# x: vector de respuestas originales de edad.
+# Devuelve: TRUE cuando la respuesta es un intervalo y FALSE en otro caso.
+is_age_interval <- function(x) {
   x_low <- normalise_text(x)
   
-  case_when(
-    str_detect(
-      x_low,
-      "18\\s*25|18 25|18-25"
-    ) ~ 21.5,
-    
-    str_detect(
-      x_low,
-      "26\\s*39|26 39|26-39"
-    ) ~ 32.5,
-    
-    str_detect(
-      x_low,
-      "40\\s*59|40 59|40-59"
-    ) ~ 49.5,
-    
-    str_detect(
-      x_low,
-      "60 or older|60\\+|60 and older|older than 60"
-    ) ~ 65,
-    
-    TRUE ~ NA_real_
-  )
+  !is.na(x_low) &
+    (
+      str_detect(
+        x_low,
+        "^(18\\s+25|26\\s+39|40\\s+59|60\\s+or\\s+older)$"
+      ) |
+        str_detect(
+          clean_text(x),
+          "^60\\s*\\+$"
+        )
+    )
 }
 
+
+# Armoniza las respuestas de género procedentes de las encuestas.
+# Identifica respuestas femeninas, masculinas, otras categorías,
+# respuestas ausentes y conflictos entre fuentes.
+# x: vector de respuestas originales.
+# Devuelve: female, male, other, unknown o conflict.
 recode_gender <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
     str_detect(
       x_raw,
       "\\s\\|\\s"
-    ) ~
-      "conflict",
+    ) ~ "conflict",
     
     str_detect(
       x_low,
       "\\bfemale\\b|\\bwoman\\b|\\bwomen\\b|\\bmujer\\b|\\bfemen"
-    ) ~
-      "female",
+    ) ~ "female",
     
     str_detect(
       x_low,
       "\\bmale\\b|\\bman\\b|\\bmen\\b|\\bhombre\\b|\\bmascul"
-    ) ~
-      "male",
+    ) ~ "male",
     
     str_detect(
       x_low,
       "non binary|nonbinary|non binar|other|otro|otra|diverse|no binar"
-    ) ~
-      "other",
+    ) ~ "other",
     
     str_detect(
       x_low,
       "prefer not|no answer|dont know|do not know|ns nc"
-    ) ~
-      "unknown",
+    ) ~ "unknown",
     
     TRUE ~ "other"
   )
 }
 
+
+# Convierte las respuestas sobre idioma a códigos comunes.
+# x: vector de idiomas declarados.
+# Devuelve: EN, ES, EU, NL, FR, DE, IT, PL, GR, OTHER o unknown.
 recode_language <- function(x) {
   x_low <- normalise_text(x)
   
@@ -923,90 +1203,86 @@ recode_language <- function(x) {
   )
 }
 
+
+# Armoniza el nivel educativo mediante tres categorías generales.
+# x: respuestas originales de educación.
+# Devuelve: low, medium, high, other, unknown o conflict.
 recode_education <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
-    str_detect(
-      x_raw,
-      "\\s\\|\\s"
-    ) ~
-      "conflict",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
     
     str_detect(
       x_low,
       "phd|doctor|doctoral"
-    ) ~
-      "high",
+    ) ~ "high",
     
     str_detect(
       x_low,
       "master|msc|postgraduate|bachelor|undergraduate|degree|university|universit|tertiary|higher education|grado|licenciatura|diploma universitario"
-    ) ~
-      "high",
+    ) ~ "high",
     
     str_detect(
       x_low,
       "vocational|professional training|upper secondary|secondary|high school|bachiller|formacion profesional|\\bfp\\b|college"
-    ) ~
-      "medium",
+    ) ~ "medium",
     
     str_detect(
       x_low,
       "primary|basic|lower secondary|no formal|less than|sin estudios|primaria"
-    ) ~
-      "low",
+    ) ~ "low",
     
     str_detect(
       x_low,
       "prefer not|no answer|dont know|do not know"
-    ) ~
-      "unknown",
+    ) ~ "unknown",
     
     TRUE ~ "other"
   )
 }
 
+
+# Armoniza la educación para los análisis del TFM.
+# Agrupa los niveles universitarios y no universitarios por separado.
+# x: respuestas originales de educación.
+# Devuelve: university, non_university, other, unknown o conflict.
 recode_education_tfm <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
-    str_detect(
-      x_raw,
-      "\\s\\|\\s"
-    ) ~
-      "conflict",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
     
     str_detect(
       x_low,
       "phd|doctor|doctoral|master|msc|postgraduate|bachelor|undergraduate|degree|university|universit|tertiary|higher education|grado|licenciatura|diploma universitario"
-    ) ~
-      "university",
+    ) ~ "university",
     
     str_detect(
       x_low,
       "vocational|professional training|upper secondary|secondary|high school|bachiller|formacion profesional|\\bfp\\b|college|primary|basic|lower secondary|no formal|less than|sin estudios|primaria"
-    ) ~
-      "non_university",
+    ) ~ "non_university",
     
     str_detect(
       x_low,
       "prefer not|no answer|dont know|do not know"
-    ) ~
-      "unknown",
+    ) ~ "unknown",
     
     TRUE ~ "other"
   )
 }
 
+
+# Agrupa los países de residencia en regiones geográficas amplias.
+# Utiliza latam_iso2, definido en 00_common.R, para Latinoamérica.
+# country_code: vector de códigos de país.
+# Devuelve: región geográfica, unknown, conflict u other_region.
 recode_residence_region <- function(country_code) {
   country_code <- str_to_upper(
     clean_text(country_code)
@@ -1014,47 +1290,45 @@ recode_residence_region <- function(country_code) {
   
   case_when(
     is.na(country_code) |
-      country_code == "" ~
-      "unknown",
+      country_code == "" ~ "unknown",
     
     str_detect(
       country_code,
       "\\s\\|\\s"
-    ) ~
-      "conflict",
+    ) ~ "conflict",
     
     country_code %in% c(
       "DK", "EE", "FI", "IE", "IS",
       "LV", "LT", "NO", "GB", "SE"
-    ) ~
-      "northern_europe",
+    ) ~ "northern_europe",
     
     country_code %in% c(
       "DE", "AT", "BE", "FR", "LI",
       "LU", "MC", "NL", "CH"
-    ) ~
-      "western_europe",
+    ) ~ "western_europe",
     
     country_code %in% c(
       "AL", "AD", "BA", "HR", "SI",
       "ES", "GR", "IT", "MT", "ME",
       "PT", "MK", "SM", "RS", "CY"
-    ) ~
-      "southern_europe",
+    ) ~ "southern_europe",
     
     country_code %in% c(
       "BY", "BG", "SK", "HU", "MD",
       "PL", "CZ", "RO", "RU", "UA"
-    ) ~
-      "eastern_europe",
+    ) ~ "eastern_europe",
     
-    country_code %in% latam_iso2 ~
-      "latin_america",
+    country_code %in% latam_iso2 ~ "latin_america",
     
     TRUE ~ "other_region"
   )
 }
 
+
+# Armoniza las respuestas sobre situación laboral.
+# x: respuestas originales de empleo.
+# Devuelve: unemployed, self_employed, employed, student,
+# inactive_other, retired, other, unknown o conflict.
 recode_employment <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
@@ -1108,6 +1382,10 @@ recode_employment <- function(x) {
   )
 }
 
+
+# Armoniza la condición de estudiante.
+# x: respuestas originales.
+# Devuelve: student, not_student, other, unknown o conflict.
 recode_student_status <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
@@ -1131,73 +1409,70 @@ recode_student_status <- function(x) {
   )
 }
 
+
+# Armoniza el tamaño de la ciudad de residencia.
+# Interpreta respuestas categóricas o valores numéricos de población.
+# x: respuestas originales de tamaño de ciudad.
+# Devuelve: rural_small, small_city, medium_city, large_city,
+# metropolitan, other, unknown o conflict.
 recode_city_size <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
   n <- parse_num_no_conflict(x_raw)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
-    str_detect(
-      x_raw,
-      "\\s\\|\\s"
-    ) ~
-      "conflict",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
     
     str_detect(
       x_low,
       "rural|village|small town"
-    ) ~
-      "rural_small",
+    ) ~ "rural_small",
     
     str_detect(
       x_low,
       "less than|under|below|<"
     ) &
       !is.na(n) &
-      n <= 10000 ~
-      "rural_small",
+      n <= 10000 ~ "rural_small",
     
     str_detect(
       x_low,
       "less than|under|below|<"
     ) &
       !is.na(n) &
-      n <= 50000 ~
-      "small_city",
+      n <= 50000 ~ "small_city",
     
     !is.na(n) &
-      n < 10000 ~
-      "rural_small",
+      n < 10000 ~ "rural_small",
     
     !is.na(n) &
-      n < 50000 ~
-      "small_city",
+      n < 50000 ~ "small_city",
     
     !is.na(n) &
-      n < 250000 ~
-      "medium_city",
+      n < 250000 ~ "medium_city",
     
     !is.na(n) &
-      n < 1000000 ~
-      "large_city",
+      n < 1000000 ~ "large_city",
     
     !is.na(n) &
-      n >= 1000000 ~
-      "metropolitan",
+      n >= 1000000 ~ "metropolitan",
     
     str_detect(
       x_low,
       "more than|over|above|>"
-    ) ~
-      "large_city",
+    ) ~ "large_city",
     
     TRUE ~ "other"
   )
 }
 
+
+# Armoniza el régimen de tenencia de la vivienda.
+# x: respuestas originales sobre propiedad, alquiler o convivencia.
+# Devuelve: rent, owner_without_mortgage, owner_with_mortgage,
+# owner, family_home, other, unknown o conflict.
 recode_tenure <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
@@ -1236,114 +1511,110 @@ recode_tenure <- function(x) {
   )
 }
 
+
+# Recodifica la tenencia de la vivienda en las tres categorías
+# utilizadas específicamente en los análisis del TFM.
+# x: respuestas originales de tenencia.
+# Devuelve: Homeowner without mortgage, Homeowner with mortgage,
+# Non-homeowner, unknown o conflict.
 recode_tenure_tfm <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
-    str_detect(
-      x_raw,
-      "\\s\\|\\s"
-    ) ~
-      "conflict",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
     
     str_detect(
       x_low,
       "own the home outright|fully paid-off|without mortgage|sin hipoteca"
-    ) ~
-      "Homeowner without mortgage",
+    ) ~ "Homeowner without mortgage",
     
     str_detect(
       x_low,
       "mortgage|outstanding payments|hipoteca"
-    ) ~
-      "Homeowner with mortgage",
+    ) ~ "Homeowner with mortgage",
     
     str_detect(
       x_low,
       "rent|rental|tenant|alquil|family|relative|parents"
-    ) ~
-      "Non-homeowner",
+    ) ~ "Non-homeowner",
     
     str_detect(
       x_low,
       "own|owner|propiedad"
-    ) ~
-      "Homeowner without mortgage",
+    ) ~ "Homeowner without mortgage",
     
     TRUE ~ "Non-homeowner"
   )
 }
 
+
+# Armoniza respuestas afirmativas y negativas de distintos cuestionarios.
+# x: respuestas originales.
+# Devuelve: yes, no, other, unknown o conflict.
 recode_yes_no <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
-    str_detect(
-      x_raw,
-      "\\s\\|\\s"
-    ) ~
-      "conflict",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
     
     str_detect(
       x_low,
       "\\byes\\b|\\bsi\\b|true"
-    ) ~
-      "yes",
+    ) ~ "yes",
     
     str_detect(
       x_low,
       "\\bno\\b|false|none"
-    ) ~
-      "no",
+    ) ~ "no",
     
     TRUE ~ "other"
   )
 }
 
+
+# Armoniza las respuestas sobre participación electoral declarada.
+# x: respuestas originales.
+# Devuelve: voter, abstainer, uncertain, unknown o conflict.
 recode_vote_status <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
-    str_detect(
-      x_raw,
-      "\\s\\|\\s"
-    ) ~
-      "conflict",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
     
     str_detect(
       x_low,
       "abstain|abstention|do not vote|dont vote|did not vote|not vote|never vote|usually do not vote|no voto|abstengo"
-    ) ~
-      "abstainer",
+    ) ~ "abstainer",
     
     str_detect(
       x_low,
       "always vote|usually vote|i vote|voted|voter|participate|turn out|suelo votar|siempre voto"
-    ) ~
-      "voter",
+    ) ~ "voter",
     
     str_detect(
       x_low,
       "sometimes|depends|not sure|uncertain|undecided|prefer not|no answer"
-    ) ~
-      "uncertain",
+    ) ~ "uncertain",
     
     TRUE ~ "uncertain"
   )
 }
 
+
+# Agrupa la autoubicación política declarada en intervalos numéricos
+# de la escala de 0 a 100 utilizada por este análisis.
+# x: respuesta original de autoubicación.
+# Devuelve: extreme_left, left, centre, right, extreme_right,
+# unknown o invalid.
 recode_political_block <- function(x) {
   n <- parse_num_no_conflict(x)
   
@@ -1359,183 +1630,168 @@ recode_political_block <- function(x) {
   )
 }
 
+
+# Armoniza los ingresos declarados en las diferentes encuestas.
+# Interpreta intervalos, cantidades numéricas y categorías textuales.
+# x: respuestas originales de ingresos.
+# Devuelve: low, medium, high, other, unknown o conflict.
 recode_income <- function(x) {
   x_raw <- clean_text(x)
   x_low <- normalise_text(x_raw)
   n <- parse_num_no_conflict(x_raw)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
-    str_detect(
-      x_raw,
-      "\\s\\|\\s"
-    ) ~
-      "conflict",
+    str_detect(x_raw, "\\s\\|\\s") ~ "conflict",
     
     str_detect(
       x_low,
       "prefer not|no answer|dont know|do not know"
-    ) ~
-      "unknown",
+    ) ~ "unknown",
     
     str_detect(
       x_low,
       "less than 20 000|less than 20000|under 20 000|under 20000"
-    ) ~
-      "low",
+    ) ~ "low",
     
     str_detect(
       x_low,
       "20 000.*49 999|20000.*49999"
-    ) ~
-      "medium",
+    ) ~ "medium",
     
     str_detect(
       x_low,
       "50 000.*100 000|50000.*100000|more than 100 000|more than 100000|over 100 000|over 100000"
-    ) ~
-      "high",
+    ) ~ "high",
     
     !is.na(n) &
       n >= 10000 &
-      n < 20000 ~
-      "low",
+      n < 20000 ~ "low",
     
     !is.na(n) &
       n >= 20000 &
-      n < 50000 ~
-      "medium",
+      n < 50000 ~ "medium",
     
     !is.na(n) &
-      n >= 50000 ~
-      "high",
+      n >= 50000 ~ "high",
     
     !is.na(n) &
-      n < 1000 ~
-      "low",
+      n < 1000 ~ "low",
     
     !is.na(n) &
-      n < 2500 ~
-      "medium",
+      n < 2500 ~ "medium",
     
     !is.na(n) &
-      n >= 2500 ~
-      "high",
+      n >= 2500 ~ "high",
     
     str_detect(
       x_low,
       "low|bajo"
-    ) ~
-      "low",
+    ) ~ "low",
     
     str_detect(
       x_low,
       "middle|medium|medio"
-    ) ~
-      "medium",
+    ) ~ "medium",
     
     str_detect(
       x_low,
       "high|alto"
-    ) ~
-      "high",
+    ) ~ "high",
     
     TRUE ~ "other"
   )
 }
 
+
+# Convierte a número la cantidad de hijos declarada.
+# Reconoce también respuestas textuales que indican que no hay hijos.
+# x: respuestas originales.
+# Devuelve: número de hijos o NA_real_ cuando no puede determinarse.
 parse_num_children <- function(x) {
   x_low <- normalise_text(x)
   n <- parse_num_no_conflict(x)
   
   case_when(
-    is.na(x_low) ~
-      NA_real_,
+    is.na(x_low) ~ NA_real_,
     
     str_detect(
       x_low,
       "none|no children|sin hijos|ninguno"
-    ) ~
-      0,
+    ) ~ 0,
     
-    !is.na(n) ~
-      n,
+    !is.na(n) ~ n,
     
-    TRUE ~
-      NA_real_
+    TRUE ~ NA_real_
   )
 }
 
+
+# Armoniza la autoclasificación declarada sobre decisiones de inversión.
+# Identifica las categorías de arquetipo utilizadas en el análisis.
+# x: respuestas originales de autoclasificación.
+# Devuelve: activist, fearful, influencer, careful, uninterested,
+# pioneer, sentient, homo_economicus, none, other o unknown.
 recode_self_classification <- function(x) {
   x_low <- normalise_text(x)
   
   case_when(
-    is.na(x_low) ~
-      "unknown",
+    is.na(x_low) ~ "unknown",
     
     str_detect(
       x_low,
       "environment|climate|planet"
-    ) ~
-      "activist",
+    ) ~ "activist",
     
     str_detect(
       x_low,
       "safety|safe|risk"
-    ) ~
-      "fearful",
+    ) ~ "fearful",
     
     str_detect(
       x_low,
       "status|recognition|show others"
-    ) ~
-      "influencer",
+    ) ~ "influencer",
     
     str_detect(
       x_low,
       "comfort|cozy|cosy|well being|wellbeing"
-    ) ~
-      "careful",
+    ) ~ "careful",
     
     str_detect(
       x_low,
       "not interested|not very interested"
-    ) ~
-      "uninterested",
+    ) ~ "uninterested",
     
     str_detect(
       x_low,
       "new|innovation|technology|early adopter"
-    ) ~
-      "pioneer",
+    ) ~ "pioneer",
     
     str_detect(
       x_low,
       "ethical|meaning|values"
-    ) ~
-      "sentient",
+    ) ~ "sentient",
     
     str_detect(
       x_low,
       "cost|money|save|saving|economic"
-    ) ~
-      "homo_economicus",
+    ) ~ "homo_economicus",
     
     str_detect(
       x_low,
       "none"
-    ) ~
-      "none",
+    ) ~ "none",
     
-    TRUE ~
-      "other"
+    TRUE ~ "other"
   )
 }
 
 
-# Variables armonizadas
+# CONSTRUCCIÓN DE LAS VARIABLES ARMONIZADAS
+
+# Convertir las respuestas originales de edad y año de nacimiento a números.
 year_birth_num <- parse_num_no_conflict(
   raw_clean$year_birth
 )
@@ -1544,10 +1800,15 @@ age_num_raw <- parse_num_no_conflict(
   raw_clean$age
 )
 
-age_midpoint_vec <- age_midpoint_from_raw(
+# Identificar las respuestas que expresan intervalos y que, por tanto,
+# no pueden utilizarse directamente como edades numéricas exactas.
+age_is_interval_vec <- is_age_interval(
   raw_clean$age
 )
 
+
+# Identificar el año de nacimiento, utilizando un año válido declarado
+# directamente o detectado dentro del campo de edad.
 year_birth_model_vec <- case_when(
   !is.na(year_birth_num) &
     year_birth_num >= 1900 &
@@ -1559,15 +1820,19 @@ year_birth_model_vec <- case_when(
     age_num_raw <= reference_year_model_vec ~
     as.integer(age_num_raw),
   
-  TRUE ~
-    NA_integer_
+  TRUE ~ NA_integer_
 )
+
+
+# Recuperar únicamente edades numéricas válidas.
+# Se excluyen las respuestas expresadas mediante intervalos.
 
 age_direct_vec <- case_when(
   !is.na(age_num_raw) &
     age_num_raw >= 15 &
     age_num_raw <= 110 &
-    is.na(age_midpoint_vec) ~
+    !age_is_interval_vec &
+    !flag_conflict(raw_clean$age) ~
     as.numeric(age_num_raw),
   
   !is.na(year_birth_num) &
@@ -1575,13 +1840,17 @@ age_direct_vec <- case_when(
     year_birth_num <= 110 ~
     as.numeric(year_birth_num),
   
-  TRUE ~
-    NA_real_
+  TRUE ~ NA_real_
 )
 
+# Utilizar la edad declarada directamente o calcularla a partir
+# del año de nacimiento y del año de referencia de la encuesta.
+#
+# No se utilizan puntos medios de intervalos para generar edades
+# numéricas individuales.
 age_model_vec <- coalesce(
   age_direct_vec,
-  age_midpoint_vec,
+  
   ifelse(
     !is.na(year_birth_model_vec),
     reference_year_model_vec - year_birth_model_vec,
@@ -1589,10 +1858,19 @@ age_model_vec <- coalesce(
   )
 )
 
-age_model_is_approximate_vec <-
-  !is.na(age_midpoint_vec) &
-  is.na(age_direct_vec)
+# TRUE cuando la edad numérica se ha estimado a partir del año
+# de nacimiento y del año de referencia de la encuesta.
+#
+# FALSE cuando se dispone de una edad numérica directa o cuando
+# age_model es NA. Los intervalos de DIEGO no generan edades
+# numéricas aproximadas.
 
+age_model_is_approximate_vec <-
+  !is.na(age_model_vec) &
+  is.na(age_direct_vec) &
+  !is.na(year_birth_model_vec)
+
+# Armonizar país de residencia y país de nacimiento.
 country_code_from_raw <- extract_country_code_multi(
   raw_clean$country_raw
 )
@@ -1608,6 +1886,8 @@ country_model_vec <- coalesce(
   country_code_from_raw
 )
 
+
+# Convertir a valores numéricos las variables de contexto que lo permiten.
 political_left_right_vec <- parse_num_no_conflict(
   raw_clean$political_left_right
 )
@@ -1636,6 +1916,9 @@ num_children_vec <- parse_num_children(
   raw_clean$num_children
 )
 
+
+# Incorporar las respuestas consolidadas y las variables armonizadas.
+# Se conservan las columnas originales de all_sources_integrated.
 all_sources_integrated_clean <- bind_cols(
   all_sources_integrated,
   raw_df
@@ -1644,7 +1927,9 @@ all_sources_integrated_clean <- bind_cols(
     reference_year_model = reference_year_model_vec,
     
     year_birth_model = year_birth_model_vec,
+    
     age_model = age_model_vec,
+    
     age_model_is_approximate = age_model_is_approximate_vec,
     
     age_group_model = recode_age_group_from_raw(
@@ -1748,8 +2033,7 @@ all_sources_integrated_clean <- bind_cols(
       TRUE ~ NA_integer_
     ),
     
-    political_left_right_model =
-      political_left_right_vec,
+    political_left_right_model = political_left_right_vec,
     
     political_block_model = recode_political_block(
       raw_clean$political_left_right
@@ -1759,21 +2043,19 @@ all_sources_integrated_clean <- bind_cols(
       raw_clean$self_classification
     ),
     
-    energy_efficiency_goal_0_100 =
-      energy_efficiency_goal_vec,
+    energy_efficiency_goal_0_100 = energy_efficiency_goal_vec,
     
-    climate_awareness_0_100 =
-      climate_awareness_vec,
+    climate_awareness_0_100 = climate_awareness_vec,
     
     energy_transition_awareness_0_100 =
       energy_transition_awareness_vec,
     
-    travel_distance_model =
-      travel_distance_vec,
+    travel_distance_model = travel_distance_vec,
     
-    travel_time_model =
-      travel_time_vec,
+    travel_time_model = travel_time_vec,
     
+    # Registrar por separado los conflictos encontrados en las
+    # respuestas originales que se han utilizado para armonizar.
     year_birth_conflict = flag_conflict(
       raw_clean$year_birth
     ),
@@ -1823,12 +2105,18 @@ all_sources_integrated_clean <- bind_cols(
     )
   )
 
+
+# AGRUPACIÓN DE PAÍSES SEGÚN SU FRECUENCIA
+
+# Contar los registros correspondientes a cada país armonizado.
 country_counts <- all_sources_integrated_clean %>%
   count(
     country_model,
     name = "n_country_model"
   )
 
+# Los países que aparecen al menos MIN_COUNTRY_N veces conservan
+# su categoría; los demás se agrupan como OTHER_COUNTRIES.
 all_sources_integrated_clean <- all_sources_integrated_clean %>%
   left_join(
     country_counts,
@@ -1837,28 +2125,32 @@ all_sources_integrated_clean <- all_sources_integrated_clean %>%
   mutate(
     country_model_grouped = case_when(
       is.na(country_model) |
-        country_model == "" ~
-        "UNKNOWN",
+        country_model == "" ~ "UNKNOWN",
       
       str_detect(
         country_model,
         "\\s\\|\\s"
-      ) ~
-        "CONFLICT",
+      ) ~ "CONFLICT",
       
-      n_country_model >= MIN_COUNTRY_N ~
-        country_model,
+      n_country_model >= MIN_COUNTRY_N ~ country_model,
       
-      TRUE ~
-        "OTHER_COUNTRIES"
+      TRUE ~ "OTHER_COUNTRIES"
     )
   ) %>%
-  select(
-    -n_country_model
-  )
+  select(-n_country_model)
 
 
-# Determinantes
+# ARMONIZACIÓN DE LOS 32 DETERMINANTES
+
+# Cada fila del diccionario indica:
+# det_id: número del determinante.
+# det_name: nombre común del determinante.
+# rv_prefix: prefijo de la columna correspondiente en RENOVISOR.
+# why_prefix: prefijo de la columna correspondiente en WHY.
+# diego_col: columna correspondiente en DIEGO.
+#
+# Se mantienen exactamente las correspondencias definidas en el script
+# original para evitar modificar la interpretación de los determinantes.
 determinant_dictionary <- tribble(
   ~det_id, ~det_name, ~rv_prefix, ~why_prefix, ~diego_col,
   
@@ -2023,6 +2315,7 @@ determinant_dictionary <- tribble(
   "diego_det_32_0_100"
 ) %>%
   mutate(
+    # Nombre común de la columna armonizada.
     det_col = paste0(
       "det_",
       sprintf("%02d", det_id),
@@ -2030,16 +2323,19 @@ determinant_dictionary <- tribble(
       det_name
     ),
     
+    # Localizar la columna real correspondiente en RENOVISOR.
     rv_col = map_chr(
       rv_prefix,
       ~ resolve_unique_prefix(df, .x)
     ),
     
+    # Localizar la columna real correspondiente en WHY.
     why_col = map_chr(
       why_prefix,
       ~ resolve_unique_prefix(df, .x)
     ),
     
+    # Comprobar que la columna de DIEGO existe.
     diego_col_resolved = if_else(
       diego_col %in% names(df),
       diego_col,
@@ -2047,6 +2343,8 @@ determinant_dictionary <- tribble(
     )
   )
 
+
+# DETECCIÓN DE COLUMNAS DE DETERMINANTES AUSENTES
 missing_mapping <- determinant_dictionary %>%
   filter(
     is.na(rv_col) |
@@ -2067,6 +2365,15 @@ if (nrow(missing_mapping)) {
   )
 }
 
+
+# CREACIÓN DE LOS 32 DETERMINANTES COMUNES
+
+# Para cada determinante, recuperar las columnas originales de las
+# tres fuentes y seleccionar el valor correspondiente a dataset_source.
+#
+# La operación recorre únicamente 32 determinantes y utiliza funciones
+# vectorizadas. No se marca para paralelizar sin comprobar previamente
+# que representa un coste significativo de ejecución.
 for (i in seq_len(nrow(determinant_dictionary))) {
   det_col <- determinant_dictionary$det_col[i]
   
@@ -2095,36 +2402,40 @@ for (i in seq_len(nrow(determinant_dictionary))) {
     all_sources_integrated_clean$dataset_source == "diego" ~
       diego_values,
     
-    TRUE ~
-      NA_real_
+    TRUE ~ NA_real_
   )
 }
 
 det_cols <- determinant_dictionary$det_col
 
-if (length(det_cols) != 32) {
+if (length(det_cols) != N_DET_TOTAL) {
   stop(
-    "El diccionario no contiene exactamente 32 determinantes."
+    "El diccionario no contiene exactamente ",
+    N_DET_TOTAL,
+    " determinantes."
   )
 }
 
+
+# Calcular cuántos determinantes no ausentes tiene cada participante.
+# Estos recuentos corresponden a los valores previos a la imputación.
 all_sources_integrated_clean <- all_sources_integrated_clean %>%
   mutate(
     n_det_non_missing = rowSums(
       !is.na(
-        across(
-          all_of(det_cols)
-        )
+        across(all_of(det_cols))
       )
     ),
     
     prop_det_non_missing =
-      n_det_non_missing /
-      length(det_cols)
+      n_det_non_missing / N_DET_TOTAL
   )
 
 
-# Dataset limpio y trazabilidad
+# CREACIÓN DE LOS DATASETS LIMPIOS Y DE TRAZABILIDAD
+
+# Seleccionar las columnas sociodemográficas, políticas y de contexto
+# que se conservarán en la base limpia.
 sociodemographic_clean_cols <- c(
   "reference_year_model",
   
@@ -2192,6 +2503,9 @@ det_clean_cols <- c(
   det_cols
 )
 
+
+# Colocar las variables armonizadas junto a los identificadores,
+# conservando el resto de las columnas originales.
 all_sources_integrated_clean <- all_sources_integrated_clean %>%
   relocate(
     any_of(
@@ -2203,6 +2517,9 @@ all_sources_integrated_clean <- all_sources_integrated_clean %>%
     .after = any_of("identification_code")
   )
 
+
+# Guardar la versión completa antes de seleccionar las columnas
+# que formarán la versión reducida para análisis.
 all_sources_integrated_clean_traceability <-
   all_sources_integrated_clean
 
@@ -2217,11 +2534,11 @@ analysis_clean_cols <- unique(
 all_sources_integrated_clean <-
   all_sources_integrated_clean_traceability %>%
   select(
-    any_of(
-      analysis_clean_cols
-    )
+    any_of(analysis_clean_cols)
   )
 
+
+# Crear dos tablas específicas para facilitar su uso posterior.
 sociodemographics_clean <- all_sources_integrated_clean %>%
   select(
     any_of(id_cols),
@@ -2235,7 +2552,9 @@ determinants_harmonized <- all_sources_integrated_clean %>%
   )
 
 
-# Diagnósticos
+# DIAGNÓSTICOS DE COBERTURA SOCIODEMOGRÁFICA
+
+# Variables cuya disponibilidad se comprobará por fuente y submuestra.
 coverage_vars <- c(
   "age_model",
   "age_group_model",
@@ -2264,12 +2583,16 @@ coverage_vars <- c(
   "energy_transition_awareness_0_100"
 )
 
+
+# Calcula el número de filas y de valores disponibles para cada variable,
+# agrupando los registros según las columnas indicadas.
+# data: tabla con las variables armonizadas.
+# group_vars: nombres de las columnas por las que se agrupará.
+# Devuelve: tibble con n_rows y una columna n_non_missing_* por variable.
 coverage_summary <- function(data, group_vars) {
   data %>%
     group_by(
-      across(
-        all_of(group_vars)
-      )
+      across(all_of(group_vars))
     ) %>%
     summarise(
       n_rows = n(),
@@ -2287,6 +2610,8 @@ coverage_summary <- function(data, group_vars) {
     )
 }
 
+
+# Cobertura sociodemográfica por fuente y total.
 diagnostics_sociodemographics_coverage <- bind_rows(
   coverage_summary(
     sociodemographics_clean,
@@ -2309,6 +2634,8 @@ diagnostics_sociodemographics_coverage <- bind_rows(
     )
 )
 
+
+# Cobertura sociodemográfica por submuestra.
 diagnostics_sociodemographics_coverage_by_subsample <-
   coverage_summary(
     sociodemographics_clean,
@@ -2323,6 +2650,10 @@ diagnostics_sociodemographics_coverage_by_subsample <-
     subsample
   )
 
+
+# DIAGNÓSTICOS DE FRECUENCIAS SOCIODEMOGRÁFICAS
+
+# Variables categóricas para las que se contarán las respuestas.
 count_vars <- c(
   "age_group_model",
   "gender_model",
@@ -2339,6 +2670,8 @@ count_vars <- c(
   "self_classification_model"
 )
 
+
+# Frecuencias y proporciones por fuente de datos.
 diagnostics_sociodemographics_counts <- sociodemographics_clean %>%
   select(
     dataset_source,
@@ -2369,6 +2702,8 @@ diagnostics_sociodemographics_counts <- sociodemographics_clean %>%
     desc(n)
   )
 
+
+# Frecuencias y proporciones por submuestra.
 diagnostics_sociodemographics_counts_by_subsample <-
   sociodemographics_clean %>%
   select(
@@ -2400,6 +2735,11 @@ diagnostics_sociodemographics_counts_by_subsample <-
     desc(n)
   )
 
+
+# DIAGNÓSTICOS DE CONFLICTOS
+
+# Columnas que registran las respuestas incompatibles encontradas
+# durante la consolidación de los datos originales.
 conflict_cols <- c(
   "year_birth_conflict",
   "age_conflict",
@@ -2415,20 +2755,21 @@ conflict_cols <- c(
   "vote_conflict"
 )
 
+
+# Número total de conflictos por variable.
 diagnostics_conflicts <- sociodemographics_clean %>%
   summarise(
     n_rows = n(),
     
     across(
       all_of(conflict_cols),
-      ~ sum(
-        .x,
-        na.rm = TRUE
-      ),
+      ~ sum(.x, na.rm = TRUE),
       .names = "n_{.col}"
     )
   )
 
+
+# Número de conflictos por región y submuestra.
 diagnostics_conflicts_by_subsample <-
   sociodemographics_clean %>%
   group_by(
@@ -2440,10 +2781,7 @@ diagnostics_conflicts_by_subsample <-
     
     across(
       all_of(conflict_cols),
-      ~ sum(
-        .x,
-        na.rm = TRUE
-      ),
+      ~ sum(.x, na.rm = TRUE),
       .names = "n_{.col}"
     ),
     
@@ -2454,12 +2792,19 @@ diagnostics_conflicts_by_subsample <-
     subsample
   )
 
+
+# DIAGNÓSTICOS DE COBERTURA DE LOS 32 DETERMINANTES
+
+# Calcula cuántos participantes tienen al menos un determinante disponible,
+# cuántos tienen los 32 completos y cuántos determinantes están informados
+# por término medio.
+# data: tabla que contiene n_det_non_missing.
+# group_vars: nombres de las columnas por las que se agrupará.
+# Devuelve: tibble con el tamaño de cada grupo y sus medidas de cobertura.
 det_summary <- function(data, group_vars) {
   data %>%
     group_by(
-      across(
-        all_of(group_vars)
-      )
+      across(all_of(group_vars))
     ) %>%
     summarise(
       n_rows = n(),
@@ -2470,7 +2815,7 @@ det_summary <- function(data, group_vars) {
       ),
       
       n_complete_32_det = sum(
-        n_det_non_missing == 32,
+        n_det_non_missing == N_DET_TOTAL,
         na.rm = TRUE
       ),
       
@@ -2493,6 +2838,8 @@ det_summary <- function(data, group_vars) {
     )
 }
 
+
+# Cobertura de los determinantes por fuente y total.
 diagnostics_32det_by_source <- bind_rows(
   det_summary(
     all_sources_integrated_clean,
@@ -2511,7 +2858,7 @@ diagnostics_32det_by_source <- bind_rows(
       ),
       
       n_complete_32_det = sum(
-        n_det_non_missing == 32,
+        n_det_non_missing == N_DET_TOTAL,
         na.rm = TRUE
       ),
       
@@ -2532,6 +2879,8 @@ diagnostics_32det_by_source <- bind_rows(
     )
 )
 
+
+# Cobertura de los determinantes por región y submuestra.
 diagnostics_32det_by_subsample <- det_summary(
   all_sources_integrated_clean,
   c(
@@ -2542,9 +2891,7 @@ diagnostics_32det_by_subsample <- det_summary(
 ) %>%
   mutate(
     pct_complete_32_det =
-      100 *
-      n_complete_32_det /
-      n_rows,
+      100 * n_complete_32_det / n_rows,
     .after = n_complete_32_det
   ) %>%
   arrange(
@@ -2552,6 +2899,11 @@ diagnostics_32det_by_subsample <- det_summary(
     subsample
   )
 
+
+# DIAGNÓSTICOS DE RANGOS DE LOS DETERMINANTES
+
+# Transformar los 32 determinantes a formato largo.
+# Cada fila representa el valor de un determinante de un participante.
 det_long <- all_sources_integrated_clean %>%
   select(
     dataset_source,
@@ -2565,28 +2917,23 @@ det_long <- all_sources_integrated_clean %>%
     values_to = "value"
   )
 
+
+# Calcular mínimos, máximos y valores fuera de la escala 0-100
+# para cada determinante y fuente.
 diagnostics_32det_ranges <- det_long %>%
   group_by(
     dataset_source,
     det_col
   ) %>%
   summarise(
-    n_non_missing = sum(
-      !is.na(value)
-    ),
+    n_non_missing = sum(!is.na(value)),
     
     min_value = suppressWarnings(
-      min(
-        value,
-        na.rm = TRUE
-      )
+      min(value, na.rm = TRUE)
     ),
     
     max_value = suppressWarnings(
-      max(
-        value,
-        na.rm = TRUE
-      )
+      max(value, na.rm = TRUE)
     ),
     
     n_below_0 = sum(
@@ -2615,6 +2962,8 @@ diagnostics_32det_ranges <- det_long %>%
     )
   )
 
+
+# Calcular los mismos indicadores por región y submuestra.
 diagnostics_32det_ranges_by_subsample <- det_long %>%
   group_by(
     comparison_region,
@@ -2624,27 +2973,17 @@ diagnostics_32det_ranges_by_subsample <- det_long %>%
   summarise(
     n_rows = n(),
     
-    n_non_missing = sum(
-      !is.na(value)
-    ),
+    n_non_missing = sum(!is.na(value)),
     
     pct_non_missing =
-      100 *
-      n_non_missing /
-      n_rows,
+      100 * n_non_missing / n_rows,
     
     min_value = suppressWarnings(
-      min(
-        value,
-        na.rm = TRUE
-      )
+      min(value, na.rm = TRUE)
     ),
     
     max_value = suppressWarnings(
-      max(
-        value,
-        na.rm = TRUE
-      )
+      max(value, na.rm = TRUE)
     ),
     
     n_below_0 = sum(
@@ -2679,7 +3018,10 @@ diagnostics_32det_ranges_by_subsample <- det_long %>%
   )
 
 
-# Diccionario sociodemográfico
+# DICCIONARIO SOCIODEMOGRÁFICO
+
+# Describir las principales variables armonizadas para facilitar
+# la interpretación de los archivos de salida.
 sociodemographic_dictionary <- tribble(
   ~variable, ~description,
   
@@ -2690,13 +3032,13 @@ sociodemographic_dictionary <- tribble(
   "Year of birth harmonised from survey and Prolific fields.",
   
   "age_model",
-  "Age harmonised from direct age fields, computed from year of birth, or approximated from Diego age group.",
+  "Numeric age declared directly or calculated from year of birth and the survey reference year. Participants with only an age interval have NA.",
   
   "age_model_is_approximate",
-  "TRUE when age_model was approximated from an age group rather than observed as exact age.",
+  "TRUE when numeric age is calculated from year of birth and the survey reference year; FALSE for directly reported numeric ages or missing age_model.",
   
   "age_group_model",
-  "Age grouped for modelling.",
+  "Age harmonised into 18_39, 40_59, 60_plus or unknown. Original Diego age intervals are grouped without assigning individual numeric ages.",
   
   "gender_model",
   "Gender harmonised into female, male, other, unknown or conflict.",
@@ -2775,7 +3117,9 @@ sociodemographic_dictionary <- tribble(
 )
 
 
-# Guardado
+# GUARDADO DE ARCHIVOS
+
+# Asociar cada tabla creada con su correspondiente archivo CSV.
 outputs <- list(
   "all_sources_integrated_clean.csv" =
     all_sources_integrated_clean,
@@ -2829,6 +3173,8 @@ outputs <- list(
     sociodemographic_dictionary
 )
 
+
+# Escribir los archivos de salida en el directorio de armonización.
 iwalk(
   outputs,
   ~ write_csv(
@@ -2838,26 +3184,20 @@ iwalk(
 )
 
 
-# Resumen
-cat(
-  "\nCOBERTURA SOCIODEMOGRÁFICA POR FUENTE\n"
-)
+# RESUMEN EN CONSOLA
+cat("\nCOBERTURA SOCIODEMOGRÁFICA POR FUENTE\n")
 
 print(
   diagnostics_sociodemographics_coverage
 )
 
-cat(
-  "\n32 DETERMINANTES POR FUENTE\n"
-)
+cat("\n32 DETERMINANTES POR FUENTE\n")
 
 print(
   diagnostics_32det_by_source
 )
 
-cat(
-  "\n32 DETERMINANTES POR SUBMUESTRA\n"
-)
+cat("\n32 DETERMINANTES POR SUBMUESTRA\n")
 
 print(
   diagnostics_32det_by_subsample,

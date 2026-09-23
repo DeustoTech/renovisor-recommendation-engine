@@ -1,40 +1,140 @@
+# 03_1_component_quality.R
+#
+# OBJETIVO
+# Evaluar la calidad de los datos integrados y determinar qué participantes
+# pueden utilizarse en el clustering y en los análisis posteriores.
+#
+# ENTRADA
+# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/
+# all_sources_integrated_clean_traceability.csv
+#
+# PROCESAMIENTO
+# 1. Comprobar la estructura de las cuatro submuestras.
+# 2. Identificar la disponibilidad de los distintos componentes de encuesta.
+# 3. Evaluar la calidad de los 32 determinantes antes de imputar.
+# 4. Imputar con 50 los NA originales de las filas elegibles.
+# 5. Evaluar valores fuera de rango, variabilidad y proporción de extremos.
+# 6. Evaluar la disponibilidad sociodemográfica, de voto y de metadatos.
+# 7. Evaluar los controles de atención disponibles.
+# 8. Identificar las filas utilizables para clustering.
+# 9. Generar las matrices y los diagnósticos de calidad.
+#
+# REGLAS DE IMPUTACIÓN
+# - Se aplica únicamente a RENOVISOR, WHY_EUROPE y WHY_LATAM.
+# - Se exige un mínimo de 24 determinantes originales válidos.
+# - Se imputan únicamente las celdas originalmente ausentes.
+# - No se imputan DIEGO ni participantes sin determinantes válidos.
+# - Se conserva el número de valores originales y cada celda imputada.
+#
+# CRITERIOS DE CLUSTERING
+# - Al menos 24 de los 32 determinantes válidos después de imputar.
+# - Ningún determinante fuera del intervalo 0-100.
+# - Más de dos valores distintos entre los determinantes válidos.
+# - Proporción de valores extremos inferior a 0,80.
+#
+# IMPORTANTE
+# usable_for_clustering depende de la calidad de los determinantes.
+# La disponibilidad sociodemográfica y los controles de atención se
+# diagnostican por separado y no se añaden silenciosamente a ese filtro.
+#
+# SALIDAS
+# Directorio: data/processed/03_component_quality/
+#
+# BASES PRINCIPALES
+# - all_sources_integrated_component_quality.csv:
+#   Base completa con determinantes imputados e indicadores de calidad.
+# - matrix_32det_with_quality.csv:
+#   Identificadores, metadatos, determinantes y variables de calidad.
+# - matrix_32det_for_clustering.csv:
+#   Filas que cumplen los criterios definidos para clustering.
+#
+# DIAGNÓSTICOS
+# - diagnostics_component_candidate_columns.csv
+# - diagnostics_component_quality_counts.csv
+# - diagnostics_component_coverage_by_source.csv
+# - diagnostics_component_quality_counts_by_subsample.csv
+# - diagnostics_component_coverage_by_subsample.csv
+# - diagnostics_row_quality_by_source.csv
+# - diagnostics_row_quality_by_subsample.csv
+# - diagnostics_row_quality_counts.csv
+# - diagnostics_row_quality_counts_by_subsample.csv
+# - diagnostics_missing_by_determinant.csv
+# - diagnostics_missing_by_determinant_by_subsample.csv
+# - diagnostics_missing_after_imputation_by_determinant.csv
+# - diagnostics_missing_after_imputation_by_subsample.csv
+# - diagnostics_imputation_50_by_determinant.csv
+# - diagnostics_imputation_50_by_subsample.csv
+# - diagnostics_imputation_50_by_row.csv
+# - diagnostics_imputation_50_summary.csv
+# - diagnostics_metadata_quality_counts.csv
+# - diagnostics_metadata_quality_counts_by_subsample.csv
+# - diagnostics_propensity_score_readiness.csv
+# - diagnostics_propensity_score_readiness_by_subsample.csv
+# - diagnostics_clustering_sample_sizes.csv
+#
+# VARIABLES PRINCIPALES GENERADAS
+# - n_det_valid_original: número de determinantes originales válidos.
+# - n_det_missing_original: número de valores no numéricos o ausentes
+#   después de convertir los determinantes originales a números.
+# - n_det_imputed_50: número de celdas imputadas con 50.
+# - prop_det_imputed_50: proporción de las 32 celdas imputadas.
+# - det_cols_imputed_50: nombres de los determinantes imputados.
+# - n_det_valid: determinantes válidos después de imputar.
+# - n_det_missing: determinantes que no tienen un valor válido 0-100.
+# - flag_*: indicadores de problemas de calidad.
+# - quality_determinants_32: categoría de calidad de los determinantes.
+# - usable_for_clustering: elegibilidad para clustering.
+# - quality_sociodemographics: disponibilidad de información básica.
+# - metadata_quality: calidad de los metadatos.
+# - attention_check_*: disponibilidad y resultado de controles de atención.
+# - row_quality_final: clasificación global de calidad de la fila.
+# - usable_for_main_analysis: disponibilidad según row_quality_final.
+#
+# DEPENDENCIAS
+# - 00_common.R: paquetes, rutas, constantes y funciones compartidas.
+# - 02_harmonize_common_variables.R: genera el archivo de entrada.
 
-# Objetivo
-# Evalúa la calidad del dataset integrado y armonizado y define
-# las personas utilizables para los análisis posteriores.
-#
-# Submuestras:
-#   DIEGO
-#   RENOVISOR
-#   WHY_EUROPE
-#   WHY_LATAM
-#
-# Este script es PRE-BOOTSTRAP. No remuestrea.
-#
-# Los IDs utilizables para clustering definidos aquí se emplearán después en:
-#   EUROPE  -> bootstrap político/electoral (04_2b)
-#   LATAM   -> bootstrap económico por ingreso (04_2e)
-#   COMPLETE -> combinación EUROPE + LATAM (04_2f)
-#
-# POOLED_ALL se conserva únicamente como resumen descriptivo
-# del dataset original antes del bootstrap.
-#
-# El propensity político se considera exclusivamente aplicable a EUROPE.
-#
-#
-# Outputs principales:
-#   03_component_quality/all_sources_integrated_component_quality.csv
-#   03_component_quality/matrix_32det_with_quality.csv
-#   03_component_quality/matrix_32det_for_clustering.csv
+################################################################################
+
+# CARGA DE 00_common.R
+script_sources <- vapply(
+  sys.frames(),
+  function(frame) {
+    if (!is.null(frame$ofile)) {
+      as.character(frame$ofile)[1]
+    } else {
+      NA_character_
+    }
+  },
+  character(1)
+)
+
+script_sources <- script_sources[!is.na(script_sources)]
+
+common_candidates <- c(
+  file.path(dirname(script_sources), "00_common.R"),
+  file.path("paper1_cluster", "scripts", "00_common.R"),
+  file.path("scripts", "00_common.R"),
+  "00_common.R"
+)
+
+common_path <- common_candidates[
+  file.exists(common_candidates)
+][1]
+
+if (is.na(common_path)) {
+  stop("No se encuentra 00_common.R.")
+}
+
+source(common_path)
+
+# library(tidyverse)  # Se carga desde 00_common.R.
 
 
-suppressPackageStartupMessages({
-  library(tidyverse)
-})
+# CONFIGURACIÓN
 
-
-# Configuración
-processed_root <- "paper1_cluster/data/processed"
+# processed_root se define en 00_common.R.
+# processed_root <- "paper1_cluster/data/processed"
 
 in_file <- file.path(
   processed_root,
@@ -47,17 +147,36 @@ out_dir <- file.path(
   "03_component_quality"
 )
 
-N_DET_TOTAL <- 32
-MIN_DET_VALID_FOR_CLUSTERING <- 24
-LOW_VARIABILITY_MAX_UNIQUE <- 2
+# Número mínimo de determinantes válidos para entrar en clustering.
+MIN_DET_VALID_FOR_CLUSTERING <- 24L
+
+# Una fila con dos valores distintos o menos se considera de baja variabilidad.
+LOW_VARIABILITY_MAX_UNIQUE <- 2L
+
+# Una proporción de extremos igual o superior a 0,80 se marca como sospechosa.
 HIGH_EXTREME_SHARE_THRESHOLD <- 0.80
 
-if (!file.exists(in_file)) {
-  stop("No encuentro el archivo de entrada: ", in_file)
-}
+# Mínimo de determinantes originales válidos para permitir imputación a 50.
+MIN_DET_VALID_ORIGINAL_FOR_IMPUTATION <- 24L
 
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+# DIEGO no se incluye porque sus 32 determinantes están completos
+# en la base armonizada y no se ha definido imputación para esa fuente.
+IMPUTE_50_SUBSAMPLES <- c(
+  "RENOVISOR",
+  "WHY_EUROPE",
+  "WHY_LATAM"
+)
 
+check_file(in_file)
+
+dir.create(
+  out_dir,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+# Leer inicialmente todas las columnas como caracteres.
+# Las conversiones numéricas se realizan posteriormente de forma explícita.
 df <- read_csv(
   in_file,
   show_col_types = FALSE,
@@ -65,7 +184,7 @@ df <- read_csv(
 )
 
 
-# Comprobaciones
+# COMPROBACIONES INICIALES
 required_structure_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -74,7 +193,10 @@ required_structure_cols <- c(
   "dataset_source"
 )
 
-missing_structure_cols <- setdiff(required_structure_cols, names(df))
+missing_structure_cols <- setdiff(
+  required_structure_cols,
+  names(df)
+)
 
 if (length(missing_structure_cols)) {
   stop(
@@ -106,7 +228,7 @@ if (anyDuplicated(df$integrated_row_id)) {
   stop("integrated_row_id contiene duplicados.")
 }
 
-cat("\nSubmuestras recibidas desde 02:\n")
+cat("\nSUBMUESTRAS RECIBIDAS DESDE 02\n")
 
 print(
   df %>%
@@ -115,11 +237,21 @@ print(
       subsample,
       dataset_source,
       name = "n"
-    )
+    ),
+  n = Inf
 )
 
 
-# Funciones auxiliares
+# FUNCIONES AUXILIARES
+
+# Limpia espacios y transforma los códigos de ausencia en NA.
+#
+# x: vector de respuestas originales.
+# Devuelve: vector de caracteres depurado.
+#
+# Se mantiene local porque la versión de clean_text() utilizada en
+# 02_harmonize_common_variables.R también elimina determinadas respuestas
+# del tipo "Prefer not to say". No son exactamente la misma función.
 clean_text <- function(x) {
   x <- str_squish(as.character(x))
   
@@ -142,30 +274,56 @@ clean_text <- function(x) {
 }
 
 
+# Convierte respuestas a números usando parse_num() de 00_common.R.
+#
+# x: vector de respuestas.
+# Devuelve: vector numérico, con NA si no puede extraerse un número.
+#
+# Se conserva el nombre parse_num_clean() para no modificar todas
+# las llamadas existentes en este script.
+#
+# Definición anterior, ahora centralizada en parse_num():
+#
+# parse_num_clean <- function(x) {
+#   suppressWarnings(
+#     parse_number(
+#       as.character(x),
+#       locale = locale(
+#         decimal_mark = ".",
+#         grouping_mark = ","
+#       )
+#     )
+#   )
+# }
+
 parse_num_clean <- function(x) {
-  suppressWarnings(
-    parse_number(
-      as.character(x),
-      locale = locale(
-        decimal_mark = ".",
-        grouping_mark = ","
-      )
-    )
-  )
+  parse_num(x)
 }
 
 
+# Comprueba si existe una respuesta original distinta de los códigos
+# de ausencia reconocidos por clean_text().
+#
+# x: vector de respuestas originales.
+# Devuelve: vector lógico; TRUE si la respuesta está informada.
 is_non_missing_raw <- function(x) {
   !is.na(clean_text(x))
 }
 
 
+# Comprueba si una variable armonizada contiene información utilizable.
+# Excluye las categorías de ausencia, conflicto, otros e invalidación.
+#
+# x: vector de valores armonizados.
+# Devuelve: vector lógico; TRUE si el valor se considera informado.
+#
+# Se mantiene local: is_valid_model_value() de 02 utiliza criterios
+# ligeramente diferentes, especialmente para datos numéricos.
 is_valid_model_value <- function(x) {
   x <- clean_text(x)
   
   !is.na(x) &
-    !str_to_lower(x) %in%
-    c(
+    !str_to_lower(x) %in% c(
       "unknown",
       "conflict",
       "other",
@@ -177,24 +335,57 @@ is_valid_model_value <- function(x) {
 }
 
 
+# Recupera una columna como caracteres. Si no existe, devuelve
+# un NA por cada fila. Utiliza safe_pull() de 00_common.R.
+#
+# data: tabla de entrada.
+# col: nombre de la columna que se desea recuperar.
+# Devuelve: vector de caracteres.
+#
+# Definición anterior:
+#
+# safe_chr_col <- function(data, col) {
+#   if (col %in% names(data)) {
+#     as.character(data[[col]])
+#   } else {
+#     rep(NA_character_, nrow(data))
+#   }
+# }
+
 safe_chr_col <- function(data, col) {
-  if (col %in% names(data)) {
-    as.character(data[[col]])
-  } else {
-    rep(NA_character_, nrow(data))
-  }
+  as.character(safe_pull(data, col))
 }
 
+
+# Recupera una columna como números. Si no existe, devuelve un
+# NA_real_ por cada fila.
+# Utiliza safe_pull() y parse_num(), definidas en 00_common.R.
+#
+# data: tabla de entrada.
+# col: nombre de la columna.
+# Devuelve: vector numérico.
+#
+# Definición anterior:
+#
+# safe_num_col <- function(data, col) {
+#   if (col %in% names(data)) {
+#     parse_num_clean(data[[col]])
+#   } else {
+#     rep(NA_real_, nrow(data))
+#   }
+# }
 
 safe_num_col <- function(data, col) {
-  if (col %in% names(data)) {
-    parse_num_clean(data[[col]])
-  } else {
-    rep(NA_real_, nrow(data))
-  }
+  parse_num(safe_pull(data, col))
 }
 
 
+# Cuenta, fila por fila, cuántas columnas de un conjunto contienen
+# información armonizada válida.
+#
+# data: tabla de entrada.
+# cols: nombres de las columnas que se desean evaluar.
+# Devuelve: vector numérico de recuentos por fila.
 count_valid_model_cols <- function(data, cols) {
   cols <- intersect(cols, names(data))
   
@@ -210,45 +401,60 @@ count_valid_model_cols <- function(data, cols) {
 }
 
 
-find_component_cols <- function(data, pattern, exclude = NULL) {
-  out <- names(data)[
-    str_detect(
-      names(data),
-      regex(pattern, ignore_case = TRUE)
-    )
-  ]
-  
-  if (!is.null(exclude)) {
-    out <- out[
-      !str_detect(
-        out,
-        regex(exclude, ignore_case = TRUE)
-      )
-    ]
-  }
-  
-  unique(out)
-}
+# find_component_cols() realiza la misma búsqueda que find_cols(),
+# definida en 00_common.R. Se conserva comentada su definición original.
+#
+# find_component_cols <- function(
+    #     data,
+#     pattern,
+#     exclude = NULL
+# ) {
+#   out <- names(data)[
+#     str_detect(
+#       names(data),
+#       regex(pattern, ignore_case = TRUE)
+#     )
+#   ]
+#
+#   if (!is.null(exclude)) {
+#     out <- out[
+#       !str_detect(
+#         out,
+#         regex(exclude, ignore_case = TRUE)
+#       )
+#     ]
+#   }
+#
+#   unique(out)
+# }
 
 
-component_stats <- function(data, component_name, cols) {
+# Calcula la disponibilidad de un componente de encuesta por participante.
+# La disponibilidad esperada se determina dentro de cada fuente de datos.
+#
+# data: tabla que contiene las respuestas y dataset_source.
+# component_name: nombre utilizado para crear las columnas del resultado.
+# cols: columnas originales pertenecientes al componente.
+#
+# Devuelve: tibble con número y proporción de respuestas informadas
+# y una categoría de calidad para el componente.
+component_stats <- function(
+    data,
+    component_name,
+    cols
+) {
   cols <- intersect(unique(cols), names(data))
   
   n_col_name <- paste0(
-    "n_",
-    component_name,
-    "_non_missing"
+    "n_", component_name, "_non_missing"
   )
   
   prop_col_name <- paste0(
-    "prop_",
-    component_name,
-    "_non_missing"
+    "prop_", component_name, "_non_missing"
   )
   
   quality_col_name <- paste0(
-    "quality_",
-    component_name
+    "quality_", component_name
   )
   
   if (!length(cols)) {
@@ -305,6 +511,10 @@ component_stats <- function(data, component_name, cols) {
 }
 
 
+# Conserva únicamente los determinantes numéricos válidos en 0-100.
+#
+# x: vector numérico de determinantes.
+# Devuelve: vector con los valores válidos.
 valid_det_values <- function(x) {
   x[
     !is.na(x) &
@@ -314,6 +524,14 @@ valid_det_values <- function(x) {
 }
 
 
+# Calcula un estadístico por participante sobre sus determinantes válidos.
+#
+# mat: matriz numérica de determinantes.
+# fun: función estadística que se aplica a cada fila.
+# min_n: mínimo de valores válidos exigido.
+# empty_value: resultado cuando no se alcanza min_n.
+#
+# Devuelve: vector con un resultado por fila de mat.
 det_row_stat <- function(
     mat,
     fun,
@@ -336,6 +554,15 @@ det_row_stat <- function(
 }
 
 
+# Calcula la ausencia y los valores fuera de rango de cada determinante
+# dentro de los grupos indicados.
+#
+# data: tabla original o tabla posterior a la imputación.
+# group_vars: columnas que definen los grupos del diagnóstico.
+# det_cols: nombres de los 32 determinantes.
+#
+# Devuelve: tibble con número de filas, ausencias, proporción de ausencias
+# y número de valores fuera del intervalo 0-100 por determinante y grupo.
 missing_by_determinant <- function(
     data,
     group_vars,
@@ -353,13 +580,12 @@ missing_by_determinant <- function(
     ) %>%
     mutate(
       value_num = parse_num_clean(value_raw),
+      
       is_missing = is.na(value_num),
+      
       is_out_of_range =
         !is.na(value_num) &
-        (
-          value_num < 0 |
-            value_num > 100
-        )
+        (value_num < 0 | value_num > 100)
     ) %>%
     group_by(
       across(all_of(group_vars)),
@@ -367,22 +593,31 @@ missing_by_determinant <- function(
     ) %>%
     summarise(
       n_rows = n(),
+      
       n_missing = sum(is_missing),
+      
       prop_missing = n_missing / n_rows,
+      
       n_out_of_range = sum(is_out_of_range),
+      
       .groups = "drop"
     )
 }
 
 
+# Resume la calidad final de las filas por fuente o submuestra.
+#
+# data: tabla completa con indicadores de calidad.
+# group_vars: columnas de agrupación.
+#
+# Devuelve: tibble con tamaños, categorías de calidad, disponibilidad
+# para clustering, estadísticos de determinantes y metadatos.
 row_quality_summary <- function(
     data,
     group_vars
 ) {
   data %>%
-    group_by(
-      across(all_of(group_vars))
-    ) %>%
+    group_by(across(all_of(group_vars))) %>%
     summarise(
       n_rows = n(),
       
@@ -392,8 +627,7 @@ row_quality_summary <- function(
       ),
       
       prop_usable_for_clustering =
-        n_usable_for_clustering /
-        n_rows,
+        n_usable_for_clustering / n_rows,
       
       n_usable_for_main_analysis = sum(
         usable_for_main_analysis,
@@ -401,12 +635,10 @@ row_quality_summary <- function(
       ),
       
       prop_usable_for_main_analysis =
-        n_usable_for_main_analysis /
-        n_rows,
+        n_usable_for_main_analysis / n_rows,
       
       n_usable_complete = sum(
-        row_quality_final ==
-          "usable_complete",
+        row_quality_final == "usable_complete",
         na.rm = TRUE
       ),
       
@@ -417,8 +649,7 @@ row_quality_summary <- function(
       ),
       
       n_usable_partial = sum(
-        row_quality_final ==
-          "usable_partial",
+        row_quality_final == "usable_partial",
         na.rm = TRUE
       ),
       
@@ -429,8 +660,7 @@ row_quality_summary <- function(
       ),
       
       n_no_determinants = sum(
-        row_quality_final ==
-          "no_determinants",
+        row_quality_final == "no_determinants",
         na.rm = TRUE
       ),
       
@@ -447,8 +677,7 @@ row_quality_summary <- function(
       ),
       
       n_invalid_determinants = sum(
-        row_quality_final ==
-          "invalid_determinants",
+        row_quality_final == "invalid_determinants",
         na.rm = TRUE
       ),
       
@@ -473,23 +702,20 @@ row_quality_summary <- function(
       ),
       
       n_metadata_complete = sum(
-        metadata_quality ==
-          "metadata_complete",
+        metadata_quality == "metadata_complete",
         na.rm = TRUE
       ),
       
       n_metadata_partial = sum(
-        metadata_quality ==
-          "metadata_partial",
+        metadata_quality == "metadata_partial",
         na.rm = TRUE
       ),
       
       n_metadata_poor = sum(
-        metadata_quality %in%
-          c(
-            "metadata_poor",
-            "metadata_no_identifier"
-          ),
+        metadata_quality %in% c(
+          "metadata_poor",
+          "metadata_no_identifier"
+        ),
         na.rm = TRUE
       ),
       
@@ -498,6 +724,15 @@ row_quality_summary <- function(
 }
 
 
+# Calcula las frecuencias y proporciones de las categorías de calidad
+# de los componentes.
+#
+# data: tabla con las categorías de calidad.
+# count_vars: columnas utilizadas para contar las observaciones.
+# prop_vars: columnas utilizadas como denominador de las proporciones.
+# quality_cols: columnas de calidad que se quieren resumir.
+#
+# Devuelve: tibble con frecuencias y proporciones por componente.
 component_quality_counts <- function(
     data,
     count_vars,
@@ -534,6 +769,13 @@ component_quality_counts <- function(
 }
 
 
+# Resume la cobertura de los componentes de encuesta.
+#
+# data: tabla con los recuentos de disponibilidad por componente.
+# group_vars: columnas de agrupación.
+# component_n_cols: columnas con recuentos n_*_non_missing.
+#
+# Devuelve: tibble con cobertura, media, mínimo y máximo por componente.
 component_coverage <- function(
     data,
     group_vars,
@@ -547,9 +789,7 @@ component_coverage <- function(
     mutate(
       across(
         all_of(component_n_cols),
-        ~ suppressWarnings(
-          as.numeric(.x)
-        )
+        ~ suppressWarnings(as.numeric(.x))
       )
     ) %>%
     pivot_longer(
@@ -570,8 +810,7 @@ component_coverage <- function(
       ),
       
       prop_rows_with_any =
-        n_rows_with_any /
-        n_rows,
+        n_rows_with_any / n_rows,
       
       mean_n_non_missing = mean(
         n_non_missing,
@@ -579,17 +818,11 @@ component_coverage <- function(
       ),
       
       min_n_non_missing = suppressWarnings(
-        min(
-          n_non_missing,
-          na.rm = TRUE
-        )
+        min(n_non_missing, na.rm = TRUE)
       ),
       
       max_n_non_missing = suppressWarnings(
-        max(
-          n_non_missing,
-          na.rm = TRUE
-        )
+        max(n_non_missing, na.rm = TRUE)
       ),
       
       .groups = "drop"
@@ -610,7 +843,10 @@ component_coverage <- function(
 }
 
 
-# Columnas por componente
+# COLUMNAS POR COMPONENTE
+
+# Excluir columnas armonizadas, identificadores y diagnósticos.
+# Los componentes genéricos se construyen a partir de columnas originales.
 
 generic_exclude <- paste(
   c(
@@ -635,6 +871,7 @@ generic_exclude <- paste(
   collapse = "|"
 )
 
+# Detectar los 32 determinantes armonizados.
 det_cols <- names(df)[
   str_detect(
     names(df),
@@ -668,7 +905,10 @@ vote_politics_cols <- c(
   "political_block_model"
 )
 
-technology_adoption_cols <- find_component_cols(
+# find_cols() está definida en 00_common.R.
+# Sustituye aquí a la antigua find_component_cols().
+
+technology_adoption_cols <- find_cols(
   df,
   paste(
     c(
@@ -701,7 +941,7 @@ technology_adoption_cols <- find_component_cols(
   exclude = generic_exclude
 )
 
-tariffs_costs_payback_cols <- find_component_cols(
+tariffs_costs_payback_cols <- find_cols(
   df,
   paste(
     c(
@@ -734,7 +974,7 @@ concerns_barriers_cols <- unique(
       )
     ],
     
-    find_component_cols(
+    find_cols(
       df,
       paste(
         c(
@@ -758,7 +998,7 @@ concerns_barriers_cols <- unique(
   )
 )
 
-trust_information_cols <- find_component_cols(
+trust_information_cols <- find_cols(
   df,
   paste(
     c(
@@ -790,7 +1030,7 @@ energy_crisis_cols <- unique(
       )
     ],
     
-    find_component_cols(
+    find_cols(
       df,
       "energy_crisis|crisis|inflation|electricity|gas|heating|fuel",
       exclude = generic_exclude
@@ -807,7 +1047,7 @@ poverty_cols <- unique(
       )
     ],
     
-    find_component_cols(
+    find_cols(
       df,
       "poverty|vulnerab|depriv|difficulty|arrears|afford|unable|inability",
       exclude = generic_exclude
@@ -816,8 +1056,17 @@ poverty_cols <- unique(
 )
 
 
-# Attention checks
+# ATTENTION CHECKS: IDENTIFICACIÓN DE COLUMNAS
 
+# Busca la primera columna que coincide con alguno de los patrones
+# definidos para un control de atención.
+#
+# data: tabla de datos.
+# patterns: vector o lista de expresiones regulares.
+# check_id: identificador del control de atención.
+#
+# Devuelve: nombre de la primera columna encontrada o NA_character_.
+# Emite un aviso si no hay patrones, no encuentra columnas o encuentra varias.
 find_first_attention_col <- function(
     data,
     patterns,
@@ -854,10 +1103,7 @@ find_first_attention_col <- function(
         ~ cols[
           str_detect(
             cols,
-            regex(
-              .x,
-              ignore_case = TRUE
-            )
+            regex(.x, ignore_case = TRUE)
           )
         ]
       ),
@@ -865,9 +1111,7 @@ find_first_attention_col <- function(
     )
   )
   
-  hits <- hits[
-    hits %in% cols
-  ]
+  hits <- hits[hits %in% cols]
   
   if (!length(hits)) {
     warning(
@@ -885,16 +1129,17 @@ find_first_attention_col <- function(
       "\nUsando la primera:\n",
       hits[1],
       "\nCandidatas:\n",
-      paste(
-        hits,
-        collapse = "\n"
-      )
+      paste(hits, collapse = "\n")
     )
   }
   
   hits[1]
 }
 
+
+# Especificaciones de los controles de atención.
+# Cada fila define su identificador, el tipo de respuesta esperada
+# y los patrones utilizados para localizar su columna original.
 
 attention_check_specs <- tribble(
   ~check_id, ~expected_type, ~patterns,
@@ -993,14 +1238,13 @@ attention_check_specs <- tribble(
       )
     )
   ) %>%
-  filter(
-    !is.na(column)
-  )
+  filter(!is.na(column))
 
 attention_quality_cols <- attention_check_specs$column
 
 
-# Componentes
+# COMPONENTES DE CALIDAD
+
 component_columns <- list(
   determinants_32 = det_cols,
   sociodemographics_model = sociodemographic_model_cols,
@@ -1014,6 +1258,7 @@ component_columns <- list(
   attention_quality = attention_quality_cols
 )
 
+# Registrar qué columnas se han identificado para cada componente.
 diagnostics_component_candidate_columns <- enframe(
   component_columns,
   name = "component",
@@ -1036,20 +1281,22 @@ diagnostics_component_candidate_columns <- enframe(
   )
 
 
-# Calidad de los 32 determinantes
+# CALIDAD DE LOS 32 DETERMINANTES
 
 if (length(det_cols) != N_DET_TOTAL) {
-  warning(
+  stop(
     "Se esperaban 32 determinantes armonizados, pero se han encontrado ",
     length(det_cols),
     ". Revisa nombres de columnas ^det_\\d{2}_"
   )
 }
 
-det_numeric <- df %>%
-  select(
-    all_of(det_cols)
-  ) %>%
+
+# VALORES ORIGINALES ANTES DE IMPUTAR
+
+# Convertir los 32 determinantes a números sin modificar todavía sus NA.
+det_numeric_original <- df %>%
+  select(all_of(det_cols)) %>%
   mutate(
     across(
       everything(),
@@ -1057,9 +1304,110 @@ det_numeric <- df %>%
     )
   )
 
-det_mat <- as.matrix(
-  det_numeric
+det_mat_original <- as.matrix(det_numeric_original)
+
+
+# MÁSCARA DE AUSENCIAS ORIGINALES
+
+# Identificar solamente los NA originales.
+# Una respuesta no numérica que produzca NA durante la conversión
+# no se imputa automáticamente si no estaba ausente en el dato original.
+raw_missing_mat <- df %>%
+  select(all_of(det_cols)) %>%
+  mutate(
+    across(
+      everything(),
+      ~ is.na(clean_text(.x))
+    )
+  ) %>%
+  as.matrix()
+
+
+# DIAGNÓSTICOS ORIGINALES
+
+# Número de determinantes con un valor numérico dentro de 0-100.
+n_det_valid_original <- rowSums(
+  !is.na(det_mat_original) &
+    det_mat_original >= 0 &
+    det_mat_original <= 100
 )
+
+# Incluye valores ausentes y valores que no pudieron convertirse a número.
+n_det_missing_original <- rowSums(
+  is.na(det_mat_original)
+)
+
+
+# FILAS ELEGIBLES PARA IMPUTACIÓN
+
+# Se exige pertenecer a una submuestra autorizada y tener al menos
+# 24 determinantes originales válidos.
+rows_eligible_for_imputation <-
+  df$subsample %in% IMPUTE_50_SUBSAMPLES &
+  n_det_valid_original >= MIN_DET_VALID_ORIGINAL_FOR_IMPUTATION
+
+
+# MÁSCARA DE IMPUTACIÓN
+
+# TRUE identifica cada celda originalmente ausente que recibirá el valor 50.
+# La máscara tiene las mismas dimensiones que la matriz de determinantes.
+imputation_mask <- raw_missing_mat & matrix(
+  rows_eligible_for_imputation,
+  nrow = nrow(df),
+  ncol = length(det_cols)
+)
+
+colnames(imputation_mask) <- det_cols
+
+
+# RECUENTO DE IMPUTACIONES POR PARTICIPANTE
+
+n_det_imputed_50 <- rowSums(
+  imputation_mask
+)
+
+prop_det_imputed_50 <-
+  n_det_imputed_50 / N_DET_TOTAL
+
+has_det_imputed_50 <-
+  n_det_imputed_50 > 0L
+
+
+# DETERMINANTES IMPUTADOS EN CADA FILA
+
+# Guardar sus nombres separados por "; " para permitir su auditoría.
+det_cols_imputed_50 <- apply(
+  imputation_mask,
+  1,
+  function(flags) {
+    chosen <- det_cols[which(flags)]
+    
+    if (length(chosen)) {
+      paste(chosen, collapse = "; ")
+    } else {
+      NA_character_
+    }
+  }
+)
+
+
+# APLICACIÓN DE LA IMPUTACIÓN
+
+# Trabajar sobre una copia numérica.
+# El archivo de entrada y det_mat_original permanecen sin modificar.
+det_mat <- det_mat_original
+
+det_mat[imputation_mask] <- DET_NEUTRAL_VALUE
+
+colnames(det_mat) <- det_cols
+
+det_numeric <- as_tibble(
+  det_mat,
+  .name_repair = "minimal"
+)
+
+
+# ESTADÍSTICOS DESPUÉS DE IMPUTAR
 
 n_det_numeric <- rowSums(
   !is.na(det_mat)
@@ -1071,9 +1419,10 @@ n_det_valid <- rowSums(
     det_mat <= 100
 )
 
+# Aquí "missing" significa que falta un valor válido en 0-100.
+# Incluye ausencias y valores fuera de rango.
 n_det_missing <-
-  N_DET_TOTAL -
-  n_det_valid
+  N_DET_TOTAL - n_det_valid
 
 n_det_below_0 <- rowSums(
   !is.na(det_mat) &
@@ -1086,8 +1435,7 @@ n_det_above_100 <- rowSums(
 )
 
 n_det_out_of_range <-
-  n_det_below_0 +
-  n_det_above_100
+  n_det_below_0 + n_det_above_100
 
 det_row_mean <- det_row_stat(
   det_mat,
@@ -1110,6 +1458,9 @@ det_row_max <- det_row_stat(
   max
 )
 
+# Número de valores distintos entre los determinantes válidos.
+# El redondeo evita que diferencias numéricas insignificantes
+# se cuenten como valores distintos.
 det_n_unique_values <- apply(
   det_mat,
   1,
@@ -1118,15 +1469,13 @@ det_n_unique_values <- apply(
     
     length(
       unique(
-        round(
-          x,
-          6
-        )
+        round(x, 6)
       )
     )
   }
 )
 
+# Proporción de determinantes válidos con valores exactamente 0 o 100.
 det_prop_extreme_values <- apply(
   det_mat,
   1,
@@ -1144,88 +1493,84 @@ det_prop_extreme_values <- apply(
   }
 )
 
+
+# FLAGS DE CALIDAD SOBRE LOS DATOS DESPUÉS DE IMPUTAR
+
 flag_no_determinants <-
   n_det_valid == 0
 
 flag_too_many_missing <-
   n_det_valid > 0 &
-  n_det_valid <
-  MIN_DET_VALID_FOR_CLUSTERING
+  n_det_valid < MIN_DET_VALID_FOR_CLUSTERING
 
 flag_incomplete_but_usable <-
-  n_det_valid >=
-  MIN_DET_VALID_FOR_CLUSTERING &
-  n_det_valid <
-  N_DET_TOTAL
+  n_det_valid >= MIN_DET_VALID_FOR_CLUSTERING &
+  n_det_valid < N_DET_TOTAL
 
 flag_complete_32det <-
-  n_det_valid ==
-  N_DET_TOTAL
+  n_det_valid == N_DET_TOTAL
 
 flag_out_of_range <-
   n_det_out_of_range > 0
 
 flag_low_variability <-
-  n_det_valid >=
-  MIN_DET_VALID_FOR_CLUSTERING &
-  det_n_unique_values <=
-  LOW_VARIABILITY_MAX_UNIQUE
+  n_det_valid >= MIN_DET_VALID_FOR_CLUSTERING &
+  det_n_unique_values <= LOW_VARIABILITY_MAX_UNIQUE
 
 flag_high_extreme_share <-
-  n_det_valid >=
-  MIN_DET_VALID_FOR_CLUSTERING &
-  !is.na(
-    det_prop_extreme_values
-  ) &
-  det_prop_extreme_values >=
-  HIGH_EXTREME_SHARE_THRESHOLD
+  n_det_valid >= MIN_DET_VALID_FOR_CLUSTERING &
+  !is.na(det_prop_extreme_values) &
+  det_prop_extreme_values >= HIGH_EXTREME_SHARE_THRESHOLD
 
+
+# CLASIFICACIÓN DE CALIDAD DE LOS DETERMINANTES
+
+# El orden de las condiciones establece qué categoría prevalece
+# si una misma fila presenta varios problemas.
 det_quality <- case_when(
-  flag_out_of_range ~
-    "invalid_values",
-  
-  flag_no_determinants ~
-    "no_determinants",
-  
-  flag_too_many_missing ~
-    "too_many_missing",
-  
-  flag_low_variability ~
-    "low_variability",
-  
-  flag_high_extreme_share ~
-    "high_extreme_share",
-  
-  flag_complete_32det ~
-    "usable_complete",
-  
-  flag_incomplete_but_usable ~
-    "usable_partial",
-  
-  TRUE ~
-    "review"
+  flag_out_of_range ~ "invalid_values",
+  flag_no_determinants ~ "no_determinants",
+  flag_too_many_missing ~ "too_many_missing",
+  flag_low_variability ~ "low_variability",
+  flag_high_extreme_share ~ "high_extreme_share",
+  flag_complete_32det ~ "usable_complete",
+  flag_incomplete_but_usable ~ "usable_partial",
+  TRUE ~ "review"
 )
 
-usable_for_clustering <-
-  det_quality %in%
-  c(
-    "usable_complete",
-    "usable_partial"
-  )
+usable_for_clustering <- det_quality %in% c(
+  "usable_complete",
+  "usable_partial"
+)
+
+
+# TABLA DE CALIDAD E IMPUTACIÓN POR PARTICIPANTE
 
 det_quality_df <- tibble(
+  n_det_valid_original = n_det_valid_original,
+  n_det_missing_original = n_det_missing_original,
+  
+  n_det_imputed_50 = n_det_imputed_50,
+  prop_det_imputed_50 = prop_det_imputed_50,
+  has_det_imputed_50 = has_det_imputed_50,
+  det_cols_imputed_50 = det_cols_imputed_50,
+  
   n_det_valid = n_det_valid,
   n_det_missing = n_det_missing,
   prop_det_valid = n_det_valid / N_DET_TOTAL,
+  
   n_det_below_0 = n_det_below_0,
   n_det_above_100 = n_det_above_100,
   n_det_out_of_range = n_det_out_of_range,
+  
   det_row_mean = det_row_mean,
   det_row_sd = det_row_sd,
   det_row_min = det_row_min,
   det_row_max = det_row_max,
+  
   det_n_unique_values = det_n_unique_values,
   det_prop_extreme_values = det_prop_extreme_values,
+  
   flag_no_determinants = flag_no_determinants,
   flag_too_many_missing = flag_too_many_missing,
   flag_incomplete_but_usable = flag_incomplete_but_usable,
@@ -1233,72 +1578,49 @@ det_quality_df <- tibble(
   flag_out_of_range = flag_out_of_range,
   flag_low_variability = flag_low_variability,
   flag_high_extreme_share = flag_high_extreme_share,
+  
   quality_determinants_32 = det_quality,
   usable_for_clustering = usable_for_clustering
 )
 
 
-# Calidad sociodemográfica y metadata
+# CALIDAD SOCIODEMOGRÁFICA Y DE METADATOS
+
+# La edad se considera disponible si existe age_group_model
+# o una edad numérica válida. Esto permite que DIEGO tenga edad
+# informada aunque no disponga de edades individuales exactas.
 has_age_info <-
   is_valid_model_value(
-    safe_chr_col(
-      df,
-      "age_group_model"
-    )
+    safe_chr_col(df, "age_group_model")
   ) |
   !is.na(
-    safe_num_col(
-      df,
-      "age_model"
-    )
+    safe_num_col(df, "age_model")
   )
 
-has_gender_info <-
-  is_valid_model_value(
-    safe_chr_col(
-      df,
-      "gender_model"
-    )
-  )
+has_gender_info <- is_valid_model_value(
+  safe_chr_col(df, "gender_model")
+)
 
 has_country_info <-
   is_valid_model_value(
-    safe_chr_col(
-      df,
-      "country_model"
-    )
+    safe_chr_col(df, "country_model")
   ) |
   is_valid_model_value(
-    safe_chr_col(
-      df,
-      "country_model_grouped"
-    )
+    safe_chr_col(df, "country_model_grouped")
   )
 
 has_identifier <-
   is_non_missing_raw(
-    safe_chr_col(
-      df,
-      "global_participant_key"
-    )
+    safe_chr_col(df, "global_participant_key")
   ) |
   is_non_missing_raw(
-    safe_chr_col(
-      df,
-      "participant_key"
-    )
+    safe_chr_col(df, "participant_key")
   ) |
   is_non_missing_raw(
-    safe_chr_col(
-      df,
-      "prolific_id"
-    )
+    safe_chr_col(df, "prolific_id")
   ) |
   is_non_missing_raw(
-    safe_chr_col(
-      df,
-      "identification_code"
-    )
+    safe_chr_col(df, "identification_code")
   )
 
 core_sociodemographic_count <- rowSums(
@@ -1328,17 +1650,10 @@ extended_sociodemographic_count <- count_valid_model_cols(
 )
 
 quality_sociodemographics <- case_when(
-  core_sociodemographic_count == 3 ~
-    "core_complete",
-  
-  core_sociodemographic_count == 2 ~
-    "core_partial",
-  
-  core_sociodemographic_count == 1 ~
-    "core_poor",
-  
-  TRUE ~
-    "core_missing"
+  core_sociodemographic_count == 3 ~ "core_complete",
+  core_sociodemographic_count == 2 ~ "core_partial",
+  core_sociodemographic_count == 1 ~ "core_poor",
+  TRUE ~ "core_missing"
 )
 
 metadata_quality <- case_when(
@@ -1354,8 +1669,7 @@ metadata_quality <- case_when(
     core_sociodemographic_count == 0 ~
     "metadata_poor",
   
-  TRUE ~
-    "metadata_no_identifier"
+  TRUE ~ "metadata_no_identifier"
 )
 
 sociodemographic_quality_df <- tibble(
@@ -1363,99 +1677,65 @@ sociodemographic_quality_df <- tibble(
   has_age_info = has_age_info,
   has_gender_info = has_gender_info,
   has_country_info = has_country_info,
-  core_sociodemographic_count = core_sociodemographic_count,
-  extended_sociodemographic_count = extended_sociodemographic_count,
-  quality_sociodemographics = quality_sociodemographics,
+  
+  core_sociodemographic_count =
+    core_sociodemographic_count,
+  
+  extended_sociodemographic_count =
+    extended_sociodemographic_count,
+  
+  quality_sociodemographics =
+    quality_sociodemographics,
+  
   metadata_quality = metadata_quality
 )
 
 
-# Propensity político europeo
-#
-# Estas variables sirven como diagnóstico de disponibilidad.
-# El bootstrap político final se construye posteriormente en 04_2b
-# y nunca incluye WHY_LATAM
+# DISPONIBILIDAD PARA EL MODELO POLÍTICO EUROPEO
+
+# Estas variables diagnostican la disponibilidad de sus predictores.
+# No construyen el modelo ni realizan el bootstrap.
+# WHY_LATAM no entra en este diagnóstico como muestra europea.
 propensity_eu_applicable <-
-  safe_chr_col(
-    df,
-    "comparison_region"
-  ) ==
-  "EUROPE"
+  safe_chr_col(df, "comparison_region") == "EUROPE"
 
 has_propensity_age <-
   is_valid_model_value(
-    safe_chr_col(
-      df,
-      "age_group_model"
-    )
+    safe_chr_col(df, "age_group_model")
   ) |
   !is.na(
-    safe_num_col(
-      df,
-      "age_model"
-    )
+    safe_num_col(df, "age_model")
   )
 
-has_propensity_education <-
-  is_valid_model_value(
-    safe_chr_col(
-      df,
-      "education_model"
-    )
-  )
+has_propensity_education <- is_valid_model_value(
+  safe_chr_col(df, "education_model")
+)
 
-has_propensity_income <-
-  is_valid_model_value(
-    safe_chr_col(
-      df,
-      "income_model"
-    )
-  )
+has_propensity_income <- is_valid_model_value(
+  safe_chr_col(df, "income_model")
+)
 
 has_propensity_country <-
   is_valid_model_value(
-    safe_chr_col(
-      df,
-      "country_model_grouped"
-    )
+    safe_chr_col(df, "country_model_grouped")
   ) |
   is_valid_model_value(
-    safe_chr_col(
-      df,
-      "country_model"
-    )
+    safe_chr_col(df, "country_model")
   )
 
-has_propensity_city_size <-
-  is_valid_model_value(
-    safe_chr_col(
-      df,
-      "city_size_model"
-    )
-  )
+has_propensity_city_size <- is_valid_model_value(
+  safe_chr_col(df, "city_size_model")
+)
 
-has_propensity_employment <-
-  is_valid_model_value(
-    safe_chr_col(
-      df,
-      "employment_model"
-    )
-  )
+has_propensity_employment <- is_valid_model_value(
+  safe_chr_col(df, "employment_model")
+)
 
 has_propensity_outcome_binary <-
-  safe_chr_col(
-    df,
-    "vote_status_declared"
-  ) %in%
-  c(
-    "voter",
-    "abstainer"
-  ) |
+  safe_chr_col(df, "vote_status_declared") %in%
+  c("voter", "abstainer") |
   !is.na(
-    safe_num_col(
-      df,
-      "voted_observed"
-    )
+    safe_num_col(df, "voted_observed")
   )
 
 n_propensity_predictors_available <- rowSums(
@@ -1471,8 +1751,7 @@ n_propensity_predictors_available <- rowSums(
 )
 
 prop_propensity_predictors_available <-
-  n_propensity_predictors_available /
-  6
+  n_propensity_predictors_available / 6
 
 usable_for_propensity_score_strict <-
   propensity_eu_applicable &
@@ -1525,8 +1804,7 @@ quality_propensity_score_predictors <- case_when(
   n_propensity_predictors_available > 0 ~
     "partial_predictors",
   
-  TRUE ~
-    "missing_predictors"
+  TRUE ~ "missing_predictors"
 )
 
 quality_propensity_score_model <- case_when(
@@ -1548,19 +1826,21 @@ quality_propensity_score_model <- case_when(
   n_propensity_predictors_available > 0 ~
     "outcome_available_but_predictors_partial",
   
-  TRUE ~
-    "not_ready"
+  TRUE ~ "not_ready"
 )
 
 propensity_quality_df <- tibble(
   propensity_eu_applicable = propensity_eu_applicable,
+  
   has_propensity_age = has_propensity_age,
   has_propensity_education = has_propensity_education,
   has_propensity_income = has_propensity_income,
   has_propensity_country = has_propensity_country,
   has_propensity_city_size = has_propensity_city_size,
   has_propensity_employment = has_propensity_employment,
-  has_propensity_outcome_binary = has_propensity_outcome_binary,
+  
+  has_propensity_outcome_binary =
+    has_propensity_outcome_binary,
   
   n_propensity_predictors_available =
     n_propensity_predictors_available,
@@ -1594,43 +1874,29 @@ propensity_quality_df <- tibble(
 )
 
 
-# Calidad voto y política
-has_vote_status <-
-  is_valid_model_value(
-    safe_chr_col(
-      df,
-      "vote_status_declared"
-    )
-  )
+# CALIDAD DE VOTO Y VARIABLES POLÍTICAS
 
-has_voted_observed <-
-  !is.na(
-    safe_num_col(
-      df,
-      "voted_observed"
-    )
-  )
+has_vote_status <- is_valid_model_value(
+  safe_chr_col(df, "vote_status_declared")
+)
 
-political_left_right_num <-
-  safe_num_col(
-    df,
-    "political_left_right_model"
-  )
+has_voted_observed <- !is.na(
+  safe_num_col(df, "voted_observed")
+)
+
+political_left_right_num <- safe_num_col(
+  df,
+  "political_left_right_model"
+)
 
 has_political_left_right <-
-  !is.na(
-    political_left_right_num
-  ) &
+  !is.na(political_left_right_num) &
   political_left_right_num >= 0 &
   political_left_right_num <= 100
 
-has_political_block <-
-  is_valid_model_value(
-    safe_chr_col(
-      df,
-      "political_block_model"
-    )
-  )
+has_political_block <- is_valid_model_value(
+  safe_chr_col(df, "political_block_model")
+)
 
 quality_vote_politics <- case_when(
   has_vote_status &
@@ -1648,8 +1914,7 @@ quality_vote_politics <- case_when(
   has_political_block ~
     "politics_block_only",
   
-  TRUE ~
-    "missing_or_not_collected"
+  TRUE ~ "missing_or_not_collected"
 )
 
 vote_politics_quality_df <- tibble(
@@ -1661,7 +1926,8 @@ vote_politics_quality_df <- tibble(
 )
 
 
-# Calidad genérica por componentes
+# CALIDAD GENÉRICA POR COMPONENTES
+
 technology_quality_df <- component_stats(
   df,
   "technology_adoption",
@@ -1705,7 +1971,13 @@ attention_quality_df <- component_stats(
 )
 
 
-# Attention checks explícitos
+# ATTENTION CHECKS EXPLÍCITOS
+
+# Normaliza las respuestas a controles de atención para compararlas
+# con las respuestas esperadas.
+#
+# x: respuesta original o vector de respuestas.
+# Devuelve: texto en minúsculas, sin guiones bajos y con espacios ajustados.
 normalise_attention_response <- function(x) {
   clean_text(x) %>%
     str_to_lower() %>%
@@ -1715,6 +1987,13 @@ normalise_attention_response <- function(x) {
 }
 
 
+# Comprueba si una respuesta cumple el control de atención indicado.
+#
+# x: respuesta individual original.
+# expected_type: tipo de control, según attention_check_specs.
+#
+# Devuelve: TRUE si pasa, FALSE si falla y NA si no hay respuesta
+# o el tipo de control no está reconocido.
 attention_passes_expected <- function(
     x,
     expected_type
@@ -1733,121 +2012,56 @@ attention_passes_expected <- function(
         !is.na(x_num) &
           x_num == 42
       ) |
-      str_detect(
-        x_low,
-        "^42$"
-      ) |
-      str_detect(
-        x_low,
-        "\\b42\\b"
-      ),
+      str_detect(x_low, "^42$") |
+      str_detect(x_low, "\\b42\\b"),
     
     expected_type == "longest_line" ~
-      str_detect(
-        x_low,
-        "longest"
-      ) |
-      str_detect(
-        x_low,
-        "largest"
-      ) |
-      str_detect(
-        x_low,
-        "linea mas larga"
-      ) |
-      str_detect(
-        x_low,
-        "línea más larga"
-      ),
+      str_detect(x_low, "longest") |
+      str_detect(x_low, "largest") |
+      str_detect(x_low, "linea mas larga") |
+      str_detect(x_low, "línea más larga"),
     
     expected_type == "option_4" ~
       (
         !is.na(x_num) &
           x_num == 4
       ) |
-      str_detect(
-        x_low,
-        "^4$"
-      ) |
-      str_detect(
-        x_low,
-        "\\boption\\s*4\\b"
-      ) |
-      str_detect(
-        x_low,
-        "\\bopcion\\s*4\\b"
-      ) |
-      str_detect(
-        x_low,
-        "\\bopción\\s*4\\b"
-      ),
+      str_detect(x_low, "^4$") |
+      str_detect(x_low, "\\boption\\s*4\\b") |
+      str_detect(x_low, "\\bopcion\\s*4\\b") |
+      str_detect(x_low, "\\bopción\\s*4\\b"),
     
     expected_type == "strongly_disagree" ~
-      str_detect(
-        x_low,
-        "strongly disagree"
-      ) |
-      str_detect(
-        x_low,
-        "totalmente en desacuerdo"
-      ) |
-      str_detect(
-        x_low,
-        "muy en desacuerdo"
-      ),
+      str_detect(x_low, "strongly disagree") |
+      str_detect(x_low, "totalmente en desacuerdo") |
+      str_detect(x_low, "muy en desacuerdo"),
     
     expected_type == "disagree" ~
       (
-        str_detect(
-          x_low,
-          "^disagree$"
-        ) |
-          str_detect(
-            x_low,
-            "\\bdisagree\\b"
-          ) |
-          str_detect(
-            x_low,
-            "\\ben desacuerdo\\b"
-          )
+        str_detect(x_low, "^disagree$") |
+          str_detect(x_low, "\\bdisagree\\b") |
+          str_detect(x_low, "\\ben desacuerdo\\b")
       ) &
-      !str_detect(
-        x_low,
-        "strongly"
-      ) &
-      !str_detect(
-        x_low,
-        "totalmente"
-      ) &
-      !str_detect(
-        x_low,
-        "muy"
-      ),
+      !str_detect(x_low, "strongly") &
+      !str_detect(x_low, "totalmente") &
+      !str_detect(x_low, "muy"),
     
     expected_type == "zero" ~
       (
         !is.na(x_num) &
           x_num == 0
       ) |
-      str_detect(
-        x_low,
-        "^0$"
-      ) |
-      str_detect(
-        x_low,
-        "^zero$"
-      ) |
-      str_detect(
-        x_low,
-        "^cero$"
-      ),
+      str_detect(x_low, "^0$") |
+      str_detect(x_low, "^zero$") |
+      str_detect(x_low, "^cero$"),
     
-    TRUE ~
-      NA
+    TRUE ~ NA
   )
 }
 
 
+# Evaluar cada control de atención identificado en attention_check_specs.
+# La tabla larga conserva un registro por participante y control.
 attention_check_long <- pmap_dfr(
   attention_check_specs,
   function(
@@ -1874,39 +2088,20 @@ attention_check_long <- pmap_dfr(
       }
     )
     
-    available <-
-      !is.na(
-        clean_text(
-          response_raw
-        )
-      )
+    available <- !is.na(
+      clean_text(response_raw)
+    )
     
-    failed <-
-      available &
-      !passed
+    failed <- available & !passed
     
     tibble(
-      row_index_attention =
-        seq_len(
-          nrow(df)
-        ),
+      row_index_attention = seq_len(nrow(df)),
+      check_id = check_id,
+      attention_check_column = column,
+      expected_type = expected_type,
+      response_raw = as.character(response_raw),
       
-      check_id =
-        check_id,
-      
-      attention_check_column =
-        column,
-      
-      expected_type =
-        expected_type,
-      
-      response_raw =
-        as.character(
-          response_raw
-        ),
-      
-      attention_check_available =
-        available,
+      attention_check_available = available,
       
       attention_check_passed = if_else(
         available,
@@ -1923,138 +2118,171 @@ attention_check_long <- pmap_dfr(
   }
 )
 
-attention_check_df <- attention_check_long %>%
-  group_by(
-    row_index_attention
-  ) %>%
-  summarise(
-    n_attention_checks_available_explicit = sum(
-      attention_check_available,
-      na.rm = TRUE
-    ),
+
+# RESUMEN DE ATTENTION CHECKS POR PARTICIPANTE
+
+# Si una encuesta no tiene controles reconocidos, mantener una fila
+# de diagnóstico por participante con estado "not_available".
+if (nrow(attention_check_long) > 0L) {
+  
+  attention_check_df <- attention_check_long %>%
+    group_by(row_index_attention) %>%
+    summarise(
+      n_attention_checks_available_explicit = sum(
+        attention_check_available,
+        na.rm = TRUE
+      ),
+      
+      n_attention_checks_passed_explicit = sum(
+        attention_check_passed == TRUE,
+        na.rm = TRUE
+      ),
+      
+      n_attention_checks_failed_explicit = sum(
+        attention_check_failed == TRUE,
+        na.rm = TRUE
+      ),
+      
+      attention_check_failed_any =
+        n_attention_checks_failed_explicit > 0,
+      
+      attention_check_failed_all_available =
+        n_attention_checks_available_explicit > 0 &
+        n_attention_checks_failed_explicit ==
+        n_attention_checks_available_explicit,
+      
+      attention_check_failed_all_4 =
+        n_attention_checks_available_explicit == 4 &
+        n_attention_checks_failed_explicit == 4,
+      
+      attention_check_failed_4_or_more =
+        n_attention_checks_failed_explicit >= 4,
+      
+      failed_attention_check_ids = paste(
+        check_id[
+          attention_check_failed == TRUE
+        ],
+        collapse = "; "
+      ),
+      
+      .groups = "drop"
+    ) %>%
+    mutate(
+      failed_attention_check_ids = na_if(
+        failed_attention_check_ids,
+        ""
+      ),
+      
+      attention_check_status_explicit = case_when(
+        n_attention_checks_available_explicit == 0 ~
+          "not_available",
+        
+        n_attention_checks_failed_explicit == 0 ~
+          "passed_all_available",
+        
+        attention_check_failed_all_available ~
+          "failed_all_available",
+        
+        n_attention_checks_failed_explicit > 0 ~
+          "failed_some",
+        
+        TRUE ~ "review"
+      )
+    ) %>%
+    right_join(
+      tibble(
+        row_index_attention = seq_len(nrow(df))
+      ),
+      by = "row_index_attention"
+    ) %>%
+    arrange(row_index_attention) %>%
+    mutate(
+      n_attention_checks_available_explicit =
+        replace_na(
+          n_attention_checks_available_explicit,
+          0L
+        ),
+      
+      n_attention_checks_passed_explicit =
+        replace_na(
+          n_attention_checks_passed_explicit,
+          0L
+        ),
+      
+      n_attention_checks_failed_explicit =
+        replace_na(
+          n_attention_checks_failed_explicit,
+          0L
+        ),
+      
+      attention_check_failed_any =
+        replace_na(
+          attention_check_failed_any,
+          FALSE
+        ),
+      
+      attention_check_failed_all_available =
+        replace_na(
+          attention_check_failed_all_available,
+          FALSE
+        ),
+      
+      attention_check_failed_all_4 =
+        replace_na(
+          attention_check_failed_all_4,
+          FALSE
+        ),
+      
+      attention_check_failed_4_or_more =
+        replace_na(
+          attention_check_failed_4_or_more,
+          FALSE
+        ),
+      
+      attention_check_status_explicit =
+        replace_na(
+          attention_check_status_explicit,
+          "not_available"
+        )
+    ) %>%
+    select(-row_index_attention)
+  
+} else {
+  
+  attention_check_df <- tibble(
+    n_attention_checks_available_explicit =
+      rep(0L, nrow(df)),
     
-    n_attention_checks_passed_explicit = sum(
-      attention_check_passed == TRUE,
-      na.rm = TRUE
-    ),
+    n_attention_checks_passed_explicit =
+      rep(0L, nrow(df)),
     
-    n_attention_checks_failed_explicit = sum(
-      attention_check_failed == TRUE,
-      na.rm = TRUE
-    ),
+    n_attention_checks_failed_explicit =
+      rep(0L, nrow(df)),
     
     attention_check_failed_any =
-      n_attention_checks_failed_explicit >
-      0,
+      rep(FALSE, nrow(df)),
     
     attention_check_failed_all_available =
-      n_attention_checks_available_explicit >
-      0 &
-      n_attention_checks_failed_explicit ==
-      n_attention_checks_available_explicit,
+      rep(FALSE, nrow(df)),
     
     attention_check_failed_all_4 =
-      n_attention_checks_available_explicit ==
-      4 &
-      n_attention_checks_failed_explicit ==
-      4,
+      rep(FALSE, nrow(df)),
     
     attention_check_failed_4_or_more =
-      n_attention_checks_failed_explicit >=
-      4,
+      rep(FALSE, nrow(df)),
     
-    failed_attention_check_ids = paste(
-      check_id[
-        attention_check_failed ==
-          TRUE
-      ],
-      collapse = "; "
-    ),
+    failed_attention_check_ids =
+      rep(NA_character_, nrow(df)),
     
-    .groups = "drop"
-  ) %>%
-  mutate(
-    failed_attention_check_ids = na_if(
-      failed_attention_check_ids,
-      ""
-    ),
-    
-    attention_check_status_explicit = case_when(
-      n_attention_checks_available_explicit == 0 ~
-        "not_available",
-      
-      n_attention_checks_failed_explicit == 0 ~
-        "passed_all_available",
-      
-      attention_check_failed_all_available ~
-        "failed_all_available",
-      
-      n_attention_checks_failed_explicit > 0 ~
-        "failed_some",
-      
-      TRUE ~
-        "review"
-    )
-  ) %>%
-  right_join(
-    tibble(
-      row_index_attention =
-        seq_len(
-          nrow(df)
-        )
-    ),
-    by = "row_index_attention"
-  ) %>%
-  arrange(
-    row_index_attention
-  ) %>%
-  mutate(
-    n_attention_checks_available_explicit = replace_na(
-      n_attention_checks_available_explicit,
-      0L
-    ),
-    
-    n_attention_checks_passed_explicit = replace_na(
-      n_attention_checks_passed_explicit,
-      0L
-    ),
-    
-    n_attention_checks_failed_explicit = replace_na(
-      n_attention_checks_failed_explicit,
-      0L
-    ),
-    
-    attention_check_failed_any = replace_na(
-      attention_check_failed_any,
-      FALSE
-    ),
-    
-    attention_check_failed_all_available = replace_na(
-      attention_check_failed_all_available,
-      FALSE
-    ),
-    
-    attention_check_failed_all_4 = replace_na(
-      attention_check_failed_all_4,
-      FALSE
-    ),
-    
-    attention_check_failed_4_or_more = replace_na(
-      attention_check_failed_4_or_more,
-      FALSE
-    ),
-    
-    attention_check_status_explicit = replace_na(
-      attention_check_status_explicit,
-      "not_available"
-    )
-  ) %>%
-  select(
-    -row_index_attention
+    attention_check_status_explicit =
+      rep("not_available", nrow(df))
   )
+}
 
 
-# Dataset final de calidad
+# DATASET FINAL DE CALIDAD
+
+# Unir los datos originales con todos los diagnósticos por participante.
 df_quality <- bind_cols(
   df,
   det_quality_df,
@@ -2069,60 +2297,56 @@ df_quality <- bind_cols(
   poverty_quality_df,
   attention_quality_df,
   attention_check_df
-) %>%
+)
+
+
+# Sustituir las 32 columnas originales por los determinantes numéricos
+# posteriores a la imputación. Los diagnósticos originales permanecen
+# en las columnas n_det_*_original y en los archivos específicos.
+df_quality[det_cols] <- det_numeric
+
+
+# CLASIFICACIÓN GLOBAL DE CALIDAD
+
+df_quality <- df_quality %>%
   mutate(
     row_quality_final = case_when(
-      quality_determinants_32 ==
-        "invalid_values" ~
+      quality_determinants_32 == "invalid_values" ~
         "invalid_determinants",
       
-      quality_determinants_32 ==
-        "no_determinants" ~
+      quality_determinants_32 == "no_determinants" ~
         "no_determinants",
       
-      quality_determinants_32 ==
-        "too_many_missing" ~
+      quality_determinants_32 == "too_many_missing" ~
         "too_many_missing_determinants",
       
-      quality_determinants_32 %in%
-        c(
-          "low_variability",
-          "high_extreme_share"
-        ) ~
-        "suspicious_determinants",
+      quality_determinants_32 %in% c(
+        "low_variability",
+        "high_extreme_share"
+      ) ~ "suspicious_determinants",
       
-      quality_determinants_32 ==
-        "usable_complete" &
-        quality_sociodemographics ==
-        "core_complete" ~
+      quality_determinants_32 == "usable_complete" &
+        quality_sociodemographics == "core_complete" ~
         "usable_complete",
       
-      quality_determinants_32 ==
-        "usable_complete" &
-        quality_sociodemographics !=
-        "core_complete" ~
+      quality_determinants_32 == "usable_complete" &
+        quality_sociodemographics != "core_complete" ~
         "usable_complete_limited_metadata",
       
-      quality_determinants_32 ==
-        "usable_partial" &
-        quality_sociodemographics %in%
-        c(
+      quality_determinants_32 == "usable_partial" &
+        quality_sociodemographics %in% c(
           "core_complete",
           "core_partial"
-        ) ~
-        "usable_partial",
+        ) ~ "usable_partial",
       
-      quality_determinants_32 ==
-        "usable_partial" ~
+      quality_determinants_32 == "usable_partial" ~
         "usable_partial_limited_metadata",
       
-      TRUE ~
-        "review"
+      TRUE ~ "review"
     ),
     
     usable_for_main_analysis =
-      row_quality_final %in%
-      c(
+      row_quality_final %in% c(
         "usable_complete",
         "usable_complete_limited_metadata",
         "usable_partial",
@@ -2131,7 +2355,8 @@ df_quality <- bind_cols(
   )
 
 
-# Matrices para clustering
+# MATRICES PARA CLUSTERING
+
 id_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -2164,6 +2389,7 @@ metadata_cols <- c(
   "num_children_model"
 )
 
+# Seleccionar las columnas de calidad generadas en esta etapa.
 quality_cols <- names(df_quality)[
   str_detect(
     names(df_quality),
@@ -2171,6 +2397,8 @@ quality_cols <- names(df_quality)[
       c(
         "^n_det_",
         "^prop_det_",
+        "^has_det_imputed_50$",
+        "^det_cols_imputed_50$",
         "^det_row_",
         "^det_n_",
         "^det_prop_",
@@ -2189,6 +2417,7 @@ quality_cols <- names(df_quality)[
   )
 ]
 
+# Matriz completa, incluyendo filas que no cumplen los filtros.
 matrix_32det_with_quality <- df_quality %>%
   select(
     any_of(id_cols),
@@ -2197,17 +2426,19 @@ matrix_32det_with_quality <- df_quality %>%
     any_of(quality_cols)
   )
 
+# Matriz filtrada que utilizarán los análisis de clustering.
 matrix_32det_for_clustering <- matrix_32det_with_quality %>%
   filter(
     usable_for_clustering == TRUE,
-    n_det_valid >=
-      MIN_DET_VALID_FOR_CLUSTERING
+    n_det_valid >= MIN_DET_VALID_FOR_CLUSTERING
   )
 
 
-# Diagnósticos de missing
+# DIAGNÓSTICOS DE MISSING ORIGINAL
+
+# Utilizar df, no df_quality, para conservar las ausencias originales.
 diagnostics_missing_by_determinant <- missing_by_determinant(
-  df_quality,
+  df,
   "dataset_source",
   det_cols
 ) %>%
@@ -2216,15 +2447,16 @@ diagnostics_missing_by_determinant <- missing_by_determinant(
     det_col
   )
 
-diagnostics_missing_by_determinant_by_subsample <- missing_by_determinant(
-  df_quality,
-  c(
-    "comparison_region",
-    "subsample",
-    "dataset_source"
-  ),
-  det_cols
-) %>%
+diagnostics_missing_by_determinant_by_subsample <-
+  missing_by_determinant(
+    df,
+    c(
+      "comparison_region",
+      "subsample",
+      "dataset_source"
+    ),
+    det_cols
+  ) %>%
   arrange(
     comparison_region,
     subsample,
@@ -2232,7 +2464,168 @@ diagnostics_missing_by_determinant_by_subsample <- missing_by_determinant(
   )
 
 
-# Calidad final y metadata
+# DIAGNÓSTICOS DE MISSING DESPUÉS DE IMPUTAR
+
+diagnostics_missing_after_imputation_by_determinant <-
+  missing_by_determinant(
+    df_quality,
+    "dataset_source",
+    det_cols
+  ) %>%
+  arrange(
+    dataset_source,
+    det_col
+  )
+
+diagnostics_missing_after_imputation_by_subsample <-
+  missing_by_determinant(
+    df_quality,
+    c(
+      "comparison_region",
+      "subsample",
+      "dataset_source"
+    ),
+    det_cols
+  ) %>%
+  arrange(
+    comparison_region,
+    subsample,
+    det_col
+  )
+
+
+# DIAGNÓSTICOS DE IMPUTACIÓN A 50
+
+# Crear un registro largo con una fila por participante y determinante.
+# La columna imputed_50 indica si esa celda fue imputada.
+imputation_long <- tibble(
+  integrated_row_id = df$integrated_row_id,
+  comparison_region = df$comparison_region,
+  subsample = df$subsample,
+  dataset_source = df$dataset_source,
+  row_index = seq_len(nrow(df))
+) %>%
+  bind_cols(
+    as_tibble(
+      imputation_mask,
+      .name_repair = "minimal"
+    )
+  ) %>%
+  pivot_longer(
+    cols = all_of(det_cols),
+    names_to = "det_col",
+    values_to = "imputed_50"
+  )
+
+
+# IMPUTACIONES POR DETERMINANTE Y FUENTE
+
+diagnostics_imputation_50_by_determinant <-
+  imputation_long %>%
+  group_by(
+    dataset_source,
+    det_col
+  ) %>%
+  summarise(
+    n_rows = n(),
+    
+    n_imputed_50 = sum(imputed_50),
+    
+    prop_rows_imputed_50 = n_imputed_50 / n_rows,
+    
+    .groups = "drop"
+  ) %>%
+  arrange(
+    dataset_source,
+    det_col
+  )
+
+
+# IMPUTACIONES POR DETERMINANTE Y SUBMUESTRA
+
+diagnostics_imputation_50_by_subsample <-
+  imputation_long %>%
+  group_by(
+    comparison_region,
+    subsample,
+    dataset_source,
+    det_col
+  ) %>%
+  summarise(
+    n_rows = n(),
+    
+    n_imputed_50 = sum(imputed_50),
+    
+    prop_rows_imputed_50 = n_imputed_50 / n_rows,
+    
+    .groups = "drop"
+  ) %>%
+  arrange(
+    comparison_region,
+    subsample,
+    det_col
+  )
+
+
+# IMPUTACIONES POR PARTICIPANTE
+
+diagnostics_imputation_50_by_row <- df_quality %>%
+  select(
+    integrated_row_id,
+    comparison_region,
+    subsample,
+    dataset_source,
+    
+    n_det_valid_original,
+    n_det_missing_original,
+    
+    n_det_imputed_50,
+    prop_det_imputed_50,
+    has_det_imputed_50,
+    det_cols_imputed_50,
+    
+    n_det_valid,
+    n_det_missing,
+    usable_for_clustering
+  )
+
+
+# RESUMEN DE IMPUTACIONES POR SUBMUESTRA
+
+diagnostics_imputation_50_summary <- df_quality %>%
+  group_by(
+    comparison_region,
+    subsample,
+    dataset_source
+  ) %>%
+  summarise(
+    n_rows = n(),
+    
+    n_rows_with_imputation = sum(
+      has_det_imputed_50
+    ),
+    
+    n_cells_imputed_50 = sum(
+      n_det_imputed_50
+    ),
+    
+    mean_imputations_per_row = mean(
+      n_det_imputed_50
+    ),
+    
+    n_rows_all_missing_original = sum(
+      n_det_valid_original == 0L
+    ),
+    
+    .groups = "drop"
+  ) %>%
+  arrange(
+    comparison_region,
+    subsample
+  )
+
+
+# DIAGNÓSTICOS DE CALIDAD FINAL POR FUENTE
 
 diagnostics_row_quality_counts <- df_quality %>%
   count(
@@ -2240,9 +2633,7 @@ diagnostics_row_quality_counts <- df_quality %>%
     row_quality_final,
     name = "n"
   ) %>%
-  group_by(
-    dataset_source
-  ) %>%
+  group_by(dataset_source) %>%
   mutate(
     prop = n / sum(n)
   ) %>%
@@ -2252,7 +2643,11 @@ diagnostics_row_quality_counts <- df_quality %>%
     desc(n)
   )
 
-diagnostics_row_quality_counts_by_subsample <- df_quality %>%
+
+# DIAGNÓSTICOS DE CALIDAD FINAL POR SUBMUESTRA
+
+diagnostics_row_quality_counts_by_subsample <-
+  df_quality %>%
   count(
     comparison_region,
     subsample,
@@ -2274,15 +2669,16 @@ diagnostics_row_quality_counts_by_subsample <- df_quality %>%
     desc(n)
   )
 
+
+# DIAGNÓSTICOS DE CALIDAD DE METADATOS POR FUENTE
+
 diagnostics_metadata_quality_counts <- df_quality %>%
   count(
     dataset_source,
     metadata_quality,
     name = "n"
   ) %>%
-  group_by(
-    dataset_source
-  ) %>%
+  group_by(dataset_source) %>%
   mutate(
     prop = n / sum(n)
   ) %>%
@@ -2292,7 +2688,11 @@ diagnostics_metadata_quality_counts <- df_quality %>%
     desc(n)
   )
 
-diagnostics_metadata_quality_counts_by_subsample <- df_quality %>%
+
+# DIAGNÓSTICOS DE CALIDAD DE METADATOS POR SUBMUESTRA
+
+diagnostics_metadata_quality_counts_by_subsample <-
+  df_quality %>%
   count(
     comparison_region,
     subsample,
@@ -2315,11 +2715,10 @@ diagnostics_metadata_quality_counts_by_subsample <- df_quality %>%
   )
 
 
-# Propensity readiness
+# DISPONIBILIDAD PARA PROPENSITY POR FUENTE
+
 diagnostics_propensity_score_readiness <- df_quality %>%
-  group_by(
-    dataset_source
-  ) %>%
+  group_by(dataset_source) %>%
   summarise(
     n_rows = n(),
     
@@ -2329,17 +2728,14 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_has_binary_vote_outcome =
-      n_has_binary_vote_outcome /
-      n_rows,
+      n_has_binary_vote_outcome / n_rows,
     
     n_has_age = sum(
       has_propensity_age,
       na.rm = TRUE
     ),
     
-    prop_has_age =
-      n_has_age /
-      n_rows,
+    prop_has_age = n_has_age / n_rows,
     
     n_has_education = sum(
       has_propensity_education,
@@ -2347,26 +2743,21 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_has_education =
-      n_has_education /
-      n_rows,
+      n_has_education / n_rows,
     
     n_has_income = sum(
       has_propensity_income,
       na.rm = TRUE
     ),
     
-    prop_has_income =
-      n_has_income /
-      n_rows,
+    prop_has_income = n_has_income / n_rows,
     
     n_has_country = sum(
       has_propensity_country,
       na.rm = TRUE
     ),
     
-    prop_has_country =
-      n_has_country /
-      n_rows,
+    prop_has_country = n_has_country / n_rows,
     
     n_has_city_size = sum(
       has_propensity_city_size,
@@ -2374,17 +2765,14 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_has_city_size =
-      n_has_city_size /
-      n_rows,
+      n_has_city_size / n_rows,
     
     n_has_employment = sum(
       has_propensity_employment,
       na.rm = TRUE
     ),
     
-    prop_has_employment =
-      n_has_employment /
-      n_rows,
+    prop_has_employment = n_has_employment / n_rows,
     
     mean_n_propensity_predictors_available = mean(
       n_propensity_predictors_available,
@@ -2397,8 +2785,7 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_predictors_strict_complete =
-      n_predictors_strict_complete /
-      n_rows,
+      n_predictors_strict_complete / n_rows,
     
     n_predictors_complete_without_income = sum(
       usable_for_propensity_score_without_income,
@@ -2406,8 +2793,7 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_predictors_complete_without_income =
-      n_predictors_complete_without_income /
-      n_rows,
+      n_predictors_complete_without_income / n_rows,
     
     n_predictors_minimal = sum(
       usable_for_propensity_score_minimal,
@@ -2415,8 +2801,7 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_predictors_minimal =
-      n_predictors_minimal /
-      n_rows,
+      n_predictors_minimal / n_rows,
     
     n_model_ready_strict = sum(
       usable_for_propensity_model_strict,
@@ -2424,8 +2809,7 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_model_ready_strict =
-      n_model_ready_strict /
-      n_rows,
+      n_model_ready_strict / n_rows,
     
     n_model_ready_without_income = sum(
       usable_for_propensity_model_without_income,
@@ -2433,8 +2817,7 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_model_ready_without_income =
-      n_model_ready_without_income /
-      n_rows,
+      n_model_ready_without_income / n_rows,
     
     n_model_ready_minimal = sum(
       usable_for_propensity_model_minimal,
@@ -2442,13 +2825,16 @@ diagnostics_propensity_score_readiness <- df_quality %>%
     ),
     
     prop_model_ready_minimal =
-      n_model_ready_minimal /
-      n_rows,
+      n_model_ready_minimal / n_rows,
     
     .groups = "drop"
   )
 
-diagnostics_propensity_score_readiness_by_subsample <- df_quality %>%
+
+# DISPONIBILIDAD PARA PROPENSITY POR SUBMUESTRA
+
+diagnostics_propensity_score_readiness_by_subsample <-
+  df_quality %>%
   group_by(
     comparison_region,
     subsample,
@@ -2463,8 +2849,7 @@ diagnostics_propensity_score_readiness_by_subsample <- df_quality %>%
     ),
     
     prop_eu_applicable =
-      n_eu_applicable /
-      n_rows,
+      n_eu_applicable / n_rows,
     
     n_has_binary_vote_outcome = sum(
       has_propensity_outcome_binary,
@@ -2509,11 +2894,15 @@ diagnostics_propensity_score_readiness_by_subsample <- df_quality %>%
   )
 
 
-# Calidad de filas
+# CALIDAD DE FILAS POR FUENTE
+
 diagnostics_row_quality_by_source <- row_quality_summary(
   df_quality,
   "dataset_source"
 )
+
+
+# CALIDAD DE FILAS POR SUBMUESTRA
 
 diagnostics_row_quality_by_subsample <- row_quality_summary(
   df_quality,
@@ -2528,14 +2917,21 @@ diagnostics_row_quality_by_subsample <- row_quality_summary(
     subsample
   )
 
+
+# TAMAÑOS DISPONIBLES PARA CLUSTERING
+
 diagnostics_clustering_sample_sizes <-
   diagnostics_row_quality_by_subsample %>%
   transmute(
     analysis_sample = subsample,
     comparison_region = comparison_region,
     n_total = n_rows,
-    n_usable_for_clustering = n_usable_for_clustering,
-    prop_usable_for_clustering = prop_usable_for_clustering
+    
+    n_usable_for_clustering =
+      n_usable_for_clustering,
+    
+    prop_usable_for_clustering =
+      prop_usable_for_clustering
   ) %>%
   bind_rows(
     df_quality %>%
@@ -2550,20 +2946,17 @@ diagnostics_clustering_sample_sizes <-
         ),
         
         prop_usable_for_clustering =
-          n_usable_for_clustering /
-          n_total
+          n_usable_for_clustering / n_total
       )
   ) %>%
   arrange(
-    desc(
-      analysis_sample ==
-        "POOLED_ALL"
-    ),
+    desc(analysis_sample == "POOLED_ALL"),
     analysis_sample
   )
 
 
-# Calidad y cobertura por componente
+# CALIDAD POR COMPONENTE
+
 component_quality_cols <- names(df_quality)[
   str_detect(
     names(df_quality),
@@ -2571,37 +2964,45 @@ component_quality_cols <- names(df_quality)[
   )
 ]
 
-diagnostics_component_quality_counts <- component_quality_counts(
-  df_quality,
-  count_vars = "dataset_source",
-  prop_vars = "dataset_source",
-  quality_cols = component_quality_cols
-) %>%
+diagnostics_component_quality_counts <-
+  component_quality_counts(
+    df_quality,
+    count_vars = "dataset_source",
+    prop_vars = "dataset_source",
+    quality_cols = component_quality_cols
+  ) %>%
   arrange(
     dataset_source,
     component,
     desc(n)
   )
 
-diagnostics_component_quality_counts_by_subsample <- component_quality_counts(
-  df_quality,
-  count_vars = c(
-    "comparison_region",
-    "subsample",
-    "dataset_source"
-  ),
-  prop_vars = c(
-    "comparison_region",
-    "subsample"
-  ),
-  quality_cols = component_quality_cols
-) %>%
+
+# CALIDAD POR COMPONENTE Y SUBMUESTRA
+
+diagnostics_component_quality_counts_by_subsample <-
+  component_quality_counts(
+    df_quality,
+    count_vars = c(
+      "comparison_region",
+      "subsample",
+      "dataset_source"
+    ),
+    prop_vars = c(
+      "comparison_region",
+      "subsample"
+    ),
+    quality_cols = component_quality_cols
+  ) %>%
   arrange(
     comparison_region,
     subsample,
     component,
     desc(n)
   )
+
+
+# COBERTURA POR COMPONENTE
 
 component_n_cols <- names(df_quality)[
   str_detect(
@@ -2610,25 +3011,30 @@ component_n_cols <- names(df_quality)[
   )
 ]
 
-diagnostics_component_coverage_by_source <- component_coverage(
-  df_quality,
-  "dataset_source",
-  component_n_cols
-) %>%
+diagnostics_component_coverage_by_source <-
+  component_coverage(
+    df_quality,
+    "dataset_source",
+    component_n_cols
+  ) %>%
   arrange(
     dataset_source,
     component_n_variable
   )
 
-diagnostics_component_coverage_by_subsample <- component_coverage(
-  df_quality,
-  c(
-    "comparison_region",
-    "subsample",
-    "dataset_source"
-  ),
-  component_n_cols
-) %>%
+
+# COBERTURA POR COMPONENTE Y SUBMUESTRA
+
+diagnostics_component_coverage_by_subsample <-
+  component_coverage(
+    df_quality,
+    c(
+      "comparison_region",
+      "subsample",
+      "dataset_source"
+    ),
+    component_n_cols
+  ) %>%
   arrange(
     comparison_region,
     subsample,
@@ -2636,7 +3042,8 @@ diagnostics_component_coverage_by_subsample <- component_coverage(
   )
 
 
-# Guardado
+# GUARDADO DE ARCHIVOS
+
 outputs <- list(
   "all_sources_integrated_component_quality.csv" =
     df_quality,
@@ -2665,6 +3072,27 @@ outputs <- list(
   "diagnostics_missing_by_determinant.csv" =
     diagnostics_missing_by_determinant,
   
+  "diagnostics_missing_by_determinant_by_subsample.csv" =
+    diagnostics_missing_by_determinant_by_subsample,
+  
+  "diagnostics_missing_after_imputation_by_determinant.csv" =
+    diagnostics_missing_after_imputation_by_determinant,
+  
+  "diagnostics_missing_after_imputation_by_subsample.csv" =
+    diagnostics_missing_after_imputation_by_subsample,
+  
+  "diagnostics_imputation_50_by_determinant.csv" =
+    diagnostics_imputation_50_by_determinant,
+  
+  "diagnostics_imputation_50_by_subsample.csv" =
+    diagnostics_imputation_50_by_subsample,
+  
+  "diagnostics_imputation_50_by_row.csv" =
+    diagnostics_imputation_50_by_row,
+  
+  "diagnostics_imputation_50_summary.csv" =
+    diagnostics_imputation_50_summary,
+  
   "diagnostics_metadata_quality_counts.csv" =
     diagnostics_metadata_quality_counts,
   
@@ -2676,9 +3104,6 @@ outputs <- list(
   
   "diagnostics_row_quality_counts_by_subsample.csv" =
     diagnostics_row_quality_counts_by_subsample,
-  
-  "diagnostics_missing_by_determinant_by_subsample.csv" =
-    diagnostics_missing_by_determinant_by_subsample,
   
   "diagnostics_metadata_quality_counts_by_subsample.csv" =
     diagnostics_metadata_quality_counts_by_subsample,
@@ -2696,19 +3121,25 @@ outputs <- list(
     diagnostics_clustering_sample_sizes
 )
 
+# Guardar todos los CSV en el directorio de esta etapa.
 iwalk(
   outputs,
   ~ write_csv(
     .x,
-    file.path(
-      out_dir,
-      .y
-    )
+    file.path(out_dir, .y)
   )
 )
 
 
-# Resumen
+# RESUMEN EN CONSOLA
+
+cat("\nIMPUTACIÓN DE DETERMINANTES CON 50 POR SUBMUESTRA\n")
+
+print(
+  diagnostics_imputation_50_summary,
+  n = Inf
+)
+
 cat("\nCALIDAD PARA CLUSTERING POR SUBMUESTRA\n")
 
 print(

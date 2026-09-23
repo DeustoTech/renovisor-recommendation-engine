@@ -1,9 +1,9 @@
 variable,description
 reference_year_model,"Reference year used to compute age when only year of birth is available. RV = 2026, WHY = 2022, Diego = 2023."
 year_birth_model,Year of birth harmonised from survey and Prolific fields.
-age_model,"Age harmonised from direct age fields, computed from year of birth, or approximated from Diego age group."
-age_model_is_approximate,TRUE when age_model was approximated from an age group rather than observed as exact age.
-age_group_model,Age grouped for modelling.
+age_model,Numeric age declared directly or calculated from year of birth and the survey reference year. Participants with only an age interval have NA.
+age_model_is_approximate,TRUE when numeric age is calculated from year of birth and the survey reference year; FALSE for directly reported numeric ages or missing age_model.
+age_group_model,"Age harmonised into 18_39, 40_59, 60_plus or unknown. Original Diego age intervals are grouped without assigning individual numeric ages."
 gender_model,"Gender harmonised into female, male, other, unknown or conflict."
 education_model,"Education harmonised from RV, Diego Q4 and any Prolific education field found."
 employment_model,"Employment harmonised from RV, Diego Q5 and Prolific employment status."
