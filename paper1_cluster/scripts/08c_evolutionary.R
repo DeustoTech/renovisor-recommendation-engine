@@ -1,5 +1,11 @@
 source("00_common.R")
 
+library("future.apply")
+library("data.table")
+library("bigstatsr")
+library("R.utils")
+library("stringr")
+
 # Configurar R para usar todos los núcleos disponibles (excepto 1 para no congelar el PC)
 plan(multisession, workers = availableCores() - 2)
 options(future.globals.maxSize = 10 * 1024^3)

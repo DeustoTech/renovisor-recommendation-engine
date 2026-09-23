@@ -13,7 +13,12 @@ PAQUETES <- c(
   "psych",
   "GPArotation",
   "cluster",
-  "clue"
+  "clue",
+  "future.apply",
+  "data.table",
+  "bigstatsr",
+  "R.utils",
+  "stringr",
 )
 
 PAQUETES_FALTANTES <- PAQUETES[
