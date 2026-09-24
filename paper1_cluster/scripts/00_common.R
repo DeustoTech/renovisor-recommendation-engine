@@ -19,7 +19,10 @@ PAQUETES <- c(
   "bigstatsr",
   "R.utils",
   "stringr",
+  "progressr"
 )
+
+
 
 PAQUETES_FALTANTES <- PAQUETES[
   !vapply(
