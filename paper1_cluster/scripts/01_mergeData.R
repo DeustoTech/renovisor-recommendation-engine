@@ -152,11 +152,6 @@ if (is.na(common_path)) {
 
 source(common_path)
 
-# library(tidyverse)  # Cargada desde 00_common.R.
-# library(readxl)     # Cargada desde 00_common.R.
-# library(janitor)    # Cargada desde 00_common.R.
-
-
 # CONFIGURACIÓN
 # RANDOM_SEED está definido en 00_common.R.
 set.seed(RANDOM_SEED)

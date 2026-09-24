@@ -1,22 +1,22 @@
-figure,description
-01_columns_by_processing_step.png,Number of columns at each processing step.
-02_original_rows_by_subsample.png,Original N of the four subsamples.
-03_original_sample_composition.png,Relative composition of the integrated dataset.
-04_total_vs_clustering_usable_by_subsample.png,Original versus clustering-usable N by subsample.
-05_prop_usable_for_clustering.png,Percentage of rows usable for clustering.
-06_quality_categories_by_subsample.png,Final row-quality categories by subsample.
-07_metadata_quality_by_subsample.png,Metadata-quality categories by subsample.
-08_determinant_coverage_by_subsample.png,Availability and completeness of the 32 determinants.
-09_complete_32det_by_sample.png,Percentage with all 32 determinants available.
-10_missing_determinants_by_subsample.png,Missingness of each determinant by subsample.
-11_sociodemographic_coverage_by_subsample.png,Coverage of sociodemographic variables.
-12_propensity_variable_coverage_by_subsample.png,Coverage of candidate variables for European propensity.
-13_european_propensity_applicability.png,Applicability of the European propensity model.
-14_european_propensity_readiness.png,Readiness of European samples for the political propensity model.
-15_phase_response_coverage.png,Coverage of RV Decision phase questions.
-16_selected_dimensions_by_phase_renovisor.png,Dimensions selected in the RV Decision phase questions.
-17_phase_dimension_scores_renovisor.png,Mean determinant scores associated with selected dimensions.
-18_dimension_determinant_mapping.png,Mapping of the 32 determinants to the 9 dimensions.
-19_final_clustering_sample_sizes.png,Pre-bootstrap usable N for POOLED_ALL and each subsample.
-20_pooled_clustering_composition.png,Composition of the usable POOLED_ALL sample.
-21_original_vs_final_analysis_sizes.png,Original versus clustering-usable N for all five pre-bootstrap analysis samples.
+figure,description,generated
+01_columns_by_processing_step.png,Number of columns at each processing step.,TRUE
+02_original_rows_by_subsample.png,Original N of the four subsamples.,TRUE
+03_original_sample_composition.png,Relative composition of the integrated dataset.,TRUE
+04_total_vs_clustering_usable_by_subsample.png,Original versus clustering-usable N by subsample.,TRUE
+05_prop_usable_for_clustering.png,Percentage of rows usable for clustering.,TRUE
+06_quality_categories_by_subsample.png,Final row-quality categories by subsample.,TRUE
+07_metadata_quality_by_subsample.png,Metadata-quality categories by subsample.,TRUE
+08_determinant_coverage_by_subsample.png,Availability and completeness of the 32 determinants.,TRUE
+09_complete_32det_by_sample.png,Percentage with all 32 determinants available.,TRUE
+10_missing_determinants_by_subsample.png,Missingness of each determinant by subsample.,TRUE
+11_sociodemographic_coverage_by_subsample.png,Coverage of sociodemographic variables.,TRUE
+12_propensity_variable_coverage_by_subsample.png,Coverage of candidate variables for European propensity.,TRUE
+13_european_propensity_applicability.png,Applicability of the European propensity model.,TRUE
+14_european_propensity_readiness.png,Readiness of European samples for the political propensity model.,TRUE
+15_phase_response_coverage.png,Coverage of RV Decision phase questions.,TRUE
+16_selected_dimensions_by_phase_renovisor.png,Dimensions selected in the RV Decision phase questions.,TRUE
+17_phase_dimension_scores_renovisor.png,Mean determinant scores associated with selected dimensions.,TRUE
+18_dimension_determinant_mapping.png,Mapping of the 32 determinants to the 9 dimensions.,TRUE
+19_final_clustering_sample_sizes.png,Pre-bootstrap usable N for POOLED_ALL and each subsample.,TRUE
+20_pooled_clustering_composition.png,Composition of the usable POOLED_ALL sample.,TRUE
+21_original_vs_final_analysis_sizes.png,Original versus clustering-usable N for all five pre-bootstrap analysis samples.,TRUE

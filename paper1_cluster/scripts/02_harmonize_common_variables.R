@@ -38,7 +38,7 @@
 #
 # SALIDAS
 # Directorio:
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/
+# paper1_cluster/data/processed/02_harmonize_sociodemographics/
 #
 # - all_sources_integrated_clean.csv:
 #   Base integrada con identificadores y variables armonizadas.
@@ -204,8 +204,6 @@ if (is.na(common_path)) {
 
 source(common_path)
 
-# library(tidyverse)  # Se carga desde 00_common.R.
-
 
 # CONFIGURACIÓN
 
@@ -248,7 +246,7 @@ in_file <- if (file.exists(in_file_new)) {
 
 out_dir <- file.path(
   processed_root,
-  "01_1_harmonize_sociodemographics"
+  "02_harmonize_sociodemographics"
 )
 
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
@@ -268,7 +266,6 @@ all_sources_integrated <- read_csv(
 df <- all_sources_integrated
 
 # Comprobar que se conservan los identificadores creados en 01.
-
 required_id_cols <- c(
   "integrated_row_id",
   "subsample",
@@ -290,25 +287,27 @@ if (length(missing_required_id_cols)) {
 }
 
 # Comprobar que se han recibido las cuatro submuestras esperadas.
+# Las submuestras esperadas se definen en 00_common.R.
+# expected_subsamples <- c(
+#   "DIEGO",
+#   "RENOVISOR",
+#   "WHY_EUROPE",
+#   "WHY_LATAM"
+# )
 
-expected_subsamples <- c(
-  "DIEGO",
-  "RENOVISOR",
-  "WHY_EUROPE",
-  "WHY_LATAM"
-)
+# missing_subsamples <- setdiff(
+#   expected_subsamples,
+#   unique(df$subsample)
+# )
 
-missing_subsamples <- setdiff(
-  expected_subsamples,
-  unique(df$subsample)
-)
+# if (length(missing_subsamples)) {
+#   stop(
+#     "Faltan submuestras en all_sources_integrated.csv: ",
+#     paste(missing_subsamples, collapse = ", ")
+#   )
+# }
 
-if (length(missing_subsamples)) {
-  stop(
-    "Faltan submuestras en all_sources_integrated.csv: ",
-    paste(missing_subsamples, collapse = ", ")
-  )
-}
+check_expected_subsamples(df)
 
 if (anyDuplicated(df$integrated_row_id)) {
   stop("integrated_row_id contiene duplicados.")

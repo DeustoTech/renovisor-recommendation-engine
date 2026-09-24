@@ -1,50 +1,109 @@
 # 03_1_component_quality.R
 #
 # OBJETIVO
-# Evaluar la calidad de los datos integrados y determinar qué participantes
-# pueden utilizarse en el clustering y en los análisis posteriores.
+# Evaluar la calidad y la disponibilidad de los datos integrados de
+# RENOVISOR, WHY y DIEGO, aplicar la imputación definida para los
+# determinantes y preparar las matrices para los análisis posteriores.
 #
 # ENTRADA
-# paper1_cluster/data/processed/01_1_harmonize_sociodemographics/
+# paper1_cluster/data/processed/02_harmonize_sociodemographics/
 # all_sources_integrated_clean_traceability.csv
 #
 # PROCESAMIENTO
-# 1. Comprobar la estructura de las cuatro submuestras.
-# 2. Identificar la disponibilidad de los distintos componentes de encuesta.
-# 3. Evaluar la calidad de los 32 determinantes antes de imputar.
-# 4. Imputar con 50 los NA originales de las filas elegibles.
-# 5. Evaluar valores fuera de rango, variabilidad y proporción de extremos.
-# 6. Evaluar la disponibilidad sociodemográfica, de voto y de metadatos.
-# 7. Evaluar los controles de atención disponibles.
-# 8. Identificar las filas utilizables para clustering.
-# 9. Generar las matrices y los diagnósticos de calidad.
+# 1. Comprobar la estructura de la base integrada, la presencia de las
+#    cuatro submuestras y la ausencia de identificadores duplicados.
+#
+# 2. Identificar las columnas correspondientes a los componentes de
+#    las encuestas: determinantes, sociodemografía, voto y política,
+#    adopción tecnológica, tarifas y costes, preocupaciones y barreras,
+#    confianza e información, crisis energética, pobreza y atención.
+#
+# 3. Evaluar los 32 determinantes originales por participante:
+#    disponibilidad, valores válidos en la escala 0-100, ausencias
+#    y valores fuera de rango.
+#
+# 4. Imputar con 50 los determinantes originalmente ausentes de los
+#    participantes que cumplen los requisitos de imputación.
+#    Registrar cuántos valores se imputan y qué determinantes son.
+#
+# 5. Evaluar los determinantes después de la imputación:
+#    número de valores válidos, media, desviación típica, mínimo,
+#    máximo, valores distintos y proporción de valores extremos.
+#
+# 6. Clasificar la calidad de los determinantes e identificar a los
+#    participantes que cumplen los criterios para clustering.
+#
+# 7. Evaluar la disponibilidad de edad, género, país, identificadores
+#    y otras variables sociodemográficas. Clasificar la calidad
+#    sociodemográfica y de los metadatos.
+#
+# 8. Evaluar la disponibilidad de las variables de voto y autoubicación
+#    política. Calcular, para la muestra europea, qué participantes
+#    disponen de los predictores requeridos por las distintas
+#    especificaciones del modelo de propensity y cuáles disponen,
+#    además, de una variable de voto binaria.
+#
+# 9. Localizar y evaluar los controles de atención disponibles.
+#    Registrar controles respondidos, superados y fallados, así como
+#    los controles concretos fallados por cada participante.
+#
+# 10. Evaluar la cobertura de los componentes de las encuestas
+#     y clasificar la calidad global de cada fila según sus
+#     determinantes y su información sociodemográfica.
+#
+# 11. Crear la base completa de calidad, la matriz con indicadores
+#     de calidad y la matriz filtrada para clustering.
+#
+# 12. Generar diagnósticos por fuente y por submuestra sobre calidad,
+#     cobertura, ausencias, imputación, metadatos, disponibilidad
+#     para propensity y tamaños finales para clustering.
 #
 # REGLAS DE IMPUTACIÓN
 # - Se aplica únicamente a RENOVISOR, WHY_EUROPE y WHY_LATAM.
-# - Se exige un mínimo de 24 determinantes originales válidos.
-# - Se imputan únicamente las celdas originalmente ausentes.
-# - No se imputan DIEGO ni participantes sin determinantes válidos.
-# - Se conserva el número de valores originales y cada celda imputada.
+# - DIEGO no se imputa.
+# - Se exige un mínimo de 24 determinantes originales válidos
+#   en la escala 0-100.
+# - Solo se imputan las celdas originalmente ausentes.
+# - No se imputan automáticamente las respuestas no numéricas ni
+#   los valores fuera de rango.
+# - Se asigna el valor 50 a cada celda elegible.
+# - Se conservan indicadores de la disponibilidad original y un
+#   registro de los determinantes imputados por participante.
 #
 # CRITERIOS DE CLUSTERING
 # - Al menos 24 de los 32 determinantes válidos después de imputar.
 # - Ningún determinante fuera del intervalo 0-100.
 # - Más de dos valores distintos entre los determinantes válidos.
-# - Proporción de valores extremos inferior a 0,80.
+# - Se calcula un indicador cuando el 80 % o más de los determinantes
+#   válidos tienen valor 0 o 100, pero este indicador NO constituye
+#   un criterio automático de exclusión.
 #
 # IMPORTANTE
-# usable_for_clustering depende de la calidad de los determinantes.
-# La disponibilidad sociodemográfica y los controles de atención se
-# diagnostican por separado y no se añaden silenciosamente a ese filtro.
+# - usable_for_clustering se determina a partir de la calidad
+#   de los 32 determinantes.
+# - Los controles de atención, la disponibilidad sociodemográfica
+#   y la disponibilidad de variables para propensity se evalúan
+#   por separado; no se utilizan como filtros automáticos
+#   adicionales de usable_for_clustering.
+# - La imputación con 50 no representa una respuesta observada
+#   del participante, sino el valor asignado a una ausencia.
+# - La matriz para clustering puede admitir filas con al menos
+#   24 determinantes válidos; la ausencia de NA debe comprobarse
+#   antes de utilizarla en algoritmos que exijan datos completos.
 #
 # SALIDAS
-# Directorio: data/processed/03_component_quality/
+# Directorio:
+# paper1_cluster/data/processed/03_1_component_quality/
 #
 # BASES PRINCIPALES
 # - all_sources_integrated_component_quality.csv:
-#   Base completa con determinantes imputados e indicadores de calidad.
+#   Base completa con determinantes posteriores a la imputación
+#   y todos los indicadores de calidad generados.
+#
 # - matrix_32det_with_quality.csv:
-#   Identificadores, metadatos, determinantes y variables de calidad.
+#   Identificadores, metadatos, 32 determinantes e indicadores de
+#   calidad de todas las filas.
+#
 # - matrix_32det_for_clustering.csv:
 #   Filas que cumplen los criterios definidos para clustering.
 #
@@ -73,26 +132,83 @@
 # - diagnostics_clustering_sample_sizes.csv
 #
 # VARIABLES PRINCIPALES GENERADAS
-# - n_det_valid_original: número de determinantes originales válidos.
-# - n_det_missing_original: número de valores no numéricos o ausentes
-#   después de convertir los determinantes originales a números.
-# - n_det_imputed_50: número de celdas imputadas con 50.
-# - prop_det_imputed_50: proporción de las 32 celdas imputadas.
-# - det_cols_imputed_50: nombres de los determinantes imputados.
-# - n_det_valid: determinantes válidos después de imputar.
-# - n_det_missing: determinantes que no tienen un valor válido 0-100.
-# - flag_*: indicadores de problemas de calidad.
-# - quality_determinants_32: categoría de calidad de los determinantes.
-# - usable_for_clustering: elegibilidad para clustering.
-# - quality_sociodemographics: disponibilidad de información básica.
-# - metadata_quality: calidad de los metadatos.
-# - attention_check_*: disponibilidad y resultado de controles de atención.
-# - row_quality_final: clasificación global de calidad de la fila.
-# - usable_for_main_analysis: disponibilidad según row_quality_final.
+#
+# n_det_valid_original:
+#   Número de determinantes originales válidos en la escala 0-100.
+#
+# n_det_missing_original:
+#   Número de determinantes ausentes o no convertibles a número
+#   antes de imputar.
+#
+# n_det_imputed_50:
+#   Número de determinantes imputados con 50 por participante.
+#
+# prop_det_imputed_50:
+#   Proporción de los 32 determinantes imputados con 50.
+#
+# det_cols_imputed_50:
+#   Nombres de los determinantes imputados por participante.
+#
+# n_det_valid:
+#   Número de determinantes válidos después de imputar.
+#
+# n_det_missing:
+#   Número de determinantes sin un valor válido en la escala 0-100
+#   después de imputar.
+#
+# det_row_mean, det_row_sd, det_row_min, det_row_max:
+#   Estadísticos calculados sobre los determinantes válidos.
+#
+# det_n_unique_values:
+#   Número de valores distintos entre los determinantes válidos.
+#
+# det_prop_extreme_values:
+#   Proporción de determinantes válidos con valor 0 o 100.
+#
+# flag_*:
+#   Indicadores de ausencia, falta de valores válidos, valores fuera
+#   de rango, baja variabilidad y alta proporción de extremos.
+#
+# quality_determinants_32:
+#   Categoría de calidad asignada a los 32 determinantes.
+#
+# usable_for_clustering:
+#   TRUE cuando la fila cumple los criterios de calidad definidos
+#   para entrar en la matriz de clustering.
+#
+# quality_sociodemographics, metadata_quality:
+#   Clasificaciones de disponibilidad sociodemográfica y metadatos.
+#
+# quality_vote_politics:
+#   Clasificación de disponibilidad de las variables de voto
+#   y autoubicación política.
+#
+# has_propensity_*, usable_for_propensity_*,
+# quality_propensity_score_*:
+#   Indicadores de disponibilidad de predictores y de la variable
+#   de voto para las distintas especificaciones del modelo europeo.
+#
+# quality_technology_adoption, quality_tariffs_costs_payback,
+# quality_concerns_barriers, quality_trust_information,
+# quality_energy_crisis, quality_poverty, quality_attention_quality:
+#   Disponibilidad y calidad de los componentes de las encuestas.
+#
+# attention_check_*:
+#   Disponibilidad, resultados y fallos de los controles de atención.
+#
+# row_quality_final:
+#   Clasificación global de calidad de la fila a partir de los
+#   determinantes y la disponibilidad sociodemográfica.
+#
+# usable_for_main_analysis:
+#   Indicador derivado de las categorías admitidas
+#   en row_quality_final.
 #
 # DEPENDENCIAS
 # - 00_common.R: paquetes, rutas, constantes y funciones compartidas.
-# - 02_harmonize_common_variables.R: genera el archivo de entrada.
+# - 01_mergeData.R: genera la base integrada original.
+# - 02_harmonize_common_variables.R: genera el archivo de entrada
+#   con las variables y los 32 determinantes armonizados.
 
 ################################################################################
 
@@ -128,23 +244,20 @@ if (is.na(common_path)) {
 
 source(common_path)
 
-# library(tidyverse)  # Se carga desde 00_common.R.
-
 
 # CONFIGURACIÓN
 
 # processed_root se define en 00_common.R.
 # processed_root <- "paper1_cluster/data/processed"
-
 in_file <- file.path(
   processed_root,
-  "01_1_harmonize_sociodemographics",
+  "02_harmonize_sociodemographics",
   "all_sources_integrated_clean_traceability.csv"
 )
 
 out_dir <- file.path(
   processed_root,
-  "03_component_quality"
+  "03_1_component_quality"
 )
 
 # Número mínimo de determinantes válidos para entrar en clustering.
@@ -205,24 +318,27 @@ if (length(missing_structure_cols)) {
   )
 }
 
-expected_subsamples <- c(
-  "DIEGO",
-  "RENOVISOR",
-  "WHY_EUROPE",
-  "WHY_LATAM"
-)
+# Las submuestras esperadas se definen en 00_common.R.
+# expected_subsamples <- c(
+#   "DIEGO",
+#   "RENOVISOR",
+#   "WHY_EUROPE",
+#   "WHY_LATAM"
+# )
 
-missing_subsamples <- setdiff(
-  expected_subsamples,
-  unique(df$subsample)
-)
+# missing_subsamples <- setdiff(
+#   expected_subsamples,
+#   unique(df$subsample)
+# )
 
-if (length(missing_subsamples)) {
-  stop(
-    "Faltan submuestras esperadas: ",
-    paste(missing_subsamples, collapse = ", ")
-  )
-}
+# if (length(missing_subsamples)) {
+#   stop(
+#     "Faltan submuestras esperadas: ",
+#     paste(missing_subsamples, collapse = ", ")
+#   )
+# }
+
+check_expected_subsamples(df)
 
 if (anyDuplicated(df$integrated_row_id)) {
   stop("integrated_row_id contiene duplicados.")
@@ -252,26 +368,26 @@ print(
 # Se mantiene local porque la versión de clean_text() utilizada en
 # 02_harmonize_common_variables.R también elimina determinadas respuestas
 # del tipo "Prefer not to say". No son exactamente la misma función.
-clean_text <- function(x) {
-  x <- str_squish(as.character(x))
-  
-  x[
-    is.na(x) |
-      x %in% c(
-        "",
-        "NA",
-        "NaN",
-        "NULL",
-        "null",
-        "None",
-        "none",
-        "DATA_EXPIRED",
-        "data_expired"
-      )
-  ] <- NA_character_
-  
-  x
-}
+# clean_text <- function(x) {
+#   x <- str_squish(as.character(x))
+#   
+#   x[
+#     is.na(x) |
+#       x %in% c(
+#         "",
+#         "NA",
+#         "NaN",
+#         "NULL",
+#         "null",
+#         "None",
+#         "none",
+#         "DATA_EXPIRED",
+#         "data_expired"
+#       )
+#   ] <- NA_character_
+#   
+#   x
+# }
 
 
 # Convierte respuestas a números usando parse_num() de 00_common.R.
@@ -296,9 +412,9 @@ clean_text <- function(x) {
 #   )
 # }
 
-parse_num_clean <- function(x) {
-  parse_num(x)
-}
+# parse_num_clean <- function(x) {
+#   parse_num(x)
+# }
 
 
 # Comprueba si existe una respuesta original distinta de los códigos
@@ -307,7 +423,7 @@ parse_num_clean <- function(x) {
 # x: vector de respuestas originales.
 # Devuelve: vector lógico; TRUE si la respuesta está informada.
 is_non_missing_raw <- function(x) {
-  !is.na(clean_text(x))
+  !is.na(clean_text_quality(x))
 }
 
 
@@ -320,7 +436,7 @@ is_non_missing_raw <- function(x) {
 # Se mantiene local: is_valid_model_value() de 02 utiliza criterios
 # ligeramente diferentes, especialmente para datos numéricos.
 is_valid_model_value <- function(x) {
-  x <- clean_text(x)
+  x <- clean_text_quality(x)
   
   !is.na(x) &
     !str_to_lower(x) %in% c(
@@ -579,7 +695,7 @@ missing_by_determinant <- function(
       values_to = "value_raw"
     ) %>%
     mutate(
-      value_num = parse_num_clean(value_raw),
+      value_num = parse_num(value_raw),
       
       is_missing = is.na(value_num),
       
@@ -847,7 +963,6 @@ component_coverage <- function(
 
 # Excluir columnas armonizadas, identificadores y diagnósticos.
 # Los componentes genéricos se construyen a partir de columnas originales.
-
 generic_exclude <- paste(
   c(
     "^det_",
@@ -904,9 +1019,6 @@ vote_politics_cols <- c(
   "political_left_right_model",
   "political_block_model"
 )
-
-# find_cols() está definida en 00_common.R.
-# Sustituye aquí a la antigua find_component_cols().
 
 technology_adoption_cols <- find_cols(
   df,
@@ -1140,7 +1252,6 @@ find_first_attention_col <- function(
 # Especificaciones de los controles de atención.
 # Cada fila define su identificador, el tipo de respuesta esperada
 # y los patrones utilizados para localizar su columna original.
-
 attention_check_specs <- tribble(
   ~check_id, ~expected_type, ~patterns,
   
@@ -1244,7 +1355,6 @@ attention_quality_cols <- attention_check_specs$column
 
 
 # COMPONENTES DE CALIDAD
-
 component_columns <- list(
   determinants_32 = det_cols,
   sociodemographics_model = sociodemographic_model_cols,
@@ -1282,7 +1392,6 @@ diagnostics_component_candidate_columns <- enframe(
 
 
 # CALIDAD DE LOS 32 DETERMINANTES
-
 if (length(det_cols) != N_DET_TOTAL) {
   stop(
     "Se esperaban 32 determinantes armonizados, pero se han encontrado ",
@@ -1300,7 +1409,7 @@ det_numeric_original <- df %>%
   mutate(
     across(
       everything(),
-      parse_num_clean
+      parse_num
     )
   )
 
@@ -1317,7 +1426,7 @@ raw_missing_mat <- df %>%
   mutate(
     across(
       everything(),
-      ~ is.na(clean_text(.x))
+      ~ is.na(clean_text_quality(.x))
     )
   ) %>%
   as.matrix()
@@ -1532,7 +1641,7 @@ det_quality <- case_when(
   flag_no_determinants ~ "no_determinants",
   flag_too_many_missing ~ "too_many_missing",
   flag_low_variability ~ "low_variability",
-  flag_high_extreme_share ~ "high_extreme_share",
+  #flag_high_extreme_share ~ "high_extreme_share",
   flag_complete_32det ~ "usable_complete",
   flag_incomplete_but_usable ~ "usable_partial",
   TRUE ~ "review"
@@ -1979,7 +2088,7 @@ attention_quality_df <- component_stats(
 # x: respuesta original o vector de respuestas.
 # Devuelve: texto en minúsculas, sin guiones bajos y con espacios ajustados.
 normalise_attention_response <- function(x) {
-  clean_text(x) %>%
+  clean_text_quality(x) %>%
     str_to_lower() %>%
     str_replace_all("_", " ") %>%
     str_replace_all("\\s+", " ") %>%
@@ -1998,9 +2107,9 @@ attention_passes_expected <- function(
     x,
     expected_type
 ) {
-  x_clean <- clean_text(x)
+  x_clean <- clean_text_quality(x)
   x_low <- normalise_attention_response(x)
-  x_num <- parse_num_clean(x)
+  x_num <- parse_num(x)
   
   if (is.na(x_clean)) {
     return(NA)
@@ -2089,7 +2198,7 @@ attention_check_long <- pmap_dfr(
     )
     
     available <- !is.na(
-      clean_text(response_raw)
+      clean_text_quality(response_raw)
     )
     
     failed <- available & !passed

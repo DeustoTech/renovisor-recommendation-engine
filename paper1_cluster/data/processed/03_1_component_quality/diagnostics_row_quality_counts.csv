@@ -1,0 +1,13 @@
+dataset_source,row_quality_final,n,prop
+diego,usable_complete,1857,0.9778830963665087
+diego,usable_complete_limited_metadata,42,0.022116903633491312
+rv,usable_complete,763,0.6208299430431244
+rv,no_determinants,274,0.2229454841334418
+rv,usable_complete_limited_metadata,137,0.1114727420667209
+rv,too_many_missing_determinants,54,0.043938161106590726
+rv,suspicious_determinants,1,8.136696501220504e-4
+why,usable_complete,1441,0.8851351351351351
+why,usable_complete_limited_metadata,141,0.0866093366093366
+why,too_many_missing_determinants,21,0.012899262899262898
+why,no_determinants,20,0.012285012285012284
+why,suspicious_determinants,5,0.003071253071253071

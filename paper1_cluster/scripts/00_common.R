@@ -2,9 +2,7 @@
 
 # Librerías, configuración y funciones comunes del proyecto
 
-
 # PAQUETES
-
 PAQUETES <- c(
   "tidyverse",
   "readxl",
@@ -186,6 +184,142 @@ PRIMARY_WEIGHTING <- "equal_candidate"
 # Umbral utilizado para diagnosticar las coincidencias Jaccard
 MATCH_THRESHOLD <- 50
 
+expected_subsamples <- c(
+  "DIEGO",
+  "RENOVISOR",
+  "WHY_EUROPE",
+  "WHY_LATAM"
+)
+
+# Comprueba que un dataset contiene todas las submuestras esperadas.
+#
+# data: dataset que se desea comprobar.
+# subsample_col: columna que identifica las submuestras.
+# expected: submuestras que deben estar presentes.
+#
+# Detiene la ejecución si falta alguna submuestra.
+
+check_expected_subsamples <- function(
+    data,
+    subsample_col = "subsample",
+    expected = expected_subsamples
+) {
+  if (!subsample_col %in% names(data)) {
+    stop(
+      "No se encuentra la columna de submuestra: ",
+      subsample_col
+    )
+  }
+  
+  missing_subsamples <- setdiff(
+    expected,
+    unique(data[[subsample_col]])
+  )
+  
+  if (length(missing_subsamples)) {
+    stop(
+      "Faltan submuestras esperadas: ",
+      paste(missing_subsamples, collapse = ", ")
+    )
+  }
+  
+  invisible(TRUE)
+}
+
+# FUNCIONES COMUNES: MUESTRAS DE ANÁLISIS
+
+# Crea una tabla auxiliar con POOLED_ALL y las submuestras originales.
+#
+# data: dataset que contiene subsample y comparison_region.
+#
+# Cada participante aparece dos veces en el resultado:
+# una en POOLED_ALL y otra en su submuestra original.
+#
+# Se utiliza únicamente para calcular resúmenes por muestra.
+# No modifica el dataset de entrada ni aplica bootstrap.
+
+add_analysis_samples <- function(data) {
+  bind_rows(
+    data %>%
+      mutate(
+        analysis_sample = "POOLED_ALL",
+        analysis_region = "ALL"
+      ),
+    
+    data %>%
+      mutate(
+        analysis_sample = subsample,
+        analysis_region = comparison_region
+      )
+  )
+}
+
+# CORRESPONDENCIA ENTRE DIMENSIONES Y DETERMINANTES
+
+# El diccionario conserva el mapeo de las nueve dimensiones
+# y los 32 determinantes del script original.
+#
+# Cada determinante aparece en una única dimensión.
+dimension_determinants <- list(
+  FINANCIAL = c(
+    "det_01_profits",
+    "det_02_credit_score",
+    "det_03_risk_profile",
+    "det_04_added_value",
+    "det_05_frugality"
+  ),
+  
+  SECURITY = c(
+    "det_07_legal",
+    "det_08_trust",
+    "det_09_safety"
+  ),
+  
+  COMPETENCE = c(
+    "det_10_cost_efficiency",
+    "det_11_knowledge",
+    "det_12_own_competence",
+    "det_13_technical_fit"
+  ),
+  
+  AUTONOMY = c(
+    "det_15_self_satisfaction",
+    "det_16_commitment",
+    "det_17_adherence",
+    "det_18_autonomy"
+  ),
+  
+  PHYSIOLOGICAL = c(
+    "det_19_wellbeing",
+    "det_20_coziness"
+  ),
+  
+  RELATEDNESS = c(
+    "det_21_rights_and_duties",
+    "det_22_peer_pressure",
+    "det_23_support",
+    "det_24_socialising",
+    "det_25_agreement"
+  ),
+  
+  STIMULATION = c(
+    "det_26_novelty",
+    "det_27_fun"
+  ),
+  
+  POPULARITY = c(
+    "det_28_recognition",
+    "det_29_trends",
+    "det_30_authority",
+    "det_31_approval"
+  ),
+  
+  MEANING = c(
+    "det_06_climate_protection",
+    "det_14_environmental_concerns",
+    "det_32_own_significance"
+  )
+)
 
 # Diccionario común de nombres de países y códigos de dos letras.
 # Incluye las denominaciones utilizadas en 01_mergeData.R y en
@@ -421,6 +555,35 @@ find_cols <- function(df, pattern, exclude = NULL) {
   
   unique(out)
 }
+
+
+# Limpia textos para los diagnósticos de calidad y los scores de fase.
+#
+# x: vector de respuestas originales.
+# Devuelve: vector de caracteres, con NA para los códigos de ausencia
+# utilizados en las etapas 03_1 y 03_2.
+
+clean_text_quality <- function(x) {
+  x <- str_squish(as.character(x))
+  
+  invalid_values <- c(
+    "",
+    "NA",
+    "NaN",
+    "NULL",
+    "null",
+    "None",
+    "none",
+    "DATA_EXPIRED",
+    "data_expired"
+  )
+  
+  x[is.na(x) | x %in% invalid_values] <- NA_character_
+  
+  x
+}
+
+
 # Reúne los valores distintos y no ausentes de un vector.
 # Elimina espacios adicionales y duplicados. Cuando existen varias
 # respuestas diferentes, las conserva separadas mediante " | ".

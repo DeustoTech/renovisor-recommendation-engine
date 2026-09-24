@@ -1,5 +1,0 @@
-comparison_region,subsample,dataset_source,n_rows,n_rows_with_imputation,n_cells_imputed_50,mean_imputations_per_row,n_rows_all_missing_original
-EUROPE,DIEGO,diego,1899,0,0,0,0
-EUROPE,RENOVISOR,rv,1229,302,837,0.6810414971521614,274
-EUROPE,WHY_EUROPE,why,990,165,269,0.2717171717171719,9
-LATAM,WHY_LATAM,why,638,130,272,0.426332288401253,11

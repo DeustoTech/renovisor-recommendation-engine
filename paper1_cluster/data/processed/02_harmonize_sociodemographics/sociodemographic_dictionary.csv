@@ -1,0 +1,31 @@
+variable,description
+reference_year_model,"Reference year used to compute age when only year of birth is available. RV = 2026, WHY = 2022, Diego = 2023."
+year_birth_model,Year of birth harmonised from survey and Prolific fields.
+age_model,Numeric age declared directly or calculated from year of birth and the survey reference year. Participants with only an age interval have NA.
+age_model_is_approximate,TRUE when numeric age is calculated from year of birth and the survey reference year; FALSE for directly reported numeric ages or missing age_model.
+age_group_model,"Age harmonised into 18_39, 40_59, 60_plus or unknown. Original Diego age intervals are grouped without assigning individual numeric ages."
+gender_model,"Gender harmonised into female, male, other, unknown or conflict."
+education_model,"Education harmonised from RV, Diego Q4 and any Prolific education field found."
+employment_model,"Employment harmonised from RV, Diego Q5 and Prolific employment status."
+student_status_model,Student status harmonised mainly from Prolific student status.
+num_children_model,Number of children harmonised mainly from Diego Q6 where available.
+income_model,Income harmonised mainly from Diego Q7 and any clear income field found.
+country_model,Country of residence harmonised as ISO2 code where possible.
+country_region_model,Broad residence region. European countries are grouped by European subregion and Latin American countries are labelled latin_america.
+country_birth_model,Country of birth harmonised as ISO2 code where possible.
+nationality_model,Nationality harmonised from Prolific when available.
+ethnicity_model,Ethnicity simplified harmonised from Prolific when available.
+country_model_grouped,Country grouped; countries with fewer than MIN_COUNTRY_N rows assigned to OTHER_COUNTRIES.
+language_model,"Language harmonised into EN, ES, EU, NL, FR, DE, IT, PL, GR, OTHER or unknown."
+vote_status_declared,"Declared voting status harmonised into voter, abstainer, uncertain, unknown or conflict."
+voted_observed,"Binary voting indicator: voter = 1, abstainer = 0, otherwise NA."
+political_left_right_model,"Numeric left-right self-placement, expected 0-100."
+political_block_model,"Political self-placement grouped into extreme_left, left, centre, right, extreme_right, unknown or invalid."
+self_classification_model,Household investment self-classification mapped to archetype-like categories.
+energy_efficiency_goal_0_100,Energy efficiency goal parsed as numeric 0-100 where available.
+climate_awareness_0_100,Climate change awareness parsed as numeric 0-100 where available.
+energy_transition_awareness_0_100,Energy transition awareness parsed as numeric 0-100 where available.
+travel_distance_model,Daily travel distance parsed as numeric where available.
+travel_time_model,Daily travel time parsed as numeric where available.
+n_det_non_missing,Number of available harmonised determinants among the 32 determinant variables.
+prop_det_non_missing,Proportion of available harmonised determinants among the 32 determinant variables.

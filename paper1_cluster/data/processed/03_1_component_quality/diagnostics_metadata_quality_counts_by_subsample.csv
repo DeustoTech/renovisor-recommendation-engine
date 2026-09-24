@@ -1,0 +1,10 @@
+comparison_region,subsample,dataset_source,metadata_quality,n,prop
+EUROPE,DIEGO,diego,metadata_complete,1857,0.9778830963665087
+EUROPE,DIEGO,diego,metadata_partial,42,0.022116903633491312
+EUROPE,RENOVISOR,rv,metadata_complete,988,0.8039056143205858
+EUROPE,RENOVISOR,rv,metadata_partial,135,0.10984540276647681
+EUROPE,RENOVISOR,rv,metadata_poor,106,0.08624898291293735
+EUROPE,WHY_EUROPE,why,metadata_complete,988,0.997979797979798
+EUROPE,WHY_EUROPE,why,metadata_partial,2,0.00202020202020202
+LATAM,WHY_LATAM,why,metadata_complete,473,0.7413793103448276
+LATAM,WHY_LATAM,why,metadata_partial,165,0.25862068965517243

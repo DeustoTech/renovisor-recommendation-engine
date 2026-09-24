@@ -1,5 +1,0 @@
-comparison_region,subsample,dataset_source,n_rows,n_usable_for_clustering,prop_usable_for_clustering,n_usable_for_main_analysis,prop_usable_for_main_analysis,n_usable_complete,n_usable_complete_limited_metadata,n_usable_partial,n_usable_partial_limited_metadata,n_no_determinants,n_too_many_missing_determinants,n_suspicious_determinants,n_invalid_determinants,mean_n_det_valid,min_n_det_valid,max_n_det_valid,mean_det_row_sd,n_metadata_complete,n_metadata_partial,n_metadata_poor
-EUROPE,DIEGO,diego,1899,1899,1,1899,1,1857,42,0,0,0,0,0,0,32,32,32,26.245692264226285,1857,42,0
-EUROPE,RENOVISOR,rv,1229,895,0.7282343368592351,895,0.7282343368592351,759,136,0,0,274,54,6,0,24.27013832384051,0,32,25.471024794437543,988,135,106
-EUROPE,WHY_EUROPE,why,990,971,0.9808080808080808,971,0.9808080808080808,970,1,0,0,9,8,2,0,31.507070707070703,0,32,24.63103843963898,988,2,0
-LATAM,WHY_LATAM,why,638,609,0.9545454545454546,609,0.9545454545454546,469,140,0,0,11,13,5,0,31.031347962382448,0,32,23.671332636543045,473,165,0
